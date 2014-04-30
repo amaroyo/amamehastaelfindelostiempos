@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+ <description>Aplicacion de MRM</description>
+ <!-- ******************************************************** 
+ Definition de los Parametros de Contexto                 
+ ******************************************************** -->
+ <context-param>
+  <param-name>contextConfigLocation</param-name>
+  <param-value>/WEB-INF/applicationContext-negocio.xml,/WEB-INF/applicationContext-persistencia-mysql.xml,/WEB-INF/applicationContext-recursos.xml</param-value>
+ </context-param>
+
+ <listener>
+  <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+ </listener>
+
+ <!-- 
+		Listener necesario por parte de Spring para hacer uso del scope=session en un bean
+	 -->
+ <listener>
+  <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+ </listener>
+ <listener>
+  <listener-class>es.oyssen.mrm.listeners.MrmContextListener</listener-class>
+ </listener>
+ <!-- Definition Servlet Controller Struts -->
+ <servlet>
+  <servlet-name>action</servlet-name>
+  <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+  <init-param>
+   <param-name>config</param-name>
+   <param-value>/WEB-INF/struts-config.xml, 
+   				/WEB-INF/struts-config-comerciales.xml, 
+   				/WEB-INF/struts-config-distribuidores.xml, 
+   				/WEB-INF/struts-config-puntos-venta.xml,
+   				/WEB-INF/struts-config-leads.xml,
+   				/WEB-INF/struts-config-responsables.xml,
+   				/WEB-INF/struts-config-empresas.xml,
+   				/WEB-INF/struts-config-servicios.xml,
+   				/WEB-INF/struts-config-canales.xml,
+   				/WEB-INF/struts-config-grupos.xml,
+   				/WEB-INF/struts-config-usuarios.xml,
+   				/WEB-INF/struts-config-bienvenida.xml,
+   				/WEB-INF/struts-config-logs.xml
+   </param-value>
+  </init-param>
+  <init-param>
+   <param-name>debug</param-name>
+   <param-value>3</param-value>
+  </init-param>
+  <init-param>
+   <param-name>detail</param-name>
+   <param-value>3</param-value>
+  </init-param>
+  <load-on-startup>0</load-on-startup>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>action</servlet-name>
+  <url-pattern>*.do</url-pattern>
+ </servlet-mapping>
+ 
+ <session-config>
+  <session-timeout>60</session-timeout>
+ </session-config>
+ <jsp-config>
+ 
+  <!-- Struts Tag Library Descriptors -->
+  <taglib>
+   <taglib-uri>/WEB-INF/tlds/struts-bean.tld</taglib-uri>
+   <taglib-location>/WEB-INF/tlds/struts-bean.tld</taglib-location>
+  </taglib>
+  <taglib>
+   <taglib-uri>/WEB-INF/tlds/struts-html.tld</taglib-uri>
+   <taglib-location>/WEB-INF/tlds/struts-html.tld</taglib-location>
+  </taglib>
+  <taglib>
+   <taglib-uri>/WEB-INF/tlds/struts-logic.tld</taglib-uri>
+   <taglib-location>/WEB-INF/tlds/struts-logic.tld</taglib-location>
+  </taglib>
+  <taglib>
+   <taglib-uri>/WEB-INF/tlds/struts-nested.tld</taglib-uri>
+   <taglib-location>/WEB-INF/tlds/struts-nested.tld</taglib-location>
+  </taglib>
+  <taglib>
+   <taglib-uri>/WEB-INF/tlds/struts-template.tld</taglib-uri>
+   <taglib-location>/WEB-INF/tlds/struts-template.tld</taglib-location>
+  </taglib>
+ </jsp-config>
+ 
+ 
+ 
+
+	<filter> 
+		<filter-name>FiltroSesion</filter-name>
+		<filter-class>es.oyssen.mrm.filtros.FiltroSesion</filter-class>
+	</filter>
+		
+	<filter-mapping> 
+		<filter-name>FiltroSesion</filter-name>
+		<url-pattern>*.do</url-pattern>
+    	<dispatcher>REQUEST</dispatcher>
+    	<dispatcher>FORWARD</dispatcher>
+    	<dispatcher>INCLUDE</dispatcher>
+    	<dispatcher>ERROR</dispatcher>		
+	</filter-mapping> 
+ 
+</web-app>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+
+   <item type="fieldset" name="data2" label="Datos de la empresa" inputWidth="auto">
+       <item type="input" name="orgnr" label="Org Nr" labelWidth="100" width="150" />
+   	   <item type="input" name="nombre" label="Nombre" labelWidth="100" width="150" />
+       <item type="input" name="telefono" label="Telefono" labelWidth="100" width="150" />
+       <item type="input" name="telefonoMovil" label="Telefono movil" labelWidth="100" width="150" />
+       <item type="input" name="email" label="Email" labelWidth="100" width="150" />
+       <item type="input" name="informacionContacto" label="I.Contacto" labelWidth="100" width="150" />       
+   </item> 
+
+   <item type="fieldset" name="data" label="Información general" inputWidth="auto">
+       <item type="combo" name="canal" label="Canal" labelWidth="100" width="150" />
+       <item type="combo" name="servicio" label="Servicio" labelWidth="100" width="150" />       
+       <item type="combo" name="comercial" label="Comercial" labelWidth="100" width="150" />
+       <item type="combo" name="responsable" label="Responsable" labelWidth="100" width="150" />
+       <item type="combo" name="distribuidor" label="Distribuidor" labelWidth="100" width="150" />
+       <!-- <item type="combo" name="empresa" label="Empresa" labelWidth="100" width="150" /> -->
+       
+       <item type="combo" name="estado" label="Estado" labelWidth="100" width="150">       		
+       		<option text="New" value="1" />
+       		<option text="Accepted" value="2" />
+       		<!-- <option text="Contacted" value="3" /> -->
+       		<option text="Ongoing" value="4" />
+       		<option text="Offert" value="5" />
+       		<option text="Won" value="6" />
+       		<option text="Lost" value="7" />
+       </item>
+       <item type="combo" name="marketingActivity" label="Marketing Activity" labelWidth="100" width="150">
+       		<option text="Direct marketing" value="1" />
+       		<option text="Website" value="2" />
+       		<option text="Mobile marketing" value="3" />
+       		<option text="Telemarketing" value="4" />
+       		<option text="Event" value="5" />
+       		<option text="Recommendation" value="6" />
+       </item>
+       <item type="input" name="usuariosPotenciales" label="Usuarios potenciales" labelWidth="100" width="150" />
+       <item type="input" name="usuarios" label="Usuarios" labelWidth="100" width="150" />
+	   <item type="input" name="comentarios" label="Comentarios" labelWidth="100" rows="3"  width="150"/>     	    
+   </item>
+   
+   <item type="button" name="aceptar" value="Aceptar" /> 
+</items>

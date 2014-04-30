@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+ 	<bean id="credenciales" class="es.oyssen.mrm.negocio.vo.Credenciales" scope="session">
+		<aop:scoped-proxy/>
+	</bean>
+
+	<bean id="daoBase" class="es.oyssen.mrm.negocio.dao.DAOBase">
+		<property name="dataSource" ref="dataSource" />
+		<property name="credenciales" ref="credenciales" />
+	</bean>
+	
+	<bean id="daoComerciales" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOComercialesImpl" parent="daoBase" />
+	
+	<bean id="daoResponsables" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOResponsablesImpl" parent="daoBase" />
+	
+	<bean id="daoResponsablesComerciales" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOResponsablesComercialesImpl" parent="daoBase" />
+	
+	<bean id="daoEmpresas" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOEmpresasImpl" parent="daoBase" />
+	
+	<bean id="daoEstados" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOEstadosImpl" parent="daoBase" />
+	
+	<bean id="daoLeads" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOLeadsImpl" parent="daoBase" />
+	
+	<bean id="daoServicios" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOServiciosImpl" parent="daoBase" />
+	
+	<bean id="daoMarketingActivities" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOMarketingActivitiesImpl" parent="daoBase" />
+	
+	<bean id="daoDistribuidores" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAODistribuidoresImpl" parent="daoBase" />
+	
+	<bean id="daoLeadActionsHistory" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOLeadActionsHistoryImpl" parent="daoBase" />
+	
+	<bean id="daoContactosDistribuidor" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOContactosDistribuidorImpl" parent="daoBase" />
+	
+	<bean id="daoFicheros" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOFicherosImpl" parent="daoBase" />
+	
+	<bean id="daoCanales" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOCanalesImpl" parent="daoBase" />
+	
+	<bean id="daoContactosCanal" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOContactosCanalImpl" parent="daoBase" />
+	
+	<bean id="daoLeadsHistory" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOLeadsHistoryImpl" parent="daoBase" />
+	
+	<bean id="daoGrupos" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOGruposImpl" parent="daoBase" />
+	
+	<bean id="daoPermisosGrupo" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOPermisosGrupoImpl" parent="daoBase" />
+	
+	<bean id="daoPermisos" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOPermisosImpl" parent="daoBase" />
+	
+	<bean id="daoUsuarios" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOUsuariosImpl" parent="daoBase" />
+	
+	<bean id="daoServiciosUsuario" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOServiciosUsuarioImpl" parent="daoBase" />
+	
+	<bean id="daoLogsUsuario" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOLogsUsuarioImpl" parent="daoBase" />
+
+	<bean id="daoFicherosLead" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOFicherosLeadImpl" parent="daoBase" />
+	
+</beans>
+

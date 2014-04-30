@@ -1,0 +1,30 @@
+package es.oyssen.mrm.negocio.services;
+
+import java.util.List;
+
+import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
+import es.oyssen.mrm.negocio.exceptions.ServiceException;
+import es.oyssen.mrm.negocio.vo.GrupoVO;
+import es.oyssen.mrm.negocio.vo.UsuarioVO;
+
+public interface UsuariosService {
+	
+	public void insert(UsuarioVO usuario) throws ServiceException, DAOException;
+	
+	public void update(UsuarioVO usuario) throws ServiceException, DAOException;
+	
+	public void delete(UsuarioVO usuario) throws ServiceException, DAOException;
+	
+	public List<UsuarioVO> findAll() throws ServiceException;
+	
+	public List<UsuarioVO> findByGrupo(GrupoVO grupo) throws ServiceException;
+	
+	public UsuarioVO findById(UsuarioVO usuario) throws ServiceException;
+	
+	public UsuarioVO findByEmail(UsuarioVO usuario) throws ServiceException;
+	
+	public UsuarioVO findByUser(UsuarioVO usuario) throws ServiceException;
+	
+	public UsuarioVO findByUserPass(UsuarioVO usuario) throws ServiceException;
+
+}

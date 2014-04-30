@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbar> 
+	<item id="new" type="button" img="new.gif" imgdis="new_dis.gif" text="New lead"  action="newLead" />
+	<item id="sep1" type="separator"/>
+	<item id="delete" type="button" img="delete.png" imgdis="delete_dis.png" text="Eliminar" enabled="false" action="deleteLead" />
+	<item id="sep2" type="separator"/>
+	<item id="importar" type="button" img="import_excel.png" text="Importar" action="goImportar"/>
+	<item id="sep3" type="separator"/>
+	<item id="exportar" type="button" img="export_excel.png" text="Exportar" action="goExportar"/>
+	<item id="sep4" type="separator"/>
+	<item id="refresh" type="button" img="recargar.png" text="Actualizar" action="goActualizar"/>
+	<item id="sep5" type="separator"/>
+	<item id="statusFilter" type="button" img="filter.png" text="Filtrar" action="changeStatusFilter"/>
+	<item id="sep6" type="separator"/>
+	<item id="LostStatusFilter" type="button" img="filter.png" text="Filtrar" action="changeLostStatusFilter"/>
+	<item id="sep7" type="separator"/>
+	<item id="dateFilter" type="button" img="calendar.gif" text="Filtrar" action="datesFilter"/>
+</toolbar>

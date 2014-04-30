@@ -1,0 +1,32 @@
+package es.oyssen.mrm.negocio.dao;
+
+import java.util.List;
+
+import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
+import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
+import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
+import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
+import es.oyssen.mrm.negocio.vo.GrupoVO;
+import es.oyssen.mrm.negocio.vo.UsuarioVO;
+
+public interface DAOUsuarios {
+	
+	public List<UsuarioVO> findAll() throws DAOException;
+	
+	public List<UsuarioVO> findByGrupo(GrupoVO grupo) throws DAOException;
+	
+	public UsuarioVO findById(UsuarioVO usuario) throws DAOException;
+	
+	public UsuarioVO findByUser(UsuarioVO usuario) throws DAOException;
+	
+	public UsuarioVO findByEmail(UsuarioVO usuario) throws DAOException;
+	
+	public UsuarioVO findByUserPass(UsuarioVO usuario) throws DAOException;
+	
+	public void insert(UsuarioVO usuario) throws DAOException, DAOInsertException;
+	
+	public void update(UsuarioVO usuario) throws DAOException, DAOUpdateException;
+	
+	public void delete(UsuarioVO usuario) throws DAOException, DAODeleteException;
+
+}

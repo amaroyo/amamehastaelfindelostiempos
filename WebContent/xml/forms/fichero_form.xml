@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+   <item type="fieldset" name="data" label="Información general" inputWidth="auto">
+       <item type="input" name="nombre" label="Nombre" labelWidth="100" />
+       <item type="input" name="telefono" label="Telefono" labelWidth="100" />
+       <item type="input" name="telefonoMovil" label="Telefono movil" labelWidth="100" />
+       <item type="input" name="direccion" label="Direccion" labelWidth="100" />
+       <item type="input" name="codigoPostal" label="Codigo postal" labelWidth="100" />
+       <item type="input" name="ciudad" label="Ciudad" labelWidth="100" />
+       <item type="input" name="pais" label="Pais" labelWidth="100" />
+       <item type="input" name="email" label="Email" labelWidth="100" />    
+       <item type="input" name="direccionFacturacion" label="Direccion facturacion" labelWidth="100" />
+       <item type="input" name="codigoPostalFacturacion" label="Codigo postal facturacion" labelWidth="100" />
+       <item type="input" name="ciudadFacturacion" label="Ciudad facturacion" labelWidth="100" />
+       <item type="input" name="paisFacturacion" label="Pais facturacion" labelWidth="100" />
+       <item type="input" name="nombreFacturacion" label="Nombre facturacion" labelWidth="100" />
+       <item type="input" name="telefonoFacturacion" label="Telefono facturacion" labelWidth="100" />
+       <item type="input" name="telefonoMovilFacturacion" label="Telefono movil facturacion" labelWidth="100" />
+       <item type="input" name="emailFacturacion" label="Email facturacion" labelWidth="100" />
+   </item>
+   <item type="button" name="aceptar" value="Aceptar" />
+</items>

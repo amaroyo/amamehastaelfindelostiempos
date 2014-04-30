@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+   <item type="fieldset" name="data" label="Información general" inputWidth="auto">
+       <item type="password" name="oldPass" label="Contraseña vieja" labelWidth="110" />
+       <item type="password" name="newPass1" label="Contraseña nueva" labelWidth="110" />
+       <item type="password" name="newPass2" label="Confirme contraseña" labelWidth="110" />
+   </item>
+   <item type="button" name="aceptar" value="Aceptar" />
+</items>

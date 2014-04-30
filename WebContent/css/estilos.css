@@ -1,0 +1,873 @@
+table.barratitulo {
+	background: #74111c;
+	border-bottom: white 1px solid;
+	border-top: white 1px solid;
+}
+
+
+
+
+body {
+	background-color: #fcfcfc;
+	padding: 0 0 0 0;
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	overflow: auto;
+	scrollbar-base-color: gray;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: black;
+		
+	background-repeat: no-repeat;
+	background-position: center center;			
+}
+body.nogeneral {
+	background-color: white;
+	padding: 0 0 0 0;
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	overflow: auto;
+	scrollbar-base-color: gray;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: black;
+	background-image: none;
+}
+
+form {
+    margin: 0;
+    padding: 0;
+}
+input, textarea, select {
+    margin: 0;
+    padding: 0;
+    font-size: 8pt;
+    xborder: 1px solid #666666;
+	color:#666;
+	margin-left:0em;
+	/*border:0.1em solid #ccc;*/
+	padding:0.1em 0.3em;
+	background:url(../img/bk.input.gif) left center repeat-x;
+}
+.valoracion {
+	text-align: right;
+}
+img {
+    border: none;
+    margin: 0px;
+    padding: 0px;
+}
+table {
+    margin: 0px;
+    padding: 0px;
+}
+tr {
+    margin: 0px;
+    padding: 0px;
+}
+td {
+    margin: 0px;
+    padding: 0px;
+}
+a, a:visited, a:hover {
+    color: #e24906; 
+    text-decoration: none;
+}
+strong, form, acronym, label, table, td, th, span, a, hr, code, pre, hr {
+    margin: 0;
+    padding: 0;
+    font-size: 8pt;
+    background-repeat: no-repeat;
+    list-style-type: none;
+}
+fieldset {
+    border: 1px solid #000000;
+    margin: 0 5 5 5;
+    padding: 0 10 5 10;
+}
+legend {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+p {
+    margin-top: 100px;
+}
+h1 {
+    margin: 5 5 5 5;
+    padding: 4 4;
+    font-size: 8pt;
+    color: #FFFFFF;
+    background-color: #01603E;
+}
+
+/* ESTILOS DE LA CAPA CARGANDO */
+.progreso {
+    background-color: #8e241d;
+}
+.txtprogreso {
+    font-size: 12px; 
+    color: #8e241d; 
+    font-weight: bold; 
+    font-family: Arial,Verdana,Helvetica,sans-serif;
+}
+.filaProgreso {
+    border: #666666 1px solid;
+}
+/* FIN ESTILOS DE LA CAPA CARGANDO */
+
+/* ESTILOS DE DISPLAYTAG */
+/* Estilos de DisplayTag*/
+#displaytag {
+	font-size: 8pt;
+}
+
+#displaytag table {
+	border: 1px solid #666;
+	margin: 0px 0px 0px 0px !important;
+	width: 99%;
+	font-size: 8pt;
+}
+
+#displaytag th,#displaytag td {
+	padding: 1px 2px 1px 2px !important;
+	text-align: left;
+	/*vertical-align: top;*/
+}
+
+#displaytag thead tr {
+	background-color: gray;
+	color: white;
+}
+
+#displaytag th.sorted {
+	background-color: gray;
+}
+
+#displaytag th a,th a:visited {
+	color: white;
+}
+
+#displaytag th a:hover {
+	text-decoration: none;
+	color: #fffe8a;
+}
+
+#displaytag th.sorted a,th.sortable a,td.linked a {
+	background-position: right;
+	display: block;
+	width: 100%;
+	padding: 0px;
+}
+
+#displaytag .sortable a {
+	background-image: url(../img/ordenar-off.gif);
+}
+
+#displaytag th.order1 a {
+	background-image: url(../img/ordenar-abajo.gif);
+}
+
+#displaytag th.order2 a {
+	background-image: url(../img/ordenar-arriba.gif);
+}
+
+#displaytag tr.seleccionar {
+	background-color: white
+}
+
+#displaytag tr.odd {
+	background-color: #f8f8f8
+}
+
+#displaytag tr.tableRowEven,tr.even {
+	background-color: #ebebeb
+}
+
+#displaytag div.exportlinks {
+	background-color: #eee;
+	border: 1px dotted #999;
+	padding: 2px 4px 2px 4px;
+	margin: 2px 0 10px 0;
+	width: 99%;
+}
+
+#displaytag span.export {
+	padding: 0 4px 1px 20px;
+	display: inline;
+	display: inline-block;
+	cursor: pointer;
+}
+
+#displaytag span.excel {
+	background-image: url(../img/ico_file_excel.png);
+}
+
+#displaytag span.csv {
+	background-image: url(../img/ico_file_csv.png);
+}
+
+#displaytag span.xml {
+	background-image: url(../img/ico_file_xml.png);
+}
+
+#displaytag span.pdf {
+	background-image: url(../img/ico_file_pdf.png);
+}
+
+#displaytag span.rtf {
+	background-image: url(../img/ico_file_rtf.png);
+}
+
+#displaytag span.pagebanner {
+	background-color: white;
+	border: 1px dotted #999;
+	padding: 0px 4px 0px 4px;
+	margin: 0px 5px;
+	display: block;
+	border-bottom: none;
+	font-size: 8pt;
+	color: black;
+}
+
+#displaytag span.pagelinks {
+	background-color: white;
+	border: 1px dotted #999;
+	padding: 0px 4px 0px 4px;
+	display: block;
+	border-top: none;
+	margin: 0px 5px 5px 5px;
+	font-size: 8pt;
+	color: black;
+}
+
+#displaytag .group-1 {
+	font-weight: bold;
+	padding-bottom: 10px;
+	border-top: 1px solid black;
+}
+
+#displaytag .group-2 {
+	font-style: italic;
+	border-top: 1px solid black;
+}
+
+#displaytag .subtotal-sum,.grandtotal-sum {
+	font-weight: bold;
+	text-align: right;
+}
+
+#displaytag .subtotal-header {
+	padding-bottom: 0px;
+	border-top: 1px solid white;
+}
+
+#displaytag .subtotal-label,.grandtotal-label {
+	border-top: 1px solid white;
+	font-weight: bold;
+}
+
+#displaytag .grouped-table tr.even {
+	background-color: #fff;
+}
+
+#displaytag .grouped-table tr.odd {
+	background-color: #fff;
+}
+
+#displaytag .grandtotal-row {
+	border-top: 2px solid black;
+}
+
+/* FIN Estilos de DisplayTag*/
+/* FIN ESTILOS DE DISPLAYTAG */
+
+#header {
+    xbackground-color: #01603E;
+    margin: 0;
+    padding: 0;
+}
+#header h1 {
+    margin: 0 10;
+    padding: 0;
+    font-size: 14pt;
+    color: #FFFFFF;
+    text-align: center;
+}
+#header .version {
+    margin: 0;
+    padding: 0 10;
+    font-size: 8pt;
+    vertical-align: baseline;
+}
+#header .tituloCabecera {
+	FONT-WEIGHT: bold; FONT-SIZE: 26px; COLOR: black; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+#header table tr td {
+    margin: 0;
+    padding: 0;
+    font-size: 8pt;	
+    color: #75A594;
+    font-weight: bold;
+}
+#header .usuario {
+    color: #01603E;
+}
+#header img {
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+#breadnavlist {
+    margin: 5px 10px;
+    font-size: 8pt;
+}
+#breadnavlist a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #01603E;
+    margin: 0;
+    padding: 0;
+}
+#breadnavlist a:hover {
+    color: #FEC20F;
+}
+
+#breadbar {
+    xpadding: 5;
+    text-decoration: none;
+    font-size: 8pt;
+    Xfont-weight: bold;
+    background-color: #E7EDEC;
+    color:#01603E;
+}
+#breadbar a {
+    text-decoration: none;
+    font-weight: bold;
+    color:#01603E;
+    margin: 0;
+    padding: 0;
+}
+#breadbar a:hover {
+    color: #0000ff;
+    text-decoration:underline;
+}
+
+.botonera {
+    margin: 5px 5px 10px 5px;
+    text-align: right;
+}
+.subbotonera {
+    margin: 5px 5px 0px 5px;
+    text-align: right;
+}
+.boton {
+  background: url(../img/bk.boton.gif) left center repeat-x;
+  border: 0.1em solid #ccc;
+  color: #333;
+  padding: 0;
+  width: 130px;
+  font-size: 11px; 
+  font-weight: bold;
+  text-decoration: none; 
+  text-align: center;   
+}
+.content {
+    padding: 0px 10px 0px 0px;
+}
+.content h1 {
+    margin: 0 0 10 0;
+    padding: 4 4;
+    font-size: 8pt;
+    color: #01603E;
+    background-color: #75A594; 
+}
+
+#tablist {
+    border-bottom: 1px solid #01603E;
+    margin: 0 0 10 0;
+    padding-bottom: 19px;
+    padding-left: 10px;
+}
+#tablist ul, #tablist li {
+    display: inline;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#tablist a:link, #tablist a:visited {
+    background: #E8EBF0;
+    border-top: 1px solid #01603E;
+    border-left: 1px solid #01603E;
+    border-right: 1px solid #01603E;
+    float: left;
+    line-height: 14px;
+    margin-right: 5px;
+    padding: 2px 8px 2px 8px;
+    text-decoration: none;
+    font-size: 8pt;
+    font-weight: bold;
+    color: #01603E;
+}
+#tablist a:link#current, #tablist a:visited#current {
+    background-color: #F4F4F4;
+    border-bottom: 1px solid #F4F4F4;
+    font-size: 8pt;
+    font-weight: bold;
+    color: #01603E;
+}
+#tablist a:hover { 
+    /*color: #FEC20F; */
+    background-color: #FEC20F;
+}
+#tablist ul a:hover { 
+    /*color: #FEC20F !important; */
+    background-color: #FEC20F;
+}
+.filaenlaces {
+    padding: 0px 5px;
+}
+.filaenlaces a {
+    font-size: 7pt;
+}
+.filaenlaces a:hover {
+    color: #FEC20F;
+}
+.obligatorio {
+    font-weight: bold;
+}
+.tdlabel {
+    padding-right: 5px;
+}
+.tdfield {
+    padding-right: 10px;
+}
+.tdbold {
+    font-weight: bold;
+}
+/*
+.txterror {
+    font-weight: bold;
+    color: red;
+}
+*/
+#avisos-error { 
+    color: #FF0000; 
+    border: solid 1px #ccc; 
+    margin: 10px;
+    background-color: #FCEBE7;
+}
+#txterror { 
+    background: transparent url(../img/icoAlerta.gif) no-repeat 10px center; 
+    margin: 0px;
+    padding: 0px 10px 0px 60px;
+}
+#txterror .tit { 
+    margin: 5 0;
+    font-weight: bold;
+}
+#txterror ul { 
+    margin: 0 0 5 0;
+    padding: 0 0 0 15;
+}
+#avisos-aviso { 
+    color: #FFA500; 
+    border: solid 1px #ccc; 
+    margin: 10px;
+    background-color: #FFF4E5;
+}
+#txtaviso { 
+    background: transparent url(../img/icoAviso.gif) no-repeat 10px center; 
+    margin: 0px;
+    padding: 0px 10px 0px 60px;
+}
+#txtaviso .tit { 
+    margin: 5 0;
+    font-weight: bold;
+}
+#txtaviso ul { 
+    margin: 0 0 5 0;
+    padding: 0 0 0 15;
+}
+#avisos-confir { 
+    color: #638224; 
+    border: solid 1px #ccc; 
+    margin: 10px;
+    background-color: #EFF2E9;
+}
+#txtconfir { 
+    background: transparent url(../img/icoConfirm.gif) no-repeat 10px center; 
+    margin: 0px;
+    padding: 0px 10px 0px 60px;
+}
+#txtconfir .tit { 
+    margin: 5 0;
+    font-weight: bold;
+}
+#txtconfir ul { 
+    margin: 0 0 5 0;
+    padding: 0 0 0 15;
+}
+
+/* ESTILOS DE CALENDAR */
+/* The main calendar widget.  DIV containing a table. */
+
+div.calendar { position: relative; }
+
+.calendar, .calendar table {
+  border: 1px solid #556;
+  font-size: 11px;
+  color: #000;
+  cursor: default;
+  background: #E4E5E6;
+  font-family: tahoma,verdana,sans-serif;
+}
+
+/* Header part -- contains navigation buttons and day names. */
+
+.calendar .button { /* "<<", "<", ">", ">>" buttons have this class */
+  text-align: center;    /* They are the navigation buttons */
+  padding: 2px;          /* Make the buttons seem like they're pressing */
+}
+
+.calendar .nav {
+  background: #E4E5E6 url(menuarrow.gif) no-repeat 100% 100%;
+}
+
+.calendar thead .title { /* This holds the current "month, year" */
+  font-weight: bold;      /* Pressing it will take you to the current date */
+  text-align: center;
+  background: #fff;
+  color: #000;
+  padding: 2px;
+}
+
+.calendar thead .headrow { /* Row <TR> containing navigation buttons */
+  background: #E4E5E6;
+  color: #000;
+}
+
+.calendar thead .daynames { /* Row <TR> containing the day names */
+  background: #9DA0AC;
+}
+
+.calendar thead .name { /* Cells <TD> containing the day names */
+  border-bottom: 1px solid #556;
+  padding: 2px;
+  text-align: center;
+  color: #000;
+}
+
+.calendar thead .weekend { /* How a weekend day name shows in header */
+  color: #a66;
+}
+
+.calendar thead .hilite { /* How do the buttons in header appear when hover */
+  background-color: #E4E5E6;
+  color: #000;
+  border: 1px solid #000000;
+  padding: 1px;
+}
+
+.calendar thead .active { /* Active (pressed) buttons in header */
+  background-color: #77c;
+  padding: 2px 0px 0px 2px;
+}
+
+/* The body part -- contains all the days in month. */
+
+.calendar tbody .day { /* Cells <TD> containing month days dates */
+  width: 2em;
+  color: #456;
+  text-align: right;
+  padding: 2px 4px 2px 2px;
+}
+
+.calendar table .wn {
+  padding: 2px 3px 2px 2px;
+  border-right: 1px solid #000;
+  background: #9DA0AC;
+}
+
+.calendar tbody .rowhilite td {
+  background: #def;
+}
+
+.calendar tbody .rowhilite td.wn {
+  background: #eef;
+}
+
+.calendar tbody td.hilite { /* Hovered cells <TD> */
+  background: #def;
+  padding: 1px 3px 1px 1px;
+  border: 1px solid #bbb;
+}
+
+.calendar tbody td.active { /* Active (pressed) cells <TD> */
+  background: #cde;
+  padding: 2px 2px 0px 2px;
+}
+
+.calendar tbody td.selected { /* Cell showing today date */
+  font-weight: bold;
+  border: 1px solid #000;
+  padding: 1px 3px 1px 1px;
+  background: #fff;
+  color: #000;
+}
+
+.calendar tbody td.weekend { /* Cells showing weekend days */
+  color: #a66;
+}
+
+.calendar tbody td.today { /* Cell showing selected date */
+  font-weight: bold;
+  color: #00f;
+}
+
+.calendar tbody .disabled { color: #999; }
+
+.calendar tbody .emptycell { /* Empty cells (the best is to hide them) */
+  visibility: hidden;
+}
+
+.calendar tbody .emptyrow { /* Empty row (some months need less than 6 rows) */
+  display: none;
+}
+
+/* The footer part -- status bar and "Close" button */
+
+.calendar tfoot .footrow { /* The <TR> in footer (only one right now) */
+  text-align: center;
+  background: #556;
+  color: #fff;
+}
+
+.calendar tfoot .ttip { /* Tooltip (status bar) cell <TD> */
+  background: #fff;
+  color: #445;
+  border-top: 1px solid #556;
+  padding: 1px;
+}
+
+.calendar tfoot .hilite { /* Hover style for buttons in footer */
+  background: #aaf;
+  border: 1px solid #04f;
+  color: #000;
+  padding: 1px;
+}
+
+.calendar tfoot .active { /* Active (pressed) style for buttons in footer */
+  background: #77c;
+  padding: 2px 0px 0px 2px;
+}
+
+/* Combo boxes (menus that display months/years for direct selection) */
+
+.combo {
+  position: absolute;
+  display: none;
+  top: 0px;
+  left: 0px;
+  width: 4em;
+  cursor: default;
+  border: 1px solid #655;
+  background: #def;
+  color: #000;
+  font-size: smaller;
+}
+
+.combo .label,
+.combo .label-IEfix {
+  text-align: center;
+  padding: 1px;
+}
+
+.combo .label-IEfix {
+  width: 4em;
+}
+
+.combo .hilite {
+  background: #acf;
+}
+
+.combo .active {
+  border-top: 1px solid #46a;
+  border-bottom: 1px solid #46a;
+  background: #eef;
+  font-weight: bold;
+}
+
+.calendar td.time {
+  border-top: 1px solid #000;
+  padding: 1px 0px;
+  text-align: center;
+  background-color: #f4f0e8;
+}
+
+.calendar td.time .hour,
+.calendar td.time .minute,
+.calendar td.time .ampm {
+  padding: 0px 3px 0px 4px;
+  border: 1px solid #889;
+  font-weight: bold;
+  background-color: #fff;
+}
+
+.calendar td.time .ampm {
+  text-align: center;
+}
+
+.calendar td.time .colon {
+  padding: 0px 2px 0px 3px;
+  font-weight: bold;
+}
+
+.calendar td.time span.hilite {
+  border-color: #000;
+  background-color: #667;
+  color: #fff;
+}
+
+.calendar td.time span.active {
+  border-color: #f00;
+  background-color: #000;
+  color: #0f0;
+}
+/* FIN ESTILOS DE CALENDAR */
+
+/* ESTILOS VENTANA MENSAJERIA */
+.esconder {display: none;}
+.mostrar {display: tabla;}
+.emergente {
+    background-color: #01603E;
+    width: 100%;
+    height: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #ffd600;
+    text-decoration: none;
+}
+.resumenMensajes {
+    vertical-align: top;
+    background-position: center;
+    font-size: 11px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #01603E;
+}
+/* FIN ESTILOS VENTANA MENSAJERIA */
+
+/* ESTILOS COLAPSADORES */
+.desplegable {
+	font-family: Arial, Helvetica, sans-serif;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: #e24906;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: bold;
+	color: #e24906;
+	text-decoration: none;
+}
+.desplegable2 {
+	font-family: Arial, Helvetica, sans-serif;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+	font-size: 12px;
+	font-style: normal;
+	color: #01603e;
+	text-decoration: none;
+}
+span.titulo2 {
+	FONT-WEIGHT: bold;
+    FONT-SIZE: 12px;
+    COLOR: #e24906;
+}
+span.titulo3 {
+	FONT-WEIGHT: bold;
+        FONT-SIZE: 12px;
+        COLOR: white;
+        xCOLOR: #75A594;
+}
+/* FIN ESTILOS COLAPSADORES */
+
+/* ESTILOS PARA ERRORES */
+.error {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: red
+}
+.fondo {
+	x-background-image: url(../img/SherlockHolmes.jpg);
+	x-background-repeat: no-repeat;
+	x-background-position: left center;
+}
+
+.fondoMenu {
+	border: 1px solid #BBBBFF;
+	background-color: #EAEAFF;
+	height: 50px;
+	vertical-align: top;
+	padding: 3px;
+	margin: 3px;
+}
+.lineaMenu {
+	line-height: 2px;
+	background-color: #000000;
+}
+
+.menuGesCab {
+	background-image: url(../img/menu/menuGestion_06.gif);
+	background-repeat: repeat;	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	color: #FFFFFF;
+	text-align: center;
+	font-style: italic;
+}
+
+.menuGesPie {
+	background-image: url(../img/menu/menuGestion_30.gif);
+	background-repeat: repeat;
+}
+.menuSalCab {
+	background-image: url(../img/menu/menuGestion_06.gif);
+	background-repeat: repeat;	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	color: #FFFFFF;
+	text-align: center;
+	font-style: italic;
+}
+.menuSalPie {
+	background-image: url(../img/menu/menuGestion_30.gif);
+	background-repeat: repeat;
+}
+
+.bordeSolidSkyBlue {
+	vertical-align: top;
+	border: 1px solid #a4bed4;
+	background-image: url(../skins/imgs/dhx_skyblue/bg_top.png);
+	background-repeat: repeat-x;	
+}
+
+.hoverGrid {
+	background-color: #faeab1;
+}
+
+.error{
+	background-color: #ffd4db !important;
+	color:maroon !important;		
+	width: 300px;
+	height: 40px;
+}
+
+.info{
+	width: 300px;
+	height: 20px;
+}

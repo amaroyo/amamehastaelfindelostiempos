@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>	
+	
+	<form-beans>
+		<form-bean name="GridDistribuidoresForm" type="es.oyssen.mrm.struts.forms.distribuidores.GridDistribuidoresForm" />
+		<form-bean name="EditarDistribuidorForm" type="es.oyssen.mrm.struts.forms.distribuidores.DistribuidorForm" />
+		
+		<form-bean name="GridContactosDistribuidorForm" type="es.oyssen.mrm.struts.forms.contactos.distribuidor.GridContactosDistribuidorForm" />
+		<form-bean name="EditarContactoDistribuidorForm" type="es.oyssen.mrm.struts.forms.contactos.distribuidor.ContactoDistribuidorForm" />
+		
+		
+	</form-beans>
+	
+
+	<action-mappings>
+		<action path="/distribuidores/inicio" forward="/jsp/web/distribuidores/inicio.jsp" />
+		
+		<action path="/distribuidores/griddistribuidores" name="GridDistribuidoresForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.distribuidores.GridDistribuidoresAction" />
+
+		<action path="/distribuidores/editardistribuidor" name="EditarDistribuidorForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.distribuidores.EditarDistribuidorAction"  />
+		
+		<action path="/distribuidores/actualizardistribuidor" name="EditarDistribuidorForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.distribuidores.EditarDistribuidorAction"  />
+		
+
+		<action path="/distribuidores/gridcontactosdistribuidor" name="GridContactosDistribuidorForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.contactos.distribuidor.GridContactosDistribuidorAction" />
+
+		<action path="/distribuidores/editarcontactodistribuidor" name="EditarContactoDistribuidorForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.contactos.distribuidor.EditarContactoDistribuidorAction"  />
+		
+		<action path="/distribuidores/actualizarcontactodistribuidor" name="EditarContactoDistribuidorForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.contactos.distribuidor.EditarContactoDistribuidorAction"  />
+		
+		
+		<action path="/distribuidores/gridleads" name="GridDistribuidoresForm" scope="request"  type="es.oyssen.mrm.struts.actions.distribuidores.GridLeadsAction" />
+		
+		<action path="/distribuidores/gridcomerciales" name="GridDistribuidoresForm" scope="request"  type="es.oyssen.mrm.struts.actions.distribuidores.GridComercialesAction" />
+		
+		<action path="/distribuidores/bloqueardistribuidor" name="EditarDistribuidorForm" scope="request"  type="es.oyssen.mrm.struts.actions.distribuidores.BloquearDistribuidorAction" />
+		
+		<action path="/distribuidores/desbloqueardistribuidor" name="EditarDistribuidorForm" scope="request"  type="es.oyssen.mrm.struts.actions.distribuidores.DesbloquearDistribuidorAction" />
+		
+		<action path="/distribuidores/exportardistribuidores" name="GridDistribuidoresForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.distribuidores.ExportarDistribuidoresAction" />
+		
+	</action-mappings>
+
+</struts-config>

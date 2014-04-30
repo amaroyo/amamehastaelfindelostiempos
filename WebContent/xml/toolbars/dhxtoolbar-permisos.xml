@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbar> 
+	<item id="new" type="button" img="new.gif" imgdis="new_dis.gif" text="New Distributor"  action="newPermisoGrupo" />
+	<item id="sep1" type="separator"/>
+	<item id="delete" type="button" img="delete.png" imgdis="delete_dis.png" text="Eliminar" enabled="false" action="deletePermisoGrupo" />
+	<item id="sep1" type="separator"/>
+	<item id="refresh" type="button" img="recargar.png" text="Actualizar" action="goActualizarPermisosGrupo"/>					
+</toolbar>

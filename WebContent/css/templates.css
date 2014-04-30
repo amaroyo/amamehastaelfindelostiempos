@@ -1,0 +1,62 @@
+@CHARSET "ISO-8859-1";
+
+.dhx_dataview_repsol_item {
+	cursor:pointer;
+	background-image: url(../skins/imgs/dataview/background.png);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.dhx_dataview_repsol_item_selected {
+	cursor: pointer;
+	background-image: url(../skins/imgs/dataview/background_select.png);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.dhx_dataview_item {
+	font-family:Tahoma;
+	font-size:8pt;
+	color:#000000;
+}
+
+.dhx_dataview_item .dhx_title {
+	font-weight: bold;
+	padding: 0 0 0 10;
+	text-align: left;
+	width: 85%;
+}
+
+.dhx_dataview_item .dhx_status {
+	padding: 5 3 0 0;
+	text-align: right;
+}
+
+.dhx_dataview_item .dhx_row {
+	font-size: 8pt;
+	padding: 0 5 0 10;
+	text-align: left;
+	color: #91919;
+}
+
+.dhx_dataview_item .dhx_button {
+	display: block;
+	color:#555555;
+	font-weight: bold;
+	font-size: 7pt;
+	background-image: url(../img/button.png);
+	background-position: center;
+	width: 100%;
+	height: 100%;
+	padding-top: 4px;
+}
+
+.dhx_dataview_item .dhx_button:hover {
+	color:#555555;
+	font-weight: bold;
+	font-size: 7pt;
+	background-image: url(../img/button_over.png);
+	background-position: center;
+	width: 100%;
+	height: 100%;
+}

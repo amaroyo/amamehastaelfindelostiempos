@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbar> 
+	<item id="dashboard" type="button" img="date.png" text="Novedades" action="goDashboard"/>
+	<item id="sep1" type="separator"/> 
+	<item id="desktop" type="button" img="desktop.png" text="Escritorio" action="goDesktop"/>
+	<item id="sep1" type="separator"/>
+	<!-- 
+	<item id="browser" type="button" img="browser.png" text="Navegador" action="goBrowser"/>
+	<item id="sep1" type="separator"/>
+	 -->	
+	<item id="terms_groups" type="button" img="bookcase.png" text="Grupo Terminos" action="goTerminos"/>
+	<item id="sep1" type="separator"/>
+	<item id="tax" type="button" img="package.png" text="Taxonomias" action="goTaxonomias"/>
+	<item id="sep1" type="separator"/>
+	<item id="carpetas" type="button" img="folders.png" text="Carpetas" action="goCarpetas"/>
+	<item id="sep1" type="separator"/>
+	<item id="entidades" type="button" img="entidades.png" text="Gestión entidades" action="goGestionEntidades" />
+	<item id="sep1" type="separator"/>
+	<item id="notas" type="buttonSelect" img="knotes.png" text="Notas" action="newNota">
+		<item id="gestionnotas" type="button" img="../../skins/imgs/toolbar/gestionnotas.png" text="Gestión Notas" action="goNotas"/>
+	</item>
+		<item id="sep1" type="separator"/>
+	<item id="exit" type="button" img="exit.png" text="Salir" action="logout"/>
+</toolbar>
