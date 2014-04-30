@@ -63,7 +63,7 @@ public class ForgotPasswordAction extends MrmAction {
 		Session session = Session.getDefaultInstance(properties,
 				new Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication("medastucorreo@gmail.com","contrasenya");
+						return new PasswordAuthentication("facultad.de.enfermeria@gmail.com","proyecto1314");
 					}
 				}
 		);
