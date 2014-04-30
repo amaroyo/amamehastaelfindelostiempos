@@ -48,7 +48,8 @@ public class ForgotPasswordAction extends MrmAction {
 	
 	private void sendForgotPasswordMessage(String to,String new_pass){
 		
-		String from = "medastucorreo@gmail.com";
+		final String from = "facultad.de.enfermeria.ucm@gmail.com";
+		final String password = "proyecto1314";
 		String host = "smtp.gmail.com";
 		String subject = "Subject";
 		String body = "<h6> HTML body </h6>" + new_pass;
@@ -63,7 +64,7 @@ public class ForgotPasswordAction extends MrmAction {
 		Session session = Session.getDefaultInstance(properties,
 				new Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication("facultad.de.enfermeria@gmail.com","proyecto1314");
+						return new PasswordAuthentication(from,password);
 					}
 				}
 		);
@@ -76,6 +77,7 @@ public class ForgotPasswordAction extends MrmAction {
 			message.setContent(body,"text/html" );
 		
 			Transport.send(message);
+			
 		}
 		catch (MessagingException mex) {
 			mex.printStackTrace();
