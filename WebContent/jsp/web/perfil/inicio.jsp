@@ -10,7 +10,9 @@
 	    <link rel="stylesheet" type="text/css" href="../css/templates.css">
 	    <link rel="stylesheet" type="text/css" href="../css/estilosMenu.css">
 	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlx.css">
+	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlxform_dhx_skyblue.css">
 	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
+	    <script type="text/javascript" src="../skins/dhtmlxform.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
 	    
@@ -41,9 +43,7 @@
 			    miGrid.init();
 			    miGrid.loadXML("../xml/forms/mi_perfil_form.xml");
 			    miGrid.attachEvent("onRowSelect",doOnRowSelected);
-			    
-			    
-		    			    			    
+			    			    
 		    });
 		    
 		    function doOnRowSelected(rowID,celInd){
@@ -77,6 +77,8 @@
 		    		form.setItemLabel('user','<bean:message key="label.user"/>');
 		    		form.setItemLabel('pass','<bean:message key="label.pass"/>');			    		
 		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+		    		
+		    		form.setFocusOnFirstActive();
 
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>36</permiso>" >		    	
@@ -84,6 +86,13 @@
 						</logic:notMatch>
 					</logic:notMatch>
 
+					
+					form.attachEvent("onEnter", function() {
+						form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+
+						}); 
+		    		});
+					
 					<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
 					idSelectedUser = <%=sessionIdUser%>;
 		    		
@@ -91,7 +100,7 @@
 						form.attachEvent("onButtonClick", function(id){
 							if (id == "aceptar") {
 								form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-
+									alert('<bean:message key="message.perfil.cambiado.exito"/>');
 								});
 
 							}

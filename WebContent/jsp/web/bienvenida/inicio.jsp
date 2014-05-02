@@ -8,8 +8,6 @@
 	    <link rel="stylesheet" type="text/css" href="../css/estilosMenu.css">
 	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlx.css">
 	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlxform_dhx_skyblue.css">
-	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlxform_dhx_terrace.css">
-	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlxform_dhx_web.css">
 	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
 	    <script type="text/javascript" src="../skins/dhtmlxform.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
@@ -40,7 +38,7 @@
 		    				form.send("autenticacionusuario.do?user=" + user + "&pass=" + pass, "post", function(loader) {
 		    					goEntrada();
 		    				});
-		    		    });
+		    		});
 		    		
 		    		form.attachEvent("onButtonClick", function(id){
 		    			
