@@ -13,7 +13,7 @@
 
 	<action-mappings>
 
-		<action path="/perfil/inicio" forward="/jsp/web/perfil/inicio.jsp" />
+		<action path="/asignaturas/inicio" forward="/jsp/web/asignaturas/inicio.jsp" />
 		
 		<action path="/perfil/editarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />
 		
