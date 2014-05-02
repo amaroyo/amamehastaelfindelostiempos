@@ -99,6 +99,14 @@
     		alert('<bean:message key="message.forgot.password.successful" />');
     	}
     	
+    	function failedUpdatePassword() {
+    		alert('<bean:message key="message.pass.noCorrecta" />');
+    	}
+    	
+    	function successfulUpdatePassword() {
+    		alert('<bean:message key="message.pass.cambiadaExito" />');
+    	}
+    	
     	function goComerciales() {
     		document.getElementById("areatrabajo").src="comerciales/inicio.do";
     	}
@@ -153,6 +161,7 @@
 	</body>
 </logic:empty>
 <logic:notEmpty name="usuarioYPermisos">
+
   	<logic:match scope="session" name="usuarioYPermisos" value="<existe>YES</existe>" >
 		<logic:match scope="session" name="usuarioYPermisos" value="<bloqueado>NO</bloqueado>" >
 			<body class="ventana" onload="init();">
@@ -193,6 +202,18 @@
 			<iframe name="trabajo" id="areatrabajo" height="100%" width="100%" scrolling="auto" src="bienvenida/inicio.do" frameborder="0"></iframe>
 		</body>
 	</logic:match>
+	
+	<logic:match scope="session" name="usuarioYPermisos" value="<update_password_correct>NO</update_password_correct>" >
+		<body class="ventana" onload="failedUpdatePassword();">
+			<iframe name="trabajo" id="areatrabajo" height="100%" width="100%" scrolling="auto" src="perfil/inicio.do" frameborder="0"></iframe>
+		</body>
+	</logic:match>
+	<logic:match scope="session" name="usuarioYPermisos" value="<update_password_correct>YES</update_password_correct>" >
+		<body class="ventana" onload="successfulUpdatePassword();">
+			<iframe name="trabajo" id="areatrabajo" height="100%" width="100%" scrolling="auto" src="perfil/inicio.do" frameborder="0"></iframe>
+		</body>
+	</logic:match>  
+	
 </logic:notEmpty>    
 </body>
 </html>

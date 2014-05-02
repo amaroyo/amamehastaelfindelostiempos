@@ -8,6 +8,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
+import es.oyssen.mrm.negocio.vo.UsuarioYPermisos;
 import es.oyssen.mrm.struts.actions.MrmAction;
 import es.oyssen.mrm.struts.forms.usuarios.EditarContrasenaForm;
 import es.oyssen.mrm.util.EncriptarUtil;
@@ -25,16 +26,27 @@ public class ActualizarContrasenaAction extends MrmAction {
 		String newPass = f.getNewPass();
 			
 		UsuarioVO usuario = new UsuarioVO();
+		UsuarioYPermisos usuarioYPermisos = new UsuarioYPermisos();
 		usuario.setUser(user);
 		usuario.setPass(EncriptarUtil.getStringMessageDigest(oldPass, EncriptarUtil.MD5));
-		usuario = getUsuariosService().findByUserPass(usuario);		
+		usuario = getUsuariosService().findByUserPass(usuario);	
+		usuarioYPermisos.setUsuario(usuario);	
 		
 		if (usuario != null){
 			usuario.setPass(EncriptarUtil.getStringMessageDigest(newPass, EncriptarUtil.MD5));
 			getUsuariosService().update(usuario);
 		}				
-		
+		request.getSession().setAttribute("usuarioYPermisos", parseXML(usuarioYPermisos));
 		return mapping.findForward("success");
+	}
+	
+	private static final String parseXML(Object o) throws Exception {
+		UsuarioYPermisos c = (UsuarioYPermisos) o;
+		StringBuffer sb = new StringBuffer();
+		sb.append("<data>");
+		sb.append("<update_password_correct>" + ((c.getUsuario() == null) ? "NO" : "YES") + "</update_password_correct>");
+		sb.append("</data>");
+		return sb.toString();
 	}
 
 }

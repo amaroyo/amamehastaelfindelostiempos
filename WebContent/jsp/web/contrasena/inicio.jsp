@@ -38,25 +38,40 @@
 		    				    					    			
 		    		form.attachEvent("onButtonClick", function(id){
 	    				if (id == "aceptar") {
-	    					if (form.getItemValue("newPass1") == form.getItemValue("newPass2")){
-	    						var newPass = form.getItemValue("newPass1");
-	    						var oldPass = form.getItemValue("oldPass");
-			    				form.send("../contrasena/actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(xml) {
-			    					alert("Su contraseña ha sido cambiada con éxito");
-			    				});
-			    				window.close();
-	    					} else {
-	    						alert('<bean:message key="message.pass.no.coincide" />');
+	    					if(form.getItemValue("newPass1") != "" && form.getItemValue("newPass2") != ""){
+	    						
+		    					if (form.getItemValue("newPass1") == form.getItemValue("newPass2")){
+		    						
+			    						var newPass = form.getItemValue("newPass1");
+			    						var oldPass = form.getItemValue("oldPass");
+					    				form.send("../contrasena/actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(xml) {
+					    					goEntrada();
+					    				});
+					    				window.close();
+					    				
+		    					} 
+		    					else {
+		    						alert('<bean:message key="message.pass.no.coincide" />');
+		    					}
+	    					}
+	    					else {
+	    						alert('<bean:message key="message.pass.vacia" />');
 	    					}
 	    				}
+	    				
 		    		});
 		    	});
 			    			    			    
 		    });
-
+		    
+		    function goEntrada() {
+				var url = "../entrada.do";
+				location.href=url;
+	    	}
 		    
         </script>
 	</head>
-	<body>
+	<body> 
+		
 	</body>
 </html>

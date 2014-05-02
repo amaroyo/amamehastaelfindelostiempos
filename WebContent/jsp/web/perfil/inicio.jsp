@@ -39,7 +39,7 @@
 			    miGrid.setColTypes("ro");
 			    miGrid.enableMultiselect(false);
 			    miGrid.init();
-			    miGrid.loadXML("../xml/forms/mi_perfil_grid.xml");
+			    miGrid.loadXML("../xml/forms/mi_perfil_form.xml");
 			    miGrid.attachEvent("onRowSelect",doOnRowSelected);
 			    
 			    
@@ -47,18 +47,10 @@
 		    });
 		    
 		    function doOnRowSelected(rowID,celInd){
-		    	if (rowID == "c") logout();
-		    	else if (rowID == "b") pass();
+		        if (rowID == "b") pass();
 		    	else if (rowID == "a") verPerfil();
 		    	
 		    }
-		    
-		    function logout() {
-	    		if (confirm('<bean:message key="message.aplicacion.salir" />')) {
-					var url = "../bienvenida/logoutusuario.do";
-					location.href=url;	    			
-	    		}
-	    	}
 		    
 		    function pass() {	    		
 				var url = "../contrasena/inicio.do";

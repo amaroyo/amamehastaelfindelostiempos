@@ -30,6 +30,7 @@
   <init-param>
    <param-name>config</param-name>
    <param-value>/WEB-INF/struts-config.xml, 
+       			/WEB-INF/struts-config-perfil.xml, 
    				/WEB-INF/struts-config-comerciales.xml, 
    				/WEB-INF/struts-config-distribuidores.xml, 
    				/WEB-INF/struts-config-puntos-venta.xml,
