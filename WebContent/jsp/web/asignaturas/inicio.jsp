@@ -93,9 +93,9 @@
 					form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
 						form.attachEvent("onButtonClick", function(id){
 							if (id == "aceptar") {
-								form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+								//form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
 
-								});
+								//});
 
 							}
 						});

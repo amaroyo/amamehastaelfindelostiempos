@@ -209,7 +209,7 @@
 	
 	<logic:match scope="session" name="usuarioYPermisos" value="<update_password_correct>NO</update_password_correct>" >
 		<body class="ventana" onload="failedUpdatePassword();">
-			<iframe name="trabajo" id="areatrabajo" height="100%" width="100%" scrolling="auto" src="perfil/inicio.do" frameborder="0"></iframe>
+			<iframe name="trabajo" id="areatrabajo" height="100%" width="100%" scrolling="auto" src="contrasena/inicio.do" frameborder="0"></iframe>
 		</body>
 	</logic:match>
 	<logic:match scope="session" name="usuarioYPermisos" value="<update_password_correct>YES</update_password_correct>" >
