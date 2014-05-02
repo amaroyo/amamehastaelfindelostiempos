@@ -89,7 +89,7 @@
 					
 					form.attachEvent("onEnter", function() {
 						form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-
+							alert('<bean:message key="message.perfil.cambiado.exito"/>');
 						}); 
 		    		});
 					

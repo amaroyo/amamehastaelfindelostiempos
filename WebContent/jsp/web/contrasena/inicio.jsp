@@ -55,7 +55,7 @@
 		    					}
 	    					}
 	    					else {
-	    						alert('<bean:message key="message.pass.vacia" />');
+	    						alert('<bean:message key="message.pass.vacio" />');
 	    					}
 	    				}
 	    				

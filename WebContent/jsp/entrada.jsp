@@ -101,11 +101,11 @@
     	}
     	
     	function failedUpdatePassword() {
-    		alert('<bean:message key="message.pass.noCorrecta" />');
+    		alert('<bean:message key="message.pass.no.correcto" />');
     	}
     	
     	function successfulUpdatePassword() {
-    		alert('<bean:message key="message.pass.cambiadaExito" />');
+    		alert('<bean:message key="message.pass.cambiado.exito" />');
     	}
     	
     	function goComerciales() {
