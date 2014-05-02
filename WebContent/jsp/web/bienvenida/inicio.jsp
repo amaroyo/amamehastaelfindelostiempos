@@ -32,8 +32,9 @@
 		    		form.setItemLabel('aceptar','<bean:message key="button.entrar"/>');
 		    		form.setItemLabel('newPass','<bean:message key="button.olvide.pass"/>');
 		    		
+		    		form.setFocusOnFirstActive();
 		    				    		
-		    		 form.attachEvent("onEnter", function() {
+		    		form.attachEvent("onEnter", function() {
 		    			 var user = form.getItemValue("user");
 	    					var pass = form.getItemValue("pass");
 		    				form.send("autenticacionusuario.do?user=" + user + "&pass=" + pass, "post", function(loader) {
