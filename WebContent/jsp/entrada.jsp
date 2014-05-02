@@ -29,7 +29,6 @@
 					toolbar.setItemText('distribuidores', '<bean:message key="title.distribuidores" />');
 					toolbar.setItemText('servicios', '<bean:message key="title.servicios" />');
 					toolbar.setItemText('canales', '<bean:message key="title.channels" />');
-					toolbar.setItemText('contrasena', '<bean:message key="title.cambiar.pass" />');
 					toolbar.setItemText('grupos', '<bean:message key="title.groups" />');
 					toolbar.setItemText('usuarios', '<bean:message key="title.users" />');
 					toolbar.setItemText('logsUsuarios', '<bean:message key="title.logs.users" />');
@@ -68,14 +67,14 @@
 						</logic:notMatch>	
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>34</permiso>" >
 							toolbar.hideItem('usuarios');
-							toolbar.hideItem('sep12');
+							toolbar.hideItem('sep11');
 						</logic:notMatch>
 					</logic:notMatch>
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>1</grupo>" >
 						toolbar.hideItem('grupos');
-						toolbar.hideItem('sep11');
+						toolbar.hideItem('sep10');
 						toolbar.hideItem('logsUsuarios');
-						toolbar.hideItem('sep13');
+						toolbar.hideItem('sep12');
 					</logic:notMatch>
 				</logic:notEmpty>
 	        });	        	        
@@ -135,9 +134,7 @@
     	function goUsuarios() {
     		document.getElementById("areatrabajo").src="usuarios/inicio.do";
     	}
-    	function goContrasena() {
-    		document.getElementById("areatrabajo").src="contrasena/inicio.do";
-    	}
+    	
     	function goLogsUsuarios() {
     		document.getElementById("areatrabajo").src="logs/inicio.do";
     	}

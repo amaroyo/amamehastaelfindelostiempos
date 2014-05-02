@@ -27,17 +27,14 @@
         <item id="canales" type="button" img="channels.png" text="Canales" action="goCanales"/>
         <item id="sep9" type="separator"/>
         
-        <item id="contrasena" type="button" img="password.png" text="Cambio contraseña" action="goContrasena"/>
-        <item id="sep10" type="separator"/>
-        
         <item id="grupos" type="button" img="groups.png" text="Grupos" action="goGrupos"/>
-        <item id="sep11" type="separator"/> 
+        <item id="sep10" type="separator"/> 
         
         <item id="usuarios" type="button" img="users.png" text="Usuarios" action="goUsuarios"/>
-        <item id="sep12" type="separator"/> 
+        <item id="sep11" type="separator"/> 
         
         <item id="logsUsuarios" type="button" img="log.png" text="Logs Usuarios" action="goLogsUsuarios"/>
-        <item id="sep13" type="separator"/> 
+        <item id="sep12" type="separator"/> 
         
         <item id="exit" type="button" img="exit.png" text="Salir" action="logout"/>
         
