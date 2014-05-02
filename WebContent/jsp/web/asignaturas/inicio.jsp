@@ -27,12 +27,13 @@
 			    main_layout = new dhtmlXLayoutObject(document.body, '3W');
 			    var a = main_layout.cells('a');
 			    
-			    main_layout.cells("a").setWidth(150);
+			    main_layout.cells("a").setWidth(215);
 			    main_layout.cells("a").hideHeader();
 			    main_layout.cells("b").hideHeader();
 			    main_layout.cells("b").setWidth(150);
 			    main_layout.cells("b").hideHeader();
 			    main_layout.cells("c").hideHeader();
+			    //main_layout.setAutoSize("a;b", "b;c");
 			    
 			    
 			    miGrid = a.attachGrid();
