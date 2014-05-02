@@ -37,7 +37,7 @@
 			    
 			    miGrid = a.attachGrid();
 			    miGrid.setIconsPath('../skins/imgs/');		    	
-			    miGrid.setHeader(["<strong><bean:message key="label.misAsignaturas" /></strong>"]);
+			    miGrid.setHeader(["<strong><bean:message key="label.mis.asignaturas" /></strong>"]);
 			    //set readonly (ro)
 			    miGrid.setColTypes("ro");
 			    miGrid.enableMultiselect(false);
@@ -51,14 +51,11 @@
 		    
 		    function doOnRowSelected(rowID,celInd){
 		        if (rowID == "b") alert("haha");
-		    	else if (rowID == "a") alert("haha");
+		    	else if (rowID == "a") verPerfil();
 		    	
 		    }
 		    
-		    function pass() {	    		
-				var url = "../contrasena/inicio.do";
-				location.href=url;    		
-	    	}
+		    
 		    
 		    function verPerfil(){
 		    	var b = main_layout.cells('b');
@@ -90,16 +87,16 @@
 					<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
 					idSelectedUser = <%=sessionIdUser%>;
 		    		
-					form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
+					/*form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
 						form.attachEvent("onButtonClick", function(id){
 							if (id == "aceptar") {
-								//form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+								form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
 
-								//});
+								});
 
 							}
 						});
-					});
+					});*/
 					
 					
 		    	});

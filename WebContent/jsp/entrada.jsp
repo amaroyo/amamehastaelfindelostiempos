@@ -20,8 +20,8 @@
 	    		toolbar = new dhtmlXToolbarObject("toolbarObj");
 		        toolbar.setIconsPath("img/toolbar/");
 		        toolbar.loadXML('xml/toolbars/dhxtoolbar-mrm.xml', function() {
-		        	toolbar.setItemText('miPerfil', '<bean:message key="label.miPerfil" />');
-		        	toolbar.setItemText('misAsignaturas', '<bean:message key="label.misAsignaturas" />');
+		        	toolbar.setItemText('miPerfil', '<bean:message key="label.mi.perfil" />');
+		        	toolbar.setItemText('misAsignaturas', '<bean:message key="label.mis.asignaturas" />');
 					toolbar.setItemText('leads', '<bean:message key="title.leads" />');
 					toolbar.setItemText('comerciales', '<bean:message key="title.comerciales" />');
 					toolbar.setItemText('responsables', '<bean:message key="title.responsables" />');

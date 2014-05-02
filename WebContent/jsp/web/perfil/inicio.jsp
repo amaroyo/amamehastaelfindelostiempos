@@ -36,7 +36,7 @@
 			    
 			    miGrid = a.attachGrid();
 			    miGrid.setIconsPath('../skins/imgs/');		    	
-			    miGrid.setHeader(["<strong><bean:message key="label.miPerfil" /></strong>"]);
+			    miGrid.setHeader(["<strong><bean:message key="label.mi.perfil" /></strong>"]);
 			    //set readonly (ro)
 			    miGrid.setColTypes("ro");
 			    miGrid.enableMultiselect(false);
