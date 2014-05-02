@@ -63,7 +63,7 @@
 		    function verFormModificarPass(){
 		    	
 		    	form.loadStruct('../xml/forms/contrasena_form.xml', function() {
-		    		form.setItemLabel('data','<bean:message key="title.info.general"/>');
+		    		form.setItemLabel('data','<bean:message key="title.cambiar.pass"/>');
 		    		form.setItemLabel('oldPass','<bean:message key="label.ant.pass"/>');
 		    		form.setItemLabel('newPass1','<bean:message key="label.nueva.pass"/>');
 		    		form.setItemLabel('newPass2','<bean:message key="label.repetir.pass"/>');
@@ -112,7 +112,7 @@
 		    function verPerfil(){
 		    	
 		    	form.loadStruct('../xml/forms/usuario_form.xml', function(){
-		    		form.setItemLabel('data','<bean:message key="title.info.general"/>');
+		    		form.setItemLabel('data','<bean:message key="title.datos.personales"/>');
 		    		form.setItemLabel('grupo','<bean:message key="label.group"/>');
 		    		form.setItemLabel('nombre','<bean:message key="label.nombre"/>');
 		    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
