@@ -21,6 +21,7 @@
 		        toolbar.setIconsPath("img/toolbar/");
 		        toolbar.loadXML('xml/toolbars/dhxtoolbar-mrm.xml', function() {
 		        	toolbar.setItemText('miPerfil', '<bean:message key="label.miPerfil" />');
+		        	toolbar.setItemText('misAsignaturas', '<bean:message key="label.misAsignaturas" />');
 					toolbar.setItemText('leads', '<bean:message key="title.leads" />');
 					toolbar.setItemText('comerciales', '<bean:message key="title.comerciales" />');
 					toolbar.setItemText('responsables', '<bean:message key="title.responsables" />');
@@ -39,42 +40,42 @@
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >		    	
 							toolbar.hideItem('leads');
-							toolbar.hideItem('sep2');
+							toolbar.hideItem('sep3');
 		    			</logic:notMatch>
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>8</permiso>" >		    	
 							toolbar.hideItem('comerciales');
-							toolbar.hideItem('sep3');
+							toolbar.hideItem('sep4');
 						</logic:notMatch>    				
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>12</permiso>" >		    	
 							toolbar.hideItem('responsables');
-							toolbar.hideItem('sep4');
+							toolbar.hideItem('sep5');
 						</logic:notMatch> 
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>16</permiso>" >		    	
 							toolbar.hideItem('distribuidores');
-							toolbar.hideItem('sep5');
+							toolbar.hideItem('sep6');
 						</logic:notMatch> 
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>20</permiso>" >		    	
 							toolbar.hideItem('empresas');
-							toolbar.hideItem('sep6');
+							toolbar.hideItem('sep7');
 						</logic:notMatch>
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>24</permiso>" >		    	
 							toolbar.hideItem('servicios');
-							toolbar.hideItem('sep7');
+							toolbar.hideItem('sep8');
 						</logic:notMatch>
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>28</permiso>" >		    	
 							toolbar.hideItem('canales');
-							toolbar.hideItem('sep8');
+							toolbar.hideItem('sep9');
 						</logic:notMatch>	
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>34</permiso>" >
 							toolbar.hideItem('usuarios');
-							toolbar.hideItem('sep11');
+							toolbar.hideItem('sep12');
 						</logic:notMatch>
 					</logic:notMatch>
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>1</grupo>" >
 						toolbar.hideItem('grupos');
-						toolbar.hideItem('sep10');
+						toolbar.hideItem('sep11');
 						toolbar.hideItem('logsUsuarios');
-						toolbar.hideItem('sep12');
+						toolbar.hideItem('sep13');
 					</logic:notMatch>
 				</logic:notEmpty>
 	        });	        	        
@@ -142,6 +143,9 @@
     	}
     	function goMiPerfil() {
     		document.getElementById("areatrabajo").src="perfil/inicio.do";
+    	}
+    	function goMisAsignaturas() {
+    		document.getElementById("areatrabajo").src="asignaturas/inicio.do";
     	}
 
     	function logout() {

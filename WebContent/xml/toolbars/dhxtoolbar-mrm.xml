@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <toolbar> 
-    <item id="miPerfil" type="button" img="perfil.png" text="Mi Perfil" action="goMiPerfil"/>
+    	<item id="miPerfil" type="button" img="perfil.png" text="Mi Perfil" action="goMiPerfil"/>
         <item id="sep1" type="separator"/> 
         
-        <item id="leads" type="button" img="lead.png" text="Leads" action="goLeads"/>
+        <item id="misAsignaturas" type="button" img="asignaturas.png" text="Mi Perfil" action="goMisAsignaturas"/>
         <item id="sep2" type="separator"/> 
         
-        <item id="comerciales" type="button" img="representantes.png" text="Comerciales" action="goComerciales"/>
+        <item id="leads" type="button" img="lead.png" text="Leads" action="goLeads"/>
         <item id="sep3" type="separator"/> 
         
-        <item id="responsables" type="button" img="responsables.png" text="Responsables" action="goResponsables"/>
+        <item id="comerciales" type="button" img="representantes.png" text="Comerciales" action="goComerciales"/>
         <item id="sep4" type="separator"/> 
         
-        <item id="distribuidores" type="button" img="distributors.png" text="Distribuidores" action="goDistribuidores"/>
+        <item id="responsables" type="button" img="responsables.png" text="Responsables" action="goResponsables"/>
         <item id="sep5" type="separator"/> 
         
+        <item id="distribuidores" type="button" img="distributors.png" text="Distribuidores" action="goDistribuidores"/>
+        <item id="sep6" type="separator"/> 
+        
         <item id="empresas" type="button" img="company.png" text="Empresas" action="goEmpresas"/>
-        <item id="sep6" type="separator"/>
+        <item id="sep7" type="separator"/>
         
         <item id="servicios" type="button" img="services.png" text="Servicios" action="goServicios"/>
-        <item id="sep7" type="separator"/> 
+        <item id="sep8" type="separator"/> 
         
         <item id="canales" type="button" img="channels.png" text="Canales" action="goCanales"/>
-        <item id="sep8" type="separator"/>
-        
-        <item id="contrasena" type="button" img="password.png" text="Cambio contraseña" action="goContrasena"/>
         <item id="sep9" type="separator"/>
         
-        <item id="grupos" type="button" img="groups.png" text="Grupos" action="goGrupos"/>
-        <item id="sep10" type="separator"/> 
+        <item id="contrasena" type="button" img="password.png" text="Cambio contraseña" action="goContrasena"/>
+        <item id="sep10" type="separator"/>
         
-        <item id="usuarios" type="button" img="users.png" text="Usuarios" action="goUsuarios"/>
+        <item id="grupos" type="button" img="groups.png" text="Grupos" action="goGrupos"/>
         <item id="sep11" type="separator"/> 
         
-        <item id="logsUsuarios" type="button" img="log.png" text="Logs Usuarios" action="goLogsUsuarios"/>
+        <item id="usuarios" type="button" img="users.png" text="Usuarios" action="goUsuarios"/>
         <item id="sep12" type="separator"/> 
+        
+        <item id="logsUsuarios" type="button" img="log.png" text="Logs Usuarios" action="goLogsUsuarios"/>
+        <item id="sep13" type="separator"/> 
         
         <item id="exit" type="button" img="exit.png" text="Salir" action="logout"/>
         

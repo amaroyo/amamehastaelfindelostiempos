@@ -42,7 +42,8 @@
    				/WEB-INF/struts-config-grupos.xml,
    				/WEB-INF/struts-config-usuarios.xml,
    				/WEB-INF/struts-config-bienvenida.xml,
-   				/WEB-INF/struts-config-logs.xml
+   				/WEB-INF/struts-config-logs.xml,
+   				/WEB-INF/struts-config-asignaturas.xml
    </param-value>
   </init-param>
   <init-param>
