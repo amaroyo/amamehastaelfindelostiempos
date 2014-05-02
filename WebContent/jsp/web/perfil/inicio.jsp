@@ -21,13 +21,13 @@
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var miGrid, tabbar, tab_1, main_layout;
+	    	var miGrid, tabbar, tab_1, main_layout, form, b, a;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
 			    dhtmlxError.catchError("ALL",errorHandler);
 			    main_layout = new dhtmlXLayoutObject(document.body, '2U');
-			    var a = main_layout.cells('a');
+			    a = main_layout.cells('a');
 			    
 			    main_layout.cells("a").setWidth(150);
 			    main_layout.cells("a").hideHeader();
@@ -47,20 +47,69 @@
 		    });
 		    
 		    function doOnRowSelected(rowID,celInd){
-		        if (rowID == "b") pass();
+				b = main_layout.cells('b');
+		    	form = b.attachForm();
+		        if (rowID == "b") verFormModificarPass();
 		    	else if (rowID == "a") verPerfil();
 		    	
 		    }
 		    
-		    function pass() {	    		
-				var url = "../contrasena/inicio.do";
-				location.href=url;    		
+		    
+		    function goEntrada() {
+				var url = "../entrada.do";
+				location.href=url;
 	    	}
 		    
+		    function verFormModificarPass(){
+		    	
+		    	form.loadStruct('../xml/forms/contrasena_form.xml', function() {
+		    		form.setItemLabel('data','<bean:message key="title.info.general"/>');
+		    		form.setItemLabel('oldPass','<bean:message key="label.ant.pass"/>');
+		    		form.setItemLabel('newPass1','<bean:message key="label.nueva.pass"/>');
+		    		form.setItemLabel('newPass2','<bean:message key="label.repetir.pass"/>');
+		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+
+		    		form.setFocusOnFirstActive();
+		    		
+		    		form.attachEvent("onEnter", function() {
+		    			processPasswords();
+		    		});
+		    		
+		    		form.attachEvent("onButtonClick", function(id){
+	    				if (id == "aceptar") {
+	    					processPasswords();
+	    				}
+	    				
+		    		});
+		    	});
+		    }
+		    
+		    
+		    function processPasswords(){
+		    	if(form.getItemValue("newPass1") != "" && form.getItemValue("newPass2") != ""){
+					if (form.getItemValue("newPass1") == form.getItemValue("newPass2")){
+						if(form.getItemValue("newPass1") != form.getItemValue("oldPass")){
+    						var newPass = form.getItemValue("newPass1");
+    						var oldPass = form.getItemValue("oldPass");
+		    				form.send("../contrasena/actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(xml) {
+		    					goEntrada();
+		    				});
+						}
+						else{
+							alert('<bean:message key="message.pass.iguales" />');
+						}
+					} 
+					else {
+						alert('<bean:message key="message.pass.no.coincide" />');
+					}
+				}
+				else {
+					alert('<bean:message key="message.pass.vacio" />');
+				}
+		    }
+		    
+		    
 		    function verPerfil(){
-		    	var b = main_layout.cells('b');
-	    		
-		    	var form = b.attachForm();	
 		    	
 		    	form.loadStruct('../xml/forms/usuario_form.xml', function(){
 		    		form.setItemLabel('data','<bean:message key="title.info.general"/>');
