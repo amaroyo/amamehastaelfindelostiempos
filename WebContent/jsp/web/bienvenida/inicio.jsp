@@ -7,10 +7,13 @@
 	    <link rel="stylesheet" type="text/css" href="../css/templates.css">
 	    <link rel="stylesheet" type="text/css" href="../css/estilosMenu.css">
 	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlx.css">
+	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlxform_dhx_skyblue.css">
+	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlxform_dhx_terrace.css">
+	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlxform_dhx_web.css">
 	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
+	    <script type="text/javascript" src="../skins/dhtmlxform.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
-	    
 
 	    <script type="text/javascript">
 	    
@@ -30,9 +33,15 @@
 		    		form.setItemLabel('newPass','<bean:message key="button.olvide.pass"/>');
 		    		
 		    				    		
+		    		 form.attachEvent("onEnter", function() {
+		    			 var user = form.getItemValue("user");
+	    					var pass = form.getItemValue("pass");
+		    				form.send("autenticacionusuario.do?user=" + user + "&pass=" + pass, "post", function(loader) {
+		    					goEntrada();
+		    				});
+		    		    });
+		    		
 		    		form.attachEvent("onButtonClick", function(id){
-		    			
-		    			
 		    			
 	    				if (id == "aceptar") {
 	    					var user = form.getItemValue("user");
