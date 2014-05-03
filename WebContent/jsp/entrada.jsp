@@ -156,6 +156,7 @@
     </script>     
 </head>
 
+
 <logic:empty name="usuarioYPermisos">
 	<body class="ventana" >
 		<iframe name="trabajo" id="areatrabajo" height="100%" width="100%" scrolling="auto" src="bienvenida/inicio.do" frameborder="0"></iframe>
@@ -216,5 +217,4 @@
 	</logic:match>  
 	
 </logic:notEmpty>    
-</body>
 </html>

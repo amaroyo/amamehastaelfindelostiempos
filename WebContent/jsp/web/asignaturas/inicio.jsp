@@ -51,11 +51,13 @@
 		    });
 		    
 		    function doOnRowSelected(rowID,celInd){
-		        if (rowID == "b") alert("haha");
-		    	else if (rowID == "a") verPerfil();
-		    	
+		        verComponentesAsingatura(rowID);    	
 		    }
 		    
+		    
+		    function verComponentesAsignatura(rowID){
+		    	alert(rowID);
+		    }
 		    
 		    
 		    function verPerfil(){
