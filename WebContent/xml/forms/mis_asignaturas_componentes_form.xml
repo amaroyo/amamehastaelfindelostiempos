@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rows>
+    <row id="a">
+        <cell>Información</cell>
+    </row>
+    <row id="b">
+        <cell>Estancia Unidad Clínica</cell>
+    </row>
+    <row id="c">
+        <cell>Seminarios</cell>
+    </row>
+    <row id="d">
+        <cell>Trabajo de Campo</cell>
+    </row>
+    <row id="e">
+        <cell>Casos Clínicos</cell>
+    </row>
+    <row id="f">
+        <cell>Diario Reflexivo</cell>
+    </row>
+    <row id="g">
+        <cell>Rúbrica</cell>
+    </row>
+</rows>

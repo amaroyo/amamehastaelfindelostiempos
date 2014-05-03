@@ -13,13 +13,14 @@
 	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
+	    <script src="../skins/patterns/dhtmlxlayout_pattern4l.js"></script>
 	    
 
 	    <script type="text/javascript">
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var miGrid, tabbar, tab_1, main_layout;
+	    	var miGrid, miGrid2, tabbar, tab_1, main_layout,rowIDAsignatura,rowIDOpcion;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -51,14 +52,36 @@
 		    });
 		    
 		    function doOnRowSelected(rowID,celInd){
+		    	rowIDAsignatura=rowID;
 		        verComponentesAsingatura(rowID);    	
 		    }
 		    
 		    
-		    function verComponentesAsignatura(rowID){
-		    	alert(rowID);
+		    function verComponentesAsingatura(rowIDAsignatura){
+		    	
+		    	
+		    	var b = main_layout.cells('b');
+		    	miGrid2 = b.attachGrid();
+		    	miGrid2.setIconsPath('../skins/imgs/');
+		    	miGrid2.setHeader(["<strong><bean:message key="label.mis.asignaturas.componentes" /></strong>"]);
+			    //set readonly (ro)
+			    miGrid2.setColTypes("ro");
+			    miGrid2.enableMultiselect(false);
+			    miGrid2.init();
+			    miGrid2.loadXML("../xml/forms/mis_asignaturas_componentes_form.xml");
+			    miGrid2.attachEvent("onRowSelect",doOnRowSelected2);
 		    }
 		    
+		    
+		    function doOnRowSelected2(rowID,celInd){
+		    	rowIDOpcion=rowID;
+		        llamar();   	
+		    }
+		    
+		    function llamar(){
+		    	alert(rowIDAsignatura);
+		    	alert(rowIDOpcion);
+		    }
 		    
 		    function verPerfil(){
 		    	var b = main_layout.cells('b');
