@@ -20,6 +20,8 @@
 	    		toolbar = new dhtmlXToolbarObject("toolbarObj");
 		        toolbar.setIconsPath("img/toolbar/");
 		        toolbar.loadXML('xml/toolbars/dhxtoolbar-mrm.xml', function() {
+		        	
+		        	
 		        	toolbar.setItemText('miPerfil', '<bean:message key="label.mi.perfil" />');
 		        	toolbar.setItemText('misAsignaturas', '<bean:message key="label.mis.asignaturas" />');
 					toolbar.setItemText('leads', '<bean:message key="title.leads" />');
@@ -33,6 +35,7 @@
 					toolbar.setItemText('usuarios', '<bean:message key="title.users" />');
 					toolbar.setItemText('logsUsuarios', '<bean:message key="title.logs.users" />');
 					toolbar.setItemText('exit', '<bean:message key="label.salir" />');
+					
 					
 	
 	
@@ -77,7 +80,9 @@
 						toolbar.hideItem('sep12');
 					</logic:notMatch>
 				</logic:notEmpty>
-	        });	        	        
+	        });	 
+		        
+	        
 	        toolbar.attachEvent('onXLE', function() {
 		        
 	        });	       	        	        
@@ -152,6 +157,8 @@
     			//window.close();
     		}
     	}
+    	
+    	
 
     </script>     
 </head>

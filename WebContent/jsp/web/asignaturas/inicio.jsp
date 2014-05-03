@@ -75,13 +75,19 @@
 		    
 		    function doOnRowSelected2(rowID,celInd){
 		    	rowIDOpcion=rowID;
-		        llamar();   	
+		        switch(rowID){
+		        
+		        	case "a": goInformacio();
+		        	case "b": goEstancia();
+		        	case "c": goSeminarios();
+		        	case "d": goCampo();
+		        	case "e": goCasos();
+		        	case "f": goDiario();
+		        	case "g": goRubrica();
+		        	default: alert("Ninguna opción seleccionada!");
+		        }	
 		    }
 		    
-		    function llamar(){
-		    	alert(rowIDAsignatura);
-		    	alert(rowIDOpcion);
-		    }
 		    
 		    function verPerfil(){
 		    	var b = main_layout.cells('b');
