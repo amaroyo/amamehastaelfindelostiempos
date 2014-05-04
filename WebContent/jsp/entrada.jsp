@@ -23,7 +23,6 @@
 		        	
 		        	
 		        	toolbar.setItemText('miPerfil', '<bean:message key="label.mi.perfil" />');
-		        	toolbar.setItemText('misAsignaturas', '<bean:message key="label.mis.asignaturas" />');
 					toolbar.setItemText('leads', '<bean:message key="title.leads" />');
 					toolbar.setItemText('comerciales', '<bean:message key="title.comerciales" />');
 					toolbar.setItemText('responsables', '<bean:message key="title.responsables" />');
@@ -37,7 +36,17 @@
 					toolbar.setItemText('exit', '<bean:message key="label.salir" />');
 					
 					
-	
+					var opts = dameAsignaturasUsuario();
+					toolbar.addButtonSelect('misAsignaturas',2, '<bean:message key="label.mis.asignaturas" />',
+							opts,'asignaturas.png',null,'disabled',true,"100",'select');
+					
+					toolbar.attachEvent("onClick", function(id){
+						toolbar.forEachListOption('misAsignaturas',function(optionId){
+							if(id==optionId)
+								alert(id);
+						});
+					});
+					
 	
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >		    	
@@ -148,6 +157,13 @@
     	}
     	function goMisAsignaturas() {
     		document.getElementById("areatrabajo").src="asignaturas/inicio.do";
+    	}
+    	
+    	function dameAsignaturasUsuario(){
+    		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
+			idSelectedUser = <%=sessionIdUser%>;
+			var a = Array(Array('ind1','obj','nombre1'),Array('ind2','obj','nombre2'),Array('ind3','obj','nombre3'));
+			return a;
     	}
 
     	function logout() {

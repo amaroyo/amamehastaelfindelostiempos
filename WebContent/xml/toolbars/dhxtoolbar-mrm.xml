@@ -3,19 +3,6 @@
     	<item id="miPerfil" type="button" img="perfil.png" text="Mi Perfil" action="goMiPerfil"/>
         <item id="sep1" type="separator"/> 
         
-        <item id="misAsignaturas" type="buttonSelect" maxOpen="100" openAll="true" img="asignaturas.png" renderSelect="true" mode="select" >
-                // a listed option with text only
-                <item type="button" id="8_1" text="Today"/>
-                // a preselected listed option
-                <item type="button" id="8_2" text="Yesturday" selected="true"/>
-                <item type="button" id="8_3" text="Last Week"/>
-                <item type="button" id="8_4" text="Last Month"/>
-                <item id="8_sep0" type="separator"/> // a listed option - separator
-                // a listed option with image for the enabled state, text
-                <item type="button" id="8_5" img="icon_more.gif" text="More..."/>
-            </item>
-        
-              
         <item id="sep2" type="separator"/> 
         
         <item id="leads" type="button" img="lead.png" text="Leads" action="goLeads"/>
