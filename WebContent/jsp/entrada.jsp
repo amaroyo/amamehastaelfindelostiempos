@@ -42,8 +42,10 @@
 					
 					toolbar.attachEvent("onClick", function(id){
 						toolbar.forEachListOption('misAsignaturas',function(optionId){
-							if(id==optionId)
+							if(id==optionId){
 								alert(id);
+								goMisAsignaturas();
+							}
 						});
 					});
 					
