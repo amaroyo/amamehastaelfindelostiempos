@@ -24,27 +24,31 @@
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
+		    	<% String idAsignatura = request.getParameter("idAsignatura");
+		    		String nombreAsignatura = request.getParameter("nombreAsignatura"); %>
+		    	var idAsignatura="<%=idAsignatura%>"; 
+		    	var nombreAsignatura="<%=nombreAsignatura%>"; 
+		    	
 			    dhtmlxError.catchError("ALL",errorHandler);
-			    main_layout = new dhtmlXLayoutObject(document.body, '3W');
-			    var a = main_layout.cells('a');
+			    main_layout = new dhtmlXLayoutObject(document.body, '2U');
+			    var menuOpciones = main_layout.cells('a');
+			    var areaTrabajoAsignaturas = main_layout.cells('b');
 			    
-			    main_layout.cells("a").setWidth(215);
-			    main_layout.cells("a").hideHeader();
-			    main_layout.cells("b").hideHeader();
-			    main_layout.cells("b").setWidth(150);
-			    main_layout.cells("b").hideHeader();
-			    main_layout.cells("c").hideHeader();
+			    menuOpciones.setWidth(150);
+			    menuOpciones.setText(["<strong><bean:message key="label.mis.asignaturas.componentes" /></strong>"]);
+			    areaTrabajoAsignaturas.setText(nombreAsignatura);
 			    //main_layout.setAutoSize("a;b", "b;c");
 			    
 			    
-			    miGrid = a.attachGrid();
-			    miGrid.setIconsPath('../skins/imgs/');		    	
+			    miGrid = menuOpciones.attachGrid();
+			    //miGrid.setIconsPath('../skins/imgs/');		    	
 			    miGrid.setHeader(["<strong><bean:message key="label.mis.asignaturas" /></strong>"]);
+			    miGrid.setNoHeader(true);
 			    //set readonly (ro)
 			    miGrid.setColTypes("ro");
 			    miGrid.enableMultiselect(false);
 			    miGrid.init();
-			    miGrid.loadXML("../xml/forms/mis_asignaturas_form.xml");
+			    miGrid.loadXML("../xml/forms/mis_asignaturas_componentes_form.xml");
 			    miGrid.attachEvent("onRowSelect",doOnRowSelected);
 			    
 			    

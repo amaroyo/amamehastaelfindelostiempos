@@ -7,6 +7,8 @@
 	<form-beans>
 	    
 		<form-bean name="EditarUsuarioForm" type="es.oyssen.mrm.struts.forms.usuarios.EditarUsuarioForm" />
+		<form-bean name="EditarContrasenaForm" type="es.oyssen.mrm.struts.forms.usuarios.EditarContrasenaForm" />
+		
 		
 	</form-beans>
 	
@@ -19,6 +21,9 @@
 		
 		<action path="/perfil/actualizarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />
 		
+		<action path="/perfil/actualizarcontrasena" name="EditarContrasenaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.ActualizarContrasenaAction"  />
+		
+	
 	</action-mappings>
 
 </struts-config>

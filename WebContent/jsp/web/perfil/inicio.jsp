@@ -91,7 +91,7 @@
 						if(form.getItemValue("newPass1") != form.getItemValue("oldPass")){
     						var newPass = form.getItemValue("newPass1");
     						var oldPass = form.getItemValue("oldPass");
-		    				form.send("../contrasena/actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(xml) {
+		    				form.send("actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(xml) {
 		    					goEntrada();
 		    				});
 						}

@@ -6,7 +6,6 @@
 	<form-beans>
 		<form-bean name="GridUsuariosForm" type="es.oyssen.mrm.struts.forms.usuarios.GridUsuariosForm" />
 		<form-bean name="EditarUsuarioForm" type="es.oyssen.mrm.struts.forms.usuarios.EditarUsuarioForm" />
-		<form-bean name="EditarContrasenaForm" type="es.oyssen.mrm.struts.forms.usuarios.EditarContrasenaForm" />
 		
 		<form-bean name="GridServiciosUsuarioForm" type="es.oyssen.mrm.struts.forms.servicios.usuario.GridServiciosUsuarioForm" />
 		<form-bean name="EditarServicioUsuarioForm" type="es.oyssen.mrm.struts.forms.servicios.usuario.ServiciosUsuarioForm" />
@@ -21,10 +20,6 @@
 		<action path="/usuarios/editarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />
 		
 		<action path="/usuarios/actualizarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />
-		
-		<action path="/contrasena/inicio" forward="/jsp/web/contrasena/inicio.jsp" />
-		
-		<action path="/contrasena/actualizarcontrasena" name="EditarContrasenaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.ActualizarContrasenaAction"  />
 		
 		<action path="/usuarios/gridserviciosusuario" name="GridServiciosUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.servicios.usuario.GridServiciosUsuarioAction"  />
 		
