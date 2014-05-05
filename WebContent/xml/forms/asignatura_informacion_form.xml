@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+   <item type="fieldset" name="data" label="Información general de la Asignatura" inputWidth="auto">
+       <item type="input" name="nombreAsignatura" label="Nombre Asignatura" labelWidth="110" />
+       <item type="input" name="codigo" label="Código" labelWidth="110" />
+       <item type="input" name="curso" label="Curso" labelWidth="110" />
+       <item type="input" name="profesor" label="Profesor" labelWidth="110" />
+       <item type="input" name="descripcion" label="Descripción" labelWidth="110" rows="10"/>
+   </item>
+   <item type="button" name="aceptar" value="Aceptar" />
+</items>

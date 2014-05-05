@@ -20,19 +20,19 @@
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var miGrid, miGrid2, tabbar, tab_1, main_layout;
+	    	var miGrid, miGrid2, tabbar, tab_1, main_layout, areaTrabajoAsignaturas, menuOpciones,idAsignatura,nombreAsignatura;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
 		    	<% String idAsignatura = request.getParameter("idAsignatura");
 		    		String nombreAsignatura = request.getParameter("nombreAsignatura"); %>
-		    	var idAsignatura="<%=idAsignatura%>"; 
-		    	var nombreAsignatura="<%=nombreAsignatura%>"; 
+		    	idAsignatura="<%=idAsignatura%>"; 
+		    	nombreAsignatura="<%=nombreAsignatura%>"; 
 		    	
 			    dhtmlxError.catchError("ALL",errorHandler);
 			    main_layout = new dhtmlXLayoutObject(document.body, '2U');
-			    var menuOpciones = main_layout.cells('a');
-			    var areaTrabajoAsignaturas = main_layout.cells('b');
+			    menuOpciones = main_layout.cells('a');
+			    areaTrabajoAsignaturas = main_layout.cells('b');
 			    
 			    menuOpciones.setWidth(150);
 			    menuOpciones.setText(["<strong><bean:message key="label.mis.asignaturas.componentes" /></strong>"]);
@@ -59,14 +59,55 @@
 		        
 		        	case "a": goInformacion();
 		        	case "b": goEstancia();
-		        	case "c": goSeminarios();
-		        	case "d": goCampo();
-		        	case "e": goCasos();
-		        	case "f": goDiario();
-		        	case "g": goRubrica();
+		        	//case "c": goSeminarios();
+		        	//case "d": goCampo();
+		        	//case "e": goCasos();
+		        	//case "f": goDiario();
+		        	//case "g": goRubrica();
 		        }	
 		    }
 		    
+		    
+		    function goEstancia(){
+		    	
+		    	document.src="perfil/inicio.do";
+		    }
+		    
+		    function goInformacion(){
+		    	var b = areaTrabajoAsignaturas;
+		    	
+		    	var form = b.attachForm();
+		    	
+		    	form.loadStruct('../xml/forms/asignatura_informacion_form.xml', function(){
+		    		form.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
+		    		form.setItemLabel('nombreAsignatura','<bean:message key="label.nombre.asignatura"/>');
+		    		form.setItemLabel('codigo','<bean:message key="label.codigo.asignatura"/>');
+		    		form.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
+		    		form.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
+		    		form.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
+		    		
+		    		
+		    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>36</permiso>" >		    	
+							form.hideItem('aceptar');
+						</logic:notMatch>
+					</logic:notMatch>
+		    		
+					/*form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
+					form.attachEvent("onButtonClick", function(id){
+						if (id == "aceptar") {
+							form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+
+							});
+
+						}
+					});
+				});*/
+				
+				
+	    	});
+		    	
+		    }
 		    
 		    function verPerfil(){
 		    	var b = main_layout.cells('b');
