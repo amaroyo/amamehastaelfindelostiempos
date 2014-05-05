@@ -163,9 +163,19 @@
     	
     	function dameAsignaturasUsuario(){
     		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
-			idSelectedUser = <%=sessionIdUser%>;
-			var a = Array(Array('ind1','obj','nombre1'),Array('ind2','obj','nombre2'),Array('ind3','obj','nombre3'));
-			return a;
+    		idSelectedUser = <%=sessionIdUser%>;
+    		 var opts = [['id1', 'obj', '801148 - Prácticas Clínicas de Enfermería: Cuidados Básicos','libro.png'],
+                         ['id2', 'obj', '801149 - Prácticas Clínicas de Enfermería: Metodología Enfermera','libro.png'],
+                         ['sep1', 'sep', ''],
+                         ['id3', 'obj', '801150 - Prácticas Clínicas de Enfermería I','libro.png'],
+                         ['id4', 'obj', '801151 - Prácticas Clínicas de Enfermería II: Atención Especializada','libro.png'],
+                         ['id5', 'obj', '801151 - Prácticas Clínicas de Enfermería II: Atención Primaria','libro.png'],
+                         ['sep2', 'sep', ''],
+                         ['id6', 'obj', '801152 - Prácticas Clínicas de Enfermería III','libro.png'],
+                         ['id6', 'obj', '801153 - Prácticas Clínicas de Enfermería IV','libro.png'],
+                        ];
+			
+			return opts;
     	}
 
     	function logout() {
