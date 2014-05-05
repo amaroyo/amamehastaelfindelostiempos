@@ -20,7 +20,7 @@
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var miGrid, miGrid2, tabbar, tab_1, main_layout,rowIDAsignatura,rowIDOpcion;
+	    	var miGrid, miGrid2, tabbar, tab_1, main_layout;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -50,45 +50,20 @@
 			    miGrid.init();
 			    miGrid.loadXML("../xml/forms/mis_asignaturas_componentes_form.xml");
 			    miGrid.attachEvent("onRowSelect",doOnRowSelected);
-			    
-			    
 		    			    			    
 		    });
 		    
+		    
 		    function doOnRowSelected(rowID,celInd){
-		    	rowIDAsignatura=rowID;
-		        verComponentesAsingatura(rowID);    	
-		    }
-		    
-		    
-		    function verComponentesAsingatura(rowIDAsignatura){
-		    	
-		    	
-		    	var b = main_layout.cells('b');
-		    	miGrid2 = b.attachGrid();
-		    	miGrid2.setIconsPath('../skins/imgs/');
-		    	miGrid2.setHeader(["<strong><bean:message key="label.mis.asignaturas.componentes" /></strong>"]);
-			    //set readonly (ro)
-			    miGrid2.setColTypes("ro");
-			    miGrid2.enableMultiselect(false);
-			    miGrid2.init();
-			    miGrid2.loadXML("../xml/forms/mis_asignaturas_componentes_form.xml");
-			    miGrid2.attachEvent("onRowSelect",doOnRowSelected2);
-		    }
-		    
-		    
-		    function doOnRowSelected2(rowID,celInd){
-		    	rowIDOpcion=rowID;
 		        switch(rowID){
 		        
-		        	case "a": goInformacio();
+		        	case "a": goInformacion();
 		        	case "b": goEstancia();
 		        	case "c": goSeminarios();
 		        	case "d": goCampo();
 		        	case "e": goCasos();
 		        	case "f": goDiario();
 		        	case "g": goRubrica();
-		        	default: alert("Ninguna opción seleccionada!");
 		        }	
 		    }
 		    
