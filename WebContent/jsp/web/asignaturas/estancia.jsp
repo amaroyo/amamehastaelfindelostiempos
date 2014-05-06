@@ -19,7 +19,7 @@
 	    <script type="text/javascript">
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
-	    	var main_layout, idAsignatura,nombreAsignatura;
+	    	var main_layout, idAsignatura,nombreAsignatura, gridProfesor, formAlumno;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -44,42 +44,42 @@
 					main_layout = new dhtmlXLayoutObject(document.body, '1C');
 		    		var a = main_layout.cells('a');
 		    		a.hideHeader();
-					var form = a.attachForm();
+		    		formAlumno = a.attachForm();
 			    	
-			    	form.loadStruct('../xml/forms/estancia_form.xml', function(){
-			    		form.setItemLabel('data','<bean:message key="title.info.general.estancia"/>');
-			    		form.setItemLabel('hospital','<bean:message key="label.hospital.estancia"/>');
-			    		form.setItemLabel('clinica','<bean:message key="label.clinica.estancia"/>');
-			    		form.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
-			    		form.setItemLabel('fechaIni','<bean:message key="label.fecha.ini.estancia"/>');
-			    		form.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
+		    		formAlumno.loadStruct('../xml/forms/estancia_form.xml', function(){
+		    			formAlumno.setItemLabel('data','<bean:message key="title.info.general.estancia"/>');
+		    			formAlumno.setItemLabel('hospital','<bean:message key="label.hospital.estancia"/>');
+		    			formAlumno.setItemLabel('clinica','<bean:message key="label.clinica.estancia"/>');
+		    			formAlumno.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
+		    			formAlumno.setItemLabel('fechaIni','<bean:message key="label.fecha.ini.estancia"/>');
+		    			formAlumno.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
 			    		
 						//Ponemos por defecto que los items no se puedan modificar, y luego con los permisos necesarios 
 						//seran modificables.
-			    		form.setReadonly('hospital', true);
-			    		form.setReadonly('clinica', true);
-			    		form.setReadonly('profesor', true);
-			    		form.setReadonly('fechaIni', true);
-			    		form.setReadonly('fechaFin', true);
-			    		form.hideItem('aceptar');
+			    		formAlumno.setReadonly('hospital', true);
+			    		formAlumno.setReadonly('clinica', true);
+			    		formAlumno.setReadonly('profesor', true);
+			    		formAlumno.setReadonly('fechaIni', true);
+			    		formAlumno.setReadonly('fechaFin', true);
+			    		formAlumno.hideItem('aceptar');
 			    		
 			    		//Esto por ahora es provisional, cuando se haga una peticion de toda la informacion 
 			    		//de las asignaturas, se cogeran el codigo y el nombre de la asignatura
-			    		form.setItemValue('hospital', "Lorem ipsum");
-			    		form.setItemValue('clinica', "Lorem ipsum");
-			    		form.setItemValue('profesor', "A113");
-			    		form.setItemValue('fechaIni', "Lorem ipsum");
-			    		form.setItemValue('fechaFin', "Lorem ipsum");
+			    		formAlumno.setItemValue('hospital', "Lorem ipsum");
+			    		formAlumno.setItemValue('clinica', "Lorem ipsum");
+			    		formAlumno.setItemValue('profesor', "A113");
+			    		formAlumno.setItemValue('fechaIni', "Lorem ipsum");
+			    		formAlumno.setItemValue('fechaFin', "Lorem ipsum");
 			    		
 
 			    		
 			    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
-								form.setReadonly('hospital', false);
-					    		form.setReadonly('clinica', false);
-					    		form.setReadonly('profesor', false);
-					    		form.setReadonly('fechaIni', false);
-					    		form.setReadonly('fechaFin', false);
-					    		form.showItem('aceptar');
+				    		formAlumno.setReadonly('hospital', false);
+				    		formAlumno.setReadonly('clinica', false);
+				    		formAlumno.setReadonly('profesor', false);
+				    		formAlumno.setReadonly('fechaIni', false);
+				    		formAlumno.setReadonly('fechaFin', false);
+				    		formAlumno.showItem('aceptar');
 						</logic:match>
 			    		
 						
@@ -110,14 +110,14 @@
 		    		var b = main_layout.cells('b');
 		    		a.setText(["<strong><bean:message key="label.mis.alumnos.estancia" /></strong>"]);
 		    		b.hideHeader();
-					var miGrid = a.attachGrid();
+		    		gridProfesor = a.attachGrid();
 					
-					miGrid.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","a","b"]);
-			    	miGrid.setColTypes("ro,ro,ro,ro,ro");
+		    		gridProfesor.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","a","b"]);
+		    		gridProfesor.setColTypes("ro,ro,ro,ro,ro");
 			    	
-				    miGrid.enableMultiselect(false);
-				    miGrid.setColSorting('str,str,str,str,str');
-				    miGrid.init();
+		    		gridProfesor.enableMultiselect(false);
+		    		gridProfesor.setColSorting('str,str,str,str,str');
+		    		gridProfesor.init();
 				    
 				    
 				   
@@ -125,11 +125,11 @@
 					//ORIGINAL
 				    //gridAlumnosProcessor = new dataProcessor("gridMisAlumnos.do?idUsuario"+idSelectedUser);
 					//PRUEBA
-				    gridAlumnosProcessor = new dataProcessor("gridMisAlumnos.do");
+				    var gridAlumnosProfesorProcessor = new dataProcessor("gridusuarios.do");
 					
-				    gridAlumnosProcessor.enableUTFencoding('simple');
-				    gridAlumnosProcessor.init(miGrid);	  
-				    gridAlumnosProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+				    gridAlumnosProfesorProcessor.enableUTFencoding('simple');
+				    gridAlumnosProfesorProcessor.init(gridProfesor);	  
+				    gridAlumnosProfesorProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
 						if(action == 'error'){
 			    			dhtmlx.message(tag.firstChild.data,action,4000);
 			    		}
@@ -140,7 +140,13 @@
 				    
 			    			    			    
 					
+				    
+				    buscar();
 				}
+				
+				function buscar() {
+					gridProfesor.clearAndLoad("gridusuarios.do");		    	
+			    }
 	    		
 	    });
 	    	
