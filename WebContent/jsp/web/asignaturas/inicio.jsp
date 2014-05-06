@@ -68,20 +68,10 @@
 		    }
 		    
 		    
-		    function goEstanciaAlumno(){
-		    	
-		    	
-		    }
+		   
 		    
 		    function goEstancia(){
-		    	
-		    	<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-    				goEstanciaProfesor();
-    			</logic:match>
-    			
-    			<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-    				goEstanciaAlumno();
-    			</logic:notMatch>	
+		    	areaTrabajoAsignaturas.attachURL("estancia.do?idAsignatura="+idAsignatura);    	
 		    }
 		    
 		    function goInformacion(){

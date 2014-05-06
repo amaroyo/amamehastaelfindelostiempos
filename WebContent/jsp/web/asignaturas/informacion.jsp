@@ -19,7 +19,7 @@
 	    <script type="text/javascript">
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
-	    	var main_layout, form,idAsignatura,nombreAsignatura;
+	    	var main_layout, form, idAsignatura,nombreAsignatura;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
