@@ -57,7 +57,7 @@
 						toolbar.forEachListOption('cursos',function(optionId){
 							if(id==optionId){
 								var nombre = toolbar.getListOptionText('cursos', optionId);
-								goCursos(optionId,nombre);
+								goCursos(optionId);
 							}
 						});
 					});
@@ -171,6 +171,9 @@
     	}
     	function goMisAsignaturas(idAsignatura,nombreAsignatura) {
     		document.getElementById("areatrabajo").src="asignaturas/inicio.do?idAsignatura=" + idAsignatura + "&nombreAsignatura=" + nombreAsignatura;
+    	}
+    	function goCursos(tipo) {
+    		document.getElementById("areatrabajo").src="cursos/inicio.do?tipo=" + tipo;
     	}
     	
     	function dameAsignaturasUsuario(){
