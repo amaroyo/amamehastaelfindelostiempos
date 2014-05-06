@@ -20,7 +20,7 @@
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var miGrid, miGrid2, tabbar, tab_1, main_layout, areaTrabajoCursos, listado, opcionSeminarioOAsignatura;
+	    	var gridCursos, gridCursos2, tabbar, tab_1, main_layout, areaTrabajoCursos, listado, opcionSeminarioOAsignatura;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -40,7 +40,6 @@
 			    	listado.setText(["<strong><bean:message key="label.asignaturas" /></strong>"]);
 			    }
 			    	
-			    //areaTrabajoCursos.setText(nombreAsignatura);
 			    toolbarUsuarios = listado.attachToolbar();
 		    	toolbarUsuarios.setIconsPath('../skins/imgs/toolbar/');
 		    	
@@ -61,17 +60,31 @@
 						toolbarUsuarios.hideItem('sep2');
 					</logic:notMatch>
 			    
-			    miGrid = listado.attachGrid();
-			    //miGrid.setIconsPath('../skins/imgs/');		    	
-			    miGrid.setHeader(["<strong><bean:message key="label.cursos" /></strong>"]);
-			    miGrid.setNoHeader(true);
+			    gridCursos = listado.attachGrid();
+			    gridCursos.setIconsPath('../skins/imgs/');		    	
+			    gridCursos.setHeader(["<strong><bean:message key="label.cursos" /></strong>"]);
+			    gridCursos.setNoHeader(true);
 			    //ro = readonly
-			    miGrid.setColTypes("ro");
-			    miGrid.enableMultiselect(false);
-			    miGrid.init();
-			    miGrid.loadXML("../xml/forms/mis_asignaturas_componentes_form.xml");
-			    miGrid.attachEvent("onRowSelect",doOnRowSelected);
+			    //nombre codigo curso descripcion
+			    gridCursos.setColTypes("ro,ro,ro,ro");
+			    gridLeads.setColSorting('str,str,str,str,str');
+			    // ??????????????
+			    gridCursos.enableMultiselect(true);
+			    gridCursos.init();
+			    gridCursos.loadXML("../xml/forms/mis_asignaturas_componentes_form.xml");
+			    gridCursos.attachEvent("onRowSelect",doOnRowSelected);
 		    			    			    
+			    gridCursosProcessor = new dataProcessor("gridcursos.do");
+			    gridCursosProcessor.enableUTFencoding('simple');
+			    gridCursosProcessor.init(gridCursos);	  
+			    gridCursosProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+					if(action == 'error'){
+		    			dhtmlx.message(tag.firstChild.data,action,4000);
+		    		}
+		    	});	
+			    
+			    
+			  //areaTrabajoCursos.setText(nombreAsignatura);
 		    });
 		    
 		    
