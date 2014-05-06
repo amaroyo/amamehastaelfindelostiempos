@@ -20,23 +20,28 @@
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var miGrid, miGrid2, tabbar, tab_1, main_layout, areaTrabajoAsignaturas, menuOpciones,idAsignatura,nombreAsignatura;
+	    	var miGrid, miGrid2, tabbar, tab_1, main_layout, areaTrabajoCursos, listado, opcionSeminarioOAsignatura;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
-		    	<% String idAsignatura = request.getParameter("idAsignatura");
-		    		String nombreAsignatura = request.getParameter("nombreAsignatura"); %>
-		    	idAsignatura="<%=idAsignatura%>"; 
-		    	nombreAsignatura="<%=nombreAsignatura%>"; 
+		    	<% String opcion = request.getParameter("opcion");%>
+		    	opcionSeminarioOAsignatura="<%=opcion%>";
 		    	
 			    dhtmlxError.catchError("ALL",errorHandler);
 			    main_layout = new dhtmlXLayoutObject(document.body, '2U');
-			    menuOpciones = main_layout.cells('a');
-			    areaTrabajoAsignaturas = main_layout.cells('b');
+			    listado = main_layout.cells('a');
+			    areaTrabajoCursos = main_layout.cells('b');
 			    
-			    menuOpciones.setWidth(150);
-			    menuOpciones.setText(["<strong><bean:message key="label.mis.asignaturas.componentes" /></strong>"]);
-			    areaTrabajoAsignaturas.setText(nombreAsignatura);
+			    listado.setWidth(250);
+			    if(opcionSeminarioOAsignatura == "seminarios") {
+			    	
+			    }
+			    else if(opcionSeminarioOAsignatura == "asignaturas") {
+			    	
+			    }
+			    	listado.setText(["<strong><bean:message key="label.seminarios" /></strong>"]);
+			    	listado.setText(["<strong><bean:message key="label.asignaturas" /></strong>"]);
+			    areaTrabajoCursos.setText(nombreAsignatura);
 			    //main_layout.setAutoSize("a;b", "b;c");
 			    
 			    

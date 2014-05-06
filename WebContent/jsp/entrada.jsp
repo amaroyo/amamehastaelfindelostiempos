@@ -172,8 +172,8 @@
     	function goMisAsignaturas(idAsignatura,nombreAsignatura) {
     		document.getElementById("areatrabajo").src="asignaturas/inicio.do?idAsignatura=" + idAsignatura + "&nombreAsignatura=" + nombreAsignatura;
     	}
-    	function goCursos(tipo) {
-    		document.getElementById("areatrabajo").src="cursos/inicio.do?tipo=" + tipo;
+    	function goCursos(opcion) {
+    		document.getElementById("areatrabajo").src="cursos/inicio.do?opcion=" + opcion;
     	}
     	
     	function dameAsignaturasUsuario(){
@@ -194,9 +194,9 @@
     	}
     	
     	function dameCursos(){
-    		var opts = [['asignaturas', 'obj', 'Asignaturas','libro.png'],
+    		var opts = [['asignaturas', 'obj', ["<strong><bean:message key="label.asignaturas" /></strong>"],'libro.png'],
     		            ['sep1', 'sep', ''],
-                        ['seminarios', 'obj', 'Seminarios','seminarios.png']
+                        ['seminarios', 'obj', ["<strong><bean:message key="label.seminarios" /></strong>"],'seminarios.png']
                         ];
 			
 			return opts;
