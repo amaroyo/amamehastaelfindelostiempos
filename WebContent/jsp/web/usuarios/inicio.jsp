@@ -33,15 +33,11 @@
 		    		toolbarUsuarios.setItemText('delete',"<bean:message key="button.eliminar"/>");
 		    		toolbarUsuarios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 		    		
-					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>35</permiso>" >		    	
+					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
 							toolbarUsuarios.hideItem('new');
-							toolbarUsuarios.hideItem('sep1');
-	    				</logic:notMatch>
-						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>37</permiso>" >		    	
+							toolbarUsuarios.hideItem('sep1');    	
 							toolbarUsuarios.hideItem('delete');
 							toolbarUsuarios.hideItem('sep2');
-						</logic:notMatch>
 					</logic:notMatch>
 		    		
 		    		

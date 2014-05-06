@@ -39,30 +39,16 @@
 					var optsAsignaturas = dameAsignaturasUsuario();
 					toolbar.addButtonSelect('misAsignaturas',2, '<bean:message key="label.mis.asignaturas" />',
 							optsAsignaturas,'asignaturas.png',null,'disabled',true,"100",'select');
-					
-					toolbar.attachEvent("onClick", function(id){
-						toolbar.forEachListOption('misAsignaturas',function(optionId){
-							if(id==optionId){
-								var nombre = toolbar.getListOptionText('misAsignaturas', optionId);
-								goMisAsignaturas(optionId,nombre);
-							}
-						});
-					});
+				
 					
 					var optsCursos = dameCursos();
 					toolbar.addButtonSelect('cursos',3, '<bean:message key="label.cursos" />',
 							optsCursos,'cursos.png',null,'disabled',true,"100",'select');
-					
-					toolbar.attachEvent("onClick", function(id){
-						toolbar.forEachListOption('cursos',function(optionId){
-							if(id==optionId){
-								var nombre = toolbar.getListOptionText('cursos', optionId);
-								goCursos(optionId);
-							}
-						});
-					});
 	
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>44</permiso>" >	    	
+						toolbarUsuarios.hideItem('cursos');
+						</logic:notMatch>
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >		    	
 							toolbar.hideItem('leads');
 							toolbar.hideItem('sep3');
@@ -105,7 +91,24 @@
 				</logic:notEmpty>
 	        });	 
 		        
-	        
+		        toolbar.attachEvent("onClick", function(id){
+					toolbar.forEachListOption('cursos',function(optionId){
+						if(id==optionId){
+							var nombre = toolbar.getListOptionText('cursos', optionId);
+							goCursos(optionId);
+						}
+					});
+				});
+		        
+		        toolbar.attachEvent("onClick", function(id){
+					toolbar.forEachListOption('misAsignaturas',function(optionId){
+						if(id==optionId){
+							var nombre = toolbar.getListOptionText('misAsignaturas', optionId);
+							goMisAsignaturas(optionId,nombre);
+						}
+					});
+				});
+		        
 	        toolbar.attachEvent('onXLE', function() {
 		        
 	        });	       	        	        
@@ -179,6 +182,7 @@
     	function dameAsignaturasUsuario(){
     		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
     		idSelectedUser = <%=sessionIdUser%>;
+    		//esto se obtendra de la bbdd
     		 var opts = [['idAsignatura1', 'obj', '801148 - Prácticas Clínicas de Enfermería: Cuidados Básicos','libro.png'],
                          ['idAsignatura2', 'obj', '801149 - Prácticas Clínicas de Enfermería: Metodología Enfermera','libro.png'],
                          ['sep1', 'sep', ''],

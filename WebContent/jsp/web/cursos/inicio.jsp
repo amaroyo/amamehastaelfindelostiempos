@@ -34,22 +34,31 @@
 			    
 			    listado.setWidth(250);
 			    if(opcionSeminarioOAsignatura == "seminarios") {
-			    	
+			    	listado.setText(["<strong><bean:message key="label.seminarios" /></strong>"]);
 			    }
 			    else if(opcionSeminarioOAsignatura == "asignaturas") {
-			    	
-			    }
-			    	listado.setText(["<strong><bean:message key="label.seminarios" /></strong>"]);
 			    	listado.setText(["<strong><bean:message key="label.asignaturas" /></strong>"]);
-			    areaTrabajoCursos.setText(nombreAsignatura);
-			    //main_layout.setAutoSize("a;b", "b;c");
+			    }
+			    	
+			    //areaTrabajoCursos.setText(nombreAsignatura);
+			    toolbarUsuarios = listado.attachToolbar();
+		    	toolbarUsuarios.setIconsPath('../skins/imgs/toolbar/');
+		    	
+		    	toolbarUsuarios.loadXML('../xml/toolbars/dhxtoolbar-usuarios.xml', function(){
+		    		if(opcionSeminarioOAsignatura == "seminarios") {
+		    			toolbarUsuarios.setItemText('new',"<bean:message key="button.create.seminario"/>");
+		    		}
+		    		else if(opcionSeminarioOAsignatura == "asignaturas") {
+		    			toolbarUsuarios.setItemText('new',"<bean:message key="button.create.asignatura"/>");
+		    		}
+		    		toolbarUsuarios.setItemText('delete',"<bean:message key="button.eliminar"/>");
+		    		toolbarUsuarios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 			    
-			    
-			    miGrid = menuOpciones.attachGrid();
+			    miGrid = listado.attachGrid();
 			    //miGrid.setIconsPath('../skins/imgs/');		    	
-			    miGrid.setHeader(["<strong><bean:message key="label.mis.asignaturas" /></strong>"]);
+			    miGrid.setHeader(["<strong><bean:message key="label.cursos" /></strong>"]);
 			    miGrid.setNoHeader(true);
-			    //set readonly (ro)
+			    //ro = readonly
 			    miGrid.setColTypes("ro");
 			    miGrid.enableMultiselect(false);
 			    miGrid.init();
