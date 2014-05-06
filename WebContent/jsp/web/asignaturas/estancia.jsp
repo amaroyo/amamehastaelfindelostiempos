@@ -25,7 +25,9 @@
 	    		
 	    		
 	    		<% String idAsignatura = request.getParameter("idAsignatura");%>
-	    		idAsignatura="<%=idAsignatura%>";
+	    		idAsignatura="<%=idAsignatura%>";	
+	    		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
+				var idSelectedUser = <%=sessionIdUser%>;
 	    		
 	    		
 	    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
@@ -81,8 +83,7 @@
 						</logic:match>
 			    		
 						
-						<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
-						var idSelectedUser = <%=sessionIdUser%>;
+						
 						
 						/*form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
 						form.attachEvent("onButtonClick", function(id){
@@ -111,13 +112,32 @@
 		    		b.hideHeader();
 					var miGrid = a.attachGrid();
 					
-					miGrid.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />"]);
-			    	miGrid.setColTypes("ro,ro,ro");
+					miGrid.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","a","b"]);
+			    	miGrid.setColTypes("ro,ro,ro,ro,ro");
 			    	
 				    miGrid.enableMultiselect(false);
+				    miGrid.setColSorting('str,str,str,str,str');
 				    miGrid.init();
-				    miGrid.loadXML("../xml/forms/mis_asignaturas_componentes_form.xml");
-				    //miGrid.attachEvent("onRowSelect",doOnRowSelected);
+				    
+				    
+				   
+					var idSelectedUser = <%=sessionIdUser%>;
+					//ORIGINAL
+				    //gridAlumnosProcessor = new dataProcessor("gridMisAlumnos.do?idUsuario"+idSelectedUser);
+					//PRUEBA
+				    gridAlumnosProcessor = new dataProcessor("gridMisAlumnos.do");
+					
+				    gridAlumnosProcessor.enableUTFencoding('simple');
+				    gridAlumnosProcessor.init(miGrid);	  
+				    gridAlumnosProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+						if(action == 'error'){
+			    			dhtmlx.message(tag.firstChild.data,action,4000);
+			    		}
+			    	});	
+					
+					
+					
+				    
 			    			    			    
 					
 				}

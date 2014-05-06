@@ -6,6 +6,7 @@
 	
 	<form-beans>
 	    
+	   <form-bean name="GridMisAlumnos" type="es.oyssen.mrm.struts.forms.usuarios.GridUsuariosForm" />
 		
 	</form-beans>
 	
@@ -17,6 +18,9 @@
 		<action path="/asignaturas/informacion" forward="/jsp/web/asignaturas/informacion.jsp" />
 		
 		<action path="/asignaturas/estancia" forward="/jsp/web/asignaturas/estancia.jsp" />
+		
+		<action path="/asignaturas/gridMisAlumnos.do" name="GridMisAlumnos" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.GridUsuariosAction" />
+		
 		
 		
 	</action-mappings>
