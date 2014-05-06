@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <items>
+    
    <item type="fieldset" name="data" label="Información general" inputWidth="auto">
        <item type="input" name="grupo" label="Grupo" labelWidth="110" />
        <item type="input" name="nombre" label="Nombre" labelWidth="110" />
@@ -14,5 +15,8 @@
        <item type="input" name="pass" label="Contraseña" labelWidth="110" />
        <item type="input" name="comentarios" label="Comentarios" labelWidth="110" rows="3" />
    </item>
+   
    <item type="button" name="aceptar" value="Aceptar" />
+ 
 </items>
+

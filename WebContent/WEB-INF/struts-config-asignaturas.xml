@@ -14,6 +14,8 @@
 
 		<action path="/asignaturas/inicio" forward="/jsp/web/asignaturas/inicio.jsp" />
 		
+		<action path="/asignaturas/informacion" forward="/jsp/web/asignaturas/informacion.jsp" />
+		
 		
 	</action-mappings>
 
