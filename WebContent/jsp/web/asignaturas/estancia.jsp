@@ -19,7 +19,7 @@
 	    <script type="text/javascript">
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
-	    	var main_layout, form, idAsignatura,nombreAsignatura;
+	    	var main_layout, idAsignatura,nombreAsignatura;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -42,41 +42,41 @@
 					main_layout = new dhtmlXLayoutObject(document.body, '1C');
 		    		var a = main_layout.cells('a');
 		    		a.hideHeader();
-					form = a.attachForm();
+					var form = a.attachForm();
 			    	
 			    	form.loadStruct('../xml/forms/estancia_form.xml', function(){
-			    		form.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
-			    		form.setItemLabel('hospital','<bean:message key="label.nombre.asignatura"/>');
-			    		form.setItemLabel('clinica','<bean:message key="label.codigo.asignatura"/>');
-			    		form.setItemLabel('profesor','<bean:message key="label.curso.asignatura"/>');
-			    		form.setItemLabel('fechaIni','<bean:message key="label.profesor.asignatura"/>');
-			    		form.setItemLabel('fechaFin','<bean:message key="label.descripcion.asignatura"/>');
+			    		form.setItemLabel('data','<bean:message key="title.info.general.estancia"/>');
+			    		form.setItemLabel('hospital','<bean:message key="label.hospital.estancia"/>');
+			    		form.setItemLabel('clinica','<bean:message key="label.clinica.estancia"/>');
+			    		form.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
+			    		form.setItemLabel('fechaIni','<bean:message key="label.fecha.ini.estancia"/>');
+			    		form.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
 			    		
 						//Ponemos por defecto que los items no se puedan modificar, y luego con los permisos necesarios 
 						//seran modificables.
-			    		form.setReadonly('nombreAsignatura', true);
-			    		form.setReadonly('codigo', true);
-			    		form.setReadonly('curso', true);
+			    		form.setReadonly('hospital', true);
+			    		form.setReadonly('clinica', true);
 			    		form.setReadonly('profesor', true);
-			    		form.setReadonly('descripcion', true);
+			    		form.setReadonly('fechaIni', true);
+			    		form.setReadonly('fechaFin', true);
 			    		form.hideItem('aceptar');
 			    		
 			    		//Esto por ahora es provisional, cuando se haga una peticion de toda la informacion 
 			    		//de las asignaturas, se cogeran el codigo y el nombre de la asignatura
-			    		form.setItemValue('nombreAsignatura', idAsignatura);
-			    		form.setItemValue('codigo', idAsignatura);
-			    		form.setItemValue('curso', "A113");
-			    		form.setItemValue('profesor', "Lorem ipsum");
-			    		form.setItemValue('descripcion', "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
-		
+			    		form.setItemValue('hospital', "Lorem ipsum");
+			    		form.setItemValue('clinica', "Lorem ipsum");
+			    		form.setItemValue('profesor', "A113");
+			    		form.setItemValue('fechaIni', "Lorem ipsum");
+			    		form.setItemValue('fechaFin', "Lorem ipsum");
+			    		
 
 			    		
 			    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
-								form.setReadonly('nombreAsignatura', false);
-					    		form.setReadonly('codigo', false);
-					    		form.setReadonly('curso', false);
+								form.setReadonly('hospital', false);
+					    		form.setReadonly('clinica', false);
 					    		form.setReadonly('profesor', false);
-					    		form.setReadonly('descripcion', false);
+					    		form.setReadonly('fechaIni', false);
+					    		form.setReadonly('fechaFin', false);
 					    		form.showItem('aceptar');
 						</logic:match>
 			    		
@@ -102,6 +102,23 @@
 				
 				
 				function goProfesor(){
+					
+					main_layout = new dhtmlXLayoutObject(document.body, '2U');
+					main_layout.setAutoSize("a;b");
+		    		var a = main_layout.cells('a');
+		    		var b = main_layout.cells('b');
+		    		a.setText(["<strong><bean:message key="label.mis.alumnos.estancia" /></strong>"]);
+		    		b.hideHeader();
+					var miGrid = a.attachGrid();
+					
+					miGrid.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />"]);
+			    	miGrid.setColTypes("ro,ro,ro");
+			    	
+				    miGrid.enableMultiselect(false);
+				    miGrid.init();
+				    miGrid.loadXML("../xml/forms/mis_asignaturas_componentes_form.xml");
+				    //miGrid.attachEvent("onRowSelect",doOnRowSelected);
+			    			    			    
 					
 				}
 	    		

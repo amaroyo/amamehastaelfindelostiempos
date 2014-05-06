@@ -57,13 +57,13 @@
 		    function doOnRowSelected(rowID,celInd){
 		        switch(rowID){
 		        
-		        	case "a": goInformacion();
-		        	case "b": goEstancia();
-		        	case "c": goSeminarios();
-		        	case "d": goCampo();
-		        	case "e": goCasos();
-		        	case "f": goDiario();
-		        	case "g": goRubrica();
+		        	case "a": {goInformacion();break;}
+		        	case "b": {goEstancia();break;}
+		        	case "c": {goSeminarios();break;}
+		        	case "d": {goCampo();break;}
+		        	case "e": {goCasos();break;}
+		        	case "f": {goDiario();break;}
+		        	case "g": {goRubrica();break;}
 		        }	
 		    }
 		    
