@@ -59,18 +59,29 @@
 		        
 		        	case "a": goInformacion();
 		        	case "b": goEstancia();
-		        	//case "c": goSeminarios();
-		        	//case "d": goCampo();
-		        	//case "e": goCasos();
-		        	//case "f": goDiario();
-		        	//case "g": goRubrica();
+		        	case "c": goSeminarios();
+		        	case "d": goCampo();
+		        	case "e": goCasos();
+		        	case "f": goDiario();
+		        	case "g": goRubrica();
 		        }	
 		    }
 		    
 		    
+		    function goEstanciaAlumno(){
+		    	
+		    	
+		    }
+		    
 		    function goEstancia(){
 		    	
-		    	document.src="perfil/inicio.do";
+		    	<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+    				goEstanciaProfesor();
+    			</logic:match>
+    			
+    			<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+    				goEstanciaAlumno();
+    			</logic:notMatch>	
 		    }
 		    
 		    function goInformacion(){
@@ -86,13 +97,38 @@
 		    		form.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
 		    		form.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
 		    		
+					//Ponemos por defecto que los items no se puedan modificar, y luego con los permisos necesarios 
+					//seran modificables.
+		    		form.setReadonly('nombreAsignatura', true);
+		    		form.setReadonly('codigo', true);
+		    		form.setReadonly('curso', true);
+		    		form.setReadonly('profesor', true);
+		    		form.setReadonly('descripcion', true);
+		    		form.hideItem('aceptar');
 		    		
-		    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>36</permiso>" >		    	
-							form.hideItem('aceptar');
-						</logic:notMatch>
-					</logic:notMatch>
+		    		//Esto por ahora es provisional, cuando se haga una peticion de toda la informacion 
+		    		//de las asignaturas, se cogeran el codigo y el nombre de la asignatura
+		    		form.setItemValue('nombreAsignatura', nombreAsignatura.substring(9,nombreAsignatura.length));
+		    		form.setItemValue('codigo', nombreAsignatura.substring(0,6));
+		    		form.setItemValue('curso', "A113");
+		    		form.setItemValue('profesor', "Lorem ipsum");
+		    		form.setItemValue('descripcion', "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+	
+
 		    		
+		    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
+							form.setReadonly('nombreAsignatura', false);
+				    		form.setReadonly('codigo', false);
+				    		form.setReadonly('curso', false);
+				    		form.setReadonly('profesor', false);
+				    		form.setReadonly('descripcion', false);
+				    		form.showItem('aceptar');
+					</logic:match>
+		    		
+					
+					<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
+					var idSelectedUser = <%=sessionIdUser%>;
+					
 					/*form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
 					form.attachEvent("onButtonClick", function(id){
 						if (id == "aceptar") {
@@ -109,50 +145,6 @@
 		    	
 		    }
 		    
-		    function verPerfil(){
-		    	var b = main_layout.cells('b');
-	    		
-		    	var form = b.attachForm();	
-		    	
-		    	form.loadStruct('../xml/forms/usuario_form.xml', function(){
-		    		form.setItemLabel('data','<bean:message key="title.info.general"/>');
-		    		form.setItemLabel('grupo','<bean:message key="label.group"/>');
-		    		form.setItemLabel('nombre','<bean:message key="label.nombre"/>');
-		    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
-		    		form.setItemLabel('telefonoMovil','<bean:message key="label.telefono.movil"/>');
-		    		form.setItemLabel('direccion','<bean:message key="label.direccion"/>');
-		    		form.setItemLabel('codigoPostal','<bean:message key="label.postal.code"/>');
-		    		form.setItemLabel('ciudad','<bean:message key="label.ciudad"/>');
-		    		form.setItemLabel('pais','<bean:message key="label.pais"/>');
-		    		form.setItemLabel('email','<bean:message key="label.address.email"/>');
-		    		form.setItemLabel('comentarios','<bean:message key="label.comentarios"/>');
-		    		form.setItemLabel('user','<bean:message key="label.user"/>');
-		    		form.setItemLabel('pass','<bean:message key="label.pass"/>');			    		
-		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
-
-					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>36</permiso>" >		    	
-							form.hideItem('aceptar');
-						</logic:notMatch>
-					</logic:notMatch>
-
-					<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
-					idSelectedUser = <%=sessionIdUser%>;
-		    		
-					/*form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
-						form.attachEvent("onButtonClick", function(id){
-							if (id == "aceptar") {
-								form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-
-								});
-
-							}
-						});
-					});*/
-					
-					
-		    	});
-		    }
 		  
         </script>
 	</head>

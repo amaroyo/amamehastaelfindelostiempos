@@ -20,7 +20,7 @@
   	
 		    dhtmlxEvent(window,"load",function() {
 		    	
-		    	refresh="false";
+		    	var refresh="false";
 		    	<% String timeout = request.getParameter("timeout");%>
 				var refresh="<%=timeout%>"; 
 				if(refresh == "true") {
