@@ -15,12 +15,20 @@
 
 	    <script type="text/javascript">
 	    
+	    
 	    	dhtmlx.image_path='../skins/imgs/';	    	
   	
 		    dhtmlxEvent(window,"load",function() {
 		    	
+		    	refresh="false";
+		    	<% String timeout = request.getParameter("timeout");%>
+				var refresh="<%=timeout%>"; 
+				if(refresh == "true") {
+					//window.parent.parent.document.getElementById("toolbarTd").innerHTML="";
+			    	window.parent.parent.document.location.href="../login.do";
+			   	}
+		    	
 			    dhtmlxError.catchError("ALL",errorHandler);
-			    
 			    //var form = new dhtmlXForm(document.body);
 			    var form = new dhtmlXForm("myForm");	
 		    	form.loadStruct('../xml/forms/bienvenida_form.xml', function() {
@@ -63,6 +71,8 @@
 		    	});	
 		    	
 		    });
+		    
+		    
 		    
 	    	function goEntrada() {
 				var url = "../entrada.do";

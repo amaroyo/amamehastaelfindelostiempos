@@ -32,7 +32,7 @@ public class FiltroSesion implements Filter {
 				if (session.getAttribute("usuarioYPermisos") != null || path.contains("login.do") || path.contains("bienvenida")){
 					chain.doFilter(request, response);
 				}else{
-					((HttpServletResponse)response).sendRedirect(((HttpServletRequest)request).getContextPath() + "/bienvenida/logoutusuario.do");
+					((HttpServletResponse)response).sendRedirect(((HttpServletRequest)request).getContextPath() + "/bienvenida/timeoutusuario.do");
 				}
 			}catch (IOException io){
 				System.out.println("IOException raised");

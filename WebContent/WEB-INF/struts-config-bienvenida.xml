@@ -19,6 +19,9 @@
 		<action path="/bienvenida/logoutusuario" name="AutenticacionUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.LogOutUsuarioAction" >
 			<forward name="success" path="/bienvenida/inicio.do" />
 		</action>
+		<action path="/bienvenida/timeoutusuario" name="AutenticacionUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.LogOutUsuarioAction" >
+			<forward name="success" path="/bienvenida/inicio.do?timeout=true" />
+		</action>
 	</action-mappings>
 
 </struts-config>

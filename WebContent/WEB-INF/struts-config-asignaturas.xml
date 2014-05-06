@@ -6,7 +6,6 @@
 	
 	<form-beans>
 	    
-		<form-bean name="EditarUsuarioForm" type="es.oyssen.mrm.struts.forms.usuarios.EditarUsuarioForm" />
 		
 	</form-beans>
 	
@@ -15,9 +14,6 @@
 
 		<action path="/asignaturas/inicio" forward="/jsp/web/asignaturas/inicio.jsp" />
 		
-		<action path="/perfil/editarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />
-		
-		<action path="/perfil/actualizarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />
 		
 	</action-mappings>
 
