@@ -53,6 +53,13 @@
 		    		}
 		    		toolbarUsuarios.setItemText('delete',"<bean:message key="button.eliminar"/>");
 		    		toolbarUsuarios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+		    		
+		    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
+						toolbarUsuarios.hideItem('new');
+						toolbarUsuarios.hideItem('sep1');    	
+						toolbarUsuarios.hideItem('delete');
+						toolbarUsuarios.hideItem('sep2');
+					</logic:notMatch>
 			    
 			    miGrid = listado.attachGrid();
 			    //miGrid.setIconsPath('../skins/imgs/');		    	
