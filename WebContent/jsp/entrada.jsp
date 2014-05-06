@@ -36,9 +36,9 @@
 					toolbar.setItemText('exit', '<bean:message key="label.salir" />');
 					
 					
-					var opts = dameAsignaturasUsuario();
+					var optsAsignaturas = dameAsignaturasUsuario();
 					toolbar.addButtonSelect('misAsignaturas',2, '<bean:message key="label.mis.asignaturas" />',
-							opts,'asignaturas.png',null,'disabled',true,"100",'select');
+							optsAsignaturas,'asignaturas.png',null,'disabled',true,"100",'select');
 					
 					toolbar.attachEvent("onClick", function(id){
 						toolbar.forEachListOption('misAsignaturas',function(optionId){
@@ -49,7 +49,18 @@
 						});
 					});
 					
+					var optsCursos = dameCursos();
+					toolbar.addButtonSelect('cursos',3, '<bean:message key="label.cursos" />',
+							optsCursos,'cursos.png',null,'disabled',true,"100",'select');
 					
+					toolbar.attachEvent("onClick", function(id){
+						toolbar.forEachListOption('cursos',function(optionId){
+							if(id==optionId){
+								var nombre = toolbar.getListOptionText('cursos', optionId);
+								goCursos(optionId,nombre);
+							}
+						});
+					});
 	
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >		    	
@@ -177,6 +188,16 @@
                         ];
 			
 			return opts;
+    	}
+    	
+    	function dameCursos(){
+    		var opts = [['asignaturas', 'obj', 'Asignaturas','libro.png'],
+    		            ['sep1', 'sep', ''],
+                        ['seminarios', 'obj', 'Seminarios','seminarios.png']
+                        ];
+			
+			return opts;
+    		
     	}
 
     	function logout() {
