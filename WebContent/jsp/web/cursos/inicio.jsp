@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" errorPage="error.jsp" %>
 <%@ include file="../../common/taglibs.jsp" %>
-<%@  page import="java.util.Enumeration"%>
+<%@ page import="java.util.Enumeration"%>
 <%@ page import="es.oyssen.mrm.Const"%>
-<%@page import="javax.servlet.http.HttpServletRequest"%>
+<%@ page import="javax.servlet.http.HttpServletRequest"%>
 
 <html>
 	<head>
@@ -20,8 +20,7 @@
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var gridCursos, gridCursos2, tabbar, tab_1, main_layout, areaTrabajoCursos,
-	    		listado, toolbarCursos,opcionSeminarioOAsignatura, idSelectedCourse, gridCursos;
+	    	var gridCursos, gridCursos2, tabbar, tab_1, main_layout, areaTrabajoCursos, listado, toolbarCursos,opcionSeminarioOAsignatura, idSelectedCourse, gridCursos;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
