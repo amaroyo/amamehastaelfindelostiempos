@@ -34,7 +34,7 @@
 		    	
 		    	form.loadStruct('../xml/forms/asignatura_informacion_form.xml', function(){
 		    		form.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
-		    		form.setItemLabel('nombreAsignatura','<bean:message key="label.nombre.asignatura"/>');
+		    		form.setItemLabel('nombre','<bean:message key="label.nombre.asignatura"/>');
 		    		form.setItemLabel('codigo','<bean:message key="label.codigo.asignatura"/>');
 		    		form.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
 		    		form.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
@@ -42,7 +42,7 @@
 		    		
 					//Ponemos por defecto que los items no se puedan modificar, y luego con los permisos necesarios 
 					//seran modificables.
-		    		form.setReadonly('nombreAsignatura', true);
+		    		form.setReadonly('nombre', true);
 		    		form.setReadonly('codigo', true);
 		    		form.setReadonly('curso', true);
 		    		form.setReadonly('profesor', true);
@@ -51,7 +51,7 @@
 		    		
 		    		//Esto por ahora es provisional, cuando se haga una peticion de toda la informacion 
 		    		//de las asignaturas, se cogeran el codigo y el nombre de la asignatura
-		    		form.setItemValue('nombreAsignatura', idAsignatura);
+		    		form.setItemValue('nombre', idAsignatura);
 		    		form.setItemValue('codigo', idAsignatura);
 		    		form.setItemValue('curso', "A113");
 		    		form.setItemValue('profesor', "Lorem ipsum");
@@ -60,7 +60,7 @@
 
 		    		
 		    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
-							form.setReadonly('nombreAsignatura', false);
+							form.setReadonly('nombre', false);
 				    		form.setReadonly('codigo', false);
 				    		form.setReadonly('curso', false);
 				    		form.setReadonly('profesor', false);

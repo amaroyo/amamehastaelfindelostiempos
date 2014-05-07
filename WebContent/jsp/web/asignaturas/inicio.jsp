@@ -69,6 +69,9 @@
 		    
 		    
 		   
+		    function goSeminarios(){
+		    	areaTrabajoAsignaturas.attachURL("seminarios.do?idAsignatura="+idAsignatura);    	
+		    }
 		    
 		    function goEstancia(){
 		    	areaTrabajoAsignaturas.attachURL("estancia.do?idAsignatura="+idAsignatura);    	

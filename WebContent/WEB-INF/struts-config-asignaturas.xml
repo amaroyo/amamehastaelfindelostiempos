@@ -22,6 +22,8 @@
 		
 		<action path="/asignaturas/estancia" forward="/jsp/web/asignaturas/estancia.jsp" />
 		
+		<action path="/asignaturas/seminarios" forward="/jsp/web/asignaturas/seminarios.jsp" />
+		
 		<action path="/asignaturas/gridusuarios" name="GridUsuarios" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.GridUsuariosAction" />
 		
 		<action path="/asignaturas/editarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />
