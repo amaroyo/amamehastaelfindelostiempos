@@ -39,7 +39,16 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 	public void save(DhtmlxForm f) throws Exception {
 		EditarUsuarioForm form = (EditarUsuarioForm) f;
 		UsuarioVO usuario = new UsuarioVO();
-		usuario.setIdUsuario(form.getIdUsuario());
+		
+		if(StringUtil.isNullOrBlank(form.getIdUsuario())){
+			usuario.setEmail(form.getEmail());
+			usuario.setIdUsuario(getUsuariosService().findByEmail(usuario).getIdUsuario());
+		}
+		else{
+			usuario.setIdUsuario(form.getIdUsuario());
+			usuario.setEmail(form.getEmail());
+		}
+		
 		usuario.setIdGrupo(form.getIdGrupo());
 		usuario.setIdAsociado(form.getIdAsociado());
 		usuario.setNombre(form.getNombre());
@@ -48,8 +57,7 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		usuario.setDireccion(form.getDireccion());
 		usuario.setCodigoPostal(form.getCodigoPostal());
 		usuario.setCiudad(form.getCiudad());
-		usuario.setPais(form.getPais());
-		usuario.setEmail(form.getEmail());
+		usuario.setPais(form.getPais());		
 		usuario.setComentarios(form.getComentarios());
 		usuario.setUser(form.getUser());	
 		if (!StringUtil.isNullOrBlank(form.getPass()))
@@ -59,7 +67,8 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		
 		if (!StringUtil.isNullOrBlank(usuario.getIdUsuario())) {
 			getUsuariosService().update(usuario);
-		} else {
+		} 
+		else {
 			getUsuariosService().insert(usuario);
 		}
 	}

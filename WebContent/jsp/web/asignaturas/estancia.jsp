@@ -140,7 +140,7 @@
 				    gridProfesor.attachEvent("onRowSelect", function(row,ind){
 						
 				    	
-				    	idSelectedUser=gridProfesor.cells(row,4).getValue();
+				    	selectedEmail=gridProfesor.cells(row,4).getValue();
 
 				    	var tabbar = b.attachTabbar();
 				    	tabbar.addTab('tab_1','<bean:message key="label.propiedades"/>','');
@@ -167,10 +167,10 @@
 									form.hideItem('aceptar');								
 							</logic:notMatch>			    		
 				    		
-				    		form.load('editarusuario.do?email=' + idSelectedUser, function () {			    			
+				    		form.load('editarusuario.do?email=' + selectedEmail, function () {			    			
 				    			form.attachEvent("onButtonClick", function(id){
 				    				if (id == "aceptar") {
-					    				form.send("actualizarusuario.do?!nativeeditor_status=save&email=" + idSelectedUser ,"post", function(xml) {
+					    				form.send("actualizarusuario.do?!nativeeditor_status=save&email=" + selectedEmail ,"post", function(xml) {
 					    					
 					    				});
 					    				buscar();
