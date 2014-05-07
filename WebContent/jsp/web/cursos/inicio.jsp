@@ -16,14 +16,14 @@
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var main_layout, areaTrabajoCursos, listado, toolbarCursos, opcionSeminarioOAsignatura,
+	    	var main_layout, areaTrabajoCursos, listado, toolbarCursos, opcionSeminarioAsignatura,
 	    	idSelectedCourse, gridCursos, tabbarCursos, tabInfo;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
 		    	dhtmlxError.catchError("ALL",errorHandler);
 		    	<% String opcion = request.getParameter("opcion");%>
-		    	opcionSeminarioOAsignatura="<%=opcion%>";
+		    	opcionSeminarioAsignatura="<%=opcion%>";
 			    main_layout = new dhtmlXLayoutObject(document.body, '2U');
 			    listado = main_layout.cells('a');
 			    listado.setWidth(600);
@@ -33,11 +33,11 @@
 			    //"a;b" 'a' and 'b' will autosize when changing horizontal dimensions of layout
 			    //listado.setAutoSize("a;b",null)
 			    
-			    if (opcionSeminarioOAsignatura == "seminarios") {
+			    if (opcionSeminarioAsignatura == "seminarios") {
 			    	listado.setText("<strong><bean:message key="title.seminarios" /></strong>");
 				    areaTrabajoCursos.setText("<bean:message key="title.propiedades.seminario" />");
 			    }
-			    else if (opcionSeminarioOAsignatura == "asignaturas") {
+			    else if (opcionSeminarioAsignatura == "asignaturas") {
 			    	listado.setText("<strong><bean:message key="title.asignaturas" /></strong>");
 			    	areaTrabajoCursos.setText("<bean:message key="title.propiedades.asignatura" />");
 			    }
@@ -45,11 +45,11 @@
 			    toolbarCursos = listado.attachToolbar();
 			    toolbarCursos.setIconsPath('../skins/imgs/toolbar/');
 			    toolbarCursos.loadXML('../xml/toolbars/dhxtoolbar-cursos.xml', function(){
-		    		if(opcionSeminarioOAsignatura == "seminarios") {
+		    		if(opcionSeminarioAsignatura == "seminarios") {
 		    			toolbarCursos.setItemText('new',"<bean:message key="button.create.seminario"/>");
 		    			toolbarCursos.setItemText('delete',"<bean:message key="button.eliminar.seminario"/>");
 		    		}
-		    		else if(opcionSeminarioOAsignatura == "asignaturas") {
+		    		else if(opcionSeminarioAsignatura == "asignaturas") {
 		    			toolbarCursos.setItemText('new',"<bean:message key="button.create.asignatura"/>");
 		    			toolbarCursos.setItemText('delete',"<bean:message key="button.eliminar.asignatura"/>");
 		    		}
@@ -66,17 +66,17 @@
 			    
 			    gridCursos = listado.attachGrid();
 			    gridCursos.setIconsPath('../skins/imgs/');
-			    if(opcionSeminarioOAsignatura == "seminarios") {
+			    if(opcionSeminarioAsignatura == "seminarios") {
 			    	gridCursos.setHeader(["<strong><bean:message key="label.codigo.seminario" /></strong>",
-			    	                      "<strong><bean:message key="label.nombre" /></strong>",
-			    	                      "<strong><bean:message key="label.curso" /></strong>",
-			    	                      "<strong><bean:message key="label.descripcion" /></strong>"]);
+			    	                      "<strong><bean:message key="label.nombre.seminario" /></strong>",
+			    	                      "<strong><bean:message key="label.curso.seminario" /></strong>",
+			    	                      "<strong><bean:message key="label.descripcion.seminario" /></strong>"]);
 			    }
-			    else if(opcionSeminarioOAsignatura == "asignaturas") {
+			    else if(opcionSeminarioAsignatura == "asignaturas") {
 			   		gridCursos.setHeader(["<strong><bean:message key="label.codigo.asignatura" /></strong>"
-			   		                      ,"<strong><bean:message key="label.nombre" /></strong>",
-			   		                      "<strong><bean:message key="label.curso" /></strong>",
-			   		                      "<strong><bean:message key="label.descripcion" /></strong>"]);
+			   		                      ,"<strong><bean:message key="label.nombre.asignatura" /></strong>",
+			   		                      "<strong><bean:message key="label.curso.asignatura" /></strong>",
+			   		                      "<strong><bean:message key="label.descripcion.asignatura" /></strong>"]);
 			    }
 				
 			    //ro = readonly
@@ -103,69 +103,73 @@
 				    tabbarCursos.addTab('tabInfo','<bean:message key="label.info.general"/>','');
 			    	tabInfo = tabbarCursos.cells('tabInfo');
 			    	tabbarCursos.setTabActive('tabInfo');
-			    	formInfo = tab_1.attachForm();
+			    	formInfo = tabInfo.attachForm();
+			    	loadFormSeminarioAsignatura(opcionSeminarioAsignatura);
 			    	
-			    	if(opcionSeminarioOAsignatura == "seminarios") {
-			    		formInfo.loadStruct('../xml/forms/seminario_informacion_form.xml', function(){
-			    			form.setItemLabel('data','<bean:message key="title.info.general.seminario"/>');
-				    		form.setItemLabel('nombreAsignatura','<bean:message key="label.nombre.seminario"/>');
-				    		form.setItemLabel('codigo','<bean:message key="label.codigo.seminario"/>');
-				    		form.setItemLabel('curso','<bean:message key="label.curso.seminario"/>');
-				    		form.setItemLabel('profesor','<bean:message key="label.profesor.seminario"/>');
-				    		form.setItemLabel('descripcion','<bean:message key="label.descripcion.seminario"/>');
-				    		
-				    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-								<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>36</permiso>" >		    	
-									form.hideItem('aceptar');
-								</logic:notMatch>
-							</logic:notMatch>			    		
-			    		
-				    		form.load('editarusuario.do?idUsuario=' + idUsuario, function () {			    			
-				    			form.attachEvent("onButtonClick", function(id){
-				    				if (id == "aceptar") {
-					    				form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idUsuario ,"post", function(xml) {
-					    					
-					    				});
-					    				buscar();
-				    				}
-				    			});
-				    		});
-			    		});
-			    	}
-			    	else if(opcionSeminarioOAsignatura == "asignaturas") {
-			    		formInfo.loadStruct('../xml/forms/asignatura_informacion_form.xml', function(){
-				    		form.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
-				    		form.setItemLabel('nombreAsignatura','<bean:message key="label.nombre.asignatura"/>');
-				    		form.setItemLabel('codigo','<bean:message key="label.codigo.asignatura"/>');
-				    		form.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
-				    		form.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
-				    		form.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
-				    		
-					    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-								<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>36</permiso>" >		    	
-									form.hideItem('aceptar');
-								</logic:notMatch>
-							</logic:notMatch>			    		
-				    		
-				    		form.load('editarusuario.do?idUsuario=' + idUsuario, function () {			    			
-				    			form.attachEvent("onButtonClick", function(id){
-				    				if (id == "aceptar") {
-					    				form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idUsuario ,"post", function(xml) {
-					    					
-					    				});
-					    				buscar();
-				    				}
-				    			});
-				    		});
-			    		});
-			    	}
 			    	
+			    	
+			    });
+				  
+		    });
+		    
+		    function loadFormSeminarioAsignatura(){
+		    	if(opcionSeminarioAsignatura == "seminarios") {
+		    		formInfo.loadStruct('../xml/forms/seminario_informacion_form.xml', function(){
+		    			formInfo.setItemLabel('data','<bean:message key="title.info.general.seminario"/>');
+		    			formInfo.setItemLabel('nombre','<bean:message key="label.nombre.seminario"/>');
+		    			formInfo.setItemLabel('codigo','<bean:message key="label.codigo.seminario"/>');
+		    			formInfo.setItemLabel('curso','<bean:message key="label.curso.seminario"/>');
+		    			formInfo.setItemLabel('profesor','<bean:message key="label.profesor.seminario"/>');
+		    			formInfo.setItemLabel('descripcion','<bean:message key="label.descripcion.seminario"/>');
 			    		
-						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-							<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>36</permiso>" >		    	
-								form.hideItem('aceptar');
-							</logic:notMatch>
-						</logic:notMatch>			    		
+			    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >    	
+			    			formInfo.forEachItem(function(id){
+			    				if(getType(id) == "input"){
+			    			   		myForm.setReadOnly(id, true);
+			    				}
+			    				else if(getType(id) == "button"){
+			    					form.hideItem(id);
+			    				}
+			    			});
+						</logic:notMatch>		
+						
+						form.setItemValue('nombreAsignatura', idAsignatura);
+			    		form.setItemValue('codigo', idAsignatura);
+			    		form.setItemValue('curso', "A113");
+			    		form.setItemValue('profesor', "Lorem ipsum");
+			    		form.setItemValue('descripcion', "Lorem ipsum dolor sit amet,
+		    		
+			    		form.load('editarseminario.do?idSeminario=' + idSeminario, function () {			    			
+			    			form.attachEvent("onButtonClick", function(id){
+			    				if (id == "aceptar") {
+				    				form.send("actualizarse.do?!nativeeditor_status=save&idUsuario=" + idUsuario ,"post", function(xml) {
+				    					
+				    				});
+				    				buscar();
+			    				}
+			    			});
+			    		});
+		    		});
+		    	}
+		    	else if(opcionSeminarioAsignatura == "asignaturas") {
+		    		formInfo.loadStruct('../xml/forms/asignatura_informacion_form.xml', function(){
+		    			formInfo.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
+		    			formInfo.setItemLabel('nombre','<bean:message key="label.nombre.asignatura"/>');
+		    			formInfo.setItemLabel('codigo','<bean:message key="label.codigo.asignatura"/>');
+		    			formInfo.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
+		    			formInfo.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
+		    			formInfo.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
+			    		
+		    			<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >    	
+			    			formInfo.forEachItem(function(id){
+			    				if(getType(id) == "input"){
+			    			   		myForm.setReadOnly(id, true);
+			    				}
+			    				else if(getType(id) == "button"){
+			    					form.hideItem(id);
+			    				}
+			    			});
+						</logic:notMatch>				    		
 			    		
 			    		form.load('editarusuario.do?idUsuario=' + idUsuario, function () {			    			
 			    			form.attachEvent("onButtonClick", function(id){
@@ -177,10 +181,9 @@
 			    				}
 			    			});
 			    		});
-			    	});
-			    });
-				  
-		    });
+		    		});
+		    	}
+	    	}
 		  
         </script>
 	</head>

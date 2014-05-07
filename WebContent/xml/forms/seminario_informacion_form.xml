@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <items>
    <item type="fieldset" name="data" label="Información general del Seminario" inputWidth="auto">
-       <item type="input" name="nombreSeminario" label="Nombre Seminario" labelWidth="110" style="width:400"/>
+       <item type="input" name="nombre" label="Nombre Seminario" labelWidth="110" style="width:400"/>
        <item type="input" name="codigo" label="Código" labelWidth="110" style="width:400"/>
        <item type="input" name="curso" label="Curso" labelWidth="110" style="width:400"/>
        <item type="input" name="profesor" label="Profesor" labelWidth="110" style="width:400"/>
