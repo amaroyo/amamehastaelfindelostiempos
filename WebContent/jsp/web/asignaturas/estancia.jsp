@@ -84,17 +84,18 @@
 			    		
 						
 						
-						
-						/*form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
-						form.attachEvent("onButtonClick", function(id){
-							if (id == "aceptar") {
-								form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-
-								});
-
-							}
+						/*
+						form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
+							form.attachEvent("onButtonClick", function(id){
+								if (id == "aceptar") {
+									form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+	
+									});
+	
+								}
+							});
 						});
-					});*/
+						*/
 					
 					
 		    	});
@@ -143,7 +144,7 @@
 				    	selectedEmail=gridProfesor.cells(row,4).getValue();
 
 				    	var tabbar = b.attachTabbar();
-				    	tabbar.addTab('tab_1','<bean:message key="label.propiedades"/>','');
+				    	tabbar.addTab('tab_1','<bean:message key="title.datos.personales"/>','');
 				    	var tab_1 = tabbar.cells('tab_1');
 				    	tabbar.setTabActive('tab_1');
 				    	var form = tab_1.attachForm();
@@ -179,9 +180,43 @@
 				    		});
 				    	});
 				    	
+				    	tabbar.addTab('tab_2','<bean:message key="title.info.general.estancia"/>','');
+				    	var tab_2 = tabbar.cells('tab_2');
+				    	var form2 = tab_2.attachForm();
+				    	form2.loadStruct('../xml/forms/estancia_form.xml', function(){
+				    		form2.setItemLabel('data','<bean:message key="title.info.general.estancia"/>');
+				    		form2.setItemLabel('hospital','<bean:message key="label.hospital.estancia"/>');
+				    		form2.setItemLabel('clinica','<bean:message key="label.clinica.estancia"/>');
+				    		form2.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
+				    		form2.setItemLabel('fechaIni','<bean:message key="label.fecha.ini.estancia"/>');
+				    		form2.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
 				    	
-				    
-			    			    			    
+				    		
+				    		//Esto por ahora es provisional, cuando se haga una peticion de toda la informacion 
+				    		//de las asignaturas, se cogeran el codigo y el nombre de la asignatura
+				    		form2.setItemValue('hospital', "Lorem ipsum");
+				    		form2.setItemValue('clinica', "Lorem ipsum");
+				    		form2.setItemValue('profesor', "A113");
+				    		form2.setItemValue('fechaIni', "Lorem ipsum");
+				    		form2.setItemValue('fechaFin', "Lorem ipsum");
+			    			
+				    	});
+				    	
+				    	
+				    	/*
+						form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
+							form.attachEvent("onButtonClick", function(id){
+								if (id == "aceptar") {
+									form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+	
+									});
+	
+								}
+							});
+						});
+						*/
+						
+				    	
 					});
 				    
 				    buscar();
