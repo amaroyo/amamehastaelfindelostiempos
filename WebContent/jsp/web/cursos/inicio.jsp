@@ -36,18 +36,21 @@
 			    //autosize(horizontal,vertical)
 			    //"a;b" 'a' and 'b' will autosize when changing horizontal dimensions of layout
 			    //listado.setAutoSize("a;b",null)
-			    if(opcionSeminarioOAsignatura == "seminarios") {
-			    	listado.setText(["<strong><bean:message key="title.seminarios" /></strong>"]);
+			    
+			    
+			    
+			    if (opcionSeminarioOAsignatura == "seminarios") {
+			    	listado.setText("<strong><bean:message key="title.seminarios" /></strong>");
 				    areaTrabajoCursos.setText("<bean:message key="title.propiedades.seminario" />");
 			    }
-			    else if(opcionSeminarioOAsignatura == "asignaturas") {
-			    	listado.setText(["<strong><bean:message key="title.asignaturas" /></strong>"]);
+			    else if (opcionSeminarioOAsignatura == "asignaturas") {
+			    	listado.setText("<strong><bean:message key="title.asignaturas" /></strong>");
 			    	areaTrabajoCursos.setText("<bean:message key="title.propiedades.asignatura" />");
 			    }
 			    	
 			    toolbarCursos = listado.attachToolbar();
 			    toolbarCursos.setIconsPath('../skins/imgs/toolbar/');
-		    	
+			    
 			    toolbarCursos.loadXML('../xml/toolbars/dhxtoolbar-cursos.xml', function(){
 		    		if(opcionSeminarioOAsignatura == "seminarios") {
 		    			toolbarCursos.setItemText('new',"<bean:message key="button.create.seminario"/>");
@@ -67,19 +70,21 @@
 			    		toolbarCursos.hideItem('sep2');
 					</logic:notMatch>
 		    	});
-					
+			    
 			    gridCursos = listado.attachGrid();
 			    gridCursos.setIconsPath('../skins/imgs/');		    	
-			    gridCursos.setHeader(["<strong><bean:message key="title.cursos" /></strong>"]);
+			    gridCursos.setHeader("<strong><bean:message key="title.cursos" /></strong>","a","b","c");
 			    gridCursos.setNoHeader(true);
+				
 			    //ro = readonly
 			    //nombre codigo curso descripcion
 			    gridCursos.setColTypes("ro,ro,ro,ro");
-			    gridCursos.setColSorting('str,str,str,str,str');
+			    gridCursos.setColSorting('str,str,str,str');
+							    
 			    // ??????????????
 			    gridCursos.enableMultiselect(true);
 			    gridCursos.init();
-		    			    			    
+			    
 			    gridCursosProcessor = new dataProcessor("gridcursos.do");
 			    gridCursosProcessor.enableUTFencoding('simple');
 			    gridCursosProcessor.init(gridCursos);	  
@@ -89,7 +94,7 @@
 		    		}
 		    	});
 			    
-			    gridCursosProcessor.attachEvent("onRowSelect", function(idCurso,ind){
+			    gridCursos.attachEvent("onRowSelect", function(idCurso,ind){
 		    		toolbarUsuarios.enableItem('delete');
 			    
 					idSelectedCourse = idCurso;
@@ -97,7 +102,6 @@
 					//areaTrabajoCursos.setText("<bean:message key="title.propiedades.curso" />");
 					
 			    });
-					
 			  
 		    });
 		  
