@@ -11,14 +11,27 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 
 	@Override
 	public Object load(DhtmlxForm f) throws Exception {
+		
 		EditarUsuarioForm form = (EditarUsuarioForm) f;
 		UsuarioVO usuario = new UsuarioVO();
+		
 		if (!StringUtil.isNullOrBlank(form.getUser())){
+			
 			usuario.setUser(form.getUser());
 			return getUsuariosService().findByUser(usuario);
-		} else {
+			
+		} 
+		else if (!StringUtil.isNullOrBlank(form.getIdUsuario())){
+			
 			usuario.setIdUsuario(form.getIdUsuario());
 			return getUsuariosService().findById(usuario);
+			
+		}
+		else {
+			
+			usuario.setEmail(form.getEmail());
+			return getUsuariosService().findByEmail(usuario);
+			
 		}
 	}
 

@@ -162,7 +162,7 @@
 				    	idSelectedUserService = idServicioUsuario;
 				    });
 			    	
-		    	});
+		    	});//OnRowSelected
 		    	
 		    	buscar();		    	
 

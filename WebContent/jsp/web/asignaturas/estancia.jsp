@@ -135,11 +135,54 @@
 			    		}
 			    	});	
 					
-					
-					
+				    
+				    
+				    gridProfesor.attachEvent("onRowSelect", function(row,ind){
+						
+				    	
+				    	idSelectedUser=gridProfesor.cells(row,4).getValue();
+
+				    	var tabbar = b.attachTabbar();
+				    	tabbar.addTab('tab_1','<bean:message key="label.propiedades"/>','');
+				    	var tab_1 = tabbar.cells('tab_1');
+				    	tabbar.setTabActive('tab_1');
+				    	var form = tab_1.attachForm();
+				    	form.loadStruct('../xml/forms/usuario_form.xml', function(){
+				    		form.setItemLabel('data','<bean:message key="title.info.general"/>');
+				    		form.setItemLabel('grupo','<bean:message key="label.group"/>');
+				    		form.setItemLabel('nombre','<bean:message key="label.nombre"/>');
+				    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
+				    		form.setItemLabel('telefonoMovil','<bean:message key="label.telefono.movil"/>');
+				    		form.setItemLabel('direccion','<bean:message key="label.direccion"/>');
+				    		form.setItemLabel('codigoPostal','<bean:message key="label.postal.code"/>');
+				    		form.setItemLabel('ciudad','<bean:message key="label.ciudad"/>');
+				    		form.setItemLabel('pais','<bean:message key="label.pais"/>');
+				    		form.setItemLabel('email','<bean:message key="label.address.email"/>');
+				    		form.setItemLabel('comentarios','<bean:message key="label.comentarios"/>');
+				    		form.setItemLabel('user','<bean:message key="label.user"/>');
+				    		form.setItemLabel('pass','<bean:message key="label.pass"/>');			    		
+				    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+
+							<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >		    	
+									form.hideItem('aceptar');								
+							</logic:notMatch>			    		
+				    		
+				    		form.load('editarusuario.do?email=' + idSelectedUser, function () {			    			
+				    			form.attachEvent("onButtonClick", function(id){
+				    				if (id == "aceptar") {
+					    				form.send("actualizarusuario.do?!nativeeditor_status=save&email=" + idSelectedUser ,"post", function(xml) {
+					    					
+					    				});
+					    				buscar();
+				    				}
+				    			});
+				    		});
+				    	});
+				    	
+				    	
 				    
 			    			    			    
-					
+					});
 				    
 				    buscar();
 				}
