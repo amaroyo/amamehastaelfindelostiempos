@@ -63,4 +63,6 @@ public abstract class DHTMLXFormAction extends MrmAction {
 	public abstract void save(DhtmlxForm f) throws Exception;
 	
 	public abstract String parseXML(Object o) throws Exception;
+
+		
 }

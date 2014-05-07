@@ -49,6 +49,7 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 			usuario.setEmail(form.getEmail());
 		}
 		
+		
 		usuario.setIdGrupo(form.getIdGrupo());
 		usuario.setIdAsociado(form.getIdAsociado());
 		usuario.setNombre(form.getNombre());
@@ -103,5 +104,7 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		else if (id.equals("5")) return "Supplier";
 		else return "";
 	}
+	
+	
 
 }

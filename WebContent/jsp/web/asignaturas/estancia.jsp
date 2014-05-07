@@ -171,9 +171,8 @@
 				    		form.load('editarusuario.do?email=' + selectedEmail, function () {			    			
 				    			form.attachEvent("onButtonClick", function(id){
 				    				if (id == "aceptar") {
-					    				form.send("actualizarusuario.do?!nativeeditor_status=save&email=" + selectedEmail ,"post", function(xml) {
-					    					
-					    				});
+					    				//form.send("actualizarusuario.do?!nativeeditor_status=save&email=" + selectedEmail ,"post", function(xml) {
+					    				form.send("actualizarusuario.do?!nativeeditor_status=prueba","put");
 					    				buscar();
 				    				}
 				    			});

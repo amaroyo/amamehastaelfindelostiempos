@@ -133,11 +133,11 @@
 			    			});
 						</logic:notMatch>		
 						
-						form.setItemValue('nombreAsignatura', idAsignatura);
+						form.setItemValue('nombre', idAsignatura);
 			    		form.setItemValue('codigo', idAsignatura);
 			    		form.setItemValue('curso', "A113");
 			    		form.setItemValue('profesor', "Lorem ipsum");
-			    		form.setItemValue('descripcion', "Lorem ipsum dolor sit amet,
+			    		form.setItemValue('descripcion', "Lorem ipsum dolor sit amet");
 		    		
 			    		form.load('editarseminario.do?idSeminario=' + idSeminario, function () {			    			
 			    			form.attachEvent("onButtonClick", function(id){

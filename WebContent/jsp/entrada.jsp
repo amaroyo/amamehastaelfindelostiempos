@@ -47,7 +47,7 @@
 	
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>44</permiso>" >	    	
-						toolbarUsuarios.hideItem('cursos');
+							toolbar.hideItem('cursos');
 						</logic:notMatch>
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >		    	
 							toolbar.hideItem('leads');
