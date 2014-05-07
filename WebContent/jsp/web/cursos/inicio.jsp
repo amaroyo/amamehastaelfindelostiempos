@@ -102,24 +102,65 @@
 				    tabbarCursos = areaTrabajoCursos.attachTabbar();
 				    tabbarCursos.addTab('tabInfo','<bean:message key="label.info.general"/>','');
 			    	tabInfo = tabbarCursos.cells('tabInfo');
-			    	tabbarCursos.setTabActive('tab_1');
-			    	form = tab_1.attachForm();
-			    	form.loadStruct('../xml/forms/usuario_form.xml', function(){
-			    		form.setItemLabel('data','<bean:message key="title.info.general"/>');
-			    		form.setItemLabel('grupo','<bean:message key="label.group"/>');
-			    		form.setItemLabel('nombre','<bean:message key="label.nombre"/>');
-			    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
-			    		form.setItemLabel('telefonoMovil','<bean:message key="label.telefono.movil"/>');
-			    		form.setItemLabel('direccion','<bean:message key="label.direccion"/>');
-			    		form.setItemLabel('codigoPostal','<bean:message key="label.postal.code"/>');
-			    		form.setItemLabel('ciudad','<bean:message key="label.ciudad"/>');
-			    		form.setItemLabel('pais','<bean:message key="label.pais"/>');
-			    		form.setItemLabel('email','<bean:message key="label.address.email"/>');
-			    		form.setItemLabel('comentarios','<bean:message key="label.comentarios"/>');
-			    		form.setItemLabel('user','<bean:message key="label.user"/>');
-			    		form.setItemLabel('pass','<bean:message key="label.pass"/>');			    		
-			    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
-	
+			    	tabbarCursos.setTabActive('tabInfo');
+			    	formInfo = tab_1.attachForm();
+			    	
+			    	if(opcionSeminarioOAsignatura == "seminarios") {
+			    		formInfo.loadStruct('../xml/forms/seminario_informacion_form.xml', function(){
+			    			form.setItemLabel('data','<bean:message key="title.info.general.seminario"/>');
+				    		form.setItemLabel('nombreAsignatura','<bean:message key="label.nombre.seminario"/>');
+				    		form.setItemLabel('codigo','<bean:message key="label.codigo.seminario"/>');
+				    		form.setItemLabel('curso','<bean:message key="label.curso.seminario"/>');
+				    		form.setItemLabel('profesor','<bean:message key="label.profesor.seminario"/>');
+				    		form.setItemLabel('descripcion','<bean:message key="label.descripcion.seminario"/>');
+				    		
+				    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+								<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>36</permiso>" >		    	
+									form.hideItem('aceptar');
+								</logic:notMatch>
+							</logic:notMatch>			    		
+			    		
+				    		form.load('editarusuario.do?idUsuario=' + idUsuario, function () {			    			
+				    			form.attachEvent("onButtonClick", function(id){
+				    				if (id == "aceptar") {
+					    				form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idUsuario ,"post", function(xml) {
+					    					
+					    				});
+					    				buscar();
+				    				}
+				    			});
+				    		});
+			    		});
+			    	}
+			    	else if(opcionSeminarioOAsignatura == "asignaturas") {
+			    		formInfo.loadStruct('../xml/forms/asignatura_informacion_form.xml', function(){
+				    		form.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
+				    		form.setItemLabel('nombreAsignatura','<bean:message key="label.nombre.asignatura"/>');
+				    		form.setItemLabel('codigo','<bean:message key="label.codigo.asignatura"/>');
+				    		form.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
+				    		form.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
+				    		form.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
+				    		
+					    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+								<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>36</permiso>" >		    	
+									form.hideItem('aceptar');
+								</logic:notMatch>
+							</logic:notMatch>			    		
+				    		
+				    		form.load('editarusuario.do?idUsuario=' + idUsuario, function () {			    			
+				    			form.attachEvent("onButtonClick", function(id){
+				    				if (id == "aceptar") {
+					    				form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idUsuario ,"post", function(xml) {
+					    					
+					    				});
+					    				buscar();
+				    				}
+				    			});
+				    		});
+			    		});
+			    	}
+			    	
+			    		
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 							<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>36</permiso>" >		    	
 								form.hideItem('aceptar');
