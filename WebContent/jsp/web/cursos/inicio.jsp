@@ -20,7 +20,8 @@
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var gridCursos, gridCursos2, tabbar, tab_1, main_layout, areaTrabajoCursos, listado, opcionSeminarioOAsignatura;
+	    	var gridCursos, gridCursos2, tabbar, tab_1, main_layout, areaTrabajoCursos,
+	    		listado, toolbarCursos,opcionSeminarioOAsignatura, idSelectedCourse, gridCursos;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -32,47 +33,53 @@
 			    listado = main_layout.cells('a');
 			    areaTrabajoCursos = main_layout.cells('b');
 			    
-			    listado.setWidth(250);
+			    listado.setWidth(500);
+			    //autosize(horizontal,vertical)
+			    //"a;b" 'a' and 'b' will autosize when changing horizontal dimensions of layout
+			    //listado.setAutoSize("a;b",null)
 			    if(opcionSeminarioOAsignatura == "seminarios") {
-			    	listado.setText(["<strong><bean:message key="label.seminarios" /></strong>"]);
+			    	listado.setText(["<strong><bean:message key="title.seminarios" /></strong>"]);
+				    areaTrabajoCursos.setText("<bean:message key="title.propiedades.seminario" />");
 			    }
 			    else if(opcionSeminarioOAsignatura == "asignaturas") {
-			    	listado.setText(["<strong><bean:message key="label.asignaturas" /></strong>"]);
+			    	listado.setText(["<strong><bean:message key="title.asignaturas" /></strong>"]);
+			    	areaTrabajoCursos.setText("<bean:message key="title.propiedades.asignatura" />");
 			    }
 			    	
-			    toolbarUsuarios = listado.attachToolbar();
-		    	toolbarUsuarios.setIconsPath('../skins/imgs/toolbar/');
+			    toolbarCursos = listado.attachToolbar();
+			    toolbarCursos.setIconsPath('../skins/imgs/toolbar/');
 		    	
-		    	toolbarUsuarios.loadXML('../xml/toolbars/dhxtoolbar-usuarios.xml', function(){
+			    toolbarCursos.loadXML('../xml/toolbars/dhxtoolbar-cursos.xml', function(){
 		    		if(opcionSeminarioOAsignatura == "seminarios") {
-		    			toolbarUsuarios.setItemText('new',"<bean:message key="button.create.seminario"/>");
+		    			toolbarCursos.setItemText('new',"<bean:message key="button.create.seminario"/>");
+		    			toolbarCursos.setItemText('delete',"<bean:message key="button.eliminar.seminario"/>");
 		    		}
 		    		else if(opcionSeminarioOAsignatura == "asignaturas") {
-		    			toolbarUsuarios.setItemText('new',"<bean:message key="button.create.asignatura"/>");
+		    			toolbarCursos.setItemText('new',"<bean:message key="button.create.asignatura"/>");
+		    			toolbarCursos.setItemText('delete',"<bean:message key="button.eliminar.asignatura"/>");
 		    		}
-		    		toolbarUsuarios.setItemText('delete',"<bean:message key="button.eliminar"/>");
-		    		toolbarUsuarios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+		    		
+		    		toolbarCursos.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 		    		
 		    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
-						toolbarUsuarios.hideItem('new');
-						toolbarUsuarios.hideItem('sep1');    	
-						toolbarUsuarios.hideItem('delete');
-						toolbarUsuarios.hideItem('sep2');
+			    		toolbarCursos.hideItem('new');
+			    		toolbarCursos.hideItem('sep1');    	
+			    		toolbarCursos.hideItem('delete');
+			    		toolbarCursos.hideItem('sep2');
 					</logic:notMatch>
-			    
+		    	});
+					
 			    gridCursos = listado.attachGrid();
 			    gridCursos.setIconsPath('../skins/imgs/');		    	
-			    gridCursos.setHeader(["<strong><bean:message key="label.cursos" /></strong>"]);
+			    gridCursos.setHeader(["<strong><bean:message key="title.cursos" /></strong>"]);
 			    gridCursos.setNoHeader(true);
 			    //ro = readonly
 			    //nombre codigo curso descripcion
 			    gridCursos.setColTypes("ro,ro,ro,ro");
-			    gridLeads.setColSorting('str,str,str,str,str');
+			    gridCursos.setColSorting('str,str,str,str,str');
 			    // ??????????????
 			    gridCursos.enableMultiselect(true);
 			    gridCursos.init();
-			    gridCursos.loadXML("../xml/forms/mis_asignaturas_componentes_form.xml");
-			    gridCursos.attachEvent("onRowSelect",doOnRowSelected);
 		    			    			    
 			    gridCursosProcessor = new dataProcessor("gridcursos.do");
 			    gridCursosProcessor.enableUTFencoding('simple');
@@ -81,47 +88,19 @@
 					if(action == 'error'){
 		    			dhtmlx.message(tag.firstChild.data,action,4000);
 		    		}
-		    	});	
+		    	});
 			    
+			    gridCursosProcessor.attachEvent("onRowSelect", function(idCurso,ind){
+		    		toolbarUsuarios.enableItem('delete');
 			    
-			  //areaTrabajoCursos.setText(nombreAsignatura);
+					idSelectedCourse = idCurso;
+					// obtener el nombre del curso de la bbdd
+					//areaTrabajoCursos.setText("<bean:message key="title.propiedades.curso" />");
+					
+			    });
+					
+			  
 		    });
-		    
-		    
-		    function doOnRowSelected(rowID,celInd){
-		        switch(rowID){
-		        
-		        	case "a": goInformacion();
-		        	case "b": goEstancia();
-		        	case "c": goSeminarios();
-		        	case "d": goCampo();
-		        	case "e": goCasos();
-		        	case "f": goDiario();
-		        	case "g": goRubrica();
-		        }	
-		    }
-		    
-		    
-		    function goEstanciaAlumno(){
-		    	
-		    	
-		    }
-		    
-		    function goEstancia(){
-		    	
-		    	<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-    				goEstanciaProfesor();
-    			</logic:match>
-    			
-    			<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-    				goEstanciaAlumno();
-    			</logic:notMatch>	
-		    }
-		    
-		    function goInformacion(){
-		    	areaTrabajoAsignaturas.attachURL("informacion.do?idAsignatura="+idAsignatura);
-		    }
-		    
 		  
         </script>
 	</head>

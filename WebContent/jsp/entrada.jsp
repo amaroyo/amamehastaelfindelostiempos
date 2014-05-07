@@ -42,7 +42,7 @@
 				
 					
 					var optsCursos = dameCursos();
-					toolbar.addButtonSelect('cursos',3, '<bean:message key="label.cursos" />',
+					toolbar.addButtonSelect('cursos',3, '<bean:message key="button.select.cursos" />',
 							optsCursos,'cursos.png',null,'disabled',true,"100",'select');
 	
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
@@ -94,7 +94,6 @@
 		        toolbar.attachEvent("onClick", function(id){
 					toolbar.forEachListOption('cursos',function(optionId){
 						if(id==optionId){
-							var nombre = toolbar.getListOptionText('cursos', optionId);
 							goCursos(optionId);
 						}
 					});
@@ -177,6 +176,8 @@
     	}
     	function goCursos(opcion) {
     		document.getElementById("areatrabajo").src="cursos/inicio.do?opcion=" + opcion;
+  
+
     	}
     	
     	function dameAsignaturasUsuario(){
@@ -198,9 +199,9 @@
     	}
     	
     	function dameCursos(){
-    		var opts = [['asignaturas', 'obj', ["<strong><bean:message key="label.asignaturas" /></strong>"],'libro.png'],
+    		var opts = [['asignaturas', 'obj', ["<strong><bean:message key="button.select.asignaturas" /></strong>"],'libro.png'],
     		            ['sep1', 'sep', ''],
-                        ['seminarios', 'obj', ["<strong><bean:message key="label.seminarios" /></strong>"],'seminarios.png']
+                        ['seminarios', 'obj', ["<strong><bean:message key="button.select.seminarios" /></strong>"],'seminarios.png']
                         ];
 			
 			return opts;
