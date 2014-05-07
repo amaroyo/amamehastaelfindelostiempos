@@ -1,8 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" errorPage="error.jsp" %>
 <%@ include file="../../common/taglibs.jsp" %>
-<%@ page import="java.util.Enumeration"%>
-<%@ page import="es.oyssen.mrm.Const"%>
-<%@ page import="javax.servlet.http.HttpServletRequest"%>
 
 <html>
 	<head>
@@ -13,26 +10,26 @@
 	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
-	    <script src="../skins/patterns/dhtmlxlayout_pattern4l.js"></script>
 	    
 
 	    <script type="text/javascript">
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var gridCursos, gridCursos2, tabbar, tab_1, main_layout, areaTrabajoCursos, listado, toolbarCursos,opcionSeminarioOAsignatura, idSelectedCourse, gridCursos;
+	    	var main_layout, areaTrabajoCursos, listado, toolbarCursos, opcionSeminarioOAsignatura, idSelectedCourse, gridCursos;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
+		    	
+		    	dhtmlxError.catchError("ALL",errorHandler);
 		    	<% String opcion = request.getParameter("opcion");%>
 		    	opcionSeminarioOAsignatura="<%=opcion%>";
 		    	
-			    dhtmlxError.catchError("ALL",errorHandler);
 			    main_layout = new dhtmlXLayoutObject(document.body, '2U');
 			    listado = main_layout.cells('a');
 			    areaTrabajoCursos = main_layout.cells('b');
 			    
-			    listado.setWidth(500);
+			    listado.setWidth(600);
 			    //autosize(horizontal,vertical)
 			    //"a;b" 'a' and 'b' will autosize when changing horizontal dimensions of layout
 			    //listado.setAutoSize("a;b",null)
@@ -72,17 +69,20 @@
 		    	});
 			    
 			    gridCursos = listado.attachGrid();
-			    gridCursos.setIconsPath('../skins/imgs/');		    	
-			    gridCursos.setHeader("<strong><bean:message key="title.cursos" /></strong>","a","b","c");
-			    gridCursos.setNoHeader(true);
+			    gridCursos.setIconsPath('../skins/imgs/');
+			    if(opcionSeminarioOAsignatura == "seminarios") {
+			    	gridCursos.setHeader(["<strong><bean:message key="label.codigo.seminario" /></strong>","<strong><bean:message key="label.nombre" /></strong>","<strong><bean:message key="label.curso" /></strong>","<strong><bean:message key="label.descripcion" /></strong>"]);
+			    }
+			    else if(opcionSeminarioOAsignatura == "asignaturas") {
+			   		gridCursos.setHeader(["<strong><bean:message key="label.codigo.asignatura" /></strong>","<strong><bean:message key="label.nombre" /></strong>","<strong><bean:message key="label.curso" /></strong>","<strong><bean:message key="label.descripcion" /></strong>"]);
+			    }
 				
 			    //ro = readonly
 			    //nombre codigo curso descripcion
 			    gridCursos.setColTypes("ro,ro,ro,ro");
 			    gridCursos.setColSorting('str,str,str,str');
 							    
-			    // ??????????????
-			    gridCursos.enableMultiselect(true);
+			    gridCursos.enableMultiselect(false);
 			    gridCursos.init();
 			    
 			    gridCursosProcessor = new dataProcessor("gridcursos.do");
@@ -98,8 +98,7 @@
 		    		toolbarUsuarios.enableItem('delete');
 			    
 					idSelectedCourse = idCurso;
-					// obtener el nombre del curso de la bbdd
-					//areaTrabajoCursos.setText("<bean:message key="title.propiedades.curso" />");
+					// obtener el nombre del curso de la bbdd y añadirlo como header a la dcha
 					
 			    });
 			  
