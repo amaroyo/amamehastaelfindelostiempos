@@ -92,18 +92,15 @@
 	        });	 
 		        
 		        toolbar.attachEvent("onClick", function(id){
-					toolbar.forEachListOption('cursos',function(optionId){
-						if(id==optionId){
-							goCursos(optionId);
+					toolbar.forEachListOption('misAsignaturas',function(optionAsigId){
+						if(id==optionAsigId){
+							var nombre = toolbar.getListOptionText('misAsignaturas', optionAsigId);
+							goMisAsignaturas(optionAsigId,nombre);
 						}
 					});
-				});
-		        
-		        toolbar.attachEvent("onClick", function(id){
-					toolbar.forEachListOption('misAsignaturas',function(optionId){
-						if(id==optionId){
-							var nombre = toolbar.getListOptionText('misAsignaturas', optionId);
-							goMisAsignaturas(optionId,nombre);
+					toolbar.forEachListOption('cursos',function(optionCursosId){
+						if(id==optionCursosId){
+							goCursos(optionCursosId);
 						}
 					});
 				});
@@ -176,7 +173,6 @@
     	}
     	function goCursos(opcion) {
     		document.getElementById("areatrabajo").src="cursos/inicio.do?opcion=" + opcion;
-  
 
     	}
     	
