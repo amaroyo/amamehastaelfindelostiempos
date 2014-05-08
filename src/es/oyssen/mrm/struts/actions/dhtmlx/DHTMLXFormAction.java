@@ -64,5 +64,6 @@ public abstract class DHTMLXFormAction extends MrmAction {
 	
 	public abstract String parseXML(Object o) throws Exception;
 
+
 		
 }
