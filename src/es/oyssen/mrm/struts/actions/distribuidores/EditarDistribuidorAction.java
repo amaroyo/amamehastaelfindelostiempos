@@ -86,5 +86,11 @@ public class EditarDistribuidorAction extends DHTMLXFormAction {
 		distribuidor.setIdDistribuidor(form.getIdDistribuidor());		
 		getDistribuidoresService().desbloquear(distribuidor);
 	}
+
+	@Override
+	public void create(DhtmlxForm f) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

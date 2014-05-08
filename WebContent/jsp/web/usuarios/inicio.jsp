@@ -65,11 +65,13 @@
 		    		}
 		    	});		    	
 		    	
-		    	gridLeads.attachEvent("onRowSelect", function(idUsuario,ind){
+		    	gridLeads.attachEvent("onRowSelect", function(row,ind){
 		    		toolbarUsuarios.enableItem('delete');
 		    		
-		    	
-		    		idSelectedUser = idUsuario;
+		    		idUsuario=row;
+		    		idSelectedUser=row;
+		    		selectedEmail=gridLeads.cells(row,4).getValue();
+		    		
 		    		
 		    		
 		    		b.showHeader();
@@ -103,10 +105,10 @@
 							</logic:notMatch>
 						</logic:notMatch>			    		
 			    		
-			    		form.load('editarusuario.do?idUsuario=' + idUsuario, function () {			    			
+			    		form.load('editarusuario.do?email=' + selectedEmail, function () {			    			
 			    			form.attachEvent("onButtonClick", function(id){
 			    				if (id == "aceptar") {
-				    				form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idUsuario ,"post", function(xml) {
+				    				form.send("actualizarusuario.do?!nativeeditor_status=save&email=" + selectedEmail ,"post", function(xml) {
 				    					
 				    				});
 				    				buscar();
@@ -261,7 +263,7 @@
 		    		form.attachEvent("onButtonClick", function(id){
 	    				if (id == "aceptar") {	    		
 	    					var idAsociado = form.getCombo('idAsociado').getActualValue();
-		    				form.send("actualizarusuario.do?!nativeeditor_status=save&idAsociado="+idAsociado,"post", function(xml) {
+		    				form.send("actualizarusuario.do?!nativeeditor_status=create&idAsociado="+idAsociado,"post", function(xml) {
 		    					
 		    				});
 		    				window.close();

@@ -144,4 +144,10 @@ public class EditarLeadAction extends DHTMLXFormAction {
 		return sb.toString();
 	}
 
+	@Override
+	public void create(DhtmlxForm f) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -36,20 +36,12 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void save(DhtmlxForm f) throws Exception {
+	public void create(DhtmlxForm f) throws Exception {
+		
 		EditarUsuarioForm form = (EditarUsuarioForm) f;
 		UsuarioVO usuario = new UsuarioVO();
 		
-		if(StringUtil.isNullOrBlank(form.getIdUsuario())){
-			usuario.setEmail(form.getEmail());
-			usuario.setIdUsuario(getUsuariosService().findByEmail(usuario).getIdUsuario());
-		}
-		else{
-			usuario.setIdUsuario(form.getIdUsuario());
-			usuario.setEmail(form.getEmail());
-		}
-		
-		
+		usuario.setEmail(form.getEmail());
 		usuario.setIdGrupo(form.getIdGrupo());
 		usuario.setIdAsociado(form.getIdAsociado());
 		usuario.setNombre(form.getNombre());
@@ -60,18 +52,50 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		usuario.setCiudad(form.getCiudad());
 		usuario.setPais(form.getPais());		
 		usuario.setComentarios(form.getComentarios());
-		usuario.setUser(form.getUser());	
+		usuario.setUser(form.getUser());
+		
 		if (!StringUtil.isNullOrBlank(form.getPass()))
 			usuario.setPass(EncriptarUtil.getStringMessageDigest(form.getPass(), EncriptarUtil.MD5));
 		else
 			usuario.setPass(null);
 		
-		if (!StringUtil.isNullOrBlank(usuario.getIdUsuario())) {
-			getUsuariosService().update(usuario);
-		} 
-		else {
-			getUsuariosService().insert(usuario);
-		}
+
+		getUsuariosService().insert(usuario);
+
+	}
+	
+	@Override
+	public void save(DhtmlxForm f) throws Exception {
+		
+		EditarUsuarioForm form = (EditarUsuarioForm) f;
+		UsuarioVO usuario = new UsuarioVO();
+		
+		usuario.setEmail(form.getEmail());
+		
+		if (StringUtil.isNullOrBlank(form.getIdUsuario()))
+			usuario.setIdUsuario(getUsuariosService().findByEmail(usuario).getIdUsuario());
+		else 
+			usuario.setIdUsuario(form.getIdUsuario());
+			
+		usuario.setIdGrupo(form.getIdGrupo());
+		usuario.setIdAsociado(form.getIdAsociado());
+		usuario.setNombre(form.getNombre());
+		usuario.setTelefono(form.getTelefono());
+		usuario.setTelefonoMovil(form.getTelefonoMovil());
+		usuario.setDireccion(form.getDireccion());
+		usuario.setCodigoPostal(form.getCodigoPostal());
+		usuario.setCiudad(form.getCiudad());
+		usuario.setPais(form.getPais());		
+		usuario.setComentarios(form.getComentarios());
+		usuario.setUser(form.getUser());
+		
+		if (!StringUtil.isNullOrBlank(form.getPass()))
+			usuario.setPass(EncriptarUtil.getStringMessageDigest(form.getPass(), EncriptarUtil.MD5));
+		else
+			usuario.setPass(null);
+		
+		getUsuariosService().update(usuario);
+		
 	}
 
 	@Override

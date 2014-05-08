@@ -32,7 +32,11 @@ public abstract class DHTMLXFormAction extends MrmAction {
 				if ("save".equals(f.getNativeeditor_status()) ||
 						"update".equals(f.getNativeeditor_status())) {
 					save(f);
-				} else {
+				} 
+				else if ("create".equals(f.getNativeeditor_status())){
+					create(f);
+				}
+				else {
 					xml.append(parseXML(load(f)));
 				}
 			} catch (Exception e) {
@@ -63,6 +67,8 @@ public abstract class DHTMLXFormAction extends MrmAction {
 	public abstract void save(DhtmlxForm f) throws Exception;
 	
 	public abstract String parseXML(Object o) throws Exception;
+
+	public abstract void create(DhtmlxForm f) throws Exception;
 
 
 		
