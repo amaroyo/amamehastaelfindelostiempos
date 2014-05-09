@@ -41,26 +41,33 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		EditarUsuarioForm form = (EditarUsuarioForm) f;
 		UsuarioVO usuario = new UsuarioVO();
 		
-		usuario.setEmail(form.getEmail());
-		usuario.setIdGrupo(form.getIdGrupo());
-		usuario.setIdAsociado(form.getIdAsociado());
-		usuario.setNombre(form.getNombre());
-		usuario.setTelefono(form.getTelefono());
-		usuario.setTelefonoMovil(form.getTelefonoMovil());
-		usuario.setDireccion(form.getDireccion());
-		usuario.setCodigoPostal(form.getCodigoPostal());
-		usuario.setCiudad(form.getCiudad());
-		usuario.setPais(form.getPais());		
-		usuario.setComentarios(form.getComentarios());
+		//ESTO HAY QUE CAMBIARLO A BUSCAR SEGUN EMAIL O DNI, YA QUE SON UNIQUE
+		//EN ESTE CASO EL UNICO CAMPO UNIQUE A PARTE DEL ID ES EL USER (del form)
 		usuario.setUser(form.getUser());
-		
-		if (!StringUtil.isNullOrBlank(form.getPass()))
-			usuario.setPass(EncriptarUtil.getStringMessageDigest(form.getPass(), EncriptarUtil.MD5));
-		else
-			usuario.setPass(null);
-		
-
-		getUsuariosService().insert(usuario);
+		if (getUsuariosService().findByUser(usuario) != null)
+			System.out.println("================>ESTE USUARIO YA EXISTE<===========================");
+		else{
+			usuario.setEmail(form.getEmail());
+			usuario.setIdGrupo(form.getIdGrupo());
+			usuario.setIdAsociado(form.getIdAsociado());
+			usuario.setNombre(form.getNombre());
+			usuario.setTelefono(form.getTelefono());
+			usuario.setTelefonoMovil(form.getTelefonoMovil());
+			usuario.setDireccion(form.getDireccion());
+			usuario.setCodigoPostal(form.getCodigoPostal());
+			usuario.setCiudad(form.getCiudad());
+			usuario.setPais(form.getPais());		
+			usuario.setComentarios(form.getComentarios());
+			usuario.setUser(form.getUser());
+			
+			if (!StringUtil.isNullOrBlank(form.getPass()))
+				usuario.setPass(EncriptarUtil.getStringMessageDigest(form.getPass(), EncriptarUtil.MD5));
+			else
+				usuario.setPass(null);
+			
+	
+			getUsuariosService().insert(usuario);
+		}
 
 	}
 	
