@@ -178,127 +178,58 @@
 				
 				function goProfesor(){
 					
-					main_layout = new dhtmlXLayoutObject(document.body, '2U');
-					main_layout.setAutoSize("a;b");
+					main_layout = new dhtmlXLayoutObject(document.body, '1C');
 		    		var a = main_layout.cells('a');
-		    		var b = main_layout.cells('b');
-		    		a.setText(["<strong><bean:message key="label.mis.alumnos.estancia" /></strong>"]);
-		    		b.hideHeader();
-		    		gridProfesor = a.attachGrid();
+		    		a.hideHeader();
+		    		
+		    		var tabbar = a.attachTabbar();
+		    		
+		    		//HE AQUI QUE TENEMOS QUE HACER UNA CONSULTA EN MYSQL PARA SABER CUANTOS SEMINARIOS
+		    		//VA A HABER SEGUN LA ASIGNATURA PINCHADA PARA HACER EL WHILE
+		    		
+		    		var numSeminarios=0;
+		    		switch(idAsignatura){
+			    		case "idAsignatura1": {numSeminarios=1;break;}
+			        	case "idAsignatura2": {numSeminarios=2;break;}
+			        	case "idAsignatura3": {numSeminarios=3;break;}
+			        	case "idAsignatura4": {numSeminarios=4;break;}
+			        	case "idAsignatura5": {numSeminarios=5;break;}
+			        	case "idAsignatura6": {numSeminarios=6;break;}
+			        	case "idAsignatura7": {numSeminarios=7;break;}
+		    		}
 					
-		    		gridProfesor.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","a","b"]);
-		    		gridProfesor.setColTypes("ro,ro,ro,ro,ro");
-			    	
-		    		gridProfesor.enableMultiselect(false);
-		    		gridProfesor.setColSorting('str,str,str,str,str');
-		    		gridProfesor.init();
-				    
-				    
-				   
-					var idSelectedUser = <%=sessionIdUser%>;
-					//ORIGINAL
-				    //gridAlumnosProcessor = new dataProcessor("gridMisAlumnos.do?idUsuario"+idSelectedUser);
-					//PRUEBA
-				    var gridAlumnosProfesorProcessor = new dataProcessor("gridusuarios.do");
-					
-				    gridAlumnosProfesorProcessor.enableUTFencoding('simple');
-				    gridAlumnosProfesorProcessor.init(gridProfesor);	  
-				    gridAlumnosProfesorProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
-						if(action == 'error'){
-			    			dhtmlx.message(tag.firstChild.data,action,4000);
-			    		}
-			    	});	
-					
-				    
-				    
-				    gridProfesor.attachEvent("onRowSelect", function(row,ind){
-						
+		    		//WHILEEEEEEEELELELELLELELELEEEEEE
+		    		for (var i=0; i<numSeminarios;i++){
+		    			
+		    			var t = "tab_"+i;
+		    			tabbar.addTab(t,'Seminario ' + i,'');
+				    	var tab = tabbar.cells(t);
+				    	if(i==0) tabbar.setTabActive(t);
 				    	
-				    	selectedEmail=gridProfesor.cells(row,4).getValue();
-
-				    	var tabbar = b.attachTabbar();
-				    	tabbar.addTab('tab_1','<bean:message key="title.datos.personales"/>','');
-				    	var tab_1 = tabbar.cells('tab_1');
-				    	tabbar.setTabActive('tab_1');
-				    	var form = tab_1.attachForm();
-				    	form.loadStruct('../xml/forms/usuario_form.xml', function(){
-				    		form.setItemLabel('data','<bean:message key="title.info.general"/>');
-				    		form.setItemLabel('grupo','<bean:message key="label.group"/>');
-				    		form.setItemLabel('nombre','<bean:message key="label.nombre"/>');
-				    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
-				    		form.setItemLabel('telefonoMovil','<bean:message key="label.telefono.movil"/>');
-				    		form.setItemLabel('direccion','<bean:message key="label.direccion"/>');
-				    		form.setItemLabel('codigoPostal','<bean:message key="label.postal.code"/>');
-				    		form.setItemLabel('ciudad','<bean:message key="label.ciudad"/>');
-				    		form.setItemLabel('pais','<bean:message key="label.pais"/>');
-				    		form.setItemLabel('email','<bean:message key="label.address.email"/>');
-				    		form.setItemLabel('comentarios','<bean:message key="label.comentarios"/>');
-				    		form.setItemLabel('user','<bean:message key="label.user"/>');
-				    		form.setItemLabel('pass','<bean:message key="label.pass"/>');			    		
-				    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
-
-							<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >		    	
-									form.hideItem('aceptar');								
-							</logic:notMatch>			    		
-				    		
-				    		form.load('editarusuario.do?email=' + selectedEmail, function () {			    			
-				    			form.attachEvent("onButtonClick", function(id){
-				    				if (id == "aceptar") {
-					    				form.send("actualizarusuario.do?!nativeeditor_status=save&email=" + selectedEmail ,"post", function(xml) {
-					    					
-					    				});
-					    				buscarProfe();
-				    				}
-				    			});
-				    		});
+				    	var grid = tab.attachGrid();
+				    	
+				    	grid.setHeader(["<bean:message key="label.group" />","<bean:message key="label.nombre" />","<bean:message key="label.telefono" />","<bean:message key="label.telefono.movil" />","<bean:message key="label.address.email" />"]);
+				    	grid.setColTypes("ro,ro,ro,ro,ro");
+				    	
+				    	grid.setColSorting('str,str,str,str,str');
+				    	grid.enableMultiselect(false);
+				    	grid.init();
+				    	
+				    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+				    	gridProcessorPro.enableUTFencoding('simple');
+				    	gridProcessorPro.init(grid);	  
+				    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+							if(action == 'error'){
+				    			dhtmlx.message(tag.firstChild.data,action,4000);
+				    		}
 				    	});
 				    	
-				    	tabbar.addTab('tab_2','<bean:message key="title.info.general.estancia"/>','');
-				    	var tab_2 = tabbar.cells('tab_2');
-				    	var form2 = tab_2.attachForm();
-				    	form2.loadStruct('../xml/forms/estancia_form.xml', function(){
-				    		form2.setItemLabel('data','<bean:message key="title.info.general.estancia"/>');
-				    		form2.setItemLabel('hospital','<bean:message key="label.hospital.estancia"/>');
-				    		form2.setItemLabel('clinica','<bean:message key="label.clinica.estancia"/>');
-				    		form2.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
-				    		form2.setItemLabel('fechaIni','<bean:message key="label.fecha.ini.estancia"/>');
-				    		form2.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
-				    	
-				    		
-				    		//Esto por ahora es provisional, cuando se haga una peticion de toda la informacion 
-				    		//de las asignaturas, se cogeran el codigo y el nombre de la asignatura
-				    		form2.setItemValue('hospital', "Lorem ipsum");
-				    		form2.setItemValue('clinica', "Lorem ipsum");
-				    		form2.setItemValue('profesor', "A113");
-				    		form2.setItemValue('fechaIni', "Lorem ipsum");
-				    		form2.setItemValue('fechaFin', "Lorem ipsum");
-			    			
-				    	});
-				    	
-				    	
-				    	/*
-						form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
-							form.attachEvent("onButtonClick", function(id){
-								if (id == "aceptar") {
-									form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-	
-									});
-	
-								}
-							});
-						});
-						*/
-						
-				    	
-					});
-				    
-				    buscarProfe();
+		    			grid.clearAndLoad("gridusuarios.do");
+		    		}//FOR
+		    		
 				}
 				
-				function buscarProfe() {
-					gridProfesor.clearAndLoad("gridusuarios.do");		    	
-			    }
-	    		
+				
 				function buscarAlumno() {
 					gridAlumnoRealizado.clearAndLoad("gridusuarios.do");
 					gridAlumnoPendiente.clearAndLoad("gridusuarios.do");
