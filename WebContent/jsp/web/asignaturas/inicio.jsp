@@ -68,7 +68,11 @@
 		    }
 		    
 		    
-		   
+		    function goCampo(){
+		    	areaTrabajoAsignaturas.attachURL("campos.do?idAsignatura="+idAsignatura);    	
+		    }
+		    
+		    
 		    function goSeminarios(){
 		    	areaTrabajoAsignaturas.attachURL("seminarios.do?idAsignatura="+idAsignatura);    	
 		    }
