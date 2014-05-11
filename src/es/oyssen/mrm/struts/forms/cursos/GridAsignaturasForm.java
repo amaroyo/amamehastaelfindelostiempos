@@ -2,18 +2,19 @@ package es.oyssen.mrm.struts.forms.cursos;
 
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
 
-public class GridCursosForm extends DhtmlxGridForm {
+public class GridAsignaturasForm extends DhtmlxGridForm {
 
-	private String idASignaturaOSeminario;
+	private String idASignatura;
 	private String nombre;
 	private String codigo;
 	private String curso;
 	private String descripcion;
+	
 	public String getIdASignaturaOSeminario() {
-		return idASignaturaOSeminario;
+		return idASignatura;
 	}
-	public void setIdASignaturaOSeminario(String idASignaturaOSeminario) {
-		this.idASignaturaOSeminario = idASignaturaOSeminario;
+	public void setIdASignatura(String idASignatura) {
+		this.idASignatura = idASignatura;
 	}
 	public String getNombre() {
 		return nombre;

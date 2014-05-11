@@ -5,7 +5,11 @@
 <struts-config>	
 	
 	<form-beans>
-	    <form-bean name="GridCursosForm" type="es.oyssen.mrm.struts.forms.cursos.GridCursosForm" />
+	    <form-bean name="GridSeminariosForm" type="es.oyssen.mrm.struts.forms.cursos.GridSeminariosForm" />
+	    <form-bean name="GridAsignaturasForm" type="es.oyssen.mrm.struts.forms.cursos.GridAsignaturasForm" />
+		<form-bean name="EditarAsignaturaForm" type="es.oyssen.mrm.struts.forms.cursos.EditarAsignaturaForm" />
+		<form-bean name="EditarSeminarioForm" type="es.oyssen.mrm.struts.forms.cursos.EditarSeminarioForm" />
+		
 		
 	</form-beans>
 	
@@ -17,8 +21,13 @@
 		<action path="/cursos/inicio-seminarios" forward="/jsp/web/cursos/inicio-seminarios.jsp" />
 		<action path="/cursos/inicio-asignaturas" forward="/jsp/web/cursos/inicio-asignaturas.jsp" />
 		
-		<action path="/cursos/gridcursos" name="GridCursosForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.GridCursosAction" />
+		<action path="/cursos/gridasignaturas" name="GridAsignaturasForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.GridAsignaturasAction" />
+		<action path="/cursos/gridseminarios" name="GridSeminariosForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.GridSeminariosAction" />
 		
+		<action path="cursos/editarasignatura" name="EditarAsignaturaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.EditarAsignaturaAction"  />
+		<action path="cursos/actualizarasignatura" name="EditarAsignaturaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.EditarAsignaturaAction"  />
+		<action path="cursos/editarseminario" name="EditarSeminarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.EditarSeminarioAction"  />
+		<action path="cursos/actualizarseminario" name="EditarSeminarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.EditarSeminarioAction"  />
 		
 		
 	</action-mappings>

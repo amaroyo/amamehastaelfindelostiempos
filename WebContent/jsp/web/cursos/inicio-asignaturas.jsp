@@ -59,7 +59,7 @@
 			    gridCursos.setColSorting('str,str,str,str');
 			    gridCursos.enableMultiselect(false);
 			    gridCursos.init();
-			    gridCursosProcessor = new dataProcessor("gridcursos.do");
+			    gridCursosProcessor = new dataProcessor("gridasignaturas.do");
 			    gridCursosProcessor.enableUTFencoding('simple');
 			    gridCursosProcessor.init(gridCursos);	  
 			    gridCursosProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){

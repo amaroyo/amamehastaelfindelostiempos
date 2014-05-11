@@ -22,8 +22,6 @@
 		    dhtmlxEvent(window,"load",function() {
 		    	
 		    	dhtmlxError.catchError("ALL",errorHandler);
-		    	<% String opcion = request.getParameter("opcion");%>
-		    	opcionSeminarioAsignatura="<%=opcion%>";
 			    main_layout = new dhtmlXLayoutObject(document.body, '2U');
 			    listado = main_layout.cells('a');
 			    listado.setWidth(600);
@@ -58,7 +56,7 @@
 			    gridCursos.setColSorting('str,str,str,str');
 			    gridCursos.enableMultiselect(false);
 			    gridCursos.init();
-			    gridCursosProcessor = new dataProcessor("gridcursos.do");
+			    gridCursosProcessor = new dataProcessor("gridseminarios.do");
 			    gridCursosProcessor.enableUTFencoding('simple');
 			    gridCursosProcessor.init(gridCursos);	  
 			    gridCursosProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -67,7 +65,7 @@
 		    		}
 		    	});
 			 	// TAG: Prueba
-				gridCursos.addRow('1','A01,Anatomía,1º,Prácticas de Anatomía');
+				gridCursos.addRow('1','A01,Anatomía,1º,Seminarios de Anatomía');
 			    
 			    gridCursos.attachEvent("onRowSelect", doOnRowSelected);				  
 		    });
