@@ -16,7 +16,7 @@
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var main_layout, areaTrabajoCursos, listado, toolbarCursos, opcionSeminarioAsignatura,
+	    	var main_layout, areaTrabajoCursos, listado, toolbarCursos,
 	    	gridCursos, tabbarCursos, tabInfo, formInfo;
 	    	
 		    dhtmlxEvent(window,"load",function() {
@@ -33,51 +33,32 @@
 			    //"a;b" 'a' and 'b' will autosize when changing horizontal dimensions of layout
 			    //listado.setAutoSize("a;b",null)
 			    
-			    if (opcionSeminarioAsignatura == "seminarios") {
-			    	listado.setText("<strong><bean:message key="title.seminarios" /></strong>");
-				    areaTrabajoCursos.setText("<bean:message key="title.propiedades.seminario" />");
-			    }
-			    else if (opcionSeminarioAsignatura == "asignaturas") {
-			    	listado.setText("<strong><bean:message key="title.asignaturas" /></strong>");
-			    	areaTrabajoCursos.setText("<bean:message key="title.propiedades.asignatura" />");
-			    }
+		    	listado.setText("<strong><bean:message key="title.seminarios" /></strong>");
+			    areaTrabajoCursos.setText("<bean:message key="title.propiedades.seminario" />");
 			    	
 			    toolbarCursos = listado.attachToolbar();
 			    toolbarCursos.setIconsPath('../skins/imgs/toolbar/');
 			    toolbarCursos.loadXML('../xml/toolbars/dhxtoolbar-cursos.xml', function(){
-		    		if(opcionSeminarioAsignatura == "seminarios") {
-		    			toolbarCursos.setItemText('new',"<bean:message key="button.create.seminario"/>");
-		    			toolbarCursos.setItemText('delete',"<bean:message key="button.eliminar.seminario"/>");
-		    		}
-		    		else if(opcionSeminarioAsignatura == "asignaturas") {
-		    			toolbarCursos.setItemText('new',"<bean:message key="button.create.asignatura"/>");
-		    			toolbarCursos.setItemText('delete',"<bean:message key="button.eliminar.asignatura"/>");
-		    		}
-		    		toolbarCursos.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+	    		toolbarCursos.setItemText('new',"<bean:message key="button.create.seminario"/>");
+	    		toolbarCursos.setItemText('delete',"<bean:message key="button.eliminar.seminario"/>");
+		    	toolbarCursos.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 		    		
-		    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
-			    		toolbarCursos.hideItem('new');
-			    		toolbarCursos.hideItem('sep1');    	
-			    		toolbarCursos.hideItem('delete');
-			    		toolbarCursos.hideItem('sep2');
-					</logic:notMatch>
-		    	});
+	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
+		    		toolbarCursos.hideItem('new');
+		    		toolbarCursos.hideItem('sep1');    	
+		    		toolbarCursos.hideItem('delete');
+		    		toolbarCursos.hideItem('sep2');
+				</logic:notMatch>
+		    });
 			    
 			    
 			    gridCursos = listado.attachGrid();
 			    gridCursos.setIconsPath('../skins/imgs/');
-			    if(opcionSeminarioAsignatura == "seminarios") {
-			    	gridCursos.setHeader(["<strong><bean:message key="label.nombre.seminario" /></strong>",
+			    gridCursos.setHeader(["<strong><bean:message key="label.nombre.seminario" /></strong>",
 			    	                      "<strong><bean:message key="label.codigo.seminario" /></strong>",
 			    	                      "<strong><bean:message key="label.curso.seminario" /></strong>",
 			    	                      "<strong><bean:message key="label.descripcion.seminario" /></strong>"]);
-			    }
-			    else if(opcionSeminarioAsignatura == "asignaturas") {
-			   		gridCursos.setHeader(["<strong><bean:message key="label.nombre.asignatura" /></strong>"
-			   		                      ,"<strong><bean:message key="label.codigo.asignatura" /></strong>",
-			   		                      "<strong><bean:message key="label.curso.asignatura" /></strong>",
-			   		                      "<strong><bean:message key="label.descripcion.asignatura" /></strong>"]);
-			    }
+			    
 				
 			    //ro = readonly
 			    //nombre codigo curso descripcion
@@ -108,12 +89,7 @@
 		    	tabInfo = tabbarCursos.cells('tabInfo');
 		    	tabbarCursos.setTabActive('tabInfo');
 		    	formInfo = tabInfo.attachForm();
-		    	if(opcionSeminarioAsignatura == "seminarios") {
-		    		loadFormSeminario();
-		    	}
-		    	else if(opcionSeminarioAsignatura == "asignaturas") {
-		    		loadFormAsignatura();
-		    	}
+		    	loadFormSeminario();
 		    	// obtener el nombre del curso de la bbdd y añadirlo como header a la dcha
 				areaTrabajoCursos.setText(areaTrabajoCursos.getText() + "");
 		    }
@@ -140,28 +116,7 @@
 		    		});
 	    		});
 		    }
-		    function loadFormAsignatura(){
-		    	formInfo.loadStruct('../xml/forms/asignatura_informacion_form.xml', function(){
-	    			formInfo.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
-	    			formInfo.setItemLabel('nombre','<bean:message key="label.nombre.asignatura"/>');
-	    			formInfo.setItemLabel('codigo','<bean:message key="label.codigo.asignatura"/>');
-	    			formInfo.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
-	    			formInfo.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
-	    			formInfo.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
-	    			permisosForm();			    		
-		    		
-	    			formInfo.load('editarasignatura.do?idAsignatura=' + idAsignatura, function () {			    			
-	    				formInfo.attachEvent("onButtonClick", function(id){
-		    				if (id == "aceptar") {
-		    					formInfo.send("actualizarasignatura.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura ,"post", function(xml) {
-			    					
-			    				});
-			    				buscar();
-		    				}
-		    			});
-		    		});
-	    		});
-		    }
+		    
 		    
 		    function buscar() {
 		    	gridCursos.clearAndLoad("gridcursos.do");		    	
@@ -180,12 +135,6 @@
 				</logic:notMatch>	
 				
 				
-				// TAG: pruebas
-				formInfo.setItemValue('nombre', idAsignatura);
-				formInfo.setItemValue('codigo', idAsignatura);
-				formInfo.setItemValue('curso', "A113");
-				formInfo.setItemValue('profesor', "Lorem ipsum");
-				formInfo.setItemValue('descripcion', "Lorem ipsum dolor sit amet");
 	    	}
 		  
         </script>

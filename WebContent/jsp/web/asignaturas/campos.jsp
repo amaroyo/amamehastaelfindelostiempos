@@ -19,7 +19,7 @@
 	    <script type="text/javascript">
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
-	    	var main_layout, idAsignatura,nombreAsignatura, gridProfesor, gridAlumnoRealizado,gridAlumnoPendiente,toolbarServicios,tab;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesor, gridAlumnoRealizado,gridAlumnoPendiente,toolbarServicios,tab;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -61,7 +61,7 @@
 		    		//HE AQUI QUE TENEMOS QUE HACER UNA CONSULTA EN MYSQL PARA SABER CUANTAS PRACTICAS
 		    		//VA A HABER SEGUN LA ASIGNATURA PINCHADA PARA HACER EL WHILE
 		    		
-		    		var numSeminarios=0;
+		    		var numTrabajosCampo=0;
 		    		switch(idAsignatura){
 			    		case "idAsignatura1": {numSeminarios=1;break;}
 			        	case "idAsignatura2": {numSeminarios=2;break;}

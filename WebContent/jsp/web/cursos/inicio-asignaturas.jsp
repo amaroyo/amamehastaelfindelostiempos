@@ -16,7 +16,7 @@
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var main_layout, areaTrabajoCursos, listado, toolbarCursos, opcionSeminarioAsignatura,
+	    	var main_layout, areaTrabajoCursos, listado, toolbarCursos,
 	    	gridCursos, tabbarCursos, tabInfo, formInfo;
 	    	
 		    dhtmlxEvent(window,"load",function() {
@@ -42,13 +42,13 @@
     			toolbarCursos.setItemText('delete',"<bean:message key="button.eliminar.asignatura"/>");
     			toolbarCursos.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 		    		
-		    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
-			    		toolbarCursos.hideItem('new');
-			    		toolbarCursos.hideItem('sep1');    	
-			    		toolbarCursos.hideItem('delete');
-			    		toolbarCursos.hideItem('sep2');
-					</logic:notMatch>
-		    	});
+	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
+		    		toolbarCursos.hideItem('new');
+		    		toolbarCursos.hideItem('sep1');    	
+		    		toolbarCursos.hideItem('delete');
+		    		toolbarCursos.hideItem('sep2');
+				</logic:notMatch>
+		    });
 			    
 			    
 			    gridCursos = listado.attachGrid();
@@ -87,38 +87,11 @@
 		    	tabInfo = tabbarCursos.cells('tabInfo');
 		    	tabbarCursos.setTabActive('tabInfo');
 		    	formInfo = tabInfo.attachForm();
-		    	if(opcionSeminarioAsignatura == "seminarios") {
-		    		loadFormSeminario();
-		    	}
-		    	else if(opcionSeminarioAsignatura == "asignaturas") {
 		    		loadFormAsignatura();
-		    	}
 		    	// obtener el nombre del curso de la bbdd y añadirlo como header a la dcha
 				areaTrabajoCursos.setText(areaTrabajoCursos.getText() + "");
 		    }
 		    
-		    function loadFormSeminario(){
-	    		formInfo.loadStruct('../xml/forms/seminario_informacion_form.xml', function(){
-	    			formInfo.setItemLabel('data','<bean:message key="title.info.general.seminario"/>');
-	    			formInfo.setItemLabel('nombre','<bean:message key="label.nombre.seminario"/>');
-	    			formInfo.setItemLabel('codigo','<bean:message key="label.codigo.seminario"/>');
-	    			formInfo.setItemLabel('curso','<bean:message key="label.curso.seminario"/>');
-	    			formInfo.setItemLabel('profesor','<bean:message key="label.profesor.seminario"/>');
-	    			formInfo.setItemLabel('descripcion','<bean:message key="label.descripcion.seminario"/>');
-	    			permisosForm();
-	    			
-		    		form.load('editarseminario.do?idSeminario=' + idSeminario, function () {			    			
-		    			form.attachEvent("onButtonClick", function(id){
-		    				if (id == "aceptar") {
-			    				form.send("actualizarseminario.do?!nativeeditor_status=save&idSeminario=" + idSeminario ,"post", function(xml) {
-			    					
-			    				});
-			    				buscar();
-		    				}
-		    			});
-		    		});
-	    		});
-		    }
 		    function loadFormAsignatura(){
 		    	formInfo.loadStruct('../xml/forms/asignatura_informacion_form.xml', function(){
 	    			formInfo.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
@@ -157,14 +130,6 @@
 	    				}
 	    			});
 				</logic:notMatch>	
-				
-				
-				// TAG: pruebas
-				formInfo.setItemValue('nombre', idAsignatura);
-				formInfo.setItemValue('codigo', idAsignatura);
-				formInfo.setItemValue('curso', "A113");
-				formInfo.setItemValue('profesor', "Lorem ipsum");
-				formInfo.setItemValue('descripcion', "Lorem ipsum dolor sit amet");
 	    	}
 		  
         </script>
