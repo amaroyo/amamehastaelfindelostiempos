@@ -42,12 +42,7 @@
     			toolbarCursos.setItemText('delete',"<bean:message key="button.eliminar.asignatura"/>");
     			toolbarCursos.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 		    		
-	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
-		    		toolbarCursos.hideItem('new');
-		    		toolbarCursos.hideItem('sep1');    	
-		    		toolbarCursos.hideItem('delete');
-		    		toolbarCursos.hideItem('sep2');
-				</logic:notMatch>
+	    		//permisosToolbaAsignaturas();
 		    });
 			    
 			    
@@ -87,7 +82,7 @@
 		    	tabInfo = tabbarCursos.cells('tabInfo');
 		    	tabbarCursos.setTabActive('tabInfo');
 		    	formInfo = tabInfo.attachForm();
-		    		loadFormAsignatura();
+		    	loadFormAsignatura();
 		    	// obtener el nombre del curso de la bbdd y añadirlo como header a la dcha
 				areaTrabajoCursos.setText(areaTrabajoCursos.getText() + "");
 		    }
@@ -100,7 +95,7 @@
 	    			formInfo.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
 	    			formInfo.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
 	    			formInfo.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
-	    			permisosForm();			    		
+	    			//permisosAsignaturasForm();			    		
 		    		
 	    			formInfo.load('editarasignatura.do?idAsignatura=' + idAsignatura, function () {			    			
 	    				formInfo.attachEvent("onButtonClick", function(id){
@@ -118,8 +113,17 @@
 		    function buscar() {
 		    	gridCursos.clearAndLoad("gridcursos.do");		    	
 		    }
+		    
+			function permisosToolbarAsignaturas(){ 	
+				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
+			   		toolbarCursos.hideItem('new');
+			   		toolbarCursos.hideItem('sep1');    	
+			   		toolbarCursos.hideItem('delete');
+			   		toolbarCursos.hideItem('sep2');
+				</logic:notMatch>
+	    	}
 	    	
-	    	function permisosForm(){
+	    	function permisosAsignaturasForm(){
 	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >    	
 	    			formInfo.forEachItem(function(id){
 	    				if(getType(id) == "input"){

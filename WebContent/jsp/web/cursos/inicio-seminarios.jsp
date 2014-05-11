@@ -42,15 +42,8 @@
 	    		toolbarCursos.setItemText('new',"<bean:message key="button.create.seminario"/>");
 	    		toolbarCursos.setItemText('delete',"<bean:message key="button.eliminar.seminario"/>");
 		    	toolbarCursos.setItemText('refresh',"<bean:message key="button.actualizar"/>");
-		    		
-	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
-		    		toolbarCursos.hideItem('new');
-		    		toolbarCursos.hideItem('sep1');    	
-		    		toolbarCursos.hideItem('delete');
-		    		toolbarCursos.hideItem('sep2');
-				</logic:notMatch>
+	    		//permisosToolbarSeminarios();
 		    });
-			    
 			    
 			    gridCursos = listado.attachGrid();
 			    gridCursos.setIconsPath('../skins/imgs/');
@@ -59,7 +52,6 @@
 			    	                      "<strong><bean:message key="label.curso.seminario" /></strong>",
 			    	                      "<strong><bean:message key="label.descripcion.seminario" /></strong>"]);
 			    
-				
 			    //ro = readonly
 			    //nombre codigo curso descripcion
 			    gridCursos.setColTypes("ro,ro,ro,ro");
@@ -102,7 +94,7 @@
 	    			formInfo.setItemLabel('curso','<bean:message key="label.curso.seminario"/>');
 	    			formInfo.setItemLabel('profesor','<bean:message key="label.profesor.seminario"/>');
 	    			formInfo.setItemLabel('descripcion','<bean:message key="label.descripcion.seminario"/>');
-	    			permisosForm();
+	    			//permisosSeminariosForm();
 	    			
 		    		form.load('editarseminario.do?idSeminario=' + idSeminario, function () {			    			
 		    			form.attachEvent("onButtonClick", function(id){
@@ -122,7 +114,17 @@
 		    	gridCursos.clearAndLoad("gridcursos.do");		    	
 		    }
 	    	
-	    	function permisosForm(){
+		    function permisosToolbarSeminarios(){
+		    	
+				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
+			   		toolbarCursos.hideItem('new');
+			   		toolbarCursos.hideItem('sep1');    	
+			   		toolbarCursos.hideItem('delete');
+			   		toolbarCursos.hideItem('sep2');
+				</logic:notMatch>
+	    	}
+		    
+		    function permisosSeminariosForm(){
 	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >    	
 	    			formInfo.forEachItem(function(id){
 	    				if(getType(id) == "input"){
