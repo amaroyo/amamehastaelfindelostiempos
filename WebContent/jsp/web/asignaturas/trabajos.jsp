@@ -76,18 +76,17 @@
 		        	case "idAsignatura6": {numTrabajosCampo=6;break;}
 		        	case "idAsignatura7": {numTrabajosCampo=7;break;}
 	    		}
-	    		
-	    		
+				
 	    		for (var i=0; i<numTrabajosCampo;i++) {
 	    			tab = "tab_"+i;
 	    			tabbar.addTab(tab,'Práctica ' + i,'');
 	    			//no se como hacer que sea activa y que ademas este seleccionada para 
 	    			//disparar al metodo onSelect para que lo rellene con datos...
+			    	//alert(i);
+	    			if(i==0) tabbar.setTabActive(tab);
+	    			//alert(i);
 	    			initTabContent(tab);
-	    			if(i==0)
-	    				tabbar.setTabActive(tab);
 	    		}
-	    		
 			}	
 		    	
 	    	function initTabContent(tabID){
@@ -96,13 +95,18 @@
 								
 		    	toolbarServicios = tab.attachToolbar();
 		    	toolbarServicios.setIconsPath('../img/toolbar/');
+		    	//alert(tabID);
+		    	
 		    	toolbarServicios.loadXML('../xml/toolbars/dhtxtoolbar-trabajos-campo.xml', function(){
+		    		alert(tabID);
 		    		toolbarServicios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
 		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.practicas"/>");
 		    		toolbarServicios.setItemText('subirCorrecciones',"<bean:message key="button.subir.correcciones"/>");
 		    		toolbarServicios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 		    	});
+		    	
+		    	
 	
 		    	var grid = tab.attachGrid();
 		    	
@@ -124,6 +128,7 @@
 		    	
 	   			grid.clearAndLoad("gridusuarios.do");
 				
+	   			
 			}
 		    	
 	    	function buscarAlumno() {
