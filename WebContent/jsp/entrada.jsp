@@ -49,8 +49,14 @@
 					toolbar.addButtonSelect('administrar',6, '<bean:message key="button.select.administrar" />',
 							optsAdministrar, 'administrar.png', null, 'disabled', true, "10", 'select');
 	
+					
+					var menu = new dhtmlXMenuObject('subirListados');
+					menu.addNewChild('subirListados', 1, 'listadoAlumnos', 'Alumnos', false, null, null);
+					menu.addNewSibling('listadoAlumnos', 'listadoProfesores', 'Profesores', false, null, null);
+					menu.addNewSibling('listadoUsuarios', 'listadoUsuarios', 'Usuarios', false, null, null);
+					
 					permisosToolbarGeneral();
-	        });	 
+	        	});	 
 		        
 		        toolbar.attachEvent("onClick", function(id){
 					toolbar.forEachListOption('misAsignaturas',function(optionAsigId){
@@ -64,7 +70,12 @@
 							goCursos(optionCursosId);
 						}
 					});
-				});
+					toolbar.forEachListOption('administrar',function(optionAdministrarId){
+						if(id==optionAdministrarId){
+							goAdministrar(optionAdministrarId);
+						}
+					});
+			});
 		        
 	        toolbar.attachEvent('onXLE', function() {
 		        
@@ -74,6 +85,7 @@
     	
     	
     	function permisosToolbarGeneral(){
+    		
     		<logic:notEmpty name="usuarioYPermisos">
 	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>44</permiso>" >	    	
@@ -123,6 +135,7 @@
 				</logic:notMatch>
 			</logic:notEmpty>
     	}
+    	
     	function initWrong() {
     		alert('<bean:message key="message.wrong.user.pass" />');
     	}
@@ -186,6 +199,27 @@
     	}
     	function goCursos(opcion) {
     		document.getElementById("areatrabajo").src="cursos/inicio.do?opcion=" + opcion;
+    	}
+    	function goAdministrar(opcion) {
+    		switch(opcion){
+    		case "subirListados":
+    			alert("listados");
+    			document.getElementById("areatrabajo").src="administrar/listados.do";
+    			break;
+    		case "generarCertificados":
+    			alert("certificados");
+    			//document.getElementById("areatrabajo").src="administrar/inicio.do?opcion=" + opcion;
+    			break;
+    		case "copiaSeguridad":
+    			alert("copia");
+    			//document.getElementById("areatrabajo").src="administrar/inicio.do?opcion=" + opcion;
+    			break;
+    		case "cerrarCurso":
+    			alert("cerrar");
+    			//document.getElementById("areatrabajo").src="administrar/inicio.do?opcion=" + opcion;
+    			break;
+    		}
+    		
 
     	}
     	
