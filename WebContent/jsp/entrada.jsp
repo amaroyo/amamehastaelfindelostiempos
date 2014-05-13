@@ -37,13 +37,17 @@
 					
 					
 					var optsAsignaturas = dameAsignaturasUsuario();
-					toolbar.addButtonSelect('misAsignaturas',2, '<bean:message key="label.mis.asignaturas" />',
-							optsAsignaturas,'asignaturas.png',null,'disabled',true,"100",'select');
+					toolbar.addButtonSelect('misAsignaturas',2, '<bean:message key="button.select.mis.asignaturas" />',
+							optsAsignaturas, 'asignaturas.png', null, 'disabled', true, "100", 'select');
 				
 					
 					var optsCursos = dameCursos();
-					toolbar.addButtonSelect('cursos',3, '<bean:message key="button.select.cursos" />',
-							optsCursos,'cursos.png',null,'disabled',true,"100",'select');
+					toolbar.addButtonSelect('cursos', 4, '<bean:message key="button.select.cursos" />',
+							optsCursos, 'cursos.png', null, 'disabled', true, "5", 'select');
+					
+					var optsAdministrar = dameOpcionesAdministrar();
+					toolbar.addButtonSelect('administrar',6, '<bean:message key="button.select.administrar" />',
+							optsAdministrar, 'administrar.png', null, 'disabled', true, "10", 'select');
 	
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>44</permiso>" >	    	
@@ -51,42 +55,42 @@
 						</logic:notMatch>
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >		    	
 							toolbar.hideItem('leads');
-							toolbar.hideItem('sep3');
+							toolbar.hideItem('sep5');
 		    			</logic:notMatch>
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>8</permiso>" >		    	
 							toolbar.hideItem('comerciales');
-							toolbar.hideItem('sep4');
+							toolbar.hideItem('sep6');
 						</logic:notMatch>    				
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>12</permiso>" >		    	
 							toolbar.hideItem('responsables');
-							toolbar.hideItem('sep5');
+							toolbar.hideItem('sep7');
 						</logic:notMatch> 
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>16</permiso>" >		    	
 							toolbar.hideItem('distribuidores');
-							toolbar.hideItem('sep6');
+							toolbar.hideItem('sep8');
 						</logic:notMatch> 
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>20</permiso>" >		    	
 							toolbar.hideItem('empresas');
-							toolbar.hideItem('sep7');
+							toolbar.hideItem('sep9');
 						</logic:notMatch>
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>24</permiso>" >		    	
 							toolbar.hideItem('servicios');
-							toolbar.hideItem('sep8');
+							toolbar.hideItem('sep10');
 						</logic:notMatch>
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>28</permiso>" >		    	
 							toolbar.hideItem('canales');
-							toolbar.hideItem('sep9');
+							toolbar.hideItem('sep11');
 						</logic:notMatch>	
 						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>34</permiso>" >
 							toolbar.hideItem('usuarios');
-							toolbar.hideItem('sep11');
+							toolbar.hideItem('sep13');
 						</logic:notMatch>
 					</logic:notMatch>
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>1</grupo>" >
 						toolbar.hideItem('grupos');
-						toolbar.hideItem('sep10');
-						toolbar.hideItem('logsUsuarios');
 						toolbar.hideItem('sep12');
+						toolbar.hideItem('logsUsuarios');
+						toolbar.hideItem('sep14');
 					</logic:notMatch>
 				</logic:notEmpty>
 	        });	 
@@ -195,10 +199,24 @@
     	}
     	
     	function dameCursos(){
-    		var opts = [['asignaturas', 'obj', ["<strong><bean:message key="button.select.asignaturas" /></strong>"],'libro.png'],
+    		var opts = [['asignaturas', 'obj', ["<bean:message key="button.select.asignaturas" />"],'libro.png'],
     		            ['sep1', 'sep', ''],
-                        ['seminarios', 'obj', ["<strong><bean:message key="button.select.seminarios" /></strong>"],'seminarios.png']
+                        ['seminarios', 'obj', ["<bean:message key="button.select.seminarios" />"],'seminarios.png']
                         ];
+			
+			return opts;
+    		
+    	}
+    	
+    	function dameOpcionesAdministrar(){
+    		var opts = [['subirListados', 'obj', ["<bean:message key="button.select.subir.listados" />"],'libro.png'],
+    		            ['sep1', 'sep', ''],
+                        ['generarCertificados', 'obj', ["<bean:message key="button.select.generar.certificados" />"],'seminarios.png'],
+			    		['sep2', 'sep', ''],
+			            ['copiasSeguridad', 'obj', ["<bean:message key="button.select.copias.seguridad" />"],'seminarios.png'],
+			            ['sep3', 'sep', ''],
+			            ['cerrarCurso', 'obj', ["<bean:message key="button.select.cerrar.curso" />"],'seminarios.png']
+    					];
 			
 			return opts;
     		
