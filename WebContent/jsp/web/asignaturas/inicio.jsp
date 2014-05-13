@@ -60,7 +60,7 @@
 		        	case "a": {goInformacion();break;}
 		        	case "b": {goEstancia();break;}
 		        	case "c": {goSeminarios();break;}
-		        	case "d": {goCampo();break;}
+		        	case "d": {goTrabajos();break;}
 		        	case "e": {goCasos();break;}
 		        	case "f": {goDiario();break;}
 		        	case "g": {goRubrica();break;}
@@ -68,8 +68,8 @@
 		    }
 		    
 		    
-		    function goCampo(){
-		    	areaTrabajoAsignaturas.attachURL("campos.do?idAsignatura="+idAsignatura);    	
+		    function goTrabajos(){
+		    	areaTrabajoAsignaturas.attachURL("trabajos.do?idAsignatura="+idAsignatura);    	
 		    }
 		    
 		    
