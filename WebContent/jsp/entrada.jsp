@@ -209,13 +209,13 @@
     	}
     	
     	function dameOpcionesAdministrar(){
-    		var opts = [['subirListados', 'obj', ["<bean:message key="button.select.subir.listados" />"],'libro.png'],
+    		var opts = [['subirListados', 'obj', ["<bean:message key="button.select.subir.listados" />"],'subirListados.png'],
     		            ['sep1', 'sep', ''],
-                        ['generarCertificados', 'obj', ["<bean:message key="button.select.generar.certificados" />"],'seminarios.png'],
+                        ['generarCertificados', 'obj', ["<bean:message key="button.select.generar.certificados" />"],'generarCertificados.png'],
 			    		['sep2', 'sep', ''],
-			            ['copiasSeguridad', 'obj', ["<bean:message key="button.select.copias.seguridad" />"],'seminarios.png'],
+			            ['copiaSeguridad', 'obj', ["<bean:message key="button.select.copias.seguridad" />"],'copiaSeguridad.png'],
 			            ['sep3', 'sep', ''],
-			            ['cerrarCurso', 'obj', ["<bean:message key="button.select.cerrar.curso" />"],'seminarios.png']
+			            ['cerrarCurso', 'obj', ["<bean:message key="button.select.cerrar.curso" />"],'cerrarCurso.png']
     					];
 			
 			return opts;
