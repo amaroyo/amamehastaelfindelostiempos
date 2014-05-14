@@ -16,8 +16,6 @@
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var main_layout, areaTrabajoCursos, listado, toolbarCursos, opcionSeminarioAsignatura,
-	    	gridCursos, tabbarCursos, tabInfo, formInfo;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	

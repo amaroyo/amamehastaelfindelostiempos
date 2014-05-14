@@ -50,11 +50,6 @@
 							optsAdministrar, 'administrar.png', null, 'disabled', true, "10", 'select');
 	
 					
-					var menu = new dhtmlXMenuObject('subirListados');
-					menu.addNewChild('subirListados', 1, 'listadoAlumnos', 'Alumnos', false, null, null);
-					menu.addNewSibling('listadoAlumnos', 'listadoProfesores', 'Profesores', false, null, null);
-					menu.addNewSibling('listadoUsuarios', 'listadoUsuarios', 'Usuarios', false, null, null);
-					
 					permisosToolbarGeneral();
 	        	});	 
 		        
@@ -203,12 +198,10 @@
     	function goAdministrar(opcion) {
     		switch(opcion){
     		case "subirListados":
-    			alert("listados");
     			document.getElementById("areatrabajo").src="administrar/listados.do";
     			break;
     		case "generarCertificados":
-    			alert("certificados");
-    			//document.getElementById("areatrabajo").src="administrar/inicio.do?opcion=" + opcion;
+    			document.getElementById("areatrabajo").src="administrar/certificados.do";
     			break;
     		case "copiaSeguridad":
     			alert("copia");

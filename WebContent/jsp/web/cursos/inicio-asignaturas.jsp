@@ -10,14 +10,16 @@
 	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
+	    <script src="../skins/dhtmlxgrid.js"></script>
+	    <script src="../skins/dhtmlxgrid_export.js"></script>
 	    
 
 	    <script type="text/javascript">
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var main_layout, areaTrabajoCursos, listado, toolbarCursos,
-	    	gridCursos, tabbarCursos, tabInfo, formInfo;
+	    	var main_layout, areaTrabajoCursos, listado, toolbarAsignaturas,
+	    	gridAsignaturas, tabbarAsignaturas, tabInfo, formInfo;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -34,53 +36,55 @@
 		    	listado.setText("<strong><bean:message key="title.asignaturas" /></strong>");
 		    	areaTrabajoCursos.setText("<bean:message key="title.propiedades.asignatura" />");
 			    	
-			    toolbarCursos = listado.attachToolbar();
-			    toolbarCursos.setIconsPath('../skins/imgs/toolbar/');
-			    toolbarCursos.loadXML('../xml/toolbars/dhxtoolbar-cursos.xml', function(){
+			    toolbarAsignaturas = listado.attachToolbar();
+			    toolbarAsignaturas.setIconsPath('../skins/imgs/toolbar/');
+			    toolbarAsignaturas.loadXML('../xml/toolbars/dhxtoolbar-asignaturas.xml', function(){
 		    		
-    			toolbarCursos.setItemText('new',"<bean:message key="button.create.asignatura"/>");
-    			toolbarCursos.setItemText('delete',"<bean:message key="button.eliminar.asignatura"/>");
-    			toolbarCursos.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+	    			toolbarAsignaturas.setItemText('new',"<bean:message key="button.create.asignatura"/>");
+	    			toolbarAsignaturas.setItemText('delete',"<bean:message key="button.eliminar.asignatura"/>");
+	    			toolbarAsignaturas.setItemText('exportExcel',"<bean:message key="button.exportar.excel"/>");
+	    			toolbarAsignaturas.setItemText('exportPDF',"<bean:message key="button.exportar.pdf"/>");
+	    			toolbarAsignaturas.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 		    		
-	    		//permisosToolbaAsignaturas();
+	    		//permisosToolbarAsignaturas();
 		    });
 			    
 			    
-			    gridCursos = listado.attachGrid();
-			    gridCursos.setIconsPath('../skins/imgs/');
-		   		gridCursos.setHeader(["<strong><bean:message key="label.nombre.asignatura" /></strong>"
+			    gridAsignaturas = listado.attachGrid();
+			    gridAsignaturas.setIconsPath('../skins/imgs/');
+		   		gridAsignaturas.setHeader(["<strong><bean:message key="label.nombre.asignatura" /></strong>"
 		   		                      ,"<strong><bean:message key="label.codigo.asignatura" /></strong>",
 		   		                      "<strong><bean:message key="label.curso.asignatura" /></strong>",
 		   		                      "<strong><bean:message key="label.descripcion.asignatura" /></strong>"]);
 				
 			    //ro = readonly
 			    //nombre codigo curso descripcion
-			    gridCursos.setColTypes("ro,ro,ro,ro");
-			    gridCursos.setColSorting('str,str,str,str');
-			    gridCursos.enableMultiselect(false);
-			    gridCursos.init();
-			    gridCursosProcessor = new dataProcessor("gridasignaturas.do");
-			    gridCursosProcessor.enableUTFencoding('simple');
-			    gridCursosProcessor.init(gridCursos);	  
-			    gridCursosProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+			    gridAsignaturas.setColTypes("ro,ro,ro,ro");
+			    gridAsignaturas.setColSorting('str,str,str,str');
+			    gridAsignaturas.enableMultiselect(false);
+			    gridAsignaturas.init();
+			    gridAsignaturasProcessor = new dataProcessor("gridasignaturas.do");
+			    gridAsignaturasProcessor.enableUTFencoding('simple');
+			    gridAsignaturasProcessor.init(gridAsignaturas);	  
+			    gridAsignaturasProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
 					if(action == 'error'){
 		    			dhtmlx.message(tag.firstChild.data,action,4000);
 		    		}
 		    	});
 			 	// TAG: Prueba
-				gridCursos.addRow('1','A01,Anatomía,1º,Prácticas de Anatomía');
+				gridAsignaturas.addRow('1','A01,Anatomía,1º,Prácticas de Anatomía');
 			    
-			    gridCursos.attachEvent("onRowSelect", doOnRowSelected);				  
+			    gridAsignaturas.attachEvent("onRowSelect", doOnRowSelected);				  
 		    });
 		    
 		    
 		    function doOnRowSelected(rowID,celInd){
-		    	toolbarCursos.enableItem('delete');
+		    	toolbarAsignaturas.enableItem('delete');
 
-			    tabbarCursos = areaTrabajoCursos.attachTabbar();
-			    tabbarCursos.addTab('tabInfo','<bean:message key="label.info.general"/>','');
-		    	tabInfo = tabbarCursos.cells('tabInfo');
-		    	tabbarCursos.setTabActive('tabInfo');
+			    tabbarAsignaturas = areaTrabajoCursos.attachTabbar();
+			    tabbarAsignaturas.addTab('tabInfo','<bean:message key="label.info.general"/>','');
+		    	tabInfo = tabbarAsignaturas.cells('tabInfo');
+		    	tabbarAsignaturas.setTabActive('tabInfo');
 		    	formInfo = tabInfo.attachForm();
 		    	loadFormAsignatura();
 		    	// obtener el nombre del curso de la bbdd y añadirlo como header a la dcha
@@ -111,15 +115,15 @@
 		    }
 		    
 		    function buscar() {
-		    	gridCursos.clearAndLoad("gridcursos.do");		    	
+		    	gridAsignaturas.clearAndLoad("gridAsignaturas.do");		    	
 		    }
 		    
 			function permisosToolbarAsignaturas(){ 	
 				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
-			   		toolbarCursos.hideItem('new');
-			   		toolbarCursos.hideItem('sep1');    	
-			   		toolbarCursos.hideItem('delete');
-			   		toolbarCursos.hideItem('sep2');
+			   		toolbarAsignaturas.hideItem('new');
+			   		toolbarAsignaturas.hideItem('sep1');    	
+			   		toolbarAsignaturas.hideItem('delete');
+			   		toolbarAsignaturas.hideItem('sep2');
 				</logic:notMatch>
 	    	}
 	    	
@@ -135,6 +139,14 @@
 	    			});
 				</logic:notMatch>	
 	    	}
+	    	
+			function exportPDF(){
+		    	
+		    }
+		    
+		    function exportExcel(){
+		    	gridAsignaturas.toExcel('../skins/grid-excel-php/generate.php');
+		    }
 		  
         </script>
 	</head>

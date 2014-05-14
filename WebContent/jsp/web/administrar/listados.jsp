@@ -21,7 +21,7 @@
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var miGrid, tabbar, tab_1, main_layout, form, b, a;
+	    	var miGrid, main_layout, a;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -41,16 +41,13 @@
 			    miGrid.setColTypes("ro");
 			    miGrid.enableMultiselect(false);
 			    miGrid.init();
-			    miGrid.loadXML("../xml/forms/mi_perfil_form.xml");
+			    miGrid.loadXML("../xml/forms/listados_form.xml");
 			    miGrid.attachEvent("onRowSelect",doOnRowSelected);
 			    			    
 		    });
 		    
 		    function doOnRowSelected(rowID,celInd){
-				b = main_layout.cells('b');
-		    	form = b.attachForm();
-		        if (rowID == "b") verFormModificarPass();
-		    	else if (rowID == "a") verPerfil();
+				
 		    	
 		    }
 		  

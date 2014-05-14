@@ -14,6 +14,7 @@
 	<action-mappings>
 
 		<action path="/administrar/listados" forward="/jsp/web/administrar/listados.jsp" />
+		<action path="/administrar/certificados" forward="/jsp/web/administrar/certificados.jsp" />
 		
 		
 	

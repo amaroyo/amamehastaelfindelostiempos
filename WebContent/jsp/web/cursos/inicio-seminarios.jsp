@@ -10,14 +10,16 @@
 	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
+	    <script src="../skins/dhtmlxgrid.js"></script>
+	    <script src="../skins/dhtmlxgrid_export.js"></script>
 	    
 
 	    <script type="text/javascript">
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var main_layout, areaTrabajoCursos, listado, toolbarCursos,
-	    	gridCursos, tabbarCursos, tabInfo, formInfo;
+	    	var main_layout, areaTrabajoCursos, listado, toolbarSeminarios,
+	    	gridSeminarios, tabbarSeminarios, tabInfo, formInfo;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -34,50 +36,52 @@
 		    	listado.setText("<strong><bean:message key="title.seminarios" /></strong>");
 			    areaTrabajoCursos.setText("<bean:message key="title.propiedades.seminario" />");
 			    	
-			    toolbarCursos = listado.attachToolbar();
-			    toolbarCursos.setIconsPath('../skins/imgs/toolbar/');
-			    toolbarCursos.loadXML('../xml/toolbars/dhxtoolbar-cursos.xml', function(){
-	    		toolbarCursos.setItemText('new',"<bean:message key="button.create.seminario"/>");
-	    		toolbarCursos.setItemText('delete',"<bean:message key="button.eliminar.seminario"/>");
-		    	toolbarCursos.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+			    toolbarSeminarios = listado.attachToolbar();
+			    toolbarSeminarios.setIconsPath('../skins/imgs/toolbar/');
+			    toolbarSeminarios.loadXML('../xml/toolbars/dhxtoolbar-seminarios.xml', function(){
+		    		toolbarSeminarios.setItemText('new',"<bean:message key="button.create.seminario"/>");
+		    		toolbarSeminarios.setItemText('delete',"<bean:message key="button.eliminar.seminario"/>");
+		    		toolbarSeminarios.setItemText('exportExcel',"<bean:message key="button.exportar.excel"/>");
+	    			toolbarSeminarios.setItemText('exportPDF',"<bean:message key="button.exportar.pdf"/>");
+			    	toolbarSeminarios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 	    		//permisosToolbarSeminarios();
 		    });
 			    
-			    gridCursos = listado.attachGrid();
-			    gridCursos.setIconsPath('../skins/imgs/');
-			    gridCursos.setHeader(["<strong><bean:message key="label.nombre.seminario" /></strong>",
+			    gridSeminarios = listado.attachGrid();
+			    gridSeminarios.setIconsPath('../skins/imgs/');
+			    gridSeminarios.setHeader(["<strong><bean:message key="label.nombre.seminario" /></strong>",
 			    	                      "<strong><bean:message key="label.codigo.seminario" /></strong>",
 			    	                      "<strong><bean:message key="label.curso.seminario" /></strong>",
 			    	                      "<strong><bean:message key="label.descripcion.seminario" /></strong>"]);
 			    
 			    //ro = readonly
 			    //nombre codigo curso descripcion
-			    gridCursos.setColTypes("ro,ro,ro,ro");
-			    gridCursos.setColSorting('str,str,str,str');
-			    gridCursos.enableMultiselect(false);
-			    gridCursos.init();
-			    gridCursosProcessor = new dataProcessor("gridseminarios.do");
-			    gridCursosProcessor.enableUTFencoding('simple');
-			    gridCursosProcessor.init(gridCursos);	  
-			    gridCursosProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+			    gridSeminarios.setColTypes("ro,ro,ro,ro");
+			    gridSeminarios.setColSorting('str,str,str,str');
+			    gridSeminarios.enableMultiselect(false);
+			    gridSeminarios.init();
+			    gridSeminariosProcessor = new dataProcessor("gridseminarios.do");
+			    gridSeminariosProcessor.enableUTFencoding('simple');
+			    gridSeminariosProcessor.init(gridSeminarios);	  
+			    gridSeminariosProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
 					if(action == 'error'){
 		    			dhtmlx.message(tag.firstChild.data,action,4000);
 		    		}
 		    	});
 			 	// TAG: Prueba
-				gridCursos.addRow('1','A01,Anatomía,1º,Seminarios de Anatomía');
+				gridSeminarios.addRow('1','A01,Anatomía,1º,Seminarios de Anatomía');
 			    
-			    gridCursos.attachEvent("onRowSelect", doOnRowSelected);				  
+				gridSeminarios.attachEvent("onRowSelect", doOnRowSelected);				  
 		    });
 		    
 		    
 		    function doOnRowSelected(rowID,celInd){
-		    	toolbarCursos.enableItem('delete');
+		    	toolbarSeminarios.enableItem('delete');
 
-			    tabbarCursos = areaTrabajoCursos.attachTabbar();
-			    tabbarCursos.addTab('tabInfo','<bean:message key="label.info.general"/>','');
-		    	tabInfo = tabbarCursos.cells('tabInfo');
-		    	tabbarCursos.setTabActive('tabInfo');
+			    tabbarSeminarios = areaTrabajoCursos.attachTabbar();
+			    tabbarSeminarios.addTab('tabInfo','<bean:message key="label.info.general"/>','');
+		    	tabInfo = tabbarSeminarios.cells('tabInfo');
+		    	tabbarSeminarios.setTabActive('tabInfo');
 		    	formInfo = tabInfo.attachForm();
 		    	loadFormSeminario();
 		    	// obtener el nombre del curso de la bbdd y añadirlo como header a la dcha
@@ -109,16 +113,16 @@
 		    
 		    
 		    function buscar() {
-		    	gridCursos.clearAndLoad("gridcursos.do");		    	
+		    	gridSeminarios.clearAndLoad("gridSeminarios.do");		    	
 		    }
 	    	
 		    function permisosToolbarSeminarios(){
 		    	
 				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
-			   		toolbarCursos.hideItem('new');
-			   		toolbarCursos.hideItem('sep1');    	
-			   		toolbarCursos.hideItem('delete');
-			   		toolbarCursos.hideItem('sep2');
+			   		toolbarSeminarios.hideItem('new');
+			   		toolbarSeminarios.hideItem('sep1');    	
+			   		toolbarSeminarios.hideItem('delete');
+			   		toolbarSeminarios.hideItem('sep2');
 				</logic:notMatch>
 	    	}
 		    
@@ -136,6 +140,14 @@
 				
 				
 	    	}
+		    
+		    function exportPDF(){
+		    	
+		    }
+		    
+		    function exportExcel(){
+		    	gridAsignaturas.toExcel('../skins/grid-excel-php/generate.php');
+		    }
 		  
         </script>
 	</head>
