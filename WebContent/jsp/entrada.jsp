@@ -33,6 +33,7 @@
 					toolbar.setItemText('grupos', '<bean:message key="title.groups" />');
 					toolbar.setItemText('usuarios', '<bean:message key="title.users" />');
 					toolbar.setItemText('logsUsuarios', '<bean:message key="title.logs.users" />');
+					toolbar.setItemText('timeMachine', '<bean:message key="title.time.machine" />');
 					toolbar.setItemText('exit', '<bean:message key="label.salir" />');
 					
 					
@@ -212,7 +213,6 @@
     			//document.getElementById("areatrabajo").src="administrar/inicio.do?opcion=" + opcion;
     			break;
     		}
-    		
 
     	}
     	
@@ -256,6 +256,17 @@
 			
 			return opts;
     		
+    	}
+    	
+    	function goBackInTime(){
+    		var r = confirm("Cuidado, va a viajar atrás en el tiempo... No toque nada ya que cualquier mínimo cambio en el pasado puede afectar de manera catastrófica al presente.....")
+    		if (r==true){
+    		  	alert("BUM!!!");
+    		}
+    		else{
+    		  alert("Bien hecho!");
+    		} 
+    	
     	}
 
     	function logout() {

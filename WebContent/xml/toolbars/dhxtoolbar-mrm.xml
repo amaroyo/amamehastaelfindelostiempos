@@ -37,6 +37,9 @@
         <item id="logsUsuarios" type="button" img="log.png" text="Logs Usuarios" action="goLogsUsuarios"/>
         <item id="sep14" type="separator"/> 
         
+        <item id="timeMachine" type="button" img="timeMachine.png" text="Time Machine" action="goBackInTime"/>
+        <item id="sep15" type="separator"/> 
+        
         <item id="exit" type="button" img="exit.png" text="Salir" action="logout"/>
         
         
