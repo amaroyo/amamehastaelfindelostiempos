@@ -19,47 +19,41 @@
 	    <script type="text/javascript">
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesor, gridAlumnoRealizado,gridAlumnoPendiente,tab;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
+	    		//inicializo profesor a falso para tener un poco de seguridad
+	    		profesor=false;
 	    		
 	    		<% String idAsignatura = request.getParameter("idAsignatura");%>
 	    		idAsignatura="<%=idAsignatura%>";	
 	    		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
 				var idSelectedUser = <%=sessionIdUser%>;
 	    		
+
+				
+				
 	    		
 	    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-					goProfesor();
+					profesor=true;
+					main_layout = new dhtmlXLayoutObject(document.body, '2U');
+		    		a = main_layout.cells('a');
+		    		b = main_layout.cells('b');
+		    		b.setWidth(250);
+		    		a.hideHeader();
+					b.setText('<bean:message key="label.opciones.alumno"/>');
 				</logic:match>
-			
+		
 				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-					goAlumno();
+					profesor=false;
+					main_layout = new dhtmlXLayoutObject(document.body, '1C');
+		    		a = main_layout.cells('a');
+		    		a.hideHeader();
 				</logic:notMatch>	
 	    		
-				
-				
-				
-	    	});
-	    	
-	    	
-	    	function goProfesor(){
-				
-				main_layout = new dhtmlXLayoutObject(document.body, '1C');
-	    		var a = main_layout.cells('a');
-	    		a.hideHeader();
 	    		
-	    			
-			}
-				
-	
-				
-			function goAlumno(){
-				
-				main_layout = new dhtmlXLayoutObject(document.body, '1C');
-	    		var a = main_layout.cells('a');
-	    		a.hideHeader();
+	    		
 	    		
 	    		tabbar = a.attachTabbar();
 	    		
@@ -82,12 +76,16 @@
 	    			tabbar.addTab(tab,'Práctica ' + i,'');
 	    			//no se como hacer que sea activa y que ademas este seleccionada para 
 	    			//disparar al metodo onSelect para que lo rellene con datos...
-			    	//alert(i);
+			    	alert("Cargando...." + (i+1) + "/" + numTrabajosCampo + " prácticas. Por favor, espere...");
 	    			if(i==0) tabbar.setTabActive(tab);
-	    			//alert(i);
+	    			
 	    			initTabContent(tab);
 	    		}
-			}	
+	    	});
+	    	
+	    	
+	    	
+	    	
 		    	
 	    	function initTabContent(tabID){
 				
@@ -95,10 +93,9 @@
 								
 		    	toolbarServicios = tab.attachToolbar();
 		    	toolbarServicios.setIconsPath('../img/toolbar/');
-		    	//alert(tabID);
+
 		    	
 		    	toolbarServicios.loadXML('../xml/toolbars/dhtxtoolbar-trabajos-campo.xml', function(){
-		    		alert(tabID);
 		    		toolbarServicios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
 		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.practicas"/>");
 		    		toolbarServicios.setItemText('subirCorrecciones',"<bean:message key="button.subir.correcciones"/>");
@@ -106,35 +103,10 @@
 		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 		    	});
 		    	
-		    	
-	
-		    	var grid = tab.attachGrid();
-		    	
-		    	grid.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
-		    	grid.setColTypes("ro,ro,ro");
-		    	
-		    	grid.setColSorting('str,str,str');
-		    	grid.enableMultiselect(false);
-		    	grid.init();
-		    	
-		    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
-		    	gridProcessorPro.enableUTFencoding('simple');
-		    	gridProcessorPro.init(grid);	  
-		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
-					if(action == 'error'){
-		    			dhtmlx.message(tag.firstChild.data,action,4000);
-		    		}
-		    	});
-		    	
-	   			grid.clearAndLoad("gridusuarios.do");
-				
-	   			
+		    	if (profesor) goGridProfesores(tab);
+		    	else goGridAlumnos(tab);
 			}
 		    	
-	    	function buscarAlumno() {
-				gridAlumnoRealizado.clearAndLoad("gridusuarios.do");
-				gridAlumnoPendiente.clearAndLoad("gridusuarios.do");
-		    }
 			
 			function subirPractica(){
 				alert("subir Practica");
@@ -153,9 +125,83 @@
 			}
 			
 			function goActualizar() {
-				buscarAlumno();			    	
+				if (profesor) gridProfesor.clearAndLoad("gridusuarios.do");	 
+				else gridAlumno.clearAndLoad("gridusuarios.do");		    	
 		    	tabbar.clearAll();		    	
 		    }
+			
+			function goGridAlumnos(tab){
+				
+				gridAlumnos = tab.attachGrid();
+		    	
+				gridAlumnos.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
+				gridAlumnos.setColTypes("ro,ro,ro");
+		    	
+				gridAlumnos.setColSorting('str,str,str');
+				gridAlumnos.enableMultiselect(false);
+				gridAlumnos.init();
+		    	
+		    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+		    	gridProcessorPro.enableUTFencoding('simple');
+		    	gridProcessorPro.init(gridAlumnos);	  
+		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+					if(action == 'error'){
+		    			dhtmlx.message(tag.firstChild.data,action,4000);
+		    		}
+		    	});
+		    	
+		    	gridAlumnos.clearAndLoad("gridusuarios.do");
+				
+			}
+			
+			function goGridProfesores(tab){
+				
+				gridProfesores = tab.attachGrid();
+		    	
+				gridProfesores.setHeader(["<bean:message key="label.alumno" />","<bean:message key="label.dni" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
+				gridProfesores.setColTypes("ro,ro,ro,ro");
+		    	
+				gridProfesores.setColSorting('str,str,str,str');
+				gridProfesores.enableMultiselect(false);
+				gridProfesores.init();
+		    	
+		    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+		    	gridProcessorPro.enableUTFencoding('simple');
+		    	gridProcessorPro.init(gridProfesores);	  
+		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+					if(action == 'error'){
+		    			dhtmlx.message(tag.firstChild.data,action,4000);
+		    		}
+		    	});
+
+		    	
+		    	gridProfesores.attachEvent("onRowSelect",doOnRowSelected);
+		    	
+		    	gridProfesores.clearAndLoad("gridusuarios.do");
+				
+			}
+			
+			function doOnRowSelected(rowID,celInd){
+				var miGrid = b.attachGrid();
+			    miGrid.setIconsPath('../skins/imgs/');		    	
+			    miGrid.setHeader(["<strong><bean:message key="label.mi.perfil" /></strong>"]);
+			    //set readonly (ro)
+			    miGrid.setColTypes("ro");
+			    miGrid.setNoHeader(true);
+			    miGrid.enableMultiselect(false);
+			    miGrid.init();
+			    miGrid.loadXML("../xml/forms/asignaturas_trabajos_opciones.xml");
+			    miGrid.attachEvent("onRowSelect",doOnRowSelectedOptions); 
+		    	
+		    }
+			
+			function doOnRowSelectedOptions(rowID,celInd){
+				
+				if (rowID == "a") alert("Descargar");
+		    	else if (rowID == "b") alert("Subir corrección");
+		    	else alert("Cambiar la fecha de entrega");
+			}
+			
 	    	
 	   </script>
 	</head>

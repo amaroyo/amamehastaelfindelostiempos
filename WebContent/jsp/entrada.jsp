@@ -128,6 +128,8 @@
 					toolbar.hideItem('sep12');
 					toolbar.hideItem('logsUsuarios');
 					toolbar.hideItem('sep14');
+					toolbar.hideItem('timeMachine');
+					toolbar.hideItem('sep15');
 				</logic:notMatch>
 			</logic:notEmpty>
     	}
