@@ -58,6 +58,7 @@
   </init-param>
   <load-on-startup>0</load-on-startup>
  </servlet>
+ 
  <servlet-mapping>
   <servlet-name>action</servlet-name>
   <url-pattern>*.do</url-pattern>
@@ -107,5 +108,33 @@
     	<dispatcher>INCLUDE</dispatcher>
     	<dispatcher>ERROR</dispatcher>		
 	</filter-mapping> 
+	
+	
+	<servlet>
+    	<servlet-name>ExcelGenerator</servlet-name>
+    	<servlet-class>ExcelGenerator</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+	    <servlet-name>ExcelGenerator</servlet-name>
+	    <url-pattern>/generate</url-pattern>
+  	</servlet-mapping>
+  	
+  	<servlet>
+    	<servlet-name>CSVGenerator</servlet-name>
+    	<servlet-class>CSVGenerator</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+	    <servlet-name>CSVGenerator</servlet-name>
+	    <url-pattern>/csv</url-pattern>
+  	</servlet-mapping>
+  	
+  	<servlet>
+    	<servlet-name>HTMLGenerator</servlet-name>
+    	<servlet-class>HTMLGenerator</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+	    <servlet-name>HTMLGenerator</servlet-name>
+	    <url-pattern>/html</url-pattern>
+  	</servlet-mapping>  	
  
 </web-app>

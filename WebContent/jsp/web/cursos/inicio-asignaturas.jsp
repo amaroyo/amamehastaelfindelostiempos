@@ -145,7 +145,7 @@
 		    }
 		    
 		    function exportExcel(){
-		    	gridAsignaturas.toExcel('../skins/grid-excel-php/generate.php');
+		    	gridAsignaturas.toExcel('generateExcel.do');
 		    }
 		  
         </script>
