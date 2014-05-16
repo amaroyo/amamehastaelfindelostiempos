@@ -30,6 +30,8 @@
 		
 		<action path="/asignaturas/diario" forward="/jsp/web/asignaturas/diario.jsp" />
 		
+		<action path="/asignaturas/rubricas" forward="/jsp/web/asignaturas/rubricas.jsp" />
+		
 		<action path="/asignaturas/gridusuarios" name="GridUsuarios" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.GridUsuariosAction" />
 		
 		<action path="/asignaturas/editarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />

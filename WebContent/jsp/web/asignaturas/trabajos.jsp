@@ -72,14 +72,14 @@
 	    		}
 				
 	    		for (var i=0; i<numTrabajosCampo;i++) {
-	    			tab = "tab_"+i;
-	    			tabbar.addTab(tab,'Práctica ' + i,'');
+	    			var mytab = "tab_"+i;
+	    			tabbar.addTab(mytab,'Práctica ' + i,'');
 	    			//no se como hacer que sea activa y que ademas este seleccionada para 
 	    			//disparar al metodo onSelect para que lo rellene con datos...
-			    	alert("Cargando...." + (i+1) + "/" + numTrabajosCampo + " prácticas. Por favor, espere...");
-	    			if(i==0) tabbar.setTabActive(tab);
+			    	//alert("Cargando...." + (i+1) + "/" + numTrabajosCampo + " prácticas. Por favor, espere...");
+	    			if(i==0) tabbar.setTabActive(mytab);
 	    			
-	    			initTabContent(tab);
+	    			initTabContent(mytab);
 	    		}
 	    	});
 	    	
@@ -91,7 +91,7 @@
 				
 				tab = tabbar.cells(tabID);
 								
-		    	toolbarServicios = tab.attachToolbar();
+		    	var toolbarServicios = tab.attachToolbar();
 		    	toolbarServicios.setIconsPath('../img/toolbar/');
 
 		    	
