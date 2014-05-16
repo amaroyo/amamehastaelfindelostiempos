@@ -13,6 +13,7 @@
 	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlxform_dhx_skyblue.css">
 	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
 	    <script type="text/javascript" src="../skins/dhtmlxform.js"></script>
+	    <script type="text/javascript" src="../skins/dhtmlxform_item_upload.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
 	    
@@ -21,13 +22,14 @@
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var miGrid, main_layout, a;
+	    	var miGrid, main_layout, a, b;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
 			    dhtmlxError.catchError("ALL",errorHandler);
 			    main_layout = new dhtmlXLayoutObject(document.body, '2U');
 			    a = main_layout.cells('a');
+			    b =  main_layout.cells("b");
 			    
 			    main_layout.cells("a").setWidth(150);
 			    main_layout.cells("a").setText(["<strong><bean:message key="label.administrar" /></strong>"]);
@@ -47,8 +49,40 @@
 		    });
 		    
 		    function doOnRowSelected(rowID,celInd){
-				
+		    	importarForm = b.attachForm();
+		    	importarForm.loadStruct('../xml/forms/importar_form.xml', function() {
 		    	
+		    		importarForm.setItemLabel('data','<bean:message key="title.importar.alumnos"/>');
+		    		importarForm.setItemLabel('seleccionar','<bean:message key="label.seleccionar.archivo"/>');
+		    		importarForm.setItemLabel('import','<bean:message key="label.importar"/>');
+
+		    		importarForm.setFocusOnFirstActive();
+		    		
+		    		importarForm.attachEvent("onEnter", function() {
+		    			goImportar();
+		    		});
+		    		
+		    		importarForm.attachEvent("onButtonClick", function(id){
+	    				if (id == "aceptar") {
+	    					goImportar();
+	    				}
+	    				
+		    		});
+		    	});
+		    	
+				goActualizar();
+		    }
+		    
+		    function goImportar() {
+		    	/*form.send("actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(xml) {
+					goEntrada();
+				});*/
+		    }
+		    
+		    function goActualizar() {
+		    	/*buscar();
+		    	toolbar_1.disableItem('delete');
+		    	tabbar.clearAll();*/		    	
 		    }
 		  
         </script>
