@@ -68,10 +68,13 @@
 		    }
 		    
 		    
+		    function goCasos(){
+		    	areaTrabajoAsignaturas.attachURL("casos.do?idAsignatura="+idAsignatura);
+		    }
+		    
 		    function goTrabajos(){
 		    	areaTrabajoAsignaturas.attachURL("trabajos.do?idAsignatura="+idAsignatura);    	
 		    }
-		    
 		    
 		    function goSeminarios(){
 		    	areaTrabajoAsignaturas.attachURL("seminarios.do?idAsignatura="+idAsignatura);    	

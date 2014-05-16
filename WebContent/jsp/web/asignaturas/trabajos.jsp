@@ -97,7 +97,7 @@
 		    	
 		    	toolbarServicios.loadXML('../xml/toolbars/dhtxtoolbar-trabajos-campo.xml', function(){
 		    		toolbarServicios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
-		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.practicas"/>");
+		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.trabajos"/>");
 		    		toolbarServicios.setItemText('subirCorrecciones',"<bean:message key="button.subir.correcciones"/>");
 		    		toolbarServicios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
