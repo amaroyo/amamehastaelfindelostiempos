@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" errorPage="error.jsp" %>
 <%@ include file="../../common/taglibs.jsp" %>
-<%@  page import="java.util.Enumeration"%>
+<%@ page import="java.util.Enumeration"%>
 <%@ page import="es.oyssen.mrm.Const"%>
-<%@page import="javax.servlet.http.HttpServletRequest"%>
+<%@ page import="javax.servlet.http.HttpServletRequest"%>
 
 <html>
 	<head>
@@ -29,7 +29,7 @@
 			    dhtmlxError.catchError("ALL",errorHandler);
 			    main_layout = new dhtmlXLayoutObject(document.body, '2U');
 			    a = main_layout.cells('a');
-			    b =  main_layout.cells("b");
+			    b =  main_layout.cells('b');
 			    
 			    main_layout.cells("a").setWidth(150);
 			    main_layout.cells("a").setText(["<strong><bean:message key="label.administrar" /></strong>"]);
@@ -51,11 +51,8 @@
 		    function doOnRowSelected(rowID,celInd){
 		    	importarForm = b.attachForm();
 		    	importarForm.loadStruct('../xml/forms/importar_form.xml', function() {
-		    	
-		    		importarForm.setItemLabel('data','<bean:message key="title.importar.alumnos"/>');
-		    		importarForm.setItemLabel('seleccionar','<bean:message key="label.seleccionar.archivo"/>');
-		    		importarForm.setItemLabel('import','<bean:message key="label.importar"/>');
-
+		    		setFormLabels(rowID);
+		    		
 		    		importarForm.setFocusOnFirstActive();
 		    		
 		    		importarForm.attachEvent("onEnter", function() {
@@ -71,6 +68,24 @@
 		    	});
 		    	
 				goActualizar();
+		    }
+		    
+		    function setFormLabels(rowID){
+		    	if(rowID == 'a'){
+	    			importarForm.setItemLabel('data','<bean:message key="title.importar.alumnos"/>');
+		    		importarForm.setItemLabel('seleccionar','<bean:message key="label.seleccionar.archivo"/>');
+		    		importarForm.setItemLabel('import','<bean:message key="label.importar.alumnos"/>');
+	    		}
+	    		else if(rowID == 'b'){
+	    			importarForm.setItemLabel('data','<bean:message key="title.importar.profesores"/>');
+		    		importarForm.setItemLabel('seleccionar','<bean:message key="label.seleccionar.archivo"/>');
+		    		importarForm.setItemLabel('import','<bean:message key="label.importar.profesores"/>');
+	    		}
+	    		else if(rowID == 'c'){
+	    			importarForm.setItemLabel('data','<bean:message key="title.importar.usuarios"/>');
+		    		importarForm.setItemLabel('seleccionar','<bean:message key="label.seleccionar.archivo"/>');
+		    		importarForm.setItemLabel('import','<bean:message key="label.importar.usuarios"/>');
+	    		}
 		    }
 		    
 		    function goImportar() {
