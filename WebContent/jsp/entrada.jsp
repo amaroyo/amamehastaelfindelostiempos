@@ -23,6 +23,7 @@
 		        	
 		        	
 		        	toolbar.setItemText('miPerfil', '<bean:message key="label.mi.perfil" />');
+		        	toolbar.setItemText('misAlumnos', '<bean:message key="label.mis.alumnos" />');
 					toolbar.setItemText('leads', '<bean:message key="title.leads" />');
 					toolbar.setItemText('comerciales', '<bean:message key="title.comerciales" />');
 					toolbar.setItemText('responsables', '<bean:message key="title.responsables" />');
@@ -43,11 +44,11 @@
 				
 					
 					var optsCursos = dameCursos();
-					toolbar.addButtonSelect('cursos', 4, '<bean:message key="button.select.cursos" />',
+					toolbar.addButtonSelect('cursos', 6, '<bean:message key="button.select.cursos" />',
 							optsCursos, 'cursos.png', null, 'disabled', true, "5", 'select');
 					
 					var optsAdministrar = dameOpcionesAdministrar();
-					toolbar.addButtonSelect('administrar',6, '<bean:message key="button.select.administrar" />',
+					toolbar.addButtonSelect('administrar',8, '<bean:message key="button.select.administrar" />',
 							optsAdministrar, 'administrar.png', null, 'disabled', true, "10", 'select');
 	
 					
@@ -86,50 +87,50 @@
 	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>44</permiso>" >	    	
 						toolbar.hideItem('cursos');
-						toolbar.hideItem('sep3');
-						toolbar.hideItem('administrar');
 						toolbar.hideItem('sep4');
+						toolbar.hideItem('administrar');
+						toolbar.hideItem('sep5');
 					</logic:notMatch>
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >		    	
 						toolbar.hideItem('leads');
-						toolbar.hideItem('sep5');
+						toolbar.hideItem('sep6');
 					</logic:notMatch>
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>8</permiso>" >		    	
 						toolbar.hideItem('comerciales');
-						toolbar.hideItem('sep6');
+						toolbar.hideItem('sep7');
 					</logic:notMatch>    				
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>12</permiso>" >		    	
 						toolbar.hideItem('responsables');
-						toolbar.hideItem('sep7');
+						toolbar.hideItem('sep8');
 					</logic:notMatch> 
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>16</permiso>" >		    	
 						toolbar.hideItem('distribuidores');
-						toolbar.hideItem('sep8');
+						toolbar.hideItem('sep9');
 					</logic:notMatch> 
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>20</permiso>" >		    	
 						toolbar.hideItem('empresas');
-						toolbar.hideItem('sep9');
+						toolbar.hideItem('sep10');
 					</logic:notMatch>
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>24</permiso>" >		    	
 						toolbar.hideItem('servicios');
-						toolbar.hideItem('sep10');
+						toolbar.hideItem('sep11');
 					</logic:notMatch>
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>28</permiso>" >		    	
 						toolbar.hideItem('canales');
-						toolbar.hideItem('sep11');
+						toolbar.hideItem('sep12');
 					</logic:notMatch>	
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>34</permiso>" >
 						toolbar.hideItem('usuarios');
-						toolbar.hideItem('sep13');
+						toolbar.hideItem('sep14');
 					</logic:notMatch>
 				</logic:notMatch>
 				<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>1</grupo>" >
 					toolbar.hideItem('grupos');
-					toolbar.hideItem('sep12');
+					toolbar.hideItem('sep13');
 					toolbar.hideItem('logsUsuarios');
-					toolbar.hideItem('sep14');
-					toolbar.hideItem('timeMachine');
 					toolbar.hideItem('sep15');
+					toolbar.hideItem('timeMachine');
+					toolbar.hideItem('sep16');
 				</logic:notMatch>
 			</logic:notEmpty>
     	}
@@ -195,9 +196,14 @@
     	function goMisAsignaturas(idAsignatura,nombreAsignatura) {
     		document.getElementById("areatrabajo").src="asignaturas/inicio.do?idAsignatura=" + idAsignatura + "&nombreAsignatura=" + nombreAsignatura;
     	}
+    	function goMisAlumnos() {
+    		document.getElementById("areatrabajo").src="alumnos/inicio.do";
+    	}
     	function goCursos(opcion) {
     		document.getElementById("areatrabajo").src="cursos/inicio.do?opcion=" + opcion;
     	}
+    	
+    	
     	function goAdministrar(opcion) {
     		switch(opcion){
     		case "subirListados":
