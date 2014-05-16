@@ -4,7 +4,6 @@
        <item type="upload" name="seleccionar" inputWidth="400" inputHeight="200"
        		titleText="Arrastre aquí el archivo o haga click para seleccionar el listado a importar"
        		mode="html5" url="/administrar/importarAlumnos" />
-       		<img src="../../img/bancario50.png"></img>
        <item type="button" name="import" value="Importar"/>
    </item>
 </items>
