@@ -60,8 +60,11 @@
 		    		});
 		    		
 		    		importarForm.attachEvent("onButtonClick", function(id){
-	    				if (id == "aceptar") {
-	    					goImportar();
+	    				if (id == "import") {
+	    					if(importarForm.getUploaderStatus("subir") == 1){
+	    						goImportar(rowID);
+	    					}
+	    					
 	    				}
 	    				
 		    		});
@@ -88,8 +91,26 @@
 	    		}
 		    }
 		    
-		    function goImportar() {
-		    	/*form.send("actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(xml) {
+		    function goImportar(rowID) {
+		    	
+		    	if(rowID == 'a'){
+		    		importarForm.send("importarAlumnos.do", function(loader, response) {
+		                alert("<pre>" + response + "</pre>"+rowID);
+		            });
+	    		}
+	    		else if(rowID == 'b'){
+	    			importarForm.send("administrar/importarProfesores", function(loader, response) {
+		                alert("<pre>" + response + "</pre>"+rowID);
+		            });
+	    		}
+	    		else if(rowID == 'c'){
+	    			importarForm.send("administrar/importarUsuarios", function(loader, response) {
+		                alert("<pre>" + response + "</pre>"+rowID);
+		            });
+	    		}
+		    	
+		    	
+		    	/*importarForm.send("actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(xml) {
 					goEntrada();
 				});*/
 		    }

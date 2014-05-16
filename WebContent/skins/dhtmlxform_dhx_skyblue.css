@@ -429,7 +429,7 @@
 
 .dhxform_obj_dhx_skyblue div.dhxform_btn td.btn_l,
 .dhxform_obj_dhx_skyblue div.dhxform_btn td.btn_r {
-	background-image: url('imgs//dhxform_dhx_skyblue/dhxform_btns.gif');
+	background-image: url('./imgs/dhxform_dhx_skyblue/dhxform_btns.gif');
 	background-repeat: no-repeat;
 	width: 5px;
 	height: 21px;
@@ -441,7 +441,7 @@
 .dhxform_obj_dhx_skyblue div.dhxform_btn td.btn_r { background-position: -5px 0px; }
 
 .dhxform_obj_dhx_skyblue div.dhxform_btn td.btn_m {
-	background-image: url('imgs//dhxform_dhx_skyblue/dhxform_btns.gif');
+	background-image: url('./imgs/dhxform_dhx_skyblue/dhxform_btns.gif');
 	background-repeat: repeat-x;
 	background-position: 0px -21px;
 	height: 21px;
@@ -588,7 +588,7 @@
 	width: 19px;
 	height: 19px;
 	top: 8px;
-	background-image: url("/imgs/dhxform_dhx_skyblue/dhxform_upload_buttons.gif");
+	background-image: url("./imgs/dhxform_dhx_skyblue/dhxform_upload_buttons.gif");
 	background-repeat: no-repeat;
 	font-size: 2px;
 	cursor: pointer;
