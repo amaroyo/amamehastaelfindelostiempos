@@ -42,7 +42,7 @@
 		    		b = main_layout.cells('b');
 		    		b.setWidth(250);
 		    		a.hideHeader();
-					b.setText('<bean:message key="label.casos.clinicos.alumno"/>');
+					b.setText('<bean:message key="label.diario.reflexivo.alumno"/>');
 				</logic:match>
 		
 				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
@@ -62,7 +62,7 @@
 		    	
 		    	toolbarServicios.loadXML('../xml/toolbars/dhtxtoolbar-trabajos-campo.xml', function(){
 		    		toolbarServicios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
-		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.casos"/>");
+		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.diarios"/>");
 		    		toolbarServicios.setItemText('subirCorrecciones',"<bean:message key="button.subir.correcciones"/>");
 		    		toolbarServicios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
@@ -174,8 +174,8 @@
 		    	});
 
 		    	
+		    	gridProfesoresAlumno.attachEvent("onRowSelect",doOnRowSelectedOptions); 
 		    	
-		    	gridProfesoresAlumno.attachEvent("onRowSelect",doOnRowSelectedOptions);
 		    	gridProfesoresAlumno.clearAndLoad("gridusuarios.do");
 		    	
 		    }

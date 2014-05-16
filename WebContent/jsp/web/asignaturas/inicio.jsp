@@ -67,6 +67,9 @@
 		        }	
 		    }
 		    
+		    function goDiario(){
+		    	areaTrabajoAsignaturas.attachURL("diario.do?idAsignatura="+idAsignatura);
+		    }
 		    
 		    function goCasos(){
 		    	areaTrabajoAsignaturas.attachURL("casos.do?idAsignatura="+idAsignatura);
