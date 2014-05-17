@@ -21,145 +21,97 @@
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var miGrid, tabbar, tab_1, main_layout, form, b, a;
+	    	var miGrid, tabbar, tab_1,tab_2,tab_3,tab_4,tab_5,tab_6,tab_7, main_layout, form, b, a;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
 			    dhtmlxError.catchError("ALL",errorHandler);
 			    main_layout = new dhtmlXLayoutObject(document.body, '2U');
 			    a = main_layout.cells('a');
+			    b = main_layout.cells('b');
 			    
-			    main_layout.cells("a").setWidth(150);
-			    main_layout.cells("a").hideHeader();
-			    main_layout.cells("b").hideHeader();
+			    
+			    a.setText("<strong><bean:message key="label.todos.mis.alumnos" /></strong>");
+			    a.setWidth(380);
+			    b.hideHeader();
 			    
 			    
 			    miGrid = a.attachGrid();
 			    miGrid.setIconsPath('../skins/imgs/');		    	
-			    miGrid.setHeader(["<strong><bean:message key="label.mi.perfil" /></strong>"]);
-			    //set readonly (ro)
-			    miGrid.setColTypes("ro");
+			    miGrid.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />"]);
+			    
+			    //anchura de las columnas, en porcentaje. La suma tiene que ser igual a 100
+			    miGrid.setInitWidthsP("25,60,15");
+			    //alineacion del contenido en la columna
+			    miGrid.setColAlign("left,left,left");
+			    
+			    miGrid.setColTypes("ro,ro,ro");
+		    	
 			    miGrid.enableMultiselect(false);
+			    miGrid.setColSorting('str,str,str');
 			    miGrid.init();
-			    miGrid.loadXML("../xml/forms/mi_perfil_form.xml");
+		    	
+				var gridProcessor = new dataProcessor("gridusuarios.do");
+				gridProcessor.enableUTFencoding('simple');
+				gridProcessor.init(miGrid);	  
+				gridProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+					if(action == 'error'){
+		    			dhtmlx.message(tag.firstChild.data,action,4000);
+		    		}
+		    	});		    	
+
 			    miGrid.attachEvent("onRowSelect",doOnRowSelected);
+			    
+			    buscar();
 			    			    
 		    });
 		    
+		   
 		    function doOnRowSelected(rowID,celInd){
-				b = main_layout.cells('b');
-		    	form = b.attachForm();
-		        if (rowID == "b") verFormModificarPass();
-		    	else if (rowID == "a") verPerfil();
+		    	
+		    	var dni = miGrid.cells(rowID,2).getValue();
+		    	
+		    	tabbar = b.attachTabbar();
+		    	tabbar.addTab('tab_1','<bean:message key="title.datos.personales"/>','');
+		    	tab_1 = tabbar.cells('tab_1');
+		    	tabbar.setTabActive('tab_1');
+		    	//goInformacion(dni);
+		    	
+		    	tabbar.addTab('tab_2','<bean:message key="title.info.general.estancia"/>','');
+		    	tab_2 = tabbar.cells('tab_2');
+		    	//goEstancia(dni);
+		    	
+		    	tabbar.addTab('tab_3','<bean:message key="title.seminarios"/>','');
+		    	tab_3 = tabbar.cells('tab_3');
+		    	//goSeminarios(dni);
+		    	
+		    	tabbar.addTab('tab_4','<bean:message key="title.trabajos.campo"/>','');
+		    	tab_4 = tabbar.cells('tab_4');
+		    	//goTrabajos(dni);
+		    	
+		    	tabbar.addTab('tab_5','<bean:message key="title.casos.clinicos"/>','');
+		    	tab_5 = tabbar.cells('tab_5');
+		    	//goCasos(dni);
+		    	
+		    	tabbar.addTab('tab_6','<bean:message key="title.diario.reflexivo"/>','');
+		    	tab_6 = tabbar.cells('tab_6');
+		    	//goCasos(dni);
+		    	
+		    	tabbar.addTab('tab_7','<bean:message key="title.rubrica"/>','');
+		    	tab_7 = tabbar.cells('tab_7');
+		    	//goCasos(dni);
+		    	
 		    	
 		    }
 		    
 		    
-		    function goEntrada() {
-				var url = "../entrada.do";
-				location.href=url;
-	    	}
-		    
-		    function verFormModificarPass(){
-		    	
-		    	form.loadStruct('../xml/forms/contrasena_form.xml', function() {
-		    		form.setItemLabel('data','<bean:message key="title.cambiar.pass"/>');
-		    		form.setItemLabel('oldPass','<bean:message key="label.ant.pass"/>');
-		    		form.setItemLabel('newPass1','<bean:message key="label.nueva.pass"/>');
-		    		form.setItemLabel('newPass2','<bean:message key="label.repetir.pass"/>');
-		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
-
-		    		form.setFocusOnFirstActive();
-		    		
-		    		form.attachEvent("onEnter", function() {
-		    			processPasswords();
-		    		});
-		    		
-		    		form.attachEvent("onButtonClick", function(id){
-	    				if (id == "aceptar") {
-	    					processPasswords();
-	    				}
-	    				
-		    		});
-		    	});
+		    function buscar() {
+		    	miGrid.clearAndLoad("gridusuarios.do");		    	
 		    }
 		    
 		    
-		    function processPasswords(){
-		    	if(form.getItemValue("newPass1") != "" && form.getItemValue("newPass2") != ""){
-					if (form.getItemValue("newPass1") == form.getItemValue("newPass2")){
-						if(form.getItemValue("newPass1") != form.getItemValue("oldPass")){
-    						var newPass = form.getItemValue("newPass1");
-    						var oldPass = form.getItemValue("oldPass");
-		    				form.send("actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(xml) {
-		    					goEntrada();
-		    				});
-						}
-						else{
-							alert('<bean:message key="message.pass.iguales" />');
-						}
-					} 
-					else {
-						alert('<bean:message key="message.pass.no.coincide" />');
-					}
-				}
-				else {
-					alert('<bean:message key="message.pass.vacio" />');
-				}
-		    }
 		    
 		    
-		    function verPerfil(){
-		    	
-		    	form.loadStruct('../xml/forms/usuario_form.xml', function(){
-		    		form.setItemLabel('data','<bean:message key="title.datos.personales"/>');
-		    		form.setItemLabel('grupo','<bean:message key="label.group"/>');
-		    		form.setItemLabel('nombre','<bean:message key="label.nombre"/>');
-		    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
-		    		form.setItemLabel('telefonoMovil','<bean:message key="label.telefono.movil"/>');
-		    		form.setItemLabel('direccion','<bean:message key="label.direccion"/>');
-		    		form.setItemLabel('codigoPostal','<bean:message key="label.postal.code"/>');
-		    		form.setItemLabel('ciudad','<bean:message key="label.ciudad"/>');
-		    		form.setItemLabel('pais','<bean:message key="label.pais"/>');
-		    		form.setItemLabel('email','<bean:message key="label.address.email"/>');
-		    		form.setItemLabel('comentarios','<bean:message key="label.comentarios"/>');
-		    		form.setItemLabel('user','<bean:message key="label.user"/>');
-		    		form.setItemLabel('pass','<bean:message key="label.pass"/>');			    		
-		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
-		    		
-		    		form.setFocusOnFirstActive();
-
-					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>36</permiso>" >		    	
-							form.hideItem('aceptar');
-						</logic:notMatch>
-					</logic:notMatch>
-
-					
-					form.attachEvent("onEnter", function() {
-						form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-							alert('<bean:message key="message.perfil.cambiado.exito"/>');
-						}); 
-		    		});
-					
-					<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
-					idSelectedUser = <%=sessionIdUser%>;
-		    		
-					form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
-						form.attachEvent("onButtonClick", function(id){
-							if (id == "aceptar") {
-								form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-									alert('<bean:message key="message.perfil.cambiado.exito"/>');
-								});
-
-							}
-						});
-					});
-					
-					
-		    	});
-		    }
-		  
         </script>
 	</head>
 	<body>

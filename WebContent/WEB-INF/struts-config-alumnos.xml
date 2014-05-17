@@ -6,7 +6,9 @@
 	
 	<form-beans>
 	    
-		
+		<form-bean name="GridUsuarios" type="es.oyssen.mrm.struts.forms.usuarios.GridUsuariosForm" />
+	   
+	   	<form-bean name="EditarUsuarioForm" type="es.oyssen.mrm.struts.forms.usuarios.EditarUsuarioForm" />
 		
 	</form-beans>
 	
@@ -14,6 +16,12 @@
 	<action-mappings>
 
 		<action path="/alumnos/inicio" forward="/jsp/web/alumnos/inicio.jsp" />
+		
+		<action path="/alumnos/gridusuarios" name="GridUsuarios" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.GridUsuariosAction" />
+		
+		<action path="/alumnos/editarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />
+		
+		<action path="/alumnos/actualizarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />
 		
 	</action-mappings>
 
