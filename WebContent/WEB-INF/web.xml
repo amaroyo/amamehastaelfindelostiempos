@@ -46,7 +46,8 @@
    				/WEB-INF/struts-config-asignaturas.xml,
    				/WEB-INF/struts-config-cursos.xml,
    				/WEB-INF/struts-config-administrar.xml,
-   				/WEB-INF/struts-config-alumnos.xml
+   				/WEB-INF/struts-config-alumnos.xml,
+   				/WEB-INF/struts-config-curso_academico.xml
    </param-value>
   </init-param>
   <init-param>
