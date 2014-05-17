@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <items>
-    <item type="fieldset" name="data1" label="Aviso" inputWidth="auto">
+    <item type="fieldset" name="data1" label="Aviso" inputWidth="auto" width="400">
         <item 	type="label" 	
   				className="myCss"
   				name="labelAviso"
   				label="Aviso importante..." 
-  				
 		 />
    </item>
-   <item type="fieldset" name="data2" label="Seleccione Año Académico" inputWidth="auto">
-       <item type="password" name="oldPass" label="Contraseña vieja" labelWidth="110" />
+   <item type="fieldset" name="data2" label="Seleccione Año Académico" inputWidth="auto" width="400">
+       <item type="select"	
+		  name="anyo"
+		  label="Año"
+		  labelWidth="80"
+		  labelAlign="center"
+		  inputHeight="20"
+		  inputWidth="200"
+		/>
+
+       
    </item>
-   <item type="button" name="aceptar" value="Aceptar"  position="absolute" inputLeft="150" inputTop="250"/>
+   <item type="button" name="aceptar" value="Aceptar"  position="absolute" inputLeft="150" inputTop="200"/>
 </items>

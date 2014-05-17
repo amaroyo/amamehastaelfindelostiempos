@@ -7,6 +7,7 @@
 	    <link rel="stylesheet" type="text/css" href="../css/estilosMenu.css">
 	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlx.css">
 	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
+	    <script type="text/javascript" src="../skins/dhtmlxform_dyn.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
 	    
@@ -19,11 +20,16 @@
   	
 		    dhtmlxEvent(window,"load",function() {
 		    	
+		    	
+		    	<% String anyo = (String) session.getAttribute("anyo_academico");%>
+				var ann = ("<%=anyo%>");
+		    	
+				
 			    dhtmlxError.catchError("ALL",errorHandler);
 
 
 				var dhxWins= new dhtmlXWindows(document.body);
-				var window = dhxWins.createWindow("CambiarAnyoAcademico", 300, 50, 465, 350);
+				var window = dhxWins.createWindow("CambiarAnyoAcademico", 300, 50, 465, 300);
 				window.setText('<bean:message key="title.time.machine" />');				
 				window.setModal(true);
 				window.centerOnScreen();
@@ -32,29 +38,35 @@
 		    		form.setItemLabel('data1','<bean:message key="title.aviso.importante"/>');
 		    		form.setItemLabel('labelAviso','<bean:message key="message.cambiar.anyo.academico"/>');
 		    		form.setItemLabel('data2','<bean:message key="title.seleccione.anyo"/>');
-		    		form.setItemLabel('oldPass','<bean:message key="label.ant.pass"/>');
-		    		form.setItemLabel('newPass1','<bean:message key="label.nueva.pass"/>');
-		    		form.setItemLabel('newPass2','<bean:message key="label.repetir.pass"/>');
-		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
-
+		    		form.setItemLabel('anyo','<bean:message key="label.anyo"/>');
+		    		
+		
+		    		var data = getData();
+		    		form.reloadOptions('anyo', data);
 		    				    					    			
 		    		form.attachEvent("onButtonClick", function(id){
 	    				if (id == "aceptar") {
-	    					if (form.getItemValue("newPass1") == form.getItemValue("newPass2")){
-	    						var newPass = form.getItemValue("newPass1");
-	    						var oldPass = form.getItemValue("oldPass");
-			    			/*	form.send("../contrasena/actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(xml) {
-			    					
-			    				});*/
-			    				window.close();
-	    					} else {
-	    						alert('MIERDA');
+	    					var selec = form.getItemValue("anyo");
+	    					if(selec != ann){
+	    						//HAY Q HACER UN SET DEL ATRIBUTO!!!!!
+	    						alert('<bean:message key="message.cambio.satisfactorio"/>');
 	    					}
+	    					window.close();
+	    					
 	    				}
 		    		});
 		    	});
 			    			    			    
 		    });
+		    
+		    
+		    function getData(){
+		    	var d = [ {text: "2014/2015", value: "2014/2015", selected: true},
+                          {text: "2013/2014", value: "2013/2014"},
+                          {text: "2012/2013", value: "2012/2013"}
+                		];
+		    	return d;
+		    }
 
 		    
         </script>

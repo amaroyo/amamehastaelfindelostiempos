@@ -1,5 +1,6 @@
 package es.oyssen.mrm.struts.actions.usuarios;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,6 +56,8 @@ public class AutenticacionUsuarioAction extends MrmAction {
 			request.getSession().setAttribute("usuarioIdGrupo", usuario.getIdGrupo());
 			request.getSession().setAttribute("idUsuario", usuario.getIdUsuario());
 			request.getSession().setAttribute("usuario", usuario.getUser());
+			request.getSession().setAttribute("anyo_academico", anyo_academico());
+		
 			if (usuario.getIdGrupo().equals("1")) {
 				usuarioYPermisos.setBloqueado("NO");
 			} else if (usuario.getIdGrupo().equals("2")) {
@@ -124,6 +127,12 @@ public class AutenticacionUsuarioAction extends MrmAction {
 		sb.append("</data>");
 		
 		return sb.toString();
+	}
+	
+	private String anyo_academico(){
+		String actual = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+		String pasado = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)-1);
+		return pasado + "/" + actual;
 	}
 
 }

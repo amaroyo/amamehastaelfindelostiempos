@@ -24,6 +24,8 @@ public class LogOutUsuarioAction extends MrmAction {
 		request.getSession().removeAttribute("usuarioIdComercial");
 		request.getSession().removeAttribute("usuario");
 		request.getSession().removeAttribute("idUsuario");
+		request.getSession().removeAttribute("anyo_academico");
+		
 		
 		return mapping.findForward("success");
 	}
