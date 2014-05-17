@@ -53,7 +53,11 @@
 		    	importarForm.loadStruct('../xml/forms/importar_form.xml', function() {
 		    		setFormLabels(rowID);
 		    		
-		    		importarForm.setFocusOnFirstActive();
+		    		importarForm.attachEvent("onBeforeFileAdd",function(realName, size){
+		    			var myUploader = importarForm.getUploader("subir");
+						myUploader.clear();
+		    		    return true;
+		    		});
 		    		
 		    		importarForm.attachEvent("onEnter", function() {
 		    			goImportar();
@@ -95,7 +99,7 @@
 		    	
 		    	if(rowID == 'a'){
 		    		importarForm.send("importarAlumnos.do", function(loader, response) {
-		                alert("<pre>" + response + "</pre>"+rowID);
+		                alert(loader.xmlDoc.responseText);
 		            });
 	    		}
 	    		else if(rowID == 'b'){

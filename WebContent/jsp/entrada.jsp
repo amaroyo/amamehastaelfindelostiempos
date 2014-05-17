@@ -83,6 +83,8 @@
     	
     	function permisosToolbarGeneral(){
     		
+    		
+    		
     		<logic:notEmpty name="usuarioYPermisos">
 	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>44</permiso>" >	    	

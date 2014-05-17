@@ -17,9 +17,9 @@ public class ImportarAlumnosAction extends MrmAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		SubirFicheroForm f = (SubirFicheroForm) form;
+		/*SubirFicheroForm f = (SubirFicheroForm) form;
 		System.out.println(form.toString());
-		//getFicherosLeadService().process(f);
+		getFicherosLeadService().process(f);*/
 		
 		return mapping.findForward("success");
 	}
