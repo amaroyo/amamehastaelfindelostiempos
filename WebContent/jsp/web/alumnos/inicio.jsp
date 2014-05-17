@@ -21,7 +21,7 @@
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var miGrid, tabbar, tab_1,tab_2,tab_3,tab_4,tab_5,tab_6,tab_7, main_layout, form, b, a;
+	    	var miGrid, tabbar, tab_1,tab_2,tab_3,tab_4,tab_5,tab_6,tab_7, main_layout, form, b, a, gridAlumnoRealizado;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -62,7 +62,7 @@
 
 			    miGrid.attachEvent("onRowSelect",doOnRowSelected);
 			    
-			    buscar();
+			    buscarMisAlumnos();
 			    			    
 		    });
 		    
@@ -75,15 +75,15 @@
 		    	tabbar.addTab('tab_1','<bean:message key="title.datos.personales"/>','');
 		    	tab_1 = tabbar.cells('tab_1');
 		    	tabbar.setTabActive('tab_1');
-		    	//goInformacion(dni);
+		    	goInformacion(dni);
 		    	
 		    	tabbar.addTab('tab_2','<bean:message key="title.info.general.estancia"/>','');
 		    	tab_2 = tabbar.cells('tab_2');
-		    	//goEstancia(dni);
+		    	goEstancia(dni);
 		    	
 		    	tabbar.addTab('tab_3','<bean:message key="title.seminarios"/>','');
 		    	tab_3 = tabbar.cells('tab_3');
-		    	//goSeminarios(dni);
+		    	goSeminarios(dni);
 		    	
 		    	tabbar.addTab('tab_4','<bean:message key="title.trabajos.campo"/>','');
 		    	tab_4 = tabbar.cells('tab_4');
@@ -105,9 +105,172 @@
 		    }
 		    
 		    
-		    function buscar() {
+		    function buscarMisAlumnos() {
 		    	miGrid.clearAndLoad("gridusuarios.do");		    	
 		    }
+		    
+		    function buscarSeminarios() {
+		    	gridAlumnoRealizado.clearAndLoad("gridusuarios.do");		    	
+		    }
+		    
+		    function goInformacion(dni){
+		    	
+		    	var form = tab_1.attachForm();
+		    	form.loadStruct('../xml/forms/usuario_form.xml', function(){
+		    		form.setItemLabel('data','<bean:message key="title.info.general"/>');
+		    		form.setItemLabel('grupo','<bean:message key="label.group"/>');
+		    		form.setItemLabel('nombre','<bean:message key="label.nombre"/>');
+		    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
+		    		form.setItemLabel('telefonoMovil','<bean:message key="label.telefono.movil"/>');
+		    		form.setItemLabel('direccion','<bean:message key="label.direccion"/>');
+		    		form.setItemLabel('codigoPostal','<bean:message key="label.postal.code"/>');
+		    		form.setItemLabel('ciudad','<bean:message key="label.ciudad"/>');
+		    		form.setItemLabel('pais','<bean:message key="label.pais"/>');
+		    		form.setItemLabel('email','<bean:message key="label.address.email"/>');
+		    		form.setItemLabel('comentarios','<bean:message key="label.comentarios"/>');
+		    		form.setItemLabel('user','<bean:message key="label.user"/>');
+		    		form.setItemLabel('pass','<bean:message key="label.pass"/>');			    		
+		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+
+					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>36</permiso>" >		    	
+							form.hideItem('aceptar');
+						</logic:notMatch>
+					</logic:notMatch>			    		
+		    		
+		    		
+				// HACER LAS MODIFICACIONES NECESARIAS PARA REALIZAR UNA BUSQUEDA SEGUN DNI CUANDO ESTE HECHA LA BBDD
+				//	form.load('editarusuario.do?email=' + selectedEmail, function () {			    			
+		    	//		form.attachEvent("onButtonClick", function(id){
+		    	//			if (id == "aceptar") {
+			    //				form.send("actualizarusuario.do?!nativeeditor_status=save&email=" + selectedEmail ,"post", function(xml) {
+			    //					
+			    //				});
+			    //				buscar();
+		    	//			}
+		    	//		});
+		    	//	});
+					
+		    	});
+		    	
+		    	
+		    }
+		    
+		    
+		    function goEstancia(dni){
+		    	
+		    	var form2 = tab_2.attachForm();
+		    	form2.loadStruct('../xml/forms/estancia_form.xml', function(){
+		    		form2.setItemLabel('data','<bean:message key="title.info.general.estancia"/>');
+		    		form2.setItemLabel('hospital','<bean:message key="label.hospital.estancia"/>');
+		    		form2.setItemLabel('clinica','<bean:message key="label.clinica.estancia"/>');
+		    		form2.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
+		    		form2.setItemLabel('fechaIni','<bean:message key="label.fecha.ini.estancia"/>');
+		    		form2.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
+		    	
+		    		
+		    		//Esto por ahora es provisional, cuando se haga una peticion de toda la informacion 
+		    		//de las asignaturas, se cogeran el codigo y el nombre de la asignatura
+		    		form2.setItemValue('hospital', "Lorem ipsum");
+		    		form2.setItemValue('clinica', "Lorem ipsum");
+		    		form2.setItemValue('profesor', "A113");
+		    		form2.setItemValue('fechaIni', "Lorem ipsum");
+		    		form2.setItemValue('fechaFin', "Lorem ipsum");
+	    			
+		    	});
+		    	
+		    	
+		    	/*
+				form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
+					form.attachEvent("onButtonClick", function(id){
+						if (id == "aceptar") {
+							form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+
+							});
+
+						}
+					});
+				});
+				*/
+				
+				
+		    }
+		    
+		    function goSeminarios(dni){	    	
+		    	
+		    	var mini_layout = tabbar.cells('tab_3').attachLayout("2U","dhx_skyblue");
+		    	
+		    	var ma = mini_layout.cells('a');
+			    var mb = mini_layout.cells('b');
+			    
+			    ma.setText('<bean:message key="title.seminarios.realizados"/>');
+			    
+			    mb.setText('<bean:message key="label.descripcion.seminario"/>');
+	    		mb.setWidth(500);
+			    
+			    
+				gridAlumnoRealizado = ma.attachGrid();
+		    	
+		    	gridAlumnoRealizado.setHeader(["<bean:message key="label.nombre.seminario" />","<bean:message key="label.codigo.seminario" />","<bean:message key="label.descripcion.seminario" />"]);
+		    	gridAlumnoRealizado.setColTypes("ro,ro,ro");
+		    	
+		    	gridAlumnoRealizado.setColSorting('str,str,str');
+		    	gridAlumnoRealizado.enableMultiselect(false);
+		    	gridAlumnoRealizado.init();
+		    	
+		    	var gridAlumnoRealizadoPro = new dataProcessor("gridusuarios.do");
+		    	gridAlumnoRealizadoPro.enableUTFencoding('simple');
+		    	gridAlumnoRealizadoPro.init(gridAlumnoRealizado);	  
+		    	gridAlumnoRealizadoPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+					if(action == 'error'){
+		    			dhtmlx.message(tag.firstChild.data,action,4000);
+		    		}
+		    	});
+	    		
+		    	gridAlumnoRealizado.attachEvent("onRowSelect", function(row,ind){
+
+		    		selectedCode=gridAlumnoRealizado.cells(row,1).getValue();
+		    		
+		    		
+		    		var formSeminarioAlumno = mb.attachForm();
+		    		
+		    		formSeminarioAlumno.loadStruct('../xml/forms/seminario_informacion_form.xml', function(){
+		    			formSeminarioAlumno.setItemLabel('data','<bean:message key="title.info.general.seminario"/>');
+		    			formSeminarioAlumno.setItemLabel('nombre','<bean:message key="label.nombre.seminario"/>');
+		    			formSeminarioAlumno.setItemLabel('codigo','<bean:message key="label.codigo.seminario"/>');
+		    			formSeminarioAlumno.setItemLabel('curso','<bean:message key="label.curso.seminario"/>');
+		    			formSeminarioAlumno.setItemLabel('profesor','<bean:message key="label.profesor.seminario"/>');
+		    			formSeminarioAlumno.setItemLabel('descripcion','<bean:message key="label.descripcion.seminario"/>');
+			    		
+			    			
+						
+						formSeminarioAlumno.setItemValue('nombre', "caca");
+						formSeminarioAlumno.setItemValue('codigo', "caca");
+						formSeminarioAlumno.setItemValue('curso', "A113");
+						formSeminarioAlumno.setItemValue('profesor', "Lorem ipsum");
+						formSeminarioAlumno.setItemValue('descripcion', "Lorem ipsum dolor sit amet");
+		    		
+						/*formSeminarioAlumno.load('editarseminario.do?idSeminario=' + idSeminario, function () {			    			
+							formSeminarioAlumno.attachEvent("onButtonClick", function(id){
+			    				if (id == "aceptar") {
+			    					formSeminarioAlumno.send("actualizarse.do?!nativeeditor_status=save&idUsuario=" + idUsuario ,"post", function(xml) {
+				    					
+				    				});
+				    				//buscar();
+			    				}
+			    			});
+			    		});*/
+			    			
+		    		});
+
+	    		
+		    	});
+			    
+
+		    	buscarSeminarios();
+		    }
+		    
+		    
 		    
 		    
 		    

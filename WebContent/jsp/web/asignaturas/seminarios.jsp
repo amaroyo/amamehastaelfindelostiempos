@@ -61,7 +61,7 @@
 			    	gridAlumnoRealizado.enableMultiselect(false);
 			    	gridAlumnoRealizado.init();
 			    	
-			    	gridAlumnoRealizadoPro = new dataProcessor("gridusuarios.do");
+			    	var gridAlumnoRealizadoPro = new dataProcessor("gridusuarios.do");
 			    	gridAlumnoRealizadoPro.enableUTFencoding('simple');
 			    	gridAlumnoRealizadoPro.init(gridAlumnoRealizado);	  
 			    	gridAlumnoRealizadoPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -122,7 +122,7 @@
 			    	gridAlumnoPendiente.init();
 			    	
 			    	
-			    	gridAlumnoPendientePro = new dataProcessor("gridusuarios.do");
+			    	var gridAlumnoPendientePro = new dataProcessor("gridusuarios.do");
 			    	gridAlumnoPendientePro.enableUTFencoding('simple');
 			    	gridAlumnoPendientePro.init(gridAlumnoPendiente);	  
 			    	gridAlumnoPendientePro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){

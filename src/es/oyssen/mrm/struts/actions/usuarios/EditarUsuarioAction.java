@@ -74,6 +74,10 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 	@Override
 	public void save(DhtmlxForm f) throws Exception {
 		
+		
+		//REHACERLO, MEJOR HACEAR MODIFICACIONES SEGUN EL DNI
+		//EN MIS ALUMNOS, SOLO APARECERA NOMBRE, APELLIDOS Y DNI
+		
 		EditarUsuarioForm form = (EditarUsuarioForm) f;
 		UsuarioVO usuario = new UsuarioVO();
 		
