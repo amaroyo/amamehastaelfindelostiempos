@@ -603,12 +603,14 @@
 	right: 108px;
 }
 .dhxform_obj_dhx_skyblue .dhx_file_uploader div.dhx_upload_controls div.dhx_file_uploader_button.button_upload {
-	background-position: -19px 0px;
-	right: 79px;
+	/*background-position: -19px 0px;
+	right: 79px;*/
+	display: none;
 }
 .dhxform_obj_dhx_skyblue .dhx_file_uploader div.dhx_upload_controls div.dhx_file_uploader_button.button_cancel {
-	background-position: -57px 0px;
-	right: 79px;
+	/*background-position: -57px 0px;
+	right: 79px;*/
+	display: none;
 }
 .dhxform_obj_dhx_skyblue .dhx_file_uploader div.dhx_upload_controls div.dhx_file_uploader_button.button_clear {
 	background-position: -38px 0px;

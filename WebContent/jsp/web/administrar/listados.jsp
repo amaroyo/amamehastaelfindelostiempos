@@ -56,7 +56,7 @@
 		    		importarForm.attachEvent("onBeforeFileAdd",function(realName, size){
 		    			var myUploader = importarForm.getUploader("subir");
 						myUploader.clear();
-		    		    return true;
+						return true;
 		    		});
 		    		
 		    		importarForm.attachEvent("onEnter", function() {
@@ -98,7 +98,7 @@
 		    function goImportar(rowID) {
 		    	
 		    	if(rowID == 'a'){
-		    		importarForm.send("importarAlumnos.do", function(loader, response) {
+		    		importarForm.send("dhtmlxform_item_upload.do", function(loader, response) {
 		                alert(loader.xmlDoc.responseText);
 		            });
 	    		}
