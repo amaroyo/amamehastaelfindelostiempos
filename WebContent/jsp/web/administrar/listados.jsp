@@ -3,6 +3,7 @@
 <%@ page import="java.util.Enumeration"%>
 <%@ page import="es.oyssen.mrm.Const"%>
 <%@ page import="javax.servlet.http.HttpServletRequest"%>
+<%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
 
 <html>
 	<head>
@@ -54,6 +55,7 @@
 		    		setFormLabels(rowID);
 		    		
 		    		importarForm.attachEvent("onBeforeFileAdd",function(realName, size){
+		    			
 		    			var myUploader = importarForm.getUploader("subir");
 						myUploader.clear();
 						return true;
@@ -64,17 +66,43 @@
 		    		});
 		    		
 		    		importarForm.attachEvent("onButtonClick", function(id){
-	    				if (id == "import") {
-	    					if(importarForm.getUploaderStatus("subir") == 1){
-	    						goImportar(rowID);
-	    					}
-	    					
+	    				if(id == "import") {
+	    					onSubmit();
 	    				}
 	    				
 		    		});
 		    	});
 		    	
 				goActualizar();
+		    }
+		    
+		    function onSubmit(){
+		    	var fileData = importarForm.getItemValue("subir");
+			    /*(item's name)+“_count” - the count of uploaded files (item name “myFiles” is used for the code above)
+			    (item's name)+“_r_”+(0..count-1) - the real name of the file
+			    (item's name)+“_s_”+(0..count-1) - the file name that the server returns after uploading*/
+		    	var fileName = fileData.subir_r_0;
+		    	if(isExcelExtension(fileName)) {
+					if(importarForm.getUploaderStatus("subir") == 1){
+						//goImportar(rowID);
+					}
+				}
+		    }
+		    
+		    function getExtension(fileName) {
+			    var parts = fileName.split('.');
+			    return parts[parts.length - 1];
+			}
+		    
+		    function isExcelExtension(fileName) {
+		        var ext = getExtension(fileName);
+		        switch (ext.toLowerCase()) {
+		        case 'xls':
+		        case 'xlsx':
+		            //etc
+		            return true;
+		        }
+		        return false;
 		    }
 		    
 		    function setFormLabels(rowID){
@@ -128,5 +156,8 @@
         </script>
 	</head>
 	<body>
+		<form name="myForm" method="post" enctype="multipart/form-data" onsubmit="onSubmit()">
+			<div id="importarForm"></div>
+		</form>
 	</body>
 </html>
