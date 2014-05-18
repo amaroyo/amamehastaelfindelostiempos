@@ -77,15 +77,15 @@
 		    }
 		    
 		    function onSubmit(){
-		    	var fileData = importarForm.getItemValue("subir");
-			    /*(item's name)+“_count” - the count of uploaded files (item name “myFiles” is used for the code above)
-			    (item's name)+“_r_”+(0..count-1) - the real name of the file
-			    (item's name)+“_s_”+(0..count-1) - the file name that the server returns after uploading*/
-		    	var fileName = fileData.subir_r_0;
-		    	if(isExcelExtension(fileName)) {
-					if(importarForm.getUploaderStatus("subir") == 1){
-						//goImportar(rowID);
-					}
+				if(importarForm.getUploaderStatus("subir") == 1){
+					var fileData = importarForm.getItemValue("subir");
+				    /*(item's name)+“_count” - the count of uploaded files (item name “myFiles” is used for the code above)
+				    (item's name)+“_r_”+(0..count-1) - the real name of the file
+				    (item's name)+“_s_”+(0..count-1) - the file name that the server returns after uploading*/
+			    	var fileName = fileData.subir_r_0;
+			    	if(isExcelExtension(fileName)) {
+						goImportar(rowID);
+			    	}
 				}
 		    }
 		    
@@ -126,7 +126,7 @@
 		    function goImportar(rowID) {
 		    	
 		    	if(rowID == 'a'){
-		    		importarForm.send("dhtmlxform_item_upload.do", function(loader, response) {
+		    		importarForm.send("administrar/importarAlumnos", function(loader, response) {
 		                alert(loader.xmlDoc.responseText);
 		            });
 	    		}
