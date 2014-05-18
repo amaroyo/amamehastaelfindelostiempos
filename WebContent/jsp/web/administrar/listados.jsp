@@ -51,7 +51,7 @@
 		    
 		    function doOnRowSelected(rowID,celInd){
 		    	importarForm = b.attachForm();
-		    	importarForm.loadStruct('../xml/forms/importar_form.xml', function() {
+		    	importarForm.loadStruct('../xml/forms/administrar_importar_form.xml', function() {
 		    		setFormLabels(rowID);
 		    		
 		    		importarForm.attachEvent("onBeforeFileAdd",function(realName, size){
@@ -62,12 +62,12 @@
 		    		});
 		    		
 		    		importarForm.attachEvent("onEnter", function() {
-		    			goImportar();
+		    			onSubmit(rowID);
 		    		});
 		    		
 		    		importarForm.attachEvent("onButtonClick", function(id){
 	    				if(id == "import") {
-	    					onSubmit();
+	    					onSubmit(rowID);
 	    				}
 	    				
 		    		});
@@ -76,7 +76,7 @@
 				goActualizar();
 		    }
 		    
-		    function onSubmit(){
+		    function onSubmit(rowID){
 				if(importarForm.getUploaderStatus("subir") == 1){
 					var fileData = importarForm.getItemValue("subir");
 				    /*(item's name)+“_count” - the count of uploaded files (item name “myFiles” is used for the code above)
@@ -126,18 +126,15 @@
 		    function goImportar(rowID) {
 		    	
 		    	if(rowID == 'a'){
-		    		importarForm.send("administrar/importarAlumnos", function(loader, response) {
-		                alert(loader.xmlDoc.responseText);
+		    		importarForm.send("importarAlumnos.do", function(loader, response) {
 		            });
 	    		}
 	    		else if(rowID == 'b'){
-	    			importarForm.send("administrar/importarProfesores", function(loader, response) {
-		                alert("<pre>" + response + "</pre>"+rowID);
+	    			importarForm.send("importarProfesores.do", function(loader, response) {
 		            });
 	    		}
 	    		else if(rowID == 'c'){
-	    			importarForm.send("administrar/importarUsuarios", function(loader, response) {
-		                alert("<pre>" + response + "</pre>"+rowID);
+	    			importarForm.send("importarUsuarios.do", function(loader, response) {
 		            });
 	    		}
 		    	
@@ -156,7 +153,7 @@
         </script>
 	</head>
 	<body>
-		<form name="myForm" method="post" enctype="multipart/form-data" onsubmit="onSubmit()">
+		<form name="myForm" method="post" enctype="multipart/form-data">
 			<div id="importarForm"></div>
 		</form>
 	</body>
