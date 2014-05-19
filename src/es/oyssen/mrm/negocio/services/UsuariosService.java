@@ -21,10 +21,13 @@ public interface UsuariosService {
 	
 	public UsuarioVO findById(UsuarioVO usuario) throws ServiceException;
 	
-	public UsuarioVO findByEmail(UsuarioVO usuario) throws ServiceException;
+	public UsuarioVO findByDni(UsuarioVO usuario) throws ServiceException;
 	
-	public UsuarioVO findByUser(UsuarioVO usuario) throws ServiceException;
+	public UsuarioVO findByCorreo(UsuarioVO usuario) throws ServiceException;
 	
-	public UsuarioVO findByUserPass(UsuarioVO usuario) throws ServiceException;
+	public UsuarioVO findByCorreoPass(UsuarioVO usuario) throws ServiceException;
+	
+	public UsuarioVO findByNombreApellidos(UsuarioVO usuario) throws ServiceException;
+
 
 }

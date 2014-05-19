@@ -23,15 +23,16 @@ import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
 public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 	
-	private static String SQL_INSERT = "insert into usuarios (id_grupo, id_asociado, nombre, telefono, telefonoMovil, direccion, codigoPostal, ciudad, pais, email, comentarios, user, pass) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	private static String SQL_UPDATE = "update usuarios set nombre=?, telefono=?, telefonoMovil=?, direccion=?, codigoPostal=?, ciudad=?, pais=?, email=?, comentarios=?, user=?";
+	private static String SQL_INSERT = "insert into usuarios (id_grupo, correo_ucm, contrasenya, nombre, apellido1, apellido2, dni, telefono, foto) values (?,?,?,?,?,?,?,?,?)";
+	private static String SQL_UPDATE = "update usuarios set contrasenya=?, nombre=?, apellido1=?, apellido2=?, dni=?, telefono=?, foto=?";
 	private static String SQL_DELETE = "delete from usuarios where id_usuario = ?";
 	private static String SQL_FIND_ALL = "select * from usuarios";
 	private static String SQL_FIND_ID = "select * from usuarios where id_usuario = ?";
-	private static String SQL_FIND_USER_PASS = "select * from usuarios where user = ? and pass = ?";
+	private static String SQL_FIND_USER_PASS = "select * from usuarios where correo_ucm = ? and contrasenya = ?";
 	private static String SQL_FIND_BY_GRUPO = "select * from usuarios where id_grupo = ?";
-	private static String SQL_FIND_USER = "select * from usuarios where user = ?";
-	private static String SQL_FIND_EMAIL = "select * from usuarios where email = ?";
+	private static String SQL_FIND_USER = "select * from usuarios where correo_ucm = ?";
+	private static String SQL_FIND_DNI = "select * from usuarios where dni = ?";
+	private static String SQL_FIND_NOMBRE_APELLIDOS = "select * from usuarios where nombre = ? and apellido1 = ? and apellido2 = ?";
 	
 	
 	public void insert(final UsuarioVO usuario) throws DAOException,
@@ -44,19 +45,16 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 						throws SQLException {
 					PreparedStatement ps = conn.prepareStatement(SQL_INSERT, new String[]{"id_usuario"});
 					ps.setString(1, usuario.getIdGrupo());
-					ps.setString(2, usuario.getIdAsociado());
-					ps.setString(3, usuario.getNombre());
-					ps.setString(4, usuario.getTelefono());
-					ps.setString(5, usuario.getTelefonoMovil());
-					ps.setString(6, usuario.getDireccion());
-					ps.setString(7, usuario.getCodigoPostal());
-					ps.setString(8, usuario.getCiudad());
-					ps.setString(9, usuario.getPais());
-					ps.setString(10, usuario.getEmail());
-					ps.setString(11, usuario.getComentarios());	
-					ps.setString(12, usuario.getUser());	
-					ps.setString(13, usuario.getPass());	
+					ps.setString(2, usuario.getCorreo());
+					ps.setString(3, usuario.getContrasenya());
+					ps.setString(4, usuario.getNombre());
+					ps.setString(5, usuario.getApellido1());
+					ps.setString(6, usuario.getApellido2());
+					ps.setString(7, usuario.getDni());
+					ps.setString(8, usuario.getTelefono());
+					ps.setString(9, usuario.getFoto());
 					return ps;
+					
 				}
 			}
 			,kh);
@@ -72,23 +70,20 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 		try {
 			
 			String query = SQL_UPDATE;
+
 			
-			if (usuario.getPass() != null)
-					query += ", pass='" + usuario.getPass()+"'"; 
+			if (usuario.getContrasenya() != null)
+					query += ", contrasenya='" + usuario.getContrasenya()+"'"; 
 			
 			query += " where id_usuario = ?";
 			
 			getJdbcTemplate().update(query, new Object[]{
 					usuario.getNombre(),
+					usuario.getApellido1(),
+					usuario.getApellido2(),
+					usuario.getDni(),
 					usuario.getTelefono(),
-					usuario.getTelefonoMovil(),
-					usuario.getDireccion(),
-					usuario.getCodigoPostal(),
-					usuario.getCiudad(),
-					usuario.getPais(),
-					usuario.getEmail(),
-					usuario.getComentarios(),
-					usuario.getUser(),
+					usuario.getFoto(),
 					usuario.getIdUsuario()});
 		} catch(Exception e) {
 			throw new DAOUpdateException(e);
@@ -138,7 +133,7 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 	
 	public UsuarioVO findByUser(UsuarioVO usuario) throws DAOException {
 		try {
-			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_USER, new Object[]{usuario.getUser()}, new UsuarioMapper());
+			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_USER, new Object[]{usuario.getCorreo()}, new UsuarioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
@@ -146,9 +141,9 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 		}
 	}
 	
-	public UsuarioVO findByEmail(UsuarioVO usuario) throws DAOException {
+	public UsuarioVO findByDni(UsuarioVO usuario) throws DAOException {
 		try {
-			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_EMAIL, new Object[]{usuario.getEmail()}, new UsuarioMapper());
+			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_DNI, new Object[]{usuario.getDni()}, new UsuarioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
@@ -158,7 +153,17 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 	
 	public UsuarioVO findByUserPass(UsuarioVO usuario) throws DAOException {
 		try {
-			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_USER_PASS, new Object[]{usuario.getUser(), usuario.getPass()}, new UsuarioMapper());
+			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_USER_PASS, new Object[]{usuario.getCorreo(), usuario.getContrasenya()}, new UsuarioMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+	
+	public UsuarioVO findByNombreApellidos(UsuarioVO usuario) throws DAOException {
+		try {
+			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_NOMBRE_APELLIDOS, new Object[]{usuario.getNombre(), usuario.getApellido1(), usuario.getApellido2()}, new UsuarioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

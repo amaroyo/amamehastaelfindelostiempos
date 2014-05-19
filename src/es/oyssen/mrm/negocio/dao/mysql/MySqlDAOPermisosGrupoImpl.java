@@ -24,7 +24,7 @@ public class MySqlDAOPermisosGrupoImpl extends DAOBase implements DAOPermisosGru
 	
 	private static String SQL_INSERT = "insert into permisos_grupos (id_grupo, id_permiso) values (?,?)";
 	private static String SQL_DELETE = "delete from permisos_grupos where id_permisoGrupo = ?";
-	private static String SQL_FIND_BY_GRUPO = "select pg.*, p.nombre permiso_nombre from permisos_grupos pg left join permisos p on p.id_permiso = pg.id_permiso where pg.id_grupo = ?";
+	private static String SQL_FIND_BY_GRUPO = "select pg.*, p.nombre permiso_nombre from grupos_permisos pg left join permisos p on p.id_permiso = pg.id_permiso where pg.id_grupo = ?";
 	
 	
 	public void insert(final PermisoGrupoVO permisoGrupo) throws DAOException,

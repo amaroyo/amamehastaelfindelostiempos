@@ -31,15 +31,15 @@ public class ForgotPasswordAction extends MrmAction {
 		UsuarioYPermisos usuarioYPermisos = new UsuarioYPermisos();
 			
 		UsuarioVO usuario = new UsuarioVO();
-		usuario.setEmail(f.getEmail());
-		usuario = getUsuariosService().findByEmail(usuario);
+		usuario.setCorreo(f.getEmail());
+		usuario = getUsuariosService().findByCorreo(usuario);
 		usuarioYPermisos.setUsuario(usuario);				
 		
 		if (usuario != null){
 			String new_pass = generatePassword();
-			usuario.setPass(EncriptarUtil.getStringMessageDigest(new_pass, EncriptarUtil.MD5));
+			usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(new_pass, EncriptarUtil.MD5));
 			getUsuariosService().update(usuario);
-			sendForgotPasswordMessage(usuario.getEmail(),new_pass);
+			sendForgotPasswordMessage(usuario.getCorreo(),new_pass);
 		}
 		
 		request.getSession().setAttribute("usuarioYPermisos", parseXML(usuarioYPermisos));

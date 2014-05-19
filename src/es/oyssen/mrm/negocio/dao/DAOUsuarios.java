@@ -19,9 +19,11 @@ public interface DAOUsuarios {
 	
 	public UsuarioVO findByUser(UsuarioVO usuario) throws DAOException;
 	
-	public UsuarioVO findByEmail(UsuarioVO usuario) throws DAOException;
+	public UsuarioVO findByDni(UsuarioVO usuario) throws DAOException;
 	
 	public UsuarioVO findByUserPass(UsuarioVO usuario) throws DAOException;
+	
+	public UsuarioVO findByNombreApellidos(UsuarioVO usuario) throws DAOException;
 	
 	public void insert(UsuarioVO usuario) throws DAOException, DAOInsertException;
 	

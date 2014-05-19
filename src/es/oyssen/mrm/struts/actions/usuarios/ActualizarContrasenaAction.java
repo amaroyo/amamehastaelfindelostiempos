@@ -27,13 +27,13 @@ public class ActualizarContrasenaAction extends MrmAction {
 			
 		UsuarioVO usuario = new UsuarioVO();
 		UsuarioYPermisos usuarioYPermisos = new UsuarioYPermisos();
-		usuario.setUser(user);
-		usuario.setPass(EncriptarUtil.getStringMessageDigest(oldPass, EncriptarUtil.MD5));
-		usuario = getUsuariosService().findByUserPass(usuario);	
+		usuario.setCorreo(user);
+		usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(oldPass, EncriptarUtil.MD5));
+		usuario = getUsuariosService().findByCorreoPass(usuario);	
 		usuarioYPermisos.setUsuario(usuario);	
 		
 		if (usuario != null){
-			usuario.setPass(EncriptarUtil.getStringMessageDigest(newPass, EncriptarUtil.MD5));
+			usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(newPass, EncriptarUtil.MD5));
 			getUsuariosService().update(usuario);
 		}				
 		request.getSession().setAttribute("usuarioYPermisos", parseXML(usuarioYPermisos));

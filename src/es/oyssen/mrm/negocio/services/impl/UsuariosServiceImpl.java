@@ -86,7 +86,7 @@ public class UsuariosServiceImpl implements UsuariosService{
 		}
 	}
 	
-	public UsuarioVO findByUser(UsuarioVO usuario)
+	public UsuarioVO findByCorreo(UsuarioVO usuario)
 			throws ServiceException {
 		try {
 			return daoUsuarios.findByUser(usuario);
@@ -96,7 +96,7 @@ public class UsuariosServiceImpl implements UsuariosService{
 		}
 	}
 	
-	public UsuarioVO findByUserPass(UsuarioVO usuario)
+	public UsuarioVO findByCorreoPass(UsuarioVO usuario)
 			throws ServiceException {
 		try {
 			return daoUsuarios.findByUserPass(usuario);
@@ -107,10 +107,21 @@ public class UsuariosServiceImpl implements UsuariosService{
 	}
 
 	@Override
-	public UsuarioVO findByEmail(UsuarioVO usuario)
+	public UsuarioVO findByDni(UsuarioVO usuario)
 			throws ServiceException {
 		try {
-			return daoUsuarios.findByEmail(usuario);
+			return daoUsuarios.findByDni(usuario);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			throw new ServiceException(e);
+		}
+	}
+	
+	@Override
+	public UsuarioVO findByNombreApellidos(UsuarioVO usuario)
+			throws ServiceException {
+		try {
+			return daoUsuarios.findByNombreApellidos(usuario);
 		} catch (DAOException e) {
 			e.printStackTrace();
 			throw new ServiceException(e);

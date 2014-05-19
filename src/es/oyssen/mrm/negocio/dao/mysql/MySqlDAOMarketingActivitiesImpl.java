@@ -20,7 +20,8 @@ public class MySqlDAOMarketingActivitiesImpl extends DAOBase implements DAOMarke
 
 	public List<MarketingActivityVO> findAll() throws DAOException {
 		try {
-			return getJdbcTemplate().query(SQL_FINDALL, new MarketingMapper());
+			//return getJdbcTemplate().query(SQL_FINDALL, new MarketingMapper());
+			return null;
 		} catch (Exception e) {
 			throw new DAOException(e);
 		}

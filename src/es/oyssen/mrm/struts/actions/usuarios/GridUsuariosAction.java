@@ -1,7 +1,5 @@
 package es.oyssen.mrm.struts.actions.usuarios;
 
-import es.oyssen.mrm.negocio.vo.CriterioComercialVO;
-import es.oyssen.mrm.negocio.vo.ComercialVO;
 import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXGridAction;

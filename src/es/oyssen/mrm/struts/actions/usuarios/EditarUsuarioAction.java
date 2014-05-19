@@ -15,10 +15,10 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		EditarUsuarioForm form = (EditarUsuarioForm) f;
 		UsuarioVO usuario = new UsuarioVO();
 		
-		if (!StringUtil.isNullOrBlank(form.getUser())){
+		if (!StringUtil.isNullOrBlank(form.getCorreo())){
 			
-			usuario.setUser(form.getUser());
-			return getUsuariosService().findByUser(usuario);
+			usuario.setCorreo(form.getCorreo());
+			return getUsuariosService().findByCorreo(usuario);
 			
 		} 
 		else if (!StringUtil.isNullOrBlank(form.getIdUsuario())){
@@ -29,8 +29,8 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		}
 		else {
 			
-			usuario.setEmail(form.getEmail());
-			return getUsuariosService().findByEmail(usuario);
+			usuario.setDni(form.getDni());
+			return getUsuariosService().findByDni(usuario);
 			
 		}
 	}
@@ -43,27 +43,23 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		
 		//ESTO HAY QUE CAMBIARLO A BUSCAR SEGUN EMAIL O DNI, YA QUE SON UNIQUE
 		//EN ESTE CASO EL UNICO CAMPO UNIQUE A PARTE DEL ID ES EL USER (del form)
-		usuario.setUser(form.getUser());
-		if (getUsuariosService().findByUser(usuario) != null)
+		usuario.setCorreo(form.getCorreo());
+		if (getUsuariosService().findByCorreo(usuario) != null)
 			System.out.println("================>ESTE USUARIO YA EXISTE<===========================");
 		else{
-			usuario.setEmail(form.getEmail());
 			usuario.setIdGrupo(form.getIdGrupo());
-			usuario.setIdAsociado(form.getIdAsociado());
+			usuario.setCorreo(form.getCorreo());
 			usuario.setNombre(form.getNombre());
+			usuario.setApellido1(form.getApellido1());
+			usuario.setApellido2(form.getApellido2());
+			usuario.setDni(form.getDni());
 			usuario.setTelefono(form.getTelefono());
-			usuario.setTelefonoMovil(form.getTelefonoMovil());
-			usuario.setDireccion(form.getDireccion());
-			usuario.setCodigoPostal(form.getCodigoPostal());
-			usuario.setCiudad(form.getCiudad());
-			usuario.setPais(form.getPais());		
-			usuario.setComentarios(form.getComentarios());
-			usuario.setUser(form.getUser());
+			usuario.setFoto(form.getFoto());
 			
-			if (!StringUtil.isNullOrBlank(form.getPass()))
-				usuario.setPass(EncriptarUtil.getStringMessageDigest(form.getPass(), EncriptarUtil.MD5));
+			if (!StringUtil.isNullOrBlank(form.getContrasenya()))
+				usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(form.getContrasenya(), EncriptarUtil.MD5));
 			else
-				usuario.setPass(null);
+				usuario.setContrasenya(null);
 			
 	
 			getUsuariosService().insert(usuario);
@@ -75,35 +71,31 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 	public void save(DhtmlxForm f) throws Exception {
 		
 		
-		//REHACERLO, MEJOR HACEAR MODIFICACIONES SEGUN EL DNI
+		//REHACERLO, MEJOR HACER MODIFICACIONES SEGUN EL DNI
 		//EN MIS ALUMNOS, SOLO APARECERA NOMBRE, APELLIDOS Y DNI
 		
 		EditarUsuarioForm form = (EditarUsuarioForm) f;
 		UsuarioVO usuario = new UsuarioVO();
 		
-		usuario.setEmail(form.getEmail());
+		usuario.setCorreo(form.getCorreo());
 		
 		if (StringUtil.isNullOrBlank(form.getIdUsuario()))
-			usuario.setIdUsuario(getUsuariosService().findByEmail(usuario).getIdUsuario());
+			usuario.setIdUsuario(getUsuariosService().findByCorreo(usuario).getIdUsuario());
 		else 
 			usuario.setIdUsuario(form.getIdUsuario());
-			
-		usuario.setIdGrupo(form.getIdGrupo());
-		usuario.setIdAsociado(form.getIdAsociado());
-		usuario.setNombre(form.getNombre());
-		usuario.setTelefono(form.getTelefono());
-		usuario.setTelefonoMovil(form.getTelefonoMovil());
-		usuario.setDireccion(form.getDireccion());
-		usuario.setCodigoPostal(form.getCodigoPostal());
-		usuario.setCiudad(form.getCiudad());
-		usuario.setPais(form.getPais());		
-		usuario.setComentarios(form.getComentarios());
-		usuario.setUser(form.getUser());
+			usuario.setIdGrupo(form.getIdGrupo());
+			usuario.setCorreo(form.getCorreo());
+			usuario.setNombre(form.getNombre());
+			usuario.setApellido1(form.getApellido1());
+			usuario.setApellido2(form.getApellido2());
+			usuario.setDni(form.getDni());
+			usuario.setTelefono(form.getTelefono());
+			usuario.setFoto(form.getFoto());
 		
-		if (!StringUtil.isNullOrBlank(form.getPass()))
-			usuario.setPass(EncriptarUtil.getStringMessageDigest(form.getPass(), EncriptarUtil.MD5));
+		if (!StringUtil.isNullOrBlank(form.getContrasenya()))
+			usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(form.getContrasenya(), EncriptarUtil.MD5));
 		else
-			usuario.setPass(null);
+			usuario.setContrasenya(null);
 		
 		getUsuariosService().update(usuario);
 		
@@ -115,18 +107,16 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<data>");
 		sb.append("<grupo><![CDATA[" + nombreGrupo(c.getIdGrupo()) + "]]></grupo>");
+		sb.append("<correo><![CDATA[" + nombreGrupo(c.getCorreo()) + "]]></correo>");
 		sb.append("<nombre><![CDATA[" + c.getNombre() + "]]></nombre>");
+		sb.append("<apellido1><![CDATA[" + c.getApellido1() + "]]></apellido1>");
+		sb.append("<apellido2><![CDATA[" + c.getApellido2() + "]]></apellido2>");
+		sb.append("<dni><![CDATA[" + c.getDni() + "]]></dni>");
 		sb.append("<telefono><![CDATA[" + c.getTelefono() + "]]></telefono>");
-		sb.append("<telefonoMovil><![CDATA[" + c.getTelefonoMovil() + "]]></telefonoMovil>");
-		sb.append("<direccion><![CDATA[" + c.getDireccion() + "]]></direccion>");
-		sb.append("<codigoPostal><![CDATA[" + c.getCodigoPostal() + "]]></codigoPostal>");
-		sb.append("<ciudad><![CDATA[" + c.getCiudad() + "]]></ciudad>");
-		sb.append("<pais><![CDATA[" + c.getPais() + "]]></pais>");
-		sb.append("<email><![CDATA[" + c.getEmail() + "]]></email>");
-		sb.append("<comentarios><![CDATA[" + c.getComentarios() + "]]></comentarios>");
-		sb.append("<user><![CDATA[" + c.getUser() + "]]></user>");
-		//sb.append("<pass></pass>");
+		sb.append("<foto><![CDATA[" + c.getFoto() + "]]></foto>");
+		//sb.append("<contrasenya></contrasenya>");
 		sb.append("</data>");
+		
 		
 		return sb.toString();
 	}

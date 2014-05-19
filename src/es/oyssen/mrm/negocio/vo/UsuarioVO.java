@@ -3,52 +3,88 @@ package es.oyssen.mrm.negocio.vo;
 
 public class UsuarioVO { 
 
-	private String idUsuario;
-	private String idGrupo;
-	private String idAsociado;
+	private String id_usuario;
+	private String id_grupo;
+	private String correo_ucm;
+	private String contrasenya;
 	private String nombre;
+	private String apellido1;
+	private String apellido2;
+	private String dni;
 	private String telefono;
-	private String telefonoMovil;
-	private String direccion;
-	private String codigoPostal;
-	private String ciudad;
-	private String pais;
-	private String email;
-	private String comentarios;
-	private String user;
-	private String pass;
+	private String foto;
 	
 	public UsuarioVO() {
 		
 	}
 	
 	public UsuarioVO(String idUsuario, String nombre) {
-		this.idUsuario= idUsuario;
+		this.id_usuario= idUsuario;
 		this.nombre = nombre;
 	}
 
 	public String getIdUsuario() {
-		return idUsuario;
+		return id_usuario;
 	}
 
 	public void setIdUsuario(String idUsuario) {
-		this.idUsuario = idUsuario;
+		this.id_usuario = idUsuario;
 	}	
 	
 	public String getIdGrupo() {
-		return idGrupo;
+		return id_grupo;
+	}
+	
+	public String getCorreo() {
+		return correo_ucm;
+	}
+
+	public void setCorreo(String correo_ucm) {
+		this.correo_ucm = correo_ucm;
+	}
+
+	public String getContrasenya() {
+		return contrasenya;
+	}
+
+	public void setContrasenya(String contrasenya) {
+		this.contrasenya = contrasenya;
+	}
+
+	public String getApellido1() {
+		return apellido1;
+	}
+
+	public void setApellido1(String apellido1) {
+		this.apellido1 = apellido1;
+	}
+
+	public String getApellido2() {
+		return apellido2;
+	}
+
+	public void setApellido2(String apellido2) {
+		this.apellido2 = apellido2;
+	}
+
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 	public void setIdGrupo(String idGrupo) {
-		this.idGrupo = idGrupo;
-	}
-
-	public String getIdAsociado() {
-		return idAsociado;
-	}
-
-	public void setIdAsociado(String idAsociado) {
-		this.idAsociado = idAsociado;
+		this.id_grupo = idGrupo;
 	}
 		
 	public String getNombre() {
@@ -67,83 +103,11 @@ public class UsuarioVO {
 		this.telefono = telefono;
 	}
 	
-	public String getTelefonoMovil() {
-		return telefonoMovil;
-	}
-	
-	public void setTelefonoMovil(String telefonoMovil) {
-		this.telefonoMovil = telefonoMovil;
-	}
-	
-	public String getDireccion() {
-		return direccion;
-	}
-	
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-	
-	public String getCodigoPostal() {
-		return codigoPostal;
-	}
-	
-	public void setCodigoPostal(String codigoPostal) {
-		this.codigoPostal = codigoPostal;
-	}
-	
-	public String getCiudad() {
-		return ciudad;
-	}
-	
-	public void setCiudad(String ciudad) {
-		this.ciudad = ciudad;
-	}
-	
-	public String getPais() {
-		return pais;
-	}
-	
-	public void setPais(String pais) {
-		this.pais = pais;
-	}
-	
-	public String getEmail() {
-		return email;
-	}
-	
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	public String getComentarios() {
-		return comentarios;
-	}
-	
-	public void setComentarios(String comentarios) {
-		this.comentarios = comentarios;
-	}
-
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
-
-	public String getPass() {
-		return pass;
-	}
-
-	public void setPass(String pass) {
-		this.pass = pass;
-	}	
-	
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((idUsuario == null) ? 0 : idUsuario.hashCode());
+				+ ((id_usuario == null) ? 0 : id_usuario.hashCode());
 		return result;
 	}
 	
@@ -155,12 +119,13 @@ public class UsuarioVO {
 		if (getClass() != obj.getClass())
 			return false;
 		UsuarioVO other = (UsuarioVO) obj;
-		if (idUsuario == null) {
-			if (other.idUsuario != null)
+		if (id_usuario == null) {
+			if (other.id_usuario != null)
 				return false;
-		} else if (!idUsuario.equals(other.idUsuario))
+		} else if (!id_usuario.equals(other.id_usuario))
 			return false;
 		return true;
 	}
+
 	
 }

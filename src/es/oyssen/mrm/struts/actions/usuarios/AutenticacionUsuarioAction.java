@@ -10,16 +10,12 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import es.oyssen.mrm.negocio.vo.ComercialVO;
-import es.oyssen.mrm.negocio.vo.DistribuidorVO;
 import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.LogUsuarioVO;
 import es.oyssen.mrm.negocio.vo.PermisoGrupoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioYPermisos;
 import es.oyssen.mrm.struts.actions.MrmAction;
-import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXFormAction;
-import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxForm;
 import es.oyssen.mrm.struts.forms.usuarios.AutenticacionUsuarioForm;
 import es.oyssen.mrm.util.EncriptarUtil;
 
@@ -34,9 +30,9 @@ public class AutenticacionUsuarioAction extends MrmAction {
 		UsuarioYPermisos usuarioYPermisos = new UsuarioYPermisos();
 			
 		UsuarioVO usuario = new UsuarioVO();
-		usuario.setUser(f.getUser());
-		usuario.setPass(EncriptarUtil.getStringMessageDigest(f.getPass(), EncriptarUtil.MD5));
-		usuario = getUsuariosService().findByUserPass(usuario);
+		usuario.setCorreo(f.getUser());
+		usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(f.getPass(), EncriptarUtil.MD5));
+		usuario = getUsuariosService().findByCorreoPass(usuario);
 		usuarioYPermisos.setUsuario(usuario);		
 		
 		if (usuario != null){
@@ -55,12 +51,12 @@ public class AutenticacionUsuarioAction extends MrmAction {
 		if (usuario != null){
 			request.getSession().setAttribute("usuarioIdGrupo", usuario.getIdGrupo());
 			request.getSession().setAttribute("idUsuario", usuario.getIdUsuario());
-			request.getSession().setAttribute("usuario", usuario.getUser());
+			request.getSession().setAttribute("usuario", usuario.getCorreo());
 			request.getSession().setAttribute("anyo_academico", anyo_academico());
 		
 			if (usuario.getIdGrupo().equals("1")) {
 				usuarioYPermisos.setBloqueado("NO");
-			} else if (usuario.getIdGrupo().equals("2")) {
+			} /*else if (usuario.getIdGrupo().equals("2")) {
 				request.getSession().setAttribute("usuarioIdCanal", usuario.getIdAsociado());
 				request.getSession().setAttribute("usuarioIdDistribuidor", "NO");
 				request.getSession().setAttribute("usuarioIdComercial", "NO");
@@ -91,7 +87,7 @@ public class AutenticacionUsuarioAction extends MrmAction {
 				request.getSession().setAttribute("usuarioIdCanal", "NO");
 				request.getSession().setAttribute("usuarioIdDistribuidor", "NO");
 				request.getSession().setAttribute("usuarioIdComercial", "NO");
-			}
+			}*/
 		}
 
 		request.getSession().setAttribute("usuarioYPermisos", parseXML(usuarioYPermisos));

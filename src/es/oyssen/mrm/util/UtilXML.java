@@ -574,12 +574,17 @@ public class UtilXML {
 				sb.append("<cell><![CDATA[" + nombreGrupo(StringUtil.nullToString(usuario.getIdGrupo())) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getNombre()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getTelefono()) + "]]></cell>");
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getTelefonoMovil()) + "]]></cell>");
+				
+				// CUIDADO REVISAR
+				
+				
+				
+				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getTelefonoMovil()) + "]]></cell>");
 				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getDireccion()) + "]]></cell>");
 				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getCodigoPostal()) + "]]></cell>");
 				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getCiudad()) + "]]></cell>");
 				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getPais()) + "]]></cell>");
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getEmail()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getCorreo()) + "]]></cell>");
 				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getComentarios()) + "]]></cell>");
 				sb.append("</row>");				
 			}
@@ -598,12 +603,17 @@ public class UtilXML {
 				//sb.append("<cell><![CDATA[" + nombreGrupo(StringUtil.nullToString(usuario.getIdGrupo())) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getNombre()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getTelefono()) + "]]></cell>");
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getTelefonoMovil()) + "]]></cell>");
+
+				// CUIDADO REVISAR
+				
+				
+				
+				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getTelefonoMovil()) + "]]></cell>");
 				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getDireccion()) + "]]></cell>");
 				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getCodigoPostal()) + "]]></cell>");
 				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getCiudad()) + "]]></cell>");
 				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getPais()) + "]]></cell>");
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getEmail()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getCorreo()) + "]]></cell>");
 				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getComentarios()) + "]]></cell>");
 				sb.append("</row>");				
 			}
