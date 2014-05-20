@@ -35,18 +35,9 @@ public class ActualizarContrasenaAction extends MrmAction {
 		if (usuario != null){
 			usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(newPass, EncriptarUtil.MD5));
 			getUsuariosService().update(usuario);
-		}				
-		request.getSession().setAttribute("usuarioYPermisos", parseXML(usuarioYPermisos));
-		return mapping.findForward("success");
-	}
-	
-	private static final String parseXML(Object o) throws Exception {
-		UsuarioYPermisos c = (UsuarioYPermisos) o;
-		StringBuffer sb = new StringBuffer();
-		sb.append("<data>");
-		sb.append("<update_password_correct>" + ((c.getUsuario() == null) ? "NO" : "YES") + "</update_password_correct>");
-		sb.append("</data>");
-		return sb.toString();
+			return mapping.findForward("success");
+		}
+		return mapping.findForward("error");
 	}
 
 }

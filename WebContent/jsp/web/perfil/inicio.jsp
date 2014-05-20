@@ -43,12 +43,14 @@
 			    miGrid.init();
 			    miGrid.loadXML("../xml/forms/mi_perfil_form.xml");
 			    miGrid.attachEvent("onRowSelect",doOnRowSelected);
+			    b = main_layout.cells('b');
+		    	form = b.attachForm();
+			    
 			    			    
 		    });
 		    
 		    function doOnRowSelected(rowID,celInd){
-				b = main_layout.cells('b');
-		    	form = b.attachForm();
+				
 		        if (rowID == "b") verFormModificarPass();
 		    	else if (rowID == "a") verPerfil();
 		    	
@@ -91,8 +93,8 @@
 						if(form.getItemValue("newPass1") != form.getItemValue("oldPass")){
     						var newPass = form.getItemValue("newPass1");
     						var oldPass = form.getItemValue("oldPass");
-		    				form.send("actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(xml) {
-		    					goEntrada();
+		    				form.send("actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(loader, response) {
+		    					//resultadoCambiarPassword(loader,response);
 		    				});
 						}
 						else{
@@ -108,6 +110,13 @@
 				}
 		    }
 		    
+		    function resultadoCambiarPassword(loader, response) {
+		    	   /*if(response.indexOf("HTTP Status") == -1) {
+		    		      editUtForm.unload();
+		    		      editUtForm = new dhtmlXForm("utenteForm", response)
+		    		      flashMessage("Utente creato con successo");
+		    		}*/
+		    }
 		    
 		    function verPerfil(){
 		    	
