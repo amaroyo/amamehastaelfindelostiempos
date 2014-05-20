@@ -19,7 +19,7 @@
 	    <script type="text/javascript">
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b, tabbar;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -125,9 +125,9 @@
 			}
 			
 			function goActualizar() {
-				if (profesor) gridProfesor.clearAndLoad("gridusuarios.do");	 
-				else gridAlumno.clearAndLoad("gridusuarios.do");		    	
-		    	tabbar.clearAll();		    	
+				if (profesor) gridProfesores.clearAndLoad("gridusuarios.do");	 
+				else gridAlumnos.clearAndLoad("gridusuarios.do");		    	
+		    	//tabbar.clearAll();		    	
 		    }
 			
 			function goGridAlumnos(tab){

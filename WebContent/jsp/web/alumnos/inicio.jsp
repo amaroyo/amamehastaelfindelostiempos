@@ -21,7 +21,8 @@
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var miGrid, tabbar, tab_1,tab_2,tab_3,tab_4,tab_5,tab_6,tab_7, main_layout, form, b, a, gridAlumnoRealizado;
+	    	var miGrid, tabbar, tab_1,tab_2,tab_3,tab_4,tab_5,tab_6,tab_7, main_layout, form, b, a, gridAlumnoRealizadoSem, gridProfesoresTrab,
+	    				gridProfesoresCasos;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -37,18 +38,21 @@
 			    
 			    
 			    miGrid = a.attachGrid();
-			    miGrid.setIconsPath('../skins/imgs/');		    	
-			    miGrid.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />"]);
+			    miGrid.setIconsPath('../skins/imgs/');		   
+			    
+			    // INSERTAR EL LABEL CORRECTO PARA ASIGNATURAS DESPUES DEL UPDATE!!!
+			    
+			    miGrid.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","CODIGO"]);
 			    
 			    //anchura de las columnas, en porcentaje. La suma tiene que ser igual a 100
-			    miGrid.setInitWidthsP("25,60,15");
+			    miGrid.setInitWidthsP("22,50,13,15");
 			    //alineacion del contenido en la columna
-			    miGrid.setColAlign("left,left,left");
+			    miGrid.setColAlign("left,left,left,left");
 			    
-			    miGrid.setColTypes("ro,ro,ro");
+			    miGrid.setColTypes("ro,ro,ro,ro");
 		    	
 			    miGrid.enableMultiselect(false);
-			    miGrid.setColSorting('str,str,str');
+			    miGrid.setColSorting('str,str,str,ro');
 			    miGrid.init();
 		    	
 				var gridProcessor = new dataProcessor("gridusuarios.do");
@@ -60,49 +64,56 @@
 		    		}
 		    	});		    	
 
-			    miGrid.attachEvent("onRowSelect",doOnRowSelected);
+			    miGrid.attachEvent("onRowSelect",doOnRowSelectedMiGrid);
 			    
 			    buscarMisAlumnos();
 			    			    
 		    });
 		    
 		   
-		    function doOnRowSelected(rowID,celInd){
+		    function doOnRowSelectedMiGrid(rowID,celInd){
 		    	
 		    	var dni = miGrid.cells(rowID,2).getValue();
+		    	var asignatura = miGrid.cells(rowID,3).getValue();
 		    	
+		    	
+		    	b.setText(asignatura + " - " + "NOMBRE DE ASIGNATURA SELECCIONADA");
 		    	tabbar = b.attachTabbar();
+		    	b.showHeader();
+		    	
 		    	tabbar.addTab('tab_1','<bean:message key="title.datos.personales"/>','');
 		    	tab_1 = tabbar.cells('tab_1');
 		    	tabbar.setTabActive('tab_1');
-		    	goInformacion(dni);
+		    	goInformacion(dni,asignatura);
 		    	
 		    	tabbar.addTab('tab_2','<bean:message key="title.info.general.estancia"/>','');
 		    	tab_2 = tabbar.cells('tab_2');
-		    	goEstancia(dni);
+		    	goEstancia(dni,asignatura);
 		    	
 		    	tabbar.addTab('tab_3','<bean:message key="title.seminarios"/>','');
 		    	tab_3 = tabbar.cells('tab_3');
-		    	goSeminarios(dni);
+		    	goSeminarios(dni,asignatura);
 		    	
 		    	tabbar.addTab('tab_4','<bean:message key="title.trabajos.campo"/>','');
 		    	tab_4 = tabbar.cells('tab_4');
-		    	//goTrabajos(dni);
+		    	goTrabajos(dni,asignatura);
 		    	
 		    	tabbar.addTab('tab_5','<bean:message key="title.casos.clinicos"/>','');
 		    	tab_5 = tabbar.cells('tab_5');
-		    	//goCasos(dni);
+		    	goCasos(dni,asignatura);
 		    	
 		    	tabbar.addTab('tab_6','<bean:message key="title.diario.reflexivo"/>','');
 		    	tab_6 = tabbar.cells('tab_6');
-		    	//goCasos(dni);
+		    	goDiarios(dni,asignatura);
 		    	
 		    	tabbar.addTab('tab_7','<bean:message key="title.rubrica"/>','');
 		    	tab_7 = tabbar.cells('tab_7');
-		    	//goCasos(dni);
+		    	goRubricas(dni,asignatura);
 		    	
 		    	
 		    }
+		    
+		    
 		    
 		    
 		    function buscarMisAlumnos() {
@@ -110,10 +121,10 @@
 		    }
 		    
 		    function buscarSeminarios() {
-		    	gridAlumnoRealizado.clearAndLoad("gridusuarios.do");		    	
+		    	gridAlumnoRealizadoSem.clearAndLoad("gridusuarios.do");		    	
 		    }
 		    
-		    function goInformacion(dni){
+		    function goInformacion(dni,asignatura){
 		    	
 		    	var form = tab_1.attachForm();
 		    	form.loadStruct('../xml/forms/usuario_form.xml', function(){
@@ -157,7 +168,7 @@
 		    }
 		    
 		    
-		    function goEstancia(dni){
+		    function goEstancia(dni,asignatura){
 		    	
 		    	var form2 = tab_2.attachForm();
 		    	form2.loadStruct('../xml/forms/estancia_form.xml', function(){
@@ -196,7 +207,7 @@
 				
 		    }
 		    
-		    function goSeminarios(dni){	    	
+		    function goSeminarios(dni,asignatura){	    	
 		    	
 		    	var mini_layout = tabbar.cells('tab_3').attachLayout("2U","dhx_skyblue");
 		    	
@@ -209,27 +220,27 @@
 	    		mb.setWidth(500);
 			    
 			    
-				gridAlumnoRealizado = ma.attachGrid();
+				gridAlumnoRealizadoSem = ma.attachGrid();
 		    	
-		    	gridAlumnoRealizado.setHeader(["<bean:message key="label.nombre.seminario" />","<bean:message key="label.codigo.seminario" />","<bean:message key="label.descripcion.seminario" />"]);
-		    	gridAlumnoRealizado.setColTypes("ro,ro,ro");
+		    	gridAlumnoRealizadoSem.setHeader(["<bean:message key="label.nombre.seminario" />","<bean:message key="label.codigo.seminario" />","<bean:message key="label.descripcion.seminario" />"]);
+		    	gridAlumnoRealizadoSem.setColTypes("ro,ro,ro");
 		    	
-		    	gridAlumnoRealizado.setColSorting('str,str,str');
-		    	gridAlumnoRealizado.enableMultiselect(false);
-		    	gridAlumnoRealizado.init();
+		    	gridAlumnoRealizadoSem.setColSorting('str,str,str');
+		    	gridAlumnoRealizadoSem.enableMultiselect(false);
+		    	gridAlumnoRealizadoSem.init();
 		    	
-		    	var gridAlumnoRealizadoPro = new dataProcessor("gridusuarios.do");
-		    	gridAlumnoRealizadoPro.enableUTFencoding('simple');
-		    	gridAlumnoRealizadoPro.init(gridAlumnoRealizado);	  
-		    	gridAlumnoRealizadoPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+		    	var gridAlumnoRealizadoSemPro = new dataProcessor("gridusuarios.do");
+		    	gridAlumnoRealizadoSemPro.enableUTFencoding('simple');
+		    	gridAlumnoRealizadoSemPro.init(gridAlumnoRealizadoSem);	  
+		    	gridAlumnoRealizadoSemPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
 					if(action == 'error'){
 		    			dhtmlx.message(tag.firstChild.data,action,4000);
 		    		}
 		    	});
 	    		
-		    	gridAlumnoRealizado.attachEvent("onRowSelect", function(row,ind){
+		    	gridAlumnoRealizadoSem.attachEvent("onRowSelect", function(row,ind){
 
-		    		selectedCode=gridAlumnoRealizado.cells(row,1).getValue();
+		    		selectedCode=gridAlumnoRealizadoSem.cells(row,1).getValue();
 		    		
 		    		
 		    		var formSeminarioAlumno = mb.attachForm();
@@ -271,8 +282,261 @@
 		    }
 		    
 		    
+			function goTrabajos(dni,asignatura){
+				
+				var mini_layout = tabbar.cells('tab_4').attachLayout("2U","dhx_skyblue");
+		    	
+		    	var ma = mini_layout.cells('a');
+			    var mb = mini_layout.cells('b');
+			    
+	    		mb.setWidth(250);
+	    		ma.hideHeader();
+				mb.setText('<bean:message key="label.opciones.alumno"/>');
+				
+				var toolbarServicios = ma.attachToolbar();
+		    	toolbarServicios.setIconsPath('../img/toolbar/');
+
+		    	
+		    	toolbarServicios.loadXML('../xml/toolbars/dhtxtoolbar-trabajos-campo.xml', function(){
+		    		toolbarServicios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
+		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.trabajos"/>");
+		    		toolbarServicios.setItemText('subirCorrecciones',"<bean:message key="button.subir.correcciones"/>");
+		    		toolbarServicios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
+		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+		    	});
+		    	
+		    	
+				gridProfesoresTrab = ma.attachGrid();
+		    	
+				gridProfesoresTrab.setHeader(["<bean:message key="label.alumno" />","<bean:message key="label.dni" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
+				gridProfesoresTrab.setColTypes("ro,ro,ro,ro");
+		    	
+				gridProfesoresTrab.setColSorting('str,str,str,str');
+				gridProfesoresTrab.enableMultiselect(false);
+				gridProfesoresTrab.init();
+		    	
+		    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+		    	gridProcessorPro.enableUTFencoding('simple');
+		    	gridProcessorPro.init(gridProfesoresTrab);	  
+		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+					if(action == 'error'){
+		    			dhtmlx.message(tag.firstChild.data,action,4000);
+		    		}
+		    	});
+
+		    	
+		    	gridProfesoresTrab.attachEvent("onRowSelect", function doOnRowSelected(rowID,celInd){
+		    		var miGrid = mb.attachGrid();
+				    miGrid.setIconsPath('../skins/imgs/');		    	
+				    miGrid.setHeader(["<strong><bean:message key="label.mi.perfil" /></strong>"]);
+				    //set readonly (ro)
+				    miGrid.setColTypes("ro");
+				    miGrid.setNoHeader(true);
+				    miGrid.enableMultiselect(false);
+				    miGrid.init();
+				    miGrid.loadXML("../xml/forms/asignaturas_trabajos_opciones.xml");
+				    miGrid.attachEvent("onRowSelect",doOnRowSelectedOptions); 
+		    		
+		    	});
+		    	
+		    	gridProfesoresTrab.clearAndLoad("gridusuarios.do");
+		    	
+		    }
+			
+   
+			
+			function doOnRowSelectedOptions(rowID,celInd){
+				
+				if (rowID == "a") alert("Descargar");
+		    	else if (rowID == "b") alert("Subir corrección");
+		    	else alert("Cambiar la fecha de entrega");
+			}
 		    
+			
+			function subirPractica(){
+				alert("subir Practica");
+			}
+			
+			function descargarTodos(){
+				alert("Descargar Todos");
+			}
+			
+			function subirCorrecciones(){
+				alert("Subir Correcciones");
+			}
+			
+			function fechaLimite(){
+				alert("Fecha Limite");
+			}
+			
+			function goActualizar() {
+				gridProfesoresTrab.clearAndLoad("gridusuarios.do");	 	   		    	
+		    }
+			
+			
+			function goCasos(dni,asignatura){
+				
+				var mini_layout = tabbar.cells('tab_5').attachLayout("2U","dhx_skyblue");
+		    	
+		    	var ma = mini_layout.cells('a');
+			    var mb = mini_layout.cells('b');
+			    
+			    mb.setWidth(250);
+	    		ma.hideHeader();
+				mb.setText('<bean:message key="label.casos.clinicos.alumno"/>');
+				
+				var toolbarServiciosCasos = ma.attachToolbar();
+				toolbarServiciosCasos.setIconsPath('../img/toolbar/');
+
+		    	
+				toolbarServiciosCasos.loadXML('../xml/toolbars/dhtxtoolbar-trabajos-campo.xml', function(){
+					toolbarServiciosCasos.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
+					toolbarServiciosCasos.setItemText('descargarTodos',"<bean:message key="button.descargar.casos"/>");
+					toolbarServiciosCasos.setItemText('subirCorrecciones',"<bean:message key="button.subir.correcciones"/>");
+					toolbarServiciosCasos.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
+					toolbarServiciosCasos.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+		    	});
+				
+				
+				gridProfesoresCasos = ma.attachGrid();
+		    	
+				gridProfesoresCasos.setHeader(["<bean:message key="label.alumno" />","<bean:message key="label.dni" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
+				gridProfesoresCasos.setColTypes("ro,ro,ro,ro");
+		    	
+				gridProfesoresCasos.setColSorting('str,str,str,str');
+				gridProfesoresCasos.enableMultiselect(false);
+				gridProfesoresCasos.init();
+		    	
+		    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+		    	gridProcessorPro.enableUTFencoding('simple');
+		    	gridProcessorPro.init(gridProfesoresCasos);	  
+		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+					if(action == 'error'){
+		    			dhtmlx.message(tag.firstChild.data,action,4000);
+		    		}
+		    	});
+
+		    	
+		    	gridProfesoresCasos.attachEvent("onRowSelect",function doOnRowSelected(rowID,celInd){
+		    		
+		    		var gridProfesoresAlumno = mb.attachGrid();
+					
+			    	
+					gridProfesoresAlumno.setHeader(["<bean:message key="label.nombre" />", "<bean:message key="label.fecha" />"]);
+					gridProfesoresAlumno.setColTypes("ro,ro");
+			    	
+					gridProfesoresAlumno.setColSorting('str, str');
+					gridProfesoresAlumno.enableMultiselect(false);
+					gridProfesoresAlumno.init();
+			    	
+			    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+			    	gridProcessorPro.enableUTFencoding('simple');
+			    	gridProcessorPro.init(gridProfesoresAlumno);	  
+			    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+						if(action == 'error'){
+			    			dhtmlx.message(tag.firstChild.data,action,4000);
+			    		}
+			    	});
+
+			    	   	
+			    	gridProfesoresAlumno.attachEvent("onRowSelect",doOnRowSelectedOptionsCasos);
+			    	gridProfesoresAlumno.clearAndLoad("gridusuarios.do");
+		    	});
+		    	
+		    	gridProfesoresCasos.clearAndLoad("gridusuarios.do");
+				
+				
+			}
+			
+			function doOnRowSelectedOptionsCasos(rowID,celInd){
+				alert("Descargar Archivo");
+	
+			}
 		    
+			
+			function goDiarios(dni,asignatura){
+				
+				var mini_layout = tabbar.cells('tab_6').attachLayout("2U","dhx_skyblue");
+		    	
+		    	var ma = mini_layout.cells('a');
+			    var mb = mini_layout.cells('b');
+			    
+			    mb.setWidth(250);
+	    		ma.hideHeader();
+				mb.setText('<bean:message key="label.diario.reflexivo.alumno"/>');
+				
+				var toolbarServiciosDiarios = ma.attachToolbar();
+				toolbarServiciosDiarios.setIconsPath('../img/toolbar/');
+
+		    	
+				toolbarServiciosDiarios.loadXML('../xml/toolbars/dhtxtoolbar-trabajos-campo.xml', function(){
+					toolbarServiciosDiarios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
+					toolbarServiciosDiarios.setItemText('descargarTodos',"<bean:message key="button.descargar.casos"/>");
+					toolbarServiciosDiarios.setItemText('subirCorrecciones',"<bean:message key="button.subir.correcciones"/>");
+					toolbarServiciosDiarios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
+					toolbarServiciosDiarios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+		    	});
+				
+				
+				gridProfesoresDiarios = ma.attachGrid();
+		    	
+				gridProfesoresDiarios.setHeader(["<bean:message key="label.alumno" />","<bean:message key="label.dni" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
+				gridProfesoresDiarios.setColTypes("ro,ro,ro,ro");
+		    	
+				gridProfesoresDiarios.setColSorting('str,str,str,str');
+				gridProfesoresDiarios.enableMultiselect(false);
+				gridProfesoresDiarios.init();
+		    	
+		    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+		    	gridProcessorPro.enableUTFencoding('simple');
+		    	gridProcessorPro.init(gridProfesoresDiarios);	  
+		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+					if(action == 'error'){
+		    			dhtmlx.message(tag.firstChild.data,action,4000);
+		    		}
+		    	});
+
+		    	
+		    	gridProfesoresDiarios.attachEvent("onRowSelect",function doOnRowSelected(rowID,celInd){
+		    		
+		    		var gridProfesoresAlumno = mb.attachGrid();
+					
+			    	
+					gridProfesoresAlumno.setHeader(["<bean:message key="label.nombre" />", "<bean:message key="label.fecha" />"]);
+					gridProfesoresAlumno.setColTypes("ro,ro");
+			    	
+					gridProfesoresAlumno.setColSorting('str, str');
+					gridProfesoresAlumno.enableMultiselect(false);
+					gridProfesoresAlumno.init();
+			    	
+			    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+			    	gridProcessorPro.enableUTFencoding('simple');
+			    	gridProcessorPro.init(gridProfesoresAlumno);	  
+			    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+						if(action == 'error'){
+			    			dhtmlx.message(tag.firstChild.data,action,4000);
+			    		}
+			    	});
+
+			    	   	
+			    	gridProfesoresAlumno.attachEvent("onRowSelect",doOnRowSelectedOptionsDiarios);
+			    	gridProfesoresAlumno.clearAndLoad("gridusuarios.do");
+		    	});
+		    	
+		    	gridProfesoresDiarios.clearAndLoad("gridusuarios.do");
+			}
+			
+			
+			function doOnRowSelectedOptionsDiarios(rowID,celInd){
+				alert("Descargar Archivo");
+	
+			}
+			
+			
+			function goRubricas(dni,asignatura){
+				
+				
+			}
 		    
 		    
         </script>

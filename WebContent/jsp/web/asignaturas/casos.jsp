@@ -96,9 +96,9 @@
 			}
 			
 			function goActualizar() {
-				if (profesor) gridProfesor.clearAndLoad("gridusuarios.do");	 
-				else gridAlumno.clearAndLoad("gridusuarios.do");		    	
-		    	tabbar.clearAll();		    	
+				if (profesor) gridProfesores.clearAndLoad("gridusuarios.do");	 
+				else gridAlumnos.clearAndLoad("gridusuarios.do");		    	
+		    	//tabbar.clearAll();		    	
 		    }
 			
 			function goGridAlumnos(){

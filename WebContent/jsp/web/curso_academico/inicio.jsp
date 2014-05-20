@@ -29,11 +29,11 @@
 
 
 				var dhxWins= new dhtmlXWindows(document.body);
-				var window = dhxWins.createWindow("CambiarAnyoAcademico", 300, 50, 465, 300);
-				window.setText('<bean:message key="title.time.machine" />');				
-				window.setModal(true);
-				window.centerOnScreen();
-				var form = window.attachForm();			
+				var mywindow = dhxWins.createWindow("CambiarAnyoAcademico", 300, 50, 465, 300);
+				mywindow.setText('<bean:message key="title.time.machine" />');				
+				mywindow.setModal(true);
+				mywindow.centerOnScreen();
+				var form = mywindow.attachForm();			
 		    	form.loadStruct('../xml/forms/cambiar_anyo_academico.xml', function() {
 		    		form.setItemLabel('data1','<bean:message key="title.aviso.importante"/>');
 		    		form.setItemLabel('labelAviso','<bean:message key="message.cambiar.anyo.academico"/>');
@@ -50,8 +50,9 @@
 	    					if(selec != ann){
 	    						//HAY Q HACER UN SET DEL ATRIBUTO!!!!!
 	    						alert('<bean:message key="message.cambio.satisfactorio"/>');
+	    						
 	    					}
-	    					window.close();
+	    					mywindow.close();
 	    					
 	    				}
 		    		});
