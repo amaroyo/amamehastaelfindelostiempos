@@ -2,10 +2,8 @@ package es.oyssen.mrm.negocio.vo;
 
 public class PermisoGrupoVO {
 	
-	private String idPermisoGrupo;
-	private String idGrupo;
-	private String idPermiso;
-	private String nombre; 
+	private String id_grupo;
+	private String id_permiso;
 	
 	
 	public PermisoGrupoVO() {
@@ -13,62 +11,63 @@ public class PermisoGrupoVO {
 	}
 
 	public String getIdGrupo() {
-		return idGrupo;
+		return id_grupo;
 	}
 
 	public void setIdGrupo(String idGrupo) {
-		this.idGrupo = idGrupo;
-	}
-
-	public String getIdPermisoGrupo() {
-		return idPermisoGrupo;
-	}
-
-	public void setIdPermisoGrupo(String idPermisoGrupo) {
-		this.idPermisoGrupo = idPermisoGrupo;
+		this.id_grupo = idGrupo;
 	}
 	
 	public String getIdPermiso() {
-		return idPermiso;
+		return id_permiso;
 	}
 	
 	public void setIdPermiso(String idPermiso) {
-		this.idPermiso = idPermiso;
+		this.id_permiso = idPermiso;
 	}
 	
-	public String getNombre() {
-		return nombre;
-	}
 	
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		PermisoGrupoVO other = (PermisoGrupoVO) obj;
+		if (id_grupo == null) {
+			if (other.id_grupo != null) {
+				return false;
+			}
+		}
+		else if (!id_grupo.equals(other.id_grupo)) {
+			return false;
+		}
+		if (id_permiso == null) {
+			if (other.id_permiso != null) {
+				return false;
+			}
+		}
+		else if (!id_permiso.equals(other.id_permiso)) {
+			return false;
+		}
+		return true;
 	}
 
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((idPermisoGrupo == null) ? 0 : idPermisoGrupo.hashCode());
+				+ ((id_grupo == null) ? 0 : id_grupo.hashCode());
+		result = prime * result
+				+ ((id_permiso == null) ? 0 : id_permiso.hashCode());
 		return result;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PermisoGrupoVO other = (PermisoGrupoVO) obj;
-		if (idPermisoGrupo == null) {
-			if (other.idPermisoGrupo != null)
-				return false;
-		} else if (!idPermisoGrupo.equals(other.idPermisoGrupo))
-			return false;
-		return true;
 	}
 	
 }

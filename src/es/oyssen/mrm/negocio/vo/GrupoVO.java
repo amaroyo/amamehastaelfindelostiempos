@@ -2,25 +2,25 @@ package es.oyssen.mrm.negocio.vo;
 
 public class GrupoVO {
 	
-	private String idGrupo;
+	private String id_grupo;
 	private String nombre; 
-	
+	private String descripcion; 
 	
 	public GrupoVO() {
 		
 	}
 	
 	public GrupoVO(String id, String nombre) {
-		this.idGrupo = id;
+		this.id_grupo = id;
 		this.nombre = nombre;
 	}
 	
 	public String getIdGrupo() {
-		return idGrupo;
+		return id_grupo;
 	}
 	
 	public void setIdGrupo(String idGrupo) {
-		this.idGrupo = idGrupo;
+		this.id_grupo = idGrupo;
 	}
 	
 	public String getNombre() {
@@ -37,7 +37,7 @@ public class GrupoVO {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((idGrupo == null) ? 0 : idGrupo.hashCode());
+				+ ((id_grupo == null) ? 0 : id_grupo.hashCode());
 		return result;
 	}
 	
@@ -50,12 +50,20 @@ public class GrupoVO {
 		if (getClass() != obj.getClass())
 			return false;
 		GrupoVO other = (GrupoVO) obj;
-		if (idGrupo == null) {
-			if (other.idGrupo != null)
+		if (id_grupo == null) {
+			if (other.id_grupo != null)
 				return false;
-		} else if (!idGrupo.equals(other.idGrupo))
+		} else if (!id_grupo.equals(other.id_grupo))
 			return false;
 		return true;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 	
 }

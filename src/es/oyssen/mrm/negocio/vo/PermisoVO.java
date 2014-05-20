@@ -2,8 +2,9 @@ package es.oyssen.mrm.negocio.vo;
 
 public class PermisoVO {
 	
-	private String idPermiso;
-	private String nombre; 
+	private String id_permiso;
+	private String nombre;
+	private String descripcion;
 	
 	
 	public PermisoVO() {
@@ -11,16 +12,16 @@ public class PermisoVO {
 	}
 	
 	public PermisoVO(String id, String nombre) {
-		this.idPermiso = id;
+		this.id_permiso = id;
 		this.nombre = nombre;
 	}
 	
 	public String getIdPermiso() {
-		return idPermiso;
+		return id_permiso;
 	}
 	
 	public void setIdPermiso(String idPermiso) {
-		this.idPermiso = idPermiso;
+		this.id_permiso = idPermiso;
 	}
 	
 	public String getNombre() {
@@ -37,7 +38,7 @@ public class PermisoVO {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((idPermiso == null) ? 0 : idPermiso.hashCode());
+				+ ((id_permiso == null) ? 0 : id_permiso.hashCode());
 		return result;
 	}
 	
@@ -50,12 +51,20 @@ public class PermisoVO {
 		if (getClass() != obj.getClass())
 			return false;
 		PermisoVO other = (PermisoVO) obj;
-		if (idPermiso == null) {
-			if (other.idPermiso != null)
+		if (id_permiso == null) {
+			if (other.id_permiso != null)
 				return false;
-		} else if (!idPermiso.equals(other.idPermiso))
+		} else if (!id_permiso.equals(other.id_permiso))
 			return false;
 		return true;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 	
 }
