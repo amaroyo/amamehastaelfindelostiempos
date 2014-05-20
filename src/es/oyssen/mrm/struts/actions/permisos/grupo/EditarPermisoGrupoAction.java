@@ -30,10 +30,8 @@ public class EditarPermisoGrupoAction extends DHTMLXFormAction {
 		PermisoGrupoVO c = (PermisoGrupoVO) o;
 		StringBuffer sb = new StringBuffer();
 		sb.append("<data>");
-		sb.append("<idPermisoGrupo><![CDATA[" + c.getIdPermisoGrupo() + "]]></idPermisoGrupo>");
 		sb.append("<idPermiso><![CDATA[" + c.getIdPermiso() + "]]></idPermiso>");
 		sb.append("<idGrupo><![CDATA[" + c.getIdGrupo() + "]]></idGrupo>");
-		sb.append("<nombre><![CDATA[" + c.getNombre() + "]]></nombre>");
 		sb.append("</data>");
 		
 		return sb.toString();

@@ -26,7 +26,7 @@ public class MySqlDAOLogsUsuarioImpl extends DAOBase implements DAOLogsUsuario{
 	
 	public void insert(final LogUsuarioVO logUsuario) throws DAOException,
 			DAOInsertException {
-		try{
+		/*try{
 			KeyHolder kh = new GeneratedKeyHolder();
 			getJdbcTemplate().update(new PreparedStatementCreator() {
 				
@@ -46,18 +46,19 @@ public class MySqlDAOLogsUsuarioImpl extends DAOBase implements DAOLogsUsuario{
 			
 		} catch (Exception e) {
 			throw new DAOInsertException(e);
-		}			
+		}/*/		
 	}
 	
 
 	public List<LogUsuarioVO> findAll() throws DAOException {
-		try {
+		/*try {
 			return getJdbcTemplate().query(SQL_FIND_ALL, new Object[]{}, new LogUsuarioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
 			throw new DAOException(e);
-		}
+		}*/
+		return null;
 	}
 	
 }

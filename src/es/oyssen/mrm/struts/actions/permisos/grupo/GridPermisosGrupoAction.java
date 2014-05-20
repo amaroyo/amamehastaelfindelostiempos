@@ -39,9 +39,10 @@ public class GridPermisosGrupoAction extends DHTMLXGridAction {
 
 	@Override
 	public void delete(DhtmlxGridForm f) throws Exception {
-		PermisoGrupoVO permisoGrupo = new PermisoGrupoVO();
+		// TODO
+		/*PermisoGrupoVO permisoGrupo = new PermisoGrupoVO();
 		permisoGrupo.setIdPermisoGrupo(f.getGr_id());
-		getPermisosGrupoService().delete(permisoGrupo);	
+		getPermisosGrupoService().delete(permisoGrupo);	*/
 	}
 
 }
