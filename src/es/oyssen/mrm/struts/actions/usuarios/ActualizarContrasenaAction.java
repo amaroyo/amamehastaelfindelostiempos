@@ -1,5 +1,8 @@
 package es.oyssen.mrm.struts.actions.usuarios;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,12 +35,22 @@ public class ActualizarContrasenaAction extends MrmAction {
 		usuario = getUsuariosService().findByCorreoPass(usuario);	
 		usuarioYPermisos.setUsuario(usuario);	
 		
+		//application/json or application/xml
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out;
+	    out = response.getWriter();
 		if (usuario != null){
 			usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(newPass, EncriptarUtil.MD5));
 			getUsuariosService().update(usuario);
-			return mapping.findForward("success");
+			out.print("password changed");
 		}
-		return mapping.findForward("error");
+		else {
+			out.print("password not changed: incorrect password");
+		}
+		
+		out.flush();
+		out.close();
+		return mapping.findForward("success");
 	}
 
 }

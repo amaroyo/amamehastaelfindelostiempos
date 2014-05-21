@@ -42,15 +42,12 @@
 			    miGrid.enableMultiselect(false);
 			    miGrid.init();
 			    miGrid.loadXML("../xml/forms/mi_perfil_form.xml");
-			    miGrid.attachEvent("onRowSelect",doOnRowSelected);
-			    b = main_layout.cells('b');
-		    	form = b.attachForm();
-			    
-			    			    
+			    miGrid.attachEvent("onRowSelect",doOnRowSelected);    
 		    });
 		    
 		    function doOnRowSelected(rowID,celInd){
-				
+		    	b = main_layout.cells('b');
+		    	form = b.attachForm();
 		        if (rowID == "b") verFormModificarPass();
 		    	else if (rowID == "a") verPerfil();
 		    	
@@ -94,7 +91,7 @@
     						var newPass = form.getItemValue("newPass1");
     						var oldPass = form.getItemValue("oldPass");
 		    				form.send("actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(loader, response) {
-		    					//resultadoCambiarPassword(loader,response);
+		    					resultadoCambiarPassword(response);
 		    				});
 						}
 						else{
@@ -110,13 +107,29 @@
 				}
 		    }
 		    
-		    function resultadoCambiarPassword(loader, response) {
-		    	   /*if(response.indexOf("HTTP Status") == -1) {
-		    		      editUtForm.unload();
-		    		      editUtForm = new dhtmlXForm("utenteForm", response)
-		    		      flashMessage("Utente creato con successo");
-		    		}*/
+		    
+		    
+		    function resultadoCambiarPassword(response) {
+		    	if(response == "password changed"){
+		    		successfulUpdatePassword();
+		    	}
+		    	else
+		    		if(response == "password not changed: incorrect password"){
+		    			failedUpdatePassword();
+			    	}
 		    }
+		    
+		    
+		    
+		    function failedUpdatePassword() {
+	    		alert('<bean:message key="message.pass.no.correcto" />');
+	    	}
+	    	
+	    	function successfulUpdatePassword() {
+	    		alert('<bean:message key="message.pass.cambiado.exito" />');
+	    	}
+	    	
+	    	
 		    
 		    function verPerfil(){
 		    	
