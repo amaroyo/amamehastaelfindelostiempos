@@ -1,6 +1,5 @@
 package es.oyssen.mrm.struts.actions.usuarios;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;

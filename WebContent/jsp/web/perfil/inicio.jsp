@@ -85,23 +85,37 @@
 		    
 		    
 		    function processPasswords(){
-		    	if(form.getItemValue("newPass1") != "" && form.getItemValue("newPass2") != ""){
-					if (form.getItemValue("newPass1") == form.getItemValue("newPass2")){
-						if(form.getItemValue("newPass1") != form.getItemValue("oldPass")){
-    						var newPass = form.getItemValue("newPass1");
-    						var oldPass = form.getItemValue("oldPass");
-		    				form.send("actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(loader, response) {
-		    					resultadoCambiarPassword(response);
-		    				});
+		    	if(form.getItemValue("oldPass") != "") {
+		    		if(form.getItemValue("newPass1") != "") {
+		    			if(form.getItemValue("newPass2") != "") {
+							if (form.getItemValue("newPass1") == form.getItemValue("newPass2")){
+								if(form.getItemValue("newPass1") != form.getItemValue("oldPass")){
+		    						var newPass = form.getItemValue("newPass1");
+		    						var oldPass = form.getItemValue("oldPass");
+				    				form.send("actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(loader, response) {
+				    					resultadoCambiarPassword(response);
+				    				});
+								}
+								else{
+									alert('<bean:message key="message.pass.iguales" />');
+									form.setItemValue("newPass1", "");
+									form.setItemValue("newPass2", "");
+								}
+							} 
+							else {
+								alert('<bean:message key="message.pass.no.coincide" />');
+								form.setItemValue("newPass1", "");
+								form.setItemValue("newPass2", "");
+							}
+		    			}
+		    			else {
+							alert('<bean:message key="message.pass.vacio" />');
 						}
-						else{
-							alert('<bean:message key="message.pass.iguales" />');
-						}
-					} 
-					else {
-						alert('<bean:message key="message.pass.no.coincide" />');
+		    		}
+		    		else {
+						alert('<bean:message key="message.pass.vacio" />');
 					}
-				}
+		    	}
 				else {
 					alert('<bean:message key="message.pass.vacio" />');
 				}
@@ -112,10 +126,12 @@
 		    function resultadoCambiarPassword(response) {
 		    	if(response == "password changed"){
 		    		successfulUpdatePassword();
+		    		form.clear();
 		    	}
 		    	else
 		    		if(response == "password not changed: incorrect password"){
 		    			failedUpdatePassword();
+		    			form.setItemValue("oldPass", "");
 			    	}
 		    }
 		    
@@ -137,17 +153,17 @@
 		    		form.setItemLabel('data','<bean:message key="title.datos.personales"/>');
 		    		form.setItemLabel('grupo','<bean:message key="label.group"/>');
 		    		form.setItemLabel('nombre','<bean:message key="label.nombre"/>');
+		    		form.setItemLabel('apellido1','<bean:message key="label.apellido1"/>');
+		    		form.setItemLabel('apellido2','<bean:message key="label.apellido2"/>');
+		    		form.setItemLabel('dni','<bean:message key="label.dni"/>');
 		    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
-		    		form.setItemLabel('telefonoMovil','<bean:message key="label.telefono.movil"/>');
-		    		form.setItemLabel('direccion','<bean:message key="label.direccion"/>');
-		    		form.setItemLabel('codigoPostal','<bean:message key="label.postal.code"/>');
-		    		form.setItemLabel('ciudad','<bean:message key="label.ciudad"/>');
-		    		form.setItemLabel('pais','<bean:message key="label.pais"/>');
-		    		form.setItemLabel('email','<bean:message key="label.address.email"/>');
-		    		form.setItemLabel('comentarios','<bean:message key="label.comentarios"/>');
-		    		form.setItemLabel('user','<bean:message key="label.user"/>');
-		    		form.setItemLabel('pass','<bean:message key="label.pass"/>');			    		
+		    		form.setItemLabel('email','<bean:message key="label.address.email"/>');	
+		    		form.setItemLabel('foto','<bean:message key="label.foto"/>');	
 		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+		    		
+		    		
+		    	
+		    		//foto LONGBLOB, 
 		    		
 		    		form.setFocusOnFirstActive();
 
@@ -157,12 +173,7 @@
 						</logic:notMatch>
 					</logic:notMatch>
 
-					
-					form.attachEvent("onEnter", function() {
-						form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-							alert('<bean:message key="message.perfil.cambiado.exito"/>');
-						}); 
-		    		});
+				
 					
 					<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
 					idSelectedUser = <%=sessionIdUser%>;
@@ -177,7 +188,13 @@
 							}
 						});
 					});
+					//myForm.getContainer(name).innerHTML = ''<img src=...>"
 					
+					form.attachEvent("onEnter", function() {
+						form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+							alert('<bean:message key="message.perfil.cambiado.exito"/>');
+						}); 
+		    		});
 					
 		    	});
 		    }

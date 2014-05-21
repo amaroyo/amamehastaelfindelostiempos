@@ -27,7 +27,7 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 			return getUsuariosService().findById(usuario);
 			
 		}
-		else {
+		else {//if (!StringUtil.isNullOrBlank(form.getDni()))
 			
 			usuario.setDni(form.getDni());
 			return getUsuariosService().findByDni(usuario);
@@ -107,7 +107,7 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<data>");
 		sb.append("<grupo><![CDATA[" + nombreGrupo(c.getIdGrupo()) + "]]></grupo>");
-		sb.append("<correo><![CDATA[" + nombreGrupo(c.getCorreo()) + "]]></correo>");
+		sb.append("<email><![CDATA[" + c.getCorreo() + "]]></email>");
 		sb.append("<nombre><![CDATA[" + c.getNombre() + "]]></nombre>");
 		sb.append("<apellido1><![CDATA[" + c.getApellido1() + "]]></apellido1>");
 		sb.append("<apellido2><![CDATA[" + c.getApellido2() + "]]></apellido2>");
