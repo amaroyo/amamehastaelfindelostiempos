@@ -1,7 +1,10 @@
 package es.oyssen.mrm.struts.actions.usuarios;
 
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -34,8 +37,9 @@ public class ActualizarContrasenaAction extends MrmAction {
 		usuario = getUsuariosService().findByCorreoPass(usuario);	
 		usuarioYPermisos.setUsuario(usuario);	
 		
-		//application/json or application/xml
-		response.setContentType("text/html;charset=utf-8");
+		
+		//application/json or application/xml text/html
+		response.setContentType("text/xml;charset=utf-8");
 		PrintWriter out;
 	    out = response.getWriter();
 		if (usuario != null){

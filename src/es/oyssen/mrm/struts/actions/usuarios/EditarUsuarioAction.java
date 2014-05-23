@@ -15,9 +15,9 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		EditarUsuarioForm form = (EditarUsuarioForm) f;
 		UsuarioVO usuario = new UsuarioVO();
 		
-		if (!StringUtil.isNullOrBlank(form.getCorreo())){
+		if (!StringUtil.isNullOrBlank(form.getEmail())){
 			
-			usuario.setCorreo(form.getCorreo());
+			usuario.setCorreo(form.getEmail());
 			return getUsuariosService().findByCorreo(usuario);
 			
 		} 
@@ -43,18 +43,18 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		
 		//ESTO HAY QUE CAMBIARLO A BUSCAR SEGUN EMAIL O DNI, YA QUE SON UNIQUE
 		//EN ESTE CASO EL UNICO CAMPO UNIQUE A PARTE DEL ID ES EL USER (del form)
-		usuario.setCorreo(form.getCorreo());
+		usuario.setCorreo(form.getEmail());
 		if (getUsuariosService().findByCorreo(usuario) != null)
 			System.out.println("================>ESTE USUARIO YA EXISTE<===========================");
 		else{
-			usuario.setIdGrupo(form.getIdGrupo());
-			usuario.setCorreo(form.getCorreo());
+			usuario.setIdGrupo(form.getGrupo());
+			usuario.setCorreo(form.getEmail());
 			usuario.setNombre(form.getNombre());
 			usuario.setApellido1(form.getApellido1());
 			usuario.setApellido2(form.getApellido2());
 			usuario.setDni(form.getDni());
 			usuario.setTelefono(form.getTelefono());
-			usuario.setFoto(form.getFoto());
+			usuario.setFoto(form.getFotoUri());
 			
 			if (!StringUtil.isNullOrBlank(form.getContrasenya()))
 				usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(form.getContrasenya(), EncriptarUtil.MD5));
@@ -75,27 +75,28 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		//EN MIS ALUMNOS, SOLO APARECERA NOMBRE, APELLIDOS Y DNI
 		
 		EditarUsuarioForm form = (EditarUsuarioForm) f;
+		
 		UsuarioVO usuario = new UsuarioVO();
 		
-		usuario.setCorreo(form.getCorreo());
 		
-		if (StringUtil.isNullOrBlank(form.getIdUsuario()))
-			usuario.setIdUsuario(getUsuariosService().findByCorreo(usuario).getIdUsuario());
-		else 
+		if (StringUtil.isNullOrBlank(form.getIdUsuario())) {
+			if (!StringUtil.isNullOrBlank(form.getEmail())) {
+				usuario.setCorreo(form.getEmail());
+				usuario.setIdUsuario(getUsuariosService().findByCorreo(usuario).getIdUsuario());
+			}
+		}
+		else  {
 			usuario.setIdUsuario(form.getIdUsuario());
-			usuario.setIdGrupo(form.getIdGrupo());
-			usuario.setCorreo(form.getCorreo());
-			usuario.setNombre(form.getNombre());
-			usuario.setApellido1(form.getApellido1());
-			usuario.setApellido2(form.getApellido2());
-			usuario.setDni(form.getDni());
-			usuario.setTelefono(form.getTelefono());
-			usuario.setFoto(form.getFoto());
-		
-		if (!StringUtil.isNullOrBlank(form.getContrasenya()))
-			usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(form.getContrasenya(), EncriptarUtil.MD5));
-		else
-			usuario.setContrasenya(null);
+		}
+		usuario.setIdGrupo(idGrupo(form.getGrupo()));
+		usuario.setCorreo(form.getEmail());
+		usuario.setNombre(form.getNombre());
+		usuario.setApellido1(form.getApellido1());
+		usuario.setApellido2(form.getApellido2());
+		usuario.setDni(form.getDni());
+		usuario.setTelefono(form.getTelefono());
+		usuario.setFoto(form.getFotoUri());
+		usuario.setContrasenya(null);
 		
 		getUsuariosService().update(usuario);
 		
@@ -128,6 +129,15 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		else if (id.equals("4")) return "Sales rep.";
 		else if (id.equals("5")) return "Supplier";
 		else return "";
+	}
+	
+	private String idGrupo(String id){
+		if (id.equals("Super user")) return "1";
+		else if (id.equals("Channel")) return "2";
+		else if (id.equals("Distributor")) return "3";
+		else if (id.equals("Sales rep.")) return "4";
+		else if (id.equals("Supplier")) return "5";
+		else return "-1";
 	}
 	
 

@@ -24,7 +24,7 @@ import es.oyssen.mrm.negocio.vo.UsuarioVO;
 public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 	
 	private static String SQL_INSERT = "insert into usuarios (id_grupo, correo_ucm, contrasenya, nombre, apellido1, apellido2, dni, telefono, foto) values (?,?,?,?,?,?,?,?,?)";
-	private static String SQL_UPDATE = "update usuarios set nombre=?, apellido1=?, apellido2=?, dni=?, telefono=?, foto=?";
+	private static String SQL_UPDATE = "update usuarios set nombre=?, apellido1=?, apellido2=?, dni=?, correo_ucm=?, telefono=?, foto=?";
 	private static String SQL_DELETE = "delete from usuarios where id_usuario = ?";
 	private static String SQL_FIND_ALL = "select * from usuarios";
 	private static String SQL_FIND_ID = "select * from usuarios where id_usuario = ?";
@@ -82,6 +82,7 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 					usuario.getApellido1(),
 					usuario.getApellido2(),
 					usuario.getDni(),
+					usuario.getCorreo(),
 					usuario.getTelefono(),
 					usuario.getFoto(),
 					usuario.getIdUsuario()});

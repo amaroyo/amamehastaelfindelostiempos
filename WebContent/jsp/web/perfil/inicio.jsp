@@ -13,6 +13,8 @@
 	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlxform_dhx_skyblue.css">
 	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
 	    <script type="text/javascript" src="../skins/dhtmlxform.js"></script>
+	    <script type="text/javascript" src="../skins/dhtmlxform_dyn.js"></script>
+	    <script type="text/javascript" src="../skins/dhtmlxform_item_container.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
 	    
@@ -145,6 +147,20 @@
 	    		alert('<bean:message key="message.pass.cambiado.exito" />');
 	    	}
 	    	
+	    	function ucmEsEmail(email) {
+	    		if (getDomain(email) == "ucm.es") {
+	    			return true;
+	    		}
+	    		else {
+	    			form.setNote("email", { text: '<bean:message key="message.email.institucional" />'} );
+	    			return false;
+	    		}
+	    	}
+	    	
+	    	function getDomain(email) {
+			    var parts = email.split('@');
+			    return parts[parts.length - 1];
+			}
 	    	
 		    
 		    function verPerfil(){
@@ -161,7 +177,20 @@
 		    		form.setItemLabel('foto','<bean:message key="label.foto"/>');	
 		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
 		    		
+		    		form.forEachItem(function(id){
+		    			switch(id) {
+			    			case "grupo":
+			    			case "nombre":
+			    			case "apellido1":
+			    			case "dni":
+			    			case "email":
+			    				form.setRequired(id,true);
+			    				break;
+		    			}
+		    		});
 		    		
+		    		
+		    		form.enableLiveValidation(true);
 		    	
 		    		//foto LONGBLOB, 
 		    		
@@ -177,8 +206,12 @@
 					
 					<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
 					idSelectedUser = <%=sessionIdUser%>;
-		    		
+
 					form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
+						if(form.getItemValue("fotoUri") == "") {
+							var uriNoProfilePic = '../img/no-profile-pic.png';
+							form.getContainer("foto").innerHTML = "<img src="+ uriNoProfilePic +">";
+						}
 						form.attachEvent("onButtonClick", function(id){
 							if (id == "aceptar") {
 								form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
@@ -187,15 +220,14 @@
 
 							}
 						});
+						form.attachEvent("onEnter", function() {
+							form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+								alert('<bean:message key="message.perfil.cambiado.exito"/>');
+							}); 
+			    		});
+						
+						
 					});
-					//myForm.getContainer(name).innerHTML = ''<img src=...>"
-					
-					form.attachEvent("onEnter", function() {
-						form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-							alert('<bean:message key="message.perfil.cambiado.exito"/>');
-						}); 
-		    		});
-					
 		    	});
 		    }
 		  

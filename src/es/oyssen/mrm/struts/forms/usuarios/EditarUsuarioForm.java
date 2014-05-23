@@ -4,36 +4,37 @@ import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
 
 public class EditarUsuarioForm extends DhtmlxGridForm {
 
-	private String id_usuario;
-	private String id_grupo;
-	private String correo_ucm;
-	private String contrasenya;
+	private String idUsuario;
+	private String grupo;
 	private String nombre;
 	private String apellido1;
 	private String apellido2;
 	private String dni;
+	private String email;
 	private String telefono;
-	private String foto;
-	
+	private String fotoUri;
+	private String contrasenya;
 	
 	
 	public String getIdUsuario() {
-		return id_usuario;
+		return idUsuario;
 	}
-	public void setIdUsuario(String id_usuario) {
-		this.id_usuario = id_usuario;
+
+
+	public void setIdUsuario(String idUsuario) {
+		this.idUsuario = idUsuario;
 	}
-	public String getIdGrupo() {
-		return id_grupo;
+	public String getGrupo() {
+		return grupo;
 	}
-	public void setIdGrupo(String id_grupo) {
-		this.id_grupo = id_grupo;
+	public void setGrupo(String id_grupo) {
+		this.grupo = id_grupo;
 	}
-	public String getCorreo() {
-		return correo_ucm;
+	public String getEmail() {
+		return email;
 	}
-	public void setCorreo(String correo_ucm) {
-		this.correo_ucm = correo_ucm;
+	public void setEmail(String correo_ucm) {
+		this.email = correo_ucm;
 	}
 	public String getContrasenya() {
 		return contrasenya;
@@ -71,11 +72,11 @@ public class EditarUsuarioForm extends DhtmlxGridForm {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	public String getFoto() {
-		return foto;
+	public String getFotoUri() {
+		return fotoUri;
 	}
-	public void setFoto(String foto) {
-		this.foto = foto;
+	public void setFotoUri(String fotoUri) {
+		this.fotoUri = fotoUri;
 	}
 	
 
