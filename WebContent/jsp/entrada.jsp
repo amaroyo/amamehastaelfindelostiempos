@@ -12,7 +12,7 @@
 	    <script type="text/javascript" src="skins/dhtmlx.js"></script>
     
     <script>
-    	var dhxWins, toolbar, width, height, nota;
+    	var dhxWins, toolbar, width, height, nota, formAsignaturasInvisible;
     	dhtmlx.image_path='skins/imgs/';
     	
     	function init() {
@@ -80,10 +80,7 @@
 	        </logic:notEmpty>
     	}
     	
-    	
     	function permisosToolbarGeneral(){
-    		
-    		
     		
     		<logic:notEmpty name="usuarioYPermisos">
 	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
@@ -226,9 +223,37 @@
 
     	}
     	
+    	
+    	function initRequest() {
+    	    if (window.XMLHttpRequest) {
+    	        xmlhttp = new XMLHttpRequest();
+    	    } else if (window.ActiveXObject) {
+    	        isIE = true;
+    	        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    	    }
+    	    return xmlhttp;
+    	}
+    	
+    	
     	function dameAsignaturasUsuario(){
     		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
     		idSelectedUser = <%=sessionIdUser%>;
+    		/*url = "asignaturasusuario.do?idUser=" + idSelectedUser;
+    		var xmlhttp = initRequest();
+    		xmlhttp.onreadystatechange=function(){
+    			if (xmlhttp.readyState===4) {
+        	        if(xmlhttp.status===200) { //GET returning a response
+        	        	var asignaturasOpts = xmlhttp.responseText;
+        				alert(asignaturasOpts);
+        	        	return asignaturasOpts;
+        	        }
+        	    }
+    		}
+    	    xmlhttp.open("GET",url,true);
+    	    xmlhttp.send(null);*/
+    	    
+    	    
+    		
     		//esto se obtendra de la bbdd
     		 var opts = [['idAsignatura1', 'obj', '801148 - Prácticas Clínicas de Enfermería: Cuidados Básicos','libro.png'],
                          ['idAsignatura2', 'obj', '801149 - Prácticas Clínicas de Enfermería: Metodología Enfermera','libro.png'],
@@ -240,8 +265,7 @@
                          ['idAsignatura6', 'obj', '801152 - Prácticas Clínicas de Enfermería III','libro.png'],
                          ['idAsignatura7', 'obj', '801153 - Prácticas Clínicas de Enfermería IV','libro.png'],
                         ];
-			
-			return opts;
+    	    return opts;
     	}
     	
     	function dameCursos(){

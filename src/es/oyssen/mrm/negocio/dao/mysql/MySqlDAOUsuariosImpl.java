@@ -27,12 +27,12 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 	private static String SQL_UPDATE = "update usuarios set nombre=?, apellido1=?, apellido2=?, dni=?, correo_ucm=?, telefono=?, foto=?";
 	private static String SQL_DELETE = "delete from usuarios where id_usuario = ?";
 	private static String SQL_FIND_ALL = "select * from usuarios";
-	private static String SQL_FIND_ID = "select * from usuarios where id_usuario = ?";
-	private static String SQL_FIND_USER_PASS = "select * from usuarios where correo_ucm = ? and contrasenya = ?";
+	private static String SQL_FIND_BY_ID = "select * from usuarios where id_usuario = ?";
+	private static String SQL_FIND_BY_USER_PASS = "select * from usuarios where correo_ucm = ? and contrasenya = ?";
 	private static String SQL_FIND_BY_GRUPO = "select * from usuarios where id_grupo = ?";
-	private static String SQL_FIND_USER = "select * from usuarios where correo_ucm = ?";
-	private static String SQL_FIND_DNI = "select * from usuarios where dni = ?";
-	private static String SQL_FIND_NOMBRE_APELLIDOS = "select * from usuarios where nombre = ? and apellido1 = ? and apellido2 = ?";
+	private static String SQL_FIND_BY_USER = "select * from usuarios where correo_ucm = ?";
+	private static String SQL_FIND_BY_DNI = "select * from usuarios where dni = ?";
+	private static String SQL_FIND_BY_NOMBRE_APELLIDOS = "select * from usuarios where nombre = ? and apellido1 = ? and apellido2 = ?";
 	
 	
 	public void insert(final UsuarioVO usuario) throws DAOException,
@@ -124,7 +124,7 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 
 	public UsuarioVO findById(UsuarioVO usuario) throws DAOException {
 		try {
-			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_ID, new Object[]{usuario.getIdUsuario()}, new UsuarioMapper());
+			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_ID, new Object[]{usuario.getIdUsuario()}, new UsuarioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
@@ -134,7 +134,7 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 	
 	public UsuarioVO findByUser(UsuarioVO usuario) throws DAOException {
 		try {
-			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_USER, new Object[]{usuario.getCorreo()}, new UsuarioMapper());
+			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_USER, new Object[]{usuario.getCorreo()}, new UsuarioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
@@ -144,7 +144,7 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 	
 	public UsuarioVO findByDni(UsuarioVO usuario) throws DAOException {
 		try {
-			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_DNI, new Object[]{usuario.getDni()}, new UsuarioMapper());
+			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_DNI, new Object[]{usuario.getDni()}, new UsuarioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
@@ -154,7 +154,7 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 	
 	public UsuarioVO findByUserPass(UsuarioVO usuario) throws DAOException {
 		try {
-			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_USER_PASS, new Object[]{usuario.getCorreo(), usuario.getContrasenya()}, new UsuarioMapper());
+			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_USER_PASS, new Object[]{usuario.getCorreo(), usuario.getContrasenya()}, new UsuarioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
@@ -164,7 +164,7 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 	
 	public UsuarioVO findByNombreApellidos(UsuarioVO usuario) throws DAOException {
 		try {
-			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_NOMBRE_APELLIDOS, new Object[]{usuario.getNombre(), usuario.getApellido1(), usuario.getApellido2()}, new UsuarioMapper());
+			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_NOMBRE_APELLIDOS, new Object[]{usuario.getNombre(), usuario.getApellido1(), usuario.getApellido2()}, new UsuarioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
