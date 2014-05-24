@@ -10,7 +10,7 @@ import es.oyssen.mrm.negocio.vo.ProfesorAsociadoVO;
 
 public interface DAOProfesoresAsociados {
 	
-	public List<ProfesorAsociadoVO> findAll() throws DAOException;
+	public List<ProfesorAsociadoVO> findAll(ProfesorAsociadoVO profesor) throws DAOException;
 	
 	public ProfesorAsociadoVO findById(ProfesorAsociadoVO profesor) throws DAOException;
 	
@@ -19,6 +19,8 @@ public interface DAOProfesoresAsociados {
 	public List<ProfesorAsociadoVO> findByAsignatura(ProfesorAsociadoVO profesor) throws DAOException;
 	
 	public List<ProfesorAsociadoVO> findByAnyoAcademico(ProfesorAsociadoVO profesor) throws DAOException;
+	
+	public List<ProfesorAsociadoVO> findByCentroTurnoAsignatura(ProfesorAsociadoVO profesor) throws DAOException;
 	
 	public void insert(ProfesorAsociadoVO profesor) throws DAOException, DAOInsertException;
 	

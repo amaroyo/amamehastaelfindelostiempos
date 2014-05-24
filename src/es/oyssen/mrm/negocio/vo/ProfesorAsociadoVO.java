@@ -14,7 +14,6 @@ public class ProfesorAsociadoVO {
 	}
 	
 	public ProfesorAsociadoVO(String id_profesor, String turno, String centro_asociado, String id_asignatura, String anyo_academico) {
-		super();
 		this.id_profesor = id_profesor;
 		this.turno = turno;
 		this.centro_asociado = centro_asociado;
