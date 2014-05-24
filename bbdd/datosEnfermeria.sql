@@ -12,10 +12,26 @@ insert into grupos (nombre) values ('Virtual Tour');
 -- Usuarios 
 -- user/pass: admin@ucm.es/realmadrid
 insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (1, 'admin@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Admin', 'Ad1', 'Ad2','12544996C' );
--- user/pass: am.aroyo@ucm.es/realmadrid
-insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (2, 'am.aroyo@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Alex Mois', 'Aroyo', '' ,'65344996C' );
--- user/pass: alumno@ucm.es/realmadrid
-insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (3, 'alumno@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Alumno', 'Ap1', 'Ap2' ,'12344996C' );
+
+-- user/pass: coordinador@ucm.es/realmadrid
+insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (2, 'coordinador@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Alex', 'Aroyo', '' ,'65344996C' );
+
+-- user/pass: profesor1@ucm.es/realmadrid
+insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (3, 'profesor1@ucm.es@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Profe1', 'pA1', 'pAA1' ,'65344988X' );
+
+-- user/pass: profesor2@ucm.es/realmadrid
+insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (3, 'profesor2@ucm.es@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Profe2', 'pA2', 'pAA2' ,'65333988X' );
+
+-- user/pass: alumno1@ucm.es/realmadrid
+insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (4, 'alumno1@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Alumno1', 'Al1', '' ,'12300996C' );
+
+-- user/pass: alumno2@ucm.es/realmadrid
+insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (4, 'alumno2@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Alumno2', 'Al2', '' ,'12345596C' );
+
+-- user/pass: alumno2@ucm.es/realmadrid
+insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (4, 'alumno3@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Alumno3', 'Al3', '' ,'17744996C' );
+
+
 
 
 -- Permisos
@@ -366,21 +382,32 @@ insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values
 
 
 -- Profesores Asociados
-insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado, turno) values (2, 1, '2012/2013', 'HUGM Hospital Gregorio Marañon', 'M - Mañana');
-insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado,turno) values (2, 2, '2012/2013', 'HUGM Hospital Gregorio Marañon', 'M - Mañana');
-insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado, turno) values (2, 1, '2013/2014', 'HUGM Hospital Gregorio Marañon', 'M - Mañana');
-insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado,turno) values (2, 2, '2013/2014', 'HUGM Hospital Gregorio Marañon', 'M - Mañana');
+insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado, turno) values (3, 1, '2012/2013', 'HUGM Hospital Gregorio Marañon', 'M - Mañana');
+insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado,turno) values (3, 2, '2012/2013', '12 de Octubre', 'T - Tarde');
+insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado, turno) values (3, 1, '2013/2014', 'HUGM Hospital Gregorio Marañon', 'M - Mañana');
+insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado,turno) values (3, 2, '2013/2014', '12 de Octubre', 'T - Tarde');
+insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado,turno) values (4, 3, '2013/2014', '12 de Octubre', 'T - Tarde');
 
 -- Portafolios
-insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (3, 1, '2012/2013');
-insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (3, 2, '2012/2013');
-insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (3, 1, '2013/2014');
+insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (5, 1, '2012/2013'); -- id1
+insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (5, 2, '2012/2013'); -- id2
+
+insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (5, 1, '2013/2014'); -- id3
+insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (5, 2, '2013/2014'); -- id4
+
+insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (6, 2, '2013/2014'); -- id5
+insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (6, 3, '2013/2014'); -- id6
 
 
 -- Estancias_unidad_clinica
 insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (1,'HUGM Hospital Gregorio Marañon', 'Urgencias', 'M - Mañana', '2012-09-01', '2013-01-31');
-insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (2,'12 de Octubre', 'UCI', 'M - Mañana', '2013-02-01', '2013-06-26');
+insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (2,'12 de Octubre', 'UCI', 'T - Tarde', '2013-02-01', '2013-06-26');
+
 insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (3,'HUGM Hospital Gregorio Marañon', 'Urgencias', 'M - Mañana', '2013-09-01', '2014-01-31');
+insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (4,'12 de Octubre', 'UCI', 'T - Tarde', '2013-09-01', '2014-01-31');
+
+insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (5,'12 de Octubre', 'Parto', 'T - Tarde', '2013-09-01', '2014-01-31');
+insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (6,'12 de Octubre', 'AA', 'T - Tarde', '2013-09-01', '2014-01-31');
 
 
 
@@ -388,12 +415,16 @@ insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_cli
 insert into trabajos_de_campo (id_portafolio, trabajo_de_campo, correccion_trabajo, fecha_limite) values (1, null, null, '2012-10-15');
 insert into trabajos_de_campo (id_portafolio, trabajo_de_campo, correccion_trabajo, fecha_limite) values (2, null, null, '2012-10-05');
 insert into trabajos_de_campo (id_portafolio, trabajo_de_campo, correccion_trabajo, fecha_limite) values (3, null, null, '2013-10-13');
+insert into trabajos_de_campo (id_portafolio, trabajo_de_campo, correccion_trabajo, fecha_limite) values (4, null, null, '2012-10-15');
+insert into trabajos_de_campo (id_portafolio, trabajo_de_campo, correccion_trabajo, fecha_limite) values (5, null, null, '2012-10-05');
+insert into trabajos_de_campo (id_portafolio, trabajo_de_campo, correccion_trabajo, fecha_limite) values (6, null, null, '2013-10-13');
 
 -- Seminarios Realizados
 insert into seminarios_realizados (id_portafolio, id_seminario) values (1,1);
 insert into seminarios_realizados (id_portafolio, id_seminario) values (2,4);
 insert into seminarios_realizados (id_portafolio, id_seminario) values (3,2);
 insert into seminarios_realizados (id_portafolio, id_seminario) values (3,3);
+
 
 
 -- Diarios Reflexivos
