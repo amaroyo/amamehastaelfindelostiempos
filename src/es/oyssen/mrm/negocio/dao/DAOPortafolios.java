@@ -10,7 +10,7 @@ import es.oyssen.mrm.negocio.vo.PortafolioVO;
 
 public interface DAOPortafolios {
 	
-	public List<PortafolioVO> findAll() throws DAOException;
+	public List<PortafolioVO> findAll(PortafolioVO portafolio) throws DAOException;
 	
 	public PortafolioVO findById(PortafolioVO portafolio) throws DAOException;
 	

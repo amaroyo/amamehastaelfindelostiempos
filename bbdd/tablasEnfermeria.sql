@@ -49,7 +49,8 @@ CREATE TABLE IF NOT EXISTS usuarios (
 	foto LONGBLOB, 
 	PRIMARY KEY (id_usuario),
 	FOREIGN KEY (id_grupo)
-		REFERENCES grupos(id_grupo)
+		REFERENCES grupos(id_grupo) 
+		ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -74,9 +75,11 @@ CREATE TABLE IF NOT EXISTS usuarios_permisos (
 	id_permiso INT(10) NOT NULL,
 	PRIMARY KEY(id_permiso,id_usuario),
 	FOREIGN KEY (id_permiso)
-		REFERENCES permisos(id_permiso),
+		REFERENCES permisos(id_permiso)
+		ON DELETE CASCADE,
 	FOREIGN KEY (id_usuario)
 		REFERENCES usuarios(id_usuario)
+		ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -89,9 +92,11 @@ CREATE TABLE IF NOT EXISTS grupos_permisos (
 	id_permiso INT(10) NOT NULL,
 	PRIMARY KEY(id_permiso,id_grupo),
 	FOREIGN KEY (id_permiso)
-		REFERENCES permisos(id_permiso),
+		REFERENCES permisos(id_permiso)
+		ON DELETE CASCADE,
 	FOREIGN KEY (id_grupo)
 		REFERENCES grupos(id_grupo)
+		ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -122,6 +127,7 @@ CREATE TABLE IF NOT EXISTS seminarios_asignaturas (
 	PRIMARY KEY (id_seminario),
 	FOREIGN KEY (id_asignatura)
 		REFERENCES asignaturas(id_asignatura)
+		ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -135,6 +141,7 @@ CREATE TABLE IF NOT EXISTS rubricas (
 	numero_criterios INT(3) NOT NULL,
 	FOREIGN KEY (id_asignatura)
 		REFERENCES asignaturas(id_asignatura)
+		ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -149,6 +156,7 @@ CREATE TABLE IF NOT EXISTS grupos_criterios_rubricas (
 	PRIMARY KEY (id_criterio_grupo),
 	FOREIGN KEY (id_asignatura)
 		REFERENCES asignaturas(id_asignatura)
+		ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -163,9 +171,11 @@ CREATE TABLE IF NOT EXISTS criterios_rubricas (
 	nombre TEXT NOT NULL,
 	PRIMARY KEY (id_criterio),
 	FOREIGN KEY (id_asignatura)
-		REFERENCES asignaturas(id_asignatura),
+		REFERENCES asignaturas(id_asignatura)
+		ON DELETE CASCADE,
 	FOREIGN KEY (id_grupo_criterio)
 		REFERENCES grupos_criterios_rubricas(id_criterio_grupo)
+		ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -181,9 +191,11 @@ CREATE TABLE IF NOT EXISTS profesores_asociados (
 	turno VARCHAR(100),
 	PRIMARY KEY(id_profesor, id_asignatura, anyo_academico),
 	FOREIGN KEY (id_profesor)
-		REFERENCES usuarios(id_usuario),
+		REFERENCES usuarios(id_usuario)
+		ON DELETE CASCADE,
 	FOREIGN KEY (id_asignatura)
 		REFERENCES asignaturas(id_asignatura)
+		ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -198,9 +210,11 @@ CREATE TABLE IF NOT EXISTS portafolios (
 	anyo_academico VARCHAR(9) NOT NULL,
 	PRIMARY KEY (id_portafolio),
 	FOREIGN KEY (id_alumno)
-		REFERENCES usuarios(id_usuario),
+		REFERENCES usuarios(id_usuario)
+		ON DELETE CASCADE,
 	FOREIGN KEY (id_asignatura)
 		REFERENCES asignaturas(id_asignatura)
+		ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -219,6 +233,7 @@ CREATE TABLE IF NOT EXISTS estancias_unidad_clinica (
 	PRIMARY KEY(id_estancia_unidad, id_portafolio),
 	FOREIGN KEY (id_portafolio)
 		REFERENCES portafolios(id_portafolio)
+		ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -235,6 +250,7 @@ CREATE TABLE IF NOT EXISTS trabajos_de_campo (
 	PRIMARY KEY(id_trabajo_de_campo, id_portafolio),
 	FOREIGN KEY (id_portafolio)
 		REFERENCES portafolios(id_portafolio)
+		ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -247,9 +263,11 @@ CREATE TABLE IF NOT EXISTS seminarios_realizados (
 	id_seminario INT(4) NOT NULL,
 	PRIMARY KEY(id_portafolio, id_seminario),
 	FOREIGN KEY (id_portafolio)
-		REFERENCES portafolios(id_portafolio),
+		REFERENCES portafolios(id_portafolio)
+		ON DELETE CASCADE,
 	FOREIGN KEY (id_seminario)
 		REFERENCES seminarios_asignaturas(id_seminario)
+		ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -264,6 +282,7 @@ CREATE TABLE IF NOT EXISTS diarios_reflexivos (
 	PRIMARY KEY(id_diario_reflexivo, id_portafolio),
 	FOREIGN KEY (id_portafolio)
 		REFERENCES portafolios(id_portafolio)
+		ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -278,6 +297,7 @@ CREATE TABLE IF NOT EXISTS anexos (
 	PRIMARY KEY(id_anexo, id_portafolio),
 	FOREIGN KEY (id_portafolio)
 		REFERENCES portafolios(id_portafolio)
+		ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -292,6 +312,7 @@ CREATE TABLE IF NOT EXISTS casos_clinicos (
 	PRIMARY KEY(id_caso_clinico, id_portafolio),
 	FOREIGN KEY (id_portafolio)
 		REFERENCES portafolios(id_portafolio)
+		ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -305,9 +326,11 @@ CREATE TABLE IF NOT EXISTS puntuacion_cirterios (
 	nota INT(3),
 	PRIMARY KEY(id_portafolio,id_criterio),
 	FOREIGN KEY (id_portafolio) 
-		REFERENCES portafolios(id_portafolio),
+		REFERENCES portafolios(id_portafolio)
+		ON DELETE CASCADE,
 	FOREIGN KEY (id_criterio) 
 		REFERENCES criterios_rubricas(id_criterio)
+		ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
