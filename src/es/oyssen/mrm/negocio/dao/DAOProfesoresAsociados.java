@@ -20,8 +20,6 @@ public interface DAOProfesoresAsociados {
 	
 	public List<ProfesorAsociadoVO> findByAnyoAcademico(ProfesorAsociadoVO profesor) throws DAOException;
 	
-	public ProfesorAsociadoVO findByAsignaturaAnyoAcademicoTurnoCentro(ProfesorAsociadoVO profesor) throws DAOException;
-	
 	public void insert(ProfesorAsociadoVO profesor) throws DAOException, DAOInsertException;
 	
 	public void update(ProfesorAsociadoVO profesor) throws DAOException, DAOUpdateException;
