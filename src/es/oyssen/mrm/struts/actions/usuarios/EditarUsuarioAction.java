@@ -123,20 +123,20 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 	}
 	
 	private String nombreGrupo(String id){
-		if (id.equals("1")) return "Super user";
-		else if (id.equals("2")) return "Channel";
-		else if (id.equals("3")) return "Distributor";
-		else if (id.equals("4")) return "Sales rep.";
-		else if (id.equals("5")) return "Supplier";
+		if (id.equals("1")) return "Super Admin";
+		else if (id.equals("2")) return "Coordinador";
+		else if (id.equals("3")) return "Profesor";
+		else if (id.equals("4")) return "Alumno";
+		else if (id.equals("5")) return "Virtual Tour";
 		else return "";
 	}
 	
 	private String idGrupo(String id){
-		if (id.equals("Super user")) return "1";
-		else if (id.equals("Channel")) return "2";
-		else if (id.equals("Distributor")) return "3";
-		else if (id.equals("Sales rep.")) return "4";
-		else if (id.equals("Supplier")) return "5";
+		if (id.equals("Super Admin")) return "1";
+		else if (id.equals("Coordinador")) return "2";
+		else if (id.equals("Profesor")) return "3";
+		else if (id.equals("Alumno")) return "4";
+		else if (id.equals("Virtual Tour")) return "5";
 		else return "-1";
 	}
 	

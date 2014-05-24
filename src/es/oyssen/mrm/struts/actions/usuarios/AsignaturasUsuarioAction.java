@@ -12,8 +12,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import es.oyssen.mrm.negocio.vo.UsuarioVO;
-import es.oyssen.mrm.negocio.vo.UsuarioYPermisos;
+import es.oyssen.mrm.negocio.vo.AsignaturaVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
 import es.oyssen.mrm.struts.forms.usuarios.EditarContrasenaForm;
 import es.oyssen.mrm.util.EncriptarUtil;
@@ -27,13 +26,29 @@ public class AsignaturasUsuarioAction extends MrmAction {
 		
 		ActionForm f = form;		
 		String idUsuario = (String)request.getSession().getAttribute("idUsuario");
-			
-		UsuarioVO usuario = new UsuarioVO();
-		UsuarioYPermisos usuarioYPermisos = new UsuarioYPermisos();
-		usuario.setIdUsuario(idUsuario);
-		usuario = getUsuariosService().findById(usuario);
-		usuarioYPermisos.setUsuario(usuario);
+		AsignaturaVO asignatura = new AsignaturaVO();
 		
+		// para saber si es profesor o alumno
+		String usuarioIdGrupo = (String)request.getSession().getAttribute("usuarioIdGrupo");
+		
+		
+		//"Super Admin" o "Coordinador" o "Virtual Tour"
+		if (usuarioIdGrupo.equals("1") || usuarioIdGrupo.equals("2") || usuarioIdGrupo.equals("5")) {
+				
+			}
+		else
+			// "Profesor"
+			if (usuarioIdGrupo.equals("3")) {
+				
+			}
+		else
+			// "Alumno"
+			if (usuarioIdGrupo.equals("4")) {
+				
+			}
+		
+		
+		usuario = getUsuariosService().findById(usuario);
 		
 		
 		//application/json or application/xml text/html
