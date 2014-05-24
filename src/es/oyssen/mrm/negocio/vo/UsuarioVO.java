@@ -18,10 +18,19 @@ public class UsuarioVO {
 		
 	}
 	
-	public UsuarioVO(String idUsuario, String nombre) {
-		this.id_usuario= idUsuario;
+	
+	
+	public UsuarioVO(String id_usuario, String id_grupo, String correo_ucm, String contrasenya, String nombre, String apellido1, String dni) {
+		this.id_usuario = id_usuario;
+		this.id_grupo = id_grupo;
+		this.correo_ucm = correo_ucm;
+		this.contrasenya = contrasenya;
 		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.dni = dni;
 	}
+
+
 
 	public String getIdUsuario() {
 		return id_usuario;

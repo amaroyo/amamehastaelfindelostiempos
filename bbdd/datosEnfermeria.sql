@@ -2,7 +2,8 @@ use enfermeria;
 
 
 -- Grupos
-insert into grupos (nombre) values ('Administrador');
+insert into grupos (nombre) values ('Super Admin');
+insert into grupos (nombre) values ('Coordinador');
 insert into grupos (nombre) values ('Profesor');
 insert into grupos (nombre) values ('Alumno');
 insert into grupos (nombre) values ('Virtual Tour');
@@ -10,11 +11,11 @@ insert into grupos (nombre) values ('Virtual Tour');
 
 -- Usuarios 
 -- user/pass: admin@ucm.es/realmadrid
-insert into usuarios (id_grupo, correo_ucm, contrasenya, nombre, apellido1, apellido2, dni) values (1, 'admin@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Admin', 'Ad1', 'Ad2','12544996C' );
+insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (1, 'admin@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Admin', 'Ad1', 'Ad2','12544996C' );
 -- user/pass: am.aroyo@ucm.es/realmadrid
-insert into usuarios (id_grupo, correo_ucm, contrasenya, nombre, apellido1, apellido2, dni) values (2, 'am.aroyo@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Alex Mois', 'Aroyo', '' ,'65344996C' );
+insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (2, 'am.aroyo@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Alex Mois', 'Aroyo', '' ,'65344996C' );
 -- user/pass: alumno@ucm.es/realmadrid
-insert into usuarios (id_grupo, correo_ucm, contrasenya, nombre, apellido1, apellido2, dni) values (3, 'alumno@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Alumno', 'Ap1', 'Ap2' ,'12344996C' );
+insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (3, 'alumno@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Alumno', 'Ap1', 'Ap2' ,'12344996C' );
 
 
 -- Permisos
@@ -379,7 +380,7 @@ insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (3, 1,
 -- Estancias_unidad_clinica
 insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (1,'HUGM Hospital Gregorio Marañon', 'Urgencias', 'M - Mañana', '2012-09-01', '2013-01-31');
 insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (2,'12 de Octubre', 'UCI', 'M - Mañana', '2013-02-01', '2013-06-26');
-insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (3,'HUGM Hospital Gregorio Marañon', 'Urgencias', 'M - Tarde', '2013-09-01', '2014-01-31');
+insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (3,'HUGM Hospital Gregorio Marañon', 'Urgencias', 'M - Mañana', '2013-09-01', '2014-01-31');
 
 
 

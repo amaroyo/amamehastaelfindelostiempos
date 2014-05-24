@@ -39,7 +39,7 @@ COLLATE = utf8_spanish_ci;
 CREATE TABLE IF NOT EXISTS usuarios (
 	id_usuario INT(10) NOT NULL auto_increment,
 	id_grupo INT(3)  NOT NULL,
-	correo_ucm VARCHAR(254) NOT NULL UNIQUE,
+	correo VARCHAR(254) NOT NULL UNIQUE,
 	contrasenya VARCHAR(50) NOT NULL,
 	nombre VARCHAR(100) NOT NULL,
 	apellido1 VARCHAR(100) NOT NULL,
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS profesores_asociados (
 	anyo_academico VARCHAR(9) NOT NULL,
 	centro_asociado VARCHAR(200) NOT NULL,
 	turno VARCHAR(100),
-	PRIMARY KEY(id_profesor,id_asignatura, anyo_academico),
+	PRIMARY KEY(id_profesor, id_asignatura, anyo_academico),
 	FOREIGN KEY (id_profesor)
 		REFERENCES usuarios(id_usuario),
 	FOREIGN KEY (id_asignatura)
