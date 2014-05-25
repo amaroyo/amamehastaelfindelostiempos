@@ -12,7 +12,6 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.DistribuidoresService;
 import es.oyssen.mrm.negocio.vo.CanalVO;
-import es.oyssen.mrm.negocio.vo.ComercialVO;
 import es.oyssen.mrm.negocio.vo.CriterioLeadVO;
 import es.oyssen.mrm.negocio.vo.DistribuidorVO;
 import es.oyssen.mrm.negocio.vo.CriterioDistribuidorVO;

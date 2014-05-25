@@ -30,7 +30,7 @@ public class AutenticacionUsuarioAction extends MrmAction {
 		UsuarioYPermisos usuarioYPermisos = new UsuarioYPermisos();
 			
 		UsuarioVO usuario = new UsuarioVO();
-		usuario.setCorreo(f.getUser());
+		usuario.setCorreo(f.getCorreo());
 		usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(f.getPass(), EncriptarUtil.MD5));
 		usuario = getUsuariosService().findByCorreoPass(usuario);
 		usuarioYPermisos.setUsuario(usuario);		

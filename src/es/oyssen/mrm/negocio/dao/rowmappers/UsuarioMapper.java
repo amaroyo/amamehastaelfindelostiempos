@@ -13,7 +13,7 @@ public class UsuarioMapper implements RowMapper {
 
 	public static final String FIELD_ID = "id_usuario";
 	public static final String FIELD_ID_GRUPO = "id_grupo";
-    public static final String FIELD_CORREO = "correo_ucm";
+    public static final String FIELD_CORREO = "correo";
     public static final String FIELD_CONTRASENYA = "contrasenya";
     public static final String FIELD_NOMBRE = "nombre";
     public static final String FIELD_APELLIDO1 = "apellido1";

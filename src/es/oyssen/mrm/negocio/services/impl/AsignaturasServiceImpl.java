@@ -17,11 +17,11 @@ public class AsignaturasServiceImpl implements AsignaturasService{
 	
 	private static Log log = LogFactory.getLog(AsignaturasServiceImpl.class);
 	private DAOAsignaturas daoAsignaturas;
-
 	
 	public void setDaoAsignaturas(DAOAsignaturas daoAsignaturas) {
 		this.daoAsignaturas = daoAsignaturas;
 	}
+	
 	
 	public void insert(AsignaturaVO asignatura)
 			throws es.oyssen.mrm.negocio.exceptions.ServiceException,

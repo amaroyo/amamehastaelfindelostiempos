@@ -24,7 +24,7 @@ public interface DAOUsuarios {
 	
 	public UsuarioVO findById(UsuarioVO usuario) throws DAOException;
 	
-	public UsuarioVO findByUser(UsuarioVO usuario) throws DAOException;
+	public UsuarioVO findByCorreo(UsuarioVO usuario) throws DAOException;
 	
 	public UsuarioVO findByDni(UsuarioVO usuario) throws DAOException;
 	

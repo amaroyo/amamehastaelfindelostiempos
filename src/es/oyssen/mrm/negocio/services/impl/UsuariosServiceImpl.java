@@ -93,7 +93,7 @@ public class UsuariosServiceImpl implements UsuariosService{
 	public UsuarioVO findByCorreo(UsuarioVO usuario)
 			throws ServiceException {
 		try {
-			return daoUsuarios.findByUser(usuario);
+			return daoUsuarios.findByCorreo(usuario);
 		} catch (DAOException e) {
 			e.printStackTrace();
 			log.error("Error findByCorreo usuario", e);

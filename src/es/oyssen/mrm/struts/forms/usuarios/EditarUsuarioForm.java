@@ -10,7 +10,7 @@ public class EditarUsuarioForm extends DhtmlxGridForm {
 	private String apellido1;
 	private String apellido2;
 	private String dni;
-	private String email;
+	private String correo;
 	private String telefono;
 	private String fotoUri;
 	private String contrasenya;
@@ -30,11 +30,11 @@ public class EditarUsuarioForm extends DhtmlxGridForm {
 	public void setGrupo(String id_grupo) {
 		this.grupo = id_grupo;
 	}
-	public String getEmail() {
-		return email;
+	public String getCorreo() {
+		return correo;
 	}
-	public void setEmail(String correo_ucm) {
-		this.email = correo_ucm;
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 	public String getContrasenya() {
 		return contrasenya;

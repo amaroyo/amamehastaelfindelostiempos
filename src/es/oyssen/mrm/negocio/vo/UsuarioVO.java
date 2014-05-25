@@ -5,7 +5,7 @@ public class UsuarioVO {
 
 	private String id_usuario;
 	private String id_grupo;
-	private String correo_ucm;
+	private String correo;
 	private String contrasenya;
 	private String nombre;
 	private String apellido1;
@@ -20,10 +20,10 @@ public class UsuarioVO {
 	
 	
 	
-	public UsuarioVO(String id_usuario, String id_grupo, String correo_ucm, String contrasenya, String nombre, String apellido1, String dni) {
+	public UsuarioVO(String id_usuario, String id_grupo, String correo, String contrasenya, String nombre, String apellido1, String dni) {
 		this.id_usuario = id_usuario;
 		this.id_grupo = id_grupo;
-		this.correo_ucm = correo_ucm;
+		this.correo = correo;
 		this.contrasenya = contrasenya;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
@@ -45,11 +45,11 @@ public class UsuarioVO {
 	}
 	
 	public String getCorreo() {
-		return correo_ucm;
+		return correo;
 	}
 
-	public void setCorreo(String correo_ucm) {
-		this.correo_ucm = correo_ucm;
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
 	public String getContrasenya() {

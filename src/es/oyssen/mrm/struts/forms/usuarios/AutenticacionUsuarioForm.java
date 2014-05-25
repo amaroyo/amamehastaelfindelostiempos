@@ -4,16 +4,16 @@ import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
 
 public class AutenticacionUsuarioForm extends DhtmlxGridForm {
 
-	private String user;
+	private String correo;
 	private String pass;
 	
 	
-	public String getUser() {
-		return user;
+	public String getCorreo() {
+		return correo;
 	}
 
-	public void setUser(String user) {
-		this.user = user;
+	public void setCorreo(String user) {
+		this.correo = user;
 	}
 
 	public String getPass() {

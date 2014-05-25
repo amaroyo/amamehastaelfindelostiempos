@@ -30,7 +30,7 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 	private static String SQL_FIND_BY_ID = "select * from usuarios where id_usuario = ?";
 	private static String SQL_FIND_BY_CORREO_PASS = "select * from usuarios where correo = ? and contrasenya = ?";
 	private static String SQL_FIND_BY_GRUPO = "select * from usuarios where id_grupo = ?";
-	private static String SQL_FIND_BY_USER = "select * from usuarios where correo = ?";
+	private static String SQL_FIND_BY_CORREO = "select * from usuarios where correo = ?";
 	private static String SQL_FIND_BY_DNI = "select * from usuarios where dni = ?";
 	private static String SQL_FIND_BY_NOMBRE_APELLIDOS = "select * from usuarios where nombre = ? and apellido1 = ? and apellido2 = ?";
 	
@@ -132,9 +132,9 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 		}
 	}
 	
-	public UsuarioVO findByUser(UsuarioVO usuario) throws DAOException {
+	public UsuarioVO findByCorreo(UsuarioVO usuario) throws DAOException {
 		try {
-			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_USER, new Object[]{usuario.getCorreo()}, new UsuarioMapper());
+			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_CORREO, new Object[]{usuario.getCorreo()}, new UsuarioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

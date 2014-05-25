@@ -33,7 +33,7 @@
 			    var form = new dhtmlXForm("myForm");	
 		    	form.loadStruct('../xml/forms/bienvenida_form.xml', function() {
 		    		form.setItemLabel('data','<bean:message key="title.bienvenida"/>');
-		    		form.setItemLabel('user','<bean:message key="label.user.email"/>');
+		    		form.setItemLabel('correo','<bean:message key="label.user.email"/>');
 		    		form.setItemLabel('pass','<bean:message key="label.user.password"/>');
 		    		form.setItemLabel('aceptar','<bean:message key="button.entrar"/>');
 		    		form.setItemLabel('newPass','<bean:message key="button.olvide.pass"/>');
@@ -41,9 +41,9 @@
 		    		form.setFocusOnFirstActive();
 		    				    		
 		    		form.attachEvent("onEnter", function() {
-		    			 var user = form.getItemValue("user");
+		    			 var correo = form.getItemValue("correo");
 	    					var pass = form.getItemValue("pass");
-		    				form.send("autenticacionusuario.do?user=" + user + "&pass=" + pass, "post", function(loader) {
+		    				form.send("autenticacionusuario.do?correo=" + correo + "&pass=" + pass, "post", function(loader) {
 		    					goEntrada();
 		    				});
 		    		});

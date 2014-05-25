@@ -113,6 +113,30 @@
 		<property name="daoUsuarios" ref="daoUsuarios" />
 	</bean>
 	
+	<bean id="asignaturasService" class="es.oyssen.mrm.negocio.services.impl.AsignaturasServiceImpl">		
+		<property name="daoAsignaturas" ref="daoAsignaturas" />
+	</bean>
+	
+	<bean id="portafoliosService" class="es.oyssen.mrm.negocio.services.impl.PortafoliosServiceImpl">		
+		<property name="daoPortafolios" ref="daoPortafolios" />
+	</bean>	
+	
+	<bean id="profesoresAsociadosService" class="es.oyssen.mrm.negocio.services.impl.ProfesoresAsociadosServiceImpl">		
+		<property name="daoProfesoresAsociados" ref="daoProfesoresAsociados" />
+	</bean>	
+	
+	<bean id="estanciasUnidadClinicaService" class="es.oyssen.mrm.negocio.services.impl.EstanciasUnidadClinicaServiceImpl">		
+		<property name="daoEstanciasUnidadClinica" ref="daoEstanciasUnidadClinica" />
+	</bean>	
+	
+	<bean id="trabajosDeCampoService" class="es.oyssen.mrm.negocio.services.impl.TrabajosDeCampoServiceImpl">		
+		<property name="daoTrabajosDeCampoService" ref="daoTrabajosDeCampoService" />
+	</bean>	
+	
+	<bean id="seminariosRealizadosService" class="es.oyssen.mrm.negocio.services.impl.SeminariosRealizadosServiceImpl">		
+		<property name="daoSeminariosRealizados" ref="daoSeminariosRealizados" />
+	</bean>	
+	
 	<bean id="serviciosUsuarioService" class="es.oyssen.mrm.negocio.services.impl.ServiciosUsuarioServiceImpl">
 		<property name="daoServiciosUsuario" ref="daoServiciosUsuario" />
 	</bean>
