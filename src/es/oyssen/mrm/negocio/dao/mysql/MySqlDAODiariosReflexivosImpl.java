@@ -62,7 +62,7 @@ public class MySqlDAODiariosReflexivosImpl extends DAOBase implements DAODiarios
 
 			getJdbcTemplate().update(query, new Object[]{
 					diarioReflexivo.getDiarioReflexivo(),
-					diarioReflexivo.getDiarioReflexivo(),
+					diarioReflexivo.getIdDiarioReflexivo(),
 					diarioReflexivo.getIdPortafolio()});
 		} catch(Exception e) {
 			throw new DAOUpdateException(e);

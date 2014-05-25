@@ -1,5 +1,6 @@
 package es.oyssen.mrm.struts.actions;
 
+import es.oyssen.mrm.negocio.services.AnexosService;
 import es.oyssen.mrm.negocio.services.AsignaturasService;
 import es.oyssen.mrm.negocio.services.CanalesService;
 import es.oyssen.mrm.negocio.services.ComercialesService;
@@ -137,6 +138,10 @@ public abstract class MrmAction extends SpringBaseAction implements Constantes{
 	
 	public DiariosReflexivosService getDiariosReflexivosService() {
 		return (DiariosReflexivosService) getBean("diariosReflexivosService");
+	}
+	
+	public AnexosService getAnexosService() {
+		return (AnexosService) getBean("anexosService");
 	}
 	
 	

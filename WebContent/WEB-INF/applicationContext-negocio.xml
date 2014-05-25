@@ -149,8 +149,14 @@
 		<property name="daoFicherosLead" ref="daoFicherosLead" />
 	</bean>	
 	
-	<bean id="ficherosDiariosReflexivos" class="es.oyssen.mrm.negocio.services.impl.DiariosReflexivosServiceImpl">		
+	<bean id="DiariosReflexivosService" class="es.oyssen.mrm.negocio.services.impl.DiariosReflexivosServiceImpl">		
 		<property name="daoDiariosReflexivos" ref="daoDiariosReflexivos" />
 	</bean>	
+	
+	<bean id="AnexosServices" class="es.oyssen.mrm.negocio.services.impl.AnexosServiceImpl">		
+		<property name="daoAnexos" ref="daoAnexos" />
+	</bean>	
+	
+	
 
 </beans>

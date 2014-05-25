@@ -72,5 +72,9 @@
 	
 	<bean id="daoDiariosReflexivos" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAODiariosReflexivosImpl" parent="daoBase" />
 	
+	<bean id="daoAnexos" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOAnexosImpl" parent="daoBase" />
+	
+	
+	
 </beans>
 

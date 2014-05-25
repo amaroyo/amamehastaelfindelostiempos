@@ -15,7 +15,6 @@ public class DiarioReflexivoVO {
 
 	
 	public DiarioReflexivoVO(String id_diario_reflexivo, String id_portafolio) {
-		super();
 		this.id_diario_reflexivo = id_diario_reflexivo;
 		this.id_portafolio = id_portafolio;
 	}
