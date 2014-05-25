@@ -70,5 +70,7 @@
 
 	<bean id="daoFicherosLead" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOFicherosLeadImpl" parent="daoBase" />
 	
+	<bean id="daoDiariosReflexivos" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAODiariosReflexivosImpl" parent="daoBase" />
+	
 </beans>
 

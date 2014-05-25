@@ -4,16 +4,16 @@ import java.util.List;
 
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
-import es.oyssen.mrm.negocio.vo.SeminarioRealizadoVO;
+import es.oyssen.mrm.negocio.vo.DiarioReflexivoVO;
 
 public interface DiariosReflexivosService {
 	
-	public void insert(SeminarioRealizadoVO seminarioRealizado) throws ServiceException, DAOException;
+	public void insert(DiarioReflexivoVO diarioReflexivo) throws ServiceException, DAOException;
 	
-	public void update(SeminarioRealizadoVO seminarioRealizado) throws ServiceException, DAOException;
+	public void update(DiarioReflexivoVO diarioReflexivo) throws ServiceException, DAOException;
 	
-	public void delete(SeminarioRealizadoVO seminarioRealizado) throws ServiceException, DAOException;
+	public void delete(DiarioReflexivoVO diarioReflexivo) throws ServiceException, DAOException;
 	
-	public List<SeminarioRealizadoVO> findAllByPortafolio(SeminarioRealizadoVO seminarioRealizado) throws ServiceException;
+	public List<DiarioReflexivoVO> findAllByPortafolio(DiarioReflexivoVO diarioReflexivo) throws ServiceException;
 
 }
