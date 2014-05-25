@@ -236,9 +236,7 @@
     	
     	
     	function dameAsignaturasUsuario(){
-    		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
-    		idSelectedUser = <%=sessionIdUser%>;
-    		/*url = "asignaturasusuario.do?idUser=" + idSelectedUser;
+    		url = "asignaturasusuario.do?";
     		var xmlhttp = initRequest();
     		xmlhttp.onreadystatechange=function(){
     			if (xmlhttp.readyState===4) {
@@ -250,12 +248,12 @@
         	    }
     		}
     	    xmlhttp.open("GET",url,true);
-    	    xmlhttp.send(null);*/
+    	    xmlhttp.send(null);
     	    
     	    
     		
     		//esto se obtendra de la bbdd
-    		 var opts = [['idAsignatura1', 'obj', '801148 - Prácticas Clínicas de Enfermería: Cuidados Básicos','libro.png'],
+    		/* var opts = [['idAsignatura1', 'obj', '801148 - Prácticas Clínicas de Enfermería: Cuidados Básicos','libro.png'],
                          ['idAsignatura2', 'obj', '801149 - Prácticas Clínicas de Enfermería: Metodología Enfermera','libro.png'],
                          ['sep1', 'sep', ''],
                          ['idAsignatura3', 'obj', '801150 - Prácticas Clínicas de Enfermería I','libro.png'],
@@ -265,7 +263,7 @@
                          ['idAsignatura6', 'obj', '801152 - Prácticas Clínicas de Enfermería III','libro.png'],
                          ['idAsignatura7', 'obj', '801153 - Prácticas Clínicas de Enfermería IV','libro.png'],
                         ];
-    	    return opts;
+    	    return opts;*/
     	}
     	
     	function dameCursos(){

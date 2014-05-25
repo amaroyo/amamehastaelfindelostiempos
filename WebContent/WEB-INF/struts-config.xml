@@ -36,6 +36,9 @@
 		<action path="/confirmacion" forward="/jsp/web/common/confirmacion.jsp" />
 		
 		<action path="/entrada" forward="/jsp/entrada.jsp" />
+		
+		<action path="/asignaturasusuario" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.AsignaturasUsuarioAction"  />
+
 				
 	</action-mappings>
 

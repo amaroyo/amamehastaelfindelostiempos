@@ -18,6 +18,8 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.dao.rowmappers.AsignaturaMapper;
 import es.oyssen.mrm.negocio.vo.AsignaturaVO;
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
+import es.oyssen.mrm.negocio.vo.ProfesorAsociadoVO;
 
 
 public class MySqlDAOAsignaturasImpl extends DAOBase implements DAOAsignaturas{
@@ -25,12 +27,15 @@ public class MySqlDAOAsignaturasImpl extends DAOBase implements DAOAsignaturas{
 	private static String SQL_INSERT = "insert into asignaturas (nombre, codigo, curso, descripcion) values (?,?,?,?)";
 	private static String SQL_UPDATE = "update asignaturas set nombre=?, codigo=?, curso=?, descripcion=?";
 	private static String SQL_DELETE = "delete from asignaturas where id_asignatura = ?";
-	private static String SQL_FIND_ALL = "select * from asignaturas";
+	private static String SQL_FIND_ALL = "select distinct a.* from asignaturas as a, profesores_asociados as p where p.anyo_academico =? and a.id_asignatura = p.id_asignatura";
 	private static String SQL_FIND_ID = "select * from asignaturas where id_asignatura = ?";
 	private static String SQL_FIND_BY_CURSO = "select * from asignaturas where curso = ?";
 	private static String SQL_FIND_BY_CODIGO = "select * from asignaturas where codigo = ?";
 	private static String SQL_FIND_BY_NOMBRE = "select * from asignaturas where nombre = ?";
+	private static String SQL_FIND_BY_PROFESOR_ANYO_ACADEMICO = "select distinct a.* from asignaturas as a, profesores_asociados as p where p.id_profesor = ? and p.anyo_academico =? and a.id_asignatura = p.id_asignatura";
+	private static String SQL_FIND_BY_ALUMNO_ANYO_ACADEMICO = "select distinct a.* from asignaturas as a, portafolios as p where p.id_alumno = ? and p.anyo_academico =? and a.id_asignatura = p.id_asignatura";
 
+	
 	@Override
 	public void insert(final AsignaturaVO asignatura) throws DAOException,
 			DAOInsertException {
@@ -90,10 +95,10 @@ public class MySqlDAOAsignaturasImpl extends DAOBase implements DAOAsignaturas{
 		
 	}
 
-	@Override
-	public List<AsignaturaVO> findAll() throws DAOException {
+	
+	public List<AsignaturaVO> findAll(String anyoAcademico) throws DAOException {
 		try {
-			return getJdbcTemplate().query(SQL_FIND_ALL, new Object[]{}, new AsignaturaMapper());
+			return getJdbcTemplate().query(SQL_FIND_ALL, new Object[]{anyoAcademico}, new AsignaturaMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
@@ -101,10 +106,20 @@ public class MySqlDAOAsignaturasImpl extends DAOBase implements DAOAsignaturas{
 		}
 	}
 	
-	@Override
+	
 	public List<AsignaturaVO> findByCurso(AsignaturaVO asignatura) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_BY_CURSO, new Object[]{asignatura.getCurso()}, new AsignaturaMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+	
+	public List<AsignaturaVO> findByProfesorAnyoAcademico(ProfesorAsociadoVO profesor) throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_BY_PROFESOR_ANYO_ACADEMICO, new Object[]{profesor.getIdProfesor(),profesor.getAnyoAcademico()}, new AsignaturaMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
@@ -143,6 +158,18 @@ public class MySqlDAOAsignaturasImpl extends DAOBase implements DAOAsignaturas{
 		} catch (Exception e) {
 			throw new DAOException(e);
 		}
+	}
+
+	@Override
+	public List<AsignaturaVO> findByAlumnoAnyoAcademico(PortafolioVO portafolio) throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_BY_ALUMNO_ANYO_ACADEMICO, new Object[]{portafolio.getIdAlumno(),portafolio.getAnyoAcademico()}, new AsignaturaMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+		
 	}
 	
 	

@@ -104,7 +104,7 @@ public class UsuariosServiceImpl implements UsuariosService{
 	public UsuarioVO findByCorreoPass(UsuarioVO usuario)
 			throws ServiceException {
 		try {
-			return daoUsuarios.findByUserPass(usuario);
+			return daoUsuarios.findByCorreoPass(usuario);
 		} catch (DAOException e) {
 			e.printStackTrace();
 			log.error("Error findByCorreoPass usuario", e);

@@ -28,7 +28,7 @@ public interface DAOUsuarios {
 	
 	public UsuarioVO findByDni(UsuarioVO usuario) throws DAOException;
 	
-	public UsuarioVO findByUserPass(UsuarioVO usuario) throws DAOException;
+	public UsuarioVO findByCorreoPass(UsuarioVO usuario) throws DAOException;
 	
 	public UsuarioVO findByNombreApellidos(UsuarioVO usuario) throws DAOException;
 	

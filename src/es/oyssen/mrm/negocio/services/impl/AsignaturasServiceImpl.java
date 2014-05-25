@@ -10,6 +10,8 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.AsignaturasService;
 import es.oyssen.mrm.negocio.vo.AsignaturaVO;
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
+import es.oyssen.mrm.negocio.vo.ProfesorAsociadoVO;
 
 public class AsignaturasServiceImpl implements AsignaturasService{
 	
@@ -56,9 +58,9 @@ public class AsignaturasServiceImpl implements AsignaturasService{
 		}			
 	}
 
-	public List<AsignaturaVO> findAll() throws ServiceException {
+	public List<AsignaturaVO> findAll(String anyoAcademico) throws ServiceException {
 		try {
-			return daoAsignaturas.findAll();
+			return daoAsignaturas.findAll(anyoAcademico);
 		} catch (DAOException e) {
 			e.printStackTrace();
 			throw new ServiceException(e.getMessage());
@@ -78,6 +80,24 @@ public class AsignaturasServiceImpl implements AsignaturasService{
 	public List<AsignaturaVO> findByCurso(AsignaturaVO asignatura) throws ServiceException {
 		try {
 			return daoAsignaturas.findByCurso(asignatura);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
+		}
+	}
+	
+	public List<AsignaturaVO> findByProfesorAnyoAcademico(ProfesorAsociadoVO profesor) throws ServiceException {
+		try {
+			return daoAsignaturas.findByProfesorAnyoAcademico(profesor);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
+		}
+	}
+	
+	public List<AsignaturaVO> findByAlumnoAnyoAcademico(PortafolioVO portafolio) throws ServiceException {
+		try {
+			return daoAsignaturas.findByAlumnoAnyoAcademico(portafolio);
 		} catch (DAOException e) {
 			e.printStackTrace();
 			throw new ServiceException(e.getMessage());
