@@ -17,10 +17,10 @@ insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido
 insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (2, 'coordinador@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Alex', 'Aroyo', '' ,'65344996C' );
 
 -- user/pass: profesor1@ucm.es/realmadrid
-insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (3, 'profesor1@ucm.es@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Profe1', 'pA1', 'pAA1' ,'65344988X' );
+insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (3, 'profesor1@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Profe1', 'pA1', 'pAA1' ,'65344988X' );
 
 -- user/pass: profesor2@ucm.es/realmadrid
-insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (3, 'profesor2@ucm.es@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Profe2', 'pA2', 'pAA2' ,'65333988X' );
+insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (3, 'profesor2@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Profe2', 'pA2', 'pAA2' ,'65333988X' );
 
 -- user/pass: alumno1@ucm.es/realmadrid
 insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (4, 'alumno1@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Alumno1', 'Al1', '' ,'12300996C' );
