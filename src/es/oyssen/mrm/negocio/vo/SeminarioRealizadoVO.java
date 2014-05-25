@@ -16,7 +16,6 @@ public class SeminarioRealizadoVO {
 	 
 	
 	public SeminarioRealizadoVO(String id_seminario, String id_portafolio) {
-		super();
 		this.id_seminario = id_seminario;
 		this.id_portafolio = id_portafolio;
 	}
