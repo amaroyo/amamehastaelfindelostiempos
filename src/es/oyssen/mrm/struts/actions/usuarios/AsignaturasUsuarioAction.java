@@ -56,7 +56,6 @@ public class AsignaturasUsuarioAction extends MrmAction {
 		response.setContentType("text/xml;charset=utf-8");
 		PrintWriter out;
 	    out = response.getWriter();
-	    System.out.println(parseXML(asignaturas));
 	    out.print(parseXML(asignaturas));
 
 		
@@ -76,7 +75,7 @@ public class AsignaturasUsuarioAction extends MrmAction {
 				sb.append("<asignatura>");
 				AsignaturaVO asignatura = it.next();
 				sb.append("<id><![CDATA[" + asignatura.getIdAsignatura() + "]]></id>");
-				sb.append("<nombre><![CDATA[" + asignatura.getCodigo()+" - "+asignatura.getIdAsignatura() + "]]></nombre>");
+				sb.append("<nombre><![CDATA[" + asignatura.getCodigo()+" - "+asignatura.getNombre() + "]]></nombre>");
 				sb.append("</asignatura>");
 			}	
 		}

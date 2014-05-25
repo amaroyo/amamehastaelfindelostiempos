@@ -52,7 +52,7 @@
 							optsAdministrar, 'administrar.png', null, 'disabled', true, "10", 'select');
 	
 					
-					permisosToolbarGeneral();
+					//permisosToolbarGeneral();
 	        	});	 
 		        
 		        toolbar.attachEvent("onClick", function(id){
@@ -241,29 +241,28 @@
     		xmlhttp.onreadystatechange=function(){
     			if (xmlhttp.readyState===4) {
         	        if(xmlhttp.status===200) { //GET returning a response
-        	        	var asignaturasOpts = xmlhttp.responseText;
+        	        	var asignaturasOpts = ;
         				alert(asignaturasOpts);
-        	        	return asignaturasOpts;
+        	        	return createArrayFromXLM(xmlhttp.responseXML);
         	        }
         	    }
     		}
     	    xmlhttp.open("GET",url,true);
     	    xmlhttp.send(null);
-    	    
-    	    
-    		
-    		//esto se obtendra de la bbdd
+    	}
+    	
+    	function createArrayFromXML(){
     		/* var opts = [['idAsignatura1', 'obj', '801148 - Prácticas Clínicas de Enfermería: Cuidados Básicos','libro.png'],
-                         ['idAsignatura2', 'obj', '801149 - Prácticas Clínicas de Enfermería: Metodología Enfermera','libro.png'],
-                         ['sep1', 'sep', ''],
-                         ['idAsignatura3', 'obj', '801150 - Prácticas Clínicas de Enfermería I','libro.png'],
-                         ['idAsignatura4', 'obj', '801151 - Prácticas Clínicas de Enfermería II: Atención Especializada','libro.png'],
-                         ['idAsignatura5', 'obj', '801151 - Prácticas Clínicas de Enfermería II: Atención Primaria','libro.png'],
-                         ['sep2', 'sep', ''],
-                         ['idAsignatura6', 'obj', '801152 - Prácticas Clínicas de Enfermería III','libro.png'],
-                         ['idAsignatura7', 'obj', '801153 - Prácticas Clínicas de Enfermería IV','libro.png'],
-                        ];
-    	    return opts;*/
+            ['idAsignatura2', 'obj', '801149 - Prácticas Clínicas de Enfermería: Metodología Enfermera','libro.png'],
+            ['sep1', 'sep', ''],
+            ['idAsignatura3', 'obj', '801150 - Prácticas Clínicas de Enfermería I','libro.png'],
+            ['idAsignatura4', 'obj', '801151 - Prácticas Clínicas de Enfermería II: Atención Especializada','libro.png'],
+            ['idAsignatura5', 'obj', '801151 - Prácticas Clínicas de Enfermería II: Atención Primaria','libro.png'],
+            ['sep2', 'sep', ''],
+            ['idAsignatura6', 'obj', '801152 - Prácticas Clínicas de Enfermería III','libro.png'],
+            ['idAsignatura7', 'obj', '801153 - Prácticas Clínicas de Enfermería IV','libro.png'],
+           ];
+return opts;*/
     	}
     	
     	function dameCursos(){
