@@ -27,11 +27,7 @@ public class MySqlDAOEstanciasUnidadClinicaImpl extends DAOBase implements DAOEs
 	private static String SQL_DELETE = "delete from estancias_unidad_clinica where id_estancia_unidad = ? and id_portafolio = ?";
 	private static String SQL_FIND_BY_PORTAFOLIO = "select * from estancias_unidad_clinica where id_portafolio = ?";
 	private static String SQL_FIND_BY_CENTRO_TURNO = "select * from estancias_unidad_clinica where centro_asociado = ? and turno = ?";
-	//private static String SQL_FIND_BY_GRUPO = "select * from usuarios where id_grupo = ?";
-	//private static String SQL_FIND_BY_USER = "select * from usuarios where correo_ucm = ?";
-	//private static String SQL_FIND_BY_DNI = "select * from usuarios where dni = ?";
-	//private static String SQL_FIND_BY_NOMBRE_APELLIDOS = "select * from usuarios where nombre = ? and apellido1 = ? and apellido2 = ?";
-	
+
 	
 	public void insert(final EstanciaUnidadClinicaVO estanciaUnidadClinica) throws DAOException,
 			DAOInsertException {
@@ -91,7 +87,7 @@ public class MySqlDAOEstanciasUnidadClinicaImpl extends DAOBase implements DAOEs
 	}
 
 	
-	public List<EstanciaUnidadClinicaVO> findByPortafolio(EstanciaUnidadClinicaVO estanciaUnidadClinica) throws DAOException {
+	public List<EstanciaUnidadClinicaVO> findAllByPortafolio(EstanciaUnidadClinicaVO estanciaUnidadClinica) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_BY_PORTAFOLIO, new Object[]{estanciaUnidadClinica.getIdPortafolio()}, new EstanciaUnidadClinicaMapper());
 		} catch (EmptyResultDataAccessException e) {

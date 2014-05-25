@@ -14,7 +14,7 @@ public interface EstanciasUnidadClinicaService {
 	
 	public void delete(EstanciaUnidadClinicaVO estanciaUnidadClinica) throws ServiceException, DAOException;
 	
-	public List<EstanciaUnidadClinicaVO> findByPortafolio(EstanciaUnidadClinicaVO estanciaUnidadClinica) throws ServiceException;
+	public List<EstanciaUnidadClinicaVO> findAllByPortafolio(EstanciaUnidadClinicaVO estanciaUnidadClinica) throws ServiceException;
 	
 	public List<EstanciaUnidadClinicaVO> findByCentroTurno(EstanciaUnidadClinicaVO estanciaUnidadClinica) throws ServiceException;
 	

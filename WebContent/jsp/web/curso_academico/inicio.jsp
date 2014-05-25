@@ -21,7 +21,7 @@
 		    dhtmlxEvent(window,"load",function() {
 		    	
 		    	
-		    	<% String anyo = (String) session.getAttribute("anyo_academico");%>
+		    	<% String anyo = (String) session.getAttribute("anyoAcademico");%>
 				var ann = ("<%=anyo%>");
 		    	
 				

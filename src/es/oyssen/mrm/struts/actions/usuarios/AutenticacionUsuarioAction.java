@@ -52,7 +52,7 @@ public class AutenticacionUsuarioAction extends MrmAction {
 			request.getSession().setAttribute("usuarioIdGrupo", usuario.getIdGrupo());
 			request.getSession().setAttribute("idUsuario", usuario.getIdUsuario());
 			request.getSession().setAttribute("usuario", usuario.getCorreo());
-			request.getSession().setAttribute("anyo_academico", anyo_academico());
+			request.getSession().setAttribute("anyoAcademico", anyoAcademico());
 		
 			if (usuario.getIdGrupo().equals("1")) {
 				usuarioYPermisos.setBloqueado("NO");
@@ -125,7 +125,7 @@ public class AutenticacionUsuarioAction extends MrmAction {
 		return sb.toString();
 	}
 	
-	private String anyo_academico(){
+	private String anyoAcademico(){
 		String actual = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
 		String pasado = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)-1);
 		return pasado + "/" + actual;
