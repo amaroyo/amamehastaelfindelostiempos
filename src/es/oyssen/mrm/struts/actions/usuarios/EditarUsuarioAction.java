@@ -15,9 +15,9 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		EditarUsuarioForm form = (EditarUsuarioForm) f;
 		UsuarioVO usuario = new UsuarioVO();
 		
-		if (!StringUtil.isNullOrBlank(form.getEmail())){
+		if (!StringUtil.isNullOrBlank(form.getCorreo())){
 			
-			usuario.setCorreo(form.getEmail());
+			usuario.setCorreo(form.getCorreo());
 			return getUsuariosService().findByCorreo(usuario);
 			
 		} 
@@ -43,12 +43,12 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		
 		//ESTO HAY QUE CAMBIARLO A BUSCAR SEGUN EMAIL O DNI, YA QUE SON UNIQUE
 		//EN ESTE CASO EL UNICO CAMPO UNIQUE A PARTE DEL ID ES EL USER (del form)
-		usuario.setCorreo(form.getEmail());
+		usuario.setCorreo(form.getCorreo());
 		if (getUsuariosService().findByCorreo(usuario) != null)
 			System.out.println("================>ESTE USUARIO YA EXISTE<===========================");
 		else{
 			usuario.setIdGrupo(form.getGrupo());
-			usuario.setCorreo(form.getEmail());
+			usuario.setCorreo(form.getCorreo());
 			usuario.setNombre(form.getNombre());
 			usuario.setApellido1(form.getApellido1());
 			usuario.setApellido2(form.getApellido2());
@@ -80,8 +80,8 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		
 		
 		if (StringUtil.isNullOrBlank(form.getIdUsuario())) {
-			if (!StringUtil.isNullOrBlank(form.getEmail())) {
-				usuario.setCorreo(form.getEmail());
+			if (!StringUtil.isNullOrBlank(form.getCorreo())) {
+				usuario.setCorreo(form.getCorreo());
 				usuario.setIdUsuario(getUsuariosService().findByCorreo(usuario).getIdUsuario());
 			}
 		}
@@ -89,7 +89,7 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 			usuario.setIdUsuario(form.getIdUsuario());
 		}
 		usuario.setIdGrupo(idGrupo(form.getGrupo()));
-		usuario.setCorreo(form.getEmail());
+		usuario.setCorreo(form.getCorreo());
 		usuario.setNombre(form.getNombre());
 		usuario.setApellido1(form.getApellido1());
 		usuario.setApellido2(form.getApellido2());
