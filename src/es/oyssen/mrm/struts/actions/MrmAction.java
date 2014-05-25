@@ -1,11 +1,13 @@
 package es.oyssen.mrm.struts.actions;
 
+import es.oyssen.mrm.negocio.services.AsignaturasService;
 import es.oyssen.mrm.negocio.services.CanalesService;
 import es.oyssen.mrm.negocio.services.ComercialesService;
 import es.oyssen.mrm.negocio.services.ContactosCanalService;
 import es.oyssen.mrm.negocio.services.ContactosDistribuidorService;
 import es.oyssen.mrm.negocio.services.DistribuidoresService;
 import es.oyssen.mrm.negocio.services.EmpresasService;
+import es.oyssen.mrm.negocio.services.EstanciasUnidadClinicaService;
 import es.oyssen.mrm.negocio.services.FicherosLeadService;
 import es.oyssen.mrm.negocio.services.FicherosService;
 import es.oyssen.mrm.negocio.services.GruposService;
@@ -14,6 +16,8 @@ import es.oyssen.mrm.negocio.services.LeadsService;
 import es.oyssen.mrm.negocio.services.LogsUsuarioService;
 import es.oyssen.mrm.negocio.services.PermisosGrupoService;
 import es.oyssen.mrm.negocio.services.PermisosService;
+import es.oyssen.mrm.negocio.services.PortafoliosService;
+import es.oyssen.mrm.negocio.services.ProfesoresAsociadosService;
 import es.oyssen.mrm.negocio.services.PuntosVentaService;
 import es.oyssen.mrm.negocio.services.ResponsablesService;
 import es.oyssen.mrm.negocio.services.ServiciosService;
@@ -88,10 +92,6 @@ public abstract class MrmAction extends SpringBaseAction implements Constantes{
 		return (PermisosService) getBean("permisosService");
 	}
 	
-	public UsuariosService getUsuariosService() {
-		return (UsuariosService) getBean("usuariosService");
-	}
-	
 	public ServiciosUsuarioService getServiciosUsuarioService() {
 		return (ServiciosUsuarioService) getBean("serviciosUsuarioService");
 	}
@@ -104,4 +104,23 @@ public abstract class MrmAction extends SpringBaseAction implements Constantes{
 		return (FicherosLeadService) getBean("ficherosLeadService");
 	}
 	
+	public UsuariosService getUsuariosService() {
+		return (UsuariosService) getBean("usuariosService");
+	}
+	
+	public AsignaturasService getAsignaturasService() {
+		return (AsignaturasService) getBean("asignaturasService");
+	}
+	
+	public PortafoliosService getPortafoliosService() {
+		return (PortafoliosService) getBean("portafoliosService");
+	}
+	
+	public ProfesoresAsociadosService getProfesoresAsociadosService() {
+		return (ProfesoresAsociadosService) getBean("profesoresAsociadosService");
+	}
+	
+	public EstanciasUnidadClinicaService getEstanciasUnidadClinicaService() {
+		return (EstanciasUnidadClinicaService) getBean("estanciasUnidadClinicaService");
+	}
 }

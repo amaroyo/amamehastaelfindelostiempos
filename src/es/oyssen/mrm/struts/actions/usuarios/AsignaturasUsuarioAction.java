@@ -34,8 +34,8 @@ public class AsignaturasUsuarioAction extends MrmAction {
 		
 		//"Super Admin" o "Coordinador" o "Virtual Tour"
 		if (usuarioIdGrupo.equals("1") || usuarioIdGrupo.equals("2") || usuarioIdGrupo.equals("5")) {
-				
-			}
+				getAsignaturasService.
+		}
 		else
 			// "Profesor"
 			if (usuarioIdGrupo.equals("3")) {
