@@ -52,7 +52,7 @@
 	
 	<bean id="daoUsuarios" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOUsuariosImpl" parent="daoBase" />
 	
-	<bean id="daoAsignaturas" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOAsigntaurasImpl" parent="daoBase" />
+	<bean id="daoAsignaturas" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOAsignaturasImpl" parent="daoBase" />
 	
 	<bean id="daoPortafolios" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOPortafoliosImpl" parent="daoBase" />
 	

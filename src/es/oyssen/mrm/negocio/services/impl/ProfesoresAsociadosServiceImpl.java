@@ -17,7 +17,7 @@ public class ProfesoresAsociadosServiceImpl implements ProfesoresAsociadosServic
 	private DAOProfesoresAsociados daoProfesoresAsociados;
 
 	
-	public void setDaoProfesores(DAOProfesoresAsociados daoProfesoresAsociados) {
+	public void setDaoProfesoresAsociados(DAOProfesoresAsociados daoProfesoresAsociados) {
 		this.daoProfesoresAsociados = daoProfesoresAsociados;
 	}
 	

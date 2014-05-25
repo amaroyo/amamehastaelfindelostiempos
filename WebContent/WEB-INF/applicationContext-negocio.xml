@@ -130,7 +130,7 @@
 	</bean>	
 	
 	<bean id="trabajosDeCampoService" class="es.oyssen.mrm.negocio.services.impl.TrabajosDeCampoServiceImpl">		
-		<property name="daoTrabajosDeCampoService" ref="daoTrabajosDeCampoService" />
+		<property name="daoTrabajosDeCampo" ref="daoTrabajosDeCampo" />
 	</bean>	
 	
 	<bean id="seminariosRealizadosService" class="es.oyssen.mrm.negocio.services.impl.SeminariosRealizadosServiceImpl">		
