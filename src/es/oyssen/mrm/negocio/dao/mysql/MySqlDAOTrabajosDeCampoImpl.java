@@ -16,7 +16,6 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
-import es.oyssen.mrm.negocio.dao.rowmappers.EstanciaUnidadClinicaMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.TrabajoDeCampoMapper;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 
@@ -88,7 +87,7 @@ public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosD
 
 	public List<TrabajoDeCampoVO> findAllByPortafolio(TrabajoDeCampoVO trabajoDeCampo) throws DAOException {
 		try {
-			return getJdbcTemplate().query(SQL_FIND_BY_PORTAFOLIO, new Object[]{trabajoDeCampo.getIdPortafolio()}, new EstanciaUnidadClinicaMapper());
+			return getJdbcTemplate().query(SQL_FIND_BY_PORTAFOLIO, new Object[]{trabajoDeCampo.getIdPortafolio()}, new TrabajoDeCampoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
