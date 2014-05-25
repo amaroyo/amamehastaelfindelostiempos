@@ -12,7 +12,7 @@
 	    <script type="text/javascript" src="skins/dhtmlx.js"></script>
     
     <script>
-    	var dhxWins, toolbar, width, height, nota, formAsignaturasInvisible;
+    	var dhxWins, toolbar, width, height, nota, formAsignaturasInvisible, optsAsignaturas;
     	dhtmlx.image_path='skins/imgs/';
     	
     	function init() {
@@ -38,7 +38,9 @@
 					toolbar.setItemText('exit', '<bean:message key="label.salir" />');
 					
 					
-					var optsAsignaturas = dameAsignaturasUsuario();
+					//var optsAsignaturas = dameAsignaturasUsuario();
+					dameAsignaturasUsuario();
+					alert(optsAsignaturas);
 					toolbar.addButtonSelect('misAsignaturas',2, '<bean:message key="button.select.mis.asignaturas" />',
 							optsAsignaturas, 'asignaturas.png', null, 'disabled', true, "100", 'select');
 				
@@ -238,20 +240,33 @@
     	function dameAsignaturasUsuario(){
     		url = "asignaturasusuario.do?";
     		var xmlhttp = initRequest();
-    		xmlhttp.onreadystatechange=function(){
-    			if (xmlhttp.readyState===4) {
-        	        if(xmlhttp.status===200) { //GET returning a response
-        	        	var asignaturasOpts = ;
-        				alert(asignaturasOpts);
-        	        	return createArrayFromXLM(xmlhttp.responseXML);
-        	        }
-        	    }
-    		}
+    		xmlhttp.onreadystatechange=miCaca;
     	    xmlhttp.open("GET",url,true);
     	    xmlhttp.send(null);
     	}
     	
-    	function createArrayFromXML(){
+    	
+    	function miCaca(){
+    		if (xmlhttp.readyState===4) {
+    	        if(xmlhttp.status===200) { //GET returning a response
+    	        	optsAsignaturas = createArrayFromXML(xmlhttp.responseXML);
+    	        }
+    	    }
+    	}
+    	function createArrayFromXML(xml){
+    		var icon = 'libro.png';
+    		var asignaturas = xml.getElementsByTagName("asignatura");
+    		var id, nombre, asignatura;
+    		var opts = [];
+    		for(var i=0;i<asignaturas.length;i++) {
+    	        id=asignaturas[i].getElementsByTagName("id")[0].firstChild.nodeValue;
+    	        nombre=asignaturas[i].getElementsByTagName("nombre")[0].firstChild.nodeValue;
+				asignatura=[id,'obj',nombre,icon];
+    	       	opts[i] = asignatura;
+    	    }
+    		return opts;
+    		
+    		
     		/* var opts = [['idAsignatura1', 'obj', '801148 - Prácticas Clínicas de Enfermería: Cuidados Básicos','libro.png'],
             ['idAsignatura2', 'obj', '801149 - Prácticas Clínicas de Enfermería: Metodología Enfermera','libro.png'],
             ['sep1', 'sep', ''],
@@ -261,8 +276,7 @@
             ['sep2', 'sep', ''],
             ['idAsignatura6', 'obj', '801152 - Prácticas Clínicas de Enfermería III','libro.png'],
             ['idAsignatura7', 'obj', '801153 - Prácticas Clínicas de Enfermería IV','libro.png'],
-           ];
-return opts;*/
+           ];*/
     	}
     	
     	function dameCursos(){
