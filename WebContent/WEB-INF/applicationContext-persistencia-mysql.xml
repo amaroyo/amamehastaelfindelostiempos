@@ -74,6 +74,7 @@
 	
 	<bean id="daoAnexos" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOAnexosImpl" parent="daoBase" />
 	
+	<bean id="daoCasosClinicos" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOCasosClinicosImpl" parent="daoBase" />
 	
 	
 </beans>

@@ -3,6 +3,7 @@ package es.oyssen.mrm.struts.actions;
 import es.oyssen.mrm.negocio.services.AnexosService;
 import es.oyssen.mrm.negocio.services.AsignaturasService;
 import es.oyssen.mrm.negocio.services.CanalesService;
+import es.oyssen.mrm.negocio.services.CasosClinicosService;
 import es.oyssen.mrm.negocio.services.ComercialesService;
 import es.oyssen.mrm.negocio.services.ContactosCanalService;
 import es.oyssen.mrm.negocio.services.ContactosDistribuidorService;
@@ -142,6 +143,10 @@ public abstract class MrmAction extends SpringBaseAction implements Constantes{
 	
 	public AnexosService getAnexosService() {
 		return (AnexosService) getBean("anexosService");
+	}
+	
+	public CasosClinicosService getCasosClinicosService() {
+		return (CasosClinicosService) getBean("casosClinicosService");
 	}
 	
 	

@@ -157,6 +157,9 @@
 		<property name="daoAnexos" ref="daoAnexos" />
 	</bean>	
 	
+	<bean id="CasosClinicosServices" class="es.oyssen.mrm.negocio.services.impl.CasosClinicosServiceImpl">		
+		<property name="daoCasosClinicos" ref="daoCasosClinicos" />
+	</bean>	
 	
 
 </beans>
