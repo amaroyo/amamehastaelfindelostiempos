@@ -25,7 +25,6 @@ public class MySqlDAOEstanciasUnidadClinicaImpl extends DAOBase implements DAOEs
 	private static String SQL_INSERT = "insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (?,?,?,?,?,?)";
 	private static String SQL_UPDATE = "update estancias_unidad_clinica set turno=?, fecha_inicio=?, fecha_fin=?";
 	private static String SQL_DELETE = "delete from estancias_unidad_clinica where id_estancia_unidad = ? and id_portafolio = ?";
-	private static String SQL_FIND_ALL = "select * from estancias_unidad_clinica where id_estancia_unidad = ?";
 	private static String SQL_FIND_BY_PORTAFOLIO = "select * from estancias_unidad_clinica where id_portafolio = ?";
 	private static String SQL_FIND_BY_CENTRO_TURNO = "select * from estancias_unidad_clinica where centro_asociado = ? and turno = ?";
 	//private static String SQL_FIND_BY_GRUPO = "select * from usuarios where id_grupo = ?";
@@ -91,15 +90,6 @@ public class MySqlDAOEstanciasUnidadClinicaImpl extends DAOBase implements DAOEs
 		
 	}
 
-	public List<EstanciaUnidadClinicaVO> findAll(EstanciaUnidadClinicaVO estanciaUnidadClinica) throws DAOException {
-		try {
-			return getJdbcTemplate().query(SQL_FIND_ALL, new Object[]{estanciaUnidadClinica.getIdEstanciaUnidad()}, new EstanciaUnidadClinicaMapper());
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		} catch (Exception e) {
-			throw new DAOException(e);
-		}
-	}
 	
 	public List<EstanciaUnidadClinicaVO> findByPortafolio(EstanciaUnidadClinicaVO estanciaUnidadClinica) throws DAOException {
 		try {

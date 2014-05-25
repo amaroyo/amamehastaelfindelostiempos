@@ -9,8 +9,7 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
-public interface DAOUsuarios {
-	
+public interface DAOTrabajosDeCampo {
 
 	public void insert(UsuarioVO usuario) throws DAOException, DAOInsertException;
 	

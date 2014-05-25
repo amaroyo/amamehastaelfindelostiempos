@@ -57,15 +57,6 @@ public class EstanciasUnidadClinicaServiceImpl implements EstanciasUnidadClinica
 		}			
 	}
 
-	public List<EstanciaUnidadClinicaVO> findAll(EstanciaUnidadClinicaVO estanciaUnidadClinica) throws ServiceException {
-		try {
-			return daoEstanciasUnidadClinica.findAll(estanciaUnidadClinica);
-		} catch (DAOException e) {
-			e.printStackTrace();
-			log.error("Error findAll estancia por unidad clinica", e);
-			throw new ServiceException(e.getMessage());
-		}
-	}
 	
 	
 	public List<EstanciaUnidadClinicaVO> findByPortafolio(EstanciaUnidadClinicaVO estanciaUnidadClinica) throws ServiceException {
