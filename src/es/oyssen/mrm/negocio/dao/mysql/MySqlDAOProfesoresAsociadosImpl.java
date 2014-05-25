@@ -1,8 +1,13 @@
 package es.oyssen.mrm.negocio.dao.mysql;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+
 import es.oyssen.mrm.negocio.dao.DAOBase;
 import es.oyssen.mrm.negocio.dao.DAOProfesoresAsociados;
 import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
@@ -29,12 +34,20 @@ public class MySqlDAOProfesoresAsociadosImpl extends DAOBase implements DAOProfe
 	public void insert(final ProfesorAsociadoVO profesor) throws DAOException,
 			DAOInsertException {
 		try{
-			getJdbcTemplate().update(SQL_INSERT, new Object[]{
-					profesor.getIdProfesor(),
-					profesor.getIdAsignatura(),
-					profesor.getCentroAsociado(),
-					profesor.getTurno(),
-					profesor.getAnyoAcademico()});
+			getJdbcTemplate().update(new PreparedStatementCreator() {
+				
+				public PreparedStatement createPreparedStatement(Connection conn)
+						throws SQLException {
+					PreparedStatement ps = conn.prepareStatement(SQL_INSERT, new String[]{});
+					ps.setString(1, profesor.getIdProfesor());
+					ps.setString(2, profesor.getIdAsignatura());
+					ps.setString(3, profesor.getCentroAsociado());
+					ps.setString(4, profesor.getTurno());
+					ps.setString(5, profesor.getAnyoAcademico());
+					return ps;
+					
+				}
+			});
 		} catch (Exception e) {
 			throw new DAOInsertException(e);
 		}			
