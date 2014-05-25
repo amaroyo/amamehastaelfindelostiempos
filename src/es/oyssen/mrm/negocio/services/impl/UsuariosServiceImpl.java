@@ -41,6 +41,7 @@ public class UsuariosServiceImpl implements UsuariosService{
 			daoUsuarios.update(usuario);
 		} catch (DAOException e) {
 			e.printStackTrace();
+			log.error("Error update usuario", e);
 			throw new ServiceException(e);
 		}		
 	}
@@ -62,6 +63,7 @@ public class UsuariosServiceImpl implements UsuariosService{
 			return daoUsuarios.findAll();
 		} catch (DAOException e) {
 			e.printStackTrace();
+			log.error("Error findAll usuario", e);
 			throw new ServiceException(e.getMessage());
 		}
 	}
@@ -71,6 +73,7 @@ public class UsuariosServiceImpl implements UsuariosService{
 			return daoUsuarios.findByGrupo(grupo);
 		} catch (DAOException e) {
 			e.printStackTrace();
+			log.error("Error findByGrupo usuario", e);
 			throw new ServiceException(e.getMessage());
 		}
 	}
@@ -82,6 +85,7 @@ public class UsuariosServiceImpl implements UsuariosService{
 			return daoUsuarios.findById(usuario);
 		} catch (DAOException e) {
 			e.printStackTrace();
+			log.error("Error findById usuario", e);
 			throw new ServiceException(e);
 		}
 	}
@@ -92,6 +96,7 @@ public class UsuariosServiceImpl implements UsuariosService{
 			return daoUsuarios.findByUser(usuario);
 		} catch (DAOException e) {
 			e.printStackTrace();
+			log.error("Error findByCorreo usuario", e);
 			throw new ServiceException(e);
 		}
 	}
@@ -102,6 +107,7 @@ public class UsuariosServiceImpl implements UsuariosService{
 			return daoUsuarios.findByUserPass(usuario);
 		} catch (DAOException e) {
 			e.printStackTrace();
+			log.error("Error findByCorreoPass usuario", e);
 			throw new ServiceException(e);
 		}
 	}
@@ -113,6 +119,7 @@ public class UsuariosServiceImpl implements UsuariosService{
 			return daoUsuarios.findByDni(usuario);
 		} catch (DAOException e) {
 			e.printStackTrace();
+			log.error("Error findByDni usuario", e);
 			throw new ServiceException(e);
 		}
 	}
@@ -124,6 +131,7 @@ public class UsuariosServiceImpl implements UsuariosService{
 			return daoUsuarios.findByNombreApellidos(usuario);
 		} catch (DAOException e) {
 			e.printStackTrace();
+			log.error("Error findByNombreApellidos usuario", e);
 			throw new ServiceException(e);
 		}
 	}
