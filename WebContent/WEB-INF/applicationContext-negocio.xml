@@ -161,5 +161,9 @@
 		<property name="daoCasosClinicos" ref="daoCasosClinicos" />
 	</bean>	
 	
-
+	<bean id="PuntuacionCriteriosServices" class="es.oyssen.mrm.negocio.services.impl.PuntuacionCriteriosServiceImpl">		
+		<property name="daoPuntuacionCriterios" ref="daoPuntuacionCriterios" />
+	</bean>	
+	
+	
 </beans>

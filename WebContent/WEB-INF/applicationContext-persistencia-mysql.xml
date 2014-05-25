@@ -76,6 +76,7 @@
 	
 	<bean id="daoCasosClinicos" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOCasosClinicosImpl" parent="daoBase" />
 	
+	<bean id="daoPuntuacionCriterios" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOPuntuacionCriteriosImpl" parent="daoBase" />
 	
 </beans>
 
