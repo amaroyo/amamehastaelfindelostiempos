@@ -14,8 +14,9 @@ public class AsignaturaVO {
 		
 	}
 	
-	public AsignaturaVO(String idAsignatura, String nombre) {
-		this.id_asignatura= idAsignatura;
+	public AsignaturaVO(String idAsignatura, String nombre, String codigo) {
+		this.id_asignatura = idAsignatura;
+		this.codigo = codigo;
 		this.nombre = nombre;
 	}
 

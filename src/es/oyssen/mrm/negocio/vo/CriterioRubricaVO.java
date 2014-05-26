@@ -3,7 +3,7 @@ package es.oyssen.mrm.negocio.vo;
 
 public class CriterioRubricaVO { 
 
-/*	private String id_criterio;
+	private String id_criterio;
 	private String id_asignatura;
 	private String id_grupo_criterio;
 	private String nombre;
@@ -14,43 +14,65 @@ public class CriterioRubricaVO {
 		
 	}
 
+
+
+	public CriterioRubricaVO(String id_criterio, String id_asignatura,
+			String id_grupo_criterio) {
+		this.id_criterio = id_criterio;
+		this.id_asignatura = id_asignatura;
+		this.id_grupo_criterio = id_grupo_criterio;
+	}
+
+
+
 	
-	public CriterioRubricaVO(String id_caso_clinico, String id_portafolio) {
-		this.id_caso_clinico = id_caso_clinico;
-		this.id_portafolio = id_portafolio;
+
+	public String getIdCriterio() {
+		return id_criterio;
 	}
 
 
-	
 
-	public String getIdCasoClinico() {
-		return id_caso_clinico;
+	public void setIdCriterio(String id_criterio) {
+		this.id_criterio = id_criterio;
 	}
 
 
-	public void setIdCasoClinico(String id_caso_clinico) {
-		this.id_caso_clinico = id_caso_clinico;
+
+	public String getIdAsignatura() {
+		return id_asignatura;
 	}
 
 
-	public String getIdPortafolio() {
-		return id_portafolio;
+
+	public void setIdAsignatura(String id_asignatura) {
+		this.id_asignatura = id_asignatura;
 	}
 
 
-	public void setIdPortafolio(String id_portafolio) {
-		this.id_portafolio = id_portafolio;
+
+	public String getIdGrupoCriterio() {
+		return id_grupo_criterio;
 	}
 
 
-	public String getCasoClinico() {
-		return caso_clinico;
+
+	public void setIdGrupoCriterio(String id_grupo_criterio) {
+		this.id_grupo_criterio = id_grupo_criterio;
 	}
 
 
-	public void setCasoClinico(String caso_clinico) {
-		this.caso_clinico = caso_clinico;
+
+	public String getNombre() {
+		return nombre;
 	}
+
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 
 
 	@Override
@@ -58,11 +80,10 @@ public class CriterioRubricaVO {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((id_caso_clinico == null) ? 0 : id_caso_clinico.hashCode());
-		result = prime * result
-				+ ((id_portafolio == null) ? 0 : id_portafolio.hashCode());
+				+ ((id_criterio == null) ? 0 : id_criterio.hashCode());
 		return result;
 	}
+
 
 
 	@Override
@@ -74,21 +95,14 @@ public class CriterioRubricaVO {
 		if (getClass() != obj.getClass())
 			return false;
 		CriterioRubricaVO other = (CriterioRubricaVO) obj;
-		if (id_caso_clinico == null) {
-			if (other.id_caso_clinico != null)
+		if (id_criterio == null) {
+			if (other.id_criterio != null)
 				return false;
-		} else if (!id_caso_clinico.equals(other.id_caso_clinico))
-			return false;
-		if (id_portafolio == null) {
-			if (other.id_portafolio != null)
-				return false;
-		} else if (!id_portafolio.equals(other.id_portafolio))
+		} else if (!id_criterio.equals(other.id_criterio))
 			return false;
 		return true;
 	}
 
-
-*/
 
 	
 }

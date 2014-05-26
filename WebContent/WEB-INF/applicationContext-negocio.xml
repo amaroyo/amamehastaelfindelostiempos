@@ -165,5 +165,10 @@
 		<property name="daoPuntuacionCriterios" ref="daoPuntuacionCriterios" />
 	</bean>	
 	
+	<bean id="CriteriosRubricasServices" class="es.oyssen.mrm.negocio.services.impl.CriteriosRubricasServiceImpl">		
+		<property name="daoCriteriosRubricas" ref="daoCriteriosRubricas" />
+	</bean>	
+	
+	
 	
 </beans>
