@@ -7,6 +7,7 @@
 	    <link rel="stylesheet" type="text/css" href="../css/estilosMenu.css">
 	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlx.css">
 	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
+	   	<script type="text/javascript" src="../skins/dhtmlxdataprocessor.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
 	    

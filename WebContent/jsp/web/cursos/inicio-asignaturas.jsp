@@ -8,10 +8,11 @@
 	    <link rel="stylesheet" type="text/css" href="../css/estilosMenu.css">
 	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlx.css">
 	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
+	    <script type="text/javascript" src="../skins/dhtmlxdataprocessor.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
-	    <script src="../skins/dhtmlxgrid.js"></script>
-	    <script src="../skins/dhtmlxgrid_export.js"></script>
+	    <script type="text/javascript" src="../skins/dhtmlxgrid.js"></script>
+	    <script type="text/javascript" src="../skins/dhtmlxgrid_export.js"></script>
 	    
 
 	    <script type="text/javascript">
@@ -26,7 +27,7 @@
 		    	dhtmlxError.catchError("ALL",errorHandler);
 			    main_layout = new dhtmlXLayoutObject(document.body, '2U');
 			    listado = main_layout.cells('a');
-			    listado.setWidth(600);
+			    listado.setWidth(700);
 			    areaTrabajoCursos = main_layout.cells('b');
 			    
 			    //autosize(horizontal,vertical)
@@ -39,7 +40,6 @@
 			    toolbarAsignaturas = listado.attachToolbar();
 			    toolbarAsignaturas.setIconsPath('../skins/imgs/toolbar/');
 			    toolbarAsignaturas.loadXML('../xml/toolbars/dhxtoolbar-asignaturas.xml', function(){
-		    		
 	    			toolbarAsignaturas.setItemText('new',"<bean:message key="button.create.asignatura"/>");
 	    			toolbarAsignaturas.setItemText('delete',"<bean:message key="button.eliminar.asignatura"/>");
 	    			toolbarAsignaturas.setItemText('exportExcel',"<bean:message key="button.exportar.excel"/>");
@@ -54,13 +54,12 @@
 			    gridAsignaturas.setIconsPath('../skins/imgs/');
 		   		gridAsignaturas.setHeader(["<strong><bean:message key="label.nombre.asignatura" /></strong>"
 		   		                      ,"<strong><bean:message key="label.codigo.asignatura" /></strong>",
-		   		                      "<strong><bean:message key="label.curso.asignatura" /></strong>",
-		   		                      "<strong><bean:message key="label.descripcion.asignatura" /></strong>"]);
+		   		                      "<strong><bean:message key="label.curso.asignatura" /></strong>"]);
 				
 			    //ro = readonly
 			    //nombre codigo curso descripcion
-			    gridAsignaturas.setColTypes("ro,ro,ro,ro");
-			    gridAsignaturas.setColSorting('str,str,str,str');
+			    gridAsignaturas.setColTypes("ro,ro,ro");
+			    gridAsignaturas.setColSorting("str,str,str");
 			    gridAsignaturas.enableMultiselect(false);
 			    gridAsignaturas.init();
 			    gridAsignaturasProcessor = new dataProcessor("gridasignaturas.do");
@@ -71,10 +70,9 @@
 		    			dhtmlx.message(tag.firstChild.data,action,4000);
 		    		}
 		    	});
-			 	// TAG: Prueba
-				gridAsignaturas.addRow('1','A01,Anatomía,1º,Prácticas de Anatomía');
 			    
-			    gridAsignaturas.attachEvent("onRowSelect", doOnRowSelected);				  
+			    gridAsignaturas.attachEvent("onRowSelect", doOnRowSelected);
+			    buscar();
 		    });
 		    
 		    
@@ -114,7 +112,7 @@
 		    }
 		    
 		    function buscar() {
-		    	gridAsignaturas.clearAndLoad("gridAsignaturas.do");		    	
+		    	gridAsignaturas.clearAndLoad("gridasignaturas.do");		    	
 		    }
 		    
 			function permisosToolbarAsignaturas(){ 	

@@ -19,10 +19,12 @@ import es.oyssen.mrm.util.StringUtil;
 public abstract class DHTMLXGridAction extends MrmAction {
 	
 	public static final String RESULTADO_ERROR = "error";
+	public String anyoAcademico;
 
 	public ActionForward process(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		anyoAcademico = (String) request.getSession().getAttribute("anyoAcademico");
 		MessageResources resources = getResources(request);
 		DhtmlxGridForm f = (DhtmlxGridForm) form;
 		f.setNativeeditor_status(request.getParameter("!nativeeditor_status"));
@@ -56,7 +58,7 @@ public abstract class DHTMLXGridAction extends MrmAction {
 			writeGridXML(response, search(f));
 		}
 		
-		return null;
+		return mapping.findForward("success");
 	}
 
 	protected void writeGridXML(HttpServletResponse response,

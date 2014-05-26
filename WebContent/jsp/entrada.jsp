@@ -236,7 +236,7 @@
     	
     	
     	function dameAsignaturasUsuario(){
-    		url = "asignaturasusuario.do?";
+    		url = "asignaturasusuario.do";
     		var xmlhttp = initRequest();
     		xmlhttp.onreadystatechange=function(){
     			if (xmlhttp.readyState===4) {
