@@ -177,6 +177,9 @@
 		<property name="daoRubricas" ref="daoRubricas" />
 	</bean>	
 	
+	<bean id="SeminariosAsignaturaServices" class="es.oyssen.mrm.negocio.services.impl.SeminariosAsignaturaServiceImpl">		
+		<property name="daoSeminariosAsignatura" ref="daoSeminariosAsignatura" />
+	</bean>	
 	
 	
 </beans>
