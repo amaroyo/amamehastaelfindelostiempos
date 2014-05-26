@@ -32,72 +32,27 @@ public class AutenticacionUsuarioAction extends MrmAction {
 		UsuarioVO usuario = new UsuarioVO();
 		usuario.setCorreo(f.getCorreo());
 		usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(f.getPass(), EncriptarUtil.MD5));
-		usuario = getUsuariosService().findByCorreoPass(usuario);
-		usuarioYPermisos.setUsuario(usuario);		
+		usuario = getUsuariosService().findByCorreoPass(usuario);	
 		
 		if (usuario != null){
+			usuarioYPermisos.setUsuario(usuario);	
 			GrupoVO grupo = new GrupoVO();
 			grupo.setIdGrupo(usuario.getIdGrupo());
 			List<PermisoGrupoVO> permisos = getPermisosGrupoService().findByGrupo(grupo);
 			usuarioYPermisos.setPermisos(permisos);
-		}			
-		
-		if (usuario != null){
+		 
 			LogUsuarioVO logUsuario = new LogUsuarioVO();
 			logUsuario.setIdUsuario(usuario.getIdUsuario());
 			getLogsUsuarioService().insert(logUsuario);
-		}
-		
-		if (usuario != null){
-			request.getSession().setAttribute("usuarioIdGrupo", usuario.getIdGrupo());
+
+
+			request.getSession().setAttribute("idGrupoUsuario", usuario.getIdGrupo());
 			request.getSession().setAttribute("idUsuario", usuario.getIdUsuario());
-			request.getSession().setAttribute("usuario", usuario.getCorreo());
+			request.getSession().setAttribute("correo", usuario.getCorreo());
 			request.getSession().setAttribute("anyoAcademico", anyoAcademico());
-		
-			//if (usuario.getIdGrupo().equals("1")) {
-				usuarioYPermisos.setBloqueado("NO");
-			/*} else if (usuario.getIdGrupo().equals("2")) {
-				request.getSession().setAttribute("usuarioIdCanal", usuario.getIdAsociado());
-				request.getSession().setAttribute("usuarioIdDistribuidor", "NO");
-				request.getSession().setAttribute("usuarioIdComercial", "NO");
-				usuarioYPermisos.setBloqueado("NO");
-			} else if (usuario.getIdGrupo().equals("3")) {
-				request.getSession().setAttribute("usuarioIdDistribuidor", usuario.getIdAsociado());
-				request.getSession().setAttribute("usuarioIdComercial", "NO");
-				DistribuidorVO distribuidor = new DistribuidorVO();
-				distribuidor.setIdDistribuidor(usuario.getIdAsociado());
-				distribuidor = getDistribuidoresService().findById(distribuidor);
-				request.getSession().setAttribute("usuarioIdCanal", distribuidor.getIdCanal());
-				
-				usuarioYPermisos.setBloqueado(distribuidor.getBloqueado());
-			} else if (usuario.getIdGrupo().equals("4")) {
-				request.getSession().setAttribute("usuarioIdComercial", usuario.getIdAsociado());
-				ComercialVO comercial = new ComercialVO();
-				comercial.setIdComercial(usuario.getIdAsociado());
-				comercial = getComercialesService().findById(comercial);
-				request.getSession().setAttribute("usuarioIdCanal", comercial.getIdCanal());
-				request.getSession().setAttribute("usuarioIdDistribuidor", comercial.getIdDistribuidor());	
-				
-				DistribuidorVO distribuidor = new DistribuidorVO();
-				distribuidor.setIdDistribuidor(comercial.getIdDistribuidor());
-				distribuidor = getDistribuidoresService().findById(distribuidor);
-				usuarioYPermisos.setBloqueado(distribuidor.getBloqueado());
-			} else if (usuario.getIdGrupo().equals("5")) {
-				usuarioYPermisos.setBloqueado("NO");
-				request.getSession().setAttribute("usuarioIdCanal", "NO");
-				request.getSession().setAttribute("usuarioIdDistribuidor", "NO");
-				request.getSession().setAttribute("usuarioIdComercial", "NO");
-			}*/
 		}
 
 		request.getSession().setAttribute("usuarioYPermisos", parseXML(usuarioYPermisos));
-		
-		request.getSession().setAttribute("filtrarEstadoWon", "false");
-		request.getSession().setAttribute("filtrarEstadoLost", "true");
-		request.getSession().setAttribute("creacionDesde", "");
-		request.getSession().setAttribute("creacionHasta", "");
-		request.getSession().setAttribute("modificacionDesde", "");
-		request.getSession().setAttribute("modificacionHasta", "");
 		
 		return mapping.findForward("success");
 	}
@@ -112,8 +67,6 @@ public class AutenticacionUsuarioAction extends MrmAction {
 			sb.append("<grupo>" + c.getUsuario().getIdGrupo() + "</grupo>");
 			sb.append("<nombre>" + c.getUsuario().getNombre() + "</nombre>");
 		}
-		if (c.getBloqueado() != null) 
-			sb.append("<bloqueado>" + c.getBloqueado() + "</bloqueado>");
 		if (c.getPermisos() != null) {
 			sb.append("<permisos>");
 			for (PermisoGrupoVO permiso : c.getPermisos())

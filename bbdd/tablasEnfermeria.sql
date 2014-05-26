@@ -106,7 +106,7 @@ COLLATE = utf8_spanish_ci;
 
 CREATE TABLE IF NOT EXISTS asignaturas (
 	id_asignatura INT(3)  auto_increment,
-	nombre VARCHAR(100) NOT NULL,
+	nombre VARCHAR(100) UNIQUE NOT NULL,
 	codigo VARCHAR(10) NOT NULL,
 	curso INT(1),
 	descripcion TEXT,

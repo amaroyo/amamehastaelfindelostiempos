@@ -7,7 +7,6 @@ public class UsuarioYPermisos {
 
 	private UsuarioVO usuario;
 	private List<PermisoGrupoVO> permisos;
-	private String bloqueado;
 	
 	
 	public UsuarioVO getUsuario() {
@@ -24,14 +23,6 @@ public class UsuarioYPermisos {
 	
 	public void setPermisos(List<PermisoGrupoVO> permisos) {
 		this.permisos = permisos;
-	}
-
-	public String getBloqueado() {
-		return bloqueado;
-	}
-
-	public void setBloqueado(String bloqueado) {
-		this.bloqueado = bloqueado;
 	}
 
 }

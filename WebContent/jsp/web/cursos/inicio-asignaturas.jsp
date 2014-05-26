@@ -101,7 +101,7 @@
 	    			formInfo.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
 	    			//permisosAsignaturasForm();			    		
 		    		
-	    			formInfo.load('editarasignatura.do?idAsignatura=' + idAsignatura, function () {			    			
+	    			formInfo.load('editarasignatura.do?idAsignatura=' + 1, function () {			    			
 	    				formInfo.attachEvent("onButtonClick", function(id){
 		    				if (id == "aceptar") {
 		    					formInfo.send("actualizarasignatura.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura ,"post", function(xml) {

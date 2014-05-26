@@ -27,7 +27,7 @@ public class AsignaturasUsuarioAction extends MrmAction {
 		String anyoAcademico = (String)request.getSession().getAttribute("anyoAcademico");
 		
 		// para saber si es profesor o alumno
-		String usuarioIdGrupo = (String)request.getSession().getAttribute("usuarioIdGrupo");
+		String usuarioIdGrupo = (String)request.getSession().getAttribute("idGrupoUsuario");
 		List<AsignaturaVO> asignaturas = null;
 		
 		//"Super Admin" o "Coordinador" o "Virtual Tour"

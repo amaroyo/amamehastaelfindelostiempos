@@ -18,11 +18,11 @@ public class LogOutUsuarioAction extends MrmAction {
 		
 		//request.getSession().removeAttribute("toolbarObj");
 		request.getSession().removeAttribute("usuarioYPermisos");		
-		request.getSession().removeAttribute("usuarioIdGrupo");
-		request.getSession().removeAttribute("usuarioIdCanal");
+		request.getSession().removeAttribute("idGrupoUsuario");
+		/*request.getSession().removeAttribute("usuarioIdCanal");
 		request.getSession().removeAttribute("usuarioIdDistribuidor");
-		request.getSession().removeAttribute("usuarioIdComercial");
-		request.getSession().removeAttribute("usuario");
+		request.getSession().removeAttribute("usuarioIdComercial");*/
+		request.getSession().removeAttribute("correo");
 		request.getSession().removeAttribute("idUsuario");
 		request.getSession().removeAttribute("anyo_academico");
 		

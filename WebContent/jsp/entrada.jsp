@@ -313,9 +313,8 @@
 	</body>
 </logic:empty>
 <logic:notEmpty name="usuarioYPermisos">
-
   	<logic:match scope="session" name="usuarioYPermisos" value="<existe>YES</existe>" >
-		<logic:match scope="session" name="usuarioYPermisos" value="<bloqueado>NO</bloqueado>" >
+		
 			<body class="ventana" onload="init();">
 			    <table border="0" cellspacing="0" cellpadding="0" width="100%" height="100%">
 			        <!-- <tr><td><%@include file="common/cabecera.jsp" %></td></tr> -->
@@ -330,13 +329,7 @@
 			        </tr>      
 			      </table>
 		     </body>
-		</logic:match> 
-		<logic:match scope="session" name="usuarioYPermisos" value="<bloqueado>YES</bloqueado>" >
-			<body class="ventana" onload="initLock();">
-				<iframe name="trabajo" id="areatrabajo" height="100%" width="100%" scrolling="auto" src="bienvenida/inicio.do" frameborder="0"></iframe>
-			</body>
-		</logic:match> 
-	</logic:match>      
+	</logic:match>  
 	
 	<logic:match scope="session" name="usuarioYPermisos" value="<existe>NO</existe>" >
 		<body class="ventana" onload="initWrong();">
