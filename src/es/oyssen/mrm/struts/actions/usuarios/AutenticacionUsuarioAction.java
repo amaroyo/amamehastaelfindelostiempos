@@ -54,9 +54,9 @@ public class AutenticacionUsuarioAction extends MrmAction {
 			request.getSession().setAttribute("usuario", usuario.getCorreo());
 			request.getSession().setAttribute("anyoAcademico", anyoAcademico());
 		
-			if (usuario.getIdGrupo().equals("1")) {
+			//if (usuario.getIdGrupo().equals("1")) {
 				usuarioYPermisos.setBloqueado("NO");
-			} /*else if (usuario.getIdGrupo().equals("2")) {
+			/*} else if (usuario.getIdGrupo().equals("2")) {
 				request.getSession().setAttribute("usuarioIdCanal", usuario.getIdAsociado());
 				request.getSession().setAttribute("usuarioIdDistribuidor", "NO");
 				request.getSession().setAttribute("usuarioIdComercial", "NO");
