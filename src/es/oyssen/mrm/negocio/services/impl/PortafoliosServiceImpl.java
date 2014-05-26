@@ -62,6 +62,7 @@ public class PortafoliosServiceImpl implements PortafoliosService{
 			return daoPortafolios.findAll(portafolio);
 		} catch (DAOException e) {
 			e.printStackTrace();
+			log.error("Error findAll portafolio", e);
 			throw new ServiceException(e.getMessage());
 		}
 	}
@@ -74,6 +75,7 @@ public class PortafoliosServiceImpl implements PortafoliosService{
 			return daoPortafolios.findById(portafolio);
 		} catch (DAOException e) {
 			e.printStackTrace();
+			log.error("Error findById portafolio", e);
 			throw new ServiceException(e);
 		}
 	}
@@ -85,15 +87,27 @@ public class PortafoliosServiceImpl implements PortafoliosService{
 			return daoPortafolios.findByAlumno(portafolio);
 		} catch (DAOException e) {
 			e.printStackTrace();
+			log.error("Error findByAlumno portafolio", e);
 			throw new ServiceException(e.getMessage());
 		}
 	}
 
+	public List<PortafolioVO> findByProfesor(PortafolioVO portafolio)  throws ServiceException {
+		try {
+			return daoPortafolios.findByProfesor(portafolio);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findByProfesor portafolio", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
+	
 	public List<PortafolioVO> findByAsignatura(PortafolioVO portafolio)  throws ServiceException {
 		try {
 			return daoPortafolios.findByAsignatura(portafolio);
 		} catch (DAOException e) {
 			e.printStackTrace();
+			log.error("Error findByAsignatura portafolio", e);
 			throw new ServiceException(e.getMessage());
 		}
 	}
@@ -103,6 +117,7 @@ public class PortafoliosServiceImpl implements PortafoliosService{
 			return daoPortafolios.findByAnyoAcademico(portafolio);
 		} catch (DAOException e) {
 			e.printStackTrace();
+			log.error("Error findByAnyoAcademico portafolio", e);
 			throw new ServiceException(e.getMessage());
 		}
 	}

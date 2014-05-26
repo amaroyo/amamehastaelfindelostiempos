@@ -5,6 +5,7 @@ public class PortafolioVO {
 
 	private String id_portafolio;
 	private String id_alumno;
+	private String id_profesor;
 	private String id_asignatura;
 	private String anyo_academico;
 	
@@ -67,6 +68,18 @@ public class PortafolioVO {
 
 	public void setAnyoAcademico(String anyo_academico) {
 		this.anyo_academico = anyo_academico;
+	}
+
+	
+
+	public String getIdProfesor() {
+		return id_profesor;
+	}
+
+
+
+	public void setIdProfesor(String id_profesor) {
+		this.id_profesor = id_profesor;
 	}
 
 

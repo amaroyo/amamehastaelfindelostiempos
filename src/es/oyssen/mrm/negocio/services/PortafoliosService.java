@@ -20,6 +20,8 @@ public interface PortafoliosService {
 	
 	public List<PortafolioVO> findByAlumno(PortafolioVO portafolio) throws ServiceException;
 	
+	public List<PortafolioVO> findByProfesor(PortafolioVO portafolio) throws ServiceException;
+	
 	public List<PortafolioVO> findByAsignatura(PortafolioVO portafolio) throws ServiceException;
 
 	public List<PortafolioVO> findByAnyoAcademico(PortafolioVO portafolio) throws ServiceException;

@@ -22,12 +22,13 @@ import es.oyssen.mrm.negocio.vo.PortafolioVO;
 
 public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 	
-	private static String SQL_INSERT = "insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (?,?,?)";
-	private static String SQL_UPDATE = "";
+	private static String SQL_INSERT = "insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (?,?,?,?)";
+	private static String SQL_UPDATE = "update portafolios set id_profesor=?";
 	private static String SQL_DELETE = "delete from portafolios where id_portafolio = ?";
 	private static String SQL_FIND_ALL = "select * from portafolios where anyo_academico = ?";
 	private static String SQL_FIND_BY_ID = "select * from portafolios where id_portafolio = ?";
 	private static String SQL_FIND_BY_ALUMNO = "select * from portafolios where id_alumno = ? and anyo_academico = ?";
+	private static String SQL_FIND_BY_PROFESOR = "select * from portafolios where id_profesor = ? and anyo_academico = ?";
 	private static String SQL_FIND_BY_ASIGNATURA = "select * from portafolios where id_asignatura = ? and anyo_academico = ?";
 	private static String SQL_FIND_BY_ANYO_ACADEMICO = "select * from portafolios where anyo_academico = ?";
 	
@@ -67,6 +68,17 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 	}
 
 	@Override
+	public List<PortafolioVO> findByProfesor(PortafolioVO portafolio) throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_BY_PROFESOR, new Object[]{portafolio.getIdProfesor(), portafolio.getAnyoAcademico()}, new PortafolioMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+	
+	@Override
 	public List<PortafolioVO> findByAsignatura(PortafolioVO portafolio) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_BY_ASIGNATURA, new Object[]{portafolio.getIdAsignatura(), portafolio.getAnyoAcademico()}, new PortafolioMapper());
@@ -87,6 +99,8 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 			throw new DAOException(e);
 		}
 	}
+	
+	
 
 	@Override
 	public void insert(final PortafolioVO portafolio) throws DAOException, DAOInsertException {
@@ -98,8 +112,9 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 						throws SQLException {
 					PreparedStatement ps = conn.prepareStatement(SQL_INSERT, new String[]{"id_portafolio"});
 					ps.setString(1, portafolio.getIdAlumno());
-					ps.setString(2, portafolio.getIdAsignatura());
-					ps.setString(3, portafolio.getAnyoAcademico());
+					ps.setString(2, portafolio.getIdProfesor());
+					ps.setString(3, portafolio.getIdAsignatura());
+					ps.setString(4, portafolio.getAnyoAcademico());
 					return ps;
 					
 				}
@@ -116,9 +131,14 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 	@Override
 	public void update(PortafolioVO portafolio) throws DAOException, DAOUpdateException {
 		try {
-			
+			 
 			String query = SQL_UPDATE;
-			
+
+			query += " where id_portafolio = ?";
+
+			getJdbcTemplate().update(query, new Object[]{
+					portafolio.getIdProfesor(),
+					portafolio.getIdPortafolio()});
 		} catch(Exception e) {
 			throw new DAOUpdateException(e);
 		}

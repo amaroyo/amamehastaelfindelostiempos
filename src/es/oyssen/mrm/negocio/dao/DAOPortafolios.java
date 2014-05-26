@@ -15,6 +15,8 @@ public interface DAOPortafolios {
 	public PortafolioVO findById(PortafolioVO portafolio) throws DAOException;
 	
 	public List<PortafolioVO> findByAlumno(PortafolioVO portafolio) throws DAOException;
+
+	public List<PortafolioVO> findByProfesor(PortafolioVO portafolio) throws DAOException;
 	
 	public List<PortafolioVO> findByAsignatura(PortafolioVO portafolio) throws DAOException;
 

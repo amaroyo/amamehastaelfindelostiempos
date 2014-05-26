@@ -13,6 +13,7 @@ public class PortafolioMapper implements RowMapper {
 
 	public static final String FIELD_ID = "id_portafolio";
 	public static final String FIELD_ID_ALUMNO = "id_alumno";
+	public static final String FIELD_ID_PROFESOR = "id_profesor";
     public static final String FIELD_ID_ASIGNATURA = "id_asignatura";
     public static final String FIELD_ANYO_ACADEMICO = "anyo_academico";
     
@@ -20,6 +21,7 @@ public class PortafolioMapper implements RowMapper {
     	PortafolioVO o = new PortafolioVO();
     	o.setIdPortafolio(StringUtil.nullToString(rs.getString(FIELD_ID)));
     	o.setIdAlumno(StringUtil.nullToString(rs.getString(FIELD_ID_ALUMNO)));
+    	o.setIdProfesor(StringUtil.nullToString(rs.getString(FIELD_ID_PROFESOR)));
     	o.setIdAsignatura(StringUtil.nullToString(rs.getString(FIELD_ID_ASIGNATURA)));
     	o.setAnyoAcademico(StringUtil.nullToString(rs.getString(FIELD_ANYO_ACADEMICO)));
 
