@@ -106,7 +106,7 @@ COLLATE = utf8_spanish_ci;
 
 CREATE TABLE IF NOT EXISTS asignaturas (
 	id_asignatura INT(3)  auto_increment,
-	nombre VARCHAR(100) UNIQUE NOT NULL,
+	nombre VARCHAR(100) NOT NULL,
 	codigo VARCHAR(10) NOT NULL,
 	curso INT(1),
 	descripcion TEXT,
@@ -139,6 +139,7 @@ CREATE TABLE IF NOT EXISTS rubricas (
 	id_asignatura INT(3) NOT NULL,
 	competencias TEXT NOT NULL,
 	numero_criterios INT(3) NOT NULL,
+	PRIMARY KEY (id_asignatura),
 	FOREIGN KEY (id_asignatura)
 		REFERENCES asignaturas(id_asignatura)
 		ON DELETE CASCADE

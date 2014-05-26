@@ -173,6 +173,9 @@
 		<property name="daoGruposCriteriosRubricas" ref="daoGruposCriteriosRubricas" />
 	</bean>	
 	
+	<bean id="RubricasServices" class="es.oyssen.mrm.negocio.services.impl.RubricasServiceImpl">		
+		<property name="daoRubricas" ref="daoRubricas" />
+	</bean>	
 	
 	
 	

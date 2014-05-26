@@ -62,7 +62,8 @@ public class MySqlDAOGruposCriteriosRubricasImpl extends DAOBase implements DAOG
 			query += " where id_grupo_criterio = ?";
 
 			getJdbcTemplate().update(query, new Object[]{
-					grupoCriterioRubrica.getNombre()});
+					grupoCriterioRubrica.getNombre(),
+					grupoCriterioRubrica.getIdGrupoCriterio()});
 		} catch(Exception e) {
 			throw new DAOUpdateException(e);
 		}
