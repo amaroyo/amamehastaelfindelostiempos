@@ -80,6 +80,9 @@
 	
 	<bean id="daoCriteriosRubricas" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOCriteriosRubricasImpl" parent="daoBase" />
 	
+	<bean id="daoGruposCriteriosRubricas" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOGruposCriteriosRubricasImpl" parent="daoBase" />
+	
+	
 	
 	
 </beans>

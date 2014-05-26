@@ -18,7 +18,6 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.dao.rowmappers.CriterioRubricaMapper;
 import es.oyssen.mrm.negocio.vo.CriterioRubricaVO;
-import es.oyssen.mrm.negocio.vo.PortafolioVO;
 
 
 public class MySqlDAOCriteriosRubricasImpl extends DAOBase implements DAOCriteriosRubricas{

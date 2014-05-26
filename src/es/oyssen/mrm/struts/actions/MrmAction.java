@@ -14,6 +14,7 @@ import es.oyssen.mrm.negocio.services.EmpresasService;
 import es.oyssen.mrm.negocio.services.EstanciasUnidadClinicaService;
 import es.oyssen.mrm.negocio.services.FicherosLeadService;
 import es.oyssen.mrm.negocio.services.FicherosService;
+import es.oyssen.mrm.negocio.services.GruposCriteriosRubricasService;
 import es.oyssen.mrm.negocio.services.GruposService;
 import es.oyssen.mrm.negocio.services.LeadsHistoryService;
 import es.oyssen.mrm.negocio.services.LeadsService;
@@ -159,6 +160,8 @@ public abstract class MrmAction extends SpringBaseAction implements Constantes{
 		return (CriteriosRubricasService) getBean("criteriosRubricasService");
 	}
 	
-	
+	public GruposCriteriosRubricasService getGruposCriteriosRubricasService() {
+		return (GruposCriteriosRubricasService) getBean("gruposCriteriosRubricasService");
+	}
 	
 }
