@@ -97,7 +97,6 @@
 	    			formInfo.setItemLabel('nombre','<bean:message key="label.nombre.asignatura"/>');
 	    			formInfo.setItemLabel('codigo','<bean:message key="label.codigo.asignatura"/>');
 	    			formInfo.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
-	    			formInfo.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
 	    			formInfo.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
 	    			//permisosAsignaturasForm();			    		
 		    		

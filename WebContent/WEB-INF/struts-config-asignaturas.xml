@@ -9,7 +9,7 @@
 	   <form-bean name="GridUsuarios" type="es.oyssen.mrm.struts.forms.usuarios.GridUsuariosForm" />
 	   
 	   <form-bean name="EditarUsuarioForm" type="es.oyssen.mrm.struts.forms.usuarios.EditarUsuarioForm" />
-	   <form-bean name="EditarAsignaturaForm" type="es.oyssen.mrm.struts.forms.asignaturas.EditarAsignaturaForm" />
+	   <form-bean name="EditarAsignaturaForm" type="es.oyssen.mrm.struts.forms.cursos.EditarAsignaturaForm" />
 	   
 	</form-beans>
 	
@@ -38,7 +38,7 @@
 		
 		<action path="/asignaturas/actualizarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />
 		
-		<action path="/asignaturas/editarasignatura" name="EditarAsignaturaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.EditarAsignaturaAction"  />
+		<action path="/asignaturas/editarasignatura" name="EditarAsignaturaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.EditarAsignaturaAction"  />
 		
 		
 	</action-mappings>

@@ -550,7 +550,7 @@ public class UtilXML {
 	}
 	
 	public static final String buildXmlGridPermisosGrupo(List<PermisoGrupoVO> list) throws Exception {
-		StringBuffer sb = new StringBuffer();
+		/*StringBuffer sb = new StringBuffer();
 		sb.append(XML_HEADER);	
 		sb.append("<rows>");
 		if(list != null){
@@ -561,7 +561,8 @@ public class UtilXML {
 			}
 		}
 		sb.append("</rows>");
-		return sb.toString();
+		return sb.toString();**/
+		return null;
 	}
 
 	public static final String buildXmlGridUsuarios(List<UsuarioVO> list) throws Exception {

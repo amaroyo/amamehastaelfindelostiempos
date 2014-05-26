@@ -19,7 +19,7 @@
 	    <script type="text/javascript">
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
-	    	var main_layout, form, idAsignatura,nombreAsignatura;
+	    	var main_layout, formInfo, idAsignatura,nombreAsignatura;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -30,35 +30,37 @@
 	    		main_layout = new dhtmlXLayoutObject(document.body, '1C');
 	    		var a = main_layout.cells('a');
 	    		a.hideHeader();
-				form = a.attachForm();
+				formInfo = a.attachForm();
 		    	
-		    	form.loadStruct('../xml/forms/asignatura_informacion_form.xml', function(){
-		    		form.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
-		    		form.setItemLabel('nombre','<bean:message key="label.nombre.asignatura"/>');
-		    		form.setItemLabel('codigo','<bean:message key="label.codigo.asignatura"/>');
-		    		form.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
-		    		form.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
+				formInfo.loadStruct('../xml/forms/asignatura_informacion_form.xml', function(){
+	    			formInfo.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
+	    			formInfo.setItemLabel('nombre','<bean:message key="label.nombre.asignatura"/>');
+	    			formInfo.setItemLabel('codigo','<bean:message key="label.codigo.asignatura"/>');
+	    			formInfo.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
+	    			formInfo.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
+	    					    		
 		    		
 					//Ponemos por defecto que los items no se puedan modificar, y luego con los permisos necesarios 
 					//seran modificables.
-		    		/*form.setReadonly('nombre', true);
-		    		form.setReadonly('codigo', true);
-		    		form.setReadonly('curso', true);
-		    		form.setReadonly('profesor', true);
-		    		form.setReadonly('descripcion', true);
-		    		form.hideItem('aceptar');*/
+		    		/*formInfo.setReadonly('nombre', true);
+		    		formInfo.setReadonly('codigo', true);
+		    		formInfo.setReadonly('curso', true);
+		    		formInfo.setReadonly('profesor', true);
+		    		formInfo.setReadonly('descripcion', true);
+		    		formInfo.hideItem('aceptar');*/
+		    					    		
 		    		
-		    		form.load('editarasignatura.do?idAsignatura=' + idAsignatura, function () {
-						form.attachEvent("onButtonClick", function(id){
+	    			formInfo.load('editarasignatura.do?idAsignatura=' + idAsignatura, function () {	
+						formInfo.attachEvent("onButtonClick", function(id){
 							if (id == "aceptar") {
-								form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+								formInfo.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
 									alert('<bean:message key="message.perfil.cambiado.exito"/>');
 								});
 
 							}
 						});
-						form.attachEvent("onEnter", function() {
-							form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+						formInfo.attachEvent("onEnter", function() {
+							formInfo.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
 								alert('<bean:message key="message.perfil.cambiado.exito"/>');
 							}); 
 			    		});
@@ -67,31 +69,31 @@
 					});
 		    		
 		    		
-		    		/*form.setItemValue('nombre', idAsignatura);
-		    		form.setItemValue('codigo', idAsignatura);
-		    		form.setItemValue('curso', "A113");
-		    		form.setItemValue('profesor', "Lorem ipsum");
-		    		form.setItemValue('descripcion', "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");*/
+		    		/*formInfo.setItemValue('nombre', idAsignatura);
+		    		formInfo.setItemValue('codigo', idAsignatura);
+		    		formInfo.setItemValue('curso', "A113");
+		    		formInfo.setItemValue('profesor', "Lorem ipsum");
+		    		formInfo.setItemValue('descripcion', "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");*/
 	
 
 		    		
 		    		/*<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
-							form.setReadonly('nombre', false);
-				    		form.setReadonly('codigo', false);
-				    		form.setReadonly('curso', false);
-				    		form.setReadonly('profesor', false);
-				    		form.setReadonly('descripcion', false);
-				    		form.showItem('aceptar');
+							formInfo.setReadonly('nombre', false);
+				    		formInfo.setReadonly('codigo', false);
+				    		formInfo.setReadonly('curso', false);
+				    		formInfo.setReadonly('profesor', false);
+				    		formInfo.setReadonly('descripcion', false);
+				    		formInfo.showItem('aceptar');
 					</logic:match>*/
 		    		
 					
 					<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
 					var idSelectedUser = <%=sessionIdUser%>;
 					
-					/*form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
-					form.attachEvent("onButtonClick", function(id){
+					/*formInfo.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
+					formInfo.attachEvent("onButtonClick", function(id){
 						if (id == "aceptar") {
-							form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+							formInfo.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
 
 							});
 
