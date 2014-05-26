@@ -12,7 +12,7 @@
 	    <script type="text/javascript" src="skins/dhtmlx.js"></script>
     
     <script>
-    	var dhxWins, toolbar, width, height, nota, formAsignaturasInvisible, optsAsignaturas;
+    	var dhxWins, toolbar, width, height, nota, optsAsignaturas;
     	dhtmlx.image_path='skins/imgs/';
     	
     	function init() {
