@@ -26,13 +26,13 @@ public class ActualizarContrasenaAction extends MrmAction {
 			throws Exception {
 		
 		EditarContrasenaForm f = (EditarContrasenaForm) form;		
-		String user = (String)request.getSession().getAttribute("usuario");
+		String correo = (String)request.getSession().getAttribute("correo");
 		String oldPass = f.getOldPass();
 		String newPass = f.getNewPass();
 			
 		UsuarioVO usuario = new UsuarioVO();
 		UsuarioYPermisos usuarioYPermisos = new UsuarioYPermisos();
-		usuario.setCorreo(user);
+		usuario.setCorreo(correo);
 		usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(oldPass, EncriptarUtil.MD5));
 		usuario = getUsuariosService().findByCorreoPass(usuario);	
 		usuarioYPermisos.setUsuario(usuario);	
