@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.util.MessageResources;
 
+import es.oyssen.mrm.negocio.vo.UsuarioYPermisos;
 import es.oyssen.mrm.struts.actions.MrmAction;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
 import es.oyssen.mrm.util.StringUtil;
@@ -19,12 +20,17 @@ import es.oyssen.mrm.util.StringUtil;
 public abstract class DHTMLXGridAction extends MrmAction {
 	
 	public static final String RESULTADO_ERROR = "error";
-	public String anyoAcademico;
+	protected String anyoAcademico;
+	protected String idGrupoUsuario;
+	protected String idUsuario;
 
 	public ActionForward process(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		anyoAcademico = (String) request.getSession().getAttribute("anyoAcademico");
+		idUsuario = (String) request.getSession().getAttribute("idUsuario");
+		idGrupoUsuario = (String) request.getSession().getAttribute("idGrupoUsuario");
+		
 		MessageResources resources = getResources(request);
 		DhtmlxGridForm f = (DhtmlxGridForm) form;
 		f.setNativeeditor_status(request.getParameter("!nativeeditor_status"));

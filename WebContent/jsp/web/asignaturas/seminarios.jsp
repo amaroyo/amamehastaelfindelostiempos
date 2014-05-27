@@ -189,13 +189,13 @@
 		    		
 		    		var numSeminarios=0;
 		    		switch(idAsignatura){
-			    		case "idAsignatura1": {numSeminarios=1;break;}
-			        	case "idAsignatura2": {numSeminarios=2;break;}
-			        	case "idAsignatura3": {numSeminarios=3;break;}
-			        	case "idAsignatura4": {numSeminarios=4;break;}
-			        	case "idAsignatura5": {numSeminarios=5;break;}
-			        	case "idAsignatura6": {numSeminarios=6;break;}
-			        	case "idAsignatura7": {numSeminarios=7;break;}
+			    		case "1": {numSeminarios=1;break;}
+			        	case "2": {numSeminarios=2;break;}
+			        	case "3": {numSeminarios=3;break;}
+			        	case "4": {numSeminarios=4;break;}
+			        	case "5": {numSeminarios=5;break;}
+			        	case "6": {numSeminarios=6;break;}
+			        	case "7": {numSeminarios=7;break;}
 		    		}
 					
 		    		//WHILEEEEEEEELELELELLELELELEEEEEE

@@ -26,8 +26,8 @@
 	    		
 	    		<% String idAsignatura = request.getParameter("idAsignatura");%>
 	    		idAsignatura="<%=idAsignatura%>";	
-	    		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
-				var idSelectedUser = <%=sessionIdUser%>;
+	    		
+				
 	    		
 	    		
 	    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
@@ -113,7 +113,7 @@
 		    		b.hideHeader();
 		    		gridProfesor = a.attachGrid();
 					
-		    		gridProfesor.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","a","b"]);
+		    		gridProfesor.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","<bean:message key="label.centro.asociado" />","<bean:message key="label.turno" />"]);
 		    		gridProfesor.setColTypes("ro,ro,ro,ro,ro");
 			    	
 		    		gridProfesor.enableMultiselect(false);
@@ -122,11 +122,9 @@
 				    
 				    
 				   
-					var idSelectedUser = <%=sessionIdUser%>;
-					//ORIGINAL
-				    //gridAlumnosProcessor = new dataProcessor("gridMisAlumnos.do?idUsuario"+idSelectedUser);
-					//PRUEBA
-				    var gridAlumnosProfesorProcessor = new dataProcessor("gridusuarios.do");
+					
+				
+				    var gridAlumnosProfesorProcessor = new dataProcessor("gridUsuariosEstancias.do?idAsignatura=" + idAsignatura);
 					
 				    gridAlumnosProfesorProcessor.enableUTFencoding('simple');
 				    gridAlumnosProfesorProcessor.init(gridProfesor);	  
@@ -224,7 +222,7 @@
 				}
 				
 				function buscar() {
-					gridProfesor.clearAndLoad("gridusuarios.do");		    	
+					gridProfesor.clearAndLoad("gridUsuariosEstancias.do?idAsignatura=" + idAsignatura);		    	
 			    }
 	    		
 	    });

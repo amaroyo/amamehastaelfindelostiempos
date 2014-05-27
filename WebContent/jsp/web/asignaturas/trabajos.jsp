@@ -62,13 +62,13 @@
 	    		
 	    		var numTrabajosCampo=0;
 	    		switch(idAsignatura){
-		    		case "idAsignatura1": {numTrabajosCampo=1;break;}
-		        	case "idAsignatura2": {numTrabajosCampo=2;break;}
-		        	case "idAsignatura3": {numTrabajosCampo=3;break;}
-		        	case "idAsignatura4": {numTrabajosCampo=4;break;}
-		        	case "idAsignatura5": {numTrabajosCampo=5;break;}
-		        	case "idAsignatura6": {numTrabajosCampo=6;break;}
-		        	case "idAsignatura7": {numTrabajosCampo=7;break;}
+		    		case "1": {numTrabajosCampo=1;break;}
+		        	case "2": {numTrabajosCampo=2;break;}
+		        	case "3": {numTrabajosCampo=3;break;}
+		        	case "4": {numTrabajosCampo=4;break;}
+		        	case "5": {numTrabajosCampo=5;break;}
+		        	case "6": {numTrabajosCampo=6;break;}
+		        	case "7": {numTrabajosCampo=7;break;}
 	    		}
 				
 	    		for (var i=0; i<numTrabajosCampo;i++) {
