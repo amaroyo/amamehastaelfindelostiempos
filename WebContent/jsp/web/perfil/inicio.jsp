@@ -152,7 +152,7 @@
 	    			return true;
 	    		}
 	    		else {
-	    			form.setNote("email", { text: '<bean:message key="message.email.institucional" />'} );
+	    			form.setNote("correo", { text: '<bean:message key="message.email.institucional" />'} );
 	    			return false;
 	    		}
 	    	}
@@ -173,7 +173,7 @@
 		    		form.setItemLabel('apellido2','<bean:message key="label.apellido2"/>');
 		    		form.setItemLabel('dni','<bean:message key="label.dni"/>');
 		    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
-		    		form.setItemLabel('email','<bean:message key="label.address.email"/>');	
+		    		form.setItemLabel('correo','<bean:message key="label.address.email"/>');	
 		    		form.setItemLabel('foto','<bean:message key="label.foto"/>');	
 		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
 		    		
@@ -183,7 +183,7 @@
 			    			case "nombre":
 			    			case "apellido1":
 			    			case "dni":
-			    			case "email":
+			    			case "correo":
 			    				form.setRequired(id,true);
 			    				break;
 		    			}
