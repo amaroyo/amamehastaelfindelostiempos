@@ -32,6 +32,7 @@ import es.oyssen.mrm.negocio.services.SeminariosRealizadosService;
 import es.oyssen.mrm.negocio.services.ServiciosService;
 import es.oyssen.mrm.negocio.services.ServiciosUsuarioService;
 import es.oyssen.mrm.negocio.services.TrabajosDeCampoService;
+import es.oyssen.mrm.negocio.services.UsuariosPermisosService;
 import es.oyssen.mrm.negocio.services.UsuariosService;
 import es.oyssen.mrm.struts.Constantes;
 
@@ -97,7 +98,11 @@ public abstract class MrmAction extends SpringBaseAction implements Constantes{
 	public GrupoPermisosService getGrupoPermisosService() {
 		return (GrupoPermisosService) getBean("grupoPermisosService");
 	}
-
+	
+	public UsuariosPermisosService getUsuariosPermisosService() {
+		return (UsuariosPermisosService) getBean("usuariosPermisosService");
+	}
+	
 	public PermisosService getPermisosService() {
 		return (PermisosService) getBean("permisosService");
 	}

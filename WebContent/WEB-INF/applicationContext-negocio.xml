@@ -105,6 +105,10 @@
 		<property name="daoGrupoPermisos" ref="daoGrupoPermisos" />
 	</bean>
 	
+	<bean id="usuariosPermisosService" class="es.oyssen.mrm.negocio.services.impl.UsuariosPermisosServiceImpl">
+		<property name="daoUsuariosPermisos" ref="daoUsuariosPermisos" />
+	</bean>
+	
 	<bean id="permisosService" class="es.oyssen.mrm.negocio.services.impl.PermisosServiceImpl">
 		<property name="daoPermisos" ref="daoPermisos" />
 	</bean>

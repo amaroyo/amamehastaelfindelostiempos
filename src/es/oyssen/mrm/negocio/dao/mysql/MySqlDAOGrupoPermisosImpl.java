@@ -22,7 +22,7 @@ import es.oyssen.mrm.negocio.vo.GrupoPermisoVO;
 
 public class MySqlDAOGrupoPermisosImpl extends DAOBase implements DAOGrupoPermisos{
 	
-	private static String SQL_INSERT = "insert into grupos_permisos (id_grupo, id_permiso, descripcion) values (?,?)";
+	private static String SQL_INSERT = "insert into grupos_permisos (id_grupo, id_permiso) values (?,?)";
 	private static String SQL_DELETE = "delete from grupos_permisos where (id_grupo, id_permiso) = (?,?)";
 	private static String SQL_FIND_BY_GRUPO = "select pg.*, p.nombre permiso_nombre from grupos_permisos pg left join permisos p on p.id_permiso = pg.id_permiso where pg.id_grupo = ?";
 	
