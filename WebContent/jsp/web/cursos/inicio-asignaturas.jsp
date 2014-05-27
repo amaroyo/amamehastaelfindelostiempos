@@ -47,7 +47,7 @@
 	    			toolbarAsignaturas.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 		    		
 	    		//permisosToolbarAsignaturas();
-		    });
+		    	});
 			    
 			    
 			    gridAsignaturas = listado.attachGrid();
@@ -77,11 +77,11 @@
 		    
 		    
 		    function doOnRowSelected(rowID,celInd){
-		    	toolbarAsignaturas.enableItem('delete');
+		    	/*toolbarAsignaturas.enableItem('delete');
 		    	formInfo = areaTrabajoCursos.attachForm();
 		    	loadFormAsignatura(rowID);
 		    	// obtener el nombre del curso de la bbdd y añadirlo como header a la dcha
-				areaTrabajoCursos.setText(areaTrabajoCursos.getText() + "");
+				areaTrabajoCursos.setText(areaTrabajoCursos.getText() + "");*/
 		    }
 		    
 		    function loadFormAsignatura(idAsignatura){

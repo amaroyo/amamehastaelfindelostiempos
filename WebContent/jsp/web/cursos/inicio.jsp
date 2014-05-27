@@ -25,7 +25,7 @@
 			    if (opcionSeminarioAsignatura == "seminarios") {
 					document.location.href="./inicio-seminarios.do";
 			    }
-		    	else if (opcionSeminarioAsignatura == "asignaturas") {	
+		    	else if (opcionSeminarioAsignatura == "asignaturas") {
 		    		document.location.href="./inicio-asignaturas.do";
 		    	}
 		    });
