@@ -19,7 +19,7 @@ import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.LeadHistoryVO;
 import es.oyssen.mrm.negocio.vo.LeadVO;
 import es.oyssen.mrm.negocio.vo.LogUsuarioVO;
-import es.oyssen.mrm.negocio.vo.PermisoGrupoVO;
+import es.oyssen.mrm.negocio.vo.GrupoPermisoVO;
 import es.oyssen.mrm.negocio.vo.PermisoVO;
 import es.oyssen.mrm.negocio.vo.ResponsableVO;
 import es.oyssen.mrm.negocio.vo.ServicioUsuarioVO;
@@ -550,7 +550,7 @@ public class UtilXML {
 		return sb.toString();
 	}
 	
-	public static final String buildXmlGridPermisosGrupo(List<PermisoGrupoVO> list) throws Exception {
+	public static final String buildXmlGridPermisosGrupo(List<GrupoPermisoVO> list) throws Exception {
 		/*StringBuffer sb = new StringBuffer();
 		sb.append(XML_HEADER);	
 		sb.append("<rows>");

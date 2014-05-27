@@ -1,14 +1,25 @@
 package es.oyssen.mrm.negocio.vo;
 
-public class PermisoGrupoVO {
+public class GrupoPermisoVO {
 	
 	private String id_grupo;
 	private String id_permiso;
 	
 	
-	public PermisoGrupoVO() {
+	public GrupoPermisoVO() {
 		
 	}
+
+	
+	
+	
+	public GrupoPermisoVO(String id_grupo, String id_permiso) {
+		this.id_grupo = id_grupo;
+		this.id_permiso = id_permiso;
+	}
+
+
+
 
 	public String getIdGrupo() {
 		return id_grupo;
@@ -38,7 +49,7 @@ public class PermisoGrupoVO {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		PermisoGrupoVO other = (PermisoGrupoVO) obj;
+		GrupoPermisoVO other = (GrupoPermisoVO) obj;
 		if (id_grupo == null) {
 			if (other.id_grupo != null) {
 				return false;

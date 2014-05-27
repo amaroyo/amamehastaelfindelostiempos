@@ -13,11 +13,13 @@ public class PermisoMapper implements RowMapper {
 
     public static final String FIELD_ID = "id_permiso";    
     public static final String FIELD_NOMBRE = "nombre";
+    public static final String FIELD_DESCRIPCION = "descripcion";
     
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
     	PermisoVO o = new PermisoVO();
     	o.setIdPermiso(StringUtil.nullToString(rs.getString(FIELD_ID)));
     	o.setNombre(StringUtil.nullToString(rs.getString(FIELD_NOMBRE)));
+    	o.setDescripcion(StringUtil.nullToString(rs.getString(FIELD_DESCRIPCION)));
 
 		return o;
 	}

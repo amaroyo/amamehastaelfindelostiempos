@@ -46,7 +46,7 @@
 	
 	<bean id="daoGrupos" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOGruposImpl" parent="daoBase" />
 	
-	<bean id="daoPermisosGrupo" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOPermisosGrupoImpl" parent="daoBase" />
+	<bean id="daoGrupoPermisos" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOGrupoPermisosImpl" parent="daoBase" />
 	
 	<bean id="daoPermisos" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOPermisosImpl" parent="daoBase" />
 	

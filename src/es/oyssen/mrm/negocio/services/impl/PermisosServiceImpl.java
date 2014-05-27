@@ -33,6 +33,7 @@ public class PermisosServiceImpl implements PermisosService{
 			return daoPermisos.findAll();
 		} catch (DAOException e) {
 			e.printStackTrace();
+			log.error("Error findAll permisos", e);
 			throw new ServiceException(e);
 		}
 	}

@@ -1,7 +1,7 @@
 package es.oyssen.mrm.struts.actions.permisos.grupo;
 
 import es.oyssen.mrm.negocio.vo.GrupoVO;
-import es.oyssen.mrm.negocio.vo.PermisoGrupoVO;
+import es.oyssen.mrm.negocio.vo.GrupoPermisoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXGridAction;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
@@ -22,7 +22,7 @@ public class GridPermisosGrupoAction extends DHTMLXGridAction {
 			usuario = getUsuariosService().findById(usuario);			
 			grupo.setIdGrupo(usuario.getIdGrupo());			
 		}
-		return UtilXML.buildXmlGridPermisosGrupo(getPermisosGrupoService().findByGrupo(grupo));
+		return UtilXML.buildXmlGridPermisosGrupo(getGrupoPermisosService().findByGrupo(grupo));
 	}
 
 	@Override

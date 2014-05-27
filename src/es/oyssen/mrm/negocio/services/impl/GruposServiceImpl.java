@@ -30,6 +30,7 @@ public class GruposServiceImpl implements GruposService{
 			return daoGrupos.findAll();
 		} catch (DAOException e) {
 			e.printStackTrace();
+			log.error("Error findAll grupos", e);
 			throw new ServiceException(e);
 		}
 	}

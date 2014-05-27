@@ -13,11 +13,14 @@ public class GrupoMapper implements RowMapper {
 
     public static final String FIELD_ID = "id_grupo";    
     public static final String FIELD_NOMBRE = "nombre";
+    public static final String FIELD_DESCRIPCION = "descripcion";
+
     
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
     	GrupoVO o = new GrupoVO();
     	o.setIdGrupo(StringUtil.nullToString(rs.getString(FIELD_ID)));
     	o.setNombre(StringUtil.nullToString(rs.getString(FIELD_NOMBRE)));
+    	o.setNombre(StringUtil.nullToString(rs.getString(FIELD_DESCRIPCION)));
 
 		return o;
 	}

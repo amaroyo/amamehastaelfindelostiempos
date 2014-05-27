@@ -11,23 +11,23 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import es.oyssen.mrm.negocio.dao.DAOBase;
-import es.oyssen.mrm.negocio.dao.DAOPermisosGrupo;
+import es.oyssen.mrm.negocio.dao.DAOGrupoPermisos;
 import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
-import es.oyssen.mrm.negocio.dao.rowmappers.PermisoGrupoMapper;
+import es.oyssen.mrm.negocio.dao.rowmappers.GrupoPermisoMapper;
 import es.oyssen.mrm.negocio.vo.GrupoVO;
-import es.oyssen.mrm.negocio.vo.PermisoGrupoVO;
+import es.oyssen.mrm.negocio.vo.GrupoPermisoVO;
 
 
-public class MySqlDAOPermisosGrupoImpl extends DAOBase implements DAOPermisosGrupo{
+public class MySqlDAOGrupoPermisosImpl extends DAOBase implements DAOGrupoPermisos{
 	
-	private static String SQL_INSERT = "insert into permisos_grupos (id_grupo, id_permiso) values (?,?)";
-	private static String SQL_DELETE = "delete from permisos_grupos where (id_grupo, id_permiso) = (?,?)";
+	private static String SQL_INSERT = "insert into grupos_permisos (id_grupo, id_permiso, descripcion) values (?,?)";
+	private static String SQL_DELETE = "delete from grupos_permisos where (id_grupo, id_permiso) = (?,?)";
 	private static String SQL_FIND_BY_GRUPO = "select pg.*, p.nombre permiso_nombre from grupos_permisos pg left join permisos p on p.id_permiso = pg.id_permiso where pg.id_grupo = ?";
 	
 	
-	public void insert(final PermisoGrupoVO permisoGrupo) throws DAOException,
+	public void insert(final GrupoPermisoVO permisoGrupo) throws DAOException,
 			DAOInsertException {
 		try{
 			getJdbcTemplate().update(SQL_INSERT, new Object[]{permisoGrupo.getIdGrupo(), permisoGrupo.getIdPermiso()});
@@ -38,7 +38,7 @@ public class MySqlDAOPermisosGrupoImpl extends DAOBase implements DAOPermisosGru
 	}
 	
 	
-	public void delete(PermisoGrupoVO permisoGrupo) throws DAOException,
+	public void delete(GrupoPermisoVO permisoGrupo) throws DAOException,
 			DAODeleteException {
 		try {
 			getJdbcTemplate().update(SQL_DELETE, new Object[]{permisoGrupo.getIdGrupo(), permisoGrupo.getIdPermiso()});
@@ -48,9 +48,9 @@ public class MySqlDAOPermisosGrupoImpl extends DAOBase implements DAOPermisosGru
 		
 	}
 
-	public List<PermisoGrupoVO> findByGrupo(GrupoVO grupo) throws DAOException {
+	public List<GrupoPermisoVO> findByGrupo(GrupoVO grupo) throws DAOException {
 		try {
-			return getJdbcTemplate().query(SQL_FIND_BY_GRUPO, new Object[]{grupo.getIdGrupo()}, new PermisoGrupoMapper());
+			return getJdbcTemplate().query(SQL_FIND_BY_GRUPO, new Object[]{grupo.getIdGrupo()}, new GrupoPermisoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

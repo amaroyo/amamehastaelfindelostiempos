@@ -1,7 +1,7 @@
 package es.oyssen.mrm.struts.actions.permisos.grupo;
 
 import es.oyssen.mrm.negocio.vo.CanalVO;
-import es.oyssen.mrm.negocio.vo.PermisoGrupoVO;
+import es.oyssen.mrm.negocio.vo.GrupoPermisoVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXFormAction;
 import es.oyssen.mrm.struts.forms.canales.CanalForm;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxForm;
@@ -18,16 +18,16 @@ public class EditarPermisoGrupoAction extends DHTMLXFormAction {
 	@Override
 	public void save(DhtmlxForm f) throws Exception {
 		PermisosGrupoForm form = (PermisosGrupoForm) f;
-		PermisoGrupoVO permisoGrupo = new PermisoGrupoVO();
+		GrupoPermisoVO permisoGrupo = new GrupoPermisoVO();
 		permisoGrupo.setIdPermiso(form.getIdPermiso());
 		permisoGrupo.setIdGrupo(form.getIdGrupo());
 
-		getPermisosGrupoService().insert(permisoGrupo);
+		getGrupoPermisosService().insert(permisoGrupo);
 	}
 
 	@Override
 	public String parseXML(Object o) throws Exception {
-		PermisoGrupoVO c = (PermisoGrupoVO) o;
+		GrupoPermisoVO c = (GrupoPermisoVO) o;
 		StringBuffer sb = new StringBuffer();
 		sb.append("<data>");
 		sb.append("<idPermiso><![CDATA[" + c.getIdPermiso() + "]]></idPermiso>");
