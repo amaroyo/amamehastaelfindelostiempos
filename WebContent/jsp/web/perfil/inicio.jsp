@@ -191,19 +191,10 @@
 		    		
 		    		
 		    		form.enableLiveValidation(true);
-		    	
 		    		//foto LONGBLOB, 
-		    		
 		    		form.setFocusOnFirstActive();
 
-					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>36</permiso>" >		    	
-							form.hideItem('aceptar');
-						</logic:notMatch>
-					</logic:notMatch>
-
 				
-					
 					<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
 					idSelectedUser = <%=sessionIdUser%>;
 
@@ -231,6 +222,14 @@
 		    	});
 		    }
 		  
+		    
+		    function permisosFormPerfil(){
+		    	<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>36</permiso>" >		    	
+						form.hideItem('aceptar');
+					</logic:notMatch>
+				</logic:notMatch>
+		    }
         </script>
 	</head>
 	<body>

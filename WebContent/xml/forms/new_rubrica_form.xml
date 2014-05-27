@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+   <item type="fieldset" name="data" label="Información general" inputWidth="auto">
+       <item type="input" name="numeroRubricas" label="Número de rúbricas/partes" labelWidth="110" />
+	   <item type="input" name="nombre" label="Nombre" labelWidth="110" />
+	   <item type="input" name="codigo" label="Código" labelWidth="110" />
+	   <item type="input" name="curso" label="Curso" labelWidth="110" />
+	   <item type="textArea" name="descripcion" label="Descripción" labelWidth="110" style="width:400"/> 
+   </item>
+   <item type="button" name="siguiente" value="Siguiente" />
+</items>

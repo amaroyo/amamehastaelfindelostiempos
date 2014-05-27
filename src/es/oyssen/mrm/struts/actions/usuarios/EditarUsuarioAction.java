@@ -20,8 +20,9 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 			usuario.setCorreo(form.getCorreo());
 			return getUsuariosService().findByCorreo(usuario);
 			
-		} 
-		else if (!StringUtil.isNullOrBlank(form.getIdUsuario())){
+		}
+		
+		else  if (!StringUtil.isNullOrBlank(form.getIdUsuario())){
 			
 			usuario.setIdUsuario(form.getIdUsuario());
 			return getUsuariosService().findById(usuario);
