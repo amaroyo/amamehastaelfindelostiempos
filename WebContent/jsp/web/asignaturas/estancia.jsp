@@ -168,7 +168,7 @@
 									form.hideItem('aceptar');								
 							</logic:notMatch>			    		
 				    		
-				    		form.load('editarusuario.do?email=' + selectedEmail, function () {			    			
+				    	/*	form.load('editarusuario.do?email=' + selectedEmail, function () {			    			
 				    			form.attachEvent("onButtonClick", function(id){
 				    				if (id == "aceptar") {
 					    				form.send("actualizarusuario.do?!nativeeditor_status=save&email=" + selectedEmail ,"post", function(xml) {
@@ -177,7 +177,8 @@
 					    				buscar();
 				    				}
 				    			});
-				    		});
+				    		});*/
+				    		
 				    	});
 				    	
 				    	tabbar.addTab('tab_2','<bean:message key="title.info.general.estancia"/>','');
