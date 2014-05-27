@@ -13,6 +13,7 @@
 	    <script type="text/javascript" src="../js/general.js"></script>
 	    <script type="text/javascript" src="../skins/dhtmlxgrid.js"></script>
 	    <script type="text/javascript" src="../skins/dhtmlxgrid_export.js"></script>
+	    <script type="text/javascript" src="../skins/dhtmlxform_dyn.js"></script>
 	    
 
 	    <script type="text/javascript">
@@ -27,7 +28,7 @@
 		    	dhtmlxError.catchError("ALL",errorHandler);
 			    main_layout = new dhtmlXLayoutObject(document.body, '2U');
 			    listado = main_layout.cells('a');
-			    listado.setWidth(700);
+			    listado.setWidth(750);
 			    areaTrabajoCursos = main_layout.cells('b');
 			    
 			    //autosize(horizontal,vertical)
@@ -55,7 +56,7 @@
 		   		gridAsignaturas.setHeader(["<strong><bean:message key="label.nombre.asignatura" /></strong>"
 		   		                      ,"<strong><bean:message key="label.codigo.asignatura" /></strong>",
 		   		                      "<strong><bean:message key="label.curso.asignatura" /></strong>"]);
-				
+		   		gridAsignaturas.setInitWidths("*,150,150");
 			    //ro = readonly
 			    //nombre codigo curso descripcion
 			    gridAsignaturas.setColTypes("ro,ro,ro");
@@ -71,6 +72,7 @@
 		    		}
 		    	});
 			    
+			
 			    gridAsignaturas.attachEvent("onRowSelect", doOnRowSelected);
 			    buscar();
 		    });
@@ -116,15 +118,13 @@
 		    }
 		    
 		    
-		    
-		    
 		    function newAsignatura() {
 				var dhxWins= new dhtmlXWindows();
-				var window = dhxWins.createWindow("nuevaAsignatura", 300, 50, 385, 510);
+				var window = dhxWins.createWindow("nuevaAsignatura", 300, 50, 400, 230);
 				window.setText('<bean:message key="title.crear.nueva.asignatura" />');				
 				window.setModal(true);
 				window.centerOnScreen();
-				var formNuevaAsignatura = window.attachForm();			
+				formNuevaAsignatura = window.attachForm();			
 		    	formNuevaAsignatura.loadStruct('../xml/forms/new_asignatura_common_form.xml', function() {
 		    		formNuevaAsignatura.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
 		    		formNuevaAsignatura.setItemLabel('numeroRubricas','<bean:message key="label.numero.rubricas"/>');
@@ -132,8 +132,11 @@
 		    		formNuevaAsignatura.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
 		    		formNuevaAsignatura.setItemLabel('siguiente','<bean:message key="button.siguiente"/>');
 		    		
+
 		    		formNuevaAsignatura.forEachItem(function(id){
-		    			formNuevaAsignatura.setRequired(id,true);
+		    			if(formNuevaAsignatura.getItemType(id) == "input"){
+		    				formNuevaAsignatura.setRequired(id,true);
+		    			}
 		    		});
 		    		
 					//permisosNuevaAsignaturaCommonForm();		  
