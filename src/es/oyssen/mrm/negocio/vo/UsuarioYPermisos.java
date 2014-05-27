@@ -6,7 +6,7 @@ import java.util.List;
 public class UsuarioYPermisos { 
 
 	private UsuarioVO usuario;
-	private List<GrupoPermisoVO> permisos;
+	private List<PermisoVO> permisos;
 	
 	
 	public UsuarioVO getUsuario() {
@@ -17,11 +17,11 @@ public class UsuarioYPermisos {
 		this.usuario = usuario;
 	}
 	
-	public List<GrupoPermisoVO> getPermisos() {
+	public List<PermisoVO> getPermisos() {
 		return permisos;
 	}
 	
-	public void setPermisos(List<GrupoPermisoVO> permisos) {
+	public void setPermisos(List<PermisoVO> permisos) {
 		this.permisos = permisos;
 	}
 

@@ -13,6 +13,7 @@ import es.oyssen.mrm.negocio.services.GrupoPermisosService;
 import es.oyssen.mrm.negocio.services.UsuariosPermisosService;
 import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.GrupoPermisoVO;
+import es.oyssen.mrm.negocio.vo.PermisoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioPermisosVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
@@ -29,7 +30,7 @@ public class UsuariosPermisosServiceImpl implements UsuariosPermisosService{
 	}
 	
 	
-	public List<UsuarioPermisosVO> findByUsuario(UsuarioVO usuario)
+	public List<PermisoVO> findByUsuario(UsuarioVO usuario)
 			throws ServiceException {
 		try {
 			return daoUsuariosPermisos.findByUsuario(usuario);

@@ -7,10 +7,11 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.GrupoPermisoVO;
+import es.oyssen.mrm.negocio.vo.PermisoVO;
 
 public interface DAOGrupoPermisos {
 	
-	public List<GrupoPermisoVO> findByGrupo(GrupoVO grupo) throws DAOException;
+	public List<PermisoVO> findByGrupo(GrupoVO grupo) throws DAOException;
 	
 	public void insert(GrupoPermisoVO permisoGrupo) throws DAOException, DAOInsertException;
 	

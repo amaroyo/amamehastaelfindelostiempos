@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionMapping;
 import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.LogUsuarioVO;
 import es.oyssen.mrm.negocio.vo.GrupoPermisoVO;
+import es.oyssen.mrm.negocio.vo.PermisoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioYPermisos;
 import es.oyssen.mrm.struts.actions.MrmAction;
@@ -38,8 +39,10 @@ public class AutenticacionUsuarioAction extends MrmAction {
 			usuarioYPermisos.setUsuario(usuario);	
 			GrupoVO grupo = new GrupoVO();
 			grupo.setIdGrupo(usuario.getIdGrupo());
-			List<GrupoPermisoVO> permisos = getGrupoPermisosService().findByGrupo(grupo);
-			usuarioYPermisos.setPermisos(permisos);
+			List<PermisoVO> permisosGrupo = getGrupoPermisosService().findByGrupo(grupo);
+			List<PermisoVO> permisosUsuario = getUsuariosPermisosService().findByUsuario(usuario);
+			permisosGrupo.addAll(permisosUsuario);
+			usuarioYPermisos.setPermisos(permisosGrupo);
 		 
 			LogUsuarioVO logUsuario = new LogUsuarioVO();
 			logUsuario.setIdUsuario(usuario.getIdUsuario());
@@ -69,7 +72,7 @@ public class AutenticacionUsuarioAction extends MrmAction {
 		}
 		if (c.getPermisos() != null) {
 			sb.append("<permisos>");
-			for (GrupoPermisoVO permiso : c.getPermisos())
+			for (PermisoVO permiso : c.getPermisos())
 				sb.append("<permiso>" + permiso.getIdPermiso() + "</permiso>");
 			sb.append("</permisos>");
 		}

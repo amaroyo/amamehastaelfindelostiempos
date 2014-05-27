@@ -8,7 +8,9 @@ import es.oyssen.mrm.negocio.dao.DAOUsuariosPermisos;
 import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
+import es.oyssen.mrm.negocio.dao.rowmappers.PermisoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioPermisosMapper;
+import es.oyssen.mrm.negocio.vo.PermisoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioPermisosVO;
 
@@ -17,7 +19,7 @@ public class MySqlDAOUsuariosPermisosImpl extends DAOBase implements DAOUsuarios
 	
 	private static String SQL_INSERT = "insert into usuarios_permisos (id_usuario, id_permiso) values (?,?)";
 	private static String SQL_DELETE = "delete from usuarios_permisos where (id_usuario, id_permiso) = (?,?)";
-	private static String SQL_FIND_BY_GRUPO = "select pg.*, p.nombre permiso_nombre from usuarios_permisos pg left join permisos p on p.id_permiso = pg.id_permiso where pg.id_usuario = ?";
+	private static String SQL_FIND_BY_GRUPO = "select p.* from usuarios_permisos as up, permisos as p where p.id_permiso = up.id_permiso and up.id_usuario = ?";
 	
 	
 	public void insert(final UsuarioPermisosVO usuarioPermiso) throws DAOException,
@@ -41,9 +43,9 @@ public class MySqlDAOUsuariosPermisosImpl extends DAOBase implements DAOUsuarios
 		
 	}
 
-	public List<UsuarioPermisosVO> findByUsuario(UsuarioVO usuario) throws DAOException {
+	public List<PermisoVO> findByUsuario(UsuarioVO usuario) throws DAOException {
 		try {
-			return getJdbcTemplate().query(SQL_FIND_BY_GRUPO, new Object[]{usuario.getIdUsuario()}, new UsuarioPermisosMapper());
+			return getJdbcTemplate().query(SQL_FIND_BY_GRUPO, new Object[]{usuario.getIdUsuario()}, new PermisoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

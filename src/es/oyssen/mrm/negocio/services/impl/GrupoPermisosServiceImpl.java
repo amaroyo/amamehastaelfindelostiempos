@@ -11,6 +11,7 @@ import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.GrupoPermisosService;
 import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.GrupoPermisoVO;
+import es.oyssen.mrm.negocio.vo.PermisoVO;
 
 
 public class GrupoPermisosServiceImpl implements GrupoPermisosService{
@@ -25,7 +26,7 @@ public class GrupoPermisosServiceImpl implements GrupoPermisosService{
 	}
 	
 	
-	public List<GrupoPermisoVO> findByGrupo(GrupoVO grupo)
+	public List<PermisoVO> findByGrupo(GrupoVO grupo)
 			throws ServiceException {
 		try {
 			return daoGrupoPermisos.findByGrupo(grupo);
