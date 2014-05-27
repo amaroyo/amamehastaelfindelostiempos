@@ -77,11 +77,11 @@
 		    
 		    
 		    function doOnRowSelected(rowID,celInd){
-		    	/*toolbarAsignaturas.enableItem('delete');
+		    	toolbarAsignaturas.enableItem('delete');
 		    	formInfo = areaTrabajoCursos.attachForm();
 		    	loadFormAsignatura(rowID);
 		    	// obtener el nombre del curso de la bbdd y añadirlo como header a la dcha
-				areaTrabajoCursos.setText(areaTrabajoCursos.getText() + "");*/
+				areaTrabajoCursos.setText(areaTrabajoCursos.getText() + "");
 		    }
 		    
 		    function loadFormAsignatura(idAsignatura){
@@ -264,7 +264,7 @@
 			function goActualizar() {
 		    	buscar();
 		    	toolbarAsignaturas.disableItem('delete');
-		    	areaTrabajoCursos.clearAll();		    	
+		    	areaTrabajoCursos.clearAll();  	
 		    }
 		    
 		    function exportExcel(){
@@ -288,7 +288,7 @@
 	    	}
 	    	
 	    	function successfulCreateAsignatura() {
-	    		alert('<bean:message key="message.asigntaura.creada.exito" />');
+	    		alert('<bean:message key="message.asignatura.creada.exito" />');
 	    	}
         </script>
 	</head>
