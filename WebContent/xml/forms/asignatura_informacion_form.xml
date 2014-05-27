@@ -4,7 +4,7 @@
        <item type="input" name="nombre" label="Nombre Asignatura" labelWidth="110" style="width:400"/>
        <item type="input" name="codigo" label="Código" labelWidth="110" style="width:400"/>
        <item type="input" name="curso" label="Curso" labelWidth="110" style="width:400"/>
-       <item type="textArea" name="descripcion" label="Descripción" labelWidth="110" style="width:400"/>
+       <item type="input" name="descripcion" label="Descripción" labelWidth="110" style="width:400" rows="11"/>
    </item>
    <item type="button" name="aceptar" value="Aceptar" />
 </items>
