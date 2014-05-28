@@ -7,8 +7,11 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
+import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
 
 public interface DAOPortafolios {
+	
+	public List<UsuarioEstanciaUnidadClinicaVO> findUsuariosEstanciaUnidadClinica(PortafolioVO portafolio) throws DAOException;
 	
 	public List<PortafolioVO> findAll(PortafolioVO portafolio) throws DAOException;
 	

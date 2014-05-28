@@ -17,7 +17,9 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.dao.rowmappers.PortafolioMapper;
+import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioEstanciaUnidadClinicaMapper;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
+import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
 
 
 public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
@@ -31,9 +33,26 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 	private static String SQL_FIND_BY_PROFESOR = "select * from portafolios where id_profesor = ? and anyo_academico = ?";
 	private static String SQL_FIND_BY_ASIGNATURA = "select * from portafolios where id_asignatura = ? and anyo_academico = ?";
 	private static String SQL_FIND_BY_ANYO_ACADEMICO = "select * from portafolios where anyo_academico = ?";
+	private static String SQL_FIND_USUARIOS_ESTANCIA_UNIDAD_CLINICA = "select u.id_usuario, u.nombre, u.apellido1, u.apellido2, u.dni, e.centro_asociado, " +
+																		"e.unidad_clinica, e.turno " +
+																		"from portafolios as p, usuarios as u, estancias_unidad_clinica as e " +
+																		"where p.id_alumno = u.id_usuario and p.id_portafolio = e.id_portafolio and " +
+																		"p.id_asignatura = ? and p.anyo_academico = ?";
+
+
 	
-
-
+	public List<UsuarioEstanciaUnidadClinicaVO> findUsuariosEstanciaUnidadClinica(PortafolioVO portafolio) throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_USUARIOS_ESTANCIA_UNIDAD_CLINICA, new Object[]{portafolio.getIdAsignatura(), portafolio.getAnyoAcademico()}, new UsuarioEstanciaUnidadClinicaMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+	
+	
+	
 	public List<PortafolioVO> findAll(PortafolioVO portafolio) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_ALL, new Object[]{portafolio.getAnyoAcademico()}, new PortafolioMapper());

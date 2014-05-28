@@ -24,6 +24,7 @@ import es.oyssen.mrm.negocio.vo.PermisoVO;
 import es.oyssen.mrm.negocio.vo.ResponsableVO;
 import es.oyssen.mrm.negocio.vo.ServicioUsuarioVO;
 import es.oyssen.mrm.negocio.vo.ServicioVO;
+import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.Constantes;
 
@@ -597,6 +598,27 @@ public class UtilXML {
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(asignatura.getCodigo()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(asignatura.getCurso()) + "]]></cell>");
 				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(asignatura.getDescripcion()) + "]]></cell>");
+				sb.append("</row>");				
+			}
+		}
+		sb.append("</rows>");
+		return sb.toString();
+	}
+	
+	public static final String buildXmlGridUsuariosEstanciasUnidadClinica(List<UsuarioEstanciaUnidadClinicaVO> list) throws Exception {
+		StringBuffer sb = new StringBuffer();
+		sb.append(XML_HEADER);
+		sb.append("<rows>");
+		if(list != null){
+			for (UsuarioEstanciaUnidadClinicaVO ueuc : list) {
+				sb.append("<row id=\"" +ueuc.getIdUsuario() + "\">");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(ueuc.getNombre()) + "]]></cell>");
+				String apellidos = ueuc.getApellido1() + ", " + ueuc.getApellido2();
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(apellidos) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(ueuc.getDni()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(ueuc.getCentroAsociado()) + "]]></cell>");
+				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(ueuc.getUnidadClinica()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(ueuc.getTurno()) + "]]></cell>");
 				sb.append("</row>");				
 			}
 		}

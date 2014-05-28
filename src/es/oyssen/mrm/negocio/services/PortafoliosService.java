@@ -5,6 +5,7 @@ import java.util.List;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
+import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
 
 public interface PortafoliosService {
 	
@@ -25,6 +26,9 @@ public interface PortafoliosService {
 	public List<PortafolioVO> findByAsignatura(PortafolioVO portafolio) throws ServiceException;
 
 	public List<PortafolioVO> findByAnyoAcademico(PortafolioVO portafolio) throws ServiceException;
+	
+	public List<UsuarioEstanciaUnidadClinicaVO> findUsuariosEstanciaUnidadClinica(PortafolioVO portafolio) throws ServiceException;
+
 	
 
 

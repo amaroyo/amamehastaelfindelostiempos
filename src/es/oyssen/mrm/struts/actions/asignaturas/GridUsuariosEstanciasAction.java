@@ -1,8 +1,10 @@
 package es.oyssen.mrm.struts.actions.asignaturas;
 
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXGridAction;
 import es.oyssen.mrm.struts.forms.asignaturas.GridUsuariosEstanciasForm;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
+import es.oyssen.mrm.util.UtilXML;
 
 
 public class GridUsuariosEstanciasAction extends DHTMLXGridAction {
@@ -14,19 +16,27 @@ public class GridUsuariosEstanciasAction extends DHTMLXGridAction {
 		//Si el usuario es coordinador, vemos todos los alumnos de ese anyo y esa asignatura
 
 		
-		System.out.println(form.getIdAsignatura());
-		System.out.println(idGrupoUsuario);
-		System.out.println(idUsuario);
 		
+		
+		//System.out.println(idUsuario);
+		
+		if (idGrupoUsuario.equals("1")){
+			PortafolioVO portafolio = new PortafolioVO();
+			portafolio.setIdAsignatura(form.getIdAsignatura());
+			portafolio.setAnyoAcademico(anyoAcademico);
+			return UtilXML.buildXmlGridUsuariosEstanciasUnidadClinica(getPortafoliosService().findUsuariosEstanciaUnidadClinica(portafolio));
+		}
+		
+		else return null;
 		/*if (form.getIdGrupo() == null) {
 			return UtilXML.buildXmlGridUsuarios(getUsuariosService().findAll());
 		} else { 
 			GrupoVO grupo = new GrupoVO();
 			grupo.setIdGrupo(form.getIdGrupo());
 			return UtilXML.buildXmlGridUsuariosGrupo(getUsuariosService().findByGrupo(grupo));
-		}
-		*/
-		return null;
+		}*/
+		
+		
 		
 	}
 
