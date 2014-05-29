@@ -14,6 +14,7 @@
 	    <script type="text/javascript" src="../skins/dhtmlxgrid.js"></script>
 	    <script type="text/javascript" src="../skins/dhtmlxgrid_export.js"></script>
 	    <script type="text/javascript" src="../skins/dhtmlxform_dyn.js"></script>
+	     <script type="text/javascript" src="../skins/dhtmlxwindows.js"></script>
 	    
 
 	    <script type="text/javascript">
@@ -21,7 +22,7 @@
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
 	    	var main_layout, areaTrabajoCursos, listado, toolbarAsignaturas,
-	    	gridAsignaturas, formInfo, formNuevaAsignatura;
+	    	gridAsignaturas, formInfo, formNuevaAsignatura, dhxWins;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -119,12 +120,12 @@
 		    
 		    
 		    function newAsignatura() {
-				var dhxWins= new dhtmlXWindows();
-				var window = dhxWins.createWindow("nuevaAsignatura", 300, 50, 400, 230);
-				window.setText('<bean:message key="title.crear.nueva.asignatura" />');				
-				window.setModal(true);
-				window.centerOnScreen();
-				formNuevaAsignatura = window.attachForm();			
+		    	dhxWins= new dhtmlXWindows();
+				var windowNewAsignatura = dhxWins.createWindow("nuevaAsignatura", 300, 50, 400, 230);
+				windowNewAsignatura.setText('<bean:message key="title.crear.nueva.asignatura" />');				
+				windowNewAsignatura.setModal(true);
+				windowNewAsignatura.centerOnScreen();
+				formNuevaAsignatura = windowNewAsignatura.attachForm();			
 		    	formNuevaAsignatura.loadStruct('../xml/forms/new_asignatura_common_form.xml', function() {
 		    		formNuevaAsignatura.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
 		    		formNuevaAsignatura.setItemLabel('numeroRubricas','<bean:message key="label.numero.rubricas"/>');
@@ -133,17 +134,18 @@
 		    		formNuevaAsignatura.setItemLabel('siguiente','<bean:message key="button.siguiente"/>');
 		    		
 
-		    		formNuevaAsignatura.forEachItem(function(id){
+		    		/*formNuevaAsignatura.forEachItem(function(id){
 		    			if(formNuevaAsignatura.getItemType(id) == "input"){
 		    				formNuevaAsignatura.setRequired(id,true);
 		    			}
-		    		});
+		    		});*/
 		    		
 					//permisosNuevaAsignaturaCommonForm();		  
 		    		
 		    		formNuevaAsignatura.attachEvent("onButtonClick", function(id){
 	    				if (id == "siguiente") {
 	    					createParts();
+	    					
 	    				}
 		    		});
 		    		formNuevaAsignatura.attachEvent("onEnter", function() {
@@ -153,19 +155,18 @@
 		    }
 		    
 		    function createParts(){
-		    	var numeroRubricas = formNuevaAsignatura.getInput("numeroRubricas");
-				for(var i=1;i<=numeroRubricas;i++){
+		    	var numeroRubricas = formNuevaAsignatura.getItemValue("numeroRubricas");
+				for(var i=numeroRubricas;i>=1;i--){
 					newPart(i);
 				}
 		    }
 		    
 		    function newPart(currentPart){
-				var dhxWins= new dhtmlXWindows();
 				var window = dhxWins.createWindow("nuevaParte"+currentPart, 300, 50, 385, 510);
-				window.setText(': ' + '<bean:message key="title.parte.nueva.asignatura" />' +currentPart);				
-				window.setModal(true);
+				window.setText('<bean:message key="title.crear.nueva.asignatura" />'+': ' + '<bean:message key="title.parte.nueva.asignatura" />' +currentPart);				
 				window.centerOnScreen();
-				var formAsignaturaParte = window.attachForm();			
+				var formAsignaturaParte = window.attachForm();
+	    		dhxWins.window("nuevaParte"+currentPart).setModal(true);
 				formAsignaturaParte.loadStruct('../xml/forms/new_asignatura_part_form.xml', function() {
 					formAsignaturaParte.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
 					formAsignaturaParte.setItemLabel('numeroRubricas','<bean:message key="label.numero.rubricas"/>');
@@ -177,8 +178,8 @@
 					formAsignaturaParte.setItemLabel('siguiente','<bean:message key="button.siguiente"/>');	  
 		    		
 					formAsignaturaParte.forEachItem(function(id){
-						formAsignaturaParte.setRequired(id,true);
-						if(id == "numeroRubricas" || "parte" || "codigo" || "curso") {
+						//formAsignaturaParte.setRequired(id,true);
+						if(id == "numeroRubricas" || id == "parte" || id == "codigo" || id == "curso") {
 							switch(id) {
 								case "numeroRubricas":
 								case "codigo":
@@ -187,7 +188,7 @@
 				    				formAsignaturaParte.setItemValue(id,valueCopied);
 				    				break;
 				    			case "parte":
-				    				var totalParts = formAsignaturaParte.setItemValue("numeroRubricas");
+				    				var totalParts = formAsignaturaParte.getItemValue("numeroRubricas");
 				    				formAsignaturaParte.setItemValue(id,currentPart+"/"+totalParts);
 				    				break;
 							}
@@ -208,7 +209,6 @@
 			}
 		    
 			function newRubrica(i){
-				var dhxWins= new dhtmlXWindows();
 				var window = dhxWins.createWindow("nuevaRubrica"+i, 300, 50, 385, 510);
 				window.setText('<bean:message key="title.crear.nueva.asignatura" />');				
 				window.setModal(true);
