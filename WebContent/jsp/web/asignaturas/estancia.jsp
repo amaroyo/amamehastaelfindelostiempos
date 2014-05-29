@@ -10,7 +10,11 @@
 	    <link rel="stylesheet" type="text/css" href="../css/templates.css">
 	    <link rel="stylesheet" type="text/css" href="../css/estilosMenu.css">
 	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlx.css">
+	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlxform_dhx_skyblue.css">
 	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
+	    <script type="text/javascript" src="../skins/dhtmlxform.js"></script>
+	    <script type="text/javascript" src="../skins/dhtmlxform_dyn.js"></script>
+	    <script type="text/javascript" src="../skins/dhtmlxform_item_container.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
 	    <script src="../skins/patterns/dhtmlxlayout_pattern4l.js"></script>
@@ -19,7 +23,7 @@
 	    <script type="text/javascript">
 	    
 	    	dhtmlx.image_path='../skins/imgs/';
-	    	var main_layout, idAsignatura,nombreAsignatura, gridProfesor, formAlumno;
+	    	var main_layout, idAsignatura,nombreAsignatura, gridProfesor, formAlumno, formUsuario;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -38,7 +42,8 @@
 					goAlumno();
 				</logic:notMatch>	
 	    		
-				
+	    	});	
+	    	
 				function goAlumno(){
 					
 					main_layout = new dhtmlXLayoutObject(document.body, '1C');
@@ -138,44 +143,131 @@
 				    
 				    gridProfesor.attachEvent("onRowSelect", function(row,ind){
 						
-				    	
-				    	selectedEmail=gridProfesor.cells(row,4).getValue();
+				    	var idSelectedUser=row;
 
 				    	var tabbar = b.attachTabbar();
 				    	tabbar.addTab('tab_1','<bean:message key="title.datos.personales"/>','');
 				    	var tab_1 = tabbar.cells('tab_1');
 				    	tabbar.setTabActive('tab_1');
-				    	var form = tab_1.attachForm();
-				    	form.loadStruct('../xml/forms/usuario_form.xml', function(){
-				    		form.setItemLabel('data','<bean:message key="title.info.general"/>');
-				    		form.setItemLabel('grupo','<bean:message key="label.group"/>');
-				    		form.setItemLabel('nombre','<bean:message key="label.nombre"/>');
-				    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
-				    		form.setItemLabel('telefonoMovil','<bean:message key="label.telefono.movil"/>');
-				    		form.setItemLabel('direccion','<bean:message key="label.direccion"/>');
-				    		form.setItemLabel('codigoPostal','<bean:message key="label.postal.code"/>');
-				    		form.setItemLabel('ciudad','<bean:message key="label.ciudad"/>');
-				    		form.setItemLabel('pais','<bean:message key="label.pais"/>');
-				    		form.setItemLabel('email','<bean:message key="label.address.email"/>');
-				    		form.setItemLabel('comentarios','<bean:message key="label.comentarios"/>');
-				    		form.setItemLabel('user','<bean:message key="label.user"/>');
-				    		form.setItemLabel('pass','<bean:message key="label.pass"/>');			    		
-				    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
-
-							<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >		    	
-									form.hideItem('aceptar');								
-							</logic:notMatch>			    		
+				    	formUsuario = tab_1.attachForm();
+				    	formUsuario.loadStruct('../xml/forms/usuario_form.xml', function(){
+				    		formUsuario.setItemLabel('data','<bean:message key="title.datos.personales"/>');
+				    		formUsuario.setItemLabel('grupo','<bean:message key="label.group"/>');
+				    		formUsuario.setItemLabel('nombre','<bean:message key="label.nombre"/>');
+				    		formUsuario.setItemLabel('apellido1','<bean:message key="label.apellido1"/>');
+				    		formUsuario.setItemLabel('apellido2','<bean:message key="label.apellido2"/>');
+				    		formUsuario.setItemLabel('dni','<bean:message key="label.dni"/>');
+				    		formUsuario.setItemLabel('telefono','<bean:message key="label.telefono"/>');
+				    		formUsuario.setItemLabel('correo','<bean:message key="label.address.email"/>');	
+				    		formUsuario.setItemLabel('foto','<bean:message key="label.foto"/>');	
+				    		formUsuario.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
 				    		
-				    	/*	form.load('editarusuario.do?email=' + selectedEmail, function () {			    			
-				    			form.attachEvent("onButtonClick", function(id){
-				    				if (id == "aceptar") {
-					    				form.send("actualizarusuario.do?!nativeeditor_status=save&email=" + selectedEmail ,"post", function(xml) {
-					    				
-					    				});
-					    				buscar();
-				    				}
-				    			});
-				    		});*/
+				    		formUsuario.hideItem('aceptar');
+				    		
+				    		formUsuario.forEachItem(function(id){
+				    			switch(id) {
+					    			case "grupo":{
+					    				formUsuario.setReadonly(id,true);
+					    				break;
+					    			}
+					    			case "nombre":{
+					    				formUsuario.setReadonly(id,true);
+					    				break;
+					    			}
+					    			case "apellido1":{
+					    				formUsuario.setReadonly(id,true);
+					    				break;
+					    			}
+					    			case "apellido2":{
+					    				formUsuario.setReadonly(id,true);
+					    				break;
+					    			}
+					    			case "dni":{
+					    				formUsuario.setReadonly(id,true);
+					    				break;
+					    			}
+					    			case "telefono":{
+					    				formUsuario.setReadonly(id,true);
+					    				break;
+					    			}
+					    			case "correo":{
+					    				formUsuario.setReadonly(id,true);
+					    				break;
+					    			}
+					    			default: break;
+				    			}
+				    		});
+				    		
+				    		//Aqui lo pondría con logic match para gente con permiso para modifiacar datos!
+				    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>3</permiso>" >	
+				    			formUsuario.forEachItem(function(id){
+					    			switch(id) {
+						    			case "grupo":{
+						    				formUsuario.setReadonly(id,false);
+						    				formUsuario.setRequired(id,true);
+						    				break;
+						    			}
+						    			case "nombre":{
+						    				formUsuario.setReadonly(id,false);
+						    				formUsuario.setRequired(id,true);
+						    				break;
+						    			}
+						    			case "apellido1":{
+						    				formUsuario.setReadonly(id,false);
+						    				formUsuario.setRequired(id,true);
+						    				break;
+						    			}
+						    			case "apellido2":{
+						    				formUsuario.setReadonly(id,false);
+						    				break;
+						    			}
+						    			case "dni":{
+						    				formUsuario.setReadonly(id,false);
+						    				formUsuario.setRequired(id,true);
+						    				break;
+						    			}
+						    			case "correo":{
+						    				formUsuario.setReadonly(id,false);
+						    				formUsuario.setRequired(id,true);
+						    				break;
+						    			}
+						    			case "telefono":{
+						    				formUsuario.setReadonly(id,false);
+						    				break;
+						    			}
+						    			default: break;
+					    			}
+					    		});
+				    			formUsuario.showItem('aceptar');
+								
+				    			formUsuario.enableLiveValidation(true);
+					    		//foto LONGBLOB, 
+					    		formUsuario.setFocusOnFirstActive();
+								
+							</logic:match>			    		
+							
+							formUsuario.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
+								if(formUsuario.getItemValue("fotoUri") == "") {
+									var uriNoProfilePic = '../img/no-profile-pic.png';
+									formUsuario.getContainer("foto").innerHTML = "<img src="+ uriNoProfilePic +">";
+								}
+								formUsuario.attachEvent("onButtonClick", function(id){
+									if (id == "aceptar") {
+										formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+											alert('<bean:message key="message.perfil.cambiado.exito"/>');
+										});
+
+									}
+								});
+								formUsuario.attachEvent("onEnter", function() {
+									formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+										alert('<bean:message key="message.perfil.cambiado.exito"/>');
+									}); 
+					    		});
+								
+								
+							});//load
+							
 				    		
 				    	});
 				    	
@@ -225,9 +317,22 @@
 					gridProfesor.clearAndLoad("gridUsuariosEstancias.do?idAsignatura=" + idAsignatura);		    	
 			    }
 	    		
-	    });
-	    	
 	    
+	    		function ucmEsEmail(correo) {
+		    		if (getDomain(correo) == "ucm.es") {
+		    			return true;
+		    		}
+		    		else {
+		    			formUsuario.setNote("correo", { text: '<bean:message key="message.email.institucional" />'} );
+		    			alert("false");
+		    			return false;
+		    		}
+		    	}
+		    	
+		    	function getDomain(correo) {
+				    var parts = correo.split('@');
+				    return parts[parts.length - 1];
+		    	}	    
 	    	
 	   </script>
 	</head>

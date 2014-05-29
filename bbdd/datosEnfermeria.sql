@@ -36,8 +36,9 @@ insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido
 
 -- Permisos
 -- De momento a lo fácil esto ya se cambiará
-insert into permisos (nombre, descripcion) values ('Todas las acciones permitidas', 'El super admin tendrá todos los privilegios');
-insert into permisos (nombre, descripcion) values ('Todas las acciones permitidas menos editar cursos pasados', 'El coordinador podrá actuar como un super admin pero no modificar datos antiguos');
+insert into permisos (nombre, descripcion) values ('Todas las acciones permitidas.', 'El Super Admin tendrá todos los privilegios.');
+insert into permisos (nombre, descripcion) values ('Todas las acciones permitidas menos editar cursos pasados.', 'El Coordinador podrá actuar como un super admin pero no modificar datos antiguos.');
+insert into permisos (nombre, descripcion) values ('Permiso para modificar datos personales de los usuarios.', 'Este permiso lo tendrá el grupo Super Admin y se podrá otorgar a diferentes usuarios.');
 
 
 /*insert into permisos (nombre, descripicion) values (2, 'View leads');
@@ -85,12 +86,20 @@ insert into permisos (nombre, descripicion) values (37, 'Delete user');*/
 
 
 -- Usuarios Permisos
+
 -- insert into grupos_permisos (id_grupo, id_permiso) values (1, 1);
 
+
+
 -- Grupos Permisos
--- Administrador : Todas las acciones permitidas
+
+-- Grupo Super Admin : Todas las acciones permitidas
 insert into grupos_permisos (id_grupo, id_permiso) values (1, 1);
--- Coordinador : Todas las acciones permitidas menos editar datos antiguos
+-- Permiso para modificar los datos de cualquier usuario
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 3);
+
+
+-- Grupo Coordinador : Todas las acciones permitidas menos editar datos antiguos
 insert into grupos_permisos (id_grupo, id_permiso) values (2, 2);
 
 
