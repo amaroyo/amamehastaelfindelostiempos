@@ -121,7 +121,7 @@
 		    
 		    function newAsignatura() {
 		    	dhxWins= new dhtmlXWindows();
-				windowNewAsignatura = dhxWins.createWindow("nuevaAsignatura", 300, 50, 400, 230);
+				windowNewAsignatura = dhxWins.createWindow("nuevaAsignatura", 300, 50, 400, 215);
 				windowNewAsignatura.setText('<bean:message key="title.crear.nueva.asignatura" />');				
 				windowNewAsignatura.setModal(true);
 				windowNewAsignatura.centerOnScreen();
@@ -144,17 +144,20 @@
 		    		
 		    		formNuevaAsignatura.attachEvent("onButtonClick", function(id){
 	    				if (id == "siguiente") {
+	    					windowNewAsignatura.close();
 	    					createParts();
 	    					
 	    				}
 		    		});
 		    		formNuevaAsignatura.attachEvent("onEnter", function() {
+		    			windowNewAsignatura.close();
 		    			createParts();
 		    		});
 		    	});
 		    }
 		    
 		    function createParts(){
+		    	
 		    	var numeroRubricas = formNuevaAsignatura.getItemValue("numeroRubricas");
 				for(var i=numeroRubricas;i>=1;i--){
 					newPart(i);
@@ -163,7 +166,7 @@
 		    }
 		    
 		    function newPart(currentPart){
-				var window = dhxWins.createWindow("nuevaParte"+currentPart, 300, 50, 385, 510);
+				var window = dhxWins.createWindow("nuevaParte"+currentPart, 300, 50, 400, 440);
 				window.setText('<bean:message key="title.crear.nueva.asignatura" />'+': ' + '<bean:message key="title.parte.nueva.asignatura" />' +currentPart);				
 				window.centerOnScreen();
 				var formAsignaturaParte = window.attachForm();
@@ -200,7 +203,7 @@
 					formAsignaturaParte.attachEvent("onButtonClick", function(id){
 	    				if (id == "siguiente") {
 	    					formAsignaturaParte.send("nuevaasignatura.do?!nativeeditor_status=create","post", function(loader,response) {
-	    						resultadoCreateAsignatura(response);
+	    						resultadoCrearAsignatura(response);
 		    				});
 		    				window.close();
 		    				goActualizar();
@@ -208,7 +211,7 @@
 		    		});
 					formAsignaturaParte.attachEvent("onEnter", function() {
 						formAsignaturaParte.send("nuevaasignatura.do?!nativeeditor_status=create","post", function(loader,response) {
-    						resultadoCreateAsignatura(response);
+							resultadoCrearAsignatura(response);
 	    				});
 	    				window.close();
 	    				goActualizar();
@@ -273,9 +276,9 @@
 		    }
 			
 			function goActualizar() {
-		    	buscar();
-		    	toolbarAsignaturas.disableItem('delete');
-		    	areaTrabajoCursos.clearAll();  	
+				buscar();
+				toolbarAsignaturas.disableItem('delete');
+				areaTrabajoCursos.detachObject(true);
 		    }
 		    
 		    function exportExcel(){
@@ -290,15 +293,19 @@
 		        	return n>=1;
 			}
 		  
-		    function resultadoCreateAsignatura(response){
-		    	alert("resultado");
+		    function resultadoCrearAsignatura(response){
+		    	if(response == "asignatura no creada: ya existe una asignatura con ese nombre")
+		    		failedCrearAsignatura();
+		    	else if(response == "asignatura creada con éxito")
+		    		successfulCrearAsignatura();
+		    		
 		    }
 		    
-		    function failedCreateAsignatura() {
-	    		alert('fail');
+		    function failedCrearAsignatura() {
+		    	alert('<bean:message key="message.asignatura.no.creada" />');
 	    	}
 	    	
-	    	function successfulCreateAsignatura() {
+	    	function successfulCrearAsignatura() {
 	    		alert('<bean:message key="message.asignatura.creada.exito" />');
 	    	}
         </script>

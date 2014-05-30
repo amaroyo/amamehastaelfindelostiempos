@@ -33,14 +33,14 @@ public class EditarAsignaturaAction extends DHTMLXFormAction {
 		AsignaturaVO asignatura = new AsignaturaVO();
 		asignatura.setNombre(form.getNombre());
 		if (getAsignaturasService().findByNombre(asignatura) != null)
-			return "asignatura not created: name already exists";
+			return "asignatura no creada: ya existe una asignatura con ese nombre";
 		else{
 			asignatura.setNombre(form.getNombre());
 			asignatura.setCodigo(form.getCodigo());
 			asignatura.setCurso(form.getCurso());
 			asignatura.setDescripcion(form.getDescripcion());
 			getAsignaturasService().insert(asignatura);
-			return "asignatura created";
+			return "asignatura creada con éxito";
 		}
 		
 	}

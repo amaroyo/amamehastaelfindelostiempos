@@ -34,10 +34,11 @@ public abstract class DHTMLXFormAction extends MrmAction {
 					xml.append(save(f));
 				} 
 				else if ("create".equals(f.getNativeeditor_status())){
-					create(f);
+					String var = create(f);
+					xml.append(var);
 				}
 				else {
-					xml.append(load(f));
+					xml.append(parseXML(load(f)));
 				}
 			} catch (Exception e) {
 				
@@ -49,13 +50,13 @@ public abstract class DHTMLXFormAction extends MrmAction {
 			
 			writeXML(response, xml.toString());
 
-			return null;
+			return mapping.findForward("success");
 	}
 
 	protected void writeXML(HttpServletResponse response,
 			String xmlGrid) throws IOException,
 			UnsupportedEncodingException {
-		response.setContentType("text/xml");
+		response.setContentType("text/xml;charset=utf-8");
 		ServletOutputStream sos = response.getOutputStream();
 		sos.write(xmlGrid.getBytes("UTF-8"));
 		sos.flush();
