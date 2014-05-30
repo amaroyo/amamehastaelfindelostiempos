@@ -17,7 +17,7 @@ public class EditarCanalAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void save(DhtmlxForm f) throws Exception {
+	public String save(DhtmlxForm f) throws Exception {
 		CanalForm form = (CanalForm) f;
 		CanalVO canal = new CanalVO();
 		canal.setIdCanal(form.getIdCanal());
@@ -45,6 +45,7 @@ public class EditarCanalAction extends DHTMLXFormAction {
 		} else {
 			getCanalesService().insert(canal);
 		}
+		return null;
 	}
 
 	@Override
@@ -76,8 +77,10 @@ public class EditarCanalAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void create(DhtmlxForm f) throws Exception {
+	public String create(DhtmlxForm f) throws Exception {
 		// TODO Auto-generated method stub
+
+		return null;
 		
 	}
 

@@ -1,7 +1,5 @@
 package es.oyssen.mrm.negocio.services.impl;
 
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

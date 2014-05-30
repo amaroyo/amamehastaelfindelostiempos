@@ -8,10 +8,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import es.oyssen.mrm.negocio.vo.CriterioServicioVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
-import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXGridAction;
-import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
 import es.oyssen.mrm.util.UtilXML;
 
 public class GridLogsUsuarioAction extends MrmAction {

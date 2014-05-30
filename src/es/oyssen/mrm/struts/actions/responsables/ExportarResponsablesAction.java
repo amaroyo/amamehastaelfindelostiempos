@@ -12,14 +12,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import es.oyssen.mrm.negocio.vo.ComercialVO;
-import es.oyssen.mrm.negocio.vo.CriterioComercialVO;
-import es.oyssen.mrm.negocio.vo.CriterioLeadVO;
 import es.oyssen.mrm.negocio.vo.CriterioResponsableVO;
-import es.oyssen.mrm.negocio.vo.LeadVO;
 import es.oyssen.mrm.negocio.vo.ResponsableVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
-import es.oyssen.mrm.struts.forms.leads.GridLeadsForm;
 import es.oyssen.mrm.util.ExcelUtil;
 
 public class ExportarResponsablesAction extends MrmAction {

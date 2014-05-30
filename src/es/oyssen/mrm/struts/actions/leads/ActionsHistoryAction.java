@@ -15,7 +15,7 @@ public class ActionsHistoryAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void save(DhtmlxForm f) throws Exception {
+	public String save(DhtmlxForm f) throws Exception {
 		ActionsHistoryForm form = (ActionsHistoryForm) f;
 		ActionHistoryVO action = new ActionHistoryVO();
 		ActionVO act = new ActionVO();
@@ -30,6 +30,7 @@ public class ActionsHistoryAction extends DHTMLXFormAction {
 
 		getLeadsService().addAction(lead, action);
 		getLeadsService().updateFechaModificacion(lead);
+		return null;
 	}
 
 	@Override
@@ -39,8 +40,9 @@ public class ActionsHistoryAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void create(DhtmlxForm f) throws Exception {
+	public String create(DhtmlxForm f) throws Exception {
 		// TODO Auto-generated method stub
+		return null;
 		
 	}
 

@@ -5,14 +5,10 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import es.oyssen.mrm.negocio.dao.DAOGrupoPermisos;
 import es.oyssen.mrm.negocio.dao.DAOUsuariosPermisos;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
-import es.oyssen.mrm.negocio.services.GrupoPermisosService;
 import es.oyssen.mrm.negocio.services.UsuariosPermisosService;
-import es.oyssen.mrm.negocio.vo.GrupoVO;
-import es.oyssen.mrm.negocio.vo.GrupoPermisoVO;
 import es.oyssen.mrm.negocio.vo.PermisoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioPermisosVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;

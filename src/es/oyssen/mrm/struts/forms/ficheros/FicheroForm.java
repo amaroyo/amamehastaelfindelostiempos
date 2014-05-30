@@ -1,7 +1,5 @@
 package es.oyssen.mrm.struts.forms.ficheros;
 
-import org.apache.struts.upload.FormFile;
-
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxForm;
 
 public class FicheroForm extends DhtmlxForm {

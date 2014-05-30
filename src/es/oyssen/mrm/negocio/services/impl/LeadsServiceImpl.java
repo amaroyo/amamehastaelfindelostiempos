@@ -29,7 +29,6 @@ import es.oyssen.mrm.negocio.services.LeadsService;
 import es.oyssen.mrm.negocio.vo.ActionHistoryVO;
 import es.oyssen.mrm.negocio.vo.CanalVO;
 import es.oyssen.mrm.negocio.vo.ComercialVO;
-import es.oyssen.mrm.negocio.vo.CriterioCanalVO;
 import es.oyssen.mrm.negocio.vo.CriterioComercialVO;
 import es.oyssen.mrm.negocio.vo.CriterioDistribuidorVO;
 import es.oyssen.mrm.negocio.vo.CriterioEmpresaVO;

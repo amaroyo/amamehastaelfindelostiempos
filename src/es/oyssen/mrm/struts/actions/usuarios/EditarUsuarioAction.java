@@ -37,7 +37,7 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void create(DhtmlxForm f) throws Exception {
+	public String create(DhtmlxForm f) throws Exception {
 		
 		EditarUsuarioForm form = (EditarUsuarioForm) f;
 		UsuarioVO usuario = new UsuarioVO();
@@ -46,7 +46,7 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		//EN ESTE CASO EL UNICO CAMPO UNIQUE A PARTE DEL ID ES EL USER (del form)
 		usuario.setCorreo(form.getCorreo());
 		if (getUsuariosService().findByCorreo(usuario) != null)
-			System.out.println("================>ESTE USUARIO YA EXISTE<===========================");
+			return "usuario not created: correo already exists";
 		else{
 			usuario.setIdGrupo(form.getGrupo());
 			usuario.setCorreo(form.getCorreo());
@@ -61,15 +61,14 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 				usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(form.getContrasenya(), EncriptarUtil.MD5));
 			else
 				usuario.setContrasenya(null);
-			
-	
 			getUsuariosService().insert(usuario);
+			return "usuario createds";
 		}
 
 	}
 	
 	@Override
-	public void save(DhtmlxForm f) throws Exception {
+	public String save(DhtmlxForm f) throws Exception {
 		
 		
 		//REHACERLO, MEJOR HACER MODIFICACIONES SEGUN EL DNI
@@ -100,6 +99,7 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		usuario.setContrasenya(null);
 		
 		getUsuariosService().update(usuario);
+		return "usuario changed";
 		
 	}
 

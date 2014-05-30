@@ -12,7 +12,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.util.MessageResources;
 
-import es.oyssen.mrm.negocio.vo.UsuarioYPermisos;
 import es.oyssen.mrm.struts.actions.MrmAction;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
 import es.oyssen.mrm.util.StringUtil;

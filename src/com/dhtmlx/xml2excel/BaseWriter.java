@@ -1,8 +1,6 @@
 package com.dhtmlx.xml2excel;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletResponse;
 
 public abstract class BaseWriter {

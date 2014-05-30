@@ -1,12 +1,9 @@
 package es.oyssen.mrm.struts.actions.permisos.grupo;
 
-import es.oyssen.mrm.negocio.vo.CanalVO;
 import es.oyssen.mrm.negocio.vo.GrupoPermisoVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXFormAction;
-import es.oyssen.mrm.struts.forms.canales.CanalForm;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxForm;
 import es.oyssen.mrm.struts.forms.permisos.grupo.PermisosGrupoForm;
-import es.oyssen.mrm.util.StringUtil;
 
 public class EditarPermisoGrupoAction extends DHTMLXFormAction {
 
@@ -16,13 +13,14 @@ public class EditarPermisoGrupoAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void save(DhtmlxForm f) throws Exception {
+	public String save(DhtmlxForm f) throws Exception {
 		PermisosGrupoForm form = (PermisosGrupoForm) f;
 		GrupoPermisoVO permisoGrupo = new GrupoPermisoVO();
 		permisoGrupo.setIdPermiso(form.getIdPermiso());
 		permisoGrupo.setIdGrupo(form.getIdGrupo());
 
 		getGrupoPermisosService().insert(permisoGrupo);
+		return null;
 	}
 
 	@Override
@@ -38,8 +36,9 @@ public class EditarPermisoGrupoAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void create(DhtmlxForm f) throws Exception {
+	public String create(DhtmlxForm f) throws Exception {
 		// TODO Auto-generated method stub
+		return null;
 		
 	}
 

@@ -1,8 +1,5 @@
 package es.oyssen.mrm.test;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import es.oyssen.mrm.util.ParseHTML;
 
 public class Test {

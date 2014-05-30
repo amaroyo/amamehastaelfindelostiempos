@@ -17,7 +17,7 @@ public class EditarEmpresaAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void save(DhtmlxForm f) throws Exception {
+	public String save(DhtmlxForm f) throws Exception {
 		EmpresaForm form = (EmpresaForm) f;
 		EmpresaVO empresa = new EmpresaVO();
 		empresa.setIdEmpresa(form.getIdEmpresa());
@@ -34,6 +34,8 @@ public class EditarEmpresaAction extends DHTMLXFormAction {
 		} else{
 			getEmpresasService().insert(empresa);
 		}
+
+		return null;
 	}
 
 	@Override
@@ -54,9 +56,10 @@ public class EditarEmpresaAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void create(DhtmlxForm f) throws Exception {
+	public String create(DhtmlxForm f) throws Exception {
 		// TODO Auto-generated method stub
-		
+
+		return null;
 	}
 
 }

@@ -1,6 +1,5 @@
 package es.oyssen.mrm.struts.actions.empresas;
 
-import es.oyssen.mrm.negocio.vo.CriterioEmpresaVO;
 import es.oyssen.mrm.negocio.vo.EmpresaVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXFormAction;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxForm;
@@ -17,7 +16,7 @@ public class CargarEmpresaAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void save(DhtmlxForm f) throws Exception {
+	public String save(DhtmlxForm f) throws Exception {
 		/*EmpresaForm form = (EmpresaForm) f;
 		EmpresaVO empresa = new EmpresaVO();
 		empresa.setIdEmpresa(form.getIdEmpresa());
@@ -33,6 +32,8 @@ public class CargarEmpresaAction extends DHTMLXFormAction {
 		} else{
 			getEmpresasService().insert(empresa);
 		}*/
+
+		return null;
 	}
 
 	@Override
@@ -64,9 +65,10 @@ public class CargarEmpresaAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void create(DhtmlxForm f) throws Exception {
+	public String create(DhtmlxForm f) throws Exception {
 		// TODO Auto-generated method stub
-		
+
+		return null;
 	}
 
 }

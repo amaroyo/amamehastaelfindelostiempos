@@ -12,8 +12,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import es.oyssen.mrm.negocio.vo.ComercialVO;
-import es.oyssen.mrm.negocio.vo.CriterioComercialVO;
 import es.oyssen.mrm.negocio.vo.CriterioEmpresaVO;
 import es.oyssen.mrm.negocio.vo.EmpresaVO;
 import es.oyssen.mrm.struts.actions.MrmAction;

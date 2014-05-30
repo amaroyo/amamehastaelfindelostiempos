@@ -17,7 +17,7 @@ public class EditarResponsableAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void save(DhtmlxForm f) throws Exception {
+	public String save(DhtmlxForm f) throws Exception {
 		ResponsableForm form = (ResponsableForm) f;
 		ResponsableVO responsable = new ResponsableVO();
 		responsable.setIdResponsable(form.getIdResponsable());
@@ -36,6 +36,7 @@ public class EditarResponsableAction extends DHTMLXFormAction {
 		} else {
 			getResponsablesService().insert(responsable);
 		}
+		return null;
 	}
 
 	@Override
@@ -58,8 +59,9 @@ public class EditarResponsableAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void create(DhtmlxForm f) throws Exception {
+	public String create(DhtmlxForm f) throws Exception {
 		// TODO Auto-generated method stub
+		return null;
 		
 	}
 

@@ -5,10 +5,6 @@ import java.io.*;
 import javax.servlet.*; 
 import javax.servlet.http.*; 
 
-import org.apache.struts.action.ActionMapping;
-
-import java.util.*; 
-
 public class FiltroSesion implements Filter { 
   
 	FilterConfig fc; 

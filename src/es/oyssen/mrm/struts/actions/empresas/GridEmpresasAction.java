@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import es.oyssen.mrm.negocio.vo.CriterioEmpresaVO;
 import es.oyssen.mrm.negocio.vo.EmpresaVO;
-import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXGridAction;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXGridWithRequestAction;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
 import es.oyssen.mrm.util.UtilXML;

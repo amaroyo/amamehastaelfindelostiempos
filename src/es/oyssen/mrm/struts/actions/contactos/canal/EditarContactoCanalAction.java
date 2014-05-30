@@ -17,7 +17,7 @@ public class EditarContactoCanalAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void save(DhtmlxForm f) throws Exception {
+	public String save(DhtmlxForm f) throws Exception {
 		ContactoCanalForm form = (ContactoCanalForm) f;
 		ContactoCanalVO contacto = new ContactoCanalVO();
 		contacto.setIdContacto(form.getIdContacto());
@@ -38,6 +38,8 @@ public class EditarContactoCanalAction extends DHTMLXFormAction {
 		} else {
 			getContactosCanalService().insert(contacto);
 		}
+
+		return null;
 	}
 
 	@Override
@@ -61,9 +63,10 @@ public class EditarContactoCanalAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void create(DhtmlxForm f) throws Exception {
+	public String create(DhtmlxForm f) throws Exception {
 		// TODO Auto-generated method stub
-		
+
+		return null;
 	}
 
 }

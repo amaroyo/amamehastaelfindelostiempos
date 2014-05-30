@@ -17,7 +17,7 @@ public class EditarServicioAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void save(DhtmlxForm f) throws Exception {
+	public String save(DhtmlxForm f) throws Exception {
 		ServicioForm form = (ServicioForm) f;
 		ServicioVO servicio = new ServicioVO();
 		servicio.setIdServicio(form.getIdServicio());
@@ -30,6 +30,8 @@ public class EditarServicioAction extends DHTMLXFormAction {
 		} else {
 			getServiciosService().insert(servicio);
 		}
+
+		return null;
 	}
 
 	@Override
@@ -46,8 +48,9 @@ public class EditarServicioAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void create(DhtmlxForm f) throws Exception {
+	public String create(DhtmlxForm f) throws Exception {
 		// TODO Auto-generated method stub
+		return null;
 		
 	}
 

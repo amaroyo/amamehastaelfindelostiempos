@@ -14,13 +14,14 @@ public class EditarServicioUsuarioAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void save(DhtmlxForm f) throws Exception {
+	public String save(DhtmlxForm f) throws Exception {
 		ServiciosUsuarioForm form = (ServiciosUsuarioForm) f;
 		ServicioUsuarioVO servicioUsuario = new ServicioUsuarioVO();
 		servicioUsuario.setIdServicio(form.getIdServicio());
 		servicioUsuario.setIdUsuario(form.getIdUsuario());
 
 		getServiciosUsuarioService().insert(servicioUsuario);
+		return null;
 	}
 
 	@Override
@@ -37,8 +38,9 @@ public class EditarServicioUsuarioAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void create(DhtmlxForm f) throws Exception {
+	public String create(DhtmlxForm f) throws Exception {
 		// TODO Auto-generated method stub
+		return null;
 		
 	}
 

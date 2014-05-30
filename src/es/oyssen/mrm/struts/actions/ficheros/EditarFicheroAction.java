@@ -17,7 +17,7 @@ public class EditarFicheroAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void save(DhtmlxForm f) throws Exception {
+	public String save(DhtmlxForm f) throws Exception {
 		FicheroForm form = (FicheroForm) f;
 		FicheroVO fichero = new FicheroVO();
 		fichero.setIdFichero(form.getIdFichero());
@@ -30,6 +30,7 @@ public class EditarFicheroAction extends DHTMLXFormAction {
 		} else {
 			getFicherosService().insert(fichero);
 		}
+		return null;
 	}
 
 	@Override
@@ -47,8 +48,9 @@ public class EditarFicheroAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void create(DhtmlxForm f) throws Exception {
+	public String create(DhtmlxForm f) throws Exception {
 		// TODO Auto-generated method stub
+		return null;
 		
 	}
 

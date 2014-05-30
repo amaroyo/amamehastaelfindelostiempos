@@ -17,7 +17,7 @@ public class EditarDistribuidorAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void save(DhtmlxForm f) throws Exception {
+	public String save(DhtmlxForm f) throws Exception {
 		DistribuidorForm form = (DistribuidorForm) f;
 		DistribuidorVO distribuidor = new DistribuidorVO();
 		distribuidor.setIdDistribuidor(form.getIdDistribuidor());
@@ -44,6 +44,8 @@ public class EditarDistribuidorAction extends DHTMLXFormAction {
 		} else {
 			getDistribuidoresService().insert(distribuidor);
 		}
+
+		return null;
 	}
 
 	@Override
@@ -88,7 +90,9 @@ public class EditarDistribuidorAction extends DHTMLXFormAction {
 	}
 
 	@Override
-	public void create(DhtmlxForm f) throws Exception {
+	public String create(DhtmlxForm f) throws Exception {
+
+		return null;
 		// TODO Auto-generated method stub
 		
 	}

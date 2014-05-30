@@ -121,7 +121,7 @@
 		    
 		    function newAsignatura() {
 		    	dhxWins= new dhtmlXWindows();
-				var windowNewAsignatura = dhxWins.createWindow("nuevaAsignatura", 300, 50, 400, 230);
+				windowNewAsignatura = dhxWins.createWindow("nuevaAsignatura", 300, 50, 400, 230);
 				windowNewAsignatura.setText('<bean:message key="title.crear.nueva.asignatura" />');				
 				windowNewAsignatura.setModal(true);
 				windowNewAsignatura.centerOnScreen();
@@ -159,6 +159,7 @@
 				for(var i=numeroRubricas;i>=1;i--){
 					newPart(i);
 				}
+				
 		    }
 		    
 		    function newPart(currentPart){
@@ -198,13 +199,20 @@
 		    		
 					formAsignaturaParte.attachEvent("onButtonClick", function(id){
 	    				if (id == "siguiente") {
-	    					formAsignaturaParte.send("nuevaasignatura.do?","post", function(loader,response) {
+	    					formAsignaturaParte.send("nuevaasignatura.do?!nativeeditor_status=create","post", function(loader,response) {
 	    						resultadoCreateAsignatura(response);
 		    				});
 		    				window.close();
 		    				goActualizar();
 	    				}
 		    		});
+					formAsignaturaParte.attachEvent("onEnter", function() {
+						formAsignaturaParte.send("nuevaasignatura.do?!nativeeditor_status=create","post", function(loader,response) {
+    						resultadoCreateAsignatura(response);
+	    				});
+	    				window.close();
+	    				goActualizar();
+					});
 		    	});
 			}
 		    
