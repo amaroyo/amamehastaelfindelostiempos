@@ -3,7 +3,6 @@ package es.oyssen.mrm.struts.actions.cursos;
 import es.oyssen.mrm.negocio.vo.AsignaturaVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXFormAction;
 import es.oyssen.mrm.struts.forms.cursos.EditarAsignaturaForm;
-import es.oyssen.mrm.struts.forms.cursos.NuevaAsignaturaForm;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxForm;
 import es.oyssen.mrm.util.StringUtil;
 
@@ -29,20 +28,8 @@ public class EditarAsignaturaAction extends DHTMLXFormAction {
 
 	@Override
 	public String create(DhtmlxForm f) throws Exception {
-		NuevaAsignaturaForm form = (NuevaAsignaturaForm) f;
-		AsignaturaVO asignatura = new AsignaturaVO();
-		asignatura.setNombre(form.getNombre());
-		if (getAsignaturasService().findByNombre(asignatura) != null)
-			return "asignatura no creada: ya existe una asignatura con ese nombre";
-		else{
-			asignatura.setNombre(form.getNombre());
-			asignatura.setCodigo(form.getCodigo());
-			asignatura.setCurso(form.getCurso());
-			asignatura.setDescripcion(form.getDescripcion());
-			getAsignaturasService().insert(asignatura);
-			return "asignatura creada con éxito";
-		}
 		
+		return null;
 	}
 	
 	@Override
@@ -73,7 +60,7 @@ public class EditarAsignaturaAction extends DHTMLXFormAction {
 				return "asignatura not changed: asignatura does not exist";
 		}
 	}
-
+	
 	@Override
 	public String parseXML(Object o) throws Exception {
 		AsignaturaVO c = (AsignaturaVO) o;

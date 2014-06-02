@@ -8,5 +8,9 @@
 	   <item type="input" name="nombre" label="Nombre" labelWidth="140" required="true"/>
 	   <item type="input" name="descripcion" label="Descripción" labelWidth="140" style="width:300" rows="7"/> 
    </item>
-   <item type="button" name="siguiente" value="Siguiente" />
+   <item type="block">
+	   <item type="button" name="anterior" value="Anterior"/>
+	   <item type="newcolumn"/>
+	   <item type="button" name="siguiente" value="Siguiente"/>
+   </item>
 </items>

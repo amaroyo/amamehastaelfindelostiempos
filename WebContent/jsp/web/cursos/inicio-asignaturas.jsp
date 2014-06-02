@@ -22,7 +22,10 @@
 	    	dhtmlx.image_path='../skins/imgs/';
 	    	
 	    	var main_layout, areaTrabajoCursos, listado, toolbarAsignaturas,
-	    	gridAsignaturas, formInfo, formNuevaAsignatura, dhxWins;
+	    	gridAsignaturas, formInfo, dhxWins;
+	    	
+	    	var windowsNewAsignatura = new Array();
+	    	var formsNewAsignatura = new Array();
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -114,141 +117,176 @@
 	    		});
 		    }
 		    
-		    function buscar() {
-		    	gridAsignaturas.clearAndLoad("gridasignaturas.do");		    	
-		    }
-		    
 		    
 		    function newAsignatura() {
 		    	dhxWins= new dhtmlXWindows();
-				windowNewAsignatura = dhxWins.createWindow("nuevaAsignatura", 300, 50, 400, 215);
-				windowNewAsignatura.setText('<bean:message key="title.crear.nueva.asignatura" />');				
-				windowNewAsignatura.setModal(true);
-				windowNewAsignatura.centerOnScreen();
-				formNuevaAsignatura = windowNewAsignatura.attachForm();			
-		    	formNuevaAsignatura.loadStruct('../xml/forms/new_asignatura_common_form.xml', function() {
-		    		formNuevaAsignatura.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
-		    		formNuevaAsignatura.setItemLabel('numeroRubricas','<bean:message key="label.numero.rubricas"/>');
-		    		formNuevaAsignatura.setItemLabel('codigo','<bean:message key="label.codigo.asignatura"/>');
-		    		formNuevaAsignatura.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
-		    		formNuevaAsignatura.setItemLabel('siguiente','<bean:message key="button.siguiente"/>');
+		    	windowsNewAsignatura[0] = dhxWins.createWindow("nuevaAsignatura", 300, 50, 400, 215);
+		    	var windowNewAsignatura = windowsNewAsignatura[0];
+		    	windowNewAsignatura.setText('<bean:message key="title.crear.nueva.asignatura" />');
+		    	windowNewAsignatura.centerOnScreen();
+				formsNewAsignatura[0] = windowsNewAsignatura[0].attachForm();
+				var formNewAsignatura = formsNewAsignatura[0];
+				formNewAsignatura.loadStruct('../xml/forms/new_asignatura_common_form.xml', function() {
+					formNewAsignatura.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
+					formNewAsignatura.setItemLabel('numeroRubricas','<bean:message key="label.numero.rubricas"/>');
+					formNewAsignatura.setItemLabel('codigo','<bean:message key="label.codigo.asignatura"/>');
+					formNewAsignatura.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
+					formNewAsignatura.setItemLabel('siguiente','<bean:message key="button.siguiente"/>');
 		    		
 
-		    		/*formNuevaAsignatura.forEachItem(function(id){
-		    			if(formNuevaAsignatura.getItemType(id) == "input"){
-		    				formNuevaAsignatura.setRequired(id,true);
+		    		/*formNewAsignatura.forEachItem(function(id){
+		    			if(formNewAsignatura.getItemType(id) == "input"){
+		    				formNewAsignatura.setRequired(id,true);
 		    			}
 		    		});*/
 		    		
 					//permisosNuevaAsignaturaCommonForm();		  
 		    		
-		    		formNuevaAsignatura.attachEvent("onButtonClick", function(id){
+		    		formNewAsignatura.attachEvent("onButtonClick", function(id){
 	    				if (id == "siguiente") {
-	    					windowNewAsignatura.close();
-	    					createParts();
-	    					
+	    					windowNewAsignatura.hide();
+	    					crearPartes(1);	
 	    				}
-		    		});
-		    		formNuevaAsignatura.attachEvent("onEnter", function() {
-		    			windowNewAsignatura.close();
-		    			createParts();
 		    		});
 		    	});
 		    }
 		    
-		    function createParts(){
-		    	
-		    	var numeroRubricas = formNuevaAsignatura.getItemValue("numeroRubricas");
-				for(var i=numeroRubricas;i>=1;i--){
-					newPart(i);
-				}
-				
-		    }
-		    
-		    function newPart(currentPart){
-				var window = dhxWins.createWindow("nuevaParte"+currentPart, 300, 50, 400, 440);
-				window.setText('<bean:message key="title.crear.nueva.asignatura" />'+': ' + '<bean:message key="title.parte.nueva.asignatura" />' +currentPart);				
-				window.centerOnScreen();
-				var formAsignaturaParte = window.attachForm();
-	    		dhxWins.window("nuevaParte"+currentPart).setModal(true);
-				formAsignaturaParte.loadStruct('../xml/forms/new_asignatura_part_form.xml', function() {
-					formAsignaturaParte.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
-					formAsignaturaParte.setItemLabel('numeroRubricas','<bean:message key="label.numero.rubricas"/>');
-					formAsignaturaParte.setItemLabel('parte','<bean:message key="label.parte"/>');
-					formAsignaturaParte.setItemLabel('codigo','<bean:message key="label.codigo.asignatura"/>');
-					formAsignaturaParte.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
-					formAsignaturaParte.setItemLabel('nombre','<bean:message key="label.nombre.asignatura"/>');
-					formAsignaturaParte.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
-					formAsignaturaParte.setItemLabel('siguiente','<bean:message key="button.siguiente"/>');	  
+		    function crearPartes(currentPart){
+		    	windowsNewAsignatura[currentPart] = dhxWins.createWindow("nuevaParte"+currentPart, 300, 50, 405, 440);
+		    	var windowNewAsignaturaPart = windowsNewAsignatura[currentPart];
+		    	windowNewAsignaturaPart.setText('<bean:message key="title.crear.nueva.asignatura" />'+': ' + '<bean:message key="title.parte.nueva.asignatura" />' +currentPart);				
+		    	windowNewAsignaturaPart.centerOnScreen();
+				formsNewAsignatura[currentPart] = windowsNewAsignatura[currentPart].attachForm();
+				var formNewAsignaturaPart = formsNewAsignatura[currentPart];
+				var numeroRubricas = formsNewAsignatura[0].getItemValue("numeroRubricas");
+				formNewAsignaturaPart.loadStruct('../xml/forms/new_asignatura_part_form.xml', function() {
+					formNewAsignaturaPart.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
+					formNewAsignaturaPart.setItemLabel('numeroRubricas','<bean:message key="label.numero.rubricas"/>');
+					formNewAsignaturaPart.setItemLabel('parte','<bean:message key="label.parte"/>');
+					formNewAsignaturaPart.setItemLabel('codigo','<bean:message key="label.codigo.asignatura"/>');
+					formNewAsignaturaPart.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
+					formNewAsignaturaPart.setItemLabel('nombre','<bean:message key="label.nombre.asignatura"/>');
+					formNewAsignaturaPart.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
+					formNewAsignaturaPart.setItemLabel('anterior','<bean:message key="button.anterior"/>');	  
+					formNewAsignaturaPart.setItemLabel('siguiente','<bean:message key="button.siguiente"/>');	  
 		    		
-					formAsignaturaParte.forEachItem(function(id){
-						//formAsignaturaParte.setRequired(id,true);
+					formNewAsignaturaPart.forEachItem(function(id){
+						//formsNewAsignatura[currentPart].setRequired(id,true);
 						if(id == "numeroRubricas" || id == "parte" || id == "codigo" || id == "curso") {
 							switch(id) {
 								case "numeroRubricas":
 								case "codigo":
 				    			case "curso":
-				    				var valueCopied = formNuevaAsignatura.getItemValue(id);
-				    				formAsignaturaParte.setItemValue(id,valueCopied);
+				    				var valueCopied = formsNewAsignatura[0].getItemValue(id);
+				    				formNewAsignaturaPart.setItemValue(id,valueCopied);
 				    				break;
 				    			case "parte":
-				    				var totalParts = formAsignaturaParte.getItemValue("numeroRubricas");
-				    				formAsignaturaParte.setItemValue(id,currentPart+"/"+totalParts);
+				    				formNewAsignaturaPart.setItemValue(id,currentPart+" / "+numeroRubricas);
 				    				break;
 							}
-							formAsignaturaParte.disableItem(id);
+							formNewAsignaturaPart.disableItem(id);
 						}
 		    		});
 		    		
-					formAsignaturaParte.attachEvent("onButtonClick", function(id){
+					formNewAsignaturaPart.attachEvent("onButtonClick", function(id){
 	    				if (id == "siguiente") {
-	    					formAsignaturaParte.send("nuevaasignatura.do?!nativeeditor_status=create","post", function(loader,response) {
-	    						resultadoCrearAsignatura(response);
-		    				});
-		    				window.close();
-		    				goActualizar();
+	    					if(!existeEnNombresAnteriores(numeroRubricas)){
+		    					formNewAsignaturaPart.send("buscarasignatura.do","post", function(loader,response) {
+		    						resultadoBuscarParteAsignatura(response,currentPart,numeroRubricas);
+			    				});
+	    					}
+	    				}
+	    				else if (id == "anterior") {
+	    					windowsNewAsignatura[currentPart].hide();
+	    					windowsNewAsignatura[currentPart-1].show();
 	    				}
 		    		});
-					formAsignaturaParte.attachEvent("onEnter", function() {
-						formAsignaturaParte.send("nuevaasignatura.do?!nativeeditor_status=create","post", function(loader,response) {
-							resultadoCrearAsignatura(response);
-	    				});
-	    				window.close();
-	    				goActualizar();
+		    	});
+			}
+			
+		    function existeEnNombresAnteriores(numeroRubricas){
+		    	var length = formsNewAsignatura.length;
+		    	for(var i=length-2;i>0;i--) {
+		    		if(formsNewAsignatura[length-1].getItemValue('nombre') == formsNewAsignatura[i].getItemValue('nombre')){
+		    			if(numeroRubricas == 1) {
+			    			alert('<bean:message key="message.asignatura.no.creada" />:'+"\n"+
+								"Nombre: "+formsNewAsignatura[i].getItemValue('nombre')+"\n"+
+								"Código: "+formsNewAsignatura[i].getItemValue('codigo')+"\n"+
+								"Curso: "+formsNewAsignatura[i].getItemValue('curso'));
+		    			}
+			    		else{
+			    			alert('<bean:message key="message.parte.asignatura.no.creada" />:'+"\n"+
+		    						"Parte: "+formsNewAsignatura[i].getItemValue('parte')+"\n"+	
+	    							"Nombre: "+formsNewAsignatura[i].getItemValue('nombre')+"\n"+
+	    							"Código: "+formsNewAsignatura[i].getItemValue('codigo')+"\n"+
+	    							"Curso: "+formsNewAsignatura[i].getItemValue('curso'));
+			    		}
+		    			return true;
+		    		}
+		    	}
+		    	return false;
+		    }
+		    
+		    function resultadoBuscarParteAsignatura(response,currentPart,numeroRubricas){
+		    	if(response == "No existe ninguna asignatura con ese nombre") {
+		    		if(numeroRubricas == 1 || currentPart == numeroRubricas) {
+		    			crearAsignaturaCompleta(numeroRubricas);
+		    			cerrarVentanas();
+		    		}
+		    		else{
+	    				windowsNewAsignatura[currentPart].hide();
+			    		crearPartes(currentPart+1);
+		    		}
+		    	}
+		    	else/* if(response == "Ya existe una asignatura con ese nombre:")*/{
+		    		if(numeroRubricas == 1) {
+		    			alert(response.replace("Ya existe una asignatura con ese nombre", '<bean:message key="message.asignatura.no.creada" />'));
+		    		}
+		    		else{
+		    			alert(response.replace("Ya existe una asignatura con ese nombre", '<bean:message key="message.parte.asignatura.no.creada" />'));
+		    		}
+		    	}
+		    }
+		    
+		    function crearAsignaturaCompleta(numeroRubricas){
+		    	alert(numeroRubricas);
+		    	var error=false;
+		    	for(var i=1;i<formsNewAsignatura.length;i++) {
+		    		formsNewAsignatura[i].send("crearasignatura.do","post", function(loader,response) {
+		    			if(response == "asignatura no creada: ya existe una asignatura con ese nombre"){
+		    				error=true;
+		    				if(numeroRubricas == 1) {
+		    					alert('<bean:message key="message.error.crear.asignatura" />:'+"\n"+
+		    							"Nombre: "+formsNewAsignatura[i].getItemValue('nombre')+"\n"+
+		    							"Código: "+formsNewAsignatura[i].getItemValue('codigo')+"\n"+
+		    							"Curso: "+formsNewAsignatura[i].getItemValue('curso'));
+		    				}
+		    				else {
+		    					alert('<bean:message key="message.error.crear.parte.asignatura" />:'+"\n"+
+		    						"Parte: "+formsNewAsignatura[i].getItemValue('parte')+"\n"+	
+	    							"Nombre: "+formsNewAsignatura[i].getItemValue('nombre')+"\n"+
+	    							"Código: "+formsNewAsignatura[i].getItemValue('codigo')+"\n"+
+	    							"Curso: "+formsNewAsignatura[i].getItemValue('curso'));
+		    				}
+		    			}
 					});
-		    	});
-			}
+		    	}
+		    	if(!error){
+	    			successfulCrearAsignatura();
+		    	}
+		    }
 		    
-			function newRubrica(i){
-				var window = dhxWins.createWindow("nuevaRubrica"+i, 300, 50, 385, 510);
-				window.setText('<bean:message key="title.crear.nueva.asignatura" />');				
-				window.setModal(true);
-				window.centerOnScreen();
-				var formNuevaAsignatura = window.attachForm();			
-		    	formNuevaAsignatura.loadStruct('../xml/forms/new_asignatura_form.xml', function() {
-		    		formNuevaAsignatura.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
-		    		formNuevaAsignatura.setItemLabel('nombre','<bean:message key="label.associated.to"/>');
-		    		formNuevaAsignatura.setItemLabel('descripcion','<bean:message key="label.nombre"/>');
-		    		formNuevaAsignatura.setItemLabel('siguiente','<bean:message key="button.aceptar"/>');	  
-		    		
-		    		formNuevaAsignatura.forEachItem(function(id){
-		    			form.setRequired(id,true);
-		    		});
-		    		
-		    		formNuevaAsignatura.attachEvent("onButtonClick", function(id){
-	    				if (id == "siguiente") {	
-	    					
-		    				formNuevaAsignatura.send("actualizarusuario.do?!nativeeditor_status=create&idAsociado="+idAsociado,"post", function(xml) {
-		    					
-		    				});
-		    				window.close();
-		    				goActualizar();
-	    				}
-		    		});
-		    	});
-			}
-		    
-			function permisosToolbarAsignaturas(){ 	
+		    function cerrarVentanas(){
+		    	for(var i=1;i<windowsNewAsignatura.length;i++)
+	    			windowsNewAsignatura[i].close();
+		    }
+	    	
+	    	function successfulCrearAsignatura() {
+	    		alert('<bean:message key="message.asignatura.creada.exito" />');
+	    	}
+	    	
+	    	
+	    	function permisosToolbarAsignaturas(){ 	
 				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
 			   		toolbarAsignaturas.hideItem('new');
 			   		toolbarAsignaturas.hideItem('sep1');    	
@@ -275,13 +313,7 @@
 		    	
 		    }
 			
-			function goActualizar() {
-				buscar();
-				toolbarAsignaturas.disableItem('delete');
-				areaTrabajoCursos.detachObject(true);
-		    }
-		    
-		    function exportExcel(){
+			function exportExcel(){
 		    	gridAsignaturas.toExcel('generateExcel.do');
 		    }
 		    
@@ -292,22 +324,17 @@
 		        else
 		        	return n>=1;
 			}
-		  
-		    function resultadoCrearAsignatura(response){
-		    	if(response == "asignatura no creada: ya existe una asignatura con ese nombre")
-		    		failedCrearAsignatura();
-		    	else if(response == "asignatura creada con éxito")
-		    		successfulCrearAsignatura();
-		    		
+			
+			function goActualizar() {
+				buscar();
+				toolbarAsignaturas.disableItem('delete');
+				areaTrabajoCursos.detachObject(true);
 		    }
-		    
-		    function failedCrearAsignatura() {
-		    	alert('<bean:message key="message.asignatura.no.creada" />');
-	    	}
-	    	
-	    	function successfulCrearAsignatura() {
-	    		alert('<bean:message key="message.asignatura.creada.exito" />');
-	    	}
+			
+			function buscar() {
+		    	gridAsignaturas.clearAndLoad("gridasignaturas.do");		    	
+		    }
+			
         </script>
 	</head>
 	<body>

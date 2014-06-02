@@ -2,7 +2,7 @@ package es.oyssen.mrm.struts.forms.cursos;
 
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
 
-public class NuevaAsignaturaForm extends DhtmlxGridForm {
+public class CrearAsignaturaForm extends DhtmlxGridForm {
 
 	private String numeroRubricas;
 	private String parte;

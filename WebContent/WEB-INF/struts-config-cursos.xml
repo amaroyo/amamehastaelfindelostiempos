@@ -5,12 +5,10 @@
 <struts-config>	
 	
 	<form-beans>
-	    <form-bean name="GridSeminariosForm" type="es.oyssen.mrm.struts.forms.cursos.GridSeminariosForm" />
+	  
 	    <form-bean name="GridAsignaturasForm" type="es.oyssen.mrm.struts.forms.cursos.GridAsignaturasForm" />
 		<form-bean name="EditarAsignaturaForm" type="es.oyssen.mrm.struts.forms.cursos.EditarAsignaturaForm" />
-		<form-bean name="EditarSeminarioForm" type="es.oyssen.mrm.struts.forms.cursos.EditarSeminarioForm" />
-		<form-bean name="NuevaAsignaturaForm" type="es.oyssen.mrm.struts.forms.cursos.NuevaAsignaturaForm" />
-		<form-bean name="NuevoSeminarioForm" type="es.oyssen.mrm.struts.forms.cursos.NuevoSeminarioForm" />
+		<form-bean name="CrearAsignaturaForm" type="es.oyssen.mrm.struts.forms.cursos.CrearAsignaturaForm" />
 		
 		
 	</form-beans>
@@ -24,14 +22,13 @@
 		<action path="/cursos/inicio-asignaturas" forward="/jsp/web/cursos/inicio-asignaturas.jsp" />
 		
 		<action path="/cursos/gridasignaturas" name="GridAsignaturasForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.GridAsignaturasAction" />
-		<action path="/cursos/gridseminarios" name="GridSeminariosForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.GridSeminariosAction" />
 		
 		<action path="/cursos/editarasignatura" name="EditarAsignaturaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.EditarAsignaturaAction"  />
 		<action path="/cursos/actualizarasignatura" name="EditarAsignaturaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.EditarAsignaturaAction"  />
-		<action path="/cursos/editarseminario" name="EditarSeminarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.EditarSeminarioAction"  />
-		<action path="/cursos/actualizarseminario" name="EditarSeminarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.EditarSeminarioAction"  />
-		<action path="/cursos/nuevaasignatura" name="NuevaAsignaturaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.EditarAsignaturaAction"  />
-		<action path="/cursos/nuevoseminario" name="NuevoSeminarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.EditarSeminarioAction"  />
+		
+		<action path="/cursos/crearasignatura" name="CrearAsignaturaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.CrearAsignaturaAction"  />
+		<action path="/cursos/borrarasignatura" name="CrearAsignaturaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.BorrarAsignaturaAction"  />
+		<action path="/cursos/buscarasignatura" name="CrearAsignaturaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.BuscarAsignaturaAction"  />
 		
 		<action path="/cursos/generateExcel" name="GridAsignaturasForm" scope="request" validate="false" type="com.dhtmlx.xml2excel.ExcelGenerator" />
 		
