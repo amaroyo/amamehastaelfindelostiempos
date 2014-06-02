@@ -62,7 +62,7 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 			else
 				usuario.setContrasenya(null);
 			getUsuariosService().insert(usuario);
-			return "usuario createds";
+			return "usuario created";
 		}
 
 	}

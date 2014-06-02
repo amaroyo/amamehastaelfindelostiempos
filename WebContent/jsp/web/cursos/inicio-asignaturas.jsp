@@ -207,7 +207,7 @@
 		    function existeEnNombresAnteriores(numeroRubricas){
 		    	var length = formsNewAsignatura.length;
 		    	for(var i=length-2;i>0;i--) {
-		    		if(formsNewAsignatura[length-1].getItemValue('nombre') == formsNewAsignatura[i].getItemValue('nombre')){
+		    		if(formsNewAsignatura[length-1].getItemValue('nombre').toLowerCase() == formsNewAsignatura[i].getItemValue('nombre').toLowerCase()){
 		    			if(numeroRubricas == 1) {
 			    			alert('<bean:message key="message.asignatura.no.creada" />:'+"\n"+
 								"Nombre: "+formsNewAsignatura[i].getItemValue('nombre')+"\n"+
@@ -249,7 +249,6 @@
 		    }
 		    
 		    function crearAsignaturaCompleta(numeroRubricas){
-		    	alert(numeroRubricas);
 		    	var error=false;
 		    	for(var i=1;i<formsNewAsignatura.length;i++) {
 		    		formsNewAsignatura[i].send("crearasignatura.do","post", function(loader,response) {

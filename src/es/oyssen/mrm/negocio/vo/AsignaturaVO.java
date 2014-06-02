@@ -11,7 +11,6 @@ public class AsignaturaVO {
 	
 	
 	public AsignaturaVO() {
-		
 	}
 	
 	public AsignaturaVO(String idAsignatura, String nombre, String codigo) {

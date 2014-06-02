@@ -1,4 +1,4 @@
-use enfermeria;
+﻿use enfermeria;
 
 
 -- Grupos
@@ -506,7 +506,3 @@ insert into puntuacion_cirterios (id_portafolio, id_criterio, nota) values (3, 1
 insert into puntuacion_cirterios (id_portafolio, id_criterio, nota) values (3, 17, 3);
 insert into puntuacion_cirterios (id_portafolio, id_criterio, nota) values (3, 18, 1);
 insert into puntuacion_cirterios (id_portafolio, id_criterio, nota) values (3, 19, 1);
-
-
-
-
