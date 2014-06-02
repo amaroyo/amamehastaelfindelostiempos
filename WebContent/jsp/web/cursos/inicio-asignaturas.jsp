@@ -124,6 +124,7 @@
 		    	var windowNewAsignatura = windowsNewAsignatura[0];
 		    	windowNewAsignatura.setText('<bean:message key="title.crear.nueva.asignatura" />');
 		    	windowNewAsignatura.centerOnScreen();
+				windowNewAsignatura.setModal(true);
 				formsNewAsignatura[0] = windowsNewAsignatura[0].attachForm();
 				var formNewAsignatura = formsNewAsignatura[0];
 				formNewAsignatura.loadStruct('../xml/forms/new_asignatura_common_form.xml', function() {
@@ -133,7 +134,6 @@
 					formNewAsignatura.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
 					formNewAsignatura.setItemLabel('siguiente','<bean:message key="button.siguiente"/>');
 		    		
-
 		    		/*formNewAsignatura.forEachItem(function(id){
 		    			if(formNewAsignatura.getItemType(id) == "input"){
 		    				formNewAsignatura.setRequired(id,true);
@@ -144,6 +144,7 @@
 		    		
 		    		formNewAsignatura.attachEvent("onButtonClick", function(id){
 	    				if (id == "siguiente") {
+	    					windowNewAsignatura.setModal(false);
 	    					windowNewAsignatura.hide();
 	    					crearPartes(1);	
 	    				}
@@ -156,6 +157,7 @@
 		    	var windowNewAsignaturaPart = windowsNewAsignatura[currentPart];
 		    	windowNewAsignaturaPart.setText('<bean:message key="title.crear.nueva.asignatura" />'+': ' + '<bean:message key="title.parte.nueva.asignatura" />' +currentPart);				
 		    	windowNewAsignaturaPart.centerOnScreen();
+		    	windowNewAsignaturaPart.setModal(true);
 				formsNewAsignatura[currentPart] = windowsNewAsignatura[currentPart].attachForm();
 				var formNewAsignaturaPart = formsNewAsignatura[currentPart];
 				var numeroRubricas = formsNewAsignatura[0].getItemValue("numeroRubricas");
@@ -190,24 +192,25 @@
 		    		
 					formNewAsignaturaPart.attachEvent("onButtonClick", function(id){
 	    				if (id == "siguiente") {
-	    					if(!existeEnNombresAnteriores(numeroRubricas)){
+	    					if(!existeEnNombresAnteriores(currentPart,numeroRubricas)){
 		    					formNewAsignaturaPart.send("buscarasignatura.do","post", function(loader,response) {
 		    						resultadoBuscarParteAsignatura(response,currentPart,numeroRubricas);
 			    				});
 	    					}
 	    				}
 	    				else if (id == "anterior") {
+	    					windowsNewAsignatura[currentPart].setModal(false);
 	    					windowsNewAsignatura[currentPart].hide();
+	    					windowsNewAsignatura[currentPart-1].setModal(true);
 	    					windowsNewAsignatura[currentPart-1].show();
 	    				}
 		    		});
 		    	});
 			}
 			
-		    function existeEnNombresAnteriores(numeroRubricas){
-		    	var length = formsNewAsignatura.length;
-		    	for(var i=length-2;i>0;i--) {
-		    		if(formsNewAsignatura[length-1].getItemValue('nombre').toLowerCase() == formsNewAsignatura[i].getItemValue('nombre').toLowerCase()){
+		    function existeEnNombresAnteriores(currentPart,numeroRubricas){
+		    	for(var i=currentPart-1;i>0;i--) {
+		    		if(formsNewAsignatura[currentPart].getItemValue('nombre').toLowerCase() == formsNewAsignatura[i].getItemValue('nombre').toLowerCase()){
 		    			if(numeroRubricas == 1) {
 			    			alert('<bean:message key="message.asignatura.no.creada" />:'+"\n"+
 								"Nombre: "+formsNewAsignatura[i].getItemValue('nombre')+"\n"+
@@ -235,6 +238,7 @@
 		    		}
 		    		else{
 	    				windowsNewAsignatura[currentPart].hide();
+	    				windowsNewAsignatura[currentPart].setModal(false);
 			    		crearPartes(currentPart+1);
 		    		}
 		    	}
