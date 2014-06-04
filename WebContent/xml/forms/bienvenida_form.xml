@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <items>
    <item type="fieldset" name="data" label="Bienvenida" inputWidth="auto">
-       <item type="input" name="correo" label="Email" position="label-top"/>
-       <item type="password" name="pass" label="Password" position="label-top"/>
+       <item type="input" name="correo" label="Email" position="label-top" required="true" validate="ValidEmail,ucmEsEmail"/>
+       <item type="password" name="pass" label="Password" position="label-top" required="true"/>
        <item type="button" name="aceptar" value="Aceptar"/>
    </item>
    <item type="button" name="newPass" value="Olvide mi contrasenya" align="right"/>

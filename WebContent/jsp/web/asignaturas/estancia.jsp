@@ -6,23 +6,30 @@
 
 <html>
 	<head>
+	    
+	    
 	    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
 	    <link rel="stylesheet" type="text/css" href="../css/templates.css">
 	    <link rel="stylesheet" type="text/css" href="../css/estilosMenu.css">
-	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlx.css">
-	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlxform_dhx_skyblue.css">
-	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
-	    <script type="text/javascript" src="../skins/dhtmlxform.js"></script>
-	    <script type="text/javascript" src="../skins/dhtmlxform_dyn.js"></script>
-	    <script type="text/javascript" src="../skins/dhtmlxform_item_container.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
-	    <script src="../skins/patterns/dhtmlxlayout_pattern4l.js"></script>
 	    
+	    
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlx.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxform_dhx_skyblue.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxtabbar.css">
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlx.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxform.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_item_container.js"></script>
+	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxcontainer.js"></script>
+	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxtabbar.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxtabbarstart.js"></script>
+		<script src="../js/dhtmlxSuite/patterns/dhtmlxlayout_pattern4l.js"></script>
 
 	    <script type="text/javascript">
 	    
-	    	dhtmlx.image_path='../skins/imgs/';
+	    	dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	var main_layout, idAsignatura,nombreAsignatura, gridProfesor, formAlumno, formUsuario;
 	    	
 	    	dhtmlxEvent(window,"load",function() {

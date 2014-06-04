@@ -6,22 +6,10 @@
 <head>  
 	<meta http-equiv="cache-control" content="no-cache" />
     <title><bean:message key="aplicacion.nombre"/></title>
-    <link rel="stylesheet" type="text/css" href="css/estilos.css">
-    <script language="JavaScript" src="js/general.js"></script>   
+    <link rel="stylesheet" type="text/css" href="css/estilos.css"> 
 
-	    <link rel="stylesheet" type="text/css" href="skins/dhtmlx.css">	    
-	    <script type="text/javascript" src="skins/dhtmlx.js"></script>
-    
-    <script>
-    	var dhxWins, toolbar, width, height, nota;
-    	dhtmlx.image_path='skins/imgs/';
-    	
-    	function init() {
-    	}
-
-    </script>     
 </head>
-<body class="ventana" onload="init();">
+<body class="ventana">
     <table border="0" cellspacing="0" cellpadding="0" width="100%" height="100%">
        <tr><td><%@include file="common/cabecera.jsp" %></td></tr>  
 

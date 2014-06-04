@@ -4,20 +4,19 @@
 <html>
 	<head>
 	    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
-	    <link rel="stylesheet" type="text/css" href="../css/templates.css">
-	    <link rel="stylesheet" type="text/css" href="../css/estilosMenu.css">
-	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlx.css">
-	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlxform_dhx_skyblue.css">
-	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
-	    <script type="text/javascript" src="../skins/dhtmlxform.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
+	    
+	    <link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxform_dhx_skyblue.css">
+	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxcommon.js"></script>
+	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxform.js"></script>
+	    <script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
+	    
+	    
 
 	    <script type="text/javascript">
 	    
-	    
-	    	dhtmlx.image_path='../skins/imgs/';	    	
-  	
+	    	var form;
 		    dhtmlxEvent(window,"load",function() {
 		    	
 		    	var refresh="false";
@@ -29,8 +28,7 @@
 			   	}
 		    	
 			    dhtmlxError.catchError("ALL",errorHandler);
-			    //var form = new dhtmlXForm(document.body);
-			    var form = new dhtmlXForm("myForm");	
+			    form = new dhtmlXForm("myForm");	
 		    	form.loadStruct('../xml/forms/bienvenida_form.xml', function() {
 		    		form.setItemLabel('data','<bean:message key="title.bienvenida"/>');
 		    		form.setItemLabel('correo','<bean:message key="label.user.email"/>');
@@ -38,6 +36,16 @@
 		    		form.setItemLabel('aceptar','<bean:message key="button.entrar"/>');
 		    		form.setItemLabel('newPass','<bean:message key="button.olvide.pass"/>');
 		    		
+		    		form.forEachItem(function(id){
+		    			switch(id) {
+		    			case "correo":
+		    			case "pass":
+		    				form.setRequired(id,true);
+		    				break;
+		    			}
+		    		});
+		    		
+		    		form.enableLiveValidation(true);
 		    		form.setFocusOnFirstActive();
 		    				    		
 		    		form.attachEvent("onEnter", function() {
@@ -49,7 +57,6 @@
 		    		});
 		    		
 		    		form.attachEvent("onButtonClick", function(id){
-		    			
 	    				if (id == "aceptar") {
 	    					var user = form.getItemValue("user");
 	    					var pass = form.getItemValue("pass");
@@ -59,7 +66,6 @@
 	    				}
 	    				else if (id == "newPass") {
 	    					var email=prompt('<bean:message key="message.forgot.password"/>');
-
 	    		    		if (email!=null)
 	    		    		  {
 	    		    			form.send("forgotpassword.do?email=" + email, "post", function(loader) {
@@ -78,6 +84,21 @@
 				var url = "../entrada.do";
 				location.href=url;
 	    	}
+	    	
+	    	function ucmEsEmail(email) {
+	    		if (getDomain(email) == "ucm.es") {
+	    			return true;
+	    		}
+	    		else {
+	    			form.setNote("correo", { text: '<bean:message key="message.email.institucional" />'} );
+	    			return false;
+	    		}
+	    	}
+	    	
+	    	function getDomain(email) {
+			    var parts = email.split('@');
+			    return parts[parts.length - 1];
+			}
 	    	
         </script>
 	</head>

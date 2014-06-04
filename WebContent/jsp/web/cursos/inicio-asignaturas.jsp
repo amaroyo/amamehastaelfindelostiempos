@@ -4,22 +4,45 @@
 <html>
 	<head>
 	    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
-	    <link rel="stylesheet" type="text/css" href="../css/templates.css">
-	    <link rel="stylesheet" type="text/css" href="../css/estilosMenu.css">
-	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlx.css">
-	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
-	    <script type="text/javascript" src="../skins/dhtmlxdataprocessor.js"></script>
-	    <script type="text/javascript" src="../js/utilsajax.js"></script>
-	    <script type="text/javascript" src="../js/general.js"></script>
-	    <script type="text/javascript" src="../skins/dhtmlxgrid.js"></script>
-	    <script type="text/javascript" src="../skins/dhtmlxgrid_export.js"></script>
-	    <script type="text/javascript" src="../skins/dhtmlxform_dyn.js"></script>
-	     <script type="text/javascript" src="../skins/dhtmlxwindows.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/templates.css">
+		<link rel="stylesheet" type="text/css" href="../css/estilosMenu.css">
+		<script type="text/javascript" src="../js/utilsajax.js"></script>
+		<script type="text/javascript" src="../js/general.js"></script>
+		
+		
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlx.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxgrid.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxgrid_skins.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxlayout.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxtabbar.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxwindows.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxform_dhx_skyblue.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxgrid_dhx_skyblue.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxlayout_dhx_skyblue.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxtoolbar_dhx_skyblue.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxwindows_dhx_skyblue.css">
+		
+		
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlx.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxcommon.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxlayout.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxtabbar.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxtabbarstart.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxform.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxtoolbar.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxgrid.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxcontainer.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxwindows.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgridcell.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxdataprocessor.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_item_container.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_item_upload.js"></script>
 	    
 
 	    <script type="text/javascript">
 	    
-	    	dhtmlx.image_path='../skins/imgs/';
+	    	dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	
 	    	var main_layout, areaTrabajoCursos, listado, toolbarAsignaturas,
 	    	gridAsignaturas, formInfo, dhxWins;
@@ -43,7 +66,7 @@
 		    	areaTrabajoCursos.setText("<bean:message key="title.propiedades.asignatura" />");
 			    	
 			    toolbarAsignaturas = listado.attachToolbar();
-			    toolbarAsignaturas.setIconsPath('../skins/imgs/toolbar/');
+			    toolbarAsignaturas.setIconsPath('../js/dhtmlxSuite/imgs/toolbar/');
 			    toolbarAsignaturas.loadXML('../xml/toolbars/dhxtoolbar-asignaturas.xml', function(){
 	    			toolbarAsignaturas.setItemText('new',"<bean:message key="button.create.asignatura"/>");
 	    			toolbarAsignaturas.setItemText('delete',"<bean:message key="button.eliminar.asignatura"/>");
@@ -134,11 +157,11 @@
 					formNewAsignatura.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
 					formNewAsignatura.setItemLabel('siguiente','<bean:message key="button.siguiente"/>');
 		    		
-		    		/*formNewAsignatura.forEachItem(function(id){
+		    		formNewAsignatura.forEachItem(function(id){
 		    			if(formNewAsignatura.getItemType(id) == "input"){
 		    				formNewAsignatura.setRequired(id,true);
 		    			}
-		    		});*/
+		    		});
 		    		
 					//permisosNuevaAsignaturaCommonForm();		  
 		    		
@@ -173,7 +196,9 @@
 					formNewAsignaturaPart.setItemLabel('siguiente','<bean:message key="button.siguiente"/>');	  
 		    		
 					formNewAsignaturaPart.forEachItem(function(id){
-						//formsNewAsignatura[currentPart].setRequired(id,true);
+						if(formNewAsignaturaPart.getItemType(id) == "input"){
+							formNewAsignaturaPart.setRequired(id,true);
+						}
 						if(id == "numeroRubricas" || id == "parte" || id == "codigo" || id == "curso") {
 							switch(id) {
 								case "numeroRubricas":
@@ -276,6 +301,7 @@
 		    	}
 		    	if(!error){
 	    			successfulCrearAsignatura();
+	    			
 		    	}
 		    }
 		    

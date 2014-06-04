@@ -9,17 +9,17 @@
 	    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
 	    <link rel="stylesheet" type="text/css" href="../css/templates.css">
 	    <link rel="stylesheet" type="text/css" href="../css/estilosMenu.css">
-	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlx.css">
-	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
-	    <script src="../skins/patterns/dhtmlxlayout_pattern4l.js"></script>
+	    
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlx.css">
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlx.js"></script>
+	    <script src="../js/dhtmlxSuite/patterns/dhtmlxlayout_pattern4l.js"></script>
 	    
 
 	    <script type="text/javascript">
 	    
-	    	dhtmlx.image_path='../skins/imgs/';
-	    	
+    		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	var miGrid, miGrid2, tabbar, tab_1, main_layout, areaTrabajoAsignaturas, menuOpciones,idAsignatura,nombreAsignatura;
 	    	
 		    dhtmlxEvent(window,"load",function() {

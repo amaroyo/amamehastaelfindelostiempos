@@ -1,29 +1,39 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" errorPage="error.jsp" %>
 <%@ include file="../../common/taglibs.jsp" %>
-<%@  page import="java.util.Enumeration"%>
+<%@ page import="java.util.Enumeration"%>
 <%@ page import="es.oyssen.mrm.Const"%>
-<%@page import="javax.servlet.http.HttpServletRequest"%>
+<%@ page import="javax.servlet.http.HttpServletRequest"%>
 
 <html>
 	<head>
 	    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
 	    <link rel="stylesheet" type="text/css" href="../css/templates.css">
 	    <link rel="stylesheet" type="text/css" href="../css/estilosMenu.css">
-	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlx.css">
-	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlxform_dhx_skyblue.css">
-	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
-	    <script type="text/javascript" src="../skins/dhtmlxform.js"></script>
-	    <script type="text/javascript" src="../skins/dhtmlxform_dyn.js"></script>
-	    <script type="text/javascript" src="../skins/dhtmlxform_item_container.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
 	    
+	    <link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlx.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxgrid.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxgrid_skins.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxlayout.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxform_dhx_skyblue.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxgrid_dhx_skyblue.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxlayout_dhx_skyblue.css">
+
+	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlx.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxcommon.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxlayout.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxform.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxgrid.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxcontainer.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_item_container.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_item_upload.js"></script>
+	    
 
 	    <script type="text/javascript">
-	    
-	    	dhtmlx.image_path='../skins/imgs/';
 	    	
-	    	var miGrid, tabbar, tab_1, main_layout, form, b, a;
+	    	var miGrid, main_layout, form, b, a;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -39,7 +49,6 @@
 			    miGrid = a.attachGrid();
 			    miGrid.setIconsPath('../skins/imgs/');		    	
 			    miGrid.setHeader(["<strong><bean:message key="label.mi.perfil" /></strong>"]);
-			    //set readonly (ro)
 			    miGrid.setColTypes("ro");
 			    miGrid.enableMultiselect(false);
 			    miGrid.init();
@@ -69,7 +78,19 @@
 		    		form.setItemLabel('newPass1','<bean:message key="label.nueva.pass"/>');
 		    		form.setItemLabel('newPass2','<bean:message key="label.repetir.pass"/>');
 		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
-
+		    		
+		    		form.forEachItem(function(id){
+		    			switch(id) {
+			    			case "oldPass":
+			    			case "newPass1":
+			    			case "newPass2":
+			    				form.setRequired(id,true);
+			    				break;
+		    			}
+		    		});
+		    		
+		    		
+		    		form.enableLiveValidation(true);
 		    		form.setFocusOnFirstActive();
 		    		
 		    		form.attachEvent("onEnter", function() {
@@ -87,41 +108,26 @@
 		    
 		    
 		    function processPasswords(){
-		    	if(form.getItemValue("oldPass") != "") {
-		    		if(form.getItemValue("newPass1") != "") {
-		    			if(form.getItemValue("newPass2") != "") {
-							if (form.getItemValue("newPass1") == form.getItemValue("newPass2")){
-								if(form.getItemValue("newPass1") != form.getItemValue("oldPass")){
-		    						var newPass = form.getItemValue("newPass1");
-		    						var oldPass = form.getItemValue("oldPass");
-				    				form.send("actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(loader, response) {
-				    					resultadoCambiarPassword(response);
-				    				});
-								}
-								else{
-									alert('<bean:message key="message.pass.iguales" />');
-									form.setItemValue("newPass1", "");
-									form.setItemValue("newPass2", "");
-								}
-							} 
-							else {
-								alert('<bean:message key="message.pass.no.coincide" />');
-								form.setItemValue("newPass1", "");
-								form.setItemValue("newPass2", "");
-							}
-		    			}
-		    			else {
-							alert('<bean:message key="message.pass.vacio" />');
-						}
-		    		}
-		    		else {
-						alert('<bean:message key="message.pass.vacio" />');
+				if (form.getItemValue("newPass1") == form.getItemValue("newPass2")){
+					if(form.getItemValue("newPass1") != form.getItemValue("oldPass")){
+   						var newPass = form.getItemValue("newPass1");
+   						var oldPass = form.getItemValue("oldPass");
+	    				form.send("actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(loader, response) {
+	    					resultadoCambiarPassword(response);
+	    				});
 					}
-		    	}
+					else{
+						alert('<bean:message key="message.pass.iguales" />');
+						form.setItemValue("newPass1", "");
+						form.setItemValue("newPass2", "");
+					}
+				} 
 				else {
-					alert('<bean:message key="message.pass.vacio" />');
+					alert('<bean:message key="message.pass.no.coincide" />');
+					form.setItemValue("newPass1", "");
+					form.setItemValue("newPass2", "");
 				}
-		    }
+   			}
 		    
 		    
 		    
@@ -173,7 +179,7 @@
 		    		form.setItemLabel('apellido2','<bean:message key="label.apellido2"/>');
 		    		form.setItemLabel('dni','<bean:message key="label.dni"/>');
 		    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
-		    		form.setItemLabel('correo','<bean:message key="label.address.email"/>');	
+		    		form.setItemLabel('correo','<bean:message key="label.correo"/>');	
 		    		form.setItemLabel('foto','<bean:message key="label.foto"/>');	
 		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
 		    		
@@ -192,7 +198,7 @@
 		    		
 		    		form.enableLiveValidation(true);
 		    		//foto LONGBLOB, 
-		    		form.setFocusOnFirstActive();
+		    		form.setItemFocus("nombre");
 
 				
 					<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>

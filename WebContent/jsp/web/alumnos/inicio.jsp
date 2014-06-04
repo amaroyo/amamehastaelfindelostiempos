@@ -6,20 +6,23 @@
 
 <html>
 	<head>
+	    
 	    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
 	    <link rel="stylesheet" type="text/css" href="../css/templates.css">
 	    <link rel="stylesheet" type="text/css" href="../css/estilosMenu.css">
-	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlx.css">
-	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlxform_dhx_skyblue.css">
-	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
-	    <script type="text/javascript" src="../skins/dhtmlxform.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
+	    
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlx.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxform_dhx_skyblue.css">
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlx.js"></script>
+	    <script src="../js/dhtmlxSuite/patterns/dhtmlxlayout_pattern4l.js"></script>
+	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxform.js"></script>
 	    
 
 	    <script type="text/javascript">
 	    
-	    	dhtmlx.image_path='../skins/imgs/';
+	    	dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	
 	    	var miGrid, tabbar, tab_1,tab_2,tab_3,tab_4,tab_5,tab_6,tab_7, main_layout, form, b, a, gridAlumnoRealizadoSem, gridProfesoresTrab,
 	    				gridProfesoresCasos;

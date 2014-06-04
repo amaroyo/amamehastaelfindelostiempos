@@ -8,12 +8,15 @@
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <script language="JavaScript" src="js/general.js"></script>   
 
-	    <link rel="stylesheet" type="text/css" href="skins/dhtmlx.css">	    
-	    <script type="text/javascript" src="skins/dhtmlx.js"></script>
+	    <link rel="stylesheet" type="text/css" href="js/dhtmlxSuite/dhtmlx.css">	 
+	    <link rel="stylesheet" type="text/css" href="js/dhtmlxSuite/skins/dhtmlxtoolbar_dhx_skyblue.css">	    
+	    <script type="text/javascript" src="js/dhtmlxSuite/dhtmlxtoolbar.js"></script>
+	    <script type="text/javascript" src="js/dhtmlxSuite/dhtmlx.js"></script>
+	    <script type="text/javascript" src="js/dhtmlxSuite/dhtmlxcommon.js"></script>
     
     <script>
     	var dhxWins, toolbar, width, height, nota, optsAsignaturas;
-    	dhtmlx.image_path='skins/imgs/';
+    	dhtmlx.image_path='js/dhtmlxSuite/imgs/';
     	
     	function init() {
 			<logic:notEmpty name="usuarioYPermisos">
@@ -40,16 +43,16 @@
 					
 					optsAsignaturas = dameAsignaturasUsuario();
 					toolbar.addButtonSelect('misAsignaturas',2, '<bean:message key="button.select.mis.asignaturas" />',
-							optsAsignaturas, 'asignaturas.png', null, 'disabled', true, "100", 'select');
+							optsAsignaturas, 'asignaturas.png', null, 'disabled', true, "100");
 				
 					
 					var optsCursos = dameCursos();
 					toolbar.addButtonSelect('cursos', 6, '<bean:message key="button.select.cursos" />',
-							optsCursos, 'cursos.png', null, 'disabled', true, "5", 'select');
+							optsCursos, 'cursos.png', null, 'disabled', true, "5");
 					
 					var optsAdministrar = dameOpcionesAdministrar();
 					toolbar.addButtonSelect('administrar',8, '<bean:message key="button.select.administrar" />',
-							optsAdministrar, 'administrar.png', null, 'disabled', true, "10", 'select');
+							optsAdministrar, 'administrar.png', null, 'disabled', true, "10");
 	
 					
 					//permisosToolbarGeneral();
