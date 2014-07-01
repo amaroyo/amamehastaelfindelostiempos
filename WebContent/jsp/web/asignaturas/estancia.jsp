@@ -24,7 +24,7 @@
 		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_item_container.js"></script>
 	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxcontainer.js"></script>
 	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxtabbar.js"></script>
-		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxtabbarstart.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxtabbar_start.js"></script>
 		<script src="../js/dhtmlxSuite/patterns/dhtmlxlayout_pattern4l.js"></script>
 
 	    <script type="text/javascript">
@@ -301,18 +301,18 @@
 				    	});
 				    	
 				    	
-				    	/*
-						form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
+				    	
+						form2.load('estanciaUnidadClinica.do?idUsuario=' + idSelectedUser + "&idAsignatura=" + idAsignatura, function () {
 							form.attachEvent("onButtonClick", function(id){
 								if (id == "aceptar") {
-									form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+									//form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
 	
-									});
+									//});
 	
 								}
 							});
 						});
-						*/
+						
 						
 				    	
 					});
