@@ -33,6 +33,7 @@
 
 	    <script type="text/javascript">
 	    	
+	   	    dhtmlx.image_path='../js/dhtmlxSuite/imgs/'
 	    	var miGrid, main_layout, form, b, a;
 	    	
 		    dhtmlxEvent(window,"load",function() {

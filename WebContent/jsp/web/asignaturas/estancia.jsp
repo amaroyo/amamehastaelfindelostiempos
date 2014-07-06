@@ -278,6 +278,8 @@
 				    		
 				    	});
 				    	
+				    	
+				    	//INFORMACION DE LA ESTANCIA EN LA UNIDAD CLINICA SELECCIONADA
 				    	tabbar.addTab('tab_2','<bean:message key="title.info.general.estancia"/>','');
 				    	var tab_2 = tabbar.cells('tab_2');
 				    	var form2 = tab_2.attachForm();
@@ -288,21 +290,82 @@
 				    		form2.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
 				    		form2.setItemLabel('fechaIni','<bean:message key="label.fecha.ini.estancia"/>');
 				    		form2.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
-				    	
+				    		form2.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
 				    		
-				    		//Esto por ahora es provisional, cuando se haga una peticion de toda la informacion 
-				    		//de las asignaturas, se cogeran el codigo y el nombre de la asignatura
-				    		form2.setItemValue('hospital', "Lorem ipsum");
-				    		form2.setItemValue('clinica', "Lorem ipsum");
-				    		form2.setItemValue('profesor', "A113");
-				    		form2.setItemValue('fechaIni', "Lorem ipsum");
-				    		form2.setItemValue('fechaFin', "Lorem ipsum");
+				    		form2.hideItem('aceptar');
 			    			
+				    		form2.forEachItem(function(id){
+				    			switch(id) {
+					    			case "hospital":{
+					    				form2.setReadonly(id,true);
+					    				break;
+					    			}
+					    			case "clinica":{
+					    				form2.setReadonly(id,true);
+					    				break;
+					    			}
+					    			case "profesor":{
+					    				form2.setReadonly(id,true);
+					    				break;
+					    			}
+					    			case "fechaIni":{
+					    				form2.setReadonly(id,true);
+					    				break;
+					    			}
+					    			case "fechaFin":{
+					    				form2.setReadonly(id,true);
+					    				break;
+					    			}
+					    			
+					    			default: break;
+				    			}
+				    		});
+				    		
+				    		
+				    		//Aqui lo pondría con logic match para gente con permiso para modifiacar datos!
+				    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>3</permiso>" >	
+				    			form2.forEachItem(function(id){
+				    				switch(id) {
+					    			case "hospital":{
+					    				form2.setReadonly(id,false);
+					    				form2.setRequired(id,true);
+					    				break;
+					    			}
+					    			case "clinica":{
+					    				form2.setReadonly(id,false);
+					    				form2.setRequired(id,true);
+					    				break;
+					    			}
+					    			case "profesor":{
+					    				form2.setReadonly(id,false);
+					    				form2.setRequired(id,true);
+					    				break;
+					    			}
+					    			case "fechaIni":{
+					    				form2.setReadonly(id,false);
+					    				break;
+					    			}
+					    			case "fechaFin":{
+					    				form2.setReadonly(id,false);
+					    				break;
+					    			}
+					    			
+					    			default: break;
+				    			}
+					    		});
+				    			form2.showItem('aceptar');
+								
+				    			form2.enableLiveValidation(true);
+					    		form2.setFocusOnFirstActive();
+								
+							</logic:match>	
+				    		
+				    		
 				    	});
 				    	
 				    	
 				    	
-						form2.load('estanciaUnidadClinica.do?idUsuario=' + idSelectedUser + "&idAsignatura=" + idAsignatura, function () {
+					/*	form2.load('estanciaUnidadClinica.do?idUsuario=' + idSelectedUser + "&idAsignatura=" + idAsignatura, function () {
 							form.attachEvent("onButtonClick", function(id){
 								if (id == "aceptar") {
 									//form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
@@ -313,7 +376,7 @@
 							});
 						});
 						
-						
+					*/	
 				    	
 					});
 				    
