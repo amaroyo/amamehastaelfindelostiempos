@@ -6,8 +6,8 @@
        <item type="input" name="clinica" label="Unidad Clinica" labelWidth="110" />
        <item type="input" name="turno" label="Turno" labelWidth="110" />
        <item type="input" name="profesor" label="Profesor" labelWidth="110" />
-       <item type="input" name="fechaIni" label="Fecha Comienzo" labelWidth="110" />
-       <item type="input" name="fechaFin" label="Fecha Fin" labelWidth="110" />
+       <item type="calendar" name="fechaIni" label="Fecha Comienzo" labelWidth="110" dateFormat="%Y/%m/%d" calendarPosition="right" value="1970/01/01" readonly= "true"/>
+       <item type="calendar" name="fechaFin" label="Fecha Fin" labelWidth="110" dateFormat="%Y/%m/%d" calendarPosition="right" readonly="true" />
    </item>
    
    <item type="button" name="aceptar" value="Aceptar" />
