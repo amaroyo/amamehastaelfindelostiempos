@@ -20,14 +20,25 @@
 		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlx.css">
 		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxform_dhx_skyblue.css">
 		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxtabbar.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxlayout.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxwindows.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxcalendar.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxwindows_dhx_skyblue.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxcalendar_dhx_skyblue.css">
 		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlx.js"></script>
 		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxform.js"></script>
 		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
 		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_item_container.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_item_calendar.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxcalendar.js"></script>
 	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxcontainer.js"></script>
 	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxtabbar.js"></script>
+	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxwindows.js"></script>
 		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxtabbar_start.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
 		<script src="../js/dhtmlxSuite/patterns/dhtmlxlayout_pattern4l.js"></script>
+		
+		
 
 	    <script type="text/javascript">
 	    
@@ -138,7 +149,9 @@
 			    		form.setItemLabel('fechaModificacionHasta','<bean:message key="label.till"/>');
 			    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
 			    		
-			    		var date = (form.getCalendar("fechaCreacionHasta")).getFormatedDate("%Y/%m/%d");
+			    		
+			    		var calendar = form.getCalendar('fechaCreacionHasta');
+			    		var date = calendar.getFormatedDate("%Y/%m/%d");
 			    		form.setItemValue("fechaCreacionDesde", date);
 			    		form.setItemValue("fechaCreacionHasta", date);
 			    		form.setItemValue("fechaModificacionDesde", date);
