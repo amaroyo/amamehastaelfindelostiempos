@@ -43,7 +43,7 @@
 	    <script type="text/javascript">
 	    
 	    	dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura,nombreAsignatura, gridProfesor, formAlumno, formUsuario;
+	    	var main_layout,idAsignatura, nombreAsignatura, gridProfesor, formAlumno, formUsuario , fechaIni, fechaFin;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -51,7 +51,6 @@
 	    		<% String idAsignatura = request.getParameter("idAsignatura");%>
 	    		idAsignatura="<%=idAsignatura%>";	
 	    		
-				
 	    		
 	    		
 	    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
@@ -129,55 +128,6 @@
 				
 				
 				function goProfesor(){
-					
-					/*AKIIII*/
-					
-					
-					var dhxWins= new dhtmlXWindows();
-					var window = dhxWins.createWindow("lead", 300,50, 360, 280);
-					window.setText('<bean:message key="label.filter.dates" />');				
-					window.setModal(true);
-					window.centerOnScreen();
-					var form = window.attachForm();					
-			    	form.loadStruct('../xml/forms/fecha_form.xml', function() {
-			    		
-			    		form.setItemLabel('fechaCreacion','<bean:message key="title.creation"/>');
-			    		form.setItemLabel('fechaCreacionDesde','<bean:message key="label.from"/>');
-			    		form.setItemLabel('fechaCreacionHasta','<bean:message key="label.till"/>');
-			    		form.setItemLabel('fechaModificacion','<bean:message key="title.last.modify"/>');
-			    		form.setItemLabel('fechaModificacionDesde','<bean:message key="label.from"/>');
-			    		form.setItemLabel('fechaModificacionHasta','<bean:message key="label.till"/>');
-			    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
-			    		
-			    		
-			    		var calendar = form.getCalendar('fechaCreacionHasta');
-			    		var date = calendar.getFormatedDate("%Y/%m/%d");
-			    		form.setItemValue("fechaCreacionDesde", date);
-			    		form.setItemValue("fechaCreacionHasta", date);
-			    		form.setItemValue("fechaModificacionDesde", date);
-			    		form.setItemValue("fechaModificacionHasta", date);
-			    		
-			    		form.attachEvent("onButtonClick", function(id){
-		    				if (id == "aceptar") {							
-								var calendar = form.getCalendar("fechaCreacionDesde");							
-								var date = form.getItemValue("fechaCreacionDesde");
-								creacionDesde = calendar.getFormatedDate("%Y/%m/%d", date);							
-								date = form.getItemValue("fechaCreacionHasta");
-								creacionHasta = calendar.getFormatedDate("%Y/%m/%d", date);							
-								date = form.getItemValue("fechaModificacionDesde");
-								modificacionDesde = calendar.getFormatedDate("%Y/%m/%d", date);							
-								date = form.getItemValue("fechaModificacionHasta");
-								modificacionHasta = calendar.getFormatedDate("%Y/%m/%d", date);
-								window.close();
-								//goActualizar();
-		    				}
-			    		});	
-			    	});
-					
-					
-					
-					
-					/*******/
 					
 					main_layout = new dhtmlXLayoutObject(document.body, '2U');
 					main_layout.setAutoSize("a;b");
@@ -356,13 +306,6 @@
 				    		
 				    		form2.hideItem('aceptar');
 			    			
-				    		/*
-				    		var date = (form2.getCalendar("fechaIni")).getFormatedDate("%Y/%m/%d");
-				    		var date2 = (form2.getCalendar("fechaFin")).getFormatedDate("%Y/%m/%d");
-				    		form2.setItemValue("fechaIni", date);
-				    		form2.setItemValue("fechaIni", date2);
-				    		*/
-				    		
 				    		
 				    		form2.forEachItem(function(id){
 				    			switch(id) {
@@ -412,12 +355,44 @@
 								
 				    			form2.enableLiveValidation(true);
 					    		form2.setFocusOnFirstActive();
+					    		
+					    		
+					    		form2.attachEvent("onButtonClick", function(id){
+					    			
+					    			var calendarIni, calendarFin, dateIni, dateFin;	
+					    			
+									calendarIni = form2.getCalendar("fechaIni");							
+									dateIni = form2.getItemValue("fechaIni");
+									fechaIni = calendarIni.getFormatedDate("%d/%m/%Y", dateIni);
+				    										
+									calendarFin = form2.getCalendar("fechaFin");							
+									dateFin = form2.getItemValue("fechaFin");
+									fechaFin = calendarFin.getFormatedDate("%d/%m/%Y", dateFin);	
+				    			
+					    		});	
 								
 							</logic:match>	
-				    		
+
 							
-							
-							
+							form2.load('estanciaUnidadClinica.do?idUsuario=' + idSelectedUser + '&idAsignatura=' + idAsignatura, function () {
+								
+								/*
+								formUsuario.attachEvent("onButtonClick", function(id){
+									if (id == "aceptar") {
+										formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+											alert('<bean:message key="message.perfil.cambiado.exito"/>');
+										});
+
+									}
+								});
+								formUsuario.attachEvent("onEnter", function() {
+									formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+										alert('<bean:message key="message.perfil.cambiado.exito"/>');
+									}); 
+					    		});
+								*/
+								
+							});//load
 							
 							
 							
