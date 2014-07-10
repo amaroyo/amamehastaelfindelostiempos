@@ -29,6 +29,7 @@ public interface PortafoliosService {
 	
 	public List<UsuarioEstanciaUnidadClinicaVO> findUsuariosEstanciaUnidadClinica(PortafolioVO portafolio) throws ServiceException;
 
+	public findDatosUsuarioEstanciaUnidadClinica(PortafolioVO portafolio) throws ServiceException;
 	
 
 

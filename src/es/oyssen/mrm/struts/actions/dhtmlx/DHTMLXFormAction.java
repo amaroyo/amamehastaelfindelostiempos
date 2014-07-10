@@ -18,10 +18,18 @@ import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxForm;
 public abstract class DHTMLXFormAction extends MrmAction {
 	
 	public static final String RESULTADO_ERROR = "error";
+	protected String anyoAcademico;
+	protected String idGrupoUsuario;
+	protected String idUsuario;
 
 	public ActionForward process(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		
+		anyoAcademico = (String) request.getSession().getAttribute("anyoAcademico");
+		idUsuario = (String) request.getSession().getAttribute("idUsuario");
+		idGrupoUsuario = (String) request.getSession().getAttribute("idGrupoUsuario");
+		
 		MessageResources resources = getResources(request);
 		DhtmlxForm f = (DhtmlxForm) form;
 		f.setNativeeditor_status(request.getParameter("!nativeeditor_status"));

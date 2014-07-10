@@ -299,6 +299,7 @@
 				    		form2.setItemLabel('data','<bean:message key="title.info.general.estancia"/>');
 				    		form2.setItemLabel('hospital','<bean:message key="label.hospital.estancia"/>');
 				    		form2.setItemLabel('clinica','<bean:message key="label.clinica.estancia"/>');
+				    		form2.setItemLabel('turno','<bean:message key="label.turno"/>');
 				    		form2.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
 				    		form2.setItemLabel('fechaIni','<bean:message key="label.fecha.ini.estancia"/>');
 				    		form2.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
@@ -341,11 +342,6 @@
 					    				form2.setRequired(id,true);
 					    				break;
 					    			}
-					    			case "profesor":{
-					    				form2.setReadonly(id,false);
-					    				form2.setRequired(id,true);
-					    				break;
-					    			}
 					    			
 					    			
 					    			default: break;
@@ -374,7 +370,7 @@
 							</logic:match>	
 
 							
-							form2.load('estanciaUnidadClinica.do?idUsuario=' + idSelectedUser + '&idAsignatura=' + idAsignatura, function () {
+							form2.load('editarEstanciaUnidadClinica.do?idUsuario=' + idSelectedUser + '&idAsignatura=' + idAsignatura, function () {
 								
 								/*
 								formUsuario.attachEvent("onButtonClick", function(id){
