@@ -181,7 +181,7 @@
 		    		form.setItemLabel('dni','<bean:message key="label.dni"/>');
 		    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
 		    		form.setItemLabel('correo','<bean:message key="label.correo"/>');	
-		    		form.setItemLabel('foto','<bean:message key="label.foto"/>');	
+		    		form.setItemLabel('imagen','<bean:message key="label.foto"/>');
 		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
 		    		
 		    		form.forEachItem(function(id){
@@ -198,7 +198,6 @@
 		    		
 		    		
 		    		form.enableLiveValidation(true);
-		    		//foto LONGBLOB, 
 		    		form.setItemFocus("nombre");
 
 				
@@ -206,9 +205,9 @@
 					idSelectedUser = <%=sessionIdUser%>;
 
 					form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
-						if(form.getItemValue("fotoUri") == "") {
+						if(form.getItemValue("imagen") == null) {
 							var uriNoProfilePic = '../img/no-profile-pic.png';
-							form.getContainer("foto").innerHTML = "<img src="+ uriNoProfilePic +">";
+							form.getContainer("imagen").innerHTML = "<img src="+ uriNoProfilePic +">";
 						}
 						form.attachEvent("onButtonClick", function(id){
 							if (id == "aceptar") {

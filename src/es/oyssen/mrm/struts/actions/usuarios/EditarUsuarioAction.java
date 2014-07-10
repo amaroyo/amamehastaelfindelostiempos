@@ -55,7 +55,7 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 			usuario.setApellido2(form.getApellido2());
 			usuario.setDni(form.getDni());
 			usuario.setTelefono(form.getTelefono());
-			usuario.setFoto(form.getFotoUri());
+			usuario.setFoto(form.getFoto());
 			
 			if (!StringUtil.isNullOrBlank(form.getContrasenya()))
 				usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(form.getContrasenya(), EncriptarUtil.MD5));
@@ -95,7 +95,8 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		usuario.setApellido2(form.getApellido2());
 		usuario.setDni(form.getDni());
 		usuario.setTelefono(form.getTelefono());
-		usuario.setFoto(form.getFotoUri());
+		System.out.println(form.getFoto());
+		usuario.setFoto(form.getFoto());
 		usuario.setContrasenya(null);
 		
 		getUsuariosService().update(usuario);

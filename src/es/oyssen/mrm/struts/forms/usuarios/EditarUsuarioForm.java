@@ -12,7 +12,7 @@ public class EditarUsuarioForm extends DhtmlxGridForm {
 	private String dni;
 	private String correo;
 	private String telefono;
-	private String fotoUri;
+	private String foto;
 	private String contrasenya;
 	
 	
@@ -72,11 +72,15 @@ public class EditarUsuarioForm extends DhtmlxGridForm {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	public String getFotoUri() {
-		return fotoUri;
+
+
+	public String getFoto() {
+		return foto;
 	}
-	public void setFotoUri(String fotoUri) {
-		this.fotoUri = fotoUri;
+
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 	
 
