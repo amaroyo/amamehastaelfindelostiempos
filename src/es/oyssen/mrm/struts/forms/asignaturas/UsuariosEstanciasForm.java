@@ -8,11 +8,10 @@ public class UsuariosEstanciasForm extends DhtmlxForm {
 	private String idEstanciaUnidad;
 	private String idAlumno;
 	private String idAsignatura;
-	private String anyoAcademico;
 	private String hospital;
 	private String clinica;
-	private String profesor;
 	private String turno;
+	private String profesor;
 	private String fechaIni;
 	private String fechaFin;
 	
@@ -42,12 +41,6 @@ public class UsuariosEstanciasForm extends DhtmlxForm {
 	}
 	public void setIdAsignatura(String idAsignatura) {
 		this.idAsignatura = idAsignatura;
-	}
-	public String getAnyoAcademico() {
-		return anyoAcademico;
-	}
-	public void setAnyoAcademico(String anyoAcademico) {
-		this.anyoAcademico = anyoAcademico;
 	}
 	public String getHospital() {
 		return hospital;

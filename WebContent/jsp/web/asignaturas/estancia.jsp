@@ -370,7 +370,7 @@
 							</logic:match>	
 
 							
-							form2.load('editarEstanciaUnidadClinica.do?idUsuario=' + idSelectedUser + '&idAsignatura=' + idAsignatura, function () {
+							form2.load('editarEstanciaUnidadClinica.do?idAlumno=' + idSelectedUser + '&idAsignatura=' + idAsignatura, function () {
 								
 								/*
 								formUsuario.attachEvent("onButtonClick", function(id){

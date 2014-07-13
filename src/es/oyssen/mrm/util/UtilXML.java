@@ -612,7 +612,8 @@ public class UtilXML {
 			for (UsuarioEstanciaUnidadClinicaVO ueuc : list) {
 				sb.append("<row id=\"" +ueuc.getIdUsuario() + "\">");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(ueuc.getNombre()) + "]]></cell>");
-				String apellidos = ueuc.getApellido1() + ", " + ueuc.getApellido2();
+				String apellidos = ueuc.getApellido1();
+				if(ueuc.getApellido2() != "") apellidos = apellidos + ", " + ueuc.getApellido2();
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(apellidos) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(ueuc.getDni()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(ueuc.getCentroAsociado()) + "]]></cell>");

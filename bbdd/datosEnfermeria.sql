@@ -1,4 +1,4 @@
-﻿use enfermeria;
+use enfermeria;
 
 
 -- Grupos
@@ -407,7 +407,7 @@ insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (5, 2,
 insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (5, 1, '2013/2014'); -- id3
 insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (5, 2, '2013/2014'); -- id4
 
-insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (6, 2, '2013/2014'); -- id5
+insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 3, 2, '2013/2014'); -- id5
 insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (6, 3, '2013/2014'); -- id6
 
 

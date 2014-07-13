@@ -1,5 +1,6 @@
 package es.oyssen.mrm.struts.actions.asignaturas;
 
+import es.oyssen.mrm.negocio.vo.DatosUsuarioEstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXFormAction;
@@ -24,10 +25,11 @@ public class UsuariosEstanciasAction extends DHTMLXFormAction {
 			portafolio.setIdAlumno(form.getIdAlumno());
 			portafolio.setAnyoAcademico(anyoAcademico);
 			
-			return getPortafoliosService().
+			return getPortafoliosService().findDatosUsuarioEstanciaUnidadClinica(portafolio);
 			
 		}
 		
+		else return null;
 		
 	}
 
@@ -105,22 +107,32 @@ public class UsuariosEstanciasAction extends DHTMLXFormAction {
 
 	@Override
 	public String parseXML(Object o) throws Exception {
-		UsuarioVO c = (UsuarioVO) o;
+		
+		
+		
+		DatosUsuarioEstanciaUnidadClinicaVO c = (DatosUsuarioEstanciaUnidadClinicaVO) o;
 		StringBuffer sb = new StringBuffer();
+		
 		sb.append("<data>");
-		sb.append("<grupo><![CDATA[" + nombreGrupo(c.getIdGrupo()) + "]]></grupo>");
-		sb.append("<correo><![CDATA[" + c.getCorreo() + "]]></correo>");
-		sb.append("<nombre><![CDATA[" + c.getNombre() + "]]></nombre>");
-		sb.append("<apellido1><![CDATA[" + c.getApellido1() + "]]></apellido1>");
-		sb.append("<apellido2><![CDATA[" + c.getApellido2() + "]]></apellido2>");
-		sb.append("<dni><![CDATA[" + c.getDni() + "]]></dni>");
-		sb.append("<telefono><![CDATA[" + c.getTelefono() + "]]></telefono>");
-		sb.append("<foto><![CDATA[" + c.getFoto() + "]]></foto>");
-		//sb.append("<contrasenya></contrasenya>");
+		sb.append("<idPortfolio><![CDATA[" + c.getIdPortafolio() + "]]></idPortfolio>");
+		sb.append("<idEstanciaUnidad><![CDATA[" + c.getIdEstanciaUnidad() + "]]></idEstanciaUnidad>");
+		sb.append("<hospital><![CDATA[" + c.getCentroAsociado() + "]]></hospital>");
+		sb.append("<clinica><![CDATA[" + c.getUnidadClinica() + "]]></clinica>");
+		sb.append("<turno><![CDATA[" + c.getTurno() + "]]></turno>");
+		sb.append("<profesor><![CDATA[" + c.getApellido1Profesor() + " " + c.getApellido2Profesor() + ", " + c.getNombreProfesor() + "]]></profesor>");
+		sb.append("<fechaIni><![CDATA[" + parsearFecha(c.getFechaInicio()) + "]]></fechaIni>");
+		sb.append("<fechaFin><![CDATA[" + parsearFecha(c.getFechaFin()) + "]]></fechaFin>");
 		sb.append("</data>");
 		
 		
 		return sb.toString();
+	}
+	
+	
+	private String parsearFecha(String fecha){
+		String[] sp = fecha.split("-");
+		String out = sp[2] + "/" +  sp[1] + "/" + sp[0];
+		return out;
 	}
 	
 	private String nombreGrupo(String id){

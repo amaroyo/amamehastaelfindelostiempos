@@ -16,8 +16,10 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
+import es.oyssen.mrm.negocio.dao.rowmappers.DatosUsuarioEstanciaUnidadClinicaMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.PortafolioMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioEstanciaUnidadClinicaMapper;
+import es.oyssen.mrm.negocio.vo.DatosUsuarioEstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
 
@@ -39,8 +41,33 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 																		"where p.id_alumno = u.id_usuario and p.id_portafolio = e.id_portafolio and " +
 																		"p.id_asignatura = ? and p.anyo_academico = ?";
 
+	private static String SQL_FIND_DATOS_USUARIOS_ESTANCIA_UNIDAD_CLINICA = "select p.id_portafolio, e.id_estancia_unidad, e.centro_asociado, e.unidad_clinica, e.turno, e.fecha_inicio, e.fecha_fin, " +
+			"u.nombre, u.apellido1, u.apellido2 " +
+			"from portafolios as p, usuarios as u, estancias_unidad_clinica as e " +
+			"where p.id_profesor = u.id_usuario and p.id_portafolio = e.id_portafolio and " +
+			"p.id_asignatura = ? and p.anyo_academico = ? and p.id_alumno = ? ";
 
 	
+	
+	@Override
+	public DatosUsuarioEstanciaUnidadClinicaVO findDatosUsuarioEstanciaUnidadClinica(
+			PortafolioVO portafolio) throws DAOException {
+		
+		try {
+			
+			return (DatosUsuarioEstanciaUnidadClinicaVO) getJdbcTemplate().queryForObject(SQL_FIND_DATOS_USUARIOS_ESTANCIA_UNIDAD_CLINICA, new Object[]{portafolio.getIdAsignatura(), portafolio.getAnyoAcademico(), portafolio.getIdAlumno()}, new DatosUsuarioEstanciaUnidadClinicaMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+		
+		
+		
+	}
+	
+	
+	@Override
 	public List<UsuarioEstanciaUnidadClinicaVO> findUsuariosEstanciaUnidadClinica(PortafolioVO portafolio) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_USUARIOS_ESTANCIA_UNIDAD_CLINICA, new Object[]{portafolio.getIdAsignatura(), portafolio.getAnyoAcademico()}, new UsuarioEstanciaUnidadClinicaMapper());
@@ -173,6 +200,9 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 		}
 		
 	}
+
+
+
 	
 }
 
