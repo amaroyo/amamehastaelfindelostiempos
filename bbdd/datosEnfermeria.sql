@@ -31,6 +31,9 @@ insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido
 -- user/pass: alumno2@ucm.es/realmadrid
 insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (4, 'alumno3@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Alumno3', 'Apellido31', '' ,'17744996C' );
 
+-- user/pass: profeFantasma/realmadrid
+insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni) values (3, 'pffff@ucm.es', 'e8c522a4c9bdc5ea1f7a0483d965e196','Profesor No Asignado', '', '' ,'00000000X' );
+
 
 
 
@@ -395,20 +398,21 @@ insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values
 
 -- Profesores Asociados
 insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado, turno) values (3, 1, '2012/2013', 'HUGM Hospital Gregorio Marañon', 'M - Mañana');
-insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado,turno) values (3, 2, '2012/2013', '12 de Octubre', 'T - Tarde');
+insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado, turno) values (3, 2, '2012/2013', '12 de Octubre', 'T - Tarde');
 insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado, turno) values (3, 1, '2013/2014', 'HUGM Hospital Gregorio Marañon', 'M - Mañana');
-insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado,turno) values (3, 2, '2013/2014', '12 de Octubre', 'T - Tarde');
-insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado,turno) values (4, 3, '2013/2014', '12 de Octubre', 'T - Tarde');
+insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado, turno) values (3, 2, '2013/2014', '12 de Octubre', 'T - Tarde');
+insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado, turno) values (4, 3, '2013/2014', '12 de Octubre', 'T - Tarde');
+insert into profesores_asociados (id_profesor, id_asignatura, anyo_academico, centro_asociado, turno) values (8, 1, '', '', '');
 
--- Portafolios
-insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (5, 1, '2012/2013'); -- id1
-insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (5, 2, '2012/2013'); -- id2
+-- Portafolios PROFESOR 8 NO ASIGNADO
+insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (5, 8, 1, '2012/2013'); -- id1
+insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (5, 8, 2, '2012/2013'); -- id2
 
-insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (5, 1, '2013/2014'); -- id3
-insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (5, 2, '2013/2014'); -- id4
+insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (5, 8, 1, '2013/2014'); -- id3
+insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (5, 8, 2, '2013/2014'); -- id4
 
 insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 3, 2, '2013/2014'); -- id5
-insert into portafolios (id_alumno, id_asignatura, anyo_academico) values (6, 3, '2013/2014'); -- id6
+insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 8, 3, '2013/2014'); -- id6
 
 
 -- Estancias_unidad_clinica

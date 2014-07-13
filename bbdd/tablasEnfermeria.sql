@@ -207,7 +207,7 @@ COLLATE = utf8_spanish_ci;
 CREATE TABLE IF NOT EXISTS portafolios (
 	id_portafolio INT(50) auto_increment,
 	id_alumno INT(10) NOT NULL,
-	id_profesor INT(10),
+	id_profesor INT(10) NOT NULL,
 	id_asignatura INT(3) NOT NULL,
 	anyo_academico VARCHAR(9) NOT NULL,
 	PRIMARY KEY (id_portafolio),

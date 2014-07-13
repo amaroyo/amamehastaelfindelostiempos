@@ -112,6 +112,8 @@ public class UsuariosEstanciasAction extends DHTMLXFormAction {
 		
 		DatosUsuarioEstanciaUnidadClinicaVO c = (DatosUsuarioEstanciaUnidadClinicaVO) o;
 		StringBuffer sb = new StringBuffer();
+		String nombreCompleto="";
+		String apellidos = "";
 		
 		sb.append("<data>");
 		sb.append("<idPortfolio><![CDATA[" + c.getIdPortafolio() + "]]></idPortfolio>");
@@ -119,7 +121,15 @@ public class UsuariosEstanciasAction extends DHTMLXFormAction {
 		sb.append("<hospital><![CDATA[" + c.getCentroAsociado() + "]]></hospital>");
 		sb.append("<clinica><![CDATA[" + c.getUnidadClinica() + "]]></clinica>");
 		sb.append("<turno><![CDATA[" + c.getTurno() + "]]></turno>");
-		sb.append("<profesor><![CDATA[" + c.getApellido1Profesor() + " " + c.getApellido2Profesor() + ", " + c.getNombreProfesor() + "]]></profesor>");
+	
+		if (!c.getApellido1Profesor().equals("") || !c.getApellido2Profesor().equals("")){
+			apellidos = c.getApellido1Profesor() + " " + c.getApellido2Profesor();
+			nombreCompleto = apellidos + ", " + c.getNombreProfesor();
+		}
+		else
+			nombreCompleto = c.getNombreProfesor();
+
+		sb.append("<profesor><![CDATA[" + nombreCompleto + "]]></profesor>");
 		sb.append("<fechaIni><![CDATA[" + parsearFecha(c.getFechaInicio()) + "]]></fechaIni>");
 		sb.append("<fechaFin><![CDATA[" + parsearFecha(c.getFechaFin()) + "]]></fechaFin>");
 		sb.append("</data>");
