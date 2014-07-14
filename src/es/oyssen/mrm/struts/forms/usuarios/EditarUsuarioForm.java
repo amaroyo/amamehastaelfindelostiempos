@@ -1,5 +1,7 @@
 package es.oyssen.mrm.struts.forms.usuarios;
 
+import org.apache.struts.upload.FormFile;
+
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
 
 public class EditarUsuarioForm extends DhtmlxGridForm {
@@ -12,7 +14,7 @@ public class EditarUsuarioForm extends DhtmlxGridForm {
 	private String dni;
 	private String correo;
 	private String telefono;
-	private String foto;
+	private FormFile foto;
 	private String contrasenya;
 	
 	
@@ -74,14 +76,16 @@ public class EditarUsuarioForm extends DhtmlxGridForm {
 	}
 
 
-	public String getFoto() {
+	public FormFile getFoto() {
 		return foto;
 	}
 
 
-	public void setFoto(String foto) {
+	public void setFoto(FormFile foto) {
 		this.foto = foto;
 	}
+
+
 	
 
 	

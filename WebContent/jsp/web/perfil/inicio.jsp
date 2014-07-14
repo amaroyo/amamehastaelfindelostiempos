@@ -4,6 +4,7 @@
 <%@ page import="es.oyssen.mrm.Const"%>
 <%@ page import="javax.servlet.http.HttpServletRequest"%>
 
+
 <html>
 	<head>
 	    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
@@ -33,38 +34,31 @@
 
 	    <script type="text/javascript">
 	    	
-	   	    dhtmlx.image_path='../js/dhtmlxSuite/imgs/'
-	    	var miGrid, main_layout, form, b, a;
+	   	    dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
+	    	var miGrid, menu, form;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
 			    dhtmlxError.catchError("ALL",errorHandler);
-			    main_layout = new dhtmlXLayoutObject(document.body, '2U');
-			    a = main_layout.cells('a');
+			    menu = new dhtmlXLayoutObject("menu", '1C');
 			    
-			    main_layout.cells("a").setWidth(150);
-			    main_layout.cells("a").hideHeader();
-			    main_layout.cells("b").hideHeader();
+			    menu.cells("a").hideHeader();
 			    
-			    
-			    miGrid = a.attachGrid();
+			    miGrid = menu.cells("a").attachGrid();
 			    miGrid.setIconsPath('../skins/imgs/');		    	
 			    miGrid.setHeader(["<strong><bean:message key="label.mi.perfil" /></strong>"]);
 			    miGrid.setColTypes("ro");
 			    miGrid.enableMultiselect(false);
 			    miGrid.init();
 			    miGrid.loadXML("../xml/forms/mi_perfil_form.xml");
-			    miGrid.attachEvent("onRowSelect",doOnRowSelected);    
+			    miGrid.attachEvent("onRowSelect",doOnRowSelected);
 		    });
 		    
 		    function doOnRowSelected(rowID,celInd){
-		    	b = main_layout.cells('b');
-		    	form = b.attachForm();
 		        if (rowID == "b") verFormModificarPass();
 		    	else if (rowID == "a") verPerfil();
 		    	
 		    }
-		    
 		    
 		    function goEntrada() {
 				var url = "../entrada.do";
@@ -72,7 +66,7 @@
 	    	}
 		    
 		    function verFormModificarPass(){
-		    	
+		    	form = new dhtmlXForm("myForm");
 		    	form.loadStruct('../xml/forms/contrasena_form.xml', function() {
 		    		form.setItemLabel('data','<bean:message key="title.cambiar.pass"/>');
 		    		form.setItemLabel('oldPass','<bean:message key="label.ant.pass"/>');
@@ -172,6 +166,7 @@
 		    
 		    function verPerfil(){
 		    	
+		    	form = new dhtmlXForm("myForm");
 		    	form.loadStruct('../xml/forms/usuario_form.xml', function(){
 		    		form.setItemLabel('data','<bean:message key="title.datos.personales"/>');
 		    		form.setItemLabel('grupo','<bean:message key="label.group"/>');
@@ -211,9 +206,11 @@
 						}
 						form.attachEvent("onButtonClick", function(id){
 							if (id == "aceptar") {
-								form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+								alert();
+								document.getElementById("realForm").submit();
+								/*form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
 									alert('<bean:message key="message.perfil.cambiado.exito"/>');
-								});
+								});*/
 
 							}
 						});
@@ -226,7 +223,7 @@
 						
 					});//load
 					
-		    	});
+		    	});//loadStruct
 		    }
 		  
 		    
@@ -240,5 +237,17 @@
         </script>
 	</head>
 	<body>
+	<div id="layout" style="width:600px">
+		<div id="menu" style="float:left; height:100%; width:150px;">
+		
+		</div>
+		<div id="content" style="float:right; height:100%; width:400px;">
+			<form id="realForm" method="POST" enctype="multipart/form-data">
+				<div id="myForm">
+	 
+				</div >
+			</form >
+		</div>
+	</div>
 	</body>
 </html>

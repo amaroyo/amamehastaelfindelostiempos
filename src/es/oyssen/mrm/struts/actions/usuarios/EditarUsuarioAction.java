@@ -1,5 +1,9 @@
 package es.oyssen.mrm.struts.actions.usuarios;
 
+import java.io.InputStream;
+
+import org.apache.struts.upload.FormFile;
+
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXFormAction;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxForm;
@@ -55,7 +59,8 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 			usuario.setApellido2(form.getApellido2());
 			usuario.setDni(form.getDni());
 			usuario.setTelefono(form.getTelefono());
-			usuario.setFoto(form.getFoto());
+			System.out.println(form.getFoto());
+			//usuario.setFoto(form.getFoto());
 			
 			if (!StringUtil.isNullOrBlank(form.getContrasenya()))
 				usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(form.getContrasenya(), EncriptarUtil.MD5));
@@ -96,7 +101,10 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		usuario.setDni(form.getDni());
 		usuario.setTelefono(form.getTelefono());
 		System.out.println(form.getFoto());
-		usuario.setFoto(form.getFoto());
+		
+		FormFile formFile = form.getFoto();
+        InputStream fin = formFile.getInputStream();
+		//usuario.setFoto(form.getFoto());
 		usuario.setContrasenya(null);
 		
 		getUsuariosService().update(usuario);

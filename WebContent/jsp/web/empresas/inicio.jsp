@@ -4,8 +4,8 @@
 	    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
 	    <link rel="stylesheet" type="text/css" href="../css/templates.css">
 	    <link rel="stylesheet" type="text/css" href="../css/estilosMenu.css">
-	    <link rel="stylesheet" type="text/css" href="../skins/dhtmlx.css">
-	    <script type="text/javascript" src="../skins/dhtmlx.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlx..css">
+	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlx.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
 	    
