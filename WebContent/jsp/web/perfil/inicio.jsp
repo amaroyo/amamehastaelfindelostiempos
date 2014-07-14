@@ -55,6 +55,8 @@
 		    });
 		    
 		    function doOnRowSelected(rowID,celInd){
+		    	document.getElementById("myForm").innerHTML = "";
+		    	form = new dhtmlXForm("myForm");
 		        if (rowID == "b") verFormModificarPass();
 		    	else if (rowID == "a") verPerfil();
 		    	
@@ -66,7 +68,6 @@
 	    	}
 		    
 		    function verFormModificarPass(){
-		    	form = new dhtmlXForm("myForm");
 		    	form.loadStruct('../xml/forms/contrasena_form.xml', function() {
 		    		form.setItemLabel('data','<bean:message key="title.cambiar.pass"/>');
 		    		form.setItemLabel('oldPass','<bean:message key="label.ant.pass"/>');
@@ -165,8 +166,6 @@
 	    	
 		    
 		    function verPerfil(){
-		    	
-		    	form = new dhtmlXForm("myForm");
 		    	form.loadStruct('../xml/forms/usuario_form.xml', function(){
 		    		form.setItemLabel('data','<bean:message key="title.datos.personales"/>');
 		    		form.setItemLabel('grupo','<bean:message key="label.group"/>');
@@ -237,11 +236,11 @@
         </script>
 	</head>
 	<body>
-	<div id="layout" style="width:600px">
+	<div id="layout" style="width:100%; height:100%;">
 		<div id="menu" style="float:left; height:100%; width:150px;">
 		
 		</div>
-		<div id="content" style="float:right; height:100%; width:400px;">
+		<div id="content" style="float:left; height:100%; width:550px;">
 			<form id="realForm" method="POST" enctype="multipart/form-data">
 				<div id="myForm">
 	 
