@@ -40,6 +40,7 @@
 	    			formInfo.setItemLabel('codigo','<bean:message key="label.codigo.asignatura"/>');
 	    			formInfo.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
 	    			formInfo.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
+	    			formInfo.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 		    					    		
 		    		permisosFormInfoAsignaturas();
 	    			

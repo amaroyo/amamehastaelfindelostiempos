@@ -179,7 +179,7 @@
 				    		formUsuario.setItemLabel('telefono','<bean:message key="label.telefono"/>');
 				    		formUsuario.setItemLabel('correo','<bean:message key="label.address.email"/>');	
 				    		formUsuario.setItemLabel('foto','<bean:message key="label.foto"/>');	
-				    		formUsuario.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+				    		formUsuario.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 				    		
 				    		formUsuario.hideItem('aceptar');
 				    		
@@ -303,7 +303,7 @@
 				    		form2.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
 				    		form2.setItemLabel('fechaIni','<bean:message key="label.fecha.ini.estancia"/>');
 				    		form2.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
-				    		form2.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+				    		form2.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 				    		
 				    		form2.hideItem('aceptar');
 			    			

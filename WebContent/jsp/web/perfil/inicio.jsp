@@ -78,7 +78,7 @@
 		    		form.setItemLabel('oldPass','<bean:message key="label.ant.pass"/>');
 		    		form.setItemLabel('newPass1','<bean:message key="label.nueva.pass"/>');
 		    		form.setItemLabel('newPass2','<bean:message key="label.repetir.pass"/>');
-		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+		    		form.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 		    		
 		    		form.forEachItem(function(id){
 		    			switch(id) {
@@ -182,7 +182,7 @@
 		    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
 		    		form.setItemLabel('correo','<bean:message key="label.correo"/>');	
 		    		form.setItemLabel('imagen','<bean:message key="label.foto"/>');
-		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+		    		form.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 		    		
 		    		form.forEachItem(function(id){
 		    			switch(id) {
