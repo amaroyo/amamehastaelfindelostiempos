@@ -9,8 +9,9 @@
        <item type="input" name="dni" label="DNI" labelWidth="110" required="true" />
        <item type="input" name="correo" label="Email" labelWidth="110"  required="true" validate="ValidEmail,ucmEsEmail"/>
        <item type="input" name="telefono" label="Telefono" labelWidth="110" validate="ValidNumeric"/>
-       <item type="container" name="imagen" label="Foto" labelWidth="110"/>
-       <item type="file" name="foto" />
+       <item type="hidden" name="fotoImagen"/>
+       <item type="container" name="foto" label="Foto" labelWidth="110"/>
+       <item type="file" name="fotoFile" />
    </item>
    <item type="button" name="aceptar" value="Aceptar" />
 </items>
