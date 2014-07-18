@@ -35,7 +35,13 @@
 	    <script type="text/javascript">
 	    	
 	   	    dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var miGrid, menu, form;
+	    	var miGrid, menu, form, idSelectedUser;
+	    	
+
+	    	<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
+	    	<% String accion = "/perfil/actualizarusuario?!nativeeditor_status=save&idUsuario=" + sessionIdUser;%>
+			idSelectedUser = <%=sessionIdUser%>;
+	    	
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -175,7 +181,7 @@
 		    		form.setItemLabel('dni','<bean:message key="label.dni"/>');
 		    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
 		    		form.setItemLabel('correo','<bean:message key="label.correo"/>');	
-		    		form.setItemLabel('imagen','<bean:message key="label.foto"/>');
+		    		form.setItemLabel('foto','<bean:message key="label.foto"/>');
 		    		form.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 		    		
 		    		form.forEachItem(function(id){
@@ -194,23 +200,38 @@
 		    		form.enableLiveValidation(true);
 		    		form.setItemFocus("nombre");
 
-				
-					<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
-					idSelectedUser = <%=sessionIdUser%>;
-
 					form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
-						if(form.getItemValue("imagen") == null) {
+						if(form.getItemValue("fotoImagen") == "") {
 							var uriNoProfilePic = '../img/no-profile-pic.png';
-							form.getContainer("imagen").innerHTML = "<img src="+ uriNoProfilePic +">";
+							form.getContainer("foto").innerHTML = "<img src="+ uriNoProfilePic +" />";
 						}
+						else{
+							var profilePic = form.getItemValue("fotoImagen");
+							form.getContainer("foto").innerHTML = "<img src=data:image/jpg;base64,"+ profilePic +" />";
+						}
+						
+						
+						
+						form.attachEvent("onChange", function (id, value){
+							if(id == "fotoFile"){
+								if(isImageExtension(value)) {
+									 //previewPicture(rowID);
+						    	}
+								else {
+									alert('<bean:message key="message.error.formato.imagen"/>');
+									document.forms[0].elements.namedItem("fotoFile").value=null;
+								}
+							}
+						});
+						 
+						
 						form.attachEvent("onButtonClick", function(id){
-							if (id == "aceptar") {
-								alert();
-								document.getElementById("realForm").submit();
-								/*form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+							if(id == "aceptar"){
+								document.forms[0].submit();
+								//document.getElementById("realForm").submit();
+								//form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser,"post", function(xml) {
 									alert('<bean:message key="message.perfil.cambiado.exito"/>');
-								});*/
-
+								//});
 							}
 						});
 						form.attachEvent("onEnter", function() {
@@ -233,6 +254,41 @@
 					</logic:notMatch>
 				</logic:notMatch>
 		    }
+    
+		    function getExtension(fileName) {
+			    var parts = fileName.split('.');
+			    return parts[parts.length - 1];
+			}
+		    
+		    function isImageExtension(fileName) {
+		        var ext = getExtension(fileName);
+		        switch (ext.toLowerCase()) {
+			        case 'jpg':
+			        case 'jpeg':
+			        case 'bmp':
+			        case 'gif':
+			        case 'png':
+		            //etc
+		            return true;
+		        }
+		        return false;
+		    }
+		    
+		    function previewPicture(input)
+		    {
+		          /*if (input.files && input.files[0])
+		                  {
+		                        var reader = new FileReader();
+		                       reader.onload = function (e)
+		                                              {
+		                                                    $('#blah')
+		                                                    .attr('src',e.target.result)
+		                                                    .width(150)
+		                                                    .height(200);
+		                                              };
+		                       reader.readAsDataURL(input.files[0]);
+		                       }*/
+		    }
         </script>
 	</head>
 	<body>
@@ -241,12 +297,13 @@
 		
 		</div>
 		<div id="content" style="float:left; height:100%; width:550px;">
-			<form id="realForm" method="POST" enctype="multipart/form-data">
+			<html:form action="<%=accion%>" enctype="multipart/form-data" target="upload_area">
 				<div id="myForm">
 	 
 				</div >
-			</form >
+			</html:form>
 		</div>
+		<iframe name="upload_area" frameBorder="0" height="0"></iframe>
 	</div>
 	</body>
 </html>

@@ -1,8 +1,12 @@
 package es.oyssen.mrm.negocio.dao.rowmappers;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.IOUtils;
 import org.springframework.jdbc.core.RowMapper;
 
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
@@ -33,7 +37,25 @@ public class UsuarioMapper implements RowMapper {
     	o.setApellido2(StringUtil.nullToString(rs.getString(FIELD_APELLIDO2)));
     	o.setDni(StringUtil.nullToString(rs.getString(FIELD_DNI)));
     	o.setTelefono(StringUtil.nullToString(rs.getString(FIELD_TELEFONO)));
-    	o.setFoto(StringUtil.nullToString(rs.getString(FIELD_FOTO)));
+    	
+    	
+    	try {
+        	InputStream datos = rs.getBinaryStream(FIELD_FOTO);
+        	String foto;
+        	if(datos != null) {
+        		foto = new String(new Base64().encode(IOUtils.toByteArray(datos)));
+        	}
+        	else{
+        		foto = "";
+        	}
+        	o.setFotoImagen(foto);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		return o;
 	}
 }

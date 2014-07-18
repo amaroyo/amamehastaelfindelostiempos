@@ -1,8 +1,5 @@
 package es.oyssen.mrm.struts.actions.usuarios;
 
-import java.io.InputStream;
-
-import org.apache.struts.upload.FormFile;
 
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXFormAction;
@@ -59,7 +56,7 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 			usuario.setApellido2(form.getApellido2());
 			usuario.setDni(form.getDni());
 			usuario.setTelefono(form.getTelefono());
-			System.out.println(form.getFoto());
+			//System.out.println(form.getFoto());
 			//usuario.setFoto(form.getFoto());
 			
 			if (!StringUtil.isNullOrBlank(form.getContrasenya()))
@@ -100,11 +97,9 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		usuario.setApellido2(form.getApellido2());
 		usuario.setDni(form.getDni());
 		usuario.setTelefono(form.getTelefono());
-		System.out.println(form.getFoto());
 		
-		FormFile formFile = form.getFoto();
-        InputStream fin = formFile.getInputStream();
-		//usuario.setFoto(form.getFoto());
+		byte[] fotoFile = form.getFotoFile().getFileData();
+		usuario.setFotoFile(fotoFile);
 		usuario.setContrasenya(null);
 		
 		getUsuariosService().update(usuario);
@@ -124,7 +119,7 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		sb.append("<apellido2><![CDATA[" + c.getApellido2() + "]]></apellido2>");
 		sb.append("<dni><![CDATA[" + c.getDni() + "]]></dni>");
 		sb.append("<telefono><![CDATA[" + c.getTelefono() + "]]></telefono>");
-		sb.append("<foto><![CDATA[" + c.getFoto() + "]]></foto>");
+		sb.append("<fotoImagen><![CDATA[" + c.getFotoImagen() + "]]></fotoImagen>");
 		//sb.append("<contrasenya></contrasenya>");
 		sb.append("</data>");
 		

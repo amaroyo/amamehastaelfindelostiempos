@@ -1,5 +1,8 @@
 package es.oyssen.mrm.negocio.dao.mysql;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -52,7 +55,17 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 					ps.setString(6, usuario.getApellido2());
 					ps.setString(7, usuario.getDni());
 					ps.setString(8, usuario.getTelefono());
-					ps.setString(9, usuario.getFoto());
+	
+
+					InputStream foto = new ByteArrayInputStream(usuario.getFotoFile());
+					try {
+						ps.setBinaryStream(9, foto, foto.available());
+					}
+					catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				
 					return ps;
 					
 				}
@@ -84,7 +97,7 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 					usuario.getDni(),
 					usuario.getCorreo(),
 					usuario.getTelefono(),
-					usuario.getFoto(),
+					usuario.getFotoFile(),
 					usuario.getIdUsuario()});
 		} catch(Exception e) {
 			throw new DAOUpdateException(e);

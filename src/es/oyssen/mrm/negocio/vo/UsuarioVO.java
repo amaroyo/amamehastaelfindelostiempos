@@ -12,7 +12,8 @@ public class UsuarioVO {
 	private String apellido2;
 	private String dni;
 	private String telefono;
-	private String foto;
+	private byte[] fotoFile;
+	private String fotoImagen;
 	
 	public UsuarioVO() {
 		
@@ -84,13 +85,7 @@ public class UsuarioVO {
 		this.dni = dni;
 	}
 
-	public String getFoto() {
-		return foto;
-	}
-
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
+	
 
 	public void setIdGrupo(String idGrupo) {
 		this.id_grupo = idGrupo;
@@ -135,6 +130,31 @@ public class UsuarioVO {
 			return false;
 		return true;
 	}
+
+
+
+	public byte[] getFotoFile() {
+		return fotoFile;
+	}
+
+
+
+	public void setFotoFile(byte[] fotoFile) {
+		this.fotoFile = fotoFile;
+	}
+
+
+
+	public String getFotoImagen() {
+		return fotoImagen;
+	}
+
+
+
+	public void setFotoImagen(String fotoImagen) {
+		this.fotoImagen = fotoImagen;
+	}
+
 
 	
 }
