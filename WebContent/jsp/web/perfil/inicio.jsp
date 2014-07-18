@@ -207,7 +207,11 @@
 						}
 						else{
 							var profilePic = form.getItemValue("fotoImagen");
-							form.getContainer("foto").innerHTML = "<img src=data:image/jpg;base64,"+ profilePic +" />";
+							
+							
+							
+							
+							form.getContainer("foto").innerHTML = "<img src=data:image/jpg;base64,"+ profilePic +" style='width:105px;height:140px'/>";
 						}
 						
 						
@@ -227,6 +231,11 @@
 						
 						form.attachEvent("onButtonClick", function(id){
 							if(id == "aceptar"){
+								
+								
+								//si no ha subido nada dejar la que estaba
+								
+								
 								document.forms[0].submit();
 								//document.getElementById("realForm").submit();
 								//form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser,"post", function(xml) {
