@@ -2,12 +2,9 @@ package es.oyssen.mrm.struts.actions.asignaturas;
 
 import es.oyssen.mrm.negocio.vo.DatosUsuarioEstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
-import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXFormAction;
 import es.oyssen.mrm.struts.forms.asignaturas.UsuariosEstanciasForm;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxForm;
-import es.oyssen.mrm.struts.forms.usuarios.EditarUsuarioForm;
-import es.oyssen.mrm.util.EncriptarUtil;
 import es.oyssen.mrm.util.StringUtil;
 
 public class UsuariosEstanciasAction extends DHTMLXFormAction {
@@ -69,41 +66,32 @@ public class UsuariosEstanciasAction extends DHTMLXFormAction {
 	@Override
 	public String save(DhtmlxForm f) throws Exception {
 		
-		/*
-		//REHACERLO, MEJOR HACER MODIFICACIONES SEGUN EL DNI
-		//EN MIS ALUMNOS, SOLO APARECERA NOMBRE, APELLIDOS Y DNI
-		
-		EditarUsuarioForm form = (EditarUsuarioForm) f;
-		
-		UsuarioVO usuario = new UsuarioVO();
 		
 		
-		if (StringUtil.isNullOrBlank(form.getIdUsuario())) {
-			if (!StringUtil.isNullOrBlank(form.getCorreo())) {
-				usuario.setCorreo(form.getCorreo());
-				usuario.setIdUsuario(getUsuariosService().findByCorreo(usuario).getIdUsuario());
-			}
-		}
-		else  {
-			usuario.setIdUsuario(form.getIdUsuario());
-		}
-		usuario.setIdGrupo(idGrupo(form.getGrupo()));
-		usuario.setCorreo(form.getCorreo());
-		usuario.setNombre(form.getNombre());
-		usuario.setApellido1(form.getApellido1());
-		usuario.setApellido2(form.getApellido2());
-		usuario.setDni(form.getDni());
-		usuario.setTelefono(form.getTelefono());
-		System.out.println(form.getFoto());
-		usuario.setFoto(form.getFoto());
-		usuario.setContrasenya(null);
+		UsuariosEstanciasForm form = (UsuariosEstanciasForm) f;
+		DatosUsuarioEstanciaUnidadClinicaVO data = new DatosUsuarioEstanciaUnidadClinicaVO();
 		
-		getUsuariosService().update(usuario);
-		return "usuario changed";
-		*/
 		
-		return null;
+		data.setIdPortafolio(form.getIdPortfolio());
+		data.setIdEstanciaUnidad(form.getIdEstanciaUnidad());
+		data.setCentroAsociado(form.getHospital());
+		data.setUnidadClinica(form.getClinica());
+		//No se puede hacer set del nombre del profesor
+		data.setNombreProfesor("");
+		data.setApellido1Profesor("");
+		data.setApellido2Profesor("");
+		data.setTurno(form.getTurno());
+		data.setFechaInicio(setFechaMySQL(form.getFechaIni()));
+		data.setFechaFin(setFechaMySQL(form.getFechaFin()));
+		
+		getPortafoliosService().updateEstancia(data);
+		
+		
+		return "estancia unidad clinica changed";
+		
 	}
+
+	
 
 	@Override
 	public String parseXML(Object o) throws Exception {
@@ -143,6 +131,13 @@ public class UsuariosEstanciasAction extends DHTMLXFormAction {
 		String[] sp = fecha.split("-");
 		String out = sp[2] + "/" +  sp[1] + "/" + sp[0];
 		return out;
+	}
+	
+	private String setFechaMySQL(String fecha) {
+		String[] sp = fecha.split("/");
+		String out = sp[2] + "-" +  sp[1] + "-" + sp[0];
+		return out;
+		
 	}
 	
 	private String nombreGrupo(String id){

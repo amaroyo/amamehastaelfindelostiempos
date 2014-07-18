@@ -31,6 +31,8 @@ public interface PortafoliosService {
 	public List<UsuarioEstanciaUnidadClinicaVO> findUsuariosEstanciaUnidadClinica(PortafolioVO portafolio) throws ServiceException;
 
 	public DatosUsuarioEstanciaUnidadClinicaVO findDatosUsuarioEstanciaUnidadClinica(PortafolioVO portafolio) throws ServiceException;
+
+	public void updateEstancia(DatosUsuarioEstanciaUnidadClinicaVO data) throws ServiceException, DAOException;
 	
 
 

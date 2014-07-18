@@ -144,6 +144,27 @@ public class PortafoliosServiceImpl implements PortafoliosService{
 			throw new ServiceException(e.getMessage());
 		}
 	}
+
+	@Override
+	public void updateEstancia(DatosUsuarioEstanciaUnidadClinicaVO data) 
+						throws es.oyssen.mrm.negocio.exceptions.ServiceException,
+							es.oyssen.mrm.negocio.dao.exceptions.DAOException {
+		
+		try {
+			daoPortafolios.updateEstancia(data);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error haciendo update en la estancia Unidad Clinica", e);
+			throw new ServiceException(e);
+		}
+		
+		
+	}
+	
+	
+	
+				
+	
 	
 	
 }

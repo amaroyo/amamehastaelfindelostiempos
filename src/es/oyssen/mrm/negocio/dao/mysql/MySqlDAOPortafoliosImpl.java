@@ -28,6 +28,7 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 	
 	private static String SQL_INSERT = "insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (?,?,?,?)";
 	private static String SQL_UPDATE = "update portafolios set id_profesor=?";
+	private static String SQL_UPDATE_ESTANCIA = "update estancias_unidad_clinica set centro_asociado=?, unidad_clinica=?, turno=?, fecha_inicio=?, fecha_fin=?";
 	private static String SQL_DELETE = "delete from portafolios where id_portafolio = ?";
 	private static String SQL_FIND_ALL = "select * from portafolios where anyo_academico = ?";
 	private static String SQL_FIND_BY_ID = "select * from portafolios where id_portafolio = ?";
@@ -197,6 +198,31 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 			getJdbcTemplate().update(SQL_DELETE, new Object[]{portafolio.getIdPortafolio()});
 		} catch (Exception e) {
 			throw new DAODeleteException(e);
+		}
+		
+	}
+
+
+	@Override
+	public void updateEstancia(DatosUsuarioEstanciaUnidadClinicaVO data) throws DAOException, DAOUpdateException {
+		try {
+			 
+			String query = SQL_UPDATE_ESTANCIA;
+
+			query += " where id_portafolio = ? and id_estancia_unidad = ?";
+
+			getJdbcTemplate().update(query, new Object[]{
+					data.getCentroAsociado(),
+					data.getUnidadClinica(), 
+					data.getTurno(),
+					data.getFechaInicio(),
+					data.getFechaFin(),
+					data.getIdPortafolio(),
+					data.getIdEstanciaUnidad()
+				
+			});
+		} catch(Exception e) {
+			throw new DAOUpdateException(e);
 		}
 		
 	}

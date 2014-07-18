@@ -42,6 +42,8 @@
 		
 		<action path="/asignaturas/editarEstanciaUnidadClinica" name="EstanciaUnidadClinicaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.UsuariosEstanciasAction" />
 		
+		<action path="/asignaturas/actualizarEstanciaUnidadClinica" name="EstanciaUnidadClinicaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.UsuariosEstanciasAction" />		
+		
 		<action path="/asignaturas/editarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />
 		
 		<action path="/asignaturas/actualizarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />

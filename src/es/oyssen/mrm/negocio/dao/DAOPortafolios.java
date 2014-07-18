@@ -34,6 +34,8 @@ public interface DAOPortafolios {
 	
 	public void delete(PortafolioVO portafolio) throws DAOException, DAODeleteException;
 
+	public void updateEstancia(DatosUsuarioEstanciaUnidadClinicaVO data) throws DAOException, DAOUpdateException;
+
 	
 	
 

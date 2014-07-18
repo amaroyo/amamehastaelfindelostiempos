@@ -372,21 +372,27 @@
 							
 							form2.load('editarEstanciaUnidadClinica.do?idAlumno=' + idSelectedUser + '&idAsignatura=' + idAsignatura, function () {
 								
-								/*
-								formUsuario.attachEvent("onButtonClick", function(id){
+								
+								form2.attachEvent("onButtonClick", function(id){
 									if (id == "aceptar") {
-										formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-											alert('<bean:message key="message.perfil.cambiado.exito"/>');
-										});
+										if(fechasMenores(fechaIni,fechaFin)){	
+											form2.send("actualizarEstanciaUnidadClinica.do?!nativeeditor_status=save&idAlumno=" + idSelectedUser + '&idAsignatura=' + idAsignatura,"post", function(xml) {
+												alert('<bean:message key="message.estancia.clinica.exito"/>');
+											});
+										}
+										else alert('<bean:message key="message.fechas.error"/>');
 
 									}
 								});
-								formUsuario.attachEvent("onEnter", function() {
-									formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-										alert('<bean:message key="message.perfil.cambiado.exito"/>');
-									}); 
+								form2.attachEvent("onEnter", function() {
+									if(fechasMenores(fechaIni,fechaFin)){
+										form2.send("actualizarEstanciaUnidadClinica.do?!nativeeditor_status=save&idAlumno=" + idSelectedUser + '&idAsignatura=' + idAsignatura,"post", function(xml) {
+											alert('<bean:message key="message.estancia.clinica.exito"/>');
+										}); 
+									}
+									else alert('<bean:message key="message.fechas.error"/>');
 					    		});
-								*/
+								
 								
 							});//load
 							
@@ -423,6 +429,26 @@
 				    var parts = correo.split('@');
 				    return parts[parts.length - 1];
 		    	}	    
+		    	
+		    	function fechasMenores(f1,f2){
+		    		var partsIni = f1.split('/');
+		    		var partsFin = f2.split('/');
+		    		
+		    		if (partsIni[2]>partsFin[2]) return false;
+		    		else if (partsIni[2]==partsFin[2]) {
+		    			if (partsIni[1]>partsFin[1]) return false;
+		    			else if (partsIni[1]==partsFin[1]) {
+		    				if (partsIni[0]>partsFin[0]) return false;
+			    			else if (partsIni[0]==partsFin[0]) {
+			    				return false;
+			    			}
+			    			else return true;
+		    			}
+		    			else return true;
+		    		}
+		    		else return true;
+		    		
+		    	}
 	    	
 	   </script>
 	</head>

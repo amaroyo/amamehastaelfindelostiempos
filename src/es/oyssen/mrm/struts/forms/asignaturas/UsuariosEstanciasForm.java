@@ -15,6 +15,7 @@ public class UsuariosEstanciasForm extends DhtmlxForm {
 	private String fechaIni;
 	private String fechaFin;
 	
+
 	
 	
 	
