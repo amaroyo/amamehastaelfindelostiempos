@@ -182,6 +182,7 @@
 		    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
 		    		form.setItemLabel('correo','<bean:message key="label.correo"/>');	
 		    		form.setItemLabel('foto','<bean:message key="label.foto"/>');
+		    		form.setItemLabel('fotoFile','<bean:message key="label.max.size"/>');
 		    		form.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 		    		
 		    		form.forEachItem(function(id){

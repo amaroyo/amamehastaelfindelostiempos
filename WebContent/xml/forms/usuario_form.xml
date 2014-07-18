@@ -11,7 +11,7 @@
        <item type="input" name="telefono" label="Telefono" labelWidth="110" validate="ValidNumeric"/>
        <item type="hidden" name="fotoImagen"/>
        <item type="container" name="foto" label="Foto" labelWidth="110"/>
-       <item type="file" name="fotoFile" label="El tamaño de la imagen no debe exceder 1 MB"/>
+       <item type="file" name="fotoFile" label="El tamaño de la imagen no debe exceder 1 MB" position="label-top"/>
    </item>
    <item type="button" name="aceptar" value="Aceptar" />
 </items>
