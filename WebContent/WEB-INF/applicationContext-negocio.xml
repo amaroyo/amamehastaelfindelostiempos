@@ -157,31 +157,31 @@
 		<property name="daoDiariosReflexivos" ref="daoDiariosReflexivos" />
 	</bean>	
 	
-	<bean id="AnexosServices" class="es.oyssen.mrm.negocio.services.impl.AnexosServiceImpl">		
+	<bean id="AnexosService" class="es.oyssen.mrm.negocio.services.impl.AnexosServiceImpl">		
 		<property name="daoAnexos" ref="daoAnexos" />
 	</bean>	
 	
-	<bean id="CasosClinicosServices" class="es.oyssen.mrm.negocio.services.impl.CasosClinicosServiceImpl">		
+	<bean id="CasosClinicosService" class="es.oyssen.mrm.negocio.services.impl.CasosClinicosServiceImpl">		
 		<property name="daoCasosClinicos" ref="daoCasosClinicos" />
 	</bean>	
 	
-	<bean id="PuntuacionCriteriosServices" class="es.oyssen.mrm.negocio.services.impl.PuntuacionCriteriosServiceImpl">		
+	<bean id="PuntuacionCriteriosService" class="es.oyssen.mrm.negocio.services.impl.PuntuacionCriteriosServiceImpl">		
 		<property name="daoPuntuacionCriterios" ref="daoPuntuacionCriterios" />
 	</bean>	
 	
-	<bean id="CriteriosRubricasServices" class="es.oyssen.mrm.negocio.services.impl.CriteriosRubricasServiceImpl">		
+	<bean id="CriteriosRubricasService" class="es.oyssen.mrm.negocio.services.impl.CriteriosRubricasServiceImpl">		
 		<property name="daoCriteriosRubricas" ref="daoCriteriosRubricas" />
 	</bean>	
 	
-	<bean id="GruposCriteriosRubricasServices" class="es.oyssen.mrm.negocio.services.impl.GruposCriteriosRubricasServiceImpl">		
+	<bean id="GruposCriteriosRubricasService" class="es.oyssen.mrm.negocio.services.impl.GruposCriteriosRubricasServiceImpl">		
 		<property name="daoGruposCriteriosRubricas" ref="daoGruposCriteriosRubricas" />
 	</bean>	
 	
-	<bean id="RubricasServices" class="es.oyssen.mrm.negocio.services.impl.RubricasServiceImpl">		
+	<bean id="RubricasService" class="es.oyssen.mrm.negocio.services.impl.RubricasServiceImpl">		
 		<property name="daoRubricas" ref="daoRubricas" />
 	</bean>	
 	
-	<bean id="SeminariosAsignaturaServices" class="es.oyssen.mrm.negocio.services.impl.SeminariosAsignaturaServiceImpl">		
+	<bean id="seminariosAsignaturaService" class="es.oyssen.mrm.negocio.services.impl.SeminariosAsignaturaServiceImpl">		
 		<property name="daoSeminariosAsignatura" ref="daoSeminariosAsignatura" />
 	</bean>	
 	

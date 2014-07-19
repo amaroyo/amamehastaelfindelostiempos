@@ -22,13 +22,13 @@ import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
 
 public class MySqlDAOSeminariosAsignaturaImpl extends DAOBase implements DAOSeminariosAsignatura{
 
-	private static String SQL_INSERT = "insert into seminarios_asignatura (id_asignatura, nombre, codigo, descripcion) values (?,?,?,?)";
-	private static String SQL_UPDATE = "update seminarios_asignatura set descripcion=?";
-	private static String SQL_DELETE = "delete from seminarios_asignatura where id_seminario = ? ";
-	private static String SQL_FIND_BY_ID = "select * from seminarios_asignatura where id_seminario = ?";
-	private static String SQL_FIND_BY_NOMBRE = "select * from seminarios_asignatura where nombre = ?";
-	private static String SQL_FIND_BY_CODIGO = "select * from seminarios_asignatura where codigo = ?";
-	private static String SQL_FIND_BY_ASIGNATURA = "select * from seminarios_asignatura where id_asignatura = ?";
+	private static String SQL_INSERT = "insert into seminarios_asignaturas (id_asignatura, nombre, codigo, descripcion) values (?,?,?,?)";
+	private static String SQL_UPDATE = "update seminarios_asignaturas set descripcion=?";
+	private static String SQL_DELETE = "delete from seminarios_asignaturas where id_seminario = ? ";
+	private static String SQL_FIND_BY_ID = "select * from seminarios_asignaturas where id_seminario = ?";
+	private static String SQL_FIND_BY_NOMBRE = "select * from seminarios_asignaturas where nombre = ?";
+	private static String SQL_FIND_BY_CODIGO = "select * from seminarios_asignaturas where codigo = ?";
+	private static String SQL_FIND_BY_ASIGNATURA = "select * from seminarios_asignaturas where id_asignatura = ?";
 
 
 

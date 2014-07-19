@@ -20,7 +20,7 @@
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura,nombreAsignatura, gridProfesor, gridAlumnoRealizado,gridAlumnoPendiente;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesor, gridAlumnoRealizado, gridAlumnoPendiente;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -185,25 +185,21 @@
 		    		
 		    		var tabbar = a.attachTabbar();
 		    		
-		    		//HE AQUI QUE TENEMOS QUE HACER UNA CONSULTA EN MYSQL PARA SABER CUANTOS SEMINARIOS
-		    		//VA A HABER SEGUN LA ASIGNATURA PINCHADA PARA HACER EL WHILE
+		    		var optsSeminarios = dameSeminariosAsignatura();
 		    		
-		    		var numSeminarios=0;
-		    		switch(idAsignatura){
-			    		case "1": {numSeminarios=1;break;}
-			        	case "2": {numSeminarios=2;break;}
-			        	case "3": {numSeminarios=3;break;}
-			        	case "4": {numSeminarios=4;break;}
-			        	case "5": {numSeminarios=5;break;}
-			        	case "6": {numSeminarios=6;break;}
-			        	case "7": {numSeminarios=7;break;}
-		    		}
+		    		var numSeminarios=optsSeminarios.length;
+		    		
+		    		
+		    		
 					
 		    		//WHILEEEEEEEELELELELLELELELEEEEEE
 		    		for (var i=0; i<numSeminarios;i++){
 		    			
-		    			var t = "tab_"+i;
-		    			tabbar.addTab(t,'Seminario ' + i,'');
+		    			var string = optsSeminarios[i].toString();
+		    			var parts = string.split(',');
+		    			
+		    			var t = parts[0];
+		    			tabbar.addTab(t,parts[1],'');
 				    	var tab = tabbar.cells(t);
 				    	if(i==0) tabbar.setTabActive(t);
 				    	
@@ -227,6 +223,7 @@
 				    	
 		    			grid.clearAndLoad("gridusuarios.do");
 		    		}//FOR
+		    	
 		    		
 				}
 				
@@ -235,6 +232,51 @@
 					gridAlumnoRealizado.clearAndLoad("gridusuarios.do");
 					gridAlumnoPendiente.clearAndLoad("gridusuarios.do");
 			    }
+				
+				
+				
+				function initRequest() {
+		    	    if (window.XMLHttpRequest) {
+		    	        xmlhttp = new XMLHttpRequest();
+		    	    } else if (window.ActiveXObject) {
+		    	        isIE = true;
+		    	        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		    	    }
+		    	    return xmlhttp;
+		    	}
+		    	
+		    	
+		    	function dameSeminariosAsignatura(){
+		    		var url = "seminariosAsignaturas.do?idAsignatura=" + idAsignatura;
+		    		var xmlhttp = initRequest();
+		    		xmlhttp.onreadystatechange=function(){
+		    			if (xmlhttp.readyState===4) {
+		        	        if(xmlhttp.status===200) { //GET returning a response
+		        	        	return createArrayFromXML(xmlhttp.responseXML);
+		        	        }
+		        	    }
+		    		}
+		    	    xmlhttp.open("GET",url,false);
+		    	    xmlhttp.send(null);
+		    	    return xmlhttp.onreadystatechange();
+		    	}
+		    	
+		    	function createArrayFromXML(xml){
+		    		var seminarios = xml.getElementsByTagName("seminario");
+		    		var id, nombre, seminario;
+		    		var opts = new Array();
+		    		for(var i=0;i<seminarios.length;i++) {
+		    	        id=seminarios[i].getElementsByTagName("id")[0].firstChild.nodeValue;
+		    	        nombre=seminarios[i].getElementsByTagName("nombre")[0].firstChild.nodeValue;
+		    	        seminario=[id,nombre];
+		    	       	opts[i] = seminario;
+		    	    }
+		    		return opts;
+
+		    	}
+				
+				
+				
 	    });
 	    	
 	    
