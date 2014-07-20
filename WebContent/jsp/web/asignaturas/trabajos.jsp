@@ -20,7 +20,7 @@
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b, tabbar;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos, profesor,a,b, tabbar;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -58,29 +58,24 @@
 	    		
 	    		tabbar = a.attachTabbar();
 	    		
-	    		//HE AQUI QUE TENEMOS QUE HACER UNA CONSULTA EN MYSQL PARA SABER CUANTAS PRACTICAS
-	    		//VA A HABER SEGUN LA ASIGNATURA PINCHADA PARA HACER EL WHILE
+	    		var optsTrabajosCampo = dameTrabajosCampoAsignatura();
+	    		var numTrabajosCampo=optsTrabajosCampo.length;
 	    		
-	    		var numTrabajosCampo=0;
-	    		switch(idAsignatura){
-		    		case "1": {numTrabajosCampo=1;break;}
-		        	case "2": {numTrabajosCampo=2;break;}
-		        	case "3": {numTrabajosCampo=3;break;}
-		        	case "4": {numTrabajosCampo=4;break;}
-		        	case "5": {numTrabajosCampo=5;break;}
-		        	case "6": {numTrabajosCampo=6;break;}
-		        	case "7": {numTrabajosCampo=7;break;}
-	    		}
+	    		
 				
 	    		for (var i=0; i<numTrabajosCampo;i++) {
-	    			var mytab = "tab_"+i;
-	    			tabbar.addTab(mytab,'Práctica ' + i,'');
+	    			
+	    			var string = optsTrabajosCampo[i].toString();
+	    			var parts = string.split(',');
+
+	    			var idTrabajoCampo = parts[0];
+	    			tabbar.addTab(idTrabajoCampo,parts[1],'');
 	    			//no se como hacer que sea activa y que ademas este seleccionada para 
 	    			//disparar al metodo onSelect para que lo rellene con datos...
 			    	//alert("Cargando...." + (i+1) + "/" + numTrabajosCampo + " prácticas. Por favor, espere...");
-	    			if(i==0) tabbar.setTabActive(mytab);
+	    			if(i==0) tabbar.setTabActive(idTrabajoCampo);
 	    			
-	    			initTabContent(mytab);
+	    			initTabContent(idTrabajoCampo);
 	    		}
 	    	});
 	    	
@@ -88,9 +83,9 @@
 	    	
 	    	
 		    	
-	    	function initTabContent(tabID){
+	    	function initTabContent(idTrabajoCampo){
 				
-				tab = tabbar.cells(tabID);
+				var tab = tabbar.cells(idTrabajoCampo);
 								
 		    	var toolbarServicios = tab.attachToolbar();
 		    	toolbarServicios.setIconsPath('../img/toolbar/');
@@ -104,8 +99,8 @@
 		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 		    	});
 		    	
-		    	if (profesor) goGridProfesores(tab);
-		    	else goGridAlumnos(tab);
+		    	if (profesor) goGridProfesores(tab,idTrabajoCampo);
+		    	else goGridAlumnos(tab,idTrabajoCampo);
 			}
 		    	
 			
@@ -131,7 +126,7 @@
 		    	//tabbar.clearAll();		    	
 		    }
 			
-			function goGridAlumnos(tab){
+			function goGridAlumnos(tab,idTrabajoCampo){
 				
 				gridAlumnos = tab.attachGrid();
 		    	
@@ -155,7 +150,7 @@
 				
 			}
 			
-			function goGridProfesores(tab){
+			function goGridProfesores(tab,idTrabajoCampo){
 				
 				gridProfesores = tab.attachGrid();
 		    	
@@ -202,6 +197,48 @@
 		    	else if (rowID == "b") alert("Subir corrección");
 		    	else alert("Cambiar la fecha de entrega");
 			}
+			
+			
+			function initRequest() {
+	    	    if (window.XMLHttpRequest) {
+	    	        xmlhttp = new XMLHttpRequest();
+	    	    } else if (window.ActiveXObject) {
+	    	        isIE = true;
+	    	        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	    	    }
+	    	    return xmlhttp;
+	    	}
+	    	
+	    	
+	    	function dameTrabajosCampoAsignatura(){
+	    		var url = "trabajosCampoAsignaturas.do?idAsignatura=" + idAsignatura;
+	    		var xmlhttp = initRequest();
+	    		xmlhttp.onreadystatechange=function(){
+	    			if (xmlhttp.readyState===4) {
+	        	        if(xmlhttp.status===200) { //GET returning a response
+	        	        	return createArrayFromXML(xmlhttp.responseXML);
+	        	        }
+	        	    }
+	    		}
+	    	    xmlhttp.open("GET",url,false);
+	    	    xmlhttp.send(null);
+	    	    return xmlhttp.onreadystatechange();
+	    	}
+	    	
+	    	function createArrayFromXML(xml){
+	    		var seminarios = xml.getElementsByTagName("trabajo");
+	    		var id, nombre, seminario;
+	    		var opts = new Array();
+	    		for(var i=0;i<seminarios.length;i++) {
+	    	        id=seminarios[i].getElementsByTagName("id")[0].firstChild.nodeValue;
+	    	        nombre=seminarios[i].getElementsByTagName("nombre")[0].firstChild.nodeValue;
+	    	        seminario=[id,nombre];
+	    	       	opts[i] = seminario;
+	    	    }
+	    		return opts;
+
+	    	}
+			
 			
 	    	
 	   </script>

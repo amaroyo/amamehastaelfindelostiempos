@@ -6,6 +6,7 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 
 public interface DAOTrabajosDeCampo {
@@ -17,6 +18,8 @@ public interface DAOTrabajosDeCampo {
 	public void delete(TrabajoDeCampoVO trabajoDeCampo) throws DAOException, DAODeleteException;
 		
 	public List<TrabajoDeCampoVO> findAllByPortafolio(TrabajoDeCampoVO trabajoDeCampo) throws DAOException;
+
+	public List<TrabajoDeCampoVO> findAllByAsignatura(PortafolioVO p) throws DAOException;
 	
 	
 	

@@ -59,7 +59,7 @@
 		
 		<action path="/asignaturas/gridUsuariosSeminariosAsignatura" name="GridUsuariosSeminariosAsignatura" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridUsuariosSeminariosAsignaturaAction" />
 		
-	
+		<action path="/asignaturas/trabajosCampoAsignaturas" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.TrabajosCampoAsignaturaAction"  />
 		
 	</action-mappings>
 

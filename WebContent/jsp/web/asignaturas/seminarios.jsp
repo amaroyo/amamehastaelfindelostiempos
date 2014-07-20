@@ -38,7 +38,7 @@
 				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 					goAlumno();
 				</logic:notMatch>	
-	    		
+	    	});    		
 				
 				function goAlumno(){
 					
@@ -278,7 +278,7 @@
 				
 				
 				
-	    });
+	    
 	    	
 	    
 	    	

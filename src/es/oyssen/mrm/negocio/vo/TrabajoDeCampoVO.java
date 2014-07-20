@@ -5,6 +5,7 @@ public class TrabajoDeCampoVO {
 
 	private String id_trabajo_de_campo;
 	private String id_portafolio;
+	private String nombre;
 	private String trabajo_de_campo;
 	private String correccion_trabajo;
 	private String fecha_limite;
@@ -59,6 +60,16 @@ public class TrabajoDeCampoVO {
 
 	public void setFechaLimite(String fecha_limite) {
 		this.fecha_limite = fecha_limite;
+	}
+
+	
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	@Override

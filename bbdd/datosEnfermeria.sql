@@ -430,12 +430,15 @@ insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_cli
 
 
 -- Trabajos de Campo
-insert into trabajos_de_campo (id_portafolio, trabajo_de_campo, correccion_trabajo, fecha_limite) values (1, null, null, '2012-10-15');
-insert into trabajos_de_campo (id_portafolio, trabajo_de_campo, correccion_trabajo, fecha_limite) values (2, null, null, '2012-10-05');
-insert into trabajos_de_campo (id_portafolio, trabajo_de_campo, correccion_trabajo, fecha_limite) values (3, null, null, '2013-10-13');
-insert into trabajos_de_campo (id_portafolio, trabajo_de_campo, correccion_trabajo, fecha_limite) values (4, null, null, '2012-10-15');
-insert into trabajos_de_campo (id_portafolio, trabajo_de_campo, correccion_trabajo, fecha_limite) values (5, null, null, '2012-10-05');
-insert into trabajos_de_campo (id_portafolio, trabajo_de_campo, correccion_trabajo, fecha_limite) values (6, null, null, '2013-10-13');
+insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correccion_trabajo, fecha_limite) values (1, 'Trabajo de Campo I', null, null, '2012-10-15');
+insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correccion_trabajo, fecha_limite) values (2, 'Trabajo de Campo II', null, null, '2012-10-05');
+insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correccion_trabajo, fecha_limite) values (3, 'Trabajo de Campo II', null, null, '2013-10-13');
+insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correccion_trabajo, fecha_limite) values (4, 'Trabajo de Campo IV', null, null, '2012-10-15');
+insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correccion_trabajo, fecha_limite) values (5, 'Trabajo de Campo V', null, null, '2012-10-05');
+insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correccion_trabajo, fecha_limite) values (6, 'Trabajo de Campo VI', null, null, '2013-10-13');
+insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correccion_trabajo, fecha_limite) values (7, 'Trabajo de Campo VII', null, null, '2015-10-13');
+
+
 
 -- Seminarios Realizados
 insert into seminarios_realizados (id_portafolio, id_seminario) values (1,1);
