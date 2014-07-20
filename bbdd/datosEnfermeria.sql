@@ -139,6 +139,7 @@ insert into seminarios_asignaturas (id_asignatura, nombre, codigo, descripcion) 
 insert into seminarios_asignaturas (id_asignatura, nombre, codigo, descripcion) values (5, 'LOREM IPSUM 7', 'cod7', '');
 
 
+
 -- Rúbricas
 insert into rubricas (id_asignatura, competencias, numero_criterios) values (1, 'Consecución en un nivel inicial:\n\n- Sabe prestar una atención sanitaria técnica y profesional adecuada a las necesidades de salud de las personas que atienden\n\n- Conoce el comportamiento interactivo de la persona dentro de su contexto social y multicultural\n\n- Relaciona las intervenciones de enfermería con la evidencia científica y con los medios disponibles\n\n- Comprende sin prejuicios a las personas, considerando sus aspectos físicos, psicológicos y sociales, como individuos autónomos e independientes, asegurando el respeto a sus opiniones, creencias y valores, garantizando el derecho a la intimidad, a través de la confidencialidad y el secreto  profesional\n\n- Favorece el derecho de participación, información, autonomía y el consentimiento informado en la toma de decisiones de las personas atendidas\n\n- Fomenta estilos de vida saludables, el autocuidado, apoyando el mantenimiento de conductas preventivas y terapéuticas\n\n- Protege la salud y el bienestar de las personas, familia o grupos atendidos, garantizando su seguridad\n\n- Sabe realizar una comunicación eficaz con pacientes, familia y compañeros\n\n- Conoce el código ético y deontológico de la enfermería española\n\n- Desarrolla mecanismos de evaluación\n\n- Sabe trabajar con el equipo de profesionales', 19);
 
@@ -440,6 +441,8 @@ insert into seminarios_realizados (id_portafolio, id_seminario) values (1,1);
 insert into seminarios_realizados (id_portafolio, id_seminario) values (2,4);
 insert into seminarios_realizados (id_portafolio, id_seminario) values (3,2);
 insert into seminarios_realizados (id_portafolio, id_seminario) values (3,3);
+insert into seminarios_realizados (id_portafolio, id_seminario) values (5,4);
+insert into seminarios_realizados (id_portafolio, id_seminario) values (6,5);
 
 
 

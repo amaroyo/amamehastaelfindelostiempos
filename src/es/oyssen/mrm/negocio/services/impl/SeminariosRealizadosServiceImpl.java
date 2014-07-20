@@ -10,6 +10,8 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.SeminariosRealizadosService;
 import es.oyssen.mrm.negocio.vo.SeminarioRealizadoVO;
+import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
+import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
 public class SeminariosRealizadosServiceImpl implements SeminariosRealizadosService{
 	
@@ -65,6 +67,17 @@ public class SeminariosRealizadosServiceImpl implements SeminariosRealizadosServ
 		} catch (DAOException e) {
 			e.printStackTrace();
 			log.error("Error findAllByPortafolio seminario realizado", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	@Override
+	public List<UsuarioAnyoSeminarioVO> findAllUsersByPortafolio(SeminarioRealizadoVO seminarioRealizado) throws ServiceException {
+		try {
+			return daoSeminariosRealizados.findAllUsersByPortafolio(seminarioRealizado);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findAllUsersByPortafolio seminario realizado", e);
 			throw new ServiceException(e.getMessage());
 		}
 	}

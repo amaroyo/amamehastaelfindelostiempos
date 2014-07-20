@@ -79,7 +79,7 @@ public class SeminariosAsignaturaAction extends MrmAction {
 			while(it.hasNext()) {
 				sb.append("<seminario>");
 				SeminarioAsignaturaVO seminario = it.next();
-				sb.append("<id><![CDATA[" + seminario.getIdAsignatura() + "]]></id>");
+				sb.append("<id><![CDATA[" + seminario.getIdSeminario() + "]]></id>");
 				sb.append("<nombre><![CDATA[" + seminario.getCodigo() + " - " + seminario.getNombre() + "]]></nombre>");
 				sb.append("</seminario>");
 			}	

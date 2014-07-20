@@ -15,6 +15,9 @@
 	   
 	   <form-bean name="EstanciaUnidadClinicaForm" type="es.oyssen.mrm.struts.forms.asignaturas.UsuariosEstanciasForm" />
 	   
+	   <form-bean name="GridUsuariosSeminariosAsignatura" type="es.oyssen.mrm.struts.forms.asignaturas.GridUsuariosSeminariosAsignaturaForm" />
+	   
+	   
 	</form-beans>
 	
 
@@ -53,6 +56,10 @@
 		<action path="/asignaturas/actualizarasignatura" name="EditarAsignaturaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.EditarAsignaturaAction"  />
 		
 		<action path="/asignaturas/seminariosAsignaturas" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.SeminariosAsignaturaAction"  />
+		
+		<action path="/asignaturas/gridUsuariosSeminariosAsignatura" name="GridUsuariosSeminariosAsignatura" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridUsuariosSeminariosAsignaturaAction" />
+		
+	
 		
 	</action-mappings>
 

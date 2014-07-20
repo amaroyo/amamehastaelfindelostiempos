@@ -190,7 +190,6 @@
 		    		var numSeminarios=optsSeminarios.length;
 		    		
 		    		
-		    		
 					
 		    		//WHILEEEEEEEELELELELLELELELEEEEEE
 		    		for (var i=0; i<numSeminarios;i++){
@@ -205,14 +204,16 @@
 				    	
 				    	var grid = tab.attachGrid();
 				    	
-				    	grid.setHeader(["<bean:message key="label.group" />","<bean:message key="label.nombre" />","<bean:message key="label.telefono" />","<bean:message key="label.telefono.movil" />","<bean:message key="label.address.email" />"]);
-				    	grid.setColTypes("ro,ro,ro,ro,ro");
+				    	grid.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","<bean:message key="label.telefono" />","<bean:message key="label.user.email" />","<bean:message key="label.anyo.realizacion.seminario" />"]);
+				    	grid.setColTypes("ro,ro,ro,ro,ro,ro");
 				    	
-				    	grid.setColSorting('str,str,str,str,str');
 				    	grid.enableMultiselect(false);
+				    	grid.setColSorting('str,str,str,str,str,str');
 				    	grid.init();
 				    	
-				    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+						
+				    	var gridProcessorPro = new dataProcessor("gridUsuariosSeminariosAsignatura.do?idSeminario=" + t);
+				    	
 				    	gridProcessorPro.enableUTFencoding('simple');
 				    	gridProcessorPro.init(grid);	  
 				    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -221,7 +222,7 @@
 				    		}
 				    	});
 				    	
-		    			grid.clearAndLoad("gridusuarios.do");
+		    			grid.clearAndLoad("gridUsuariosSeminariosAsignatura.do?idSeminario=" + t);
 		    		}//FOR
 		    	
 		    		

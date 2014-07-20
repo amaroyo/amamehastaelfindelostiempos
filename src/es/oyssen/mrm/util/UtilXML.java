@@ -21,8 +21,10 @@ import es.oyssen.mrm.negocio.vo.LeadVO;
 import es.oyssen.mrm.negocio.vo.LogUsuarioVO;
 import es.oyssen.mrm.negocio.vo.PermisoVO;
 import es.oyssen.mrm.negocio.vo.ResponsableVO;
+import es.oyssen.mrm.negocio.vo.SeminarioRealizadoVO;
 import es.oyssen.mrm.negocio.vo.ServicioUsuarioVO;
 import es.oyssen.mrm.negocio.vo.ServicioVO;
+import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.Constantes;
@@ -626,6 +628,28 @@ public class UtilXML {
 		return sb.toString();
 	}
 	
+	public static final String buildXmlGridUsuariosSeminariosAsignatura(List<UsuarioAnyoSeminarioVO> list) throws Exception {
+		StringBuffer sb = new StringBuffer();
+		sb.append(XML_HEADER);
+		sb.append("<rows>");
+		if(list != null){
+			for (UsuarioAnyoSeminarioVO usr : list) {
+				sb.append("<row id=\"" +usr.getIdUsuario() + "\">");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usr.getNombre()) + "]]></cell>");
+				String apellidos = usr.getApellido1();
+				if(usr.getApellido2() != "") apellidos = apellidos + ", " + usr.getApellido2();
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(apellidos) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usr.getDni()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usr.getTelefono()) + "]]></cell>");				
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usr.getCorreo()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usr.getAnyo_academico()) + "]]></cell>");
+				sb.append("</row>");				
+			}
+		}
+		sb.append("</rows>");
+		return sb.toString();
+	}
+	
 	public static final String buildXmlGridUsuariosGrupo(List<UsuarioVO> list) throws Exception {
 		StringBuffer sb = new StringBuffer();
 		sb.append(XML_HEADER);
@@ -695,5 +719,7 @@ public class UtilXML {
 		else if (id.equals("5")) return "Supplier";
 		else return "";
 	}
+
+	
 }
 

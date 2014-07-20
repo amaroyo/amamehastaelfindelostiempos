@@ -2,22 +2,27 @@ package es.oyssen.mrm.struts.forms.asignaturas;
 
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
 
-public class GridUsuariosEstanciasForm extends DhtmlxGridForm {
+public class GridUsuariosSeminariosAsignaturaForm extends DhtmlxGridForm {
 
 	private String idUsuario;
-	private String idAsignatura;
+	private String idSeminario;
 	private String nombre;
 	private String apellidos;
 	private String dni;
-	private String centro;
-	private String turno;
-	
+	private String telefono;
+	private String email;
 	
 	public String getIdUsuario() {
 		return idUsuario;
 	}
 	public void setIdUsuario(String idUsuario) {
 		this.idUsuario = idUsuario;
+	}
+	public String getIdSeminario() {
+		return idSeminario;
+	}
+	public void setIdSeminario(String idSeminario) {
+		this.idSeminario = idSeminario;
 	}
 	public String getNombre() {
 		return nombre;
@@ -37,23 +42,20 @@ public class GridUsuariosEstanciasForm extends DhtmlxGridForm {
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-	public String getCentro() {
-		return centro;
+	public String getTelefono() {
+		return telefono;
 	}
-	public void setCentro(String centro) {
-		this.centro = centro;
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
-	public String getTurno() {
-		return turno;
+	public String getEmail() {
+		return email;
 	}
-	public void setTurno(String turno) {
-		this.turno = turno;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getIdAsignatura() {
-		return idAsignatura;
-	}
-	public void setIdAsignatura(String idAsignatura) {
-		this.idAsignatura = idAsignatura;
-	}
+	
+	
+	
 	
 }
