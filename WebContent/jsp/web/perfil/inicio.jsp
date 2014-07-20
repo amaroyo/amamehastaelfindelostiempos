@@ -189,17 +189,7 @@
 		    		form.enableLiveValidation(true);
 		    		form.setItemFocus("nombre");
 
-					form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
-						if(form.getItemValue("fotoImagen") == "") {
-							var uriNoProfilePic = '../img/no-profile-pic.png';
-							form.getContainer("foto").innerHTML = "<img src="+ uriNoProfilePic +" />";
-						}
-						else{
-							var profilePic = form.getItemValue("fotoImagen");
-							form.getContainer("foto").innerHTML = "<img src=data:image/jpg;base64,"+ profilePic +" style='width:105px;height:140px'/>";
-						}
-						
-						
+					loadFormPerfil();
 						
 						form.attachEvent("onChange", function (id, value){
 							if(id == "fotoFile"){
@@ -215,27 +205,16 @@
 						 
 						
 						form.attachEvent("onButtonClick", function(id){
-							submittingForm(id, function(){
-								alert(window.getElementById("response_area_iframe").value);
-							});//submittingForm
+							if(id == "aceptar"){
+								document.forms[0].submit();
+								//document.getElementById("realForm").submit();
+								//form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser,"post", function(xml) {
+									alert('<bean:message key="message.perfil.cambiado.exito"/>');
+									loadFormPerfil();
+							}
 						});//onButtonClick
 					});//load
-					
-		    	});//loadStruct
 		    }
-		    
-		    function submittingForm(id, callback){
-		    	if(id == "aceptar"){
-					document.forms[0].submit();
-					//document.getElementById("realForm").submit();
-					//form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser,"post", function(xml) {
-						// esta alerta debe ser condicional de la respuesta del servidor
-						alert('<bean:message key="message.perfil.cambiado.exito"/>');
-						callback();  
-					//});
-				}
-		    }
-		  
 		    
 		    function permisosFormPerfil(){
 		    	<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
@@ -264,20 +243,21 @@
 		        return false;
 		    }
 		    
-		    function previewPicture(input)
-		    {
-		          /*if (input.files && input.files[0])
-		                  {
-		                        var reader = new FileReader();
-		                       reader.onload = function (e)
-		                                              {
-		                                                    $('#blah')
-		                                                    .attr('src',e.target.result)
-		                                                    .width(150)
-		                                                    .height(200);
-		                                              };
-		                       reader.readAsDataURL(input.files[0]);
-		                       }*/
+		    function previewPicture(input){
+		    	
+		    }
+		    
+		    function loadFormPerfil() {
+		    	form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
+					if(form.getItemValue("fotoImagen") == "") {
+						var uriNoProfilePic = '../img/no-profile-pic.png';
+						form.getContainer("foto").innerHTML = "<img src="+ uriNoProfilePic +" />";
+					}
+					else{
+						var profilePic = form.getItemValue("fotoImagen");
+						form.getContainer("foto").innerHTML = "<img src=data:image/jpg;base64,"+ profilePic +" style='width:105px;height:140px'/>";
+					}
+		    	});
 		    }
         </script>
 	</head>
@@ -293,7 +273,7 @@
 				</div >
 			</html:form>
 		</div>
-		<iframe name="response_area_iframe" height="0"></iframe>
+		<iframe name="response_area_iframe" frameBorder="0" height="0"></iframe>
 	</div>
 	</body>
 </html>

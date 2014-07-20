@@ -1,6 +1,16 @@
 package es.oyssen.mrm.struts.actions.usuarios;
 
 
+import java.awt.AlphaComposite;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
+
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXFormAction;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxForm;
@@ -10,6 +20,11 @@ import es.oyssen.mrm.util.StringUtil;
 
 public class EditarUsuarioAction extends DHTMLXFormAction {
 
+	//in pixels
+	private static final int WIDTH = 105;
+	private static final int HEIGHT = 140;
+	
+	
 	@Override
 	public Object load(DhtmlxForm f) throws Exception {
 		
@@ -98,16 +113,36 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		usuario.setDni(form.getDni());
 		usuario.setTelefono(form.getTelefono());
 		
-		int fileSize = form.getFotoFile().getFileSize();
 		byte[] fotoFile = form.getFotoFile().getFileData();
-		//max_allowed_packet for MySQL server is 1MB we should change this for larger files
-		// this means foto + rest of mysql query info cannot be larger than 1048576bytes
-		if(fileSize >= 1048576){
-			return "usuario not changed: exceeded file size";
-		}
-		else if(fileSize <= 0){
+		if(form.getFotoFile().getFileSize() <= 0){
 			fotoFile = null;
 		}
+		else {
+			
+			// convert byte array to BufferedImage
+			InputStream in = new ByteArrayInputStream(fotoFile);
+			BufferedImage originalImage = ImageIO.read(in);
+			
+			int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+			
+			// resizing
+			BufferedImage resizedImage = new BufferedImage(WIDTH, HEIGHT, type);
+			Graphics2D g = resizedImage.createGraphics();
+			g.setComposite(AlphaComposite.Src);
+			g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+			g.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+			g.drawImage(originalImage, 0, 0, WIDTH, HEIGHT, null);
+			g.dispose();	
+			
+			// convert back BufferedImage to byte array
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write(resizedImage, "jpg", baos);
+			baos.flush();
+			fotoFile = baos.toByteArray();
+			baos.close();
+		}
+		
 		usuario.setFotoFile(fotoFile);
 		usuario.setContrasenya(null);
 		getUsuariosService().update(usuario);

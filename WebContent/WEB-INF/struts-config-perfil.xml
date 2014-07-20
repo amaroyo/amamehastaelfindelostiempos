@@ -17,15 +17,9 @@
 
 		<action path="/perfil/inicio" forward="/jsp/web/perfil/inicio.jsp" />
 		
-		<action path="/perfil/editarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  >
-			<exception type="java.lang.Exception" key="error.subir.fichero" path="/perfil/inicio.do"></exception>
-		</action>
-		<action path="/perfil/actualizarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction" >
-			<exception type="java.lang.Exception" key="error.subir.fichero" path="/perfil/inicio.do"></exception>
-		</action>
-		<action path="/perfil/actualizarcontrasena" name="EditarContrasenaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.ActualizarContrasenaAction"  >
-	
-		</action>
+		<action path="/perfil/editarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />
+		<action path="/perfil/actualizarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction" />
+		<action path="/perfil/actualizarcontrasena" name="EditarContrasenaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.ActualizarContrasenaAction"  />
 	</action-mappings>
 
 </struts-config>
