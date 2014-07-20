@@ -101,6 +101,7 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		int fileSize = form.getFotoFile().getFileSize();
 		byte[] fotoFile = form.getFotoFile().getFileData();
 		//max_allowed_packet for MySQL server is 1MB we should change this for larger files
+		// this means foto + rest of mysql query info cannot be larger than 1048576bytes
 		if(fileSize >= 1048576){
 			return "usuario not changed: exceeded file size";
 		}
