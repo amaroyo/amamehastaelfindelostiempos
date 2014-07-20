@@ -414,6 +414,7 @@ insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) 
 
 insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 3, 2, '2013/2014'); -- id5
 insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 8, 3, '2013/2014'); -- id6
+insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 8, 1, '2012/2013'); -- id7
 
 
 -- Estancias_unidad_clinica
@@ -443,6 +444,7 @@ insert into seminarios_realizados (id_portafolio, id_seminario) values (3,2);
 insert into seminarios_realizados (id_portafolio, id_seminario) values (3,3);
 insert into seminarios_realizados (id_portafolio, id_seminario) values (5,4);
 insert into seminarios_realizados (id_portafolio, id_seminario) values (6,5);
+insert into seminarios_realizados (id_portafolio, id_seminario) values (7,3);
 
 
 
