@@ -27,7 +27,7 @@ import es.oyssen.mrm.negocio.vo.UsuarioVO;
 public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 	
 	private static String SQL_INSERT = "insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni, telefono, foto) values (?,?,?,?,?,?,?,?,?)";
-	private static String SQL_UPDATE = "update usuarios set nombre=?, apellido1=?, apellido2=?, dni=?, correo=?, telefono=?, foto=?";
+	private static String SQL_UPDATE = "update usuarios set nombre=?, apellido1=?, apellido2=?, dni=?, correo=?, telefono=?";
 	private static String SQL_DELETE = "delete from usuarios where id_usuario = ?";
 	private static String SQL_FIND_ALL = "select * from usuarios";
 	private static String SQL_FIND_BY_ID = "select * from usuarios where id_usuario = ?";
@@ -83,22 +83,39 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 		try {
 			
 			String query = SQL_UPDATE;
+			Object[] o;
 
 			
 			if (usuario.getContrasenya() != null)
-					query += ", contrasenya='" + usuario.getContrasenya()+"'"; 
+					query += ", contrasenya='" + usuario.getContrasenya()+"'";
+			
+			if (usuario.getFotoFile() != null){
+				query += ", foto= ?";
+				o = new Object[]{
+						usuario.getNombre(),
+						usuario.getApellido1(),
+						usuario.getApellido2(),
+						usuario.getDni(),
+						usuario.getCorreo(),
+						usuario.getTelefono(),
+						usuario.getFotoFile(),
+						usuario.getIdUsuario()};
+			}
+			else {
+				o = new Object[]{
+						usuario.getNombre(),
+						usuario.getApellido1(),
+						usuario.getApellido2(),
+						usuario.getDni(),
+						usuario.getCorreo(),
+						usuario.getTelefono(),
+						usuario.getIdUsuario()};
+			}
 			
 			query += " where id_usuario = ?";
 			
-			getJdbcTemplate().update(query, new Object[]{
-					usuario.getNombre(),
-					usuario.getApellido1(),
-					usuario.getApellido2(),
-					usuario.getDni(),
-					usuario.getCorreo(),
-					usuario.getTelefono(),
-					usuario.getFotoFile(),
-					usuario.getIdUsuario()});
+			
+			getJdbcTemplate().update(query, o);
 		} catch(Exception e) {
 			throw new DAOUpdateException(e);
 		}

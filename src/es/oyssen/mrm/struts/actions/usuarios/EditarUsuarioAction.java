@@ -98,10 +98,17 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		usuario.setDni(form.getDni());
 		usuario.setTelefono(form.getTelefono());
 		
+		int fileSize = form.getFotoFile().getFileSize();
 		byte[] fotoFile = form.getFotoFile().getFileData();
+		//max_allowed_packet for MySQL server is 1MB we should change this for larger files
+		if(fileSize >= 1048576){
+			return "usuario not changed: exceeded file size";
+		}
+		else if(fileSize <= 0){
+			fotoFile = null;
+		}
 		usuario.setFotoFile(fotoFile);
 		usuario.setContrasenya(null);
-		
 		getUsuariosService().update(usuario);
 		return "usuario changed";
 		

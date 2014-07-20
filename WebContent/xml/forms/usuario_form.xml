@@ -7,11 +7,11 @@
        <item type="input" name="apellido1" label="Apellido1" labelWidth="110" required="true" />
        <item type="input" name="apellido2" label="Apellido2" labelWidth="110"/>
        <item type="input" name="dni" label="DNI" labelWidth="110" required="true" />
-       <item type="input" name="correo" label="Email" labelWidth="110"  required="true" validate="ValidEmail,ucmEsEmail"/>
+       <item type="input" name="correo" label="Email" labelWidth="110"  required="true" validate="ucmEsEmail"/>
        <item type="input" name="telefono" label="Telefono" labelWidth="110" validate="ValidNumeric"/>
        <item type="hidden" name="fotoImagen"/>
        <item type="container" name="foto" label="Foto" labelWidth="110"/>
-       <item type="file" name="fotoFile" label="El tamaño de la imagen no debe exceder 1 MB" position="label-top"/>
+       <item type="file" name="fotoFile" label="* El tamaño de la imagen no debe exceder de 1 MB" position="label-top"/>
    </item>
    <item type="button" name="aceptar" value="Aceptar" />
 </items>

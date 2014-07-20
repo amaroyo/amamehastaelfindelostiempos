@@ -14,22 +14,10 @@
 	    <script type="text/javascript" src="../js/general.js"></script>
 	    
 	    <link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlx.css">
-		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxgrid.css">
-		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxgrid_skins.css">
-		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxlayout.css">
-		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxform_dhx_skyblue.css">
-		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxgrid_dhx_skyblue.css">
-		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxlayout_dhx_skyblue.css">
 
 	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlx.js"></script>
 		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxcommon.js"></script>
-		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxlayout.js"></script>
-		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxform.js"></script>
-		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxgrid.js"></script>
-		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxcontainer.js"></script>
 		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
-		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_item_container.js"></script>
-		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_item_upload.js"></script>
 	    
 
 	    <script type="text/javascript">
@@ -208,10 +196,6 @@
 						}
 						else{
 							var profilePic = form.getItemValue("fotoImagen");
-							
-							
-							
-							
 							form.getContainer("foto").innerHTML = "<img src=data:image/jpg;base64,"+ profilePic +" style='width:105px;height:140px'/>";
 						}
 						
@@ -231,29 +215,25 @@
 						 
 						
 						form.attachEvent("onButtonClick", function(id){
-							if(id == "aceptar"){
-								
-								
-								//si no ha subido nada dejar la que estaba
-								
-								
-								document.forms[0].submit();
-								//document.getElementById("realForm").submit();
-								//form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser,"post", function(xml) {
-									alert('<bean:message key="message.perfil.cambiado.exito"/>');
-								//});
-							}
-						});
-						form.attachEvent("onEnter", function() {
-							form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-								alert('<bean:message key="message.perfil.cambiado.exito"/>');
-							}); 
-			    		});
-						
-						
+							submittingForm(id, function(){
+								alert(window.getElementById("response_area_iframe").value);
+							});//submittingForm
+						});//onButtonClick
 					});//load
 					
 		    	});//loadStruct
+		    }
+		    
+		    function submittingForm(id, callback){
+		    	if(id == "aceptar"){
+					document.forms[0].submit();
+					//document.getElementById("realForm").submit();
+					//form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser,"post", function(xml) {
+						// esta alerta debe ser condicional de la respuesta del servidor
+						alert('<bean:message key="message.perfil.cambiado.exito"/>');
+						callback();  
+					//});
+				}
 		    }
 		  
 		    
@@ -307,13 +287,13 @@
 		
 		</div>
 		<div id="content" style="float:left; height:100%; width:550px;">
-			<html:form action="<%=accion%>" enctype="multipart/form-data" target="upload_area">
+			<html:form action="<%=accion%>" enctype="multipart/form-data" target="response_area_iframe">
 				<div id="myForm">
 	 
 				</div >
 			</html:form>
 		</div>
-		<iframe name="upload_area" frameBorder="0" height="0"></iframe>
+		<iframe name="response_area_iframe" height="0"></iframe>
 	</div>
 	</body>
 </html>
