@@ -183,7 +183,7 @@
 				    		formUsuario.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 				    		
 				    		formUsuario.hideItem('aceptar');
-				    		formUsuario.hideItem('fotoFile');
+				    		formUsuario.removeItem('fotoFile');
 				    		
 				    		formUsuario.forEachItem(function(id){
 				    			switch(id) {

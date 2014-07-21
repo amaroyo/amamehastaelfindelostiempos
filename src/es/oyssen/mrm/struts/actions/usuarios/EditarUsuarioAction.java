@@ -113,35 +113,40 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		usuario.setDni(form.getDni());
 		usuario.setTelefono(form.getTelefono());
 		
-		byte[] fotoFile = form.getFotoFile().getFileData();
-		if(form.getFotoFile().getFileSize() <= 0){
+		byte[] fotoFile;
+		if(form.getFotoFile() == null){
 			fotoFile = null;
 		}
-		else {
-			
-			// convert byte array to BufferedImage
-			InputStream in = new ByteArrayInputStream(fotoFile);
-			BufferedImage originalImage = ImageIO.read(in);
-			
-			int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
-			
-			// resizing
-			BufferedImage resizedImage = new BufferedImage(WIDTH, HEIGHT, type);
-			Graphics2D g = resizedImage.createGraphics();
-			g.setComposite(AlphaComposite.Src);
-			g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-			g.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
-			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-			g.drawImage(originalImage, 0, 0, WIDTH, HEIGHT, null);
-			g.dispose();	
-			
-			// convert back BufferedImage to byte array
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ImageIO.write(resizedImage, "jpg", baos);
-			baos.flush();
-			fotoFile = baos.toByteArray();
-			baos.close();
-		}
+		else{
+			if(form.getFotoFile().getFileSize() <= 0){
+				fotoFile = null;
+			}
+			else {
+				fotoFile = form.getFotoFile().getFileData();
+				// convert byte array to BufferedImage
+				InputStream in = new ByteArrayInputStream(fotoFile);
+				BufferedImage originalImage = ImageIO.read(in);
+				
+				int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+				
+				// resizing
+				BufferedImage resizedImage = new BufferedImage(WIDTH, HEIGHT, type);
+				Graphics2D g = resizedImage.createGraphics();
+				g.setComposite(AlphaComposite.Src);
+				g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+				g.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+				g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+				g.drawImage(originalImage, 0, 0, WIDTH, HEIGHT, null);
+				g.dispose();	
+				
+				// convert back BufferedImage to byte array
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				ImageIO.write(resizedImage, "jpg", baos);
+				baos.flush();
+				fotoFile = baos.toByteArray();
+				baos.close();
+			}//else
+		}//else
 		
 		usuario.setFotoFile(fotoFile);
 		usuario.setContrasenya(null);

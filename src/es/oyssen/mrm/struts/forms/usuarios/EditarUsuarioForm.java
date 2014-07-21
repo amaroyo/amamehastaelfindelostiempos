@@ -1,7 +1,5 @@
 package es.oyssen.mrm.struts.forms.usuarios;
 
-import java.awt.Image;
-
 import org.apache.struts.upload.FormFile;
 
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
