@@ -179,9 +179,11 @@
 				    		formUsuario.setItemLabel('telefono','<bean:message key="label.telefono"/>');
 				    		formUsuario.setItemLabel('correo','<bean:message key="label.address.email"/>');	
 				    		formUsuario.setItemLabel('foto','<bean:message key="label.foto"/>');	
+				    		formUsuario.setItemLabel('fotoFile','<bean:message key="label.max.size"/>');
 				    		formUsuario.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 				    		
 				    		formUsuario.hideItem('aceptar');
+				    		formUsuario.hideItem('fotoFile');
 				    		
 				    		formUsuario.forEachItem(function(id){
 				    			switch(id) {
@@ -266,9 +268,13 @@
 							</logic:match>			    		
 							
 							formUsuario.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
-								if(formUsuario.getItemValue("fotoUri") == "") {
+								if(formUsuario.getItemValue("fotoImagen") == "") {
 									var uriNoProfilePic = '../img/no-profile-pic.png';
-									formUsuario.getContainer("foto").innerHTML = "<img src="+ uriNoProfilePic +">";
+									formUsuario.getContainer("foto").innerHTML = "<img src="+ uriNoProfilePic +" />";
+								}
+								else{
+									var profilePic = formUsuario.getItemValue("fotoImagen");
+									formUsuario.getContainer("foto").innerHTML = "<img src=data:image/jpg;base64,"+ profilePic +" style='width:105px;height:140px'/>";
 								}
 								formUsuario.attachEvent("onButtonClick", function(id){
 									if (id == "aceptar") {
