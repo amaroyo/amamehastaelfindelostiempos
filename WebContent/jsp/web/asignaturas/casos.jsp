@@ -149,10 +149,10 @@
 				
 				gridProfesores = a.attachGrid();
 		    	
-				gridProfesores.setHeader(["<bean:message key="label.alumno" />","<bean:message key="label.dni" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
-				gridProfesores.setColTypes("ro,ro,ro,ro");
+				gridProfesores.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","<bean:message key="label.telefono" />","<bean:message key="label.user.email" />"]);
+				gridProfesores.setColTypes("ro,ro,ro,ro,ro");
 		    	
-				gridProfesores.setColSorting('str,str,str,str');
+				gridProfesores.setColSorting('str,str,str,str,str');
 				gridProfesores.enableMultiselect(false);
 				gridProfesores.init();
 		    	

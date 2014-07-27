@@ -6,6 +6,7 @@ public class CasoClinicoVO {
 	private String id_caso_clinico;
 	private String id_portafolio;
 	private String nombre;
+	private String fecha_subida;
 	private String caso_clinico;
 
 	
@@ -62,6 +63,18 @@ public class CasoClinicoVO {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	
+	
+
+	public String getFechaSubida() {
+		return fecha_subida;
+	}
+
+
+	public void setFechaSubida(String fecha_subida) {
+		this.fecha_subida = fecha_subida;
 	}
 
 

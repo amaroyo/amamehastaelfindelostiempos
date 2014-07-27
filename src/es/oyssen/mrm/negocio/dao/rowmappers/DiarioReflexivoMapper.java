@@ -14,6 +14,7 @@ public class DiarioReflexivoMapper implements RowMapper {
 	public static final String FIELD_ID_DIARIO_REFLEXIVO = "id_diario_reflexivo";
 	public static final String FIELD_ID_PORTAFOLIO = "id_portafolio";
 	public static final String FIELD_NOMBRE = "nombre";
+	public static final String FIELD_FECHA_SUBIDA = "fecha_subida";
 	public static final String FIELD_DIARIO_REFLEXIVO = "diario_reflexivo";
     
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -21,6 +22,7 @@ public class DiarioReflexivoMapper implements RowMapper {
     	o.setIdDiarioReflexivo(StringUtil.nullToString(rs.getString(FIELD_ID_DIARIO_REFLEXIVO)));
     	o.setIdPortafolio(StringUtil.nullToString(rs.getString(FIELD_ID_PORTAFOLIO)));
     	o.setNombre(StringUtil.nullToString(rs.getString(FIELD_NOMBRE)));
+    	o.setFechaSubida(StringUtil.nullToString(rs.getString(FIELD_FECHA_SUBIDA)));
     	o.setDiarioReflexivo(StringUtil.nullToString(rs.getString(FIELD_DIARIO_REFLEXIVO)));
 		return o;
 	}

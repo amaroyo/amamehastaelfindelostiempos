@@ -22,8 +22,8 @@ import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 
 public class MySqlDAOCasosClinicosImpl extends DAOBase implements DAOCasosClinicos{
 
-	private static String SQL_INSERT = "insert into casos_clinicos (id_portafolio, caso_clinico) values (?,?)";
-	private static String SQL_UPDATE = "update casos_clinicos set caso_clinico=?";
+	private static String SQL_INSERT = "insert into casos_clinicos (id_portafolio, nombre, caso_clinico) values (?,?,?)";
+	private static String SQL_UPDATE = "update casos_clinicos set caso_clinico=?, nombre=?, fecha_subida=?";
 	private static String SQL_DELETE = "delete from casos_clinicos where id_portafolio = ? and id_caso_clinico = ?";
 	private static String SQL_FIND_BY_PORTAFOLIO = "select * from casos_clinicos where id_portafolio = ?";
 
@@ -39,7 +39,8 @@ public class MySqlDAOCasosClinicosImpl extends DAOBase implements DAOCasosClinic
 						throws SQLException {
 					PreparedStatement ps = conn.prepareStatement(SQL_INSERT, new String[]{"id_caso_clinico"});
 					ps.setString(1, casoClinico.getIdPortafolio());
-					ps.setString(2, casoClinico.getCasoClinico());
+					ps.setString(2, casoClinico.getNombre());
+					ps.setString(3, casoClinico.getCasoClinico());
 					return ps;
 
 				}
@@ -62,6 +63,8 @@ public class MySqlDAOCasosClinicosImpl extends DAOBase implements DAOCasosClinic
 
 			getJdbcTemplate().update(query, new Object[]{
 					casoClinico.getCasoClinico(),
+					casoClinico.getNombre(),
+					casoClinico.getFechaSubida(),
 					casoClinico.getIdCasoClinico(),
 					casoClinico.getIdPortafolio()});
 		} catch(Exception e) {

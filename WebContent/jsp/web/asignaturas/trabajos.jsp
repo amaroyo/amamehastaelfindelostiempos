@@ -136,7 +136,7 @@
 			}
 			
 			function goActualizar() {
-				var idTrabajoCampo = tabbar.getActiveTab();
+				var nombreTrabajoCampo = tabbar.getActiveTab();
 				if (profesor) gridProfesores.clearAndLoad("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&nombreTrabajoCampo=" + nombreTrabajoCampo);	 
 				else gridAlumnos.clearAndLoad("gridusuarios.do");		    	
 		    	//tabbar.clearAll();		    	

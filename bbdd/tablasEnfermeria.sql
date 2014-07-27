@@ -286,6 +286,7 @@ CREATE TABLE IF NOT EXISTS diarios_reflexivos (
 	id_portafolio INT(50) NOT NULL,
 	nombre VARCHAR(100) NOT NULL,
 	diario_relfexivo LONGBLOB,
+	fecha_subida DATETIME,
 	PRIMARY KEY(id_diario_reflexivo, id_portafolio),
 	FOREIGN KEY (id_portafolio)
 		REFERENCES portafolios(id_portafolio)
@@ -302,6 +303,7 @@ CREATE TABLE IF NOT EXISTS anexos (
 	id_portafolio INT(50) NOT NULL,
 	nombre VARCHAR(100) NOT NULL,
 	anexo LONGBLOB,
+	fecha_subida DATETIME,
 	PRIMARY KEY(id_anexo, id_portafolio),
 	FOREIGN KEY (id_portafolio)
 		REFERENCES portafolios(id_portafolio)
@@ -318,6 +320,7 @@ CREATE TABLE IF NOT EXISTS casos_clinicos (
 	id_portafolio INT(50) NOT NULL,
 	nombre VARCHAR(100) NOT NULL,
 	caso_clinico LONGBLOB,
+	fecha_subida DATETIME,
 	PRIMARY KEY(id_caso_clinico, id_portafolio),
 	FOREIGN KEY (id_portafolio)
 		REFERENCES portafolios(id_portafolio)

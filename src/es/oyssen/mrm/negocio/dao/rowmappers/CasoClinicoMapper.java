@@ -14,6 +14,7 @@ public class CasoClinicoMapper implements RowMapper {
 	public static final String FIELD_ID_CASO_CLINICO = "id_caso_clinico";
 	public static final String FIELD_ID_PORTAFOLIO = "id_portafolio";
 	public static final String FIELD_NOMBRE = "nombre";
+	public static final String FIELD_FECHA_SUBIDA = "fecha_subida";
 	public static final String FIELD_CASO_CLINICO = "caso_clinico";
     
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -21,6 +22,7 @@ public class CasoClinicoMapper implements RowMapper {
     	o.setIdCasoClinico(StringUtil.nullToString(rs.getString(FIELD_ID_CASO_CLINICO)));
     	o.setIdPortafolio(StringUtil.nullToString(rs.getString(FIELD_ID_PORTAFOLIO)));
     	o.setNombre(StringUtil.nullToString(rs.getString(FIELD_NOMBRE)));
+    	o.setFechaSubida(StringUtil.nullToString(rs.getString(FIELD_FECHA_SUBIDA)));
     	o.setCasoClinico(StringUtil.nullToString(rs.getString(FIELD_CASO_CLINICO)));
 		return o;
 	}

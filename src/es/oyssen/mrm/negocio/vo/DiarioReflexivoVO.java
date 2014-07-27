@@ -6,6 +6,7 @@ public class DiarioReflexivoVO {
 	private String id_diario_reflexivo;
 	private String id_portafolio;
 	private String nombre;
+	private String fecha_subida;
 	private String diario_reflexivo;
 
 	
@@ -62,6 +63,19 @@ public class DiarioReflexivoVO {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+
+	
+	
+	
+	public String getFechaSubida() {
+		return fecha_subida;
+	}
+
+
+	public void setFechaSubida(String fecha_subida) {
+		this.fecha_subida = fecha_subida;
 	}
 
 

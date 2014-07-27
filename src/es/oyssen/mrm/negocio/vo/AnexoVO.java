@@ -6,6 +6,7 @@ public class AnexoVO {
 	private String id_anexo;
 	private String id_portafolio;
 	private String nombre;
+	private String fecha_subida;
 	private String anexo;
 
 	
@@ -55,6 +56,17 @@ public class AnexoVO {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	
+	
+
+	public String getFechaSubida() {
+		return fecha_subida;
+	}
+
+	public void setFechaSubida(String fecha_subida) {
+		this.fecha_subida = fecha_subida;
 	}
 
 	@Override

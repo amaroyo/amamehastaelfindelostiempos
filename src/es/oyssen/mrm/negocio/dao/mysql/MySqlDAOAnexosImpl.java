@@ -22,8 +22,8 @@ import es.oyssen.mrm.negocio.vo.AnexoVO;
 
 public class MySqlDAOAnexosImpl extends DAOBase implements DAOAnexos{
 
-	private static String SQL_INSERT = "insert into anexos (id_portafolio, anexo) values (?,?)";
-	private static String SQL_UPDATE = "update anexos set anexo=?";
+	private static String SQL_INSERT = "insert into anexos (id_portafolio, nombre, anexo) values (?,?,?)";
+	private static String SQL_UPDATE = "update anexos set anexo=?, nombre =?, fecha_subida=?";
 	private static String SQL_DELETE = "delete from anexos where id_portafolio = ? and id_anexo = ?";
 	private static String SQL_FIND_BY_PORTAFOLIO = "select * from anexos where id_portafolio = ?";
 
@@ -39,6 +39,7 @@ public class MySqlDAOAnexosImpl extends DAOBase implements DAOAnexos{
 						throws SQLException {
 					PreparedStatement ps = conn.prepareStatement(SQL_INSERT, new String[]{"id_anexo"});
 					ps.setString(1, anexo.getIdPortafolio());
+					ps.setString(2, anexo.getNombre());
 					ps.setString(2, anexo.getAnexo());
 					return ps;
 
@@ -62,6 +63,8 @@ public class MySqlDAOAnexosImpl extends DAOBase implements DAOAnexos{
 
 			getJdbcTemplate().update(query, new Object[]{
 					anexo.getAnexo(),
+					anexo.getNombre(),
+					anexo.getFechaSubida(),
 					anexo.getIdAnexo(),
 					anexo.getIdPortafolio()});
 		} catch(Exception e) {

@@ -22,8 +22,8 @@ import es.oyssen.mrm.negocio.vo.DiarioReflexivoVO;
 
 public class MySqlDAODiariosReflexivosImpl extends DAOBase implements DAODiariosReflexivos{
 
-	private static String SQL_INSERT = "insert into diarios_reflexivos (id_portafolio, diario_reflexivo) values (?,?)";
-	private static String SQL_UPDATE = "update diarios_reflexivos set diario_reflexivo=?";
+	private static String SQL_INSERT = "insert into diarios_reflexivos (id_portafolio, nombre, diario_reflexivo) values (?,?,?)";
+	private static String SQL_UPDATE = "update diarios_reflexivos set diario_reflexivo=?, nombre=?, fecha_subida=?";
 	private static String SQL_DELETE = "delete from diarios_reflexivos where id_portafolio = ? and id_diario_reflexivo = ?";
 	private static String SQL_FIND_BY_PORTAFOLIO = "select * from diarios_reflexivos where id_portafolio = ?";
 
@@ -39,7 +39,8 @@ public class MySqlDAODiariosReflexivosImpl extends DAOBase implements DAODiarios
 						throws SQLException {
 					PreparedStatement ps = conn.prepareStatement(SQL_INSERT, new String[]{"id_diario_reflexivo"});
 					ps.setString(1, diarioReflexivo.getIdPortafolio());
-					ps.setString(2, diarioReflexivo.getDiarioReflexivo());
+					ps.setString(2, diarioReflexivo.getNombre());
+					ps.setString(3, diarioReflexivo.getDiarioReflexivo());
 					return ps;
 
 				}
@@ -62,6 +63,8 @@ public class MySqlDAODiariosReflexivosImpl extends DAOBase implements DAODiarios
 
 			getJdbcTemplate().update(query, new Object[]{
 					diarioReflexivo.getDiarioReflexivo(),
+					diarioReflexivo.getNombre(),
+					diarioReflexivo.getFechaSubida(),
 					diarioReflexivo.getIdDiarioReflexivo(),
 					diarioReflexivo.getIdPortafolio()});
 		} catch(Exception e) {
