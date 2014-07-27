@@ -285,7 +285,7 @@ CREATE TABLE IF NOT EXISTS diarios_reflexivos (
 	id_diario_reflexivo INT(10) NOT NULL auto_increment,
 	id_portafolio INT(50) NOT NULL,
 	nombre VARCHAR(100) NOT NULL,
-	diario_relfexivo LONGBLOB,
+	diario_reflexivo LONGBLOB,
 	fecha_subida DATETIME,
 	PRIMARY KEY(id_diario_reflexivo, id_portafolio),
 	FOREIGN KEY (id_portafolio)

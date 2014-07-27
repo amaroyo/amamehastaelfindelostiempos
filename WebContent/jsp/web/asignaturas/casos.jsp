@@ -180,7 +180,7 @@
 				gridProfesoresAlumno.setHeader(["<bean:message key="label.nombre" />", "<bean:message key="label.fecha" />", "<bean:message key="label.enlace" />"]);
 				gridProfesoresAlumno.setColTypes("ro,ro,ro");
 		    	
-				gridProfesoresAlumno.setColSorting('str, str,str');
+				gridProfesoresAlumno.setColSorting('str,str,str');
 				gridProfesoresAlumno.enableMultiselect(false);
 				gridProfesoresAlumno.init();
 		    	
@@ -201,7 +201,10 @@
 		    }
 			
 			function doOnRowSelectedOptions(rowID,celInd){
-				if(celInd=='2') alert("Descargar Archivo");
+				if(celInd=='2') {
+					var parts = rowID.split("-");
+					alert("Descargar Archivo con idPortafolio=" + parts[0] + " y idCasoClinico=" + parts[1]);
+				}
 	
 			}
 			

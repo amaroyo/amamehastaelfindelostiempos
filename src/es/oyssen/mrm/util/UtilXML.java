@@ -13,6 +13,7 @@ import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.ComercialVO;
 import es.oyssen.mrm.negocio.vo.ContactoCanalVO;
 import es.oyssen.mrm.negocio.vo.ContactoDistribuidorVO;
+import es.oyssen.mrm.negocio.vo.DiarioReflexivoVO;
 import es.oyssen.mrm.negocio.vo.DistribuidorVO;
 import es.oyssen.mrm.negocio.vo.EmpresaVO;
 import es.oyssen.mrm.negocio.vo.FicheroVO;
@@ -681,7 +682,7 @@ public class UtilXML {
 		sb.append("<rows>");
 		if(list != null){
 			for (UsuarioTrabajoCampoVO utc : list) {
-				sb.append("<row id=\"" +utc.getIdPortafolio() + " - " + utc.getIdTrabajoDeCampo() + "\">");
+				sb.append("<row id=\"" +utc.getIdPortafolio() + "-" + utc.getIdTrabajoDeCampo() + "\">");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(utc.getNombre()) + "]]></cell>");
 				String apellidos = utc.getApellido1();
 				if(utc.getApellido2() != "") apellidos = apellidos + ", " + utc.getApellido2();
@@ -767,7 +768,7 @@ public class UtilXML {
 		sb.append("<rows>");
 		if(list != null){
 			for (CasoClinicoVO cc : list) {
-				sb.append("<row id=\"" +cc.getIdPortafolio() + " - " + cc.getIdCasoClinico() + "\">");
+				sb.append("<row id=\"" +cc.getIdPortafolio() + "-" + cc.getIdCasoClinico() + "\">");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(cc.getNombre()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(cc.getFechaSubida(),false)) + "]]></cell>");
 				sb.append("<cell><![CDATA[" +  "Descargar" + "]]></cell>");
@@ -778,6 +779,22 @@ public class UtilXML {
 		return sb.toString();
 	}
 	
+	public static String buildXmlGridDiariosReflexivosAsignaturaUsuario(List<DiarioReflexivoVO> list) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(XML_HEADER);
+		sb.append("<rows>");
+		if(list != null){
+			for (DiarioReflexivoVO dr : list) {
+				sb.append("<row id=\"" +dr.getIdPortafolio() + "-" + dr.getIdDiarioReflexivo() + "\">");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(dr.getNombre()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(dr.getFechaSubida(),false)) + "]]></cell>");
+				sb.append("<cell><![CDATA[" +  "Descargar" + "]]></cell>");
+				sb.append("</row>");				
+			}
+		}
+		sb.append("</rows>");
+		return sb.toString();
+	}
 	
 	private static final String nombreGrupo(String id){
 		if (id.equals("1")) return "Super user";
@@ -797,6 +814,8 @@ public class UtilXML {
 		else out = date[2] + "/" +  date[1] + "/" + date[0] + " " + hora[0];
 		return out;
 	}
+
+	
 
 	
 

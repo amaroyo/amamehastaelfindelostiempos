@@ -460,12 +460,12 @@ insert into seminarios_realizados (id_portafolio, id_seminario) values (7,3);
 
 
 -- Diarios Reflexivos
-insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (5, 'Diario I', null, '2013-10-13 23:59:59');
-insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (5, 'Diario II', null, '2014-10-13 23:59:59');
-insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (5, 'Diario III', null, '2015-10-13 23:59:59');
-insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (4, 'Diario I', null, '2016-10-13 23:59:59');
-insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (4, 'Diario II', null, '2017-10-13 23:59:59');
-insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (6, 'Diario I', null, '2018-10-13 23:59:59');
+insert into diarios_reflexivos (id_portafolio, nombre, diario_reflexivo, fecha_subida) values (5, 'Diario I', null, '2013-10-13 23:59:59');
+insert into diarios_reflexivos (id_portafolio, nombre, diario_reflexivo, fecha_subida) values (5, 'Diario II', null, '2014-10-13 23:59:59');
+insert into diarios_reflexivos (id_portafolio, nombre, diario_reflexivo, fecha_subida) values (5, 'Diario III', null, '2015-10-13 23:59:59');
+insert into diarios_reflexivos (id_portafolio, nombre, diario_reflexivo, fecha_subida) values (4, 'Diario I', null, '2016-10-13 23:59:59');
+insert into diarios_reflexivos (id_portafolio, nombre, diario_reflexivo, fecha_subida) values (4, 'Diario II', null, '2017-10-13 23:59:59');
+insert into diarios_reflexivos (id_portafolio, nombre, diario_reflexivo, fecha_subida) values (6, 'Diario I', null, '2018-10-13 23:59:59');
 
 
 -- Anexos

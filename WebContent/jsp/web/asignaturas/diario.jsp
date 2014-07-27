@@ -41,7 +41,7 @@
 					main_layout = new dhtmlXLayoutObject(document.body, '2U');
 		    		a = main_layout.cells('a');
 		    		b = main_layout.cells('b');
-		    		b.setWidth(250);
+		    		b.setWidth(350);
 		    		a.hideHeader();
 					b.setText('<bean:message key="label.diario.reflexivo.alumno"/>');
 				</logic:match>
@@ -67,6 +67,22 @@
 		    		toolbarServicios.setItemText('subirCorrecciones',"<bean:message key="button.subir.correcciones"/>");
 		    		toolbarServicios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+		    		
+		    		toolbarServicios.hideItem('subirCorrecciones');
+		    		toolbarServicios.hideItem('sep3');
+		    		toolbarServicios.hideItem('fechaLimite');
+		    		toolbarServicios.hideItem('sep4');
+		    	
+		    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+			    		toolbarServicios.hideItem('subirPractica');
+			    		toolbarServicios.hideItem('sep1');
+	    			</logic:match>
+	    			<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >    	
+			    		toolbarServicios.hideItem('descargarTodos');
+			    		toolbarServicios.hideItem('sep2');
+	    			</logic:notMatch>
+		    		
+		    	
 		    	});
 		    	
 		    	if (profesor) goGridProfesores();
@@ -97,7 +113,7 @@
 			}
 			
 			function goActualizar() {
-				if (profesor) gridProfesores.clearAndLoad("gridusuarios.do");	 
+				if (profesor) gridProfesores.clearAndLoad("gridUsuariosDiariosReflexivosAsignatura.do?idAsignatura=" + idAsignatura);	 
 				else gridAlumnos.clearAndLoad("gridusuarios.do");		    	
 		    	tabbar.clearAll();		    	
 		    }
@@ -130,14 +146,14 @@
 				
 				gridProfesores = a.attachGrid();
 		    	
-				gridProfesores.setHeader(["<bean:message key="label.alumno" />","<bean:message key="label.dni" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
-				gridProfesores.setColTypes("ro,ro,ro,ro");
+				gridProfesores.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","<bean:message key="label.telefono" />","<bean:message key="label.user.email" />"]);
+				gridProfesores.setColTypes("ro,ro,ro,ro,ro");
 		    	
-				gridProfesores.setColSorting('str,str,str,str');
+				gridProfesores.setColSorting('str,str,str,str,str');
 				gridProfesores.enableMultiselect(false);
 				gridProfesores.init();
 		    	
-		    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+		    	var gridProcessorPro = new dataProcessor("gridUsuariosDiariosReflexivosAsignatura.do?idAsignatura=" + idAsignatura);
 		    	gridProcessorPro.enableUTFencoding('simple');
 		    	gridProcessorPro.init(gridProfesores);	  
 		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -149,7 +165,7 @@
 		    	
 		    	gridProfesores.attachEvent("onRowSelect",doOnRowSelected);
 		    	
-		    	gridProfesores.clearAndLoad("gridusuarios.do");
+		    	gridProfesores.clearAndLoad("gridUsuariosDiariosReflexivosAsignatura.do?idAsignatura=" + idAsignatura);
 				
 			}
 			
@@ -158,14 +174,14 @@
 				var gridProfesoresAlumno = b.attachGrid();
 				
 		    	
-				gridProfesoresAlumno.setHeader(["<bean:message key="label.nombre" />", "<bean:message key="label.fecha" />"]);
-				gridProfesoresAlumno.setColTypes("ro,ro");
+				gridProfesoresAlumno.setHeader(["<bean:message key="label.nombre" />", "<bean:message key="label.fecha" />", "<bean:message key="label.enlace" />"]);
+				gridProfesoresAlumno.setColTypes("ro,ro,ro");
 		    	
-				gridProfesoresAlumno.setColSorting('str, str');
+				gridProfesoresAlumno.setColSorting('str,str,str');
 				gridProfesoresAlumno.enableMultiselect(false);
 				gridProfesoresAlumno.init();
 		    	
-		    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+		    	var gridProcessorPro = new dataProcessor("gridDiariosReflexivosAsignaturaUsuario.do?idPortafolio=" + rowID);
 		    	gridProcessorPro.enableUTFencoding('simple');
 		    	gridProcessorPro.init(gridProfesoresAlumno);	  
 		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -177,12 +193,15 @@
 		    	
 		    	gridProfesoresAlumno.attachEvent("onRowSelect",doOnRowSelectedOptions); 
 		    	
-		    	gridProfesoresAlumno.clearAndLoad("gridusuarios.do");
+		    	gridProfesoresAlumno.clearAndLoad("gridDiariosReflexivosAsignaturaUsuario.do?idPortafolio=" + rowID);
 		    	
 		    }
 			
 			function doOnRowSelectedOptions(rowID,celInd){
-				alert("Descargar Archivo");
+				if(celInd=='2') {
+					var parts = rowID.split("-");
+					alert("Descargar Archivo con idPortafolio=" + parts[0] + " y idDiarioReflexivo=" + parts[1]);
+				}
 	
 			}
 			

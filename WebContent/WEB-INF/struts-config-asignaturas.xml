@@ -23,6 +23,11 @@
 	   
 	   <form-bean name="GridCasosClinicosAsignaturaUsuario" type="es.oyssen.mrm.struts.forms.asignaturas.GridCasosClinicosAsignaturaUsuarioForm" />
 	   
+	   <form-bean name="GridUsuariosDiariosReflexivosAsignatura" type="es.oyssen.mrm.struts.forms.asignaturas.GridUsuariosDiariosReflexivosAsignaturaForm" />
+	   
+	   <form-bean name="GridCasosClinicosAsignaturaUsuario" type="es.oyssen.mrm.struts.forms.asignaturas.GridCasosClinicosAsignaturaUsuarioForm" />
+	   
+	   <form-bean name="GridDiariosReflexivosAsignaturaUsuario" type="es.oyssen.mrm.struts.forms.asignaturas.GridDiariosReflexivosAsignaturaUsuarioForm" />
 	   
 	   
 	</form-beans>
@@ -73,6 +78,10 @@
 		<action path="/asignaturas/gridUsuariosCasosClinicosAsignatura" name="GridUsuariosCasosClinicosAsignatura" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridUsuariosCasosClinicosAsignaturaAction" />
 		
 		<action path="/asignaturas/gridCasosClinicosAsignaturaUsuario" name="GridCasosClinicosAsignaturaUsuario" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridCasosClinicosAsignaturaUsuarioAction" />
+		
+		<action path="/asignaturas/gridUsuariosDiariosReflexivosAsignatura" name="GridUsuariosDiariosReflexivosAsignatura" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridUsuariosDiariosReflexivosAsignaturaAction" />
+		
+		<action path="/asignaturas/gridDiariosReflexivosAsignaturaUsuario" name="GridDiariosReflexivosAsignaturaUsuario" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridDiariosReflexivosAsignaturaUsuarioAction" />
 		
 		
 		
