@@ -59,23 +59,21 @@
 	    		tabbar = a.attachTabbar();
 	    		
 	    		var optsTrabajosCampo = dameTrabajosCampoAsignatura();
-	    		var numTrabajosCampo=optsTrabajosCampo.length;
+	    		var numTrabajosCampo = optsTrabajosCampo.length;
 	    		
 	    		
 				
 	    		for (var i=0; i<numTrabajosCampo;i++) {
 	    			
-	    			var string = optsTrabajosCampo[i].toString();
-	    			var parts = string.split(',');
-
-	    			var idTrabajoCampo = parts[0];
-	    			tabbar.addTab(idTrabajoCampo,parts[1],'');
+	    			var nombreTrabajoCampo = optsTrabajosCampo[i].toString();
+	    		  
+	    			tabbar.addTab(nombreTrabajoCampo,nombreTrabajoCampo,'');
 	    			//no se como hacer que sea activa y que ademas este seleccionada para 
 	    			//disparar al metodo onSelect para que lo rellene con datos...
 			    	//alert("Cargando...." + (i+1) + "/" + numTrabajosCampo + " prácticas. Por favor, espere...");
-	    			if(i==0) tabbar.setTabActive(idTrabajoCampo);
+	    			if(i==0) tabbar.setTabActive(nombreTrabajoCampo);
 	    			
-	    			initTabContent(idTrabajoCampo);
+	    			initTabContent(nombreTrabajoCampo);
 	    		}
 	    	});
 	    	
@@ -83,10 +81,9 @@
 	    	
 	    	
 		    	
-	    	function initTabContent(idTrabajoCampo){
+	    	function initTabContent(nombreTrabajoCampo){
 				
-				var tab = tabbar.cells(idTrabajoCampo);
-								
+				var tab = tabbar.cells(nombreTrabajoCampo);
 		    	var toolbarServicios = tab.attachToolbar();
 		    	toolbarServicios.setIconsPath('../img/toolbar/');
 
@@ -97,10 +94,28 @@
 		    		toolbarServicios.setItemText('subirCorrecciones',"<bean:message key="button.subir.correcciones"/>");
 		    		toolbarServicios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+		    	
+		    	
+			    	<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+			    		toolbarServicios.hideItem('subirPractica');
+			    		toolbarServicios.hideItem('sep1');
+			    		
+			    	</logic:match>
+			    	<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+			    	
+			    		toolbarServicios.hideItem('descargarTodos');
+			    		toolbarServicios.hideItem('sep2');
+			    		toolbarServicios.hideItem('subirCorrecciones');
+			    		toolbarServicios.hideItem('sep3');
+			    		toolbarServicios.hideItem('fechaLimite');
+			    		toolbarServicios.hideItem('sep4');
+			    	
+			    	</logic:notMatch>
 		    	});
 		    	
-		    	if (profesor) goGridProfesores(tab,idTrabajoCampo);
-		    	else goGridAlumnos(tab,idTrabajoCampo);
+		    	
+		    	if (profesor) goGridProfesores(tab,nombreTrabajoCampo);
+		    	else goGridAlumnos(tab,nombreTrabajoCampo);
 			}
 		    	
 			
@@ -121,23 +136,26 @@
 			}
 			
 			function goActualizar() {
-				if (profesor) gridProfesores.clearAndLoad("gridusuarios.do");	 
+				var idTrabajoCampo = tabbar.getActiveTab();
+				if (profesor) gridProfesores.clearAndLoad("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&nombreTrabajoCampo=" + nombreTrabajoCampo);	 
 				else gridAlumnos.clearAndLoad("gridusuarios.do");		    	
 		    	//tabbar.clearAll();		    	
 		    }
 			
-			function goGridAlumnos(tab,idTrabajoCampo){
+			function goGridAlumnos(tab,nombreTrabajoCampo){
 				
 				gridAlumnos = tab.attachGrid();
 		    	
-				gridAlumnos.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
-				gridAlumnos.setColTypes("ro,ro,ro");
+				gridAlumnos.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.fecha.limite" />","<bean:message key="label.enlace.practica" />","<bean:message key="label.enlace.correccion" />"]);
+				gridAlumnos.setColTypes("ro,ro,ro,ro");
 		    	
-				gridAlumnos.setColSorting('str,str,str');
+				gridAlumnos.setColSorting('str,str,str,str');
 				gridAlumnos.enableMultiselect(false);
 				gridAlumnos.init();
 		    	
-		    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+				
+				
+		    	var gridProcessorPro = new dataProcessor("");
 		    	gridProcessorPro.enableUTFencoding('simple');
 		    	gridProcessorPro.init(gridAlumnos);	  
 		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -146,22 +164,23 @@
 		    		}
 		    	});
 		    	
-		    	gridAlumnos.clearAndLoad("gridusuarios.do");
+		    	gridAlumnos.clearAndLoad("");
 				
 			}
 			
-			function goGridProfesores(tab,idTrabajoCampo){
+			function goGridProfesores(tab,nombreTrabajoCampo){
 				
+								
 				gridProfesores = tab.attachGrid();
 		    	
-				gridProfesores.setHeader(["<bean:message key="label.alumno" />","<bean:message key="label.dni" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
-				gridProfesores.setColTypes("ro,ro,ro,ro");
+				gridProfesores.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","<bean:message key="label.fecha.limite" />","<bean:message key="label.enlace.practica" />","<bean:message key="label.enlace.correccion" />"]);
+				gridProfesores.setColTypes("ro,ro,ro,ro,ro,ro");
 		    	
-				gridProfesores.setColSorting('str,str,str,str');
+				gridProfesores.setColSorting('str,str,str,str,str,str');
 				gridProfesores.enableMultiselect(false);
 				gridProfesores.init();
 		    	
-		    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+		    	var gridProcessorPro = new dataProcessor("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&nombreTrabajoCampo=" + nombreTrabajoCampo);
 		    	gridProcessorPro.enableUTFencoding('simple');
 		    	gridProcessorPro.init(gridProfesores);	  
 		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -173,7 +192,7 @@
 		    	
 		    	gridProfesores.attachEvent("onRowSelect",doOnRowSelected);
 		    	
-		    	gridProfesores.clearAndLoad("gridusuarios.do");
+		    	gridProfesores.clearAndLoad("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&nombreTrabajoCampo=" + nombreTrabajoCampo);
 				
 			}
 			
@@ -230,10 +249,10 @@
 	    		var id, nombre, seminario;
 	    		var opts = new Array();
 	    		for(var i=0;i<seminarios.length;i++) {
-	    	        id=seminarios[i].getElementsByTagName("id")[0].firstChild.nodeValue;
+	    	        //id=seminarios[i].getElementsByTagName("id")[0].firstChild.nodeValue;
 	    	        nombre=seminarios[i].getElementsByTagName("nombre")[0].firstChild.nodeValue;
-	    	        seminario=[id,nombre];
-	    	       	opts[i] = seminario;
+	    	        //seminario=[id,nombre];
+	    	       	opts[i] = nombre;
 	    	    }
 	    		return opts;
 

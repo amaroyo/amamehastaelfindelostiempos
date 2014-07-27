@@ -15,6 +15,7 @@ import es.oyssen.mrm.negocio.vo.AsignaturaVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.ProfesorAsociadoVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
+import es.oyssen.mrm.negocio.vo.TrabajoDeCampoNombreVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
 
@@ -35,12 +36,14 @@ public class TrabajosCampoAsignaturaAction extends MrmAction {
 		String id_asignatura = (String)request.getParameter("idAsignatura");
 		p.setIdAsignatura(id_asignatura);
 		p.setAnyoAcademico(anyoAcademico);
-		List<TrabajoDeCampoVO> trabajos = null;
+		List<TrabajoDeCampoNombreVO> trabajos = null;
+		
+		//***CUIDADO, HABRA Q CONSULTAR Q PROFESOR ES Y VER LOS TRABAJOS DE CAMPO DE DICHO PROFE/ASIGNATURA
 		
 		//"Super Admin" o "Coordinador" o "Virtual Tour"
-		if (usuarioIdGrupo.equals("1") || usuarioIdGrupo.equals("2") || usuarioIdGrupo.equals("5")) {
-			trabajos = getTrabajosDeCampoService().findAllByAsignatura(p);
-		}
+		//if (usuarioIdGrupo.equals("1") || usuarioIdGrupo.equals("2") || usuarioIdGrupo.equals("5")) {
+			trabajos = getTrabajosDeCampoService().findAllNombresByAsignatura(p);
+		//}
 		/*else
 			// "Profesor"
 			if (usuarioIdGrupo.equals("3")) {
@@ -76,12 +79,12 @@ public class TrabajosCampoAsignaturaAction extends MrmAction {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<trabajos>");
 		if (o != null){
-			List<TrabajoDeCampoVO> trabajos = (List<TrabajoDeCampoVO>) o;
-			Iterator<TrabajoDeCampoVO> it = trabajos.iterator();
+			List<TrabajoDeCampoNombreVO> trabajos = (List<TrabajoDeCampoNombreVO>) o;
+			Iterator<TrabajoDeCampoNombreVO> it = trabajos.iterator();
 			while(it.hasNext()) {
 				sb.append("<trabajo>");
-				TrabajoDeCampoVO trabajo = it.next();
-				sb.append("<id><![CDATA[" + trabajo.getIdTrabajoDeCampo() + "]]></id>");
+				TrabajoDeCampoNombreVO trabajo = it.next();
+				//sb.append("<id><![CDATA[" + trabajo.getIdTrabajoDeCampo() + "]]></id>");
 				sb.append("<nombre><![CDATA[" + trabajo.getNombre()  + "]]></nombre>");
 				sb.append("</trabajo>");
 			}	

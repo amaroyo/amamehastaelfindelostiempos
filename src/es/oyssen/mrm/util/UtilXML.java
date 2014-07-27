@@ -26,6 +26,7 @@ import es.oyssen.mrm.negocio.vo.ServicioUsuarioVO;
 import es.oyssen.mrm.negocio.vo.ServicioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
+import es.oyssen.mrm.negocio.vo.UsuarioTrabajoCampoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.Constantes;
 
@@ -650,6 +651,31 @@ public class UtilXML {
 		return sb.toString();
 	}
 	
+	public static String buildXmlGridUsuariosTrabajosCampoAsignatura(List<UsuarioTrabajoCampoVO> list) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(XML_HEADER);
+		sb.append("<rows>");
+		if(list != null){
+			for (UsuarioTrabajoCampoVO utc : list) {
+				sb.append("<row id=\"" +utc.getIdPortafolio() + " - " + utc.getIdTrabajoDeCampo() + "\">");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(utc.getNombre()) + "]]></cell>");
+				String apellidos = utc.getApellido1();
+				if(utc.getApellido2() != "") apellidos = apellidos + ", " + utc.getApellido2();
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(apellidos) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(utc.getDni()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(utc.getFechaLimite())) + "]]></cell>");				
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(utc.getTrabajoDeCampoNombre()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(utc.getCorreccionTrabajoNombre()) + "]]></cell>");
+				sb.append("</row>");				
+			}
+		}
+		sb.append("</rows>");
+		return sb.toString();
+	}
+	
+	
+	
+
 	public static final String buildXmlGridUsuariosGrupo(List<UsuarioVO> list) throws Exception {
 		StringBuffer sb = new StringBuffer();
 		sb.append(XML_HEADER);
@@ -718,6 +744,14 @@ public class UtilXML {
 		else if (id.equals("4")) return "Sales rep.";
 		else if (id.equals("5")) return "Supplier";
 		else return "";
+	}
+
+	private static String parsearFechaLimite(String fechaLimite) {
+		String[] fl = fechaLimite.split(" ");
+		String[] date = fl[0].split("-");
+		String[] hora = fl[1].split("\\.");
+		String out = "Día: " + date[2] + "/" +  date[1] + "/" + date[0] + " Hora: " + hora[0];
+		return out;
 	}
 
 	
