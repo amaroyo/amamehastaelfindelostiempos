@@ -5,6 +5,7 @@ public class CasoClinicoVO {
 
 	private String id_caso_clinico;
 	private String id_portafolio;
+	private String nombre;
 	private String caso_clinico;
 
 	
@@ -49,6 +50,18 @@ public class CasoClinicoVO {
 
 	public void setCasoClinico(String caso_clinico) {
 		this.caso_clinico = caso_clinico;
+	}
+
+	
+	
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 

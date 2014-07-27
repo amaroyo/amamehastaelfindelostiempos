@@ -13,12 +13,14 @@ public class DiarioReflexivoMapper implements RowMapper {
 
 	public static final String FIELD_ID_DIARIO_REFLEXIVO = "id_diario_reflexivo";
 	public static final String FIELD_ID_PORTAFOLIO = "id_portafolio";
+	public static final String FIELD_NOMBRE = "nombre";
 	public static final String FIELD_DIARIO_REFLEXIVO = "diario_reflexivo";
     
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
     	DiarioReflexivoVO o = new DiarioReflexivoVO();
-    	o.setIdPortafolio(StringUtil.nullToString(rs.getString(FIELD_ID_DIARIO_REFLEXIVO)));
+    	o.setIdDiarioReflexivo(StringUtil.nullToString(rs.getString(FIELD_ID_DIARIO_REFLEXIVO)));
     	o.setIdPortafolio(StringUtil.nullToString(rs.getString(FIELD_ID_PORTAFOLIO)));
+    	o.setNombre(StringUtil.nullToString(rs.getString(FIELD_NOMBRE)));
     	o.setDiarioReflexivo(StringUtil.nullToString(rs.getString(FIELD_DIARIO_REFLEXIVO)));
 		return o;
 	}

@@ -460,24 +460,27 @@ insert into seminarios_realizados (id_portafolio, id_seminario) values (7,3);
 
 
 -- Diarios Reflexivos
-insert into diarios_reflexivos (id_portafolio, diario_relfexivo) values (1, null);
-insert into diarios_reflexivos (id_portafolio, diario_relfexivo) values (2, null);
-insert into diarios_reflexivos (id_portafolio, diario_relfexivo) values (3, null);
+insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo) values (1, 'Diario I', null);
+insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo) values (1, 'Diario II', null);
+insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo) values (1, 'Diario III', null);
+insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo) values (2, 'Diario I', null);
+insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo) values (2, 'Diario II', null);
+insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo) values (3, 'Diario I', null);
 
 
 -- Anexos
-insert into anexos (id_portafolio, anexo) values (1, null);
-insert into anexos (id_portafolio, anexo) values (2, null);
-insert into anexos (id_portafolio, anexo) values (2, null);
-insert into anexos (id_portafolio, anexo) values (3, null);
-insert into anexos (id_portafolio, anexo) values (3, null);
-insert into anexos (id_portafolio, anexo) values (3, null);
+insert into anexos (id_portafolio, nombre, anexo) values (1, 'a1', null);
+insert into anexos (id_portafolio, nombre, anexo) values (2, 'a1', null);
+insert into anexos (id_portafolio, nombre, anexo) values (2, 'a2', null);
+insert into anexos (id_portafolio, nombre, anexo) values (3, 'a1', null);
+insert into anexos (id_portafolio, nombre, anexo) values (3, 'a2', null);
+insert into anexos (id_portafolio, nombre, anexo) values (3, 'a3', null);
 
 -- Casos Clinicos
-insert into casos_clinicos (id_portafolio, caso_clinico) values (1, null);
-insert into casos_clinicos (id_portafolio, caso_clinico) values (2, null);
-insert into casos_clinicos (id_portafolio, caso_clinico) values (3, null);
-insert into casos_clinicos (id_portafolio, caso_clinico) values (3, null);	
+insert into casos_clinicos (id_portafolio, nombre, caso_clinico) values (1, 'Caso Clinico I', null);
+insert into casos_clinicos (id_portafolio, nombre, caso_clinico) values (2, 'Caso Clinico I', null);
+insert into casos_clinicos (id_portafolio, nombre, caso_clinico) values (3, 'Caso Clinico I', null);
+insert into casos_clinicos (id_portafolio, nombre, caso_clinico) values (3, 'Caso Clinico II', null);	
 	
 
 -- Puntuacion Criterios 

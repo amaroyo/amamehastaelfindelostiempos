@@ -284,6 +284,7 @@ COLLATE = utf8_spanish_ci;
 CREATE TABLE IF NOT EXISTS diarios_reflexivos (
 	id_diario_reflexivo INT(10) NOT NULL auto_increment,
 	id_portafolio INT(50) NOT NULL,
+	nombre VARCHAR(100) NOT NULL,
 	diario_relfexivo LONGBLOB,
 	PRIMARY KEY(id_diario_reflexivo, id_portafolio),
 	FOREIGN KEY (id_portafolio)
@@ -299,6 +300,7 @@ COLLATE = utf8_spanish_ci;
 CREATE TABLE IF NOT EXISTS anexos (
 	id_anexo INT(10) NOT NULL auto_increment,
 	id_portafolio INT(50) NOT NULL,
+	nombre VARCHAR(100) NOT NULL,
 	anexo LONGBLOB,
 	PRIMARY KEY(id_anexo, id_portafolio),
 	FOREIGN KEY (id_portafolio)
@@ -314,6 +316,7 @@ COLLATE = utf8_spanish_ci;
 CREATE TABLE IF NOT EXISTS casos_clinicos (
 	id_caso_clinico INT(10) NOT NULL auto_increment,
 	id_portafolio INT(50) NOT NULL,
+	nombre VARCHAR(100) NOT NULL,
 	caso_clinico LONGBLOB,
 	PRIMARY KEY(id_caso_clinico, id_portafolio),
 	FOREIGN KEY (id_portafolio)

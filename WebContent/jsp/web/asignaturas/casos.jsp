@@ -67,6 +67,25 @@
 		    		toolbarServicios.setItemText('subirCorrecciones',"<bean:message key="button.subir.correcciones"/>");
 		    		toolbarServicios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+		    		
+		    		toolbarServicios.hideItem('subirCorrecciones');
+		    		toolbarServicios.hideItem('sep3');
+		    		toolbarServicios.hideItem('fechaLimite');
+		    		toolbarServicios.hideItem('sep4');
+		    		
+		    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+			    		toolbarServicios.hideItem('subirPractica');
+			    		toolbarServicios.hideItem('sep1');
+		    		
+		    		</logic:match>
+		    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+		    	
+			    		toolbarServicios.hideItem('descargarTodos');
+			    		toolbarServicios.hideItem('sep2');
+			    		
+			    	
+		    		</logic:notMatch>
+		    	
 		    	});
 		    	
 		    	if (profesor) goGridProfesores();
