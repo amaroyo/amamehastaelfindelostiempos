@@ -6,7 +6,10 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.vo.DatosUsuarioEstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
+import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
+import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
+import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
 public interface PortafoliosService {
 	
@@ -33,6 +36,8 @@ public interface PortafoliosService {
 	public DatosUsuarioEstanciaUnidadClinicaVO findDatosUsuarioEstanciaUnidadClinica(PortafolioVO portafolio) throws ServiceException;
 
 	public void updateEstancia(DatosUsuarioEstanciaUnidadClinicaVO data) throws ServiceException, DAOException;
+
+	public List<UsuarioPortafolioVO> findUsuariosByAsignatura(PortafolioVO p) throws ServiceException;
 	
 
 

@@ -460,25 +460,25 @@ insert into seminarios_realizados (id_portafolio, id_seminario) values (7,3);
 
 
 -- Diarios Reflexivos
-insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (1, 'Diario I', null, '2013-10-13 23:59:59');
-insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (1, 'Diario II', null, '2014-10-13 23:59:59');
-insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (1, 'Diario III', null, '2015-10-13 23:59:59');
-insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (2, 'Diario I', null, '2016-10-13 23:59:59');
-insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (2, 'Diario II', null, '2017-10-13 23:59:59');
-insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (3, 'Diario I', null, '2018-10-13 23:59:59');
+insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (5, 'Diario I', null, '2013-10-13 23:59:59');
+insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (5, 'Diario II', null, '2014-10-13 23:59:59');
+insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (5, 'Diario III', null, '2015-10-13 23:59:59');
+insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (4, 'Diario I', null, '2016-10-13 23:59:59');
+insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (4, 'Diario II', null, '2017-10-13 23:59:59');
+insert into diarios_reflexivos (id_portafolio, nombre, diario_relfexivo, fecha_subida) values (6, 'Diario I', null, '2018-10-13 23:59:59');
 
 
 -- Anexos
-insert into anexos (id_portafolio, nombre, anexo, fecha_subida) values (1, 'a1', null, '2013-10-13 23:59:59');
-insert into anexos (id_portafolio, nombre, anexo, fecha_subida) values (2, 'a1', null, '2014-10-13 23:59:59');
-insert into anexos (id_portafolio, nombre, anexo, fecha_subida) values (2, 'a2', null, '2015-10-13 23:59:59');
+insert into anexos (id_portafolio, nombre, anexo, fecha_subida) values (6, 'a1', null, '2013-10-13 23:59:59');
+insert into anexos (id_portafolio, nombre, anexo, fecha_subida) values (4, 'a1', null, '2014-10-13 23:59:59');
+insert into anexos (id_portafolio, nombre, anexo, fecha_subida) values (4, 'a2', null, '2015-10-13 23:59:59');
 insert into anexos (id_portafolio, nombre, anexo, fecha_subida) values (3, 'a1', null, '2016-10-13 23:59:59');
 insert into anexos (id_portafolio, nombre, anexo, fecha_subida) values (3, 'a2', null, '2017-10-13 23:59:59');
 insert into anexos (id_portafolio, nombre, anexo, fecha_subida) values (3, 'a3', null, '2018-10-13 23:59:59');
 
 -- Casos Clinicos
-insert into casos_clinicos (id_portafolio, nombre, caso_clinico, fecha_subida) values (1, 'Caso Clinico I', null, '2013-10-13 23:59:59');
-insert into casos_clinicos (id_portafolio, nombre, caso_clinico, fecha_subida) values (2, 'Caso Clinico I', null, '2014-10-13 23:59:59');
+insert into casos_clinicos (id_portafolio, nombre, caso_clinico, fecha_subida) values (4, 'Caso Clinico I', null, '2013-10-13 23:59:59');
+insert into casos_clinicos (id_portafolio, nombre, caso_clinico, fecha_subida) values (6, 'Caso Clinico I', null, '2014-10-13 23:59:59');
 insert into casos_clinicos (id_portafolio, nombre, caso_clinico, fecha_subida) values (3, 'Caso Clinico I', null, '2015-10-13 23:59:59');
 insert into casos_clinicos (id_portafolio, nombre, caso_clinico, fecha_subida) values (3, 'Caso Clinico II', null, '2016-10-13 23:59:59');	
 	

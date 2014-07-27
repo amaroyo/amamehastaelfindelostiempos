@@ -19,6 +19,11 @@
 	   
 	   <form-bean name="GridUsuariosTrabajosCampoAsignatura" type="es.oyssen.mrm.struts.forms.asignaturas.GridUsuariosTrabajosCampoAsignaturaForm" />
 	   
+	   <form-bean name="GridUsuariosCasosClinicosAsignatura" type="es.oyssen.mrm.struts.forms.asignaturas.GridUsuariosCasosClinicosAsignaturaForm" />
+	   
+	   <form-bean name="GridCasosClinicosAsignaturaUsuario" type="es.oyssen.mrm.struts.forms.asignaturas.GridCasosClinicosAsignaturaUsuarioForm" />
+	   
+	   
 	   
 	</form-beans>
 	
@@ -64,6 +69,11 @@
 		<action path="/asignaturas/trabajosCampoAsignaturas" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.TrabajosCampoAsignaturaAction"  />
 		
 		<action path="/asignaturas/gridUsuariosTrabajosCampoAsignatura" name="GridUsuariosTrabajosCampoAsignatura" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridUsuariosTrabajosCampoAsignaturaAction" />
+		
+		<action path="/asignaturas/gridUsuariosCasosClinicosAsignatura" name="GridUsuariosCasosClinicosAsignatura" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridUsuariosCasosClinicosAsignaturaAction" />
+		
+		<action path="/asignaturas/gridCasosClinicosAsignaturaUsuario" name="GridCasosClinicosAsignaturaUsuario" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridCasosClinicosAsignaturaUsuarioAction" />
+		
 		
 		
 	</action-mappings>

@@ -41,7 +41,7 @@
 					main_layout = new dhtmlXLayoutObject(document.body, '2U');
 		    		a = main_layout.cells('a');
 		    		b = main_layout.cells('b');
-		    		b.setWidth(250);
+		    		b.setWidth(350);
 		    		a.hideHeader();
 					b.setText('<bean:message key="label.casos.clinicos.alumno"/>');
 				</logic:match>
@@ -116,7 +116,7 @@
 			}
 			
 			function goActualizar() {
-				if (profesor) gridProfesores.clearAndLoad("gridusuarios.do");	 
+				if (profesor) gridProfesores.clearAndLoad("gridUsuariosCasosClinicosAsignatura.do?idAsignatura=" + idAsignatura);	 
 				else gridAlumnos.clearAndLoad("gridusuarios.do");		    	
 		    	//tabbar.clearAll();		    	
 		    }
@@ -156,7 +156,7 @@
 				gridProfesores.enableMultiselect(false);
 				gridProfesores.init();
 		    	
-		    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+		    	var gridProcessorPro = new dataProcessor("gridUsuariosCasosClinicosAsignatura.do?idAsignatura=" + idAsignatura);
 		    	gridProcessorPro.enableUTFencoding('simple');
 		    	gridProcessorPro.init(gridProfesores);	  
 		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -168,7 +168,7 @@
 		    	
 		    	gridProfesores.attachEvent("onRowSelect",doOnRowSelected);
 		    	
-		    	gridProfesores.clearAndLoad("gridusuarios.do");
+		    	gridProfesores.clearAndLoad("gridUsuariosCasosClinicosAsignatura.do?idAsignatura=" + idAsignatura);
 				
 			}
 			
@@ -177,14 +177,14 @@
 				var gridProfesoresAlumno = b.attachGrid();
 				
 		    	
-				gridProfesoresAlumno.setHeader(["<bean:message key="label.nombre" />", "<bean:message key="label.fecha" />"]);
-				gridProfesoresAlumno.setColTypes("ro,ro");
+				gridProfesoresAlumno.setHeader(["<bean:message key="label.nombre" />", "<bean:message key="label.fecha" />", "<bean:message key="label.enlace" />"]);
+				gridProfesoresAlumno.setColTypes("ro,ro,ro");
 		    	
-				gridProfesoresAlumno.setColSorting('str, str');
+				gridProfesoresAlumno.setColSorting('str, str,str');
 				gridProfesoresAlumno.enableMultiselect(false);
 				gridProfesoresAlumno.init();
 		    	
-		    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+		    	var gridProcessorPro = new dataProcessor("gridCasosClinicosAsignaturaUsuario.do?idPortafolio=" + rowID);
 		    	gridProcessorPro.enableUTFencoding('simple');
 		    	gridProcessorPro.init(gridProfesoresAlumno);	  
 		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -196,12 +196,12 @@
 		    	
 		    	
 		    	gridProfesoresAlumno.attachEvent("onRowSelect",doOnRowSelectedOptions);
-		    	gridProfesoresAlumno.clearAndLoad("gridusuarios.do");
+		    	gridProfesoresAlumno.clearAndLoad("gridCasosClinicosAsignaturaUsuario.do?idPortafolio=" + rowID);
 		    	
 		    }
 			
 			function doOnRowSelectedOptions(rowID,celInd){
-				alert("Descargar Archivo");
+				if(celInd=='2') alert("Descargar Archivo");
 	
 			}
 			

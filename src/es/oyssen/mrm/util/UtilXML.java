@@ -9,6 +9,7 @@ import org.apache.struts.util.MessageResources;
 import es.oyssen.mrm.negocio.vo.ActionHistoryVO;
 import es.oyssen.mrm.negocio.vo.AsignaturaVO;
 import es.oyssen.mrm.negocio.vo.CanalVO;
+import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.ComercialVO;
 import es.oyssen.mrm.negocio.vo.ContactoCanalVO;
 import es.oyssen.mrm.negocio.vo.ContactoDistribuidorVO;
@@ -26,6 +27,7 @@ import es.oyssen.mrm.negocio.vo.ServicioUsuarioVO;
 import es.oyssen.mrm.negocio.vo.ServicioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
+import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioTrabajoCampoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.Constantes;
@@ -651,6 +653,28 @@ public class UtilXML {
 		return sb.toString();
 	}
 	
+	public static String buildXmlGridUsuariosPortafolioAsignatura(List<UsuarioPortafolioVO> list) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(XML_HEADER);
+		sb.append("<rows>");
+		if(list != null){
+			for (UsuarioPortafolioVO usr : list) {
+				sb.append("<row id=\"" +usr.getIdPortafolio() + "\">");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usr.getNombre()) + "]]></cell>");
+				String apellidos = usr.getApellido1();
+				if(usr.getApellido2() != "") apellidos = apellidos + ", " + usr.getApellido2();
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(apellidos) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usr.getDni()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usr.getTelefono()) + "]]></cell>");				
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usr.getCorreo()) + "]]></cell>");
+				sb.append("</row>");				
+			}
+		}
+		sb.append("</rows>");
+		return sb.toString();
+	}
+	
+	
 	public static String buildXmlGridUsuariosTrabajosCampoAsignatura(List<UsuarioTrabajoCampoVO> list) {
 		StringBuffer sb = new StringBuffer();
 		sb.append(XML_HEADER);
@@ -663,7 +687,7 @@ public class UtilXML {
 				if(utc.getApellido2() != "") apellidos = apellidos + ", " + utc.getApellido2();
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(apellidos) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(utc.getDni()) + "]]></cell>");
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(utc.getFechaLimite())) + "]]></cell>");				
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(utc.getFechaLimite(),true)) + "]]></cell>");				
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(utc.getTrabajoDeCampoNombre()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(utc.getCorreccionTrabajoNombre()) + "]]></cell>");
 				sb.append("</row>");				
@@ -737,6 +761,24 @@ public class UtilXML {
 		return sb.toString();
 	}
 	
+	public static String buildXmlGridCasosClinicosAsignaturaUsuario(List<CasoClinicoVO> list) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(XML_HEADER);
+		sb.append("<rows>");
+		if(list != null){
+			for (CasoClinicoVO cc : list) {
+				sb.append("<row id=\"" +cc.getIdPortafolio() + " - " + cc.getIdCasoClinico() + "\">");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(cc.getNombre()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(cc.getFechaSubida(),false)) + "]]></cell>");
+				sb.append("<cell><![CDATA[" +  "Descargar" + "]]></cell>");
+				sb.append("</row>");				
+			}
+		}
+		sb.append("</rows>");
+		return sb.toString();
+	}
+	
+	
 	private static final String nombreGrupo(String id){
 		if (id.equals("1")) return "Super user";
 		else if (id.equals("2")) return "Channel";
@@ -746,13 +788,19 @@ public class UtilXML {
 		else return "";
 	}
 
-	private static String parsearFechaLimite(String fechaLimite) {
+	private static String parsearFechaLimite(String fechaLimite, boolean b) {
 		String[] fl = fechaLimite.split(" ");
 		String[] date = fl[0].split("-");
 		String[] hora = fl[1].split("\\.");
-		String out = "Día: " + date[2] + "/" +  date[1] + "/" + date[0] + " Hora: " + hora[0];
+		String out = "";
+		if (b) out = "Día: " + date[2] + "/" +  date[1] + "/" + date[0] + " Hora: " + hora[0];
+		else out = date[2] + "/" +  date[1] + "/" + date[0] + " " + hora[0];
 		return out;
 	}
+
+	
+
+	
 
 	
 }

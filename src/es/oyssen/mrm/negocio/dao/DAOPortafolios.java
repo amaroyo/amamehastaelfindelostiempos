@@ -9,6 +9,7 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.vo.DatosUsuarioEstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
+import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
 
 public interface DAOPortafolios {
 	
@@ -35,6 +36,8 @@ public interface DAOPortafolios {
 	public void delete(PortafolioVO portafolio) throws DAOException, DAODeleteException;
 
 	public void updateEstancia(DatosUsuarioEstanciaUnidadClinicaVO data) throws DAOException, DAOUpdateException;
+
+	public List<UsuarioPortafolioVO> findUsuariosByAsignatura(PortafolioVO p) throws DAOException;
 
 	
 	

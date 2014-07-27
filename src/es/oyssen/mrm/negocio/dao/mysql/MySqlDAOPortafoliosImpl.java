@@ -19,9 +19,11 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.dao.rowmappers.DatosUsuarioEstanciaUnidadClinicaMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.PortafolioMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioEstanciaUnidadClinicaMapper;
+import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioPortafolioMapper;
 import es.oyssen.mrm.negocio.vo.DatosUsuarioEstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
+import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
 
 
 public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
@@ -47,7 +49,10 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 			"from portafolios as p, usuarios as u, estancias_unidad_clinica as e " +
 			"where p.id_profesor = u.id_usuario and p.id_portafolio = e.id_portafolio and " +
 			"p.id_asignatura = ? and p.anyo_academico = ? and p.id_alumno = ? ";
-
+	
+	private static String SQL_FIND_USUARIOS_BY_ASIGNATURA = "select u.id_usuario, u.correo, u.nombre, u.apellido1, u.apellido2, u.dni, u.telefono, p.id_portafolio "+
+																"from portafolios as p, usuarios as u " + 
+																"where p.id_alumno = u.id_usuario and p.id_asignatura=? and p.anyo_academico=?";
 	
 	
 	@Override
@@ -225,6 +230,18 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 			throw new DAOUpdateException(e);
 		}
 		
+	}
+
+
+	@Override
+	public List<UsuarioPortafolioVO> findUsuariosByAsignatura(PortafolioVO p) throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_USUARIOS_BY_ASIGNATURA, new Object[]{p.getIdAsignatura(),p.getAnyoAcademico()}, new UsuarioPortafolioMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
 	}
 
 

@@ -12,6 +12,7 @@ import es.oyssen.mrm.negocio.services.PortafoliosService;
 import es.oyssen.mrm.negocio.vo.DatosUsuarioEstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
+import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
 
 public class PortafoliosServiceImpl implements PortafoliosService{
 	
@@ -159,6 +160,17 @@ public class PortafoliosServiceImpl implements PortafoliosService{
 		}
 		
 		
+	}
+
+	@Override
+	public List<UsuarioPortafolioVO> findUsuariosByAsignatura(PortafolioVO p) throws ServiceException {
+		try {
+			return daoPortafolios.findUsuariosByAsignatura(p);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findUsuariosByAsignatura portafolio", e);
+			throw new ServiceException(e.getMessage());
+		}
 	}
 	
 	
