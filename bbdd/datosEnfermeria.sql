@@ -478,7 +478,6 @@ insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correcci
 
 -- Seminarios Realizados
 insert into seminarios_realizados (id_portafolio, id_seminario) values (1,1);
-insert into seminarios_realizados (id_portafolio, id_seminario) values (2,4);
 insert into seminarios_realizados (id_portafolio, id_seminario) values (3,2);
 insert into seminarios_realizados (id_portafolio, id_seminario) values (3,3);
 insert into seminarios_realizados (id_portafolio, id_seminario) values (5,4);

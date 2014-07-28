@@ -29,6 +29,12 @@
 	   
 	   <form-bean name="GridDiariosReflexivosAsignaturaUsuario" type="es.oyssen.mrm.struts.forms.asignaturas.GridDiariosReflexivosAsignaturaUsuarioForm" />
 	   
+	   <form-bean name="GridSeminariosRealizadosUsuario" type="es.oyssen.mrm.struts.forms.asignaturas.GridSeminariosRealizadosUsuarioForm" />
+	   
+	   <form-bean name="EditarSeminarioForm" type="es.oyssen.mrm.struts.forms.cursos.EditarSeminarioForm" />
+	   
+	   
+	   
 	   
 	</form-beans>
 	
@@ -82,6 +88,11 @@
 		<action path="/asignaturas/gridUsuariosDiariosReflexivosAsignatura" name="GridUsuariosDiariosReflexivosAsignatura" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridUsuariosDiariosReflexivosAsignaturaAction" />
 		
 		<action path="/asignaturas/gridDiariosReflexivosAsignaturaUsuario" name="GridDiariosReflexivosAsignaturaUsuario" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridDiariosReflexivosAsignaturaUsuarioAction" />
+		
+		<action path="/asignaturas/gridSeminariosRealizadosUsuario" name="GridSeminariosRealizadosUsuario" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridSeminariosRealizadosUsuarioAction" />
+		
+		<action path="/asignaturas/editarseminario" name="EditarSeminarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.EditarSeminarioAction" />
+		
 		
 		
 		

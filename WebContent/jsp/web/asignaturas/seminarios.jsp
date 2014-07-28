@@ -20,7 +20,7 @@
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesor, gridAlumnoRealizado, gridAlumnoPendiente;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesor, gridAlumnoRealizado, gridAlumnoPendiente,idSessionUser;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -28,7 +28,7 @@
 	    		<% String idAsignatura = request.getParameter("idAsignatura");%>
 	    		idAsignatura="<%=idAsignatura%>";	
 	    		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
-				var idSelectedUser = <%=sessionIdUser%>;
+				 idSessionUser = <%=sessionIdUser%>;
 	    		
 	    		
 	    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
@@ -55,14 +55,14 @@
 			    	tabbar.setTabActive('tab_1');
 			    	gridAlumnoRealizado = tab_1.attachGrid();
 			    	
-			    	gridAlumnoRealizado.setHeader(["<bean:message key="label.nombre.seminario" />","<bean:message key="label.codigo.seminario" />","<bean:message key="label.descripcion.seminario" />"]);
+			    	gridAlumnoRealizado.setHeader(["<bean:message key="label.nombre.seminario" />","<bean:message key="label.codigo.seminario" />","<bean:message key="label.anyo.realizacion.seminario" />"]);
 			    	gridAlumnoRealizado.setColTypes("ro,ro,ro");
 			    	
 			    	gridAlumnoRealizado.setColSorting('str,str,str');
 			    	gridAlumnoRealizado.enableMultiselect(false);
 			    	gridAlumnoRealizado.init();
 			    	
-			    	var gridAlumnoRealizadoPro = new dataProcessor("gridusuarios.do");
+			    	var gridAlumnoRealizadoPro = new dataProcessor("gridSeminariosRealizadosUsuario.do?idAlumno=" + idSessionUser + "&idAsignatura=" + idAsignatura);
 			    	gridAlumnoRealizadoPro.enableUTFencoding('simple');
 			    	gridAlumnoRealizadoPro.init(gridAlumnoRealizado);	  
 			    	gridAlumnoRealizadoPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -71,10 +71,11 @@
 			    		}
 			    	});
 		    		
+			    	gridAlumnoRealizado.clearAndLoad("gridSeminariosRealizadosUsuario.do?idAlumno=" + idSessionUser + "&idAsignatura=" + idAsignatura);
+			    	
 			    	gridAlumnoRealizado.attachEvent("onRowSelect", function(row,ind){
 
-			    		selectedCode=gridAlumnoRealizado.cells(row,1).getValue();
-			    		
+
 			    		
 			    		var formSeminarioAlumno = b.attachForm();
 			    		
@@ -85,25 +86,19 @@
 			    			formSeminarioAlumno.setItemLabel('curso','<bean:message key="label.curso.seminario"/>');
 			    			formSeminarioAlumno.setItemLabel('profesor','<bean:message key="label.profesor.seminario"/>');
 			    			formSeminarioAlumno.setItemLabel('descripcion','<bean:message key="label.descripcion.seminario"/>');
+			    			formSeminarioAlumno.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 				    		
-				    			
-							
-							formSeminarioAlumno.setItemValue('nombre', "caca");
-							formSeminarioAlumno.setItemValue('codigo', "caca");
-							formSeminarioAlumno.setItemValue('curso', "A113");
-							formSeminarioAlumno.setItemValue('profesor', "Lorem ipsum");
-							formSeminarioAlumno.setItemValue('descripcion', "Lorem ipsum dolor sit amet");
+			    			formSeminarioAlumno.hideItem('aceptar');
+			    			
+							//Ponemos por defecto que los items no se puedan modificar, y luego con los permisos necesarios 
+							//seran modificables.
+				    		formSeminarioAlumno.setReadonly('nombre', true);
+				    		formSeminarioAlumno.setReadonly('codigo', true);
+				    		formSeminarioAlumno.setReadonly('curso', true);
+				    		formSeminarioAlumno.setReadonly('profesor', true);
+				    		formSeminarioAlumno.setReadonly('descripcion', true);
 			    		
-							/*formSeminarioAlumno.load('editarseminario.do?idSeminario=' + idSeminario, function () {			    			
-								formSeminarioAlumno.attachEvent("onButtonClick", function(id){
-				    				if (id == "aceptar") {
-				    					formSeminarioAlumno.send("actualizarse.do?!nativeeditor_status=save&idUsuario=" + idUsuario ,"post", function(xml) {
-					    					
-					    				});
-					    				//buscar();
-				    				}
-				    			});
-				    		});*/
+							formSeminarioAlumno.load('editarseminario.do?idSeminario=' + row);
 				    			
 			    		});
 	
@@ -134,7 +129,7 @@
 		    		
 			    	gridAlumnoPendiente.attachEvent("onRowSelect", function(row,ind){
 
-			    		selectedCode=gridAlumnoPendiente.cells(row,1).getValue();
+			    		
 			    		
 			    		
 			    		var formSeminarioAlumno = b.attachForm();
@@ -172,7 +167,7 @@
 			    	});
 			    	
 		    	
-				 	buscarAlumno();		
+				 	//buscarAlumno();		
 				}
 				
 	
@@ -229,10 +224,7 @@
 				}
 				
 				
-				function buscarAlumno() {
-					gridAlumnoRealizado.clearAndLoad("gridusuarios.do");
-					gridAlumnoPendiente.clearAndLoad("gridusuarios.do");
-			    }
+				
 				
 				
 				

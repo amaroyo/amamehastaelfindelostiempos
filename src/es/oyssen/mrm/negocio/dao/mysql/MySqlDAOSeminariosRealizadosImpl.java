@@ -16,9 +16,12 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
+import es.oyssen.mrm.negocio.dao.rowmappers.SeminarioAsignaturaAnyoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.SeminarioRealizadoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioAnyoSeminarioMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioMapper;
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
+import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaAnyoVO;
 import es.oyssen.mrm.negocio.vo.SeminarioRealizadoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
@@ -35,7 +38,10 @@ public class MySqlDAOSeminariosRealizadosImpl extends DAOBase implements DAOSemi
 															"where u.id_usuario=p.id_alumno and p.id_portafolio=s.id_portafolio and s.id_seminario=?";
 
 
-	
+	private static String SQL_FIND_SEMINARIOS_REALIZADOS = "select sa.id_seminario, sa.nombre, sa.codigo, p.anyo_academico " +
+															"from seminarios_asignaturas as sa, portafolios as p, seminarios_realizados as sr " +
+															"where p.id_portafolio = sr.id_portafolio and sr.id_seminario = sa.id_seminario " +
+															"and p.id_alumno=? and p.id_asignatura=?";
 	
 
 	public void insert(final SeminarioRealizadoVO seminarioRealizado) throws DAOException,
@@ -98,6 +104,17 @@ public class MySqlDAOSeminariosRealizadosImpl extends DAOBase implements DAOSemi
 	public List<UsuarioAnyoSeminarioVO> findAllUsersByPortafolio(SeminarioRealizadoVO seminarioRealizado) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_USERS_BY_PORTAFOLIO, new Object[]{seminarioRealizado.getIdSeminario()}, new UsuarioAnyoSeminarioMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+	@Override
+	public List<SeminarioAsignaturaAnyoVO> findSeminariosRealizados(PortafolioVO p) throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_SEMINARIOS_REALIZADOS, new Object[]{p.getIdAlumno(), p.getIdAsignatura()}, new SeminarioAsignaturaAnyoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

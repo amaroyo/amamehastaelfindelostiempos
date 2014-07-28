@@ -4,8 +4,12 @@ import java.util.List;
 
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
+import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaAnyoVO;
+import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
 import es.oyssen.mrm.negocio.vo.SeminarioRealizadoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
+import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
 public interface SeminariosRealizadosService {
@@ -19,5 +23,7 @@ public interface SeminariosRealizadosService {
 	public List<SeminarioRealizadoVO> findAllByPortafolio(SeminarioRealizadoVO seminarioRealizado) throws ServiceException;
 
 	public List<UsuarioAnyoSeminarioVO> findAllUsersByPortafolio(SeminarioRealizadoVO sr) throws ServiceException;
+
+	public List<SeminarioAsignaturaAnyoVO> findSeminariosRealizados(PortafolioVO p) throws ServiceException;
 
 }
