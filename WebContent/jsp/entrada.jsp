@@ -125,6 +125,14 @@
 						toolbar.hideItem('usuarios');
 						toolbar.hideItem('sep14');
 					</logic:notMatch>
+					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>4</permiso>" >
+						toolbar.hideItem('misAlumnos');
+						toolbar.hideItem('sep2');
+					</logic:notMatch>
+					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>4</permiso>" >
+						toolbar.hideItem('timeMachine');
+						toolbar.hideItem('sep13');
+					</logic:notMatch>
 				</logic:notMatch>
 				<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>1</grupo>" >
 					toolbar.hideItem('grupos');

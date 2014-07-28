@@ -43,14 +43,15 @@
 	    <script type="text/javascript">
 	    
 	    	dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout,idAsignatura, nombreAsignatura, gridProfesor, formAlumno, formUsuario , fechaIni, fechaFin;
+	    	var main_layout,idAsignatura, nombreAsignatura, gridProfesor, formAlumno, formUsuario, fechaIni, fechaFin, idSessionUser;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
 	    		
 	    		<% String idAsignatura = request.getParameter("idAsignatura");%>
 	    		idAsignatura="<%=idAsignatura%>";	
-	    		
+	    		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
+				idSessionUser = <%=sessionIdUser%>;
 	    		
 	    		
 	    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
@@ -74,53 +75,36 @@
 		    			formAlumno.setItemLabel('data','<bean:message key="title.info.general.estancia"/>');
 		    			formAlumno.setItemLabel('hospital','<bean:message key="label.hospital.estancia"/>');
 		    			formAlumno.setItemLabel('clinica','<bean:message key="label.clinica.estancia"/>');
+		    			formAlumno.setItemLabel('turno','<bean:message key="label.turno"/>');
 		    			formAlumno.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
 		    			formAlumno.setItemLabel('fechaIni','<bean:message key="label.fecha.ini.estancia"/>');
 		    			formAlumno.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
+		    			formAlumno.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 			    		
+		    			formAlumno.hideItem('aceptar');
+		    			
 						//Ponemos por defecto que los items no se puedan modificar, y luego con los permisos necesarios 
 						//seran modificables.
 			    		formAlumno.setReadonly('hospital', true);
 			    		formAlumno.setReadonly('clinica', true);
+			    		formAlumno.setReadonly('turno', true);
 			    		formAlumno.setReadonly('profesor', true);
 			    		formAlumno.setReadonly('fechaIni', true);
 			    		formAlumno.setReadonly('fechaFin', true);
 			    		formAlumno.hideItem('aceptar');
 			    		
-			    		//Esto por ahora es provisional, cuando se haga una peticion de toda la informacion 
-			    		//de las asignaturas, se cogeran el codigo y el nombre de la asignatura
-			    		formAlumno.setItemValue('hospital', "Lorem ipsum");
-			    		formAlumno.setItemValue('clinica', "Lorem ipsum");
-			    		formAlumno.setItemValue('profesor', "A113");
-			    		formAlumno.setItemValue('fechaIni', "Lorem ipsum");
-			    		formAlumno.setItemValue('fechaFin', "Lorem ipsum");
 			    		
-
-			    		
-			    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
-				    		formAlumno.setReadonly('hospital', false);
-				    		formAlumno.setReadonly('clinica', false);
-				    		formAlumno.setReadonly('profesor', false);
-				    		formAlumno.setReadonly('fechaIni', false);
-				    		formAlumno.setReadonly('fechaFin', false);
-				    		formAlumno.showItem('aceptar');
-						</logic:match>
-			    		
+			    		var ci = formAlumno.getCalendar("fechaIni");
+			    		//ci.unload(); con esto no se ve la fecha.... :S:S
+			    		var cf = formAlumno.getCalendar("fechaFin");
+			    		//cf.unload();
 						
 						
-						/*
-						form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
-							form.attachEvent("onButtonClick", function(id){
-								if (id == "aceptar") {
-									form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-	
-									});
-	
-								}
-							});
-						});
-						*/
-					
+			    		formAlumno.load('editarEstanciaUnidadClinica.do?idAlumno=' + idSessionUser + '&idAsignatura=' + idAsignatura);	
+			    		
+						
+						ci.hide();
+						cf.hide();
 					
 		    	});
 					

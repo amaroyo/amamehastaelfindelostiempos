@@ -42,6 +42,8 @@ insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido
 insert into permisos (nombre, descripcion) values ('Todas las acciones permitidas.', 'El Super Admin tendrá todos los privilegios.');
 insert into permisos (nombre, descripcion) values ('Todas las acciones permitidas menos editar cursos pasados.', 'El Coordinador podrá actuar como un super admin pero no modificar datos antiguos.');
 insert into permisos (nombre, descripcion) values ('Permiso para modificar datos personales de los usuarios.', 'Este permiso lo tendrá el grupo Super Admin y se podrá otorgar a diferentes usuarios.');
+insert into permisos (nombre, descripcion) values ('Permiso para ver Mis Alumnos.', 'Este permiso se dará a gente que pueda visualizar el botón Mis Alumnos.');
+insert into permisos (nombre, descripcion) values ('Permiso para cambiar año academico.', 'Solo para Super Admin, Coordinador y Virtual Tour.');
 
 
 /*insert into permisos (nombre, descripicion) values (2, 'View leads');
@@ -96,14 +98,40 @@ insert into permisos (nombre, descripicion) values (37, 'Delete user');*/
 
 -- Grupos Permisos
 
--- Grupo Super Admin : Todas las acciones permitidas
+-- Grupo Super Admin :
+-- Todas las acciones permitidas
 insert into grupos_permisos (id_grupo, id_permiso) values (1, 1);
 -- Permiso para modificar los datos de cualquier usuario
 insert into grupos_permisos (id_grupo, id_permiso) values (1, 3);
+-- Permiso para visualizar Mis Alumnos
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 4);
+-- Permiso para visualizar Cambiar Año Academico
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 5);
 
 
--- Grupo Coordinador : Todas las acciones permitidas menos editar datos antiguos
+-- Grupo Coordinador : 
+-- Todas las acciones permitidas menos editar datos antiguos
 insert into grupos_permisos (id_grupo, id_permiso) values (2, 2);
+-- Permiso para visualizar Mis Alumnos
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 4);
+-- Permiso para visualizar Cambiar Año Academico
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 5);
+
+
+-- Grupo Profesores:
+-- Permiso para visualizar Mis Alumnos
+insert into grupos_permisos (id_grupo, id_permiso) values (3, 4);
+
+-- Grupo Alumnos:
+
+
+-- Grupo Virtual Tour:
+-- Permiso para visualizar Mis Alumnos
+insert into grupos_permisos (id_grupo, id_permiso) values (5, 4);
+-- Permiso para visualizar Cambiar Año Academico
+insert into grupos_permisos (id_grupo, id_permiso) values (5, 5);
+
+
 
 
 
