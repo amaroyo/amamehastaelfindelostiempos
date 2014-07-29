@@ -165,6 +165,7 @@ insert into seminarios_asignaturas (id_asignatura, nombre, codigo) values (2, 'L
 insert into seminarios_asignaturas (id_asignatura, nombre, codigo, descripcion) values (3, 'LOREM IPSUM 5', 'cod5', '');
 insert into seminarios_asignaturas (id_asignatura, nombre, codigo, descripcion) values (4, 'LOREM IPSUM 6', 'cod6', '');
 insert into seminarios_asignaturas (id_asignatura, nombre, codigo, descripcion) values (5, 'LOREM IPSUM 7', 'cod7', '');
+insert into seminarios_asignaturas (id_asignatura, nombre, codigo, descripcion) values (1, 'LOREM IPSUMPrueba', 'cod8', 'pruebaaaa');
 
 
 

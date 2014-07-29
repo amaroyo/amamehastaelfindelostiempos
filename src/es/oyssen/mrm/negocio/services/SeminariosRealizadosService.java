@@ -26,4 +26,6 @@ public interface SeminariosRealizadosService {
 
 	public List<SeminarioAsignaturaAnyoVO> findSeminariosRealizados(PortafolioVO p) throws ServiceException;
 
+	public List<SeminarioAsignaturaVO> findSeminariosPendientes(PortafolioVO p) throws ServiceException;
+
 }

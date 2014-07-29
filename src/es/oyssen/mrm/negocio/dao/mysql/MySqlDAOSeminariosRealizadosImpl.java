@@ -17,11 +17,13 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.dao.rowmappers.SeminarioAsignaturaAnyoMapper;
+import es.oyssen.mrm.negocio.dao.rowmappers.SeminarioAsignaturaMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.SeminarioRealizadoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioAnyoSeminarioMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioMapper;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaAnyoVO;
+import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
 import es.oyssen.mrm.negocio.vo.SeminarioRealizadoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
@@ -42,6 +44,15 @@ public class MySqlDAOSeminariosRealizadosImpl extends DAOBase implements DAOSemi
 															"from seminarios_asignaturas as sa, portafolios as p, seminarios_realizados as sr " +
 															"where p.id_portafolio = sr.id_portafolio and sr.id_seminario = sa.id_seminario " +
 															"and p.id_alumno=? and p.id_asignatura=?";
+	
+	private static String SQL_FIND_SEMINARIOS_PENDIENTES = "select * " +
+															"from seminarios_asignaturas as sa " +
+															"where sa.id_asignatura =? " + 
+															"and sa.id_seminario not in ( " +
+															"select sa.id_seminario " +
+															"from seminarios_asignaturas as sa, portafolios as p, seminarios_realizados as sr " +
+															"where p.id_portafolio = sr.id_portafolio and sr.id_seminario = sa.id_seminario " +
+															"and p.id_alumno =? and p.id_asignatura =? )";
 	
 
 	public void insert(final SeminarioRealizadoVO seminarioRealizado) throws DAOException,
@@ -115,6 +126,17 @@ public class MySqlDAOSeminariosRealizadosImpl extends DAOBase implements DAOSemi
 	public List<SeminarioAsignaturaAnyoVO> findSeminariosRealizados(PortafolioVO p) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_SEMINARIOS_REALIZADOS, new Object[]{p.getIdAlumno(), p.getIdAsignatura()}, new SeminarioAsignaturaAnyoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+	@Override
+	public List<SeminarioAsignaturaVO> findSeminariosPendientes(PortafolioVO p)throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_SEMINARIOS_PENDIENTES, new Object[]{p.getIdAsignatura(), p.getIdAlumno(), p.getIdAsignatura()}, new SeminarioAsignaturaMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

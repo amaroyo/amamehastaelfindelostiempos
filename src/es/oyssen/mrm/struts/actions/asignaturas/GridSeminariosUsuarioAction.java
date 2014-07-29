@@ -3,7 +3,7 @@ package es.oyssen.mrm.struts.actions.asignaturas;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.SeminarioRealizadoVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXGridAction;
-import es.oyssen.mrm.struts.forms.asignaturas.GridSeminariosRealizadosUsuarioForm;
+import es.oyssen.mrm.struts.forms.asignaturas.GridSeminariosUsuarioForm;
 import es.oyssen.mrm.struts.forms.asignaturas.GridUsuariosCasosClinicosAsignaturaForm;
 import es.oyssen.mrm.struts.forms.asignaturas.GridUsuariosDiariosReflexivosAsignaturaForm;
 import es.oyssen.mrm.struts.forms.asignaturas.GridUsuariosEstanciasForm;
@@ -12,13 +12,13 @@ import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
 import es.oyssen.mrm.util.UtilXML;
 
 
-public class GridSeminariosRealizadosUsuarioAction extends DHTMLXGridAction {
+public class GridSeminariosUsuarioAction extends DHTMLXGridAction {
 	
 	@Override
 	public String search(DhtmlxGridForm f) throws Exception {
 		
 		
-		GridSeminariosRealizadosUsuarioForm form = (GridSeminariosRealizadosUsuarioForm) f;
+		GridSeminariosUsuarioForm form = (GridSeminariosUsuarioForm) f;
 		
 		//Si el usuario es coordinador, vemos todos los alumnos de ese anyo y esa asignatura
 
@@ -26,10 +26,18 @@ public class GridSeminariosRealizadosUsuarioAction extends DHTMLXGridAction {
 		//System.out.println(idUsuario);
 		
 		if (idGrupoUsuario.equals("4")){
+			
 			PortafolioVO p = new PortafolioVO();
 			p.setIdAlumno(form.getIdAlumno());
 			p.setIdAsignatura(form.getIdAsignatura());
-			return UtilXML.buildXmlGridSeminariosRealizadosUsuario(getSeminariosRealizadosService().findSeminariosRealizados(p));
+			
+			if(form.getPeticion().equals("realizados"))
+				return UtilXML.buildXmlGridSeminariosRealizadosUsuario(getSeminariosRealizadosService().findSeminariosRealizados(p));
+		
+			else if (form.getPeticion().equals("pendientes"))
+				return UtilXML.buildXmlGridSeminariosPendientesUsuario(getSeminariosRealizadosService().findSeminariosPendientes(p));
+			
+			else return null;
 		}
 		
 		else return null;

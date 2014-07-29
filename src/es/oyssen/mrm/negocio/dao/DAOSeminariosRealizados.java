@@ -8,6 +8,7 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaAnyoVO;
+import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
 import es.oyssen.mrm.negocio.vo.SeminarioRealizadoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
@@ -25,6 +26,10 @@ public interface DAOSeminariosRealizados {
 	public List<UsuarioAnyoSeminarioVO> findAllUsersByPortafolio(SeminarioRealizadoVO seminarioRealizado) throws DAOException;
 
 	public List<SeminarioAsignaturaAnyoVO> findSeminariosRealizados(PortafolioVO p) throws DAOException;
+
+	public List<SeminarioAsignaturaVO> findSeminariosPendientes(PortafolioVO p) throws DAOException;
+
+	
 	
 	
 	

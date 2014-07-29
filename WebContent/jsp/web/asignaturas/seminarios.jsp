@@ -62,7 +62,7 @@
 			    	gridAlumnoRealizado.enableMultiselect(false);
 			    	gridAlumnoRealizado.init();
 			    	
-			    	var gridAlumnoRealizadoPro = new dataProcessor("gridSeminariosRealizadosUsuario.do?idAlumno=" + idSessionUser + "&idAsignatura=" + idAsignatura);
+			    	var gridAlumnoRealizadoPro = new dataProcessor("gridSeminariosRealizadosUsuario.do?idAlumno=" + idSessionUser + "&idAsignatura=" + idAsignatura + "&peticion=realizados");
 			    	gridAlumnoRealizadoPro.enableUTFencoding('simple');
 			    	gridAlumnoRealizadoPro.init(gridAlumnoRealizado);	  
 			    	gridAlumnoRealizadoPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -71,7 +71,7 @@
 			    		}
 			    	});
 		    		
-			    	gridAlumnoRealizado.clearAndLoad("gridSeminariosRealizadosUsuario.do?idAlumno=" + idSessionUser + "&idAsignatura=" + idAsignatura);
+			    	gridAlumnoRealizado.clearAndLoad("gridSeminariosRealizadosUsuario.do?idAlumno=" + idSessionUser + "&idAsignatura=" + idAsignatura + "&peticion=realizados");
 			    	
 			    	gridAlumnoRealizado.attachEvent("onRowSelect", function(row,ind){
 
@@ -106,15 +106,15 @@
 			    	
 			    	gridAlumnoPendiente = tab_2.attachGrid();
 		    		
-			    	gridAlumnoPendiente.setHeader(["<bean:message key="label.nombre.seminario" />","<bean:message key="label.codigo.seminario" />","<bean:message key="label.descripcion.seminario" />"]);
-			    	gridAlumnoPendiente.setColTypes("ro,ro,ro");
+			    	gridAlumnoPendiente.setHeader(["<bean:message key="label.nombre.seminario" />","<bean:message key="label.codigo.seminario" />"]);
+			    	gridAlumnoPendiente.setColTypes("ro,ro");
 			    	
-			    	gridAlumnoPendiente.setColSorting('str,str,str');
+			    	gridAlumnoPendiente.setColSorting('str,str');
 			    	gridAlumnoPendiente.enableMultiselect(false);
 			    	gridAlumnoPendiente.init();
 			    	
 			    	
-			    	var gridAlumnoPendientePro = new dataProcessor("gridusuarios.do");
+			    	var gridAlumnoPendientePro = new dataProcessor("gridSeminariosPendientesUsuario.do?idAlumno=" + idSessionUser + "&idAsignatura=" + idAsignatura + "&peticion=pendientes");
 			    	gridAlumnoPendientePro.enableUTFencoding('simple');
 			    	gridAlumnoPendientePro.init(gridAlumnoPendiente);	  
 			    	gridAlumnoPendientePro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -123,6 +123,9 @@
 			    		}
 			    	});
 		    		
+			    	gridAlumnoPendiente.clearAndLoad("gridSeminariosPendientesUsuario.do?idAlumno=" + idSessionUser + "&idAsignatura=" + idAsignatura + "&peticion=pendientes");
+			    	
+			    	
 			    	gridAlumnoPendiente.attachEvent("onRowSelect", function(row,ind){
 
 			    		
@@ -134,28 +137,18 @@
 			    			formSeminarioAlumno.setItemLabel('data','<bean:message key="title.info.general.seminario"/>');
 			    			formSeminarioAlumno.setItemLabel('nombre','<bean:message key="label.nombre.seminario"/>');
 			    			formSeminarioAlumno.setItemLabel('codigo','<bean:message key="label.codigo.seminario"/>');
-			    			formSeminarioAlumno.setItemLabel('curso','<bean:message key="label.curso.seminario"/>');
-			    			formSeminarioAlumno.setItemLabel('profesor','<bean:message key="label.profesor.seminario"/>');
 			    			formSeminarioAlumno.setItemLabel('descripcion','<bean:message key="label.descripcion.seminario"/>');
+			    			formSeminarioAlumno.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 				    		
-				    			
-							
-							formSeminarioAlumno.setItemValue('nombre', "cacaPENDIENTE");
-							formSeminarioAlumno.setItemValue('codigo', "cacaPENDIENTE");
-							formSeminarioAlumno.setItemValue('curso', "A113PENDIENTE");
-							formSeminarioAlumno.setItemValue('profesor', "Lorem ipsumPENDIENTE");
-							formSeminarioAlumno.setItemValue('descripcion', "Lorem ipsum dolor sit ametPENDIENTE");
+			    			formSeminarioAlumno.hideItem('aceptar');
+			    			
+							//Ponemos por defecto que los items no se puedan modificar, y luego con los permisos necesarios 
+							//seran modificables.
+				    		formSeminarioAlumno.setReadonly('nombre', true);
+				    		formSeminarioAlumno.setReadonly('codigo', true);
+				    		formSeminarioAlumno.setReadonly('descripcion', true);
 			    		
-							/*formSeminarioAlumno.load('editarseminario.do?idSeminario=' + idSeminario, function () {			    			
-								formSeminarioAlumno.attachEvent("onButtonClick", function(id){
-				    				if (id == "aceptar") {
-				    					formSeminarioAlumno.send("actualizarse.do?!nativeeditor_status=save&idUsuario=" + idUsuario ,"post", function(xml) {
-					    					
-					    				});
-					    				//buscar();
-				    				}
-				    			});
-				    		});*/
+							formSeminarioAlumno.load('editarseminario.do?idSeminario=' + row);
 				    			
 			    		});
 	
