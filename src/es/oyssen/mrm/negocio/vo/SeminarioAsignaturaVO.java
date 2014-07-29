@@ -78,6 +78,13 @@ public class SeminarioAsignaturaVO {
 		this.descripcion = descripcion;
 	}
 
+	
+	
+
+
+
+	
+
 
 	@Override
 	public int hashCode() {

@@ -83,8 +83,6 @@
 			    			formSeminarioAlumno.setItemLabel('data','<bean:message key="title.info.general.seminario"/>');
 			    			formSeminarioAlumno.setItemLabel('nombre','<bean:message key="label.nombre.seminario"/>');
 			    			formSeminarioAlumno.setItemLabel('codigo','<bean:message key="label.codigo.seminario"/>');
-			    			formSeminarioAlumno.setItemLabel('curso','<bean:message key="label.curso.seminario"/>');
-			    			formSeminarioAlumno.setItemLabel('profesor','<bean:message key="label.profesor.seminario"/>');
 			    			formSeminarioAlumno.setItemLabel('descripcion','<bean:message key="label.descripcion.seminario"/>');
 			    			formSeminarioAlumno.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 				    		
@@ -94,8 +92,6 @@
 							//seran modificables.
 				    		formSeminarioAlumno.setReadonly('nombre', true);
 				    		formSeminarioAlumno.setReadonly('codigo', true);
-				    		formSeminarioAlumno.setReadonly('curso', true);
-				    		formSeminarioAlumno.setReadonly('profesor', true);
 				    		formSeminarioAlumno.setReadonly('descripcion', true);
 			    		
 							formSeminarioAlumno.load('editarseminario.do?idSeminario=' + row);

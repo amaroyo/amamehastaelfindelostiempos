@@ -75,7 +75,6 @@ public class EditarSeminarioAction extends DHTMLXFormAction {
 		sb.append("<data>");
 		sb.append("<nombre><![CDATA[" + c.getNombre() + "]]></nombre>");
 		sb.append("<codigo><![CDATA[" + c.getCodigo() + "]]></codigo>");
-		sb.append("<curso><![CDATA[" + c.getCurso() + "]]></curso>");
 		sb.append("<descripcion><![CDATA[" + c.getDescripcion() + "]]></descripcion>");
 		sb.append("</data>");
 		return sb.toString();
