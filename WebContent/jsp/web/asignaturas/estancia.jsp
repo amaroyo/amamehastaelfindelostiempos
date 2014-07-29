@@ -94,19 +94,23 @@
 			    		formAlumno.hideItem('aceptar');
 			    		
 			    		
-			    		var ci = formAlumno.getCalendar("fechaIni");
-			    		//ci.unload(); con esto no se ve la fecha.... :S:S
-			    		var cf = formAlumno.getCalendar("fechaFin");
-			    		//cf.unload();
-						
-						
-			    		formAlumno.load('editarEstanciaUnidadClinica.do?idAlumno=' + idSessionUser + '&idAsignatura=' + idAsignatura);	
 			    		
 						
-						ci.hide();
-						cf.hide();
-					
+			    		formAlumno.load('editarEstanciaUnidadClinica.do?idAlumno=' + idSessionUser + '&idAsignatura=' + idAsignatura);
+						
+			    		var ci = formAlumno.getCalendar("fechaIni");
+			    		
+			    		ci.attachEvent("onShow", function(){
+			    		    ci.hide();
+			    		});
+			    		
+			    		var cf = formAlumno.getCalendar("fechaFin");
+			    		cf.attachEvent("onShow", function(){
+			    		    cf.hide();
+			    		});
 		    	});
+		    		
+		    		
 					
 				}
 				
