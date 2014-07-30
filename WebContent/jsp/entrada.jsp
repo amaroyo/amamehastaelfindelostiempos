@@ -38,7 +38,11 @@
 					toolbar.setItemText('grupos', '<bean:message key="title.groups" />');
 					toolbar.setItemText('usuarios', '<bean:message key="title.users" />');
 					toolbar.setItemText('logsUsuarios', '<bean:message key="title.logs.users" />');
-					toolbar.setItemText('timeMachine', '<bean:message key="title.cambiar.anyo.academico" />');
+					
+					<% String anyo = (String) session.getAttribute("anyoAcademico");%>
+					var ann = ("<%=anyo%>");
+					
+					toolbar.setItemText('timeMachine', '<bean:message key="title.cambiar.anyo.academico" />' + " " + "<strong>" + ann +"</strong>");
 					toolbar.setItemText('exit', '<bean:message key="label.salir" />');
 					
 					
