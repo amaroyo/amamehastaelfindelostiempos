@@ -20,7 +20,7 @@
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b,idSession;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -30,7 +30,7 @@
 	    		<% String idAsignatura = request.getParameter("idAsignatura");%>
 	    		idAsignatura="<%=idAsignatura%>";	
 	    		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
-				var idSelectedUser = <%=sessionIdUser%>;
+				idSession = <%=sessionIdUser%>;
 	    		
 
 				
@@ -117,7 +117,7 @@
 			
 			function goActualizar() {
 				if (profesor) gridProfesores.clearAndLoad("gridUsuariosCasosClinicosAsignatura.do?idAsignatura=" + idAsignatura);	 
-				else gridAlumnos.clearAndLoad("gridusuarios.do");		    	
+				else gridAlumnos.clearAndLoad("gridCasosClinicosUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);		    	
 		    	//tabbar.clearAll();		    	
 		    }
 			
@@ -132,7 +132,7 @@
 				gridAlumnos.enableMultiselect(false);
 				gridAlumnos.init();
 		    	
-		    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+		    	var gridProcessorPro = new dataProcessor("gridCasosClinicosUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);
 		    	gridProcessorPro.enableUTFencoding('simple');
 		    	gridProcessorPro.init(gridAlumnos);	  
 		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -141,7 +141,7 @@
 		    		}
 		    	});
 		    	
-		    	gridAlumnos.clearAndLoad("gridusuarios.do");
+		    	gridAlumnos.clearAndLoad("gridCasosClinicosUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);
 				
 			}
 			

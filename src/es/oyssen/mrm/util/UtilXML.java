@@ -852,6 +852,25 @@ public class UtilXML {
 	}
 
 	
+	public static String buildXmlGridCasosClinicosUsuarioAsignatura(List<CasoClinicoVO> list) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(XML_HEADER);
+		sb.append("<rows>");
+		if(list != null){
+			for (CasoClinicoVO cc : list) {
+				sb.append("<row id=\"" +cc.getIdPortafolio() + "-" + cc.getIdCasoClinico() + "\">");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(cc.getNombre()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(cc.getFechaSubida(),true)) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(cc.getCasoClinico()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" +  "Descargar" + "]]></cell>");
+				sb.append("</row>");				
+			}
+		}
+		sb.append("</rows>");
+		return sb.toString();
+	}
+
+	
 	
 	
 	private static final String nombreGrupo(String id){
@@ -873,6 +892,7 @@ public class UtilXML {
 		return out;
 	}
 
+	
 	
 	
 
