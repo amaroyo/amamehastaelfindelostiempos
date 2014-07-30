@@ -6,6 +6,7 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.DatosUsuarioEstanciaUnidadClinicaVO;
+import es.oyssen.mrm.negocio.vo.DiarioReflexivoVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
@@ -45,6 +46,8 @@ public interface PortafoliosService {
 	public List<TrabajoDeCampoVO> findTrabajosByPortafolio(PortafolioVO p, TrabajoDeCampoVO t) throws ServiceException;
 
 	public List<CasoClinicoVO> findCasosByPortafolio(PortafolioVO p) throws ServiceException;
+
+	public List<DiarioReflexivoVO> findDiariosByPortafolio(PortafolioVO p) throws ServiceException;
 	
 
 

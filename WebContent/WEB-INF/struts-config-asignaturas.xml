@@ -39,6 +39,8 @@
 	   
 	   <form-bean name="GridCasosClinicosUsuarioAsignatura" type="es.oyssen.mrm.struts.forms.asignaturas.GridCasosClinicosUsuarioAsignaturaForm" />
 	   
+	   <form-bean name="GridDiariosReflexivosUsuarioAsignatura" type="es.oyssen.mrm.struts.forms.asignaturas.GridDiariosReflexivosUsuarioAsignaturaForm" />
+	   
 	   
 	   
 	</form-beans>
@@ -103,6 +105,9 @@
 		<action path="/asignaturas/gridTrabajosCampoUsuarioAsignatura" name="GridTrabajosCampoUsuarioAsignatura" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridTrabajosCampoUsuarioAsignaturaAction" />
 		
 		<action path="/asignaturas/gridCasosClinicosUsuarioAsignatura" name="GridCasosClinicosUsuarioAsignatura" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridCasosClinicosUsuarioAsignaturaAction" />
+		
+		<action path="/asignaturas/gridDiariosReflexivosUsuarioAsignatura" name="GridDiariosReflexivosUsuarioAsignatura" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridDiariosReflexivosUsuarioAsignaturaAction" />
+		
 		
 		
 	</action-mappings>

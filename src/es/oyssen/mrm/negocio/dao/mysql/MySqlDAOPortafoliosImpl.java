@@ -18,12 +18,14 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.dao.rowmappers.CasoClinicoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.DatosUsuarioEstanciaUnidadClinicaMapper;
+import es.oyssen.mrm.negocio.dao.rowmappers.DiarioReflexivoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.PortafolioMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.TrabajoDeCampoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioEstanciaUnidadClinicaMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioPortafolioMapper;
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.DatosUsuarioEstanciaUnidadClinicaVO;
+import es.oyssen.mrm.negocio.vo.DiarioReflexivoVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
@@ -69,6 +71,14 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 															"where c.id_portafolio = p.id_portafolio and " +
 															"p.id_alumno=? and p.id_asignatura=? and p.anyo_academico=?";
 
+	private static String SQL_FIND_DIARIOS_BY_PORTAFOLIO = "select d.* " +
+															"from diarios_reflexivos as d, portafolios as p " +
+															"where d.id_portafolio = p.id_portafolio and " +
+															"p.id_alumno=? and p.id_asignatura=? and p.anyo_academico=?";
+
+	
+	
+	
 	
 	
 	@Override
@@ -277,6 +287,18 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 	public List<CasoClinicoVO> findCasosByPortafolio(PortafolioVO p) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_CASOS_BY_PORTAFOLIO, new Object[]{p.getIdAlumno(),p.getIdAsignatura(),p.getAnyoAcademico()}, new CasoClinicoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+
+	@Override
+	public List<DiarioReflexivoVO> findDiariosByPortafolio(PortafolioVO p) throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_DIARIOS_BY_PORTAFOLIO, new Object[]{p.getIdAlumno(),p.getIdAsignatura(),p.getAnyoAcademico()}, new DiarioReflexivoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

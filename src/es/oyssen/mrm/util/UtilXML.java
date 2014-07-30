@@ -871,6 +871,23 @@ public class UtilXML {
 	}
 
 	
+	public static String buildXmlGridDiariosReflexivosUsuarioAsignatura(List<DiarioReflexivoVO> list) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(XML_HEADER);
+		sb.append("<rows>");
+		if(list != null){
+			for (DiarioReflexivoVO dr : list) {
+				sb.append("<row id=\"" +dr.getIdPortafolio() + "-" + dr.getIdDiarioReflexivo() + "\">");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(dr.getNombre()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(dr.getFechaSubida(),true)) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(dr.getDiarioReflexivo()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" +  "Descargar" + "]]></cell>");
+				sb.append("</row>");				
+			}
+		}
+		sb.append("</rows>");
+		return sb.toString();
+	}
 	
 	
 	private static final String nombreGrupo(String id){
@@ -891,6 +908,8 @@ public class UtilXML {
 		else out = date[2] + "/" +  date[1] + "/" + date[0] + " " + hora[0];
 		return out;
 	}
+
+	
 
 	
 	
