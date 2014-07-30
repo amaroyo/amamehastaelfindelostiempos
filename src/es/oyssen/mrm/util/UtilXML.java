@@ -28,6 +28,7 @@ import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
 import es.oyssen.mrm.negocio.vo.SeminarioRealizadoVO;
 import es.oyssen.mrm.negocio.vo.ServicioUsuarioVO;
 import es.oyssen.mrm.negocio.vo.ServicioVO;
+import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
@@ -831,6 +832,27 @@ public class UtilXML {
 		return sb.toString();
 	}
 	
+	public static String buildXmlGridTrabajosCampoUsuarioAsignatura(List<TrabajoDeCampoVO> list) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(XML_HEADER);
+		sb.append("<rows>");
+		if(list != null){
+			for (TrabajoDeCampoVO tc : list) {
+				sb.append("<row id=\"" +tc.getIdPortafolio() + "-" + tc.getIdTrabajoDeCampo() + "\">");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(tc.getNombre()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(tc.getFechaLimite(),true)) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(tc.getTrabajoDeCampo()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(tc.getCorreccionTrabajo()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" +  "Descargar" + "]]></cell>");
+				sb.append("</row>");				
+			}
+		}
+		sb.append("</rows>");
+		return sb.toString();
+	}
+
+	
+	
 	
 	private static final String nombreGrupo(String id){
 		if (id.equals("1")) return "Super user";
@@ -851,6 +873,7 @@ public class UtilXML {
 		return out;
 	}
 
+	
 	
 
 	

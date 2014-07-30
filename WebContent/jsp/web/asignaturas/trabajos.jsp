@@ -20,7 +20,7 @@
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos, profesor,a,b, tabbar;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos, profesor,a,b, tabbar, idSession;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -30,7 +30,7 @@
 	    		<% String idAsignatura = request.getParameter("idAsignatura");%>
 	    		idAsignatura="<%=idAsignatura%>";	
 	    		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
-				var idSelectedUser = <%=sessionIdUser%>;
+				idSession = <%=sessionIdUser%>;
 	    		
 
 				
@@ -138,7 +138,7 @@
 			function goActualizar() {
 				var nombreTrabajoCampo = tabbar.getActiveTab();
 				if (profesor) gridProfesores.clearAndLoad("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&nombreTrabajoCampo=" + nombreTrabajoCampo);	 
-				else gridAlumnos.clearAndLoad("gridusuarios.do");		    	
+				else gridAlumnos.clearAndLoad("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession + "&nombreTrabajoCampo=" + nombreTrabajoCampo);		    	
 		    	//tabbar.clearAll();		    	
 		    }
 			
@@ -155,7 +155,7 @@
 		    	
 				
 				
-		    	var gridProcessorPro = new dataProcessor("");
+		    	var gridProcessorPro = new dataProcessor("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession + "&nombreTrabajoCampo=" + nombreTrabajoCampo);
 		    	gridProcessorPro.enableUTFencoding('simple');
 		    	gridProcessorPro.init(gridAlumnos);	  
 		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -164,7 +164,7 @@
 		    		}
 		    	});
 		    	
-		    	gridAlumnos.clearAndLoad("");
+		    	gridAlumnos.clearAndLoad("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession + "&nombreTrabajoCampo=" + nombreTrabajoCampo);
 				
 			}
 			

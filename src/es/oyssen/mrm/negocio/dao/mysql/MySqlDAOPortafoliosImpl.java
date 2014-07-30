@@ -18,10 +18,12 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.dao.rowmappers.DatosUsuarioEstanciaUnidadClinicaMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.PortafolioMapper;
+import es.oyssen.mrm.negocio.dao.rowmappers.TrabajoDeCampoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioEstanciaUnidadClinicaMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioPortafolioMapper;
 import es.oyssen.mrm.negocio.vo.DatosUsuarioEstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
+import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
 
@@ -53,6 +55,14 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 	private static String SQL_FIND_USUARIOS_BY_ASIGNATURA = "select u.id_usuario, u.correo, u.nombre, u.apellido1, u.apellido2, u.dni, u.telefono, p.id_portafolio "+
 																"from portafolios as p, usuarios as u " + 
 																"where p.id_alumno = u.id_usuario and p.id_asignatura=? and p.anyo_academico=?";
+	
+	
+	private static String SQL_FIND_TRABAJOS_BY_PORTAFOLIO = "select t.* " +
+															"from trabajos_de_campo as t, portafolios as p " +
+															"where t.id_portafolio = p.id_portafolio and " +
+															"p.id_alumno=? and p.id_asignatura=? and p.anyo_academico=? and t.nombre=?";
+	
+	
 	
 	
 	@Override
@@ -237,6 +247,18 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 	public List<UsuarioPortafolioVO> findUsuariosByAsignatura(PortafolioVO p) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_USUARIOS_BY_ASIGNATURA, new Object[]{p.getIdAsignatura(),p.getAnyoAcademico()}, new UsuarioPortafolioMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+
+	@Override
+	public List<TrabajoDeCampoVO> findTrabajosByPortafolio(PortafolioVO p, TrabajoDeCampoVO t) throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_TRABAJOS_BY_PORTAFOLIO, new Object[]{p.getIdAlumno(),p.getIdAsignatura(),p.getAnyoAcademico(),t.getNombre()}, new TrabajoDeCampoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
