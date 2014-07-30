@@ -32,12 +32,13 @@
 		    	<% String anyo = (String) session.getAttribute("anyoAcademico");%>
 				var ann = ("<%=anyo%>");
 		    	
+				var mywindow;
 				
 			    dhtmlxError.catchError("ALL",errorHandler);
 
 
 				var dhxWins= new dhtmlXWindows(document.body);
-				var mywindow = dhxWins.createWindow("CambiarAnyoAcademico", 300, 50, 465, 300);
+				mywindow = dhxWins.createWindow("CambiarAnyoAcademico", 300, 50, 465, 300);
 				mywindow.setText('<bean:message key="title.time.machine" />');				
 				mywindow.setModal(true);
 				mywindow.centerOnScreen();
@@ -54,13 +55,16 @@
 		    				    					    			
 		    		form.attachEvent("onButtonClick", function(id){
 	    				if (id == "aceptar") {
-	    					var selec = form.getItemValue("anyo");
-	    					if(selec != ann){
-	    						//HAY Q HACER UN SET DEL ATRIBUTO!!!!!
-	    						alert('<bean:message key="message.cambio.satisfactorio"/>');
+	    					var selectedYear = form.getItemValue("anyo");
+	    					if(selectedYear != ann){
 	    						
+	    						var mensaje;
+	    						mensaje = cambiarCursoAcademico(selectedYear);  
+	    						alert(mensaje);
+	    						mywindow.close();
+		    					goEntrada();
 	    					}
-	    					mywindow.close();
+	    					else alert('<bean:message key="message.mismo.anyo"/>' + " " + ann);
 	    					
 	    				}
 		    		});
@@ -77,6 +81,56 @@
 		    	return d;
 		    }
 
+		    
+		    function initRequest() {
+	    	    if (window.XMLHttpRequest) {
+	    	        xmlhttp = new XMLHttpRequest();
+	    	    } else if (window.ActiveXObject) {
+	    	        isIE = true;
+	    	        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	    	    }
+	    	    return xmlhttp;
+	    	}
+	    	
+	    	
+	    	function cambiarCursoAcademico(selectedYear){
+	    		var url = "cambiarCursoAcademico.do?anyo=" + selectedYear;
+	    		var xmlhttp = initRequest();
+	    		xmlhttp.onreadystatechange=function(){
+	    			if (xmlhttp.readyState===4) {
+	        	        if(xmlhttp.status===200) { //GET returning a response
+	        	        	return createArrayFromXML(xmlhttp.responseXML);
+	        	        }
+	        	    }
+	    		}
+	    	    xmlhttp.open("GET",url,false);
+	    	    xmlhttp.send(null);
+	    	    return xmlhttp.onreadystatechange();
+	    	}
+	    	
+	    	function createArrayFromXML(xml){
+	    		var seminarios = xml.getElementsByTagName("cambio");
+	    		var id, nombre, seminario;
+	    		for(var i=0;i<seminarios.length;i++) {
+	    	        //id=seminarios[i].getElementsByTagName("id")[0].firstChild.nodeValue;
+	    	        nombre=seminarios[i].getElementsByTagName("nombre")[0].firstChild.nodeValue;
+	    	        //seminario=[id,nombre];
+	    	    }
+	    		
+	    		if(nombre=="exito"){
+	    			return '<bean:message key="message.cambio.satisfactorio"/>';
+	    		}
+	    		else return '<bean:message key="message.algo.salio.mal"/>';
+
+	    	}
+	    	
+	    	function goEntrada() {
+				//var url = "../entrada.do";
+				//location.href=url;
+				
+				//window.parent.parent.document.getElementById("toolbarTd").innerHTML="";
+		    	window.parent.document.location.href="../entrada.do";
+	    	}
 		    
         </script>
 	</head>

@@ -4,24 +4,14 @@
 
 <struts-config>	
 	
-	<form-beans>
-	    
-		<form-bean name="GridUsuarios" type="es.oyssen.mrm.struts.forms.usuarios.GridUsuariosForm" />
-	   
-	   	<form-bean name="EditarUsuarioForm" type="es.oyssen.mrm.struts.forms.usuarios.EditarUsuarioForm" />
-		
-	</form-beans>
+
 	
 
 	<action-mappings>
 
 		<action path="/curso_academico/inicio" forward="/jsp/web/curso_academico/inicio.jsp" />
-		
-		<action path="/curso_academico/gridusuarios" name="GridUsuarios" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.GridUsuariosAction" />
-		
-		<action path="/curso_academico/editarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />
-		
-		<action path="/curso_academico/actualizarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />
+
+		<action path="/curso_academico/cambiarCursoAcademico" name="CambiarCursoAcademico" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.CambiarCursoAcademicoAction"  />
 		
 	</action-mappings>
 

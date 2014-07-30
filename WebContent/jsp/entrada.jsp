@@ -19,6 +19,7 @@
     	dhtmlx.image_path='js/dhtmlxSuite/imgs/';
     	
     	function init() {
+    		
 			<logic:notEmpty name="usuarioYPermisos">
 	    		toolbar = new dhtmlXToolbarObject("toolbarObj");
 		        toolbar.setIconsPath("img/toolbar/");
