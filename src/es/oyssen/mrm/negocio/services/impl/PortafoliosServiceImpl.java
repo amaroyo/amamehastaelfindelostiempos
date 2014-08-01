@@ -208,6 +208,17 @@ public class PortafoliosServiceImpl implements PortafoliosService{
 			throw new ServiceException(e.getMessage());
 		}
 	}
+
+	
+	public PortafolioVO findByAlumnoAsignatura(PortafolioVO p) throws ServiceException {
+		try {
+			return daoPortafolios.findByAlumnoAsignatura(p);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findByAlumnoAsignatura portafolio", e);
+			throw new ServiceException(e);
+		}
+	}
 	
 	
 	

@@ -48,6 +48,8 @@ public interface DAOPortafolios {
 
 	public List<DiarioReflexivoVO> findDiariosByPortafolio(PortafolioVO p) throws DAOException;
 
+	public PortafolioVO findByAlumnoAsignatura(PortafolioVO p) throws DAOException;
+
 	
 	
 

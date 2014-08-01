@@ -40,6 +40,7 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 	private static String SQL_DELETE = "delete from portafolios where id_portafolio = ?";
 	private static String SQL_FIND_ALL = "select * from portafolios where anyo_academico = ?";
 	private static String SQL_FIND_BY_ID = "select * from portafolios where id_portafolio = ?";
+	private static String SQL_FIND_BY_ALUMNO_ASIGNATURA = "select * from portafolios where id_alumno=? and id_asignatura=? and anyo_academico=?";
 	private static String SQL_FIND_BY_ALUMNO = "select * from portafolios where id_alumno = ? and anyo_academico = ?";
 	private static String SQL_FIND_BY_PROFESOR = "select * from portafolios where id_profesor = ? and anyo_academico = ?";
 	private static String SQL_FIND_BY_ASIGNATURA = "select * from portafolios where id_asignatura = ? and anyo_academico = ?";
@@ -299,6 +300,19 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 	public List<DiarioReflexivoVO> findDiariosByPortafolio(PortafolioVO p) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_DIARIOS_BY_PORTAFOLIO, new Object[]{p.getIdAlumno(),p.getIdAsignatura(),p.getAnyoAcademico()}, new DiarioReflexivoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+
+	@Override
+	public PortafolioVO findByAlumnoAsignatura(PortafolioVO p)
+			throws DAOException {
+		try {
+			return (PortafolioVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_ALUMNO_ASIGNATURA, new Object[]{p.getIdAlumno(),p.getIdAsignatura(),p.getAnyoAcademico()}, new PortafolioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

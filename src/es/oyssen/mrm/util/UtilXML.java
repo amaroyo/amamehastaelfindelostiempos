@@ -861,7 +861,7 @@ public class UtilXML {
 				sb.append("<row id=\"" +cc.getIdPortafolio() + "-" + cc.getIdCasoClinico() + "\">");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(cc.getNombre()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(cc.getFechaSubida(),true)) + "]]></cell>");
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(cc.getCasoClinico()) + "]]></cell>");
+				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(cc.getCasoClinico()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" +  "Descargar" + "]]></cell>");
 				sb.append("</row>");				
 			}

@@ -1,5 +1,8 @@
 package es.oyssen.mrm.negocio.services.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -9,7 +12,12 @@ import es.oyssen.mrm.negocio.dao.DAOCasosClinicos;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.CasosClinicosService;
+import es.oyssen.mrm.negocio.vo.ArchivoCasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
+import es.oyssen.mrm.negocio.vo.FicheroVO;
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
+import es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoCasoClinicoForm;
+import es.oyssen.mrm.struts.forms.ficheros.SubirFicheroForm;
 
 public class CasosClinicosServiceImpl implements CasosClinicosService{
 	
@@ -67,6 +75,31 @@ public class CasosClinicosServiceImpl implements CasosClinicosService{
 			log.error("Error findAllByPortafolio caso clinico", e);
 			throw new ServiceException(e.getMessage());
 		}
+	}
+
+
+	public void process(SubirArchivoCasoClinicoForm f) throws ServiceException {
+		try {
+			log.debug("Procesamos fichero.........");
+			
+			ArchivoCasoClinicoVO fichero = new ArchivoCasoClinicoVO();
+			
+			if(f.getNombre().equals("")) fichero.setNombre(f.getFichero().getFileName());
+			else fichero.setNombre(f.getNombre());
+			fichero.setDatos(f.getFichero().getFileData());
+			
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			//get current date time with Date()
+			Date date = new Date();
+			fichero.setFechaSubida(dateFormat.format(date));
+			fichero.setIdPortfolio(f.getIdPortafolio());
+			daoCasosClinicos.insertFichero(fichero);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Error procesando fichero SubirArchivoCasoClinicoForm", e);
+			throw new ServiceException(e);
+		}
+		
 	}
 	
 	

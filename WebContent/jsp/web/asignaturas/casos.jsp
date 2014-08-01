@@ -100,7 +100,14 @@
 
 			
 			function subirPractica(){
-				alert("subir Practica");
+				var dhxWins= new dhtmlXWindows();
+				var window = dhxWins.createWindow("subir", 300,50, 500, 150);
+				window.setText('<bean:message key="title.subir.practica" />');				
+				window.setModal(true);
+				window.centerOnScreen();
+				var portafolio = damePortafolioAlumno();
+				window.attachURL("subirCasoClinico.do?idPortafolio=" + portafolio);
+				//goActualizar();
 			}
 			
 			function descargarTodos(){
@@ -208,6 +215,46 @@
 	
 			}
 			
+			
+			function initRequest() {
+	    	    if (window.XMLHttpRequest) {
+	    	        xmlhttp = new XMLHttpRequest();
+	    	    } else if (window.ActiveXObject) {
+	    	        isIE = true;
+	    	        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	    	    }
+	    	    return xmlhttp;
+	    	}
+	    	
+	    	
+	    	function damePortafolioAlumno(){
+	    		var url = "portafolioAlumno.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession;
+	    		var xmlhttp = initRequest();
+	    		xmlhttp.onreadystatechange=function(){
+	    			if (xmlhttp.readyState===4) {
+	        	        if(xmlhttp.status===200) { //GET returning a response
+	        	        	return createArrayFromXML(xmlhttp.responseXML);
+	        	        }
+	        	    }
+	    		}
+	    	    xmlhttp.open("GET",url,false);
+	    	    xmlhttp.send(null);
+	    	    return xmlhttp.onreadystatechange();
+	    	}
+	    	
+	    	function createArrayFromXML(xml){
+	    		var seminarios = xml.getElementsByTagName("portafolio");
+	    		var id, nombre, seminario;
+	    		var opts = new Array();
+	    		for(var i=0;i<seminarios.length;i++) {
+	    	        //id=seminarios[i].getElementsByTagName("id")[0].firstChild.nodeValue;
+	    	        nombre=seminarios[i].getElementsByTagName("id")[0].firstChild.nodeValue;
+	    	        //seminario=[id,nombre];
+	    	       	opts[i] = nombre;
+	    	    }
+	    		return opts;
+
+	    	}
 			
 			
 	    	
