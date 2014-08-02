@@ -31,9 +31,10 @@ public class CasoClinicoMapper implements RowMapper {
     	
     	try {
         	InputStream datos = rs.getBinaryStream(FIELD_CASO_CLINICO);
+
         	byte[] archivo;
         	if(datos != null) {
-        		archivo = new Base64().encode(IOUtils.toByteArray(datos));
+        		archivo = IOUtils.toByteArray(datos);
         	}
         	else{
         		archivo = null;

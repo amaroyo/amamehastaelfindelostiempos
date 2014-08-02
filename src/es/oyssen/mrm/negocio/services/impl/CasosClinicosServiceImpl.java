@@ -84,7 +84,10 @@ public class CasosClinicosServiceImpl implements CasosClinicosService{
 			
 			CasoClinicoVO caso = new CasoClinicoVO();
 			
-			if(f.getNombre().equals("")) caso.setNombre(f.getFichero().getFileName());
+			if(f.getNombre().equals("")){
+				String[] sp = f.getFichero().getFileName().split(".");
+				caso.setNombre(sp[1]);
+			}
 			else caso.setNombre(f.getNombre());
 			caso.setCasoClinico(f.getFichero().getFileData());
 			

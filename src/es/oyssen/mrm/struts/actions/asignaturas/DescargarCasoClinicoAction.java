@@ -1,6 +1,10 @@
 package es.oyssen.mrm.struts.actions.asignaturas;
 
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.OutputStream;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
@@ -36,28 +40,22 @@ public class DescargarCasoClinicoAction extends MrmAction {
 		caso = getCasosClinicosService().findByIDs(caso);
 		
 		
-		//List<LeadVO> leads = getLeadsService().findByCriterio(criterio );
-//		HSSFWorkbook libro = ExcelUtil.createLeads(leads);
+		try{
 		
-		//java.util.Date fechaActual = new java.util.Date();
-		
-		response.setContentType("application/vnd.ms-excel");
-//		response.setHeader("Content-Disposition", "attachment; filename=Leads(" + fechaActual.toString() + ").xls");
+		response.setHeader("Content-Disposition", "attachment; filename=CasoClinico(" + caso.getNombre() + ").pdf");
 
-		FileInputStream stream = null;
-		ServletOutputStream sOutStream = response.getOutputStream();
-		try 
-		{ 			
-//			libro.write(sOutStream);		
-			sOutStream.flush();
+		ServletOutputStream outputStream = response.getOutputStream();
+		response.setContentType("application/pdf");
+		response.setContentLength(caso.getCasoClinico().length);
+		outputStream.write(caso.getCasoClinico()); 
+		outputStream.flush();
+		outputStream.close();
+		
+		} catch (Exception e2) {
+			System.out.println("Error in " + getClass().getName() + "\n" + e2);
 		}
-		finally 
-		{
-			if (stream != null) 
-			{
-				stream.close(); 
-			}
-		}
+		
+		
 
 		return mapping.findForward("success");
 	}

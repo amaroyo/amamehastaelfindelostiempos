@@ -43,7 +43,7 @@
 	   
 	   <form-bean name="SubirArchivoCasoClinicoForm" type="es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoCasoClinicoForm" />
 	   
-	   <form-bean name="DescargarCasoClinico" type="es.oyssen.mrm.struts.forms.leads.DescargarCasoClinicoForm" />
+	   <form-bean name="DescargarCasoClinico" type="es.oyssen.mrm.struts.forms.asignaturas.DescargarCasoClinicoForm" />
 	   
 	</form-beans>
 	
@@ -120,7 +120,7 @@
 			<forward name="success" path="/asignaturas/correcto.do" />
 		</action>
 		
-		<action path="/asignaturas/descargarCasoClinico" name="DescargarCasoClinico" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.leads.DescargarCasoClinicoAction" />
+		<action path="/asignaturas/descargarCasoClinico" name="DescargarCasoClinico" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarCasoClinicoAction" />
 		
 		
 	</action-mappings>
