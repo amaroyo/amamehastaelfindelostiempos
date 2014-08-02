@@ -6,8 +6,8 @@ import org.apache.struts.upload.FormFile;
 public class SubirArchivoCasoClinicoForm extends ActionForm {
 
 	private FormFile fichero;
-	private String tipoContenido;
-	private String idFichero;
+	private String idAlumno;
+	private String idAsignatura;
 	private String nombre;
 	private String idPortafolio;
 	
@@ -23,21 +23,7 @@ public class SubirArchivoCasoClinicoForm extends ActionForm {
 
 	
 
-	public String getTipoContenido() {
-		return tipoContenido;
-	}
-
-	public void setTipoContenido(String tipoContenido) {
-		this.tipoContenido = tipoContenido;
-	}
-
-	public String getIdFichero() {
-		return idFichero;
-	}
-
-	public void setIdFichero(String idFichero) {
-		this.idFichero = idFichero;
-	}
+	
 
 	public String getNombre() {
 		return nombre;
@@ -47,6 +33,22 @@ public class SubirArchivoCasoClinicoForm extends ActionForm {
 		this.nombre = nombre;
 	}
 
+	public String getIdAlumno() {
+		return idAlumno;
+	}
+
+	public void setIdAlumno(String idAlumno) {
+		this.idAlumno = idAlumno;
+	}
+
+	public String getIdAsignatura() {
+		return idAsignatura;
+	}
+
+	public void setIdAsignatura(String idAsignatura) {
+		this.idAsignatura = idAsignatura;
+	}
+
 	public String getIdPortafolio() {
 		return idPortafolio;
 	}
@@ -54,6 +56,10 @@ public class SubirArchivoCasoClinicoForm extends ActionForm {
 	public void setIdPortafolio(String idPortafolio) {
 		this.idPortafolio = idPortafolio;
 	}
+
+
+
+	
 
 	
 

@@ -105,8 +105,7 @@
 				window.setText('<bean:message key="title.subir.practica" />');				
 				window.setModal(true);
 				window.centerOnScreen();
-				var portafolio = damePortafolioAlumno();
-				window.attachURL("subirCasoClinico.do?idPortafolio=" + portafolio);
+				window.attachURL("subirCasoClinico.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);
 				//goActualizar();
 			}
 			
@@ -148,9 +147,20 @@
 		    		}
 		    	});
 		    	
+		    	gridAlumnos.attachEvent("onRowSelect",doOnRowDescargasOptions);
 		    	gridAlumnos.clearAndLoad("gridCasosClinicosUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);
 				
 			}
+			
+			
+			function doOnRowDescargasOptions(rowID,celInd){
+				if(celInd=='2') {
+					var parts = rowID.split("-");
+					alert("Descargar Archivo con idPortafolio=" + parts[0] + " y idCasoClinico=" + parts[1]);
+				}
+	
+			}
+			
 			
 			function goGridProfesores(){
 				
@@ -216,45 +226,9 @@
 			}
 			
 			
-			function initRequest() {
-	    	    if (window.XMLHttpRequest) {
-	    	        xmlhttp = new XMLHttpRequest();
-	    	    } else if (window.ActiveXObject) {
-	    	        isIE = true;
-	    	        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	    	    }
-	    	    return xmlhttp;
-	    	}
+			
 	    	
 	    	
-	    	function damePortafolioAlumno(){
-	    		var url = "portafolioAlumno.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession;
-	    		var xmlhttp = initRequest();
-	    		xmlhttp.onreadystatechange=function(){
-	    			if (xmlhttp.readyState===4) {
-	        	        if(xmlhttp.status===200) { //GET returning a response
-	        	        	return createArrayFromXML(xmlhttp.responseXML);
-	        	        }
-	        	    }
-	    		}
-	    	    xmlhttp.open("GET",url,false);
-	    	    xmlhttp.send(null);
-	    	    return xmlhttp.onreadystatechange();
-	    	}
-	    	
-	    	function createArrayFromXML(xml){
-	    		var seminarios = xml.getElementsByTagName("portafolio");
-	    		var id, nombre, seminario;
-	    		var opts = new Array();
-	    		for(var i=0;i<seminarios.length;i++) {
-	    	        //id=seminarios[i].getElementsByTagName("id")[0].firstChild.nodeValue;
-	    	        nombre=seminarios[i].getElementsByTagName("id")[0].firstChild.nodeValue;
-	    	        //seminario=[id,nombre];
-	    	       	opts[i] = nombre;
-	    	    }
-	    		return opts;
-
-	    	}
 			
 			
 	    	
