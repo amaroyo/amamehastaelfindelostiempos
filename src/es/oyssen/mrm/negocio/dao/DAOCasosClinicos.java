@@ -6,7 +6,6 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
-import es.oyssen.mrm.negocio.vo.ArchivoCasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 
@@ -20,7 +19,8 @@ public interface DAOCasosClinicos {
 		
 	public List<CasoClinicoVO> findAllByPortafolio(CasoClinicoVO casoClinico) throws DAOException;
 
-	public void insertFichero(ArchivoCasoClinicoVO fichero) throws DAOException;
+
+	public CasoClinicoVO findByIDs(CasoClinicoVO caso) throws DAOException;
 	
 	
 	

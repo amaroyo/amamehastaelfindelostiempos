@@ -156,7 +156,11 @@
 			function doOnRowDescargasOptions(rowID,celInd){
 				if(celInd=='2') {
 					var parts = rowID.split("-");
-					alert("Descargar Archivo con idPortafolio=" + parts[0] + " y idCasoClinico=" + parts[1]);
+					//alert("Descargar Archivo con idPortafolio=" + parts[0] + " y idCasoClinico=" + parts[1]);
+					var accion = "descargarCasoClinico.do";
+					accion += "?idPortafolio="+parts[0];
+					accion += "&idCasoClinico="+parts[1];
+					location.href=accion;
 				}
 	
 			}

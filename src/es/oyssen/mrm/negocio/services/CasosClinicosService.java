@@ -11,7 +11,7 @@ import es.oyssen.mrm.struts.forms.ficheros.SubirFicheroForm;
 
 public interface CasosClinicosService {
 	
-	public void insert(CasoClinicoVO casoClinico) throws ServiceException, DAOException;
+	//public void insert(CasoClinicoVO casoClinico) throws ServiceException, DAOException;
 	
 	public void update(CasoClinicoVO casoClinico) throws ServiceException, DAOException;
 	
@@ -19,7 +19,9 @@ public interface CasosClinicosService {
 	
 	public List<CasoClinicoVO> findAllByPortafolio(CasoClinicoVO casoClinico) throws ServiceException;
 
-	public void process(SubirArchivoCasoClinicoForm f) throws ServiceException;
+	public void process(SubirArchivoCasoClinicoForm f) throws ServiceException, DAOException;
+
+	public CasoClinicoVO findByIDs(CasoClinicoVO caso) throws ServiceException;
 
 }
 

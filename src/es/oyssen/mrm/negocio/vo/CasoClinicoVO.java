@@ -1,94 +1,74 @@
 package es.oyssen.mrm.negocio.vo;
 
+import org.apache.struts.upload.FormFile;
+
 
 public class CasoClinicoVO { 
 
-	private String id_caso_clinico;
-	private String id_portafolio;
+	private String idPortafolio;
+	private String idCasoClinico;
 	private String nombre;
-	private String fecha_subida;
-	private String caso_clinico;
-
-	
+	private byte[] caso_clinico;
+	private String fechaSubida;
 	
 	public CasoClinicoVO() {
 		
 	}
 
-	
-	public CasoClinicoVO(String id_caso_clinico, String id_portafolio) {
-		this.id_caso_clinico = id_caso_clinico;
-		this.id_portafolio = id_portafolio;
+	public String getIdPortafolio() {
+		return idPortafolio;
 	}
 
-
-	
+	public void setIdPortafolio(String idPortafolio) {
+		this.idPortafolio = idPortafolio;
+	}
 
 	public String getIdCasoClinico() {
-		return id_caso_clinico;
+		return idCasoClinico;
 	}
 
-
-	public void setIdCasoClinico(String id_caso_clinico) {
-		this.id_caso_clinico = id_caso_clinico;
+	public void setIdCasoClinico(String idCasoClinico) {
+		this.idCasoClinico = idCasoClinico;
 	}
-
-
-	public String getIdPortafolio() {
-		return id_portafolio;
-	}
-
-
-	public void setIdPortafolio(String id_portafolio) {
-		this.id_portafolio = id_portafolio;
-	}
-
-
-	public String getCasoClinico() {
-		return caso_clinico;
-	}
-
-
-	public void setCasoClinico(String caso_clinico) {
-		this.caso_clinico = caso_clinico;
-	}
-
-	
-	
 
 	public String getNombre() {
 		return nombre;
 	}
-
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
 	
-	
 
 	public String getFechaSubida() {
-		return fecha_subida;
+		return fechaSubida;
 	}
 
-
-	public void setFechaSubida(String fecha_subida) {
-		this.fecha_subida = fecha_subida;
+	public void setFechaSubida(String fechaSubida) {
+		this.fechaSubida = fechaSubida;
 	}
 
+	public byte[] getCasoClinico() {
+		return caso_clinico;
+	}
 
+	public void setCasoClinico(byte[] caso_clinico) {
+		this.caso_clinico = caso_clinico;
+	}
+
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((id_caso_clinico == null) ? 0 : id_caso_clinico.hashCode());
+				+ ((idCasoClinico == null) ? 0 : idCasoClinico.hashCode());
 		result = prime * result
-				+ ((id_portafolio == null) ? 0 : id_portafolio.hashCode());
+				+ ((idPortafolio == null) ? 0 : idPortafolio.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -99,19 +79,21 @@ public class CasoClinicoVO {
 		if (getClass() != obj.getClass())
 			return false;
 		CasoClinicoVO other = (CasoClinicoVO) obj;
-		if (id_caso_clinico == null) {
-			if (other.id_caso_clinico != null)
+		if (idCasoClinico == null) {
+			if (other.idCasoClinico != null)
 				return false;
-		} else if (!id_caso_clinico.equals(other.id_caso_clinico))
+		} else if (!idCasoClinico.equals(other.idCasoClinico))
 			return false;
-		if (id_portafolio == null) {
-			if (other.id_portafolio != null)
+		if (idPortafolio == null) {
+			if (other.idPortafolio != null)
 				return false;
-		} else if (!id_portafolio.equals(other.id_portafolio))
+		} else if (!idPortafolio.equals(other.idPortafolio))
 			return false;
 		return true;
 	}
 
+	
+	
 
 
 

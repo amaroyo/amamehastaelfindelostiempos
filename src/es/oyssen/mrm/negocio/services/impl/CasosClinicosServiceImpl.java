@@ -12,7 +12,6 @@ import es.oyssen.mrm.negocio.dao.DAOCasosClinicos;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.CasosClinicosService;
-import es.oyssen.mrm.negocio.vo.ArchivoCasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.FicheroVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
@@ -29,7 +28,7 @@ public class CasosClinicosServiceImpl implements CasosClinicosService{
 		this.daoCasosClinicos = daoCasosClinicos;
 	}
 	
-	public void insert(CasoClinicoVO casoClinico)
+	/*public void insert(CasoClinicoVO casoClinico)
 			throws es.oyssen.mrm.negocio.exceptions.ServiceException,
 			es.oyssen.mrm.negocio.dao.exceptions.DAOException {
 		try {
@@ -39,7 +38,7 @@ public class CasosClinicosServiceImpl implements CasosClinicosService{
 			log.error("Error creando caso clinico", e);
 			throw new ServiceException(e);
 		}		
-	}
+	}*/
 
 	public void update(CasoClinicoVO casoClinico) 
 			throws es.oyssen.mrm.negocio.exceptions.ServiceException,
@@ -78,28 +77,40 @@ public class CasosClinicosServiceImpl implements CasosClinicosService{
 	}
 
 
-	public void process(SubirArchivoCasoClinicoForm f) throws ServiceException {
+	public void process(SubirArchivoCasoClinicoForm f) throws ServiceException, 
+				es.oyssen.mrm.negocio.dao.exceptions.DAOException{
 		try {
 			log.debug("Procesamos fichero.........");
 			
-			ArchivoCasoClinicoVO fichero = new ArchivoCasoClinicoVO();
+			CasoClinicoVO caso = new CasoClinicoVO();
 			
-			if(f.getNombre().equals("")) fichero.setNombre(f.getFichero().getFileName());
-			else fichero.setNombre(f.getNombre());
-			fichero.setDatos(f.getFichero().getFileData());
+			if(f.getNombre().equals("")) caso.setNombre(f.getFichero().getFileName());
+			else caso.setNombre(f.getNombre());
+			caso.setCasoClinico(f.getFichero().getFileData());
 			
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			//get current date time with Date()
 			Date date = new Date();
-			fichero.setFechaSubida(dateFormat.format(date));
-			fichero.setIdPortfolio(f.getIdPortafolio());
-			daoCasosClinicos.insertFichero(fichero);
+			caso.setFechaSubida(dateFormat.format(date));
+			caso.setIdPortafolio(f.getIdPortafolio());
+			daoCasosClinicos.insert(caso);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("Error procesando fichero SubirArchivoCasoClinicoForm", e);
 			throw new ServiceException(e);
 		}
 		
+	}
+
+	@Override
+	public CasoClinicoVO findByIDs(CasoClinicoVO caso) throws ServiceException {
+		try {
+			return daoCasosClinicos.findByIDs(caso);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findByIDs caso clinico", e);
+			throw new ServiceException(e.getMessage());
+		}
 	}
 	
 	

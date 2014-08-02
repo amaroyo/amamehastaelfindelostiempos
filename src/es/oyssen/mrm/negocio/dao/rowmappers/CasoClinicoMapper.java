@@ -1,8 +1,12 @@
 package es.oyssen.mrm.negocio.dao.rowmappers;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.IOUtils;
 import org.springframework.jdbc.core.RowMapper;
 
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
@@ -23,7 +27,25 @@ public class CasoClinicoMapper implements RowMapper {
     	o.setIdPortafolio(StringUtil.nullToString(rs.getString(FIELD_ID_PORTAFOLIO)));
     	o.setNombre(StringUtil.nullToString(rs.getString(FIELD_NOMBRE)));
     	o.setFechaSubida(StringUtil.nullToString(rs.getString(FIELD_FECHA_SUBIDA)));
-    	o.setCasoClinico(StringUtil.nullToString(rs.getString(FIELD_CASO_CLINICO)));
+    	
+    	
+    	try {
+        	InputStream datos = rs.getBinaryStream(FIELD_CASO_CLINICO);
+        	byte[] archivo;
+        	if(datos != null) {
+        		archivo = new Base64().encode(IOUtils.toByteArray(datos));
+        	}
+        	else{
+        		archivo = null;
+        	}
+        	o.setCasoClinico(archivo);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		return o;
 	}
 }
