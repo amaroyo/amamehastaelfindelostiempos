@@ -300,12 +300,14 @@
 		    	toolbarServicios.setIconsPath('../img/toolbar/');
 
 		    	
-		    	toolbarServicios.loadXML('../xml/toolbars/dhtxtoolbar-trabajos-campo.xml', function(){
+		    	toolbarServicios.loadXML('../xml/toolbars/dhxtoolbar-trabajos-campo.xml', function(){
+		    		toolbarServicios.setItemText('crearTrabajoCampo',"<bean:message key="button.crear.trabajo.campo"/>");
 		    		toolbarServicios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
-		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.trabajos"/>");
-		    		toolbarServicios.setItemText('subirCorrecciones',"<bean:message key="button.subir.correcciones"/>");
+		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.casos"/>");
+		    		toolbarServicios.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.casos.alumno"/>");
 		    		toolbarServicios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+		    		
 		    	});
 		    	
 		    	
@@ -392,12 +394,14 @@
 				toolbarServiciosCasos.setIconsPath('../img/toolbar/');
 
 		    	
-				toolbarServiciosCasos.loadXML('../xml/toolbars/dhtxtoolbar-trabajos-campo.xml', function(){
+				toolbarServiciosCasos.loadXML('../xml/toolbars/dhxtoolbar-trabajos-campo.xml', function(){
+					toolbarServiciosCasos.setItemText('crearTrabajoCampo',"<bean:message key="button.crear.trabajo.campo"/>");
 					toolbarServiciosCasos.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
 					toolbarServiciosCasos.setItemText('descargarTodos',"<bean:message key="button.descargar.casos"/>");
-					toolbarServiciosCasos.setItemText('subirCorrecciones',"<bean:message key="button.subir.correcciones"/>");
+					toolbarServiciosCasos.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.casos.alumno"/>");
 					toolbarServiciosCasos.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 					toolbarServiciosCasos.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+		    		
 		    	});
 				
 				
@@ -472,12 +476,14 @@
 				toolbarServiciosDiarios.setIconsPath('../img/toolbar/');
 
 		    	
-				toolbarServiciosDiarios.loadXML('../xml/toolbars/dhtxtoolbar-trabajos-campo.xml', function(){
+				toolbarServiciosDiarios.loadXML('../xml/toolbars/dhxtoolbar-trabajos-campo.xml', function(){
+					toolbarServiciosDiarios.setItemText('crearTrabajoCampo',"<bean:message key="button.crear.trabajo.campo"/>");
 					toolbarServiciosDiarios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
 					toolbarServiciosDiarios.setItemText('descargarTodos',"<bean:message key="button.descargar.casos"/>");
-					toolbarServiciosDiarios.setItemText('subirCorrecciones',"<bean:message key="button.subir.correcciones"/>");
+					toolbarServiciosDiarios.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.casos.alumno"/>");
 					toolbarServiciosDiarios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 					toolbarServiciosDiarios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+		    		
 		    	});
 				
 				

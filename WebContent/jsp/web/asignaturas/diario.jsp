@@ -61,25 +61,32 @@
 		    	toolbarServicios.setIconsPath('../img/toolbar/');
 
 		    	
-		    	toolbarServicios.loadXML('../xml/toolbars/dhtxtoolbar-trabajos-campo.xml', function(){
+		    	toolbarServicios.loadXML('../xml/toolbars/dhxtoolbar-trabajos-campo.xml', function(){
+		    		toolbarServicios.setItemText('crearTrabajoCampo',"<bean:message key="button.crear.trabajo.campo"/>");
 		    		toolbarServicios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
-		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.diarios"/>");
-		    		toolbarServicios.setItemText('subirCorrecciones',"<bean:message key="button.subir.correcciones"/>");
+		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.casos"/>");
+		    		toolbarServicios.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.casos.alumno"/>");
 		    		toolbarServicios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 		    		
-		    		toolbarServicios.hideItem('subirCorrecciones');
-		    		toolbarServicios.hideItem('sep3');
+		    		toolbarServicios.hideItem('crearTrabajoCampo');
+		    		toolbarServicios.hideItem('sep1');
 		    		toolbarServicios.hideItem('fechaLimite');
-		    		toolbarServicios.hideItem('sep4');
+		    		toolbarServicios.hideItem('sep5');
 		    	
 		    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 			    		toolbarServicios.hideItem('subirPractica');
-			    		toolbarServicios.hideItem('sep1');
-	    			</logic:match>
-	    			<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >    	
-			    		toolbarServicios.hideItem('descargarTodos');
 			    		toolbarServicios.hideItem('sep2');
+		    		
+	    			</logic:match>
+	    			<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+	    	
+			    		toolbarServicios.hideItem('descargarTodos');
+			    		toolbarServicios.hideItem('sep3');
+			    		toolbarServicios.hideItem('descargarTodosAlumno');
+			    		toolbarServicios.hideItem('sep4');
+			    		
+		    	
 	    			</logic:notMatch>
 		    		
 		    	
@@ -110,6 +117,10 @@
 			
 			function fechaLimite(){
 				alert("Fecha Limite");
+			}
+			
+			function descargarTodosAlumno(){
+				alert("Descargar Todos Alumno");
 			}
 			
 			function goActualizar() {

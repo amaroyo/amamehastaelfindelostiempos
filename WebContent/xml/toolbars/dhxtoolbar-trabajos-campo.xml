@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbar> 
+    <item id="crearTrabajoCampo" type="button" img="uploadCorrections.png" text="crear Trabajo de Campo" action="crearTrabajoCampo"/>
+	<item id="sep1" type="separator"/>
+	<item id="subirPractica" type="button" img="assignment.png"  text="Subir Practica"  action="subirPractica" />
+	<item id="sep2" type="separator"/>
+	<item id="descargarTodos" type="button" img="downloadAssignments.png" text="Descargar Todos" action="descargarTodos"/>
+	<item id="sep3" type="separator"/>
+	<item id="descargarTodosAlumno" type="button" img="downloadStudent.png" text="Descargar TodosAlumno" action="descargarTodosAlumno"/>
+	<item id="sep4" type="separator"/>
+	<item id="fechaLimite" type="button" img="deadline.png" text="Fecha Limite" action="fechaLimite"/>
+	<item id="sep5" type="separator"/>
+	<item id="refresh" type="button" img="recargar.png" text="Actualizar" action="goActualizar"/>
+</toolbar>
