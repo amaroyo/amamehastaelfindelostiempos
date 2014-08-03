@@ -68,7 +68,7 @@ public class DescargarCasoClinicoAlumnoAction extends MrmAction {
 		
 		try{
 			
-			String nmbreArchivo = "Casos_Clinicos_de_" + u.getApellido1() + "_" + u.getApellido2()+"_" + u.getNombre();
+			String nmbreArchivo = "Casos_Clinicos_de_" + u.getApellido1() + "_" + u.getApellido2()+"_" + u.getNombre()+"_"+u.getDni();
 			
 			//**********************************************
 			response.setHeader("Content-Disposition", "attachment; filename="+ nmbreArchivo +".zip");

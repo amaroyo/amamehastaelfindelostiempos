@@ -57,7 +57,7 @@ public class DescargarTodosCasosClinicosAlumnosAction extends MrmAction {
 				List<CasoClinicoVO> casosPortafolio =  getCasosClinicosService().findAllByPortafolio(caso);
 				
 				//Crearemos Zip de Zips
-				ZipEntry entry = new ZipEntry(up.getApellido1() + "_" + up.getApellido2() + "_" + up.getNombre()+".zip");
+				ZipEntry entry = new ZipEntry(up.getApellido1() + "_" + up.getApellido2() + "_" + up.getNombre()+"_"+up.getDni()+".zip");
 				
 				ByteArrayOutputStream subBaos = new ByteArrayOutputStream();
 				ZipOutputStream subZos = new ZipOutputStream(subBaos);
