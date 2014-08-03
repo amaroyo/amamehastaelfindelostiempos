@@ -16,6 +16,8 @@ import org.apache.struts.action.ActionMapping;
 import org.mcavallo.opencloud.util.Pair;
 
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
+import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -31,9 +33,17 @@ public class DescargarCasoClinicoAlumnoAction extends MrmAction {
 		
 		
 		CasoClinicoVO caso = new CasoClinicoVO();
-		caso.setIdPortafolio((String)request.getParameter("idPortafolio"));
+		String idPortafolio = (String)request.getParameter("idPortafolio");
+		caso.setIdPortafolio(idPortafolio);
+		
+		PortafolioVO p = new PortafolioVO();
+		p.setIdPortafolio(idPortafolio);
 	
+		//Lista con todos los casos clinicos de un portafolio
 		List<CasoClinicoVO> casos =  getCasosClinicosService().findAllByPortafolio(caso);
+		
+		//Informacion de un alumno
+		UsuarioVO u = getPortafoliosService().findAlumnoByPortafolio(p);
 		
 		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -58,9 +68,10 @@ public class DescargarCasoClinicoAlumnoAction extends MrmAction {
 		
 		try{
 			
+			String nmbreArchivo = "Casos_Clinicos_de_" + u.getApellido1() + "_" + u.getApellido2()+"_" + u.getNombre();
 			
 			//**********************************************
-			response.setHeader("Content-Disposition", "attachment; filename=CasosClinicosAlumno.zip");
+			response.setHeader("Content-Disposition", "attachment; filename="+ nmbreArchivo +".zip");
 	
 			ServletOutputStream outputStream = response.getOutputStream();
 			response.setContentType("application/zip");

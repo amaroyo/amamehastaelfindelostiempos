@@ -50,6 +50,8 @@ public interface PortafoliosService {
 	public List<DiarioReflexivoVO> findDiariosByPortafolio(PortafolioVO p) throws ServiceException;
 
 	public PortafolioVO findByAlumnoAsignatura(PortafolioVO p) throws ServiceException;
+
+	public UsuarioVO findAlumnoByPortafolio(PortafolioVO p) throws ServiceException;
 	
 
 

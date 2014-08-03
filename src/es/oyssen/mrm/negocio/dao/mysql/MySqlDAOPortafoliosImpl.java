@@ -22,6 +22,7 @@ import es.oyssen.mrm.negocio.dao.rowmappers.DiarioReflexivoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.PortafolioMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.TrabajoDeCampoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioEstanciaUnidadClinicaMapper;
+import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioPortafolioMapper;
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.DatosUsuarioEstanciaUnidadClinicaVO;
@@ -30,6 +31,7 @@ import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
+import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
 
 public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
@@ -45,6 +47,7 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 	private static String SQL_FIND_BY_PROFESOR = "select * from portafolios where id_profesor = ? and anyo_academico = ?";
 	private static String SQL_FIND_BY_ASIGNATURA = "select * from portafolios where id_asignatura = ? and anyo_academico = ?";
 	private static String SQL_FIND_BY_ANYO_ACADEMICO = "select * from portafolios where anyo_academico = ?";
+	private static String SQL_FIND_ALUMNO_BY_PORTAFOLIO = "select u.* from usuarios as u, portafolios as p where u.id_usuario=p.id_alumno and p.id_portafolio=?";
 	private static String SQL_FIND_USUARIOS_ESTANCIA_UNIDAD_CLINICA = "select u.id_usuario, u.nombre, u.apellido1, u.apellido2, u.dni, e.centro_asociado, " +
 																		"e.unidad_clinica, e.turno " +
 																		"from portafolios as p, usuarios as u, estancias_unidad_clinica as e " +
@@ -313,6 +316,18 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 			throws DAOException {
 		try {
 			return (PortafolioVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_ALUMNO_ASIGNATURA, new Object[]{p.getIdAlumno(),p.getIdAsignatura(),p.getAnyoAcademico()}, new PortafolioMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+
+	@Override
+	public UsuarioVO findAlumnoByPortafolio(PortafolioVO p) throws DAOException {
+		try {
+			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_ALUMNO_BY_PORTAFOLIO, new Object[]{p.getIdPortafolio()}, new UsuarioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
