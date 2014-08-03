@@ -42,14 +42,14 @@ public class DescargarCasoClinicoAction extends MrmAction {
 		
 		try{
 		
-		response.setHeader("Content-Disposition", "attachment; filename=CasoClinico(" + caso.getNombre() + ").pdf");
-
-		ServletOutputStream outputStream = response.getOutputStream();
-		response.setContentType("application/pdf");
-		response.setContentLength(caso.getCasoClinico().length);
-		outputStream.write(caso.getCasoClinico()); 
-		outputStream.flush();
-		outputStream.close();
+			response.setHeader("Content-Disposition", "attachment; filename=CasoClinico(" + caso.getNombre() + ").pdf");
+	
+			ServletOutputStream outputStream = response.getOutputStream();
+			response.setContentType("application/pdf");
+			response.setContentLength(caso.getCasoClinico().length);
+			outputStream.write(caso.getCasoClinico()); 
+			outputStream.flush();
+			outputStream.close();
 		
 		} catch (Exception e2) {
 			System.out.println("Error in " + getClass().getName() + "\n" + e2);

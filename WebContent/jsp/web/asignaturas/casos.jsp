@@ -117,8 +117,8 @@
 				if (idPortafolio == -1) alert("<bean:message key="message.error.seleccionar.alumno" />");
 				else {
 					var accion = "descargarCasoClinicosAlumno.do";
-					//accion += "?idPortafolio=" + idPortafolio;
-					//location.href=accion;
+					accion += "?idPortafolio=" + idPortafolio;
+					location.href=accion;
 				}
 			}
 			
@@ -212,13 +212,8 @@
 			
 			function doOnRowSelected(rowID,celInd){
 				
-				
-				
-				alert(rowID);
 				idPortafolio=rowID;
 
-				
-				
 				
 				var gridProfesoresAlumno = b.attachGrid();
 				
