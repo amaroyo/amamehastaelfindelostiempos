@@ -150,7 +150,19 @@
 			
 			function goGridAlumnos(tab,nombreTrabajoCampo){
 				
-				gridAlumnos = tab.attachGrid();
+				
+				
+				var mini_layout = tabbar.cells(nombreTrabajoCampo).attachLayout("2U","dhx_skyblue");
+				
+				var ma = mini_layout.cells('a');
+			    var mb = mini_layout.cells('b');
+			    
+			    ma.hideHeader();
+			    mb.setText('<bean:message key="label.descripcion.practica"/>');
+			    mb.setWidth(500);
+				
+				
+				gridAlumnos = ma.attachGrid();
 		    	
 				gridAlumnos.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.fecha.limite" />","<bean:message key="label.enlace.practica" />","<bean:message key="label.enlace.correccion" />"]);
 				gridAlumnos.setColTypes("ro,ro,ro,ro");
