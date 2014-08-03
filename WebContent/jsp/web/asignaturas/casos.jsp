@@ -123,11 +123,9 @@
 			}
 			
 			function descargarTodos(){
-				alert("Descargar Todos");
-				alert(idPortafolio);
-				//var accion = "descargarCasoClinicosAlumno.do";
-				//accion += "?idPortafolio=" + idPortafolio;
-				//location.href=accion;
+				var accion = "descargarTodosCasosClinicosAlumnos.do";
+				accion += "?idAsignatura=" + idAsignatura;
+				location.href=accion;
 			}
 			
 			function subirCorrecciones(){

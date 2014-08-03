@@ -124,6 +124,8 @@
 		
 		<action path="/asignaturas/descargarCasoClinicosAlumno" name="DescargarCasoClinicoAlumno" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarCasoClinicoAlumnoAction" />
 		
+		<action path="/asignaturas/descargarTodosCasosClinicosAlumnos" name="DescargarTodosCasosClinicosAlumnos" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarTodosCasosClinicosAlumnosAction" />
+		
 		
 		
 	</action-mappings>
