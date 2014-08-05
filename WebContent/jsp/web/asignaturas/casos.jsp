@@ -20,7 +20,7 @@
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b,idSession,idPortafolio,minitoolbarServicios;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b,idSession,idPortafolio,minitoolbarServicios,gridProfesoresAlumno;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -169,7 +169,8 @@
 			
 			
 			function doOnRowDescargasOptions(rowID,celInd){
-				if(celInd=='2') {
+				var cellObj = gridAlumnos.cellById(rowID,celInd);
+				if(celInd=='2' && cellObj.getValue()=="Descargar") {
 					var parts = rowID.split("-");
 					//alert("Descargar Archivo con idPortafolio=" + parts[0] + " y idCasoClinico=" + parts[1]);
 					var accion = "descargarCasoClinico.do";
@@ -213,7 +214,7 @@
 				idPortafolio=rowID;
 
 				
-				var gridProfesoresAlumno = b.attachGrid();
+				gridProfesoresAlumno = b.attachGrid();
 				
 		    	
 				gridProfesoresAlumno.setHeader(["<bean:message key="label.nombre" />", "<bean:message key="label.fecha" />", "<bean:message key="label.enlace" />"]);
@@ -240,7 +241,8 @@
 		    }
 			
 			function doOnRowSelectedOptions(rowID,celInd){
-				if(celInd=='2') {
+				var cellObj = gridProfesoresAlumno.cellById(rowID,celInd);
+				if(celInd=='2' && cellObj.getValue()=="Descargar") {
 					var parts = rowID.split("-");
 					//alert("Descargar Archivo con idPortafolio=" + parts[0] + " y idCasoClinico=" + parts[1]);
 					var accion = "descargarCasoClinico.do";

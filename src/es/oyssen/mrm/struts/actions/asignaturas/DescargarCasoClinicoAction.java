@@ -1,28 +1,16 @@
 package es.oyssen.mrm.struts.actions.asignaturas;
 
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.OutputStream;
-import java.util.List;
-
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
-import es.oyssen.mrm.negocio.vo.CriterioLeadVO;
-import es.oyssen.mrm.negocio.vo.LeadVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
 import es.oyssen.mrm.struts.forms.asignaturas.DescargarCasoClinicoForm;
-import es.oyssen.mrm.struts.forms.leads.GridLeadsForm;
-import es.oyssen.mrm.util.ExcelUtil;
 
 public class DescargarCasoClinicoAction extends MrmAction {
 

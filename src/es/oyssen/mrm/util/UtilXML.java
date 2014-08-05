@@ -774,7 +774,9 @@ public class UtilXML {
 				sb.append("<row id=\"" +cc.getIdPortafolio() + "-" + cc.getIdCasoClinico() + "\">");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(cc.getNombre()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(cc.getFechaSubida(),false)) + "]]></cell>");
-				sb.append("<cell><![CDATA[" +  "Descargar" + "]]></cell>");
+				String descarga = "";
+				if(cc.getCasoClinico() != null) descarga="Descargar";
+				sb.append("<cell><![CDATA[" +  descarga + "]]></cell>");
 				sb.append("</row>");				
 			}
 		}
@@ -791,7 +793,9 @@ public class UtilXML {
 				sb.append("<row id=\"" +dr.getIdPortafolio() + "-" + dr.getIdDiarioReflexivo() + "\">");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(dr.getNombre()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(dr.getFechaSubida(),false)) + "]]></cell>");
-				sb.append("<cell><![CDATA[" +  "Descargar" + "]]></cell>");
+				String descarga = "";
+				if(dr.getDiarioReflexivo() != null) descarga="Descargar";
+				sb.append("<cell><![CDATA[" +  descarga + "]]></cell>");
 				sb.append("</row>");				
 			}
 		}
@@ -841,9 +845,13 @@ public class UtilXML {
 				sb.append("<row id=\"" +tc.getIdPortafolio() + "-" + tc.getIdTrabajoDeCampo() + "\">");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(tc.getNombre()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(tc.getFechaLimite(),true)) + "]]></cell>");
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(tc.getTrabajoDeCampo()) + "]]></cell>");
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(tc.getCorreccionTrabajo()) + "]]></cell>");
-				sb.append("<cell><![CDATA[" +  "Descargar" + "]]></cell>");
+				String descarga1 = "";
+				if(tc.getTrabajoDeCampo() != null) descarga1="Descargar";
+				sb.append("<cell><![CDATA[" + descarga1 + "]]></cell>");
+				String descarga2 = "";
+				if(tc.getCorreccionTrabajo() != null) descarga2="Descargar";
+				sb.append("<cell><![CDATA[" + descarga2 + "]]></cell>");
+			
 				sb.append("</row>");				
 			}
 		}
@@ -862,7 +870,9 @@ public class UtilXML {
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(cc.getNombre()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(cc.getFechaSubida(),true)) + "]]></cell>");
 				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(cc.getCasoClinico()) + "]]></cell>");
-				sb.append("<cell><![CDATA[" +  "Descargar" + "]]></cell>");
+				String descarga = "";
+				if(cc.getCasoClinico() != null) descarga="Descargar";
+				sb.append("<cell><![CDATA[" +  descarga + "]]></cell>");
 				sb.append("</row>");				
 			}
 		}
@@ -881,6 +891,9 @@ public class UtilXML {
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(dr.getNombre()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(dr.getFechaSubida(),true)) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(dr.getDiarioReflexivo()) + "]]></cell>");
+				String descarga = "";
+				if(dr.getDiarioReflexivo() != null) descarga="Descargar";
+				sb.append("<cell><![CDATA[" +  descarga + "]]></cell>");
 				sb.append("<cell><![CDATA[" +  "Descargar" + "]]></cell>");
 				sb.append("</row>");				
 			}
