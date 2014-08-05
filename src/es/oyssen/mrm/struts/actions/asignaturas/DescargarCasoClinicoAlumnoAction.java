@@ -52,7 +52,7 @@ public class DescargarCasoClinicoAlumnoAction extends MrmAction {
 		if(casos != null){
 			for (CasoClinicoVO c : casos) {				
 				if(c.getCasoClinico()!=null){
-					ZipEntry entry = new ZipEntry(c.getNombre()+".pdf");
+					ZipEntry entry = new ZipEntry(c.getNombre());
 					entry.setSize(c.getCasoClinico().length);
 					zos.putNextEntry(entry);
 					zos.write(c.getCasoClinico());

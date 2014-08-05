@@ -25,7 +25,7 @@ public class SubirArchivoCasoClinicoAction extends MrmAction {
 		SubirArchivoCasoClinicoForm f = (SubirArchivoCasoClinicoForm) form;	
 		String nombre = f.getFichero().getFileName();
 		String[] sp = nombre.split("\\.");
-		if(sp[1].equals("pdf") && f.getFichero().getFileSize()<MAX_SIZE_MYSQL) { 
+		if(((sp[1].toLowerCase()).equals("pdf") || (sp[1].toLowerCase()).equals("doc") || (sp[1].toLowerCase()).equals("docx")) && f.getFichero().getFileSize()<MAX_SIZE_MYSQL) { 
 
 			PortafolioVO p = new PortafolioVO();
 			p.setIdAlumno(f.getIdAlumno());

@@ -84,12 +84,13 @@ public class CasosClinicosServiceImpl implements CasosClinicosService{
 			
 			CasoClinicoVO caso = new CasoClinicoVO();
 			
-			if(f.getNombre().equals("")){
-				String n = f.getFichero().getFileName();
-				String[] sp = n.split("\\.");
-				caso.setNombre(sp[0]);
+			String n = f.getFichero().getFileName();
+			String[] sp = n.split("\\.");
+			
+			if(f.getNombre().equals("")){	
+				caso.setNombre(sp[0] + "." + sp[1].toLowerCase());
 			}
-			else caso.setNombre(f.getNombre());
+			else caso.setNombre(f.getNombre() + "." + sp[1].toLowerCase());
 			caso.setCasoClinico(f.getFichero().getFileData());
 			
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

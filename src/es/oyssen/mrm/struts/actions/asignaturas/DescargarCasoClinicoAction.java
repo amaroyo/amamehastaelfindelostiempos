@@ -39,23 +39,31 @@ public class DescargarCasoClinicoAction extends MrmAction {
 	
 		caso = getCasosClinicosService().findByIDs(caso);
 		
+		if(caso.getCasoClinico()!=null){ ///SE RALLA EL JSP!!!! CUANDO HAY UN CASO CLINICO IGUAL A NULL!!!!!! :@
+			try{
+				
+					String[] sp = caso.getNombre().split("\\.");
+				
+					response.setHeader("Content-Disposition", "attachment; filename=CasoClinico(" + sp[0] + ")." + sp[1]);
+			
+					ServletOutputStream outputStream = response.getOutputStream();
+					if (sp[0].equals("pdf")) response.setContentType("application/pdf");
+					else if ((sp[0]).equals("doc")) response.setContentType("application/msword");
+					else if ((sp[0]).equals("docx")) response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+					else response.setContentType("text/plain");
+					
+					
+					response.setContentLength(caso.getCasoClinico().length);
+					outputStream.write(caso.getCasoClinico()); 
+					outputStream.flush();
+					outputStream.close();
+				
+			
+			} catch (Exception e2) {
+				System.out.println("Error in " + getClass().getName() + "\n" + e2);
+			}
 		
-		try{
-		
-			response.setHeader("Content-Disposition", "attachment; filename=CasoClinico(" + caso.getNombre() + ").pdf");
-	
-			ServletOutputStream outputStream = response.getOutputStream();
-			response.setContentType("application/pdf");
-			response.setContentLength(caso.getCasoClinico().length);
-			outputStream.write(caso.getCasoClinico()); 
-			outputStream.flush();
-			outputStream.close();
-		
-		} catch (Exception e2) {
-			System.out.println("Error in " + getClass().getName() + "\n" + e2);
 		}
-		
-		
 
 		return mapping.findForward("success");
 	}
