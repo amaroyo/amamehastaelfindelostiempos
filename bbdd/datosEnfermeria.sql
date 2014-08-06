@@ -458,21 +458,35 @@ insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_cli
 
 
 
+-- Trabajos de Campo info
+insert into trabajos_de_campo_info (nombre, enunciado, descripcion) values ('801148 - Trabajo de Campo I', null, 'Este 1er trabajo servira...');
+insert into trabajos_de_campo_info (nombre, enunciado, descripcion) values ('801148 - Trabajo de Campo II', null, 'Este 2do trabajo servira...');
+insert into trabajos_de_campo_info (nombre, enunciado, descripcion) values ('801148 - Trabajo de Campo III', null, 'Este 3er trabajo servira...');
+
+insert into trabajos_de_campo_info (nombre, enunciado, descripcion) values ('801149 - Trabajo de Campo I', null, 'Este 1er trabajo servira...');
+
+insert into trabajos_de_campo_info (nombre, enunciado, descripcion) values ('801149 - Trabajo de Campo II', null, 'Este 2do trabajo servira...');
+
+insert into trabajos_de_campo_info (nombre, enunciado, descripcion) values ('801149 - Trabajo de Campo III', null, 'Este 3er trabajo servira...');
+
+insert into trabajos_de_campo_info (nombre, enunciado, descripcion) values ('801150 - Trabajo de Campo I', null, 'Este 1er trabajo servira...');
+
+
 -- Trabajos de Campo
-insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correccion_trabajo, fecha_limite) values (3, '801148 - Trabajo de Campo I', null, null, '2018-10-15 23:59:59');
-insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correccion_trabajo, fecha_limite) values (3, '801148 - Trabajo de Campo II', null, null, '2019-10-13 23:59:59');
-insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correccion_trabajo, fecha_limite) values (3, '801148 - Trabajo de Campo III', null, null, '2020-10-13 23:59:59');
+insert into trabajos_de_campo (id_portafolio, id_trabajo_info, trabajo_de_campo, correccion_trabajo, fecha_limite) values (3, 1, null, null, '2018-10-15 23:59:59');
+insert into trabajos_de_campo (id_portafolio, id_trabajo_info, trabajo_de_campo, correccion_trabajo, fecha_limite) values (3, 2, null, null, '2019-10-13 23:59:59');
+insert into trabajos_de_campo (id_portafolio, id_trabajo_info, trabajo_de_campo, correccion_trabajo, fecha_limite) values (3, 3, null, null, '2020-10-13 23:59:59');
 
-insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correccion_trabajo, fecha_limite) values (4, '801149 - Trabajo de Campo I', null, null, '2012-10-05 12:59:59');
-insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correccion_trabajo, fecha_limite) values (5, '801149 - Trabajo de Campo I', null, null, '2012-10-05 12:59:59');
+insert into trabajos_de_campo (id_portafolio, id_trabajo_info, trabajo_de_campo, correccion_trabajo, fecha_limite) values (4, 4, null, null, '2012-10-05 12:59:59');
+insert into trabajos_de_campo (id_portafolio, id_trabajo_info, trabajo_de_campo, correccion_trabajo, fecha_limite) values (5, 4, null, null, '2012-10-05 12:59:59');
 
-insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correccion_trabajo, fecha_limite) values (4, '801149 - Trabajo de Campo II', null, null, '2025-10-15 23:59:59');
-insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correccion_trabajo, fecha_limite) values (5, '801149 - Trabajo de Campo II', null, null, '2025-10-15 23:59:59');
+insert into trabajos_de_campo (id_portafolio, id_trabajo_info, trabajo_de_campo, correccion_trabajo, fecha_limite) values (4, 5, null, null, '2025-10-15 23:59:59');
+insert into trabajos_de_campo (id_portafolio, id_trabajo_info, trabajo_de_campo, correccion_trabajo, fecha_limite) values (5, 5, null, null, '2025-10-15 23:59:59');
 
-insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correccion_trabajo, fecha_limite) values (4, '801149 - Trabajo de Campo III', null, null, '2088-10-05 23:59:59');
-insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correccion_trabajo, fecha_limite) values (5, '801149 - Trabajo de Campo III', null, null, '2088-10-05 23:59:59');
+insert into trabajos_de_campo (id_portafolio, id_trabajo_info, trabajo_de_campo, correccion_trabajo, fecha_limite) values (4, 6, null, null, '2088-10-05 23:59:59');
+insert into trabajos_de_campo (id_portafolio, id_trabajo_info, trabajo_de_campo, correccion_trabajo, fecha_limite) values (5, 6, null, null, '2088-10-05 23:59:59');
 
-insert into trabajos_de_campo (id_portafolio, nombre, trabajo_de_campo, correccion_trabajo, fecha_limite) values (6, '801150 - Trabajo de Campo I', null, null, '2013-10-13 23:59:59');
+insert into trabajos_de_campo (id_portafolio, id_trabajo_info, trabajo_de_campo, correccion_trabajo, fecha_limite) values (6, 7, null, null, '2013-10-13 23:59:59');
 
 
 

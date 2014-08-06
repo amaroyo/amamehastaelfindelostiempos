@@ -17,6 +17,7 @@ DROP TABLE IF EXISTS portafolios;
 DROP TABLE IF EXISTS estancias_unidad_clinica;
 DROP TABLE IF EXISTS seminarios_realizados;
 DROP TABLE IF EXISTS casos_clinicos;
+DROP TABLE IF EXISTS trabajos_de_campo_info;
 DROP TABLE IF EXISTS trabajos_de_campo;
 DROP TABLE IF EXISTS diarios_reflexivos;
 DROP TABLE IF EXISTS anexos;
@@ -245,18 +246,31 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
 
 
+CREATE TABLE IF NOT EXISTS trabajos_de_campo_info (	
+	id_trabajo_info INT(50) NOT NULL auto_increment,
+	nombre VARCHAR(100) NOT NULL,
+	enunciado LONGBLOB,
+	descripcion TEXT,
+	PRIMARY KEY(id_trabajo_info)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
+
 
 CREATE TABLE IF NOT EXISTS trabajos_de_campo (	
 	id_trabajo_de_campo INT(10) NOT NULL auto_increment,
 	id_portafolio INT(50) NOT NULL,
-	nombre VARCHAR(100) NOT NULL,
+	id_trabajo_info INT(50) NOT NULL,
 	trabajo_de_campo LONGBLOB,
 	correccion_trabajo LONGBLOB,
 	fecha_limite DATETIME,
 	PRIMARY KEY(id_trabajo_de_campo, id_portafolio),
 	FOREIGN KEY (id_portafolio)
 		REFERENCES portafolios(id_portafolio)
-		ON DELETE CASCADE
+		ON DELETE CASCADE,
+	FOREIGN KEY (id_trabajo_info)
+		REFERENCES trabajos_de_campo_info(id_trabajo_info)
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8

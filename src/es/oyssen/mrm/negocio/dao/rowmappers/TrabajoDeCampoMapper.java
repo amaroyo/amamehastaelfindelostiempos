@@ -18,6 +18,9 @@ public class TrabajoDeCampoMapper implements RowMapper {
     public static final String FIELD_TRABAJO_DE_CAMPO = "trabajo_de_campo";
     public static final String FIELD_CORRECCION_TRABAJO = "correccion_trabajo";
     public static final String FIELD_FECHA_LIMITE = "fecha_limite";
+    public static final String FIELD_ENUNCIADO = "enunciado";
+    public static final String FIELD_DESCRIPCION = "descripcion";
+    public static final String FIELD_ID_TRABAJO_INFO = "id_trabajo_info";
     
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
     	TrabajoDeCampoVO o = new TrabajoDeCampoVO();
@@ -27,6 +30,9 @@ public class TrabajoDeCampoMapper implements RowMapper {
     	o.setTrabajoDeCampo(StringUtil.nullToString(rs.getString(FIELD_TRABAJO_DE_CAMPO)));
     	o.setCorreccionTrabajo(StringUtil.nullToString(rs.getString(FIELD_CORRECCION_TRABAJO)));
     	o.setFechaLimite(StringUtil.nullToString(rs.getString(FIELD_FECHA_LIMITE)));
+    	o.setEnunciado(StringUtil.nullToString(rs.getString(FIELD_ENUNCIADO)));
+    	o.setDescripcion(StringUtil.nullToString(rs.getString(FIELD_DESCRIPCION)));
+    	o.setIdTrabajoInfo(StringUtil.nullToString(rs.getString(FIELD_ID_TRABAJO_INFO)));
 		return o;
 	}
 }

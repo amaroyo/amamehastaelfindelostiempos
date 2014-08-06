@@ -5,7 +5,10 @@ public class TrabajoDeCampoVO {
 
 	private String id_trabajo_de_campo;
 	private String id_portafolio;
+	private String id_trabajo_info;
 	private String nombre;
+	private String enunciado;
+	private String descripcion;
 	private String trabajo_de_campo;
 	private String correccion_trabajo;
 	private String fecha_limite;
@@ -64,6 +67,32 @@ public class TrabajoDeCampoVO {
 
 	
 	
+	
+	
+	public String getIdTrabajoInfo() {
+		return id_trabajo_info;
+	}
+
+	public void setIdTrabajoInfo(String id_trabajo_info) {
+		this.id_trabajo_info = id_trabajo_info;
+	}
+
+	public String getEnunciado() {
+		return enunciado;
+	}
+
+	public void setEnunciado(String enunciado) {
+		this.enunciado = enunciado;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

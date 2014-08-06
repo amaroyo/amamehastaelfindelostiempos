@@ -10,7 +10,7 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.TrabajosDeCampoService;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
-import es.oyssen.mrm.negocio.vo.TrabajoDeCampoNombreVO;
+import es.oyssen.mrm.negocio.vo.TrabajoDeCampoInfoVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioTrabajoCampoVO;
 
@@ -95,7 +95,7 @@ public class TrabajosDeCampoServiceImpl implements TrabajosDeCampoService{
 	}
 
 	@Override
-	public List<TrabajoDeCampoNombreVO> findAllNombresByAsignatura(PortafolioVO p) throws ServiceException {
+	public List<TrabajoDeCampoInfoVO> findAllNombresByAsignatura(PortafolioVO p) throws ServiceException {
 		try {
 			return daoTrabajosDeCampo.findAllNombresByAsignaturaTrabajo(p);
 		} catch (DAOException e) {

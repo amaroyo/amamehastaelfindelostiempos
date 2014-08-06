@@ -65,9 +65,9 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 																"where p.id_alumno = u.id_usuario and p.id_asignatura=? and p.anyo_academico=?";
 	
 	
-	private static String SQL_FIND_TRABAJOS_BY_PORTAFOLIO = "select t.* " +
-															"from trabajos_de_campo as t, portafolios as p " +
-															"where t.id_portafolio = p.id_portafolio and " +
+	private static String SQL_FIND_TRABAJOS_BY_PORTAFOLIO = "select t.*, i.* " +
+															"from trabajos_de_campo as t, portafolios as p, trabajos_de_campo_info as i " +
+															"where t.id_portafolio = p.id_portafolio and t.id_trabajo_info = i.id_trabajo_info and " +
 															"p.id_alumno=? and p.id_asignatura=? and p.anyo_academico=?";
 	
 	private static String SQL_FIND_CASOS_BY_PORTAFOLIO = "select c.* " +

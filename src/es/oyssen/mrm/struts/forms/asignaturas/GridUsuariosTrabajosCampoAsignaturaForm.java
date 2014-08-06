@@ -6,6 +6,7 @@ public class GridUsuariosTrabajosCampoAsignaturaForm extends DhtmlxGridForm {
 
 	private String idPortafolio;
 	private String idTrabajoCampo;
+	private String idTrabajoInfo;
 	private String idUsuario;
 	private String idAsignatura;
 	private String nombreTrabajoCampo;
@@ -69,6 +70,12 @@ public class GridUsuariosTrabajosCampoAsignaturaForm extends DhtmlxGridForm {
 	}
 	public void setEnlace(String enlace) {
 		this.enlace = enlace;
+	}
+	public String getIdTrabajoInfo() {
+		return idTrabajoInfo;
+	}
+	public void setIdTrabajoInfo(String idTrabajoInfo) {
+		this.idTrabajoInfo = idTrabajoInfo;
 	}
 	
 	

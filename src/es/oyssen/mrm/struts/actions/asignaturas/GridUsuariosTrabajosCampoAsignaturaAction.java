@@ -27,7 +27,7 @@ public class GridUsuariosTrabajosCampoAsignaturaAction extends DHTMLXGridAction 
 		if (idGrupoUsuario.equals("1")){
 			TrabajoDeCampoVO t = new TrabajoDeCampoVO();
 			PortafolioVO p = new PortafolioVO();
-			t.setNombre(form.getNombreTrabajoCampo());
+			t.setIdTrabajoInfo(form.getIdTrabajoInfo());
 			p.setAnyoAcademico(anyoAcademico);
 			p.setIdAsignatura(form.getIdAsignatura());
 			

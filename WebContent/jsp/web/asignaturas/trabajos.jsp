@@ -75,22 +75,26 @@
 				
 	    		for (var i=0; i<numTrabajosCampo;i++) {
 	    			
-	    			var nombreTrabajoCampo = optsTrabajosCampo[i].toString();
-	    		  
-	    			tabbar.addTab(nombreTrabajoCampo,nombreTrabajoCampo,'');
+	    		
+	    			var string = optsTrabajosCampo[i].toString();
+	    			var parts = string.split(',');
+	    			
+	    			
+	    			var idTrabajoInfo = parts[0];
+	    			tabbar.addTab(idTrabajoInfo,parts[1],'');
 	    			//no se como hacer que sea activa y que ademas este seleccionada para 
 	    			//disparar al metodo onSelect para que lo rellene con datos...
 			    	//alert("Cargando...." + (i+1) + "/" + numTrabajosCampo + " prácticas. Por favor, espere...");
-	    			if(i==0) tabbar.setTabActive(nombreTrabajoCampo);
+	    			if(i==0) tabbar.setTabActive(idTrabajoInfo);
 	    			
-	    			initTabContent(nombreTrabajoCampo);
+	    			initTabContent(idTrabajoInfo);
 	    		}
 	    	}
 	    	
 		    	
-	    	function initTabContent(nombreTrabajoCampo){
+	    	function initTabContent(idTrabajoInfo){
 				
-				var tab = tabbar.cells(nombreTrabajoCampo);
+				var tab = tabbar.cells(idTrabajoInfo);
 		    	var toolbarServicios = tab.attachToolbar();
 		    	toolbarServicios.setIconsPath('../img/toolbar/');
 
@@ -124,7 +128,7 @@
 		    	});
 		    	
 		    	
-		    	goGridProfesores(tab,nombreTrabajoCampo);
+		    	goGridProfesores(tab,idTrabajoInfo);
 		    	
 			}
 		    	
@@ -149,8 +153,8 @@
 			}
 			
 			function goActualizar() {
-				var nombreTrabajoCampo = tabbar.getActiveTab();
-				if (profesor) gridProfesores.clearAndLoad("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&nombreTrabajoCampo=" + nombreTrabajoCampo);	 
+				var idTrabajoInfo = tabbar.getActiveTab();
+				if (profesor) gridProfesores.clearAndLoad("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&idTrabajoInfo=" + idTrabajoInfo);	 
 				else gridAlumnos.clearAndLoad("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);		    	
 		    			    	
 		    }
@@ -259,7 +263,7 @@
 			}
 			
 			
-			function goGridProfesores(tab,nombreTrabajoCampo){
+			function goGridProfesores(tab,idTrabajoInfo){
 				
 								
 				gridProfesores = tab.attachGrid();
@@ -271,7 +275,7 @@
 				gridProfesores.enableMultiselect(false);
 				gridProfesores.init();
 		    	
-		    	var gridProcessorPro = new dataProcessor("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&nombreTrabajoCampo=" + nombreTrabajoCampo);
+		    	var gridProcessorPro = new dataProcessor("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&idTrabajoInfo=" + idTrabajoInfo);
 		    	gridProcessorPro.enableUTFencoding('simple');
 		    	gridProcessorPro.init(gridProfesores);	  
 		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -283,7 +287,7 @@
 		    	
 		    	gridProfesores.attachEvent("onRowSelect",doOnRowSelected);
 		    	
-		    	gridProfesores.clearAndLoad("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&nombreTrabajoCampo=" + nombreTrabajoCampo);
+		    	gridProfesores.clearAndLoad("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&idTrabajoInfo=" + idTrabajoInfo);
 				
 			}
 			
@@ -340,10 +344,10 @@
 	    		var id, nombre, seminario;
 	    		var opts = new Array();
 	    		for(var i=0;i<seminarios.length;i++) {
-	    	        //id=seminarios[i].getElementsByTagName("id")[0].firstChild.nodeValue;
+	    	        id=seminarios[i].getElementsByTagName("id")[0].firstChild.nodeValue;
 	    	        nombre=seminarios[i].getElementsByTagName("nombre")[0].firstChild.nodeValue;
-	    	        //seminario=[id,nombre];
-	    	       	opts[i] = nombre;
+	    	        seminario=[id,nombre];
+	    	       	opts[i] = seminario;
 	    	    }
 	    		return opts;
 
