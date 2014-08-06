@@ -43,7 +43,7 @@ public interface PortafoliosService {
 
 	public List<UsuarioPortafolioVO> findUsuariosByAsignatura(PortafolioVO p) throws ServiceException;
 
-	public List<TrabajoDeCampoVO> findTrabajosByPortafolio(PortafolioVO p, TrabajoDeCampoVO t) throws ServiceException;
+	public List<TrabajoDeCampoVO> findTrabajosByPortafolio(PortafolioVO p) throws ServiceException;
 
 	public List<CasoClinicoVO> findCasosByPortafolio(PortafolioVO p) throws ServiceException;
 

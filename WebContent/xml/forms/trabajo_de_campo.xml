@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+    
+   <item type="fieldset" name="data" label="Información Trabajo de Campo" inputWidth="auto">
+       <item type="input" name="nombre" label="Nombre" labelWidth="110" style="width:400"/>
+       <item type="input" name="descripcion" label="Descripción" labelWidth="110" style="width:400" rows="7"/>
+       <item type="calendar" name="fechaFin" label="Fecha Fin" labelWidth="110" dateFormat="%d/%m/%Y" calendarPosition="right" readonly="true" style="width:400"/>
+   	   <item type="button" name="descargarInformacion" value="Descargar Información" />
+   </item>
+   
+   <item type="button" name="aceptar" value="Aceptar" />
+   <item type="button" name="subirPractica" value="Subir Trabajo de Campo" />
+   <item type="button" name="descargarCorreccion" value="Descargar Corrección" />
+ 
+</items>

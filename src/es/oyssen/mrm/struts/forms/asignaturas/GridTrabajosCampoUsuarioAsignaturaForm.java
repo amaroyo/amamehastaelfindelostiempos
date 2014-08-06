@@ -8,7 +8,6 @@ public class GridTrabajosCampoUsuarioAsignaturaForm extends DhtmlxGridForm {
 
 	private String idAlumno;
 	private String idAsignatura;
-	private String nombreTrabajoCampo;
 	
 	
 	public String getIdAlumno() {
@@ -23,12 +22,7 @@ public class GridTrabajosCampoUsuarioAsignaturaForm extends DhtmlxGridForm {
 	public void setIdAsignatura(String idAsignatura) {
 		this.idAsignatura = idAsignatura;
 	}
-	public String getNombreTrabajoCampo() {
-		return nombreTrabajoCampo;
-	}
-	public void setNombreTrabajoCampo(String nombreTrabajoCampo) {
-		this.nombreTrabajoCampo = nombreTrabajoCampo;
-	}
+	
 	
 
 

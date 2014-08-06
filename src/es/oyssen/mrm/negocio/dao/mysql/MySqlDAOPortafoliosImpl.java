@@ -68,7 +68,7 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 	private static String SQL_FIND_TRABAJOS_BY_PORTAFOLIO = "select t.* " +
 															"from trabajos_de_campo as t, portafolios as p " +
 															"where t.id_portafolio = p.id_portafolio and " +
-															"p.id_alumno=? and p.id_asignatura=? and p.anyo_academico=? and t.nombre=?";
+															"p.id_alumno=? and p.id_asignatura=? and p.anyo_academico=?";
 	
 	private static String SQL_FIND_CASOS_BY_PORTAFOLIO = "select c.* " +
 															"from casos_clinicos as c, portafolios as p " +
@@ -276,9 +276,9 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 
 
 	@Override
-	public List<TrabajoDeCampoVO> findTrabajosByPortafolio(PortafolioVO p, TrabajoDeCampoVO t) throws DAOException {
+	public List<TrabajoDeCampoVO> findTrabajosByPortafolio(PortafolioVO p) throws DAOException {
 		try {
-			return getJdbcTemplate().query(SQL_FIND_TRABAJOS_BY_PORTAFOLIO, new Object[]{p.getIdAlumno(),p.getIdAsignatura(),p.getAnyoAcademico(),t.getNombre()}, new TrabajoDeCampoMapper());
+			return getJdbcTemplate().query(SQL_FIND_TRABAJOS_BY_PORTAFOLIO, new Object[]{p.getIdAlumno(),p.getIdAsignatura(),p.getAnyoAcademico()}, new TrabajoDeCampoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

@@ -43,7 +43,7 @@ public interface DAOPortafolios {
 
 	public List<UsuarioPortafolioVO> findUsuariosByAsignatura(PortafolioVO p) throws DAOException;
 
-	public List<TrabajoDeCampoVO> findTrabajosByPortafolio(PortafolioVO p, TrabajoDeCampoVO t) throws DAOException;
+	public List<TrabajoDeCampoVO> findTrabajosByPortafolio(PortafolioVO p) throws DAOException;
 
 	public List<CasoClinicoVO> findCasosByPortafolio(PortafolioVO p) throws DAOException;
 

@@ -28,13 +28,11 @@ public class GridTrabajosCampoUsuarioAsignaturaAction extends DHTMLXGridAction {
 		if (idGrupoUsuario.equals("4")){
 			
 			PortafolioVO p = new PortafolioVO();	
-			TrabajoDeCampoVO t = new TrabajoDeCampoVO();
 			p.setAnyoAcademico(anyoAcademico);
 			p.setIdAsignatura(form.getIdAsignatura());
 			p.setIdAlumno(form.getIdAlumno());
-			t.setNombre(form.getNombreTrabajoCampo());
 			
-			return UtilXML.buildXmlGridTrabajosCampoUsuarioAsignatura(getPortafoliosService().findTrabajosByPortafolio(p,t));
+			return UtilXML.buildXmlGridTrabajosCampoUsuarioAsignatura(getPortafoliosService().findTrabajosByPortafolio(p));
 		}
 		
 		else return null;

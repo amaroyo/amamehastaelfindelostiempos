@@ -44,17 +44,27 @@
 		    		b.setWidth(250);
 		    		a.hideHeader();
 					b.setText('<bean:message key="label.opciones.alumno"/>');
+					initProfesor();
 				</logic:match>
 		
 				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 					profesor=false;
-					main_layout = new dhtmlXLayoutObject(document.body, '1C');
+					main_layout = new dhtmlXLayoutObject(document.body, '2U');
 		    		a = main_layout.cells('a');
+		    		b = main_layout.cells('b');
 		    		a.hideHeader();
+		    		b.setText('<bean:message key="label.descripcion.practica"/>');
+				    b.setWidth(750);
+				    goGridAlumnos();
 				</logic:notMatch>	
 	    		
 	    		
-	    		
+	    	});
+	    	
+	    	
+	    	function initProfesor(){
+
+				 
 	    		
 	    		tabbar = a.attachTabbar();
 	    		
@@ -75,10 +85,7 @@
 	    			
 	    			initTabContent(nombreTrabajoCampo);
 	    		}
-	    	});
-	    	
-	    	
-	    	
+	    	}
 	    	
 		    	
 	    	function initTabContent(nombreTrabajoCampo){
@@ -117,8 +124,8 @@
 		    	});
 		    	
 		    	
-		    	if (profesor) goGridProfesores(tab,nombreTrabajoCampo);
-		    	else goGridAlumnos(tab,nombreTrabajoCampo);
+		    	goGridProfesores(tab,nombreTrabajoCampo);
+		    	
 			}
 		    	
 			
@@ -144,36 +151,50 @@
 			function goActualizar() {
 				var nombreTrabajoCampo = tabbar.getActiveTab();
 				if (profesor) gridProfesores.clearAndLoad("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&nombreTrabajoCampo=" + nombreTrabajoCampo);	 
-				else gridAlumnos.clearAndLoad("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession + "&nombreTrabajoCampo=" + nombreTrabajoCampo);		    	
-		    	//tabbar.clearAll();		    	
+				else gridAlumnos.clearAndLoad("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);		    	
+		    			    	
 		    }
 			
-			function goGridAlumnos(tab,nombreTrabajoCampo){
+			function goGridAlumnos(){
 				
-				
-				
-				var mini_layout = tabbar.cells(nombreTrabajoCampo).attachLayout("2U","dhx_skyblue");
-				
-				var ma = mini_layout.cells('a');
-			    var mb = mini_layout.cells('b');
-			    
-			    ma.hideHeader();
-			    mb.setText('<bean:message key="label.descripcion.practica"/>');
-			    mb.setWidth(500);
-				
-				
-				gridAlumnos = ma.attachGrid();
+				var toolbarServiciosAlumnosRefrescar = a.attachToolbar();
+				toolbarServiciosAlumnosRefrescar.setIconsPath('../img/toolbar/');
+
 		    	
-				gridAlumnos.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.fecha.limite" />","<bean:message key="label.enlace.practica" />","<bean:message key="label.enlace.correccion" />"]);
-				gridAlumnos.setColTypes("ro,ro,ro,ro");
-		    	
-				gridAlumnos.setColSorting('str,str,str,str');
+				toolbarServiciosAlumnosRefrescar.loadXML('../xml/toolbars/dhxtoolbar-trabajos-campo.xml', function(){
+					toolbarServiciosAlumnosRefrescar.setItemText('crearTrabajoCampo',"<bean:message key="button.crear.trabajo.campo"/>");
+					toolbarServiciosAlumnosRefrescar.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
+					toolbarServiciosAlumnosRefrescar.setItemText('descargarTodos',"<bean:message key="button.descargar.casos"/>");
+					toolbarServiciosAlumnosRefrescar.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.casos.alumno"/>");
+					toolbarServiciosAlumnosRefrescar.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
+					toolbarServiciosAlumnosRefrescar.setItemText('refresh',"<bean:message key="button.actualizar"/>");		    		
+			    	toolbarServiciosAlumnosRefrescar.hideItem('subirPractica');
+			    	toolbarServiciosAlumnosRefrescar.hideItem('sep2');			    	
+			    	toolbarServiciosAlumnosRefrescar.hideItem('crearTrabajoCampo');
+			    	toolbarServiciosAlumnosRefrescar.hideItem('sep1');
+			    	toolbarServiciosAlumnosRefrescar.hideItem('descargarTodos');
+			    	toolbarServiciosAlumnosRefrescar.hideItem('sep3');
+			    	toolbarServiciosAlumnosRefrescar.hideItem('descargarTodosAlumno');
+			    	toolbarServiciosAlumnosRefrescar.hideItem('sep4');
+			    	toolbarServiciosAlumnosRefrescar.hideItem('fechaLimite');
+			    	toolbarServiciosAlumnosRefrescar.hideItem('sep5');
+			    	
+		    	});
+				
+				
+				gridAlumnos = a.attachGrid();
+				gridAlumnos.setHeader(["<bean:message key="label.trabajo.campo" />","<bean:message key="label.fecha.limite" />","<bean:message key="label.corregido" />"]);
+				gridAlumnos.setInitWidthsP("40,40,20");
+				gridAlumnos.setColTypes("ro,ro,ro");
+				gridAlumnos.setColSorting('str,str');
 				gridAlumnos.enableMultiselect(false);
 				gridAlumnos.init();
+				
+				
 		    	
 				
 				
-		    	var gridProcessorPro = new dataProcessor("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession + "&nombreTrabajoCampo=" + nombreTrabajoCampo);
+		    	var gridProcessorPro = new dataProcessor("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);
 		    	gridProcessorPro.enableUTFencoding('simple');
 		    	gridProcessorPro.init(gridAlumnos);	  
 		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -182,9 +203,61 @@
 		    		}
 		    	});
 		    	
-		    	gridAlumnos.clearAndLoad("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession + "&nombreTrabajoCampo=" + nombreTrabajoCampo);
+		    	gridAlumnos.attachEvent("onRowSelect",doOnRowSelectedAlumnos);
+		    	
+		    	gridAlumnos.clearAndLoad("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);
+				
+				
 				
 			}
+			
+			function doOnRowSelectedAlumnos(rowID,celInd){
+				
+				
+				alert(rowID);
+				
+	    		var trabajoCampo = b.attachForm();
+		    	
+	    		trabajoCampo.loadStruct('../xml/forms/trabajo_de_campo.xml', function(){
+	    			trabajoCampo.setItemLabel('data','<bean:message key="title.info.general.trabajo.campo"/>');
+	    			trabajoCampo.setItemLabel('nombre','<bean:message key="label.nombre"/>');
+	    			trabajoCampo.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
+	    			trabajoCampo.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
+	    			trabajoCampo.setItemLabel('descargarCorreccion','<bean:message key="button.descargar.correccion"/>');
+	    			trabajoCampo.setItemLabel('descargarInformacion','<bean:message key="button.descargar.informacion"/>');
+	    			trabajoCampo.setItemLabel('subirPractica','<bean:message key="button.subir.trabajo.campo"/>');
+	    			trabajoCampo.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
+		    		
+	    			
+					//Ponemos por defecto que los items no se puedan modificar, y luego con los permisos necesarios 
+					//seran modificables.
+		    		trabajoCampo.setReadonly('nombre', true);
+		    		trabajoCampo.setReadonly('descripcion', true);
+		    		trabajoCampo.setReadonly('fechaFin', true);
+		    		trabajoCampo.hideItem('aceptar');
+		    		trabajoCampo.disableItem('descargarCorreccion');
+		    		trabajoCampo.disableItem('descargarInformacion');
+		    		trabajoCampo.disableItem('subirPractica');
+		    		
+		    		
+		    	/*	
+					
+		    		formAlumno.load('editarEstanciaUnidadClinica.do?idAlumno=' + idSessionUser + '&idAsignatura=' + idAsignatura);
+					
+		    		
+		    		
+		    		var cf = formAlumno.getCalendar("fechaFin");
+		    		cf.attachEvent("onShow", function(){
+		    		    cf.hide();
+		    		});
+		    		*/
+		    		
+	    	});
+				
+				
+				
+			}
+			
 			
 			function goGridProfesores(tab,nombreTrabajoCampo){
 				

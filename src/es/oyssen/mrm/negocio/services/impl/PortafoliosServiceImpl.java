@@ -178,9 +178,9 @@ public class PortafoliosServiceImpl implements PortafoliosService{
 	}
 
 	@Override
-	public List<TrabajoDeCampoVO> findTrabajosByPortafolio(PortafolioVO p, TrabajoDeCampoVO t) throws ServiceException {
+	public List<TrabajoDeCampoVO> findTrabajosByPortafolio(PortafolioVO p) throws ServiceException {
 		try {
-			return daoPortafolios.findTrabajosByPortafolio(p,t);
+			return daoPortafolios.findTrabajosByPortafolio(p);
 		} catch (DAOException e) {
 			e.printStackTrace();
 			log.error("Error findTrabajosByPortafolio portafolio", e);

@@ -842,16 +842,19 @@ public class UtilXML {
 		sb.append("<rows>");
 		if(list != null){
 			for (TrabajoDeCampoVO tc : list) {
-				sb.append("<row id=\"" +tc.getIdPortafolio() + "-" + tc.getIdTrabajoDeCampo() + "\">");
+				boolean corregido = (tc.getCorreccionTrabajo() != null);
+				String c="";
+				if(corregido) c="T";
+				else c="F";
+				sb.append("<row id=\""+ c + "-" +tc.getIdPortafolio() + "-" + tc.getIdTrabajoDeCampo() + "\">");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(tc.getNombre()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(tc.getFechaLimite(),true)) + "]]></cell>");
-				String descarga1 = "";
-				if(tc.getTrabajoDeCampo() != null) descarga1="Descargar";
-				sb.append("<cell><![CDATA[" + descarga1 + "]]></cell>");
-				String descarga2 = "";
-				if(tc.getCorreccionTrabajo() != null) descarga2="Descargar";
-				sb.append("<cell><![CDATA[" + descarga2 + "]]></cell>");
-			
+				
+				
+				if(corregido) sb.append("<cell><![CDATA[<img src=" + "../img/grid/corregida.png"+ "></img>]]></cell>");
+				else sb.append("<cell><![CDATA[<img src=" + "../img/grid/nocorregida.png"+ "></img>]]></cell>");
+				
+				
 				sb.append("</row>");				
 			}
 		}
