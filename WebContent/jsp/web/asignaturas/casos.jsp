@@ -78,6 +78,7 @@
 		    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 			    		toolbarServicios.hideItem('subirPractica');
 			    		toolbarServicios.hideItem('sep2');
+			    		toolbarServicios.disableItem('descargarTodosAlumno');
 		    		
 		    		</logic:match>
 		    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
@@ -86,6 +87,7 @@
 			    		toolbarServicios.hideItem('sep3');
 			    		toolbarServicios.hideItem('descargarTodosAlumno');
 			    		toolbarServicios.hideItem('sep4');
+			    		
 			    		
 			    	
 		    		</logic:notMatch>
@@ -137,7 +139,11 @@
 			}
 			
 			function goActualizar() {
-				if (profesor) gridProfesores.clearAndLoad("gridUsuariosCasosClinicosAsignatura.do?idAsignatura=" + idAsignatura);	 
+				
+				if (profesor) {
+					gridProfesores.clearAndLoad("gridUsuariosCasosClinicosAsignatura.do?idAsignatura=" + idAsignatura);
+					toolbarServicios.disableItem('descargarTodosAlumno');
+				}
 				else gridAlumnos.clearAndLoad("gridCasosClinicosUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);		    	
 		    	//tabbar.clearAll();		    	
 		    }
@@ -213,7 +219,7 @@
 				
 				idPortafolio=rowID;
 
-				
+				toolbarServicios.enableItem('descargarTodosAlumno');
 				gridProfesoresAlumno = b.attachGrid();
 				
 		    	
