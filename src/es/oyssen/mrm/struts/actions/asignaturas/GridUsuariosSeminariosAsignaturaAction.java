@@ -25,7 +25,11 @@ public class GridUsuariosSeminariosAsignaturaAction extends DHTMLXGridAction {
 		if (idGrupoUsuario.equals("1")){
 			SeminarioRealizadoVO sr = new SeminarioRealizadoVO();
 			sr.setIdSeminario(form.getIdSeminario());
-			return UtilXML.buildXmlGridUsuariosSeminariosAsignatura(getSeminariosRealizadosService().findAllUsersByPortafolio(sr));
+			//vamos a crear un portafolio con el año academico actual para poder visualizar alumnos
+			//que se hayan matriculado de esa asignatura en el año academico "actual"
+			PortafolioVO p = new PortafolioVO();
+			p.setAnyoAcademico(anyoAcademico);
+			return UtilXML.buildXmlGridUsuariosSeminariosAsignatura(getSeminariosRealizadosService().findAllUsersByPortafolio(sr,p));
 		}
 		
 		else return null;

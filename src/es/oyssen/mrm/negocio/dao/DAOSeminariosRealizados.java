@@ -23,7 +23,7 @@ public interface DAOSeminariosRealizados {
 		
 	public List<SeminarioRealizadoVO> findAllByPortafolio(SeminarioRealizadoVO seminarioRealizado) throws DAOException;
 
-	public List<UsuarioAnyoSeminarioVO> findAllUsersByPortafolio(SeminarioRealizadoVO seminarioRealizado) throws DAOException;
+	public List<UsuarioAnyoSeminarioVO> findAllUsersByPortafolio(SeminarioRealizadoVO seminarioRealizado, PortafolioVO p) throws DAOException;
 
 	public List<SeminarioAsignaturaAnyoVO> findSeminariosRealizados(PortafolioVO p) throws DAOException;
 

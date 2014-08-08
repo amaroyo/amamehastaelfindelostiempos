@@ -7,9 +7,6 @@ import java.util.List;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
-
 import es.oyssen.mrm.negocio.dao.DAOBase;
 import es.oyssen.mrm.negocio.dao.DAOSeminariosRealizados;
 import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
@@ -20,13 +17,11 @@ import es.oyssen.mrm.negocio.dao.rowmappers.SeminarioAsignaturaAnyoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.SeminarioAsignaturaMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.SeminarioRealizadoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioAnyoSeminarioMapper;
-import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioMapper;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaAnyoVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
 import es.oyssen.mrm.negocio.vo.SeminarioRealizadoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
-import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
 
 public class MySqlDAOSeminariosRealizadosImpl extends DAOBase implements DAOSeminariosRealizados{
@@ -35,9 +30,11 @@ public class MySqlDAOSeminariosRealizadosImpl extends DAOBase implements DAOSemi
 	private static String SQL_UPDATE = "";
 	private static String SQL_DELETE = "delete from seminarios_realizados where id_portafolio = ? and id_seminario = ?";
 	private static String SQL_FIND_BY_PORTAFOLIO = "select * from seminarios_realizados where id_portafolio = ?";
-	private static String SQL_FIND_USERS_BY_PORTAFOLIO = "select u.id_usuario, u.correo, u.nombre, u.apellido1, u.apellido2, u.dni, u.telefono, p.anyo_academico "+
-															"from usuarios as u, portafolios as p, seminarios_realizados as s " +
-															"where u.id_usuario=p.id_alumno and p.id_portafolio=s.id_portafolio and s.id_seminario=?";
+	private static String SQL_FIND_USERS_BY_PORTAFOLIO = "select u.id_usuario, u.correo, u.nombre, u.apellido1, u.apellido2, u.dni, u.telefono, p.anyo_academico " +
+															"from usuarios as u, portafolios as p, seminarios_realizados as s "+
+															"where u.id_usuario=p.id_alumno and p.id_portafolio=s.id_portafolio and s.id_seminario=? and "+
+															"p.id_alumno in (select pe.id_alumno from portafolios as pe "+
+															"where pe.id_asignatura=p.id_asignatura and pe.anyo_academico=?)";
 
 
 	private static String SQL_FIND_SEMINARIOS_REALIZADOS = "select sa.id_seminario, sa.nombre, sa.codigo, p.anyo_academico " +
@@ -112,9 +109,9 @@ public class MySqlDAOSeminariosRealizadosImpl extends DAOBase implements DAOSemi
 	}
 
 	
-	public List<UsuarioAnyoSeminarioVO> findAllUsersByPortafolio(SeminarioRealizadoVO seminarioRealizado) throws DAOException {
+	public List<UsuarioAnyoSeminarioVO> findAllUsersByPortafolio(SeminarioRealizadoVO seminarioRealizado, PortafolioVO p) throws DAOException {
 		try {
-			return getJdbcTemplate().query(SQL_FIND_USERS_BY_PORTAFOLIO, new Object[]{seminarioRealizado.getIdSeminario()}, new UsuarioAnyoSeminarioMapper());
+			return getJdbcTemplate().query(SQL_FIND_USERS_BY_PORTAFOLIO, new Object[]{seminarioRealizado.getIdSeminario(),p.getAnyoAcademico()}, new UsuarioAnyoSeminarioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
@@ -143,6 +140,8 @@ public class MySqlDAOSeminariosRealizadosImpl extends DAOBase implements DAOSemi
 			throw new DAOException(e);
 		}
 	}
+
+
 
 }
 

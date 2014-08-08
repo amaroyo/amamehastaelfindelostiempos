@@ -22,7 +22,7 @@ public interface SeminariosRealizadosService {
 	
 	public List<SeminarioRealizadoVO> findAllByPortafolio(SeminarioRealizadoVO seminarioRealizado) throws ServiceException;
 
-	public List<UsuarioAnyoSeminarioVO> findAllUsersByPortafolio(SeminarioRealizadoVO sr) throws ServiceException;
+	public List<UsuarioAnyoSeminarioVO> findAllUsersByPortafolio(SeminarioRealizadoVO sr, PortafolioVO p) throws ServiceException;
 
 	public List<SeminarioAsignaturaAnyoVO> findSeminariosRealizados(PortafolioVO p) throws ServiceException;
 

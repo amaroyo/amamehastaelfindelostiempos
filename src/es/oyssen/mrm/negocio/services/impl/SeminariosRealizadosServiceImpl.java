@@ -75,9 +75,9 @@ public class SeminariosRealizadosServiceImpl implements SeminariosRealizadosServ
 	}
 
 	@Override
-	public List<UsuarioAnyoSeminarioVO> findAllUsersByPortafolio(SeminarioRealizadoVO seminarioRealizado) throws ServiceException {
+	public List<UsuarioAnyoSeminarioVO> findAllUsersByPortafolio(SeminarioRealizadoVO seminarioRealizado, PortafolioVO p) throws ServiceException {
 		try {
-			return daoSeminariosRealizados.findAllUsersByPortafolio(seminarioRealizado);
+			return daoSeminariosRealizados.findAllUsersByPortafolio(seminarioRealizado,p);
 		} catch (DAOException e) {
 			e.printStackTrace();
 			log.error("Error findAllUsersByPortafolio seminario realizado", e);
