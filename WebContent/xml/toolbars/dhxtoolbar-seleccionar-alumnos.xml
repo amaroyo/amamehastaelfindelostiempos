@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbar> 
+    <item id="seleccionarAlumnos" type="button" img="misalumnosnuevos.png" text="Seleccionar Mis Alumnos" action="seleccionarAlumnos"/>
+	<item id="sep1" type="separator"/>
+	<item id="refresh" type="button" img="recargar.png" text="Actualizar" action="goActualizarAlumnos"/>
+</toolbar>

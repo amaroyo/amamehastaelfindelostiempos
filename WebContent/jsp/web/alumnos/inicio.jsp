@@ -39,6 +39,13 @@
 			    a.setWidth(380);
 			    b.hideHeader();
 			    
+			    var toolbarSeleccionarAlumnos = a.attachToolbar();
+			    toolbarSeleccionarAlumnos.setIconsPath('../img/toolbar/');
+
+			    toolbarSeleccionarAlumnos.loadXML('../xml/toolbars/dhxtoolbar-seleccionar-alumnos.xml', function(){
+			    	toolbarSeleccionarAlumnos.setItemText('seleccionarAlumnos',"<bean:message key="button.seleccionar.mis.alumnos"/>");		    	
+			    	toolbarSeleccionarAlumnos.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+			    });
 			    
 			    miGrid = a.attachGrid();
 			    miGrid.setIconsPath('../skins/imgs/');		   
@@ -378,6 +385,13 @@
 				gridProfesoresTrab.clearAndLoad("gridusuarios.do");	 	   		    	
 		    }
 			
+			function seleccionarAlumnos(){
+				alert("seleccionarAlumnos");
+			}
+			
+			function goActualizarAlumnos(){
+				alert("actualizar alumnos");
+			}
 			
 			function goCasos(dni,asignatura){
 				
