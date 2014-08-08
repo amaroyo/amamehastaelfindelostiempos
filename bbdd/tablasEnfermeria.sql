@@ -152,10 +152,10 @@ COLLATE = utf8_spanish_ci;
 
 
 CREATE TABLE IF NOT EXISTS grupos_criterios_rubricas (
-	id_criterio_grupo INT(4) auto_increment,
+	id_grupo_criterio INT(4) auto_increment,
 	id_asignatura INT(3) NOT NULL,
 	nombre VARCHAR(100) NOT NULL,
-	PRIMARY KEY (id_criterio_grupo),
+	PRIMARY KEY (id_grupo_criterio),
 	FOREIGN KEY (id_asignatura)
 		REFERENCES asignaturas(id_asignatura)
 		ON DELETE CASCADE
@@ -176,7 +176,7 @@ CREATE TABLE IF NOT EXISTS criterios_rubricas (
 		REFERENCES asignaturas(id_asignatura)
 		ON DELETE CASCADE,
 	FOREIGN KEY (id_grupo_criterio)
-		REFERENCES grupos_criterios_rubricas(id_criterio_grupo)
+		REFERENCES grupos_criterios_rubricas(id_grupo_criterio)
 		ON DELETE CASCADE
 )
 ENGINE = InnoDB
