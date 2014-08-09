@@ -30,7 +30,7 @@
 		<action path="/cursos/borrarasignatura" name="CrearAsignaturaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.BorrarAsignaturaAction"  />
 		<action path="/cursos/buscarasignatura" name="CrearAsignaturaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.BuscarAsignaturaAction"  />
 		
-		<action path="/cursos/generateExcel" name="GridAsignaturasForm" scope="request" validate="false" type="com.dhtmlx.xml2excel.ExcelGenerator" />
+		<action path="/cursos/gruposcriteriosasignatura" name="EditarAsignaturaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.GruposCriteriosAsignaturaAction"  />
 		
 		
 		

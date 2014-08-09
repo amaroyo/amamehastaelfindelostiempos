@@ -129,7 +129,7 @@
 		    	formRubrica.loadStruct('../xml/forms/rubrica_form.xml', function(){
 	    			formRubrica.setItemLabel('competencias','<bean:message key="title.resultados.competencias"/>');
 	    			
-	    			var itemData = createArrayGruposCriteriosFromXML();
+	    			var itemData = dameGruposCriteriosAsignatura(idAsignatura);
 	    			for(var i=0;i++;i<itemData.lenght){
 	    				formRubrica.addItem("grupos", itemData[i]);
 	    			}
@@ -409,13 +409,24 @@
 	    		xmlhttp.onreadystatechange=function(){
 	    			if (xmlhttp.readyState===4) {
 	        	        if(xmlhttp.status===200) { //GET returning a response
-	        	        	return createArrayFromXML(xmlhttp.responseXML);
+	        	        	return createArrayGruposCriteriosFromXML(xmlhttp.responseXML);
 	        	        }
 	        	    }
 	    		}
 	    	    xmlhttp.open("GET",url,false);
 	    	    xmlhttp.send(null);
 	    	    return xmlhttp.onreadystatechange();
+	    	}
+			
+			
+			function initRequest() {
+	    	    if (window.XMLHttpRequest) {
+	    	        xmlhttp = new XMLHttpRequest();
+	    	    } else if (window.ActiveXObject) {
+	    	        isIE = true;
+	    	        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	    	    }
+	    	    return xmlhttp;
 	    	}
 			
 			function createArrayGruposCriteriosFromXML(xml){
