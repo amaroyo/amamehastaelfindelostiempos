@@ -417,7 +417,7 @@ insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values
 insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 21, 'Juicio crítico');
 insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 21, 'Aprendizaje y mejora continua');
 insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 21, 'Responsabilidad');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 21 'Respeto');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 21, 'Respeto');
 insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 21, 'Iniciativa');
 insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 21, 'Saber estar');
 
