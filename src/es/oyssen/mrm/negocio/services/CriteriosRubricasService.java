@@ -5,6 +5,7 @@ import java.util.List;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.vo.CriterioRubricaVO;
+import es.oyssen.mrm.negocio.vo.GruposCriteriosRubricaAsignaturaVO;
 
 public interface CriteriosRubricasService {
 	
@@ -19,6 +20,7 @@ public interface CriteriosRubricasService {
 	public List<CriterioRubricaVO> findAllByAsignatura(CriterioRubricaVO criterioRubrica) throws ServiceException;
 	
 	public List<CriterioRubricaVO> findAllByGrupoCriterio(CriterioRubricaVO criterioRubrica) throws ServiceException;
+	
 
 }
 

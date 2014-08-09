@@ -6,7 +6,10 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
+import es.oyssen.mrm.negocio.exceptions.ServiceException;
+import es.oyssen.mrm.negocio.vo.CriterioRubricaVO;
 import es.oyssen.mrm.negocio.vo.GrupoCriteriosRubricasVO;
+import es.oyssen.mrm.negocio.vo.GruposCriteriosRubricaAsignaturaVO;
 
 public interface DAOGruposCriteriosRubricas {
 
@@ -19,6 +22,9 @@ public interface DAOGruposCriteriosRubricas {
 	public GrupoCriteriosRubricasVO findById(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws DAOException;
 	
 	public List<GrupoCriteriosRubricasVO> findAllByAsignatura(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws DAOException;
+
+	public List<GruposCriteriosRubricaAsignaturaVO> findGruposCriteriosRubricaAsignatura(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws DAOException;
+
 
 		
 	

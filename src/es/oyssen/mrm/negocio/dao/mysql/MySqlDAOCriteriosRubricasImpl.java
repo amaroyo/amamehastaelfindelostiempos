@@ -31,6 +31,7 @@ public class MySqlDAOCriteriosRubricasImpl extends DAOBase implements DAOCriteri
 
 
 
+
 	public void insert(final CriterioRubricaVO criterioRubrica) throws DAOException,
 	DAOInsertException {
 		try{

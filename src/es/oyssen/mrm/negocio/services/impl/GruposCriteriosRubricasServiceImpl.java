@@ -9,7 +9,9 @@ import es.oyssen.mrm.negocio.dao.DAOGruposCriteriosRubricas;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.GruposCriteriosRubricasService;
+import es.oyssen.mrm.negocio.vo.CriterioRubricaVO;
 import es.oyssen.mrm.negocio.vo.GrupoCriteriosRubricasVO;
+import es.oyssen.mrm.negocio.vo.GruposCriteriosRubricaAsignaturaVO;
 
 public class GruposCriteriosRubricasServiceImpl implements GruposCriteriosRubricasService{
 	
@@ -75,6 +77,16 @@ public class GruposCriteriosRubricasServiceImpl implements GruposCriteriosRubric
 		} catch (DAOException e) {
 			e.printStackTrace();
 			log.error("Error findAllByAsignatura grupo criterio rubrica", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
+	
+	public List<GruposCriteriosRubricaAsignaturaVO> findGruposCriteriosRubricaAsignatura(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws ServiceException {
+		try {
+			return daoGruposCriteriosRubricas.findGruposCriteriosRubricaAsignatura(grupoCriterioRubrica);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findAllByAsignatura criterio rubrica", e);
 			throw new ServiceException(e.getMessage());
 		}
 	}

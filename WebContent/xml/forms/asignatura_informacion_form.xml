@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <items>
    <item type="fieldset" name="data" label="Información general de la Asignatura" inputWidth="auto">
-       <item type="input" name="nombre" label="Nombre Asignatura" labelWidth="110" style="width:400"/>
-       <item type="input" name="codigo" label="Código" labelWidth="110" style="width:400"/>
-       <item type="input" name="curso" label="Curso" labelWidth="110" style="width:400"/>
-       <item type="input" name="descripcion" label="Descripción" labelWidth="110" style="width:400" rows="11"/>
+       <item type="input" name="nombre" label="Nombre Asignatura" labelWidth="100" style="width:475"/>
+       <item type="input" name="codigo" label="Código" labelWidth="100" style="width:475"/>
+       <item type="input" name="curso" label="Curso" labelWidth="100" style="width:475"/>
+       <item type="input" name="descripcion" label="Descripción" labelWidth="100" style="width:475" rows="12"/>
    </item>
    <item type="button" name="aceptar" value="Aceptar" />
 </items>

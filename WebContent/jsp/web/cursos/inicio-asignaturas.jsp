@@ -45,7 +45,8 @@
 	    	dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	
 	    	var main_layout, areaTrabajoCursos, listado, toolbarAsignaturas,
-	    	gridAsignaturas, formInfo, dhxWins;
+	    	gridAsignaturas, formInfo, formRubrica, dhxWins, tabbar, tab_info, tab_rubrica, rubrica_layout,
+	    	competencias_layout, grupos_layout;
 	    	
 	    	var windowsNewAsignatura = new Array();
 	    	var formsNewAsignatura = new Array();
@@ -55,7 +56,7 @@
 		    	dhtmlxError.catchError("ALL",errorHandler);
 			    main_layout = new dhtmlXLayoutObject(document.body, '2U');
 			    listado = main_layout.cells('a');
-			    listado.setWidth(750);
+			    listado.setWidth(600);
 			    areaTrabajoCursos = main_layout.cells('b');
 			    
 			    //autosize(horizontal,vertical)
@@ -70,8 +71,6 @@
 			    toolbarAsignaturas.loadXML('../xml/toolbars/dhxtoolbar-asignaturas.xml', function(){
 	    			toolbarAsignaturas.setItemText('new',"<bean:message key="button.create.asignatura"/>");
 	    			toolbarAsignaturas.setItemText('delete',"<bean:message key="button.eliminar.asignatura"/>");
-	    			toolbarAsignaturas.setItemText('exportExcel',"<bean:message key="button.exportar.excel"/>");
-	    			toolbarAsignaturas.setItemText('exportPDF',"<bean:message key="button.exportar.pdf"/>");
 	    			toolbarAsignaturas.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 		    		
 	    		//permisosToolbarAsignaturas();
@@ -83,7 +82,8 @@
 		   		gridAsignaturas.setHeader(["<strong><bean:message key="label.nombre.asignatura" /></strong>"
 		   		                      ,"<strong><bean:message key="label.codigo.asignatura" /></strong>",
 		   		                      "<strong><bean:message key="label.curso.asignatura" /></strong>"]);
-		   		gridAsignaturas.setInitWidths("*,150,150");
+		   		gridAsignaturas.setInitWidths("*,60,50");
+		   		gridAsignaturas.setColAlign("left,center,center");
 			    //ro = readonly
 			    //nombre codigo curso descripcion
 			    gridAsignaturas.setColTypes("ro,ro,ro");
@@ -106,14 +106,57 @@
 		    
 		    
 		    function doOnRowSelected(rowID,celInd){
-		    	toolbarAsignaturas.enableItem('delete');
-		    	formInfo = areaTrabajoCursos.attachForm();
+		    	//toolbarAsignaturas.enableItem('delete');
+		    	tabbar = areaTrabajoCursos.attachTabbar();
+		    	
+		    	tabbar.addTab('formAsignatura','<bean:message key="title.info.general"/>');
+		    	tab_info = tabbar.cells('formAsignatura');
+		    	tabbar.setTabActive('formAsignatura');
 		    	loadFormAsignatura(rowID);
-		    	// obtener el nombre del curso de la bbdd y añadirlo como header a la dcha
-				areaTrabajoCursos.setText(areaTrabajoCursos.getText() + "");
+		    	
+		    	tabbar.addTab('rubricaAsignatura','<bean:message key="title.rubrica"/>');
+		    	tab_rubrica = tabbar.cells('rubricaAsignatura');
+		    	loadFormRubrica(rowID);
+		    	
+				areaTrabajoCursos.setText(areaTrabajoCursos.getText());
+				areaTrabajoCursos.showHeader();
+		    }
+		    
+		    
+		    function loadFormRubrica(idAsignatura){
+
+		    	formRubrica = tab_rubrica.attachForm();
+		    	formRubrica.loadStruct('../xml/forms/rubrica_form.xml', function(){
+	    			formRubrica.setItemLabel('competencias','<bean:message key="title.resultados.competencias"/>');
+	    			
+	    			var itemData = createArrayGruposCriteriosFromXML();
+	    			for(var i=0;i++;i<itemData.lenght){
+	    				formRubrica.addItem("grupos", itemData[i]);
+	    			}
+	    			//myForm.addItem("query", {type: "newcolumn"}, lastItemIndex+1+q);
+	    			
+	    			
+	    			//permisosRubricasForm();	
+	    			/*formRubrica.load('editarasignatura.do?idAsignatura=' + idAsignatura, function () {			    			
+	    				formRubrica.attachEvent("onButtonClick", function(id){
+		    				if (id == "aceptar") {
+		    					formRubrica.send("actualizarasignatura.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura ,"post", function(xml) {
+									alert('<bean:message key="message.asignatura.cambiada.exito"/>');
+			    				});
+			    				buscar();
+		    				}
+		    			});
+	    				formRubrica.attachEvent("onEnter", function() {
+							formRubrica.send("actualizarasignatura.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura ,"post", function(xml) {
+								alert('<bean:message key="message.asignatura.cambiada.exito"/>');
+							}); 
+			    		});
+		    		});*/
+	    		});
 		    }
 		    
 		    function loadFormAsignatura(idAsignatura){
+		    	formInfo = tab_info.attachForm();
 		    	formInfo.loadStruct('../xml/forms/asignatura_informacion_form.xml', function(){
 	    			formInfo.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
 	    			formInfo.setItemLabel('nombre','<bean:message key="label.nombre.asignatura"/>');
@@ -140,6 +183,9 @@
 	    		});
 		    }
 		    
+		    function deleteAsignatura() {
+		    	
+		    }
 		    
 		    function newAsignatura() {
 		    	dhxWins= new dhtmlXWindows();
@@ -178,7 +224,7 @@
 		    function crearPartes(currentPart){
 		    	windowsNewAsignatura[currentPart] = dhxWins.createWindow("nuevaParte"+currentPart, 300, 50, 405, 440);
 		    	var windowNewAsignaturaPart = windowsNewAsignatura[currentPart];
-		    	windowNewAsignaturaPart.setText('<bean:message key="title.crear.nueva.asignatura" />'+': ' + '<bean:message key="title.parte.nueva.asignatura" />' +currentPart);				
+		    	windowNewAsignaturaPart.setText('<bean:message key="title.crear.nueva.asignatura" />'+': ' + '<bean:message key="title.parte.nueva.asignatura" /> ' +currentPart);				
 		    	windowNewAsignaturaPart.centerOnScreen();
 		    	windowNewAsignaturaPart.setModal(true);
 				formsNewAsignatura[currentPart] = windowsNewAsignatura[currentPart].attachForm();
@@ -258,6 +304,7 @@
 		    function resultadoBuscarParteAsignatura(response,currentPart,numeroRubricas){
 		    	if(response == "No existe ninguna asignatura con ese nombre") {
 		    		if(numeroRubricas == 1 || currentPart == numeroRubricas) {
+		    			crearRubricas(numeroRubricas);
 		    			crearAsignaturaCompleta(numeroRubricas);
 		    			cerrarVentanas();
 		    		}
@@ -337,14 +384,6 @@
 				</logic:notMatch>	
 	    	}
 	    	
-	    	
-			function exportPDF(){
-		    	
-		    }
-			
-			function exportExcel(){
-		    	gridAsignaturas.toExcel('generateExcel.do');
-		    }
 		    
 		    function Mayor1(n){
 		        if(n==""){
@@ -363,6 +402,55 @@
 			function buscar() {
 		    	gridAsignaturas.clearAndLoad("gridasignaturas.do");		    	
 		    }
+			
+			function dameGruposCriteriosAsignatura(idAsignatura){
+	    		var url = "gruposcriteriosasignatura.do?idAsignatura="+idAsignatura;
+	    		var xmlhttp = initRequest();
+	    		xmlhttp.onreadystatechange=function(){
+	    			if (xmlhttp.readyState===4) {
+	        	        if(xmlhttp.status===200) { //GET returning a response
+	        	        	return createArrayFromXML(xmlhttp.responseXML);
+	        	        }
+	        	    }
+	    		}
+	    	    xmlhttp.open("GET",url,false);
+	    	    xmlhttp.send(null);
+	    	    return xmlhttp.onreadystatechange();
+	    	}
+			
+			function createArrayGruposCriteriosFromXML(xml){
+				
+				/*var pos = 1;
+    			var itemData = [{type: "select", name: "video_codec", label: "Codec", validate: "NotEmpty", options:[
+						{text: "DivX", value: "DivX"},
+						{text: "XviD", value: "XviD", selected: true}
+				]},
+				{type: "select", name: "video_codec", label: "Codec2", validate: "NotEmpty", options:[
+							{text: "DivX", value: "DivX"},
+							{text: "XviD", value: "XviD", selected: true}
+					]},
+					{type: "select", name: "video_codec", label: "Codec3", validate: "NotEmpty", options:[
+							{text: "DivX", value: "DivX"},
+							{text: "XviD", value: "XviD", selected: true}
+					]}];
+				
+				
+				
+				
+				
+	    		var icon = 'libro.png';
+	    		var asignaturas = xml.getElementsByTagName("asignatura");
+	    		var id, nombre, asignatura;
+	    		var opts = new Array();
+	    		for(var i=0;i<asignaturas.length;i++) {
+	    	        id=asignaturas[i].getElementsByTagName("id")[0].firstChild.nodeValue;
+	    	        nombre=asignaturas[i].getElementsByTagName("nombre")[0].firstChild.nodeValue;
+					asignatura=[id,'obj',nombre,icon];
+	    	       	opts[i] = asignatura;
+	    	    }
+	    		return opts;*/
+
+	    	}
 			
         </script>
 	</head>

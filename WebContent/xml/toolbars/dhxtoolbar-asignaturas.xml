@@ -4,9 +4,5 @@
 	<item id="sep1" type="separator"/>
 	<item id="delete" type="button" img="delete.png" imgdis="delete_dis.png" text="Eliminar" enabled="false" action="deleteAsignatura" />
 	<item id="sep2" type="separator"/>
-	<item id="exportExcel" type="button" img="export_excel.png"  imgdis="export_excel_dis.png" text="Exportar como Excel" action="exportExcel"/>
-	<item id="se3" type="separator"/>
-	<item id="exportPDF" type="button" img="export_pdf.gif"  imgdis="export_pdf_dis.gif" text="Guardar como PDF" action="exportPDF"/>
-	<item id="sep4" type="separator"/>
 	<item id="refresh" type="button" img="recargar.png" text="Actualizar" action="goActualizar"/>					
 </toolbar>

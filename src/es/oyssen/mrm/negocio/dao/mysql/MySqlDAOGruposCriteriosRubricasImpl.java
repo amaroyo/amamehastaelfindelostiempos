@@ -16,8 +16,13 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
+import es.oyssen.mrm.negocio.dao.rowmappers.CriterioRubricaMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.GrupoCriteriosRubricasMapper;
+import es.oyssen.mrm.negocio.dao.rowmappers.GruposCriteriosRubricaAsignaturaMapper;
+import es.oyssen.mrm.negocio.exceptions.ServiceException;
+import es.oyssen.mrm.negocio.vo.CriterioRubricaVO;
 import es.oyssen.mrm.negocio.vo.GrupoCriteriosRubricasVO;
+import es.oyssen.mrm.negocio.vo.GruposCriteriosRubricaAsignaturaVO;
 
 
 public class MySqlDAOGruposCriteriosRubricasImpl extends DAOBase implements DAOGruposCriteriosRubricas{
@@ -27,6 +32,10 @@ public class MySqlDAOGruposCriteriosRubricasImpl extends DAOBase implements DAOG
 	private static String SQL_DELETE = "delete from grupos_criterios_rubricas where id_grupo_criterio = ? ";
 	private static String SQL_FIND_BY_ID = "select * from grupos_criterios_rubricas where id_grupo_criterio = ?";
 	private static String SQL_FIND_BY_ASIGNATURA = "select * from grupos_criterios_rubricas where id_asignatura = ?";
+	private static String SQL_FIND_GRUPOS_CRITERIOS_RUBRICA_ASIGNATURA = "select gcr.id_asignatura, gcr.id_grupo_criterio, gcr.nombre as nombre_grupo_criterio, cr.id_criterio, cr.nombre as nombre_criterio" +
+																			"from grupos_criterios_rubricas as gcr, criterios_rubricas as cr" +
+																			"where gcr.id_asignatura = cr.id_asignatura and gcr.id_grupo_criterio = cr.id_grupo_criterio" +
+																			"and gcr.id_asignatura = ?";
 	
 
 
@@ -100,6 +109,18 @@ public class MySqlDAOGruposCriteriosRubricasImpl extends DAOBase implements DAOG
 			throw new DAOException(e);
 		}
 	}
+	
+	public List<GruposCriteriosRubricaAsignaturaVO> findGruposCriteriosRubricaAsignatura(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_GRUPOS_CRITERIOS_RUBRICA_ASIGNATURA, new Object[]{grupoCriterioRubrica.getIdAsignatura()}, new GruposCriteriosRubricaAsignaturaMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+	
 	
 	
 
