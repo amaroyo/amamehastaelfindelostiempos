@@ -12,9 +12,12 @@
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
 	    
-		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlx.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlx.css">		
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxwindows.css">
 		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlx.js"></script>
-	    <script src="../js/dhtmlxSuite/patterns/dhtmlxlayout_pattern4l.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxwindows.js"></script>
+	
+	    <script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
 	    
 
 	    <script type="text/javascript">
@@ -101,6 +104,7 @@
 		    	
 		    	toolbarServicios.loadXML('../xml/toolbars/dhxtoolbar-trabajos-campo.xml', function(){
 		    		toolbarServicios.setItemText('crearTrabajoCampo',"<bean:message key="button.crear.trabajo.campo"/>");
+		    		toolbarServicios.setItemText('modificarTrabajoCampo',"<bean:message key="button.cambiar.trabajo.campo"/>");
 		    		toolbarServicios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
 		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.casos"/>");
 		    		toolbarServicios.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.casos.alumno"/>");
@@ -110,19 +114,21 @@
 		    	
 			    	<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 			    		toolbarServicios.hideItem('subirPractica');
-			    		toolbarServicios.hideItem('sep2');
+			    		toolbarServicios.hideItem('sep3');
 			    		
 			    	</logic:match>
 			    	<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 			    	
 			    		toolbarServicios.hideItem('crearTrabajoCampo');
 			    		toolbarServicios.hideItem('sep1');
+			    		toolbarServicios.hideItem('modificarTrabajoCampo');
+			    		toolbarServicios.hideItem('sep2');
 			    		toolbarServicios.hideItem('descargarTodos');
-			    		toolbarServicios.hideItem('sep3');
-			    		toolbarServicios.hideItem('descargarTodosAlumno');
 			    		toolbarServicios.hideItem('sep4');
-			    		toolbarServicios.hideItem('fechaLimite');
+			    		toolbarServicios.hideItem('descargarTodosAlumno');
 			    		toolbarServicios.hideItem('sep5');
+			    		toolbarServicios.hideItem('fechaLimite');
+			    		toolbarServicios.hideItem('sep6');
 			    	
 			    	</logic:notMatch>
 		    	});
@@ -132,6 +138,10 @@
 		    	
 			}
 		    	
+	    	
+	    	function modificarTrabajoCampo(){
+	    		alert("ModificarTC");
+	    	}
 			
 			function subirPractica(){
 				alert("subir Practica");
@@ -152,6 +162,77 @@
 				alert("Fecha Limite");
 			}
 			
+			function crearTrabajoCampo(){
+				var dhxWins= new dhtmlXWindows();
+				var window = dhxWins.createWindow("subir", 300,50, 500, 400);
+				window.setText('<bean:message key="title.trabajo.de.campo" />');				
+				window.setModal(true);
+				window.centerOnScreen();
+				
+				var formNTC = window.attachForm();
+				formNTC.loadStruct('../xml/forms/trabajo_de_campo.xml', function(){
+					formNTC.setItemLabel('data','<bean:message key="title.info.general.trabajo.campo"/>');
+					formNTC.setItemLabel('nombre','<bean:message key="label.nombre"/>');
+					formNTC.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
+					formNTC.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
+					formNTC.setItemLabel('hora','<bean:message key="label.hora"/>');
+					formNTC.setItemLabel('descargarCorreccion','<bean:message key="button.descargar.correccion"/>');
+					formNTC.setItemLabel('descargarInformacion','<bean:message key="button.subir.informacion.adicional"/>');
+					formNTC.setItemLabel('subirPractica','<bean:message key="button.subir.trabajo.campo"/>');
+					formNTC.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+		    		formNTC.setRequired('nombre', true);		    		
+		    		formNTC.setRequired('fechaFin', true);
+		    		formNTC.setRequired('hora', true);
+		    		formNTC.hideItem('descargarCorreccion');
+		    		formNTC.hideItem('subirPractica');
+		    		
+		    		var correcto = false;
+		    		
+		    		formNTC.attachEvent("onChange", function(name,value){
+		    		   if(name == "hora"){
+		    			   var hora = formNTC.getItemValue("hora");
+		    			   var sp = hora.split(":");
+		    			   if(sp.length==2){
+		    				   var isnum = /^\d+$/.test(sp[0]);
+		    				   isnum = isnum && /^\d+$/.test(sp[1]);
+		    				   if(isnum){
+		    					   if (sp[0] < 0 || sp[0] > 24 || sp[1] < 0 || sp[1] > 60) {
+			    					   formNTC.setNote("hora", { text: '<bean:message key="message.hora.correcta" />'} );
+			    					   correcto=false;
+		    				   		}
+		    					   else {correcto=true;}
+		    				   }
+		    				   else {formNTC.setNote("hora", { text: '<bean:message key="message.hora.correcta" />'} );correcto=false;}
+		    			   }
+		    			   else {formNTC.setNote("hora", { text: '<bean:message key="message.hora.correcta" />'} );correcto=false;}
+		    		   }
+		    		});
+		    		
+		    		formNTC.attachEvent("onButtonClick", function(id){
+		    			if(correcto){
+							if(id == "descargarInformacion"){
+					    		if (confirm("<bean:message key="message.subir.info.adicional"/>")) {
+						    		alert("a por ello!");
+						    	}
+							}
+							else if(id == "aceptar"){
+								formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura + "&idProfesor=" + idSession,"post", function(xml) {
+									//window.attachURL("crearTrabajoCampo.do?idAsignatura=" + idAsignatura + "&idProfesor=" + idSession);
+								});
+								
+							}
+		    			}
+		    			else {alert("<bean:message key="message.algo.incorrecto"/>")}
+		    			
+	
+			    	});
+		    			
+		    		
+				});
+				
+				
+			}
+			
 			function goActualizar() {
 				var idTrabajoInfo = tabbar.getActiveTab();
 				if (profesor) gridProfesores.clearAndLoad("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&idTrabajoInfo=" + idTrabajoInfo);	 
@@ -167,13 +248,16 @@
 		    	
 				toolbarServiciosAlumnosRefrescar.loadXML('../xml/toolbars/dhxtoolbar-trabajos-campo.xml', function(){
 					toolbarServiciosAlumnosRefrescar.setItemText('crearTrabajoCampo',"<bean:message key="button.crear.trabajo.campo"/>");
+					toolbarServiciosAlumnosRefrescar.setItemText('modificarTrabajoCampo',"<bean:message key="button.cambiar.trabajo.campo"/>");
 					toolbarServiciosAlumnosRefrescar.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
 					toolbarServiciosAlumnosRefrescar.setItemText('descargarTodos',"<bean:message key="button.descargar.casos"/>");
 					toolbarServiciosAlumnosRefrescar.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.casos.alumno"/>");
 					toolbarServiciosAlumnosRefrescar.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 					toolbarServiciosAlumnosRefrescar.setItemText('refresh',"<bean:message key="button.actualizar"/>");		    		
 			    	toolbarServiciosAlumnosRefrescar.hideItem('subirPractica');
-			    	toolbarServiciosAlumnosRefrescar.hideItem('sep2');			    	
+			    	toolbarServiciosAlumnosRefrescar.hideItem('sep2');			
+			    	toolbarServiciosAlumnosRefrescar.hideItem('modificarTrabajoCampo');
+			    	toolbarServiciosAlumnosRefrescar.hideItem('sep6');
 			    	toolbarServiciosAlumnosRefrescar.hideItem('crearTrabajoCampo');
 			    	toolbarServiciosAlumnosRefrescar.hideItem('sep1');
 			    	toolbarServiciosAlumnosRefrescar.hideItem('descargarTodos');

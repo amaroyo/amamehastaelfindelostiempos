@@ -11,7 +11,7 @@ import es.oyssen.mrm.negocio.vo.TrabajoDeCampoInfoVO;
 
 public interface DAOTrabajosDeCampoInfo {
 
-	public void insert(TrabajoDeCampoInfoVO trabajoInfo) throws DAOException, DAOInsertException;
+	public String insert(TrabajoDeCampoInfoVO trabajoInfo) throws DAOException, DAOInsertException;
 	
 	public void update(TrabajoDeCampoInfoVO trabajoInfo) throws DAOException, DAOUpdateException;
 	

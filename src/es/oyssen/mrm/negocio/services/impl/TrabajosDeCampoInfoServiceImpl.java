@@ -21,11 +21,11 @@ public class TrabajosDeCampoInfoServiceImpl implements TrabajosDeCampoInfoServic
 		this.daoTrabajosDeCampoInfo = daoTrabajosDeCampoInfo;
 	}
 	
-	public void insert(TrabajoDeCampoInfoVO trabajo)
+	public String  insert(TrabajoDeCampoInfoVO trabajo)
 			throws es.oyssen.mrm.negocio.exceptions.ServiceException,
 			es.oyssen.mrm.negocio.dao.exceptions.DAOException {
 		try {
-			daoTrabajosDeCampoInfo.insert(trabajo);	
+			return daoTrabajosDeCampoInfo.insert(trabajo);	
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("Error creando TrabajoDeCampoInfo", e);

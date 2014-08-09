@@ -1,5 +1,8 @@
 package es.oyssen.mrm.negocio.dao.mysql;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -27,35 +30,35 @@ import es.oyssen.mrm.negocio.vo.TrabajoDeCampoInfoVO;
 
 public class MySqlDAOTrabajosDeCampoInfoImpl extends DAOBase implements DAOTrabajosDeCampoInfo{
 	
-	private static String SQL_INSERT = "insert into trabajos_de_campo_info (nombre, enunciado, descripcion) values (?,?,?)";
+	private static String SQL_INSERT = "insert into trabajos_de_campo_info (nombre, descripcion) values (?,?)";
 	private static String SQL_UPDATE = "update trabajos_de_campo_info set nombre=?, enunciado=?, descripcion=?";
 	private static String SQL_DELETE = "delete from trabajos_de_campo_info where id_asignatura = ? ";
 	private static String SQL_FIND_BY_ID = "select * from trabajos_de_campo_info where id_trabajo_info = ?";
 	
 
 
-	public void insert(final TrabajoDeCampoInfoVO trabajo) throws DAOException,
+	public String insert(final TrabajoDeCampoInfoVO trabajo) throws DAOException,
 	DAOInsertException {
 		try{
-			
+			KeyHolder kh = new GeneratedKeyHolder();
 			getJdbcTemplate().update(new PreparedStatementCreator() {
-
+				
 				public PreparedStatement createPreparedStatement(Connection conn)
 						throws SQLException {
-					PreparedStatement ps = conn.prepareStatement(SQL_INSERT, new String[]{});
+					PreparedStatement ps = conn.prepareStatement(SQL_INSERT, new String[]{"id_usuario"});
 					ps.setString(1, trabajo.getNombre());
-					ps.setString(2, trabajo.getEnunciado());
-					ps.setString(3, trabajo.getDescripcion());
+					ps.setString(2, trabajo.getDescripcion());
+	
 					return ps;
-
+					
 				}
 			}
-			);
+			,kh);
+			return kh.getKey().toString();
 			
-
 		} catch (Exception e) {
 			throw new DAOInsertException(e);
-		}	
+		}		
 	}
 
 	public void update(TrabajoDeCampoInfoVO trabajo) throws DAOException,

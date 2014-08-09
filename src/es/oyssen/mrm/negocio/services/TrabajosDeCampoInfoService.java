@@ -6,7 +6,7 @@ import es.oyssen.mrm.negocio.vo.TrabajoDeCampoInfoVO;
 
 public interface TrabajosDeCampoInfoService {
 	
-	public void insert(TrabajoDeCampoInfoVO trabajoInfo) throws ServiceException, DAOException;
+	public String insert(TrabajoDeCampoInfoVO trabajoInfo) throws ServiceException, DAOException;
 	
 	public void update(TrabajoDeCampoInfoVO trabajoInfo) throws ServiceException, DAOException;
 	

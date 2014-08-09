@@ -2,9 +2,10 @@
 <items>
     
    <item type="fieldset" name="data" label="Información Trabajo de Campo" inputWidth="auto">
-       <item type="input" name="nombre" label="Nombre" labelWidth="110" style="width:400"/>
+       <item type="input" name="nombre" label="Nombre" labelWidth="110" style="width:400" required="true"/>
        <item type="input" name="descripcion" label="Descripción" labelWidth="110" style="width:400" rows="7"/>
-       <item type="calendar" name="fechaFin" label="Fecha Fin" labelWidth="110" dateFormat="%d/%m/%Y" calendarPosition="right" readonly="true" style="width:400"/>
+       <item type="calendar" name="fechaFin" label="Fecha Fin" labelWidth="110" dateFormat="%d/%m/%Y" calendarPosition="right" readonly="true" style="width:400" required="true"/>
+   	   <item type="input" name="hora" label="Hora" labelWidth="80" style="width:55" required="true"/>
    	   <item type="button" name="descargarInformacion" value="Descargar Información" />
    </item>
    

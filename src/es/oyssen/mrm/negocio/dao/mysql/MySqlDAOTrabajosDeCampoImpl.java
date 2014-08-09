@@ -27,7 +27,7 @@ import es.oyssen.mrm.negocio.vo.UsuarioTrabajoCampoVO;
 
 public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosDeCampo{
 
-	private static String SQL_INSERT = "insert into trabajos_de_campo (id_portafolio, id_trabajo_info, trabajo_de_campo, correccion_trabajo, fecha_limite) values (?,?,?,?,?)";
+	private static String SQL_INSERT = "insert into trabajos_de_campo (id_portafolio, id_trabajo_info, fecha_limite) values (?,?,?)";
 	private static String SQL_UPDATE = "update usuarios set id_trabajo_info=?, trabajo_de_campo=?, correccion_trabajo=?, fecha_limite=?";
 	private static String SQL_DELETE = "delete from trabajos_de_campo where id_portafolio = ? and id_trabajo_de_campo = ?";
 	private static String SQL_FIND_BY_PORTAFOLIO = "select t.*,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i where t.id_trabajo_info = i.id_trabajo_info and id_portafolio = ?";
@@ -51,9 +51,7 @@ public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosD
 					PreparedStatement ps = conn.prepareStatement(SQL_INSERT, new String[]{"id_trabajo_de_campo"});
 					ps.setString(1, trabajoDeCampo.getIdPortafolio());
 					ps.setString(2, trabajoDeCampo.getIdTrabajoInfo());
-					ps.setString(3, trabajoDeCampo.getTrabajoDeCampo());
-					ps.setString(4, trabajoDeCampo.getCorreccionTrabajo());
-					ps.setString(5, trabajoDeCampo.getFechaLimite());
+					ps.setString(3, trabajoDeCampo.getFechaLimite());
 					return ps;
 
 				}
