@@ -185,5 +185,8 @@
 		<property name="daoSeminariosAsignatura" ref="daoSeminariosAsignatura" />
 	</bean>	
 	
+	<bean id="trabajosDeCampoInfoService" class="es.oyssen.mrm.negocio.services.impl.TrabajosDeCampoInfoServiceImpl">		
+		<property name="daoTrabajosDeCampoInfo" ref="daoTrabajosDeCampoInfo" />
+	</bean>
 	
 </beans>

@@ -88,6 +88,8 @@
 	
 	<bean id="daoSeminariosAsignatura" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOSeminariosAsignaturaImpl" parent="daoBase" />
 	
+	<bean id="daoTrabajosDeCampoInfo" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOTrabajosDeCampoInfoImpl" parent="daoBase" />
+	
 	
 </beans>
 

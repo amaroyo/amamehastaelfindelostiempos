@@ -31,6 +31,7 @@ import es.oyssen.mrm.negocio.services.SeminariosAsignaturaService;
 import es.oyssen.mrm.negocio.services.SeminariosRealizadosService;
 import es.oyssen.mrm.negocio.services.ServiciosService;
 import es.oyssen.mrm.negocio.services.ServiciosUsuarioService;
+import es.oyssen.mrm.negocio.services.TrabajosDeCampoInfoService;
 import es.oyssen.mrm.negocio.services.TrabajosDeCampoService;
 import es.oyssen.mrm.negocio.services.UsuariosPermisosService;
 import es.oyssen.mrm.negocio.services.UsuariosService;
@@ -178,5 +179,10 @@ public abstract class MrmAction extends SpringBaseAction implements Constantes{
 	public SeminariosAsignaturaService getSeminariosAsignaturaService() {
 		return (SeminariosAsignaturaService) getBean("seminariosAsignaturaService");
 	}
+	
+	public TrabajosDeCampoInfoService getTrabajosDeCampoInfoService() {
+		return (TrabajosDeCampoInfoService) getBean("trabajosDeCampoInfoService");
+	}
+	
 	
 }
