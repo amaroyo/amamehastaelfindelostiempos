@@ -19,6 +19,7 @@ public class UsuarioEstanciaUnidadClinicaMapper implements RowMapper {
     public static final String FIELD_CENTRO_ASOCIADO = "centro_asociado";
     public static final String FIELD_UNIDAD_CLINICA = "unidad_clinica";
     public static final String FIELD_TURNO = "turno";
+    public static final String FIELD_ID_PROFESOR = "id_profesor";
     
     
     
@@ -34,6 +35,7 @@ public class UsuarioEstanciaUnidadClinicaMapper implements RowMapper {
     	o.setCentroAsociado(StringUtil.nullToString(rs.getString(FIELD_CENTRO_ASOCIADO)));
     	o.setUnidadClinica(StringUtil.nullToString(rs.getString(FIELD_UNIDAD_CLINICA)));
     	o.setTurno(StringUtil.nullToString(rs.getString(FIELD_TURNO)));
+    	o.setIdProfesor(StringUtil.nullToString(rs.getString(FIELD_ID_PROFESOR)));
 		return o;
 	}
 }

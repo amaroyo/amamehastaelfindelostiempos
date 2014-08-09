@@ -613,7 +613,7 @@ public class UtilXML {
 		return sb.toString();
 	}
 	
-	public static final String buildXmlGridUsuariosEstanciasUnidadClinica(List<UsuarioEstanciaUnidadClinicaVO> list) throws Exception {
+	public static final String buildXmlGridUsuariosEstanciasUnidadClinica(List<UsuarioEstanciaUnidadClinicaVO> list, String idSesion) throws Exception {
 		StringBuffer sb = new StringBuffer();
 		sb.append(XML_HEADER);
 		sb.append("<rows>");
@@ -627,7 +627,9 @@ public class UtilXML {
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(ueuc.getDni()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(ueuc.getCentroAsociado()) + "]]></cell>");
 				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(ueuc.getUnidadClinica()) + "]]></cell>");
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(ueuc.getTurno()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(ueuc.getTurno()) + "]]></cell>"); 
+				if(ueuc.getIdProfesor().equals(idSesion)) sb.append("<cell><![CDATA[<img src=" + "../img/grid/corregida.png"+ "></img>]]></cell>");
+				else sb.append("<cell><![CDATA["+""+"]]></cell>");
 				sb.append("</row>");				
 			}
 		}

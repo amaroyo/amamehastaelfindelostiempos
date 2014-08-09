@@ -24,7 +24,7 @@ public class GridUsuariosEstanciasAction extends DHTMLXGridAction {
 			PortafolioVO portafolio = new PortafolioVO();
 			portafolio.setIdAsignatura(form.getIdAsignatura());
 			portafolio.setAnyoAcademico(anyoAcademico);
-			return UtilXML.buildXmlGridUsuariosEstanciasUnidadClinica(getPortafoliosService().findUsuariosEstanciaUnidadClinica(portafolio));
+			return UtilXML.buildXmlGridUsuariosEstanciasUnidadClinica(getPortafoliosService().findUsuariosEstanciaUnidadClinica(portafolio),idUsuario);
 		}
 		
 		else return null;

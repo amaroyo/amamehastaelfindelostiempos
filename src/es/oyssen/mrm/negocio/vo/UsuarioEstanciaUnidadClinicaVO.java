@@ -11,6 +11,7 @@ public class UsuarioEstanciaUnidadClinicaVO {
 	private String centro_asociado;
 	private String unidad_clinica;
 	private String turno;
+	private String id_profesor;
 	
 	
 	
@@ -129,6 +130,20 @@ public class UsuarioEstanciaUnidadClinicaVO {
 
 	public void setTurno(String turno) {
 		this.turno = turno;
+	}
+
+
+	
+
+	public String getIdProfesor() {
+		return id_profesor;
+	}
+
+
+
+
+	public void setIdProfesor(String id_profesor) {
+		this.id_profesor = id_profesor;
 	}
 
 

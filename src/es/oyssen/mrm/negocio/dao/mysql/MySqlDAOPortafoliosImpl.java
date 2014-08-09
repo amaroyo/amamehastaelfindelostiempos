@@ -49,7 +49,7 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 	private static String SQL_FIND_BY_ANYO_ACADEMICO = "select * from portafolios where anyo_academico = ?";
 	private static String SQL_FIND_ALUMNO_BY_PORTAFOLIO = "select u.* from usuarios as u, portafolios as p where u.id_usuario=p.id_alumno and p.id_portafolio=?";
 	private static String SQL_FIND_USUARIOS_ESTANCIA_UNIDAD_CLINICA = "select u.id_usuario, u.nombre, u.apellido1, u.apellido2, u.dni, e.centro_asociado, " +
-																		"e.unidad_clinica, e.turno " +
+																		"e.unidad_clinica, e.turno, p.id_profesor " +
 																		"from portafolios as p, usuarios as u, estancias_unidad_clinica as e " +
 																		"where p.id_alumno = u.id_usuario and p.id_portafolio = e.id_portafolio and " +
 																		"p.id_asignatura = ? and p.anyo_academico = ?";
