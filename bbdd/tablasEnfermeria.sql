@@ -346,7 +346,7 @@ COLLATE = utf8_spanish_ci;
 
 
 
-CREATE TABLE IF NOT EXISTS puntuacion_cirterios (
+CREATE TABLE IF NOT EXISTS puntuacion_criterios (
 	id_portafolio INT(50) NOT NULL,
 	id_criterio INT(5) NOT NULL,
 	nota INT(3),
