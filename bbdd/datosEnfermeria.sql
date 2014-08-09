@@ -242,184 +242,184 @@ insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values
 -- #Practicas Clinicas de enfermeria - Metodologia Enfermera
 
 -- -Grupo Conocimientos
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 1, 'Sabe resolver problemas aplicando el pensamiento crítico');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 1, 'Sabe aplicar el juicio clínico en la toma de decisiones');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 1, 'Dispone de los conocimientos para utilizar la metodología adecuada');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 1, 'Sabe como obtener e interpretar con precisión los datos');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 1, 'Conoce como establecer prioridades en la planificación de los cuidados');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 1, 'Sabe transmitir la información de forma clara y precisa');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 4, 'Sabe resolver problemas aplicando el pensamiento crítico');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 4, 'Sabe aplicar el juicio clínico en la toma de decisiones');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 4, 'Dispone de los conocimientos para utilizar la metodología adecuada');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 4, 'Sabe como obtener e interpretar con precisión los datos');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 4, 'Conoce como establecer prioridades en la planificación de los cuidados');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 4, 'Sabe transmitir la información de forma clara y precisa');
 
 -- -Grupo Habilidades
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 2, 'Realiza una valoración de enfermería pertinente y sistemática');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 2, 'Analiza los datos recogidos en la valoración identificando los diagnósticos enermeros');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 2, 'Identifica los resultados previstos');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 2, 'Planifica y aplica las intervenciones adeciadas');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 2, 'Evalua los planes de cuidados');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 2, 'Documenta y registra los cuidados');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 5, 'Realiza una valoración de enfermería pertinente y sistemática');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 5, 'Analiza los datos recogidos en la valoración identificando los diagnósticos enermeros');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 5, 'Identifica los resultados previstos');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 5, 'Planifica y aplica las intervenciones adeciadas');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 5, 'Evalua los planes de cuidados');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 5, 'Documenta y registra los cuidados');
 
 -- -Grupo Actitudes
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 3, 'Juicio crítico');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 3, 'Aprendizaje y mejora continua');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 3, 'Responsabilidad');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 3, 'Respeto');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 3, 'Iniciativa');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 3, 'Saber estar');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 6, 'Juicio crítico');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 6, 'Aprendizaje y mejora continua');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 6, 'Responsabilidad');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 6, 'Respeto');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 6, 'Iniciativa');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (2, 6, 'Saber estar');
 
 
 -- #Practicas Clinicas de enfermeria I
 
 -- -Grupo Conocimientos
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 1, 'Conoce las alteraciones de salud del adulto, identifica sus manifestaciones y las necesidades de cuidados');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 1, 'Identifica y controla los posibles riesgos en la atención a los pacientes');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 1, 'Sabe como planificar los cuidados: analizar los datos, definir los problemas, establecer, ejecutar y evaluar el plan de cuidados');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 1, 'Sabe como interpretar con precisión los datos objetivos y subjetivos y su importancia para la presteción segura de los cuidados');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 1, 'Conoce como establecer prioridades en su trabajo y gestionar el tiempo eficazmente');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 1, 'Sabe proporcionar la información de manera clara y sucinta');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 1, 'Conoce la estructura y funcionamiento de la unidad de prácticas');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 7, 'Conoce las alteraciones de salud del adulto, identifica sus manifestaciones y las necesidades de cuidados');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 7, 'Identifica y controla los posibles riesgos en la atención a los pacientes');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 7, 'Sabe como planificar los cuidados: analizar los datos, definir los problemas, establecer, ejecutar y evaluar el plan de cuidados');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 7, 'Sabe como interpretar con precisión los datos objetivos y subjetivos y su importancia para la presteción segura de los cuidados');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 7, 'Conoce como establecer prioridades en su trabajo y gestionar el tiempo eficazmente');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 7, 'Sabe proporcionar la información de manera clara y sucinta');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 7, 'Conoce la estructura y funcionamiento de la unidad de prácticas');
 
 -- Grupo Habilidades
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 2, 'Realiza los cuidados de enfermería');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 2, 'Demuestra habilidad y destreza');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 2, 'Realiza las técnicas y procedimientos corresponientes');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 2, 'Documenta y registra los cuidados');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 2, 'Demuestra habilidad en el uso de la comunicación con el paciente y familia');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 2, 'Establece y mantiene relaciones de trabajo constructivas con el equipo de enfermería y el equipo multidisciplinar');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 8, 'Realiza los cuidados de enfermería');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 8, 'Demuestra habilidad y destreza');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 8, 'Realiza las técnicas y procedimientos corresponientes');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 8, 'Documenta y registra los cuidados');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 8, 'Demuestra habilidad en el uso de la comunicación con el paciente y familia');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 8, 'Establece y mantiene relaciones de trabajo constructivas con el equipo de enfermería y el equipo multidisciplinar');
 
 -- -Grupo Actitudes
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 3, 'Juicio crítico');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 3, 'Aprendizaje y mejora continua');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 3, 'Responsabilidad');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 3, 'Respeto');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 3, 'Iniciativa');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 3, 'Saber estar');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 9, 'Juicio crítico');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 9, 'Aprendizaje y mejora continua');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 9, 'Responsabilidad');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 9, 'Respeto');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 9, 'Iniciativa');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (3, 9, 'Saber estar');
 
 
 
 -- #Practicas Clinicas de enfermeria II Atención Especializada
 
 -- -Grupo Conocimientos
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 1, 'Conoce las alteraciones de la salud de la mujer, identifica sus manifestaciones y las necesidades de cuidados');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 1, 'Identifica y controla los posibles riesgos en la atención a los pacientes');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 1, 'Sabe como planificar y ejecutar los cuidados de la mujer en las diferentes etapas del ciclo reproductivo y en el climaterio');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 1, 'Sabe como planificar y ejecutar los cuidados de Enfermería durante la infancia');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 1, 'Conoce como establecer prioridades en su trabajo y gestionar el tiempo eficazmente');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 1, 'Sabe proporcionar la información de manera clara y sucinta');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 1, 'Conoce la estructura y funcionamiento de la unidad de prácticas');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 10, 'Conoce las alteraciones de la salud de la mujer, identifica sus manifestaciones y las necesidades de cuidados');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 10, 'Identifica y controla los posibles riesgos en la atención a los pacientes');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 10, 'Sabe como planificar y ejecutar los cuidados de la mujer en las diferentes etapas del ciclo reproductivo y en el climaterio');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 10, 'Sabe como planificar y ejecutar los cuidados de Enfermería durante la infancia');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 10, 'Conoce como establecer prioridades en su trabajo y gestionar el tiempo eficazmente');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 10, 'Sabe proporcionar la información de manera clara y sucinta');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 10, 'Conoce la estructura y funcionamiento de la unidad de prácticas');
 
 -- Grupo Habilidades
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 2, 'Realiza los cuidados de enfermería');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 2, 'Demuestra habilidad y destreza');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 2, 'Realiza las técnicas y procedimientos corresponientes');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 2, 'Documenta y registra los cuidados');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 2, 'Demuestra habilidad en el uso de la comunicación con el paciente y familia');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 2, 'Establece y mantiene relaciones de trabajo constructivas con el equipo de enfermería y el equipo multidisciplinar');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 11, 'Realiza los cuidados de enfermería');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 11, 'Demuestra habilidad y destreza');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 11, 'Realiza las técnicas y procedimientos corresponientes');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 11, 'Documenta y registra los cuidados');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 11, 'Demuestra habilidad en el uso de la comunicación con el paciente y familia');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 11, 'Establece y mantiene relaciones de trabajo constructivas con el equipo de enfermería y el equipo multidisciplinar');
 
 -- -Grupo Actitudes
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 3, 'Juicio crítico');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 3, 'Aprendizaje y mejora continua');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 3, 'Responsabilidad');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 3, 'Respeto');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 3, 'Iniciativa');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 3, 'Saber estar');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 12, 'Juicio crítico');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 12, 'Aprendizaje y mejora continua');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 12, 'Responsabilidad');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 12, 'Respeto');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 12, 'Iniciativa');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (4, 12, 'Saber estar');
 
 
 -- #Practicas Clinicas de enfermeria II Atención Especializada
 
 -- -Grupo Conocimientos
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 1, 'Sabe como evaluar el aprendizaje de las prácticas de salud de los pacientes');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 1, 'Sabe planificar los cuidados en colaboración con los pacientes, y en su caso con el cuidador principal');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 1, 'Sabe identificar los resultados previstos y el tiempo para conseguirlos, en colaboración con los pacientes o el cuidador principal');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 1, 'Propone y colabora en iniciativas de promoción de la salud y de prevención, así como su evaluación');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 1, 'Promueve estilos de vida sanos para la persona, la familia y la comunidad');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 1, 'Conoce como establecer prioridades en su trabajo y gestionar el tiempo eficazmente');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 1, 'Sabe proporcionar la información de manera clara y sucinta');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 1, 'Conoce la estructura y funcionamiento de la unidad de prácticas');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 13, 'Sabe como evaluar el aprendizaje de las prácticas de salud de los pacientes');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 13, 'Sabe planificar los cuidados en colaboración con los pacientes, y en su caso con el cuidador principal');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 13, 'Sabe identificar los resultados previstos y el tiempo para conseguirlos, en colaboración con los pacientes o el cuidador principal');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 13, 'Propone y colabora en iniciativas de promoción de la salud y de prevención, así como su evaluación');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 13, 'Promueve estilos de vida sanos para la persona, la familia y la comunidad');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 13, 'Conoce como establecer prioridades en su trabajo y gestionar el tiempo eficazmente');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 13, 'Sabe proporcionar la información de manera clara y sucinta');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 13, 'Conoce la estructura y funcionamiento de la unidad de prácticas');
 
 
 -- Grupo Habilidades
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 2, 'Realiza los cuidados de enfermería');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 2, 'Demuestra habilidad y destreza');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 2, 'Realiza las técnicas y procedimientos corresponientes');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 2, 'Documenta y registra los cuidados');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 2, 'Demuestra habilidad en el uso de la comunicación con el paciente y familia');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 2, 'Establece y mantiene relaciones de trabajo constructivas con el equipo de enfermería y el equipo multidisciplinar');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 14, 'Realiza los cuidados de enfermería');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 14, 'Demuestra habilidad y destreza');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 14, 'Realiza las técnicas y procedimientos corresponientes');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 14, 'Documenta y registra los cuidados');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 14, 'Demuestra habilidad en el uso de la comunicación con el paciente y familia');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 14, 'Establece y mantiene relaciones de trabajo constructivas con el equipo de enfermería y el equipo multidisciplinar');
 
 
 -- -Grupo Actitudes
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 3, 'Juicio crítico');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 3, 'Aprendizaje y mejora continua');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 3, 'Responsabilidad');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 3, 'Respeto');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 3, 'Iniciativa');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 3, 'Saber estar');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 15, 'Juicio crítico');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 15, 'Aprendizaje y mejora continua');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 15, 'Responsabilidad');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 15, 'Respeto');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 15, 'Iniciativa');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (5, 15, 'Saber estar');
 
 
 -- #Practicas Clinicas de enfermeria III 
 -- -Grupo Conocimientos
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 1, 'Conoce las alteraciones de salud e identifica sus manifestaciones');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 1, 'Conoce las necesidades de cuidado derivadas de los problemas de salud');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 1, 'Dispone de los conocimientos para valorar, diagnosticar, planificar y evaluar');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 1, 'Conoce las técnicas y procedimientos utilizados en la atención a los pacientes');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 1, 'Conoce los sistemas de información sanitaria');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 16, 'Conoce las alteraciones de salud e identifica sus manifestaciones');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 16, 'Conoce las necesidades de cuidado derivadas de los problemas de salud');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 16, 'Dispone de los conocimientos para valorar, diagnosticar, planificar y evaluar');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 16, 'Conoce las técnicas y procedimientos utilizados en la atención a los pacientes');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 16, 'Conoce los sistemas de información sanitaria');
 
 -- Grupo Habilidades
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 2, 'Realiza una valoración  de enfermería pertinente y sistemática');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 2, 'Analiza los datos recogidos en la valoración identificando los diagnósticos enfermeros');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 2, 'Identifica los resultados previstos ');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 2, 'Planifica y aplica las intervenciones adecuadas');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 2, 'Evalúa los planes de cuidados');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 2, 'Aplica y realiza las técnicas y procedimientos de forma adecuada');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 2, 'Responde eficazmente en situaciones imprevistas o ante urgencias ');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 2, 'Identifica comportamientos desafiantes, ansiedad, estrés, depresión e identifica la necesidad de intervención del personal especializado');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 2, 'Planifica y aplica cuidados para aliviar la situación de los ancianos, enfermos avanzados y terminales');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 2, 'Identifica las características del proceso de morir y de duelo así como las necesidades y estrategias de intervención mediante cuidados enfermeros');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 2, 'Demuestra habilidad en el uso de la comunicación con el paciente y familia');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 2, 'Documenta y registra los cuidados');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 2, 'Establece y mantiene relaciones de trabajo constructivas con el equipo de enfermería y el equipo multidisciplinar');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 17, 'Realiza una valoración  de enfermería pertinente y sistemática');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 17, 'Analiza los datos recogidos en la valoración identificando los diagnósticos enfermeros');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 17, 'Identifica los resultados previstos ');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 17, 'Planifica y aplica las intervenciones adecuadas');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 17, 'Evalúa los planes de cuidados');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 17, 'Aplica y realiza las técnicas y procedimientos de forma adecuada');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 17, 'Responde eficazmente en situaciones imprevistas o ante urgencias ');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 17, 'Identifica comportamientos desafiantes, ansiedad, estrés, depresión e identifica la necesidad de intervención del personal especializado');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 17, 'Planifica y aplica cuidados para aliviar la situación de los ancianos, enfermos avanzados y terminales');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 17, 'Identifica las características del proceso de morir y de duelo así como las necesidades y estrategias de intervención mediante cuidados enfermeros');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 17, 'Demuestra habilidad en el uso de la comunicación con el paciente y familia');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 17, 'Documenta y registra los cuidados');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 17, 'Establece y mantiene relaciones de trabajo constructivas con el equipo de enfermería y el equipo multidisciplinar');
 
 
 -- -Grupo Actitudes
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 3, 'Juicio crítico');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 3, 'Aprendizaje y mejora continua');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 3, 'Responsabilidad');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 3, 'Respeto');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 3, 'Iniciativa');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 3, 'Saber estar');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 18, 'Juicio crítico');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 18, 'Aprendizaje y mejora continua');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 18, 'Responsabilidad');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 18, 'Respeto');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 18, 'Iniciativa');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (6, 18, 'Saber estar');
 
 
 -- #Practicas Clinicas de enfermeria IV
 -- -Grupo Conocimientos
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 1, 'Conoce las alteraciones de salud e identifica sus manifestaciones ');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 1, 'Conoce las necesidades de cuidado derivadas de los problemas de salud');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 1, 'Dispone de los conocimientos para valorar, diagnosticar, planificar y evaluar ');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 1, 'Conoce las técnicas y procedimientos utilizados en la atención a los pacientes');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 1, 'Sabe prestar una atención sanitaria integral, técnica y profesional adecuada que incluya todas las necesidades de salud de las personas que atiende');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 1, 'Conoce todos los aspectos que implica la asistencia a un determinado paciente');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 1, 'Conoce los sistemas de información sanitaria');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 19, 'Conoce las alteraciones de salud e identifica sus manifestaciones ');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 19, 'Conoce las necesidades de cuidado derivadas de los problemas de salud');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 19, 'Dispone de los conocimientos para valorar, diagnosticar, planificar y evaluar ');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 19, 'Conoce las técnicas y procedimientos utilizados en la atención a los pacientes');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 19, 'Sabe prestar una atención sanitaria integral, técnica y profesional adecuada que incluya todas las necesidades de salud de las personas que atiende');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 19, 'Conoce todos los aspectos que implica la asistencia a un determinado paciente');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 19, 'Conoce los sistemas de información sanitaria');
 
 
 
 -- Grupo Habilidades
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 2, 'Realiza una valoración  de enfermería pertinente y sistemática');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 2, 'Analiza los datos recogidos en la valoración identificando los diagnósticos enfermeros');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 2, 'Identifica los resultados previstos ');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 2, 'Planifica y aplica las intervenciones adecuadas');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 2, 'Evalúa los planes de cuidados, su ejecución y sus resultados');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 2, 'Aplica y realiza las técnicas y procedimientos de forma adecuada');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 2, 'Demuestra habilidad en el uso de la comunicación con el paciente y familia');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 2, 'Planifica y realiza el plan de cuidados considerando todos los aspectos: físicos, psicológicos, sociales, culturales y espirituales');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 2, 'Documenta y registra los cuidados');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 2, 'Realiza los cuidados de enfermería basándose en la atención integral de salud, que supone la cooperación multiprofesional, la integración de los procesos y la continuidad asistencial');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 2, 'Establece y mantiene relaciones de trabajo constructivas con el equipo de enfermería y el equipo multidisciplinar');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 20, 'Realiza una valoración  de enfermería pertinente y sistemática');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 20, 'Analiza los datos recogidos en la valoración identificando los diagnósticos enfermeros');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 20, 'Identifica los resultados previstos ');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 20, 'Planifica y aplica las intervenciones adecuadas');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 20, 'Evalúa los planes de cuidados, su ejecución y sus resultados');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 20, 'Aplica y realiza las técnicas y procedimientos de forma adecuada');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 20, 'Demuestra habilidad en el uso de la comunicación con el paciente y familia');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 20, 'Planifica y realiza el plan de cuidados considerando todos los aspectos: físicos, psicológicos, sociales, culturales y espirituales');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 20, 'Documenta y registra los cuidados');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 20, 'Realiza los cuidados de enfermería basándose en la atención integral de salud, que supone la cooperación multiprofesional, la integración de los procesos y la continuidad asistencial');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 20, 'Establece y mantiene relaciones de trabajo constructivas con el equipo de enfermería y el equipo multidisciplinar');
 
 
 -- -Grupo Actitudes
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 3, 'Juicio crítico');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 3, 'Aprendizaje y mejora continua');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 3, 'Responsabilidad');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 3, 'Respeto');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 3, 'Iniciativa');
-insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 3, 'Saber estar');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 21, 'Juicio crítico');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 21, 'Aprendizaje y mejora continua');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 21, 'Responsabilidad');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 21 'Respeto');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 21, 'Iniciativa');
+insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (7, 21, 'Saber estar');
 
 
 -- -------------------- FIN ASIGNATURAS------------------------------------------------------
