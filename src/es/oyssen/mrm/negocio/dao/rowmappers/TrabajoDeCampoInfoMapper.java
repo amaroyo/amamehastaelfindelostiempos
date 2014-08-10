@@ -1,8 +1,11 @@
 package es.oyssen.mrm.negocio.dao.rowmappers;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.jdbc.core.RowMapper;
 
 import es.oyssen.mrm.negocio.vo.ServicioVO;
@@ -23,8 +26,28 @@ public class TrabajoDeCampoInfoMapper implements RowMapper {
 		TrabajoDeCampoInfoVO o = new TrabajoDeCampoInfoVO();
 		o.setIdTrabajoInfo(StringUtil.nullToString(rs.getString(FIELD_ID_TRABAJO_INFO)));
 		o.setNombre(StringUtil.nullToString(rs.getString(FIELD_NOMBRE)));
-		o.setEnunciado(StringUtil.nullToString(rs.getString(FIELD_ENUNCIADO)));
+		
 		o.setDescripcion(StringUtil.nullToString(rs.getString(FIELD_DESCRIPCION)));
+		
+		try {
+        	InputStream datos = rs.getBinaryStream(FIELD_ENUNCIADO);
+
+        	byte[] archivo;
+        	if(datos != null) {
+        		archivo = IOUtils.toByteArray(datos);
+        	}
+        	else{
+        		archivo = null;
+        	}
+        	o.setEnunciado(archivo);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
 		return o;
 	}
 

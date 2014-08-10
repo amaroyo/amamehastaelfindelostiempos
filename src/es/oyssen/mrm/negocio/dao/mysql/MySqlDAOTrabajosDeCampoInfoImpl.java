@@ -22,6 +22,7 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.dao.rowmappers.AnexoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.RubricaMapper;
+import es.oyssen.mrm.negocio.dao.rowmappers.TrabajoDeCampoInfoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.TrabajoDeCampoMapper;
 import es.oyssen.mrm.negocio.vo.AnexoVO;
 import es.oyssen.mrm.negocio.vo.RubricaVO;
@@ -61,19 +62,37 @@ public class MySqlDAOTrabajosDeCampoInfoImpl extends DAOBase implements DAOTraba
 		}		
 	}
 
-	public void update(TrabajoDeCampoInfoVO trabajo) throws DAOException,
+	public void update(final TrabajoDeCampoInfoVO trabajo) throws DAOException,
 	DAOUpdateException {
 		try {
 			 
-			String query = SQL_UPDATE;
-
-			query += " where id_trabajo_info = ?";
-
-			getJdbcTemplate().update(query, new Object[]{
-					trabajo.getNombre(),
-					trabajo.getEnunciado(),
-					trabajo.getDescripcion(),
-					trabajo.getIdTrabajoInfo()});
+			final String query = SQL_UPDATE + " where id_trabajo_info = ?";
+			
+			KeyHolder kh = new GeneratedKeyHolder();
+			getJdbcTemplate().update(new PreparedStatementCreator() {
+				
+				public PreparedStatement createPreparedStatement(Connection conn)
+						throws SQLException {
+					PreparedStatement ps = conn.prepareStatement(query, new String[]{""});
+					ps.setString(1, trabajo.getNombre());
+					
+					InputStream datos = new ByteArrayInputStream(trabajo.getEnunciado());
+					try {
+						ps.setBinaryStream(2, datos, datos.available());
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					ps.setString(3, trabajo.getDescripcion());
+					ps.setString(4, trabajo.getIdTrabajoInfo());
+	
+					return ps;
+					
+				}
+			}
+			,kh);
+					
 		} catch(Exception e) {
 			throw new DAOUpdateException(e);
 		}
@@ -93,7 +112,7 @@ public class MySqlDAOTrabajosDeCampoInfoImpl extends DAOBase implements DAOTraba
 	@Override
 	public TrabajoDeCampoInfoVO findById(TrabajoDeCampoInfoVO trabajo) throws DAOException {
 		try {
-			return (TrabajoDeCampoInfoVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_ID, new Object[]{trabajo.getIdTrabajoInfo()}, new TrabajoDeCampoMapper());
+			return (TrabajoDeCampoInfoVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_ID, new Object[]{trabajo.getIdTrabajoInfo()}, new TrabajoDeCampoInfoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

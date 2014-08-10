@@ -16,7 +16,7 @@
 				<table border="0" cellspacing="0" cellpadding="0" align="center">
 					<tr>
 						<td valign="top" style="padding-top: 6pt;">
-							<span class="version"><bean:message key="meessage.subido.exito" /></span>
+							<span class="version"><bean:message key="message.subido.exito" /></span>
 						</td>
 					<tr>
 				</table>

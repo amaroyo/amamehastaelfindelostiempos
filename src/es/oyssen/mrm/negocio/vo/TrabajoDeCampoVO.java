@@ -7,7 +7,7 @@ public class TrabajoDeCampoVO {
 	private String id_portafolio;
 	private String id_trabajo_info;
 	private String nombre;
-	private String enunciado;
+	private byte[] enunciado;
 	private String descripcion;
 	private String trabajo_de_campo;
 	private String correccion_trabajo;
@@ -77,11 +77,11 @@ public class TrabajoDeCampoVO {
 		this.id_trabajo_info = id_trabajo_info;
 	}
 
-	public String getEnunciado() {
+	public byte[] getEnunciado() {
 		return enunciado;
 	}
 
-	public void setEnunciado(String enunciado) {
+	public void setEnunciado(byte[] enunciado) {
 		this.enunciado = enunciado;
 	}
 

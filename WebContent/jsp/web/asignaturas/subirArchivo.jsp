@@ -18,10 +18,19 @@
 
 	<script type="text/javascript">	  	    
 	    <% 
-	    String idAlumno = request.getParameter("idAlumno");
-	    String idAsignatura = request.getParameter("idAsignatura");
-	    String accion = "/asignaturas/subirArchivoCasoClinico?idAlumno=" + idAlumno + "&idAsignatura=" + idAsignatura; 
-	 
+	    
+	    String tipo = request.getParameter("idTipo");
+	    String accion = "/asignaturas/inicio";
+	    if(tipo.equals("CasoClinico")) {
+	    	String idAlumno = request.getParameter("idAlumno");
+	    	String idAsignatura = request.getParameter("idAsignatura");
+	    	accion = "/asignaturas/subirArchivoCasoClinico?idAlumno=" + idAlumno + "&idAsignatura=" + idAsignatura;
+	    } 
+	    else if(tipo.equals("TrabajoCampo")){
+	    	String idTrabajoInfo = request.getParameter("idTrabajoInfo");
+	    	accion = "/asignaturas/subirArchivoTrabajoCampo?idTrabajoInfo=" + idTrabajoInfo;
+	    }
+	    
 	    %>
 		    function subir() {
 		    	document.forms[0].submit();
@@ -33,7 +42,7 @@
 		<html:form action="<%=accion%>" enctype="multipart/form-data">
 			<table>
 				<tr>
-					<td><label for="labelDescription"><bean:message key="label.caso.clinico" /></label></td>
+					<td><label for="labelDescription"><bean:message key="label.fichero" /></label></td>
 					<td>					
 						<div id="div_descripcion" style="width:200px; height:30px;">
 							<input type="text" name="nombre"  size="55px">

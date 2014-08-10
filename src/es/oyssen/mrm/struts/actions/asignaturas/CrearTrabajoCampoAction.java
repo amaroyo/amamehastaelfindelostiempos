@@ -118,7 +118,7 @@ public class CrearTrabajoCampoAction extends DHTMLXFormAction {
 			}
 		}
 		
-		return "trabajo de campo created";
+		return idTrabajoInfo;
 		
 	}
 

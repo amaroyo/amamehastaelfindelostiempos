@@ -1,8 +1,11 @@
 package es.oyssen.mrm.negocio.dao.rowmappers;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.jdbc.core.RowMapper;
 
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
@@ -30,9 +33,29 @@ public class TrabajoDeCampoMapper implements RowMapper {
     	o.setTrabajoDeCampo(StringUtil.nullToString(rs.getString(FIELD_TRABAJO_DE_CAMPO)));
     	o.setCorreccionTrabajo(StringUtil.nullToString(rs.getString(FIELD_CORRECCION_TRABAJO)));
     	o.setFechaLimite(StringUtil.nullToString(rs.getString(FIELD_FECHA_LIMITE)));
-    	o.setEnunciado(StringUtil.nullToString(rs.getString(FIELD_ENUNCIADO)));
     	o.setDescripcion(StringUtil.nullToString(rs.getString(FIELD_DESCRIPCION)));
     	o.setIdTrabajoInfo(StringUtil.nullToString(rs.getString(FIELD_ID_TRABAJO_INFO)));
+    	
+    	try {
+        	InputStream datos = rs.getBinaryStream(FIELD_ENUNCIADO);
+
+        	byte[] archivo;
+        	if(datos != null) {
+        		archivo = IOUtils.toByteArray(datos);
+        	}
+        	else{
+        		archivo = null;
+        	}
+        	o.setEnunciado(archivo);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+    	
+    	
 		return o;
 	}
 }

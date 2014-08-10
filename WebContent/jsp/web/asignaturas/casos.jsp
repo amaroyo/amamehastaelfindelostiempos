@@ -111,7 +111,7 @@
 				window.setText('<bean:message key="title.subir.practica" />');				
 				window.setModal(true);
 				window.centerOnScreen();
-				window.attachURL("subirCasoClinico.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);
+				window.attachURL("subirArchivo.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession + "&idTipo=CasoClinico");
 				//goActualizar();
 			}
 			

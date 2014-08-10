@@ -212,23 +212,35 @@
 		    			if(correcto){
 							if(id == "descargarInformacion"){
 					    		if (confirm("<bean:message key="message.subir.info.adicional"/>")) {
-						    		alert("a por ello!");
+					    			formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura + "&idProfesor=" + idSession,"post", function(loader, response) {
+					    				window.close();
+					    				var dhxWins2= new dhtmlXWindows();
+					    				var window2 = dhxWins2.createWindow("subir", 300,50, 500, 150);
+					    				window2.setText('<bean:message key="title.subir.practica" />');				
+					    				window2.setModal(true);
+					    				window2.centerOnScreen();
+					    				window2.attachURL("subirArchivo.do?idTipo=TrabajoCampo" + "&idTrabajoInfo=" + response);
+					    				
+										
+									});
 						    	}
 							}
 							else if(id == "aceptar"){
-								formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura + "&idProfesor=" + idSession,"post", function(xml) {
-									//window.attachURL("crearTrabajoCampo.do?idAsignatura=" + idAsignatura + "&idProfesor=" + idSession);
+								formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura + "&idProfesor=" + idSession,"post", function(loader, response) {
+									alert("<bean:message key="message.trabajo.de.campo.exito"/>");
+									window.close();
 								});
 								
 							}
 		    			}
-		    			else {alert("<bean:message key="message.algo.incorrecto"/>")}
+		    			else {alert("<bean:message key="message.algo.incorrecto"/>");}
 		    			
 	
 			    	});
 		    			
 		    		
 				});
+				
 				
 				
 			}
