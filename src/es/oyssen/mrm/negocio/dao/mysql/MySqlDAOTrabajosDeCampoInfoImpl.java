@@ -32,7 +32,7 @@ import es.oyssen.mrm.negocio.vo.TrabajoDeCampoInfoVO;
 public class MySqlDAOTrabajosDeCampoInfoImpl extends DAOBase implements DAOTrabajosDeCampoInfo{
 	
 	private static String SQL_INSERT = "insert into trabajos_de_campo_info (nombre, descripcion) values (?,?)";
-	private static String SQL_UPDATE = "update trabajos_de_campo_info set nombre=?, enunciado=?, descripcion=?";
+	private static String SQL_UPDATE = "update trabajos_de_campo_info set nombre=?, enunciado=?, nombre_archivo=?, descripcion=?";
 	private static String SQL_DELETE = "delete from trabajos_de_campo_info where id_asignatura = ? ";
 	private static String SQL_FIND_BY_ID = "select * from trabajos_de_campo_info where id_trabajo_info = ?";
 	
@@ -84,8 +84,9 @@ public class MySqlDAOTrabajosDeCampoInfoImpl extends DAOBase implements DAOTraba
 						e.printStackTrace();
 					}
 					
-					ps.setString(3, trabajo.getDescripcion());
-					ps.setString(4, trabajo.getIdTrabajoInfo());
+					ps.setString(3, trabajo.getNombreArchivo());
+					ps.setString(4, trabajo.getDescripcion());
+					ps.setString(5, trabajo.getIdTrabajoInfo());
 	
 					return ps;
 					

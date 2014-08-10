@@ -17,6 +17,7 @@ public class TrabajoDeCampoInfoMapper implements RowMapper {
 	public static final String FIELD_ID_TRABAJO_INFO = "id_trabajo_info";
     public static final String FIELD_NOMBRE = "nombre";
     public static final String FIELD_ENUNCIADO = "enunciado";
+    public static final String FIELD_NOMBRE_ARCHIVO = "nombre_archivo";
     public static final String FIELD_DESCRIPCION = "descripcion";
  
 	
@@ -26,7 +27,7 @@ public class TrabajoDeCampoInfoMapper implements RowMapper {
 		TrabajoDeCampoInfoVO o = new TrabajoDeCampoInfoVO();
 		o.setIdTrabajoInfo(StringUtil.nullToString(rs.getString(FIELD_ID_TRABAJO_INFO)));
 		o.setNombre(StringUtil.nullToString(rs.getString(FIELD_NOMBRE)));
-		
+		o.setNombreArchivo(StringUtil.nullToString(rs.getString(FIELD_NOMBRE_ARCHIVO)));
 		o.setDescripcion(StringUtil.nullToString(rs.getString(FIELD_DESCRIPCION)));
 		
 		try {

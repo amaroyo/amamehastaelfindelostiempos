@@ -250,6 +250,7 @@ CREATE TABLE IF NOT EXISTS trabajos_de_campo_info (
 	id_trabajo_info INT(50) NOT NULL auto_increment,
 	nombre VARCHAR(100) NOT NULL,
 	enunciado LONGBLOB,
+	nombre_archivo VARCHAR(100),
 	descripcion TEXT,
 	PRIMARY KEY(id_trabajo_info)
 )
@@ -262,7 +263,9 @@ CREATE TABLE IF NOT EXISTS trabajos_de_campo (
 	id_trabajo_de_campo INT(10) NOT NULL auto_increment,
 	id_portafolio INT(50) NOT NULL,
 	id_trabajo_info INT(50) NOT NULL,
+	nombre_trabajo VARCHAR(100),
 	trabajo_de_campo LONGBLOB,
+	nombre_correccion VARCHAR(100),
 	correccion_trabajo LONGBLOB,
 	fecha_limite DATETIME,
 	PRIMARY KEY(id_trabajo_de_campo, id_portafolio),

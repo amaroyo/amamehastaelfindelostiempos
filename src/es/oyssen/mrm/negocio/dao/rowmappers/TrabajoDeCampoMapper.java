@@ -18,10 +18,13 @@ public class TrabajoDeCampoMapper implements RowMapper {
 	public static final String FIELD_ID_TRABAJO_DE_CAMPO = "id_trabajo_de_campo";
 	public static final String FIELD_ID_PORTAFOLIO = "id_portafolio";
 	public static final String FIELD_NOMBRE = "nombre";
+	public static final String FIELD_NOMBRE_TRABAJO = "nombre_trabajo";
     public static final String FIELD_TRABAJO_DE_CAMPO = "trabajo_de_campo";
+    public static final String FIELD_NOMBRE_CORRECCION = "nombre_correccion";
     public static final String FIELD_CORRECCION_TRABAJO = "correccion_trabajo";
     public static final String FIELD_FECHA_LIMITE = "fecha_limite";
     public static final String FIELD_ENUNCIADO = "enunciado";
+    public static final String FIELD_NOMBRE_ARCHIVO = "nombre_archivo";
     public static final String FIELD_DESCRIPCION = "descripcion";
     public static final String FIELD_ID_TRABAJO_INFO = "id_trabajo_info";
     
@@ -35,6 +38,10 @@ public class TrabajoDeCampoMapper implements RowMapper {
     	o.setFechaLimite(StringUtil.nullToString(rs.getString(FIELD_FECHA_LIMITE)));
     	o.setDescripcion(StringUtil.nullToString(rs.getString(FIELD_DESCRIPCION)));
     	o.setIdTrabajoInfo(StringUtil.nullToString(rs.getString(FIELD_ID_TRABAJO_INFO)));
+    	o.setNombreTrabajo(StringUtil.nullToString(rs.getString(FIELD_NOMBRE_TRABAJO)));
+    	o.setNombreCorreccion(StringUtil.nullToString(rs.getString(FIELD_NOMBRE_CORRECCION)));
+    	o.setNombreArchivo(StringUtil.nullToString(rs.getString(FIELD_NOMBRE_ARCHIVO)));
+    	
     	
     	try {
         	InputStream datos = rs.getBinaryStream(FIELD_ENUNCIADO);

@@ -7,9 +7,12 @@ public class TrabajoDeCampoVO {
 	private String id_portafolio;
 	private String id_trabajo_info;
 	private String nombre;
+	private String nombre_archivo;
 	private byte[] enunciado;
 	private String descripcion;
+	private String nombre_trabajo;
 	private String trabajo_de_campo;
+	private String nombre_correccion;
 	private String correccion_trabajo;
 	private String fecha_limite;
 	
@@ -69,6 +72,30 @@ public class TrabajoDeCampoVO {
 	
 	
 	
+	public String getNombreArchivo() {
+		return nombre_archivo;
+	}
+
+	public void setNombreArchivo(String nombre_archivo) {
+		this.nombre_archivo = nombre_archivo;
+	}
+
+	public String getNombreTrabajo() {
+		return nombre_trabajo;
+	}
+
+	public void setNombreTrabajo(String nombre_trabajo) {
+		this.nombre_trabajo = nombre_trabajo;
+	}
+
+	public String getNombreCorreccion() {
+		return nombre_correccion;
+	}
+
+	public void setNombreCorreccion(String nombre_correccion) {
+		this.nombre_correccion = nombre_correccion;
+	}
+
 	public String getIdTrabajoInfo() {
 		return id_trabajo_info;
 	}
