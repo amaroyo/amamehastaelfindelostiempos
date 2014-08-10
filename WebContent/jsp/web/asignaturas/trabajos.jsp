@@ -106,7 +106,7 @@
 		    		toolbarServicios.setItemText('crearTrabajoCampo',"<bean:message key="button.crear.trabajo.campo"/>");
 		    		toolbarServicios.setItemText('modificarTrabajoCampo',"<bean:message key="button.cambiar.trabajo.campo"/>");
 		    		toolbarServicios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
-		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.casos"/>");
+		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.trabajos"/>");
 		    		toolbarServicios.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.casos.alumno"/>");
 		    		toolbarServicios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
@@ -115,6 +115,8 @@
 			    	<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 			    		toolbarServicios.hideItem('subirPractica');
 			    		toolbarServicios.hideItem('sep3');
+			    		toolbarServicios.hideItem('descargarTodosAlumno');
+			    		toolbarServicios.hideItem('sep5');
 			    		
 			    	</logic:match>
 			    	<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
@@ -430,7 +432,10 @@
 				
 			}
 			
-			function doOnRowSelected(rowID,celInd){
+			function doOnRowSelected(rowIDs,celInd){
+				var sp = rowIDs.split("-");
+				var idPortafolio = sp[0];
+				var idTrabajoCampo = sp[1];
 				var miGrid = b.attachGrid();
 			    miGrid.setIconsPath('../skins/imgs/');		    	
 			    miGrid.setHeader(["<strong><bean:message key="label.mi.perfil" /></strong>"]);
@@ -440,16 +445,22 @@
 			    miGrid.enableMultiselect(false);
 			    miGrid.init();
 			    miGrid.loadXML("../xml/forms/asignaturas_trabajos_opciones.xml");
-			    miGrid.attachEvent("onRowSelect",doOnRowSelectedOptions); 
-		    	
+			    miGrid.attachEvent("onRowSelect",function(rowId,cellIndex){
+			    	if (rowId == "a") alert("Descargar");
+			    	else if (rowId == "b") {
+			    		var dhxWinsA= new dhtmlXWindows();
+    					var windowAlumno = dhxWinsA.createWindow("subir", 300,50, 500, 150);
+    					windowAlumno.setText('<bean:message key="title.subir.correccion" />');				
+    					windowAlumno.setModal(true);
+    					windowAlumno.centerOnScreen();
+    					windowAlumno.attachURL("subirArchivo.do?tipoConsulta=TrabajoCampoCorreccion" + "&idPortafolio=" + idPortafolio + "&idTrabajoCampo=" + idTrabajoCampo);
+			    	}
+			    	else alert("Cambiar la fecha de entrega");
+			    	
+			    });
 		    }
 			
-			function doOnRowSelectedOptions(rowID,celInd){
-				
-				if (rowID == "a") alert("Descargar");
-		    	else if (rowID == "b") alert("Subir corrección");
-		    	else alert("Cambiar la fecha de entrega");
-			}
+			
 			
 			
 			function initRequest() {

@@ -30,4 +30,6 @@ public interface TrabajosDeCampoService {
 
 	public void updateTrabajoCampo(TrabajoDeCampoVO tc) throws ServiceException, DAOException;
 
+	public void updateTrabajoCampoCorreccion(TrabajoDeCampoVO tc) throws ServiceException, DAOException;
+
 }

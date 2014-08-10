@@ -127,6 +127,19 @@ public class TrabajosDeCampoServiceImpl implements TrabajosDeCampoService{
 		}		
 		
 	}
+
+	@Override
+	public void updateTrabajoCampoCorreccion(TrabajoDeCampoVO tc)
+			throws ServiceException, DAOException {
+		try {
+			daoTrabajosDeCampo.updateTrabajoCampoCorreccion(tc);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error updateTrabajoCampoCorreccion trabajo de campo", e);
+			throw new ServiceException(e);
+		}		
+		
+	}
 	
 	
 	

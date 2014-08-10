@@ -910,7 +910,7 @@ public class UtilXML {
 				sb.append("<row id=\"" +dr.getIdPortafolio() + "-" + dr.getIdDiarioReflexivo() + "\">");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(dr.getNombre()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(dr.getFechaSubida(),true)) + "]]></cell>");
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(dr.getDiarioReflexivo()) + "]]></cell>");
+				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(dr.getDiarioReflexivo()) + "]]></cell>");
 				String descarga = "";
 				if(dr.getDiarioReflexivo() != null) descarga="Descargar";
 				sb.append("<cell><![CDATA[" +  descarga + "]]></cell>");

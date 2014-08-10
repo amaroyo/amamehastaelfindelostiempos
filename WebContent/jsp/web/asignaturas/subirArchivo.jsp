@@ -35,7 +35,16 @@
 	    	String idTrabajoCampo = request.getParameter("idTrabajoCampo");
 	    	accion = "/asignaturas/subirArchivoTrabajoCampo?tipoConsulta=" + tipoConsulta + "&idPortafolio=" + idPortafolio + "&idTrabajoCampo=" + idTrabajoCampo;
 	    }
-	    
+	    else if(tipoConsulta.equals("TrabajoCampoCorreccion")){
+	    	String idPortafolio = request.getParameter("idPortafolio");	    	
+	    	String idTrabajoCampo = request.getParameter("idTrabajoCampo");
+	    	accion = "/asignaturas/subirArchivoTrabajoCampoCorreccion?tipoConsulta=" + tipoConsulta + "&idPortafolio=" + idPortafolio + "&idTrabajoCampo=" + idTrabajoCampo;
+	    }
+	    else if(tipoConsulta.equals("DiarioReflexivo")){
+	    	String idAlumno = request.getParameter("idAlumno");
+	    	String idAsignatura = request.getParameter("idAsignatura");
+	    	accion = "/asignaturas/subirArchivoDiarioReflexivo?tipoConsulta=" + tipoConsulta + "&idAlumno=" + idAlumno + "&idAsignatura=" + idAsignatura;
+	    }
 	    %>
 		    function subir() {
 		    	document.forms[0].submit();

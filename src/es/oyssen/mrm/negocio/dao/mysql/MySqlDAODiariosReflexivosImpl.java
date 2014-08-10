@@ -1,5 +1,8 @@
 package es.oyssen.mrm.negocio.dao.mysql;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -22,7 +25,7 @@ import es.oyssen.mrm.negocio.vo.DiarioReflexivoVO;
 
 public class MySqlDAODiariosReflexivosImpl extends DAOBase implements DAODiariosReflexivos{
 
-	private static String SQL_INSERT = "insert into diarios_reflexivos (id_portafolio, nombre, diario_reflexivo) values (?,?,?)";
+	private static String SQL_INSERT = "insert into diarios_reflexivos (id_portafolio, nombre, diario_reflexivo, fecha_subida) values (?,?,?,?)";
 	private static String SQL_UPDATE = "update diarios_reflexivos set diario_reflexivo=?, nombre=?, fecha_subida=?";
 	private static String SQL_DELETE = "delete from diarios_reflexivos where id_portafolio = ? and id_diario_reflexivo = ?";
 	private static String SQL_FIND_BY_PORTAFOLIO = "select * from diarios_reflexivos where id_portafolio = ?";
@@ -34,23 +37,32 @@ public class MySqlDAODiariosReflexivosImpl extends DAOBase implements DAODiarios
 		try{
 			KeyHolder kh = new GeneratedKeyHolder();
 			getJdbcTemplate().update(new PreparedStatementCreator() {
-
+				
 				public PreparedStatement createPreparedStatement(Connection conn)
 						throws SQLException {
 					PreparedStatement ps = conn.prepareStatement(SQL_INSERT, new String[]{"id_diario_reflexivo"});
 					ps.setString(1, diarioReflexivo.getIdPortafolio());
 					ps.setString(2, diarioReflexivo.getNombre());
-					ps.setString(3, diarioReflexivo.getDiarioReflexivo());
+					
+					InputStream datos = new ByteArrayInputStream(diarioReflexivo.getDiarioReflexivo());
+					try {
+						ps.setBinaryStream(3, datos, datos.available());
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					ps.setString(4, diarioReflexivo.getFechaSubida());
+					
 					return ps;
-
 				}
 			}
 			,kh);
-			diarioReflexivo.setIdDiarioReflexivo(kh.getKey().toString());
-
+			
+			
 		} catch (Exception e) {
 			throw new DAOInsertException(e);
-		}			
+		}
+		
 	}
 
 	public void update(DiarioReflexivoVO diarioReflexivo) throws DAOException,

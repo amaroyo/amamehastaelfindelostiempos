@@ -64,6 +64,7 @@
 		    	
 		    	toolbarServicios.loadXML('../xml/toolbars/dhxtoolbar-trabajos-campo.xml', function(){
 		    		toolbarServicios.setItemText('crearTrabajoCampo',"<bean:message key="button.crear.trabajo.campo"/>");
+		    		toolbarServicios.setItemText('modificarTrabajoCampo',"<bean:message key="button.cambiar.trabajo.campo"/>");
 		    		toolbarServicios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
 		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.casos"/>");
 		    		toolbarServicios.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.casos.alumno"/>");
@@ -74,6 +75,8 @@
 		    		toolbarServicios.hideItem('sep1');
 		    		toolbarServicios.hideItem('fechaLimite');
 		    		toolbarServicios.hideItem('sep5');
+		    		toolbarServicios.hideItem('modificarTrabajoCampo');
+		    		toolbarServicios.hideItem('sep3');
 		    		
 		    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 			    		toolbarServicios.hideItem('subirPractica');

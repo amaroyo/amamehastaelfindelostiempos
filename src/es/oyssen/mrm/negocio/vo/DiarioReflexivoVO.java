@@ -7,7 +7,7 @@ public class DiarioReflexivoVO {
 	private String id_portafolio;
 	private String nombre;
 	private String fecha_subida;
-	private String diario_reflexivo;
+	private byte[] diario_reflexivo;
 
 	
 	
@@ -45,12 +45,12 @@ public class DiarioReflexivoVO {
 	}
 
 
-	public String getDiarioReflexivo() {
+	public byte[] getDiarioReflexivo() {
 		return diario_reflexivo;
 	}
 
 
-	public void setDiarioReflexivo(String diario_reflexivo) {
+	public void setDiarioReflexivo(byte[] diario_reflexivo) {
 		this.diario_reflexivo = diario_reflexivo;
 	}
 

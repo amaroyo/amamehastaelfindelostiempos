@@ -30,6 +30,8 @@ public interface DAOTrabajosDeCampo {
 	public TrabajoDeCampoVO findByIDs(TrabajoDeCampoVO t) throws DAOException;
 
 	public void updateTrabajoCampo(TrabajoDeCampoVO tc) throws DAOException, DAOUpdateException;
+
+	public void updateTrabajoCampoCorreccion(TrabajoDeCampoVO tc) throws DAOException, DAOUpdateException;
 	
 	
 	

@@ -68,8 +68,37 @@ public class SubirArchivoAction extends MrmAction {
 					getTrabajosDeCampoService().updateTrabajoCampo(tc);
 				}
 				else return mapping.findForward("error");
-			}
+			}				
+			else if (tipo.equals("TrabajoCampoCorreccion")){
+				TrabajoDeCampoVO tc = new TrabajoDeCampoVO();
+				tc.setIdPortafolio(f.getIdPortafolio());
+				tc.setIdTrabajoDeCampo(f.getIdTrabajoCampo());
+				tc = getTrabajosDeCampoService().findByIDs(tc);
+							
+
+				String n = f.getFichero().getFileName();
+				String[] split = n.split("\\.");
 				
+				if(f.getNombre().equals("")){	
+					tc.setNombreCorreccion(split[0] + "." + split[1].toLowerCase());
+				}
+				else tc.setNombreCorreccion(f.getNombre() + "." + split[1].toLowerCase());
+				
+				tc.setCorreccionTrabajo(f.getFichero().getFileData());
+				
+				getTrabajosDeCampoService().updateTrabajoCampoCorreccion(tc);
+			
+			}
+			else if (tipo.equals("DiarioReflexivo")){
+				PortafolioVO p = new PortafolioVO();
+				p.setIdAlumno(f.getIdAlumno());
+				p.setIdAsignatura(f.getIdAsignatura());
+				String anyoAcademico = (String)request.getSession().getAttribute("anyoAcademico");
+				p.setAnyoAcademico(anyoAcademico);
+				f.setIdPortafolio(getPortafoliosService().findByAlumnoAsignatura(p).getIdPortafolio());
+				getDiariosReflexivosService().process(f);
+			}
+			
 			return mapping.findForward("success");
 		}
 		

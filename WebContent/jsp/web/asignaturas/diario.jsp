@@ -63,9 +63,10 @@
 		    	
 		    	toolbarServicios.loadXML('../xml/toolbars/dhxtoolbar-trabajos-campo.xml', function(){
 		    		toolbarServicios.setItemText('crearTrabajoCampo',"<bean:message key="button.crear.trabajo.campo"/>");
+		    		toolbarServicios.setItemText('modificarTrabajoCampo',"<bean:message key="button.cambiar.trabajo.campo"/>");
 		    		toolbarServicios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
-		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.casos"/>");
-		    		toolbarServicios.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.casos.alumno"/>");
+		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.diarios"/>");
+		    		toolbarServicios.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.diarios.alumno"/>");
 		    		toolbarServicios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 		    		
@@ -73,10 +74,13 @@
 		    		toolbarServicios.hideItem('sep1');
 		    		toolbarServicios.hideItem('fechaLimite');
 		    		toolbarServicios.hideItem('sep5');
+		    		toolbarServicios.hideItem('modificarTrabajoCampo');
+		    		toolbarServicios.hideItem('sep3');
 		    	
 		    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 			    		toolbarServicios.hideItem('subirPractica');
 			    		toolbarServicios.hideItem('sep2');
+			    		toolbarServicios.disableItem('descargarTodosAlumno');
 		    		
 	    			</logic:match>
 	    			<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
@@ -104,7 +108,12 @@
 
 			
 			function subirPractica(){
-				alert("subir Practica");
+				var dhxWins= new dhtmlXWindows();
+				var window = dhxWins.createWindow("subir", 300,50, 500, 150);
+				window.setText('<bean:message key="title.subir.practica" />');				
+				window.setModal(true);
+				window.centerOnScreen();
+				window.attachURL("subirArchivo.do?tipoConsulta=DiarioReflexivo" + "&idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);
 			}
 			
 			function descargarTodos(){
@@ -181,6 +190,8 @@
 			}
 			
 			function doOnRowSelected(rowID,celInd){
+				
+				toolbarServicios.enableItem('descargarTodosAlumno');
 				
 				var gridProfesoresAlumno = b.attachGrid();
 				
