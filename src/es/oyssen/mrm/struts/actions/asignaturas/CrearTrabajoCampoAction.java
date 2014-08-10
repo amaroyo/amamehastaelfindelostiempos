@@ -12,6 +12,7 @@ import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXFormAction;
 import es.oyssen.mrm.struts.forms.asignaturas.CrearTrabajoCampoForm;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxForm;
+import es.oyssen.mrm.util.StringUtil;
 
 public class CrearTrabajoCampoAction extends DHTMLXFormAction {
 
@@ -22,13 +23,20 @@ public class CrearTrabajoCampoAction extends DHTMLXFormAction {
 	public Object load(DhtmlxForm f) throws Exception {
 		
 		CrearTrabajoCampoForm form = (CrearTrabajoCampoForm) f;
-		TrabajoDeCampoVO t = new TrabajoDeCampoVO();
-		
-		t.setIdPortafolio(form.getIdPortafolio());
-		t.setIdTrabajoDeCampo(form.getIdTrabajoCampo());
-
-		return getTrabajosDeCampoService().findByIDs(t);
+		if (StringUtil.isNullOrBlank(form.getIdTrabajoInfo())){
+			TrabajoDeCampoVO t = new TrabajoDeCampoVO();
 			
+			t.setIdPortafolio(form.getIdPortafolio());
+			t.setIdTrabajoDeCampo(form.getIdTrabajoCampo());
+	
+			return getTrabajosDeCampoService().findByIDs(t);
+		}	
+		else{
+			TrabajoDeCampoInfoVO t= new TrabajoDeCampoInfoVO();
+			t.setIdTrabajoInfo(form.getIdTrabajoInfo());
+			return getTrabajosDeCampoInfoService().findById(t);
+			 
+		}
 		
 	}
 

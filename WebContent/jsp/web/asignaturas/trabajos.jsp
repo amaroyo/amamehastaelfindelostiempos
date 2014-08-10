@@ -142,15 +142,93 @@
 		    	
 	    	
 	    	function modificarTrabajoCampo(){
-	    		alert("ModificarTC");
+	    		var idTrabajoInfo = tabbar.getActiveTab();
+	    		var dhxWins= new dhtmlXWindows();
+				var window = dhxWins.createWindow("subir", 300,50, 500, 400);
+				window.setText('<bean:message key="title.trabajo.de.campo" />');				
+				window.setModal(true);
+				window.centerOnScreen();
+				
+				var formNTC = window.attachForm();
+				formNTC.loadStruct('../xml/forms/trabajo_de_campo.xml', function(){
+					formNTC.setItemLabel('data','<bean:message key="title.info.general.trabajo.campo"/>');
+					formNTC.setItemLabel('nombre','<bean:message key="label.nombre"/>');
+					formNTC.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
+					formNTC.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
+					formNTC.setItemLabel('hora','<bean:message key="label.hora"/>');
+					formNTC.setItemLabel('descargarCorreccion','<bean:message key="button.descargar.correccion"/>');
+					formNTC.setItemLabel('descargarInformacion','<bean:message key="button.subir.informacion.adicional"/>');
+					formNTC.setItemLabel('subirPractica','<bean:message key="button.subir.trabajo.campo"/>');
+					formNTC.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+		    		formNTC.setRequired('nombre', true);		    		
+		    		formNTC.setRequired('fechaFin', true);
+		    		formNTC.setRequired('hora', true);
+		    		formNTC.hideItem('descargarCorreccion');
+		    		formNTC.hideItem('subirPractica');
+		    		
+		    		var correcto = false;
+		    		
+		    		formNTC.attachEvent("onChange", function(name,value){
+		    		   if(name == "hora"){
+		    			   var hora = formNTC.getItemValue("hora");
+		    			   var sp = hora.split(":");
+		    			   if(sp.length==2){
+		    				   var isnum = /^\d+$/.test(sp[0]);
+		    				   isnum = isnum && /^\d+$/.test(sp[1]);
+		    				   if(isnum){
+		    					   if (sp[0] < 0 || sp[0] > 24 || sp[1] < 0 || sp[1] > 60) {
+			    					   formNTC.setNote("hora", { text: '<bean:message key="message.hora.correcta" />'} );
+			    					   correcto=false;
+		    				   		}
+		    					   else {correcto=true;}
+		    				   }
+		    				   else {formNTC.setNote("hora", { text: '<bean:message key="message.hora.correcta" />'} );correcto=false;}
+		    			   }
+		    			   else {formNTC.setNote("hora", { text: '<bean:message key="message.hora.correcta" />'} );correcto=false;}
+		    		   }
+		    		});
+		    		
+		    		formNTC.load('verTrabajoCampo.do?idTrabajoInfo='+ idTrabajoInfo , function () {	
+			    		formNTC.attachEvent("onButtonClick", function(id){
+			    			if(correcto){
+								if(id == "descargarInformacion"){
+						    		if (confirm("<bean:message key="message.subir.info.adicional"/>")) {
+						    			formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura + "&idProfesor=" + idSession,"post", function(loader, response) {
+						    				window.close();
+						    				var dhxWins2= new dhtmlXWindows();
+						    				var window2 = dhxWins2.createWindow("subir", 300,50, 500, 150);
+						    				window2.setText('<bean:message key="title.subir.practica" />');				
+						    				window2.setModal(true);
+						    				window2.centerOnScreen();
+						    				window2.attachURL("subirArchivo.do?tipoConsulta=TrabajoCampoInfo" + "&idTrabajoInfo=" + response);
+						    				initProfesor();
+											
+										});
+							    	}
+								}
+								else if(id == "aceptar"){
+									formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura + "&idProfesor=" + idSession,"post", function(loader, response) {
+										alert("<bean:message key="message.trabajo.de.campo.exito"/>");
+										window.close();
+										//var url = "trabajos.do";
+										//location.href=url;
+										initProfesor();
+									});
+									
+								}
+			    			}
+			    			else {alert("<bean:message key="message.algo.incorrecto"/>");}
+			    			
+		
+				    	});
+		    			
+		    		});
+				});
+				
 	    	}
 			
-			function subirPractica(){
-				alert("subir Practica");
-			}
-			function descargarTodosAlumno(){
-				alert("Descargar Todos Alumno");
-			}
+			
+			
 			
 			function descargarTodos(){
 				alert("Descargar Todos");
