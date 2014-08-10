@@ -15,7 +15,7 @@ import es.oyssen.mrm.negocio.services.CasosClinicosService;
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.FicheroVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
-import es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoCasoClinicoForm;
+import es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoForm;
 import es.oyssen.mrm.struts.forms.ficheros.SubirFicheroForm;
 
 public class CasosClinicosServiceImpl implements CasosClinicosService{
@@ -77,7 +77,7 @@ public class CasosClinicosServiceImpl implements CasosClinicosService{
 	}
 
 
-	public void process(SubirArchivoCasoClinicoForm f) throws ServiceException, 
+	public void process(SubirArchivoForm f) throws ServiceException, 
 				es.oyssen.mrm.negocio.dao.exceptions.DAOException{
 		try {
 			log.debug("Procesamos fichero.........");

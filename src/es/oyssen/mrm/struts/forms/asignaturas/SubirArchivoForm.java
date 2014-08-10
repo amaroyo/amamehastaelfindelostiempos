@@ -3,13 +3,16 @@ package es.oyssen.mrm.struts.forms.asignaturas;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.upload.FormFile;
 
-public class SubirArchivoCasoClinicoForm extends ActionForm {
+public class SubirArchivoForm extends ActionForm {
 
+	private String tipoConsulta;
 	private FormFile fichero;
 	private String idAlumno;
 	private String idAsignatura;
 	private String nombre;
 	private String idPortafolio;
+	private String idTrabajoInfo;
+
 	
 	
 	
@@ -55,6 +58,22 @@ public class SubirArchivoCasoClinicoForm extends ActionForm {
 
 	public void setIdPortafolio(String idPortafolio) {
 		this.idPortafolio = idPortafolio;
+	}
+
+	public String getTipoConsulta() {
+		return tipoConsulta;
+	}
+
+	public void setTipoConsulta(String tipoConsulta) {
+		this.tipoConsulta = tipoConsulta;
+	}
+
+	public String getIdTrabajoInfo() {
+		return idTrabajoInfo;
+	}
+
+	public void setIdTrabajoInfo(String idTrabajoInfo) {
+		this.idTrabajoInfo = idTrabajoInfo;
 	}
 
 

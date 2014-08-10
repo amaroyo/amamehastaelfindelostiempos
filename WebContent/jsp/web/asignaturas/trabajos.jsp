@@ -219,7 +219,7 @@
 					    				window2.setText('<bean:message key="title.subir.practica" />');				
 					    				window2.setModal(true);
 					    				window2.centerOnScreen();
-					    				window2.attachURL("subirArchivo.do?idTipo=TrabajoCampo" + "&idTrabajoInfo=" + response);
+					    				window2.attachURL("subirArchivo.do?tipoConsulta=TrabajoCampoInfo" + "&idTrabajoInfo=" + response);
 					    				initProfesor();
 										
 									});

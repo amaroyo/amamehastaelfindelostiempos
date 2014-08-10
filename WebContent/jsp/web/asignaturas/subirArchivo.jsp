@@ -19,16 +19,16 @@
 	<script type="text/javascript">	  	    
 	    <% 
 	    
-	    String tipo = request.getParameter("idTipo");
+	    String tipoConsulta = request.getParameter("tipoConsulta");
 	    String accion = "/asignaturas/inicio";
-	    if(tipo.equals("CasoClinico")) {
+	    if(tipoConsulta.equals("CasoClinico")) {
 	    	String idAlumno = request.getParameter("idAlumno");
 	    	String idAsignatura = request.getParameter("idAsignatura");
-	    	accion = "/asignaturas/subirArchivoCasoClinico?idAlumno=" + idAlumno + "&idAsignatura=" + idAsignatura;
+	    	accion = "/asignaturas/subirArchivoCasoClinico?tipoConsulta=" + tipoConsulta + "&idAlumno=" + idAlumno + "&idAsignatura=" + idAsignatura;
 	    } 
-	    else if(tipo.equals("TrabajoCampo")){
+	    else if(tipoConsulta.equals("TrabajoCampoInfo")){
 	    	String idTrabajoInfo = request.getParameter("idTrabajoInfo");
-	    	accion = "/asignaturas/subirArchivoTrabajoCampo?idTrabajoInfo=" + idTrabajoInfo;
+	    	accion = "/asignaturas/subirArchivoTrabajoCampo?tipoConsulta=" + tipoConsulta + "&idTrabajoInfo=" + idTrabajoInfo;
 	    }
 	    
 	    %>

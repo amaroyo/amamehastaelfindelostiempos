@@ -13,8 +13,7 @@ import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.TrabajosDeCampoInfoService;
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoInfoVO;
-import es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoCasoClinicoForm;
-import es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoTrabajoCampoForm;
+import es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoForm;
 
 
 public class TrabajosDeCampoInfoServiceImpl implements TrabajosDeCampoInfoService{
@@ -77,7 +76,7 @@ public class TrabajosDeCampoInfoServiceImpl implements TrabajosDeCampoInfoServic
 	}
 
 	@Override
-	public void process(SubirArchivoTrabajoCampoForm f) throws ServiceException {
+	public void process(SubirArchivoForm f) throws ServiceException {
 		
 		try {
 			log.debug("Procesamos fichero.........");
