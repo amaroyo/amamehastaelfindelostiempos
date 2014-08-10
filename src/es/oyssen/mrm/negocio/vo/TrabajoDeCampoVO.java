@@ -11,9 +11,9 @@ public class TrabajoDeCampoVO {
 	private byte[] enunciado;
 	private String descripcion;
 	private String nombre_trabajo;
-	private String trabajo_de_campo;
+	private byte[] trabajo_de_campo;
 	private String nombre_correccion;
-	private String correccion_trabajo;
+	private byte[] correccion_trabajo;
 	private String fecha_limite;
 	
 	
@@ -44,19 +44,19 @@ public class TrabajoDeCampoVO {
 		this.id_portafolio = id_portafolio;
 	}
 
-	public String getTrabajoDeCampo() {
+	public byte[] getTrabajoDeCampo() {
 		return trabajo_de_campo;
 	}
 
-	public void setTrabajoDeCampo(String trabajo_de_campo) {
+	public void setTrabajoDeCampo(byte[] trabajo_de_campo) {
 		this.trabajo_de_campo = trabajo_de_campo;
 	}
 
-	public String getCorreccionTrabajo() {
+	public byte[] getCorreccionTrabajo() {
 		return correccion_trabajo;
 	}
 
-	public void setCorreccionTrabajo(String correccion_trabajo) {
+	public void setCorreccionTrabajo(byte[] correccion_trabajo) {
 		this.correccion_trabajo = correccion_trabajo;
 	}
 

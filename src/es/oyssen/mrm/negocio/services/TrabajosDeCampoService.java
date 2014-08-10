@@ -28,4 +28,6 @@ public interface TrabajosDeCampoService {
 
 	public TrabajoDeCampoVO findByIDs(TrabajoDeCampoVO t) throws ServiceException;
 
+	public void updateTrabajoCampo(TrabajoDeCampoVO tc) throws ServiceException, DAOException;
+
 }

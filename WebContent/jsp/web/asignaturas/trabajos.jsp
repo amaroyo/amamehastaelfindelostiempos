@@ -249,8 +249,11 @@
 			}
 			
 			function goActualizar() {
-				var idTrabajoInfo = tabbar.getActiveTab();
-				if (profesor) gridProfesores.clearAndLoad("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&idTrabajoInfo=" + idTrabajoInfo);	 
+				
+				if (profesor) {
+					var idTrabajoInfo = tabbar.getActiveTab();
+					gridProfesores.clearAndLoad("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&idTrabajoInfo=" + idTrabajoInfo);	
+				}
 				else gridAlumnos.clearAndLoad("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);		    	
 		    			    	
 		    }
@@ -379,9 +382,22 @@
 		    		});
 		    		
 		    		
+		    		trabajoCampo.attachEvent("onButtonClick", function(id){
+	    				if (id == "subirPractica") {
+	    					var dhxWinsA= new dhtmlXWindows();
+	    					var windowAlumno = dhxWinsA.createWindow("subir", 300,50, 500, 150);
+	    					windowAlumno.setText('<bean:message key="button.subir.trabajo.campo" />');				
+	    					windowAlumno.setModal(true);
+	    					windowAlumno.centerOnScreen();
+	    					windowAlumno.attachURL("subirArchivo.do?tipoConsulta=TrabajoCampoPractica" + "&idPortafolio=" + idPortafolio + "&idTrabajoCampo=" + idTrabajoCampo);
+	    					      
+	    				}
+	    				
+	    				
+		    		});
+		    		
+		    		
 	    	});
-				
-				
 				
 			}
 			

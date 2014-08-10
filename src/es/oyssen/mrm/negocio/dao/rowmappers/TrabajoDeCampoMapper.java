@@ -33,8 +33,6 @@ public class TrabajoDeCampoMapper implements RowMapper {
     	o.setIdTrabajoDeCampo(StringUtil.nullToString(rs.getString(FIELD_ID_TRABAJO_DE_CAMPO)));
     	o.setIdPortafolio(StringUtil.nullToString(rs.getString(FIELD_ID_PORTAFOLIO)));
     	o.setNombre(StringUtil.nullToString(rs.getString(FIELD_NOMBRE)));
-    	o.setTrabajoDeCampo(StringUtil.nullToString(rs.getString(FIELD_TRABAJO_DE_CAMPO)));
-    	o.setCorreccionTrabajo(StringUtil.nullToString(rs.getString(FIELD_CORRECCION_TRABAJO)));
     	o.setFechaLimite(StringUtil.nullToString(rs.getString(FIELD_FECHA_LIMITE)));
     	o.setDescripcion(StringUtil.nullToString(rs.getString(FIELD_DESCRIPCION)));
     	o.setIdTrabajoInfo(StringUtil.nullToString(rs.getString(FIELD_ID_TRABAJO_INFO)));
@@ -44,16 +42,38 @@ public class TrabajoDeCampoMapper implements RowMapper {
     	
     	
     	try {
-        	InputStream datos = rs.getBinaryStream(FIELD_ENUNCIADO);
+        	InputStream datosEnunciado = rs.getBinaryStream(FIELD_ENUNCIADO);
+        	InputStream datosTrabajo = rs.getBinaryStream(FIELD_TRABAJO_DE_CAMPO);
+        	InputStream datosCorreccion = rs.getBinaryStream(FIELD_CORRECCION_TRABAJO);
 
-        	byte[] archivo;
-        	if(datos != null) {
-        		archivo = IOUtils.toByteArray(datos);
+        	byte[] archivoEnunciado;
+        	byte[] archivoTrabajo;
+        	byte[] archivoCorreccion;
+        	if(datosEnunciado != null) {
+        		archivoEnunciado = IOUtils.toByteArray(datosEnunciado);
         	}
         	else{
-        		archivo = null;
+        		archivoEnunciado = null;
         	}
-        	o.setEnunciado(archivo);
+        	o.setEnunciado(archivoEnunciado);
+        	
+        	if(datosTrabajo != null) {
+        		archivoTrabajo = IOUtils.toByteArray(datosTrabajo);
+        	}
+        	else{
+        		archivoTrabajo = null;
+        	}
+        	o.setTrabajoDeCampo(archivoTrabajo);
+        	
+        	if(datosCorreccion != null) {
+        		archivoCorreccion = IOUtils.toByteArray(datosCorreccion);
+        	}
+        	else{
+        		archivoCorreccion = null;
+        	}
+        	o.setCorreccionTrabajo(archivoCorreccion);
+        	
+        	
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -28,7 +28,12 @@
 	    } 
 	    else if(tipoConsulta.equals("TrabajoCampoInfo")){
 	    	String idTrabajoInfo = request.getParameter("idTrabajoInfo");
-	    	accion = "/asignaturas/subirArchivoTrabajoCampo?tipoConsulta=" + tipoConsulta + "&idTrabajoInfo=" + idTrabajoInfo;
+	    	accion = "/asignaturas/subirArchivoTrabajoCampoInfo?tipoConsulta=" + tipoConsulta + "&idTrabajoInfo=" + idTrabajoInfo;
+	    }
+	    else if(tipoConsulta.equals("TrabajoCampoPractica")){
+	    	String idPortafolio = request.getParameter("idPortafolio");	    	
+	    	String idTrabajoCampo = request.getParameter("idTrabajoCampo");
+	    	accion = "/asignaturas/subirArchivoTrabajoCampo?tipoConsulta=" + tipoConsulta + "&idPortafolio=" + idPortafolio + "&idTrabajoCampo=" + idTrabajoCampo;
 	    }
 	    
 	    %>

@@ -84,7 +84,16 @@ public class TrabajosDeCampoInfoServiceImpl implements TrabajosDeCampoInfoServic
 			TrabajoDeCampoInfoVO t = new TrabajoDeCampoInfoVO();
 			t.setIdTrabajoInfo(f.getIdTrabajoInfo());
 			t = daoTrabajosDeCampoInfo.findById(t);
+			String n = f.getFichero().getFileName();
+			String[] sp = n.split("\\.");
+			
+			if(f.getNombre().equals("")){	
+				t.setNombreArchivo(sp[0] + "." + sp[1].toLowerCase());
+			}
+			else t.setNombreArchivo(f.getNombre() + "." + sp[1].toLowerCase());
+			
 			t.setEnunciado(f.getFichero().getFileData());
+			
 			daoTrabajosDeCampoInfo.update(t);
 		} catch (Exception e) {
 			e.printStackTrace();

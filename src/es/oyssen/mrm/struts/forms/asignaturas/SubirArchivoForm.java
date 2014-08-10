@@ -12,6 +12,7 @@ public class SubirArchivoForm extends ActionForm {
 	private String nombre;
 	private String idPortafolio;
 	private String idTrabajoInfo;
+	private String idTrabajoCampo;
 
 	
 	
@@ -74,6 +75,14 @@ public class SubirArchivoForm extends ActionForm {
 
 	public void setIdTrabajoInfo(String idTrabajoInfo) {
 		this.idTrabajoInfo = idTrabajoInfo;
+	}
+
+	public String getIdTrabajoCampo() {
+		return idTrabajoCampo;
+	}
+
+	public void setIdTrabajoCampo(String idTrabajoCampo) {
+		this.idTrabajoCampo = idTrabajoCampo;
 	}
 
 

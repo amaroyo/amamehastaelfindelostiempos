@@ -28,6 +28,8 @@ public interface DAOTrabajosDeCampo {
 	public List<TrabajoDeCampoInfoVO> findAllNombresByAsignaturaTrabajo(PortafolioVO p) throws DAOException;
 
 	public TrabajoDeCampoVO findByIDs(TrabajoDeCampoVO t) throws DAOException;
+
+	public void updateTrabajoCampo(TrabajoDeCampoVO tc) throws DAOException, DAOUpdateException;
 	
 	
 	

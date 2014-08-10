@@ -1,5 +1,8 @@
 package es.oyssen.mrm.negocio.dao.mysql;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -28,7 +31,8 @@ import es.oyssen.mrm.negocio.vo.UsuarioTrabajoCampoVO;
 public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosDeCampo{
 
 	private static String SQL_INSERT = "insert into trabajos_de_campo (id_portafolio, id_trabajo_info, fecha_limite) values (?,?,?)";
-	private static String SQL_UPDATE = "update usuarios set id_trabajo_info=?, trabajo_de_campo=?, correccion_trabajo=?, fecha_limite=?";
+	private static String SQL_UPDATE = "update trabajos_de_campo set id_trabajo_info=?, trabajo_de_campo=?, correccion_trabajo=?, fecha_limite=?";
+	private static String SQL_UPDATE_TRABAJO = "update trabajos_de_campo set nombre_trabajo=?, trabajo_de_campo=?";
 	private static String SQL_DELETE = "delete from trabajos_de_campo where id_portafolio = ? and id_trabajo_de_campo = ?";
 	private static String SQL_FIND_BY_PORTAFOLIO = "select t.*,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i where t.id_trabajo_info = i.id_trabajo_info and id_portafolio = ?";
 	private static String SQL_FIND_BY_ASIGNATURA = "select t.*,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i, portafolios as p where t.id_trabajo_info = i.id_trabajo_info and p.id_portafolio = t.id_portafolio and p.id_asignatura =? and p.anyo_academico =?";
@@ -150,6 +154,44 @@ public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosD
 		} catch (Exception e) {
 			throw new DAOException(e);
 		}
+	}
+
+	@Override
+	public void updateTrabajoCampo(final TrabajoDeCampoVO tc) throws DAOException,
+			DAOUpdateException {
+		try {
+			 
+			final String query = SQL_UPDATE_TRABAJO + " where id_portafolio = ? and id_trabajo_de_campo=?";
+			
+			KeyHolder kh = new GeneratedKeyHolder();
+			getJdbcTemplate().update(new PreparedStatementCreator() {
+				
+				public PreparedStatement createPreparedStatement(Connection conn)
+						throws SQLException {
+					PreparedStatement ps = conn.prepareStatement(query, new String[]{""});
+					ps.setString(1, tc.getNombreTrabajo());
+					
+					InputStream datos = new ByteArrayInputStream(tc.getTrabajoDeCampo());
+					try {
+						ps.setBinaryStream(2, datos, datos.available());
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					ps.setString(3, tc.getIdPortafolio());
+					ps.setString(4, tc.getIdTrabajoDeCampo());
+	
+					return ps;
+					
+				}
+			}
+			,kh);
+					
+		} catch(Exception e) {
+			throw new DAOUpdateException(e);
+		}
+
 	}
 
 	
