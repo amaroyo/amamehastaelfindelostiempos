@@ -26,10 +26,12 @@ public interface TrabajosDeCampoService {
 
 	public List<TrabajoDeCampoInfoVO> findAllNombresByAsignatura(PortafolioVO p) throws ServiceException;
 
-	public TrabajoDeCampoVO findByIDs(TrabajoDeCampoVO t) throws ServiceException;
+	public TrabajoDeCampoInfoVO findByIDs(TrabajoDeCampoVO t) throws ServiceException;
 
 	public void updateTrabajoCampo(TrabajoDeCampoVO tc) throws ServiceException, DAOException;
 
 	public void updateTrabajoCampoCorreccion(TrabajoDeCampoVO tc) throws ServiceException, DAOException;
+
+	public TrabajoDeCampoVO findByIDsTC(TrabajoDeCampoVO tc) throws ServiceException;
 
 }

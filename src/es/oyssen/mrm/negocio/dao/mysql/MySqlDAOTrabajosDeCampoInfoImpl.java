@@ -33,8 +33,10 @@ public class MySqlDAOTrabajosDeCampoInfoImpl extends DAOBase implements DAOTraba
 	
 	private static String SQL_INSERT = "insert into trabajos_de_campo_info (nombre, descripcion) values (?,?)";
 	private static String SQL_UPDATE = "update trabajos_de_campo_info set nombre=?, enunciado=?, nombre_archivo=?, descripcion=?";
+	private static String SQL_UPDATE_SIMPLE = "update trabajos_de_campo_info set nombre=?, descripcion=?";
+	private static String SQL_UPDATE_DATES = "update trabajos_de_campo set fecha_limite=?";
 	private static String SQL_DELETE = "delete from trabajos_de_campo_info where id_asignatura = ? ";
-	private static String SQL_FIND_BY_ID = "select * from trabajos_de_campo_info where id_trabajo_info = ?";
+	private static String SQL_FIND_BY_ID = "select distinct i.*, t.fecha_limite from trabajos_de_campo_info as i, trabajos_de_campo as t where t.id_trabajo_info=i.id_trabajo_info and i.id_trabajo_info = ?";
 	
 
 
@@ -46,7 +48,7 @@ public class MySqlDAOTrabajosDeCampoInfoImpl extends DAOBase implements DAOTraba
 				
 				public PreparedStatement createPreparedStatement(Connection conn)
 						throws SQLException {
-					PreparedStatement ps = conn.prepareStatement(SQL_INSERT, new String[]{"id_usuario"});
+					PreparedStatement ps = conn.prepareStatement(SQL_INSERT, new String[]{"id_trabajo_info"});
 					ps.setString(1, trabajo.getNombre());
 					ps.setString(2, trabajo.getDescripcion());
 	
@@ -118,6 +120,42 @@ public class MySqlDAOTrabajosDeCampoInfoImpl extends DAOBase implements DAOTraba
 			return null;
 		} catch (Exception e) {
 			throw new DAOException(e);
+		}
+	}
+
+	@Override
+	public void updateSimple(TrabajoDeCampoInfoVO t) throws DAOException,
+			DAOUpdateException {
+		try {
+			 
+			String query = SQL_UPDATE_SIMPLE;
+
+			query += " where id_trabajo_info=?";
+
+			getJdbcTemplate().update(query, new Object[]{
+					t.getNombre(),
+					t.getDescripcion(),
+					t.getIdTrabajoInfo()});
+		} catch(Exception e) {
+			throw new DAOUpdateException(e);
+		}
+		
+	}
+
+	@Override
+	public void updateDates(TrabajoDeCampoInfoVO t) throws DAOException,
+			DAOUpdateException {
+		try {
+			 
+			String query = SQL_UPDATE_DATES;
+
+			query += " where id_trabajo_info=?";
+
+			getJdbcTemplate().update(query, new Object[]{
+					t.getFechaLimite(),
+					t.getIdTrabajoInfo()});
+		} catch(Exception e) {
+			throw new DAOUpdateException(e);
 		}
 	}
 	

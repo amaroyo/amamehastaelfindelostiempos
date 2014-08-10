@@ -15,7 +15,11 @@ public interface TrabajosDeCampoInfoService {
 
 	public TrabajoDeCampoInfoVO findById(TrabajoDeCampoInfoVO trabajoInfo) throws ServiceException;
 
-	public void process(SubirArchivoForm f) throws ServiceException;;
+	public void process(SubirArchivoForm f) throws ServiceException;
+
+	public void updateSimple(TrabajoDeCampoInfoVO t) throws ServiceException, DAOException;
+
+	public void updateDates(TrabajoDeCampoInfoVO t) throws ServiceException, DAOException;
 	
 	
 }

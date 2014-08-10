@@ -102,6 +102,33 @@ public class TrabajosDeCampoInfoServiceImpl implements TrabajosDeCampoInfoServic
 		}
 
 	}
+
+	@Override
+	public void updateSimple(TrabajoDeCampoInfoVO t) throws ServiceException,
+			DAOException {
+		try {
+			daoTrabajosDeCampoInfo.updateSimple(t);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error updateSimple TrabajoDeCampoInfo", e);
+			throw new ServiceException(e);
+		}		
+		
+	}
+
+	@Override
+	public void updateDates(TrabajoDeCampoInfoVO t) throws ServiceException,
+			DAOException {
+		try {
+			daoTrabajosDeCampoInfo.updateDates(t);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error updateSimple TrabajoDeCampoInfo", e);
+			throw new ServiceException(e);
+		}		
+		
+		
+	}
 	
 	
 }

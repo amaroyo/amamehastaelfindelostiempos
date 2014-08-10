@@ -166,10 +166,11 @@
 		    		formNTC.hideItem('descargarCorreccion');
 		    		formNTC.hideItem('subirPractica');
 		    		
-		    		var correcto = false;
+		    		var correcto=true;
 		    		
 		    		formNTC.attachEvent("onChange", function(name,value){
 		    		   if(name == "hora"){
+		    			   var correcto = false;
 		    			   var hora = formNTC.getItemValue("hora");
 		    			   var sp = hora.split(":");
 		    			   if(sp.length==2){
@@ -188,12 +189,12 @@
 		    		   }
 		    		});
 		    		
-		    		formNTC.load('verTrabajoCampo.do?idTrabajoInfo='+ idTrabajoInfo , function () {	
+		    		formNTC.load('verTrabajoCampo.do?idTrabajoInfo='+ idTrabajoInfo, function () {	
 			    		formNTC.attachEvent("onButtonClick", function(id){
 			    			if(correcto){
 								if(id == "descargarInformacion"){
-						    		if (confirm("<bean:message key="message.subir.info.adicional"/>")) {
-						    			formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura + "&idProfesor=" + idSession,"post", function(loader, response) {
+						    		if (confirm("<bean:message key="message.subir.info.adicional2"/>")) {
+						    			formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idTrabajoInfo="+ idTrabajoInfo,"post", function(loader, response) {
 						    				window.close();
 						    				var dhxWins2= new dhtmlXWindows();
 						    				var window2 = dhxWins2.createWindow("subir", 300,50, 500, 150);
@@ -207,8 +208,8 @@
 							    	}
 								}
 								else if(id == "aceptar"){
-									formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura + "&idProfesor=" + idSession,"post", function(loader, response) {
-										alert("<bean:message key="message.trabajo.de.campo.exito"/>");
+									formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idTrabajoInfo="+ idTrabajoInfo,"post", function(loader, response) {
+										alert("<bean:message key="message.trabajo.de.campo.modificado.exito"/>");
 										window.close();
 										//var url = "trabajos.do";
 										//location.href=url;
@@ -292,7 +293,7 @@
 		    			if(correcto){
 							if(id == "descargarInformacion"){
 					    		if (confirm("<bean:message key="message.subir.info.adicional"/>")) {
-					    			formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura + "&idProfesor=" + idSession,"post", function(loader, response) {
+					    			formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=create&idAsignatura=" + idAsignatura + "&idProfesor=" + idSession,"post", function(loader, response) {
 					    				window.close();
 					    				var dhxWins2= new dhtmlXWindows();
 					    				var window2 = dhxWins2.createWindow("subir", 300,50, 500, 150);
@@ -306,7 +307,7 @@
 						    	}
 							}
 							else if(id == "aceptar"){
-								formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura + "&idProfesor=" + idSession,"post", function(loader, response) {
+								formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=create&idAsignatura=" + idAsignatura + "&idProfesor=" + idSession,"post", function(loader, response) {
 									alert("<bean:message key="message.trabajo.de.campo.exito"/>");
 									window.close();
 									//var url = "trabajos.do";

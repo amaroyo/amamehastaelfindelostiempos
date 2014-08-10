@@ -37,12 +37,13 @@ public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosD
 	private static String SQL_DELETE = "delete from trabajos_de_campo where id_portafolio = ? and id_trabajo_de_campo = ?";
 	private static String SQL_FIND_BY_PORTAFOLIO = "select t.*,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i where t.id_trabajo_info = i.id_trabajo_info and id_portafolio = ?";
 	private static String SQL_FIND_BY_ASIGNATURA = "select t.*,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i, portafolios as p where t.id_trabajo_info = i.id_trabajo_info and p.id_portafolio = t.id_portafolio and p.id_asignatura =? and p.anyo_academico =?";
-	private static String SQL_FIND_NOMBRE_BY_ASIGNATURA = "select distinct i.* from trabajos_de_campo as t, trabajos_de_campo_info as i, portafolios as p where p.id_portafolio = t.id_portafolio and t.id_trabajo_info = i.id_trabajo_info and p.id_asignatura =? and p.anyo_academico =?";
+	private static String SQL_FIND_NOMBRE_BY_ASIGNATURA = "select distinct i.*, t.fecha_limite from trabajos_de_campo as t, trabajos_de_campo_info as i, portafolios as p where p.id_portafolio = t.id_portafolio and t.id_trabajo_info = i.id_trabajo_info and p.id_asignatura =? and p.anyo_academico =?";
 	private static String SQL_FIND_BY_ASIGNATURA_TRABAJO = "select t.id_portafolio, t.id_trabajo_de_campo, t.trabajo_de_campo, t.correccion_trabajo, t.fecha_limite, u.id_usuario, u.nombre, u.apellido1, u.apellido2, u.dni" +  
 															" from trabajos_de_campo as t, portafolios as p, usuarios as u" + 
 															" where p.id_portafolio = t.id_portafolio and p.id_alumno=u.id_usuario and p.id_asignatura =? and p.anyo_academico =? and t.id_trabajo_info =?";
 
-	private static String SQL_FIND_BY_IDs = "select t.*,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i where t.id_trabajo_info = i.id_trabajo_info and id_portafolio = ? and id_trabajo_de_campo=?";
+	private static String SQL_FIND_BY_IDs = "select t.fecha_limite,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i where t.id_trabajo_info = i.id_trabajo_info and id_portafolio = ? and id_trabajo_de_campo=?";
+	private static String SQL_FIND_BY_IDsTC = "select t.*,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i where t.id_trabajo_info = i.id_trabajo_info and id_portafolio = ? and id_trabajo_de_campo=?";
 	
 
 
@@ -147,9 +148,9 @@ public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosD
 	}
 
 	@Override
-	public TrabajoDeCampoVO findByIDs(TrabajoDeCampoVO t) throws DAOException {
+	public TrabajoDeCampoInfoVO findByIDs(TrabajoDeCampoVO t) throws DAOException {
 		try {
-			return (TrabajoDeCampoVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_IDs, new Object[]{t.getIdPortafolio(),t.getIdTrabajoDeCampo()}, new TrabajoDeCampoMapper());
+			return (TrabajoDeCampoInfoVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_IDs, new Object[]{t.getIdPortafolio(),t.getIdTrabajoDeCampo()}, new TrabajoDeCampoInfoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
@@ -230,6 +231,18 @@ public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosD
 		} catch(Exception e) {
 			throw new DAOUpdateException(e);
 		}		
+	}
+
+	@Override
+	public TrabajoDeCampoVO findByIDsTC(TrabajoDeCampoVO tc)
+			throws DAOException {
+		try {
+			return (TrabajoDeCampoVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_IDsTC, new Object[]{tc.getIdPortafolio(),tc.getIdTrabajoDeCampo()}, new TrabajoDeCampoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
 	}
 	
 	

@@ -18,6 +18,10 @@ public interface DAOTrabajosDeCampoInfo {
 	public void delete(TrabajoDeCampoInfoVO trabajoInfo) throws DAOException, DAODeleteException;
 		
 	public TrabajoDeCampoInfoVO findById(TrabajoDeCampoInfoVO trabajoInfo) throws DAOException;
+
+	public void updateSimple(TrabajoDeCampoInfoVO t) throws DAOException, DAOUpdateException;
+
+	public void updateDates(TrabajoDeCampoInfoVO t) throws DAOException, DAOUpdateException;
 	
 
 

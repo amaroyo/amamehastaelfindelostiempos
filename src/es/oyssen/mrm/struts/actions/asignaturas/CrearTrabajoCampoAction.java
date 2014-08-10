@@ -23,6 +23,7 @@ public class CrearTrabajoCampoAction extends DHTMLXFormAction {
 	public Object load(DhtmlxForm f) throws Exception {
 		
 		CrearTrabajoCampoForm form = (CrearTrabajoCampoForm) f;
+		
 		if (StringUtil.isNullOrBlank(form.getIdTrabajoInfo())){
 			TrabajoDeCampoVO t = new TrabajoDeCampoVO();
 			
@@ -42,42 +43,6 @@ public class CrearTrabajoCampoAction extends DHTMLXFormAction {
 
 	@Override
 	public String create(DhtmlxForm f) throws Exception {
-		
-		/*
-		 EditarUsuarioForm form = (EditarUsuarioForm) f;
-		 
-		UsuarioVO usuario = new UsuarioVO();
-		
-		//ESTO HAY QUE CAMBIARLO A BUSCAR SEGUN EMAIL O DNI, YA QUE SON UNIQUE
-		//EN ESTE CASO EL UNICO CAMPO UNIQUE A PARTE DEL ID ES EL USER (del form)
-		usuario.setCorreo(form.getCorreo());
-		if (getUsuariosService().findByCorreo(usuario) != null)
-			return "usuario not created: correo already exists";
-		else{
-			usuario.setIdGrupo(form.getGrupo());
-			usuario.setCorreo(form.getCorreo());
-			usuario.setNombre(form.getNombre());
-			usuario.setApellido1(form.getApellido1());
-			usuario.setApellido2(form.getApellido2());
-			usuario.setDni(form.getDni());
-			usuario.setTelefono(form.getTelefono());
-			//System.out.println(form.getFoto());
-			//usuario.setFoto(form.getFoto());
-			
-			if (!StringUtil.isNullOrBlank(form.getContrasenya()))
-				usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(form.getContrasenya(), EncriptarUtil.MD5));
-			else
-				usuario.setContrasenya(null);
-			getUsuariosService().insert(usuario);
-			return "usuario created";
-		}
-		*/
-		return null;
-
-	}
-	
-	@Override
-	public String save(DhtmlxForm f) throws Exception {
 		
 		CrearTrabajoCampoForm form = (CrearTrabajoCampoForm) f;
 		
@@ -111,22 +76,41 @@ public class CrearTrabajoCampoAction extends DHTMLXFormAction {
 		
 		return idTrabajoInfo;
 		
+
+	}
+	
+	@Override
+	public String save(DhtmlxForm f) throws Exception {
+		
+		CrearTrabajoCampoForm form = (CrearTrabajoCampoForm) f;
+		TrabajoDeCampoInfoVO t= new TrabajoDeCampoInfoVO();
+		t.setIdTrabajoInfo(form.getIdTrabajoInfo());
+		t.setNombre(form.getNombre());
+		t.setDescripcion(form.getDescripcion());
+		getTrabajosDeCampoInfoService().updateSimple(t);
+		
+		String fechaFinal = setFechaMySQL(form.getFechaFin()) + " " + form.getHora() + ":59";
+		t.setFechaLimite(fechaFinal);
+		getTrabajosDeCampoInfoService().updateDates(t);
+		
+		return form.getIdTrabajoInfo();
 	}
 
 	@Override
 	public String parseXML(Object o) throws Exception {
 		
-		TrabajoDeCampoVO t = (TrabajoDeCampoVO) o;
+		TrabajoDeCampoInfoVO t = (TrabajoDeCampoInfoVO) o;
 		StringBuffer sb = new StringBuffer();
 		
 		String fl = parsearFechaLimite(t.getFechaLimite(),false);
 		String[] sp = fl.split(" ");
+		String[] m = sp[1].split(":");
 		
 		sb.append("<data>");
 		sb.append("<nombre><![CDATA[" + t.getNombre() + "]]></nombre>");
 		sb.append("<descripcion><![CDATA[" + t.getDescripcion() + "]]></descripcion>");
 		sb.append("<fechaFin><![CDATA[" + sp[0] + "]]></fechaFin>");
-		sb.append("<hora><![CDATA[" + sp[1]+ "]]></hora>");
+		sb.append("<hora><![CDATA[" + m[0] +":" + m[1]+ "]]></hora>");
 		
 		
 		sb.append("</data>");

@@ -27,11 +27,13 @@ public interface DAOTrabajosDeCampo {
 
 	public List<TrabajoDeCampoInfoVO> findAllNombresByAsignaturaTrabajo(PortafolioVO p) throws DAOException;
 
-	public TrabajoDeCampoVO findByIDs(TrabajoDeCampoVO t) throws DAOException;
+	public TrabajoDeCampoInfoVO findByIDs(TrabajoDeCampoVO t) throws DAOException;
 
 	public void updateTrabajoCampo(TrabajoDeCampoVO tc) throws DAOException, DAOUpdateException;
 
 	public void updateTrabajoCampoCorreccion(TrabajoDeCampoVO tc) throws DAOException, DAOUpdateException;
+
+	public TrabajoDeCampoVO findByIDsTC(TrabajoDeCampoVO tc) throws DAOException;
 	
 	
 	

@@ -31,77 +31,78 @@ public class SubirArchivoAction extends MrmAction {
 		String tipo = f.getTipoConsulta();
 		String nombre = f.getFichero().getFileName();
 		String[] sp = nombre.split("\\.");
-		if(((sp[1].toLowerCase()).equals("pdf") || (sp[1].toLowerCase()).equals("doc") || (sp[1].toLowerCase()).equals("docx")) && f.getFichero().getFileSize()<MAX_SIZE_MYSQL) { 
-
-			if (tipo.equals("CasoClinico")){
-				PortafolioVO p = new PortafolioVO();
-				p.setIdAlumno(f.getIdAlumno());
-				p.setIdAsignatura(f.getIdAsignatura());
-				String anyoAcademico = (String)request.getSession().getAttribute("anyoAcademico");
-				p.setAnyoAcademico(anyoAcademico);
-				f.setIdPortafolio(getPortafoliosService().findByAlumnoAsignatura(p).getIdPortafolio());
-				getCasosClinicosService().process(f);
-			}
-			else if (tipo.equals("TrabajoCampoInfo")){
-				getTrabajosDeCampoInfoService().process(f);
-			}
-			else if (tipo.equals("TrabajoCampoPractica")){
-				TrabajoDeCampoVO tc = new TrabajoDeCampoVO();
-				tc.setIdPortafolio(f.getIdPortafolio());
-				tc.setIdTrabajoDeCampo(f.getIdTrabajoCampo());
-				tc = getTrabajosDeCampoService().findByIDs(tc);
-							
-				String fechaLimite = parsearFechaLimite(tc.getFechaLimite(),false);
-				boolean bloqueado = chequearDeadLine(fechaLimite);
-				if(!bloqueado){
-					
+		if(!f.getFichero().getFileName().equals("") && f.getFichero().getFileSize()>0){
+			if(((sp[1].toLowerCase()).equals("pdf") || (sp[1].toLowerCase()).equals("doc") || (sp[1].toLowerCase()).equals("docx")) && f.getFichero().getFileSize()<MAX_SIZE_MYSQL) { 
+	
+				if (tipo.equals("CasoClinico")){
+					PortafolioVO p = new PortafolioVO();
+					p.setIdAlumno(f.getIdAlumno());
+					p.setIdAsignatura(f.getIdAsignatura());
+					String anyoAcademico = (String)request.getSession().getAttribute("anyoAcademico");
+					p.setAnyoAcademico(anyoAcademico);
+					f.setIdPortafolio(getPortafoliosService().findByAlumnoAsignatura(p).getIdPortafolio());
+					getCasosClinicosService().process(f);
+				}
+				else if (tipo.equals("TrabajoCampoInfo")){
+					getTrabajosDeCampoInfoService().process(f);
+				}
+				else if (tipo.equals("TrabajoCampoPractica")){
+					TrabajoDeCampoVO tc = new TrabajoDeCampoVO();
+					tc.setIdPortafolio(f.getIdPortafolio());
+					tc.setIdTrabajoDeCampo(f.getIdTrabajoCampo());
+					tc = getTrabajosDeCampoService().findByIDsTC(tc);
+								
+					String fechaLimite = parsearFechaLimite(tc.getFechaLimite(),false);
+					boolean bloqueado = chequearDeadLine(fechaLimite);
+					if(!bloqueado){
+						
+						String n = f.getFichero().getFileName();
+						String[] split = n.split("\\.");
+						
+						if(f.getNombre().equals("")){	
+							tc.setNombreArchivo(split[0] + "." + split[1].toLowerCase());
+						}
+						else tc.setNombreTrabajo(f.getNombre() + "." + split[1].toLowerCase());
+						
+						tc.setTrabajoDeCampo(f.getFichero().getFileData());
+						
+						getTrabajosDeCampoService().updateTrabajoCampo(tc);
+					}
+					else return mapping.findForward("error");
+				}				
+				else if (tipo.equals("TrabajoCampoCorreccion")){
+					TrabajoDeCampoVO tc = new TrabajoDeCampoVO();
+					tc.setIdPortafolio(f.getIdPortafolio());
+					tc.setIdTrabajoDeCampo(f.getIdTrabajoCampo());
+					tc = getTrabajosDeCampoService().findByIDsTC(tc);
+								
+	
 					String n = f.getFichero().getFileName();
 					String[] split = n.split("\\.");
 					
 					if(f.getNombre().equals("")){	
-						tc.setNombreArchivo(split[0] + "." + split[1].toLowerCase());
+						tc.setNombreCorreccion(split[0] + "." + split[1].toLowerCase());
 					}
-					else tc.setNombreTrabajo(f.getNombre() + "." + split[1].toLowerCase());
+					else tc.setNombreCorreccion(f.getNombre() + "." + split[1].toLowerCase());
 					
-					tc.setTrabajoDeCampo(f.getFichero().getFileData());
+					tc.setCorreccionTrabajo(f.getFichero().getFileData());
 					
-					getTrabajosDeCampoService().updateTrabajoCampo(tc);
+					getTrabajosDeCampoService().updateTrabajoCampoCorreccion(tc);
+				
 				}
-				else return mapping.findForward("error");
-			}				
-			else if (tipo.equals("TrabajoCampoCorreccion")){
-				TrabajoDeCampoVO tc = new TrabajoDeCampoVO();
-				tc.setIdPortafolio(f.getIdPortafolio());
-				tc.setIdTrabajoDeCampo(f.getIdTrabajoCampo());
-				tc = getTrabajosDeCampoService().findByIDs(tc);
-							
-
-				String n = f.getFichero().getFileName();
-				String[] split = n.split("\\.");
-				
-				if(f.getNombre().equals("")){	
-					tc.setNombreCorreccion(split[0] + "." + split[1].toLowerCase());
+				else if (tipo.equals("DiarioReflexivo")){
+					PortafolioVO p = new PortafolioVO();
+					p.setIdAlumno(f.getIdAlumno());
+					p.setIdAsignatura(f.getIdAsignatura());
+					String anyoAcademico = (String)request.getSession().getAttribute("anyoAcademico");
+					p.setAnyoAcademico(anyoAcademico);
+					f.setIdPortafolio(getPortafoliosService().findByAlumnoAsignatura(p).getIdPortafolio());
+					getDiariosReflexivosService().process(f);
 				}
-				else tc.setNombreCorreccion(f.getNombre() + "." + split[1].toLowerCase());
 				
-				tc.setCorreccionTrabajo(f.getFichero().getFileData());
-				
-				getTrabajosDeCampoService().updateTrabajoCampoCorreccion(tc);
-			
+				return mapping.findForward("success");
 			}
-			else if (tipo.equals("DiarioReflexivo")){
-				PortafolioVO p = new PortafolioVO();
-				p.setIdAlumno(f.getIdAlumno());
-				p.setIdAsignatura(f.getIdAsignatura());
-				String anyoAcademico = (String)request.getSession().getAttribute("anyoAcademico");
-				p.setAnyoAcademico(anyoAcademico);
-				f.setIdPortafolio(getPortafoliosService().findByAlumnoAsignatura(p).getIdPortafolio());
-				getDiariosReflexivosService().process(f);
-			}
-			
-			return mapping.findForward("success");
-		}
-		
+		}	
 		return mapping.findForward("error");
 	}
 	

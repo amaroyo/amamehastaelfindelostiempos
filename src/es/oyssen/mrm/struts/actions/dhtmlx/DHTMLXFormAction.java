@@ -37,14 +37,19 @@ public abstract class DHTMLXFormAction extends MrmAction {
 		
 			StringBuffer xml = new StringBuffer();			
 			try {
-				if("save".equals(f.getNativeeditor_status()) || "update".equals(f.getNativeeditor_status())) {
+				if ("save".equals(f.getNativeeditor_status()) ||
+						"update".equals(f.getNativeeditor_status())) {
 					xml.append(save(f));
 				}
-				else {//load
+				else if ("create".equals(f.getNativeeditor_status())){
+					xml.append(create(f));
+				}
+				else {
 					xml.append(parseXML(load(f)));
 				}
+
 			} catch (Exception e) {
-				
+
 				e.printStackTrace();
 				xml.append("<data>");
 				xml.append("<action type='" + RESULTADO_ERROR + "'><![CDATA[" + resources.getMessage("error.operacion.ko") + "]]></action>");
