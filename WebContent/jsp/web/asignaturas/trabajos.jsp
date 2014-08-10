@@ -57,7 +57,7 @@
 		    		b = main_layout.cells('b');
 		    		a.hideHeader();
 		    		b.setText('<bean:message key="label.descripcion.practica"/>');
-				    b.setWidth(750);
+				    b.setWidth(650);
 				    goGridAlumnos();
 				</logic:notMatch>	
 	    		
@@ -220,7 +220,7 @@
 					    				window2.setModal(true);
 					    				window2.centerOnScreen();
 					    				window2.attachURL("subirArchivo.do?idTipo=TrabajoCampo" + "&idTrabajoInfo=" + response);
-					    				
+					    				initProfesor();
 										
 									});
 						    	}
@@ -229,6 +229,9 @@
 								formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura + "&idProfesor=" + idSession,"post", function(loader, response) {
 									alert("<bean:message key="message.trabajo.de.campo.exito"/>");
 									window.close();
+									//var url = "trabajos.do";
+									//location.href=url;
+									initProfesor();
 								});
 								
 							}
@@ -283,9 +286,9 @@
 				
 				
 				gridAlumnos = a.attachGrid();
-				gridAlumnos.setHeader(["<bean:message key="label.trabajo.campo" />","<bean:message key="label.fecha.limite" />","<bean:message key="label.corregido" />"]);
-				gridAlumnos.setInitWidthsP("40,40,20");
-				gridAlumnos.setColTypes("ro,ro,ro");
+				gridAlumnos.setHeader(["<bean:message key="label.trabajo.campo" />","<bean:message key="label.fecha.limite" />","<bean:message key="label.corregido" />","<bean:message key="label.enlace" />"]);
+				gridAlumnos.setInitWidthsP("45,30,10,15");
+				gridAlumnos.setColTypes("ro,ro,ro,ro");
 				gridAlumnos.setColSorting('str,str');
 				gridAlumnos.enableMultiselect(false);
 				gridAlumnos.init();
@@ -313,8 +316,25 @@
 			
 			function doOnRowSelectedAlumnos(rowID,celInd){
 				
+				var parts = rowID.split("-");
+				var corregido = parts[0];
+				var bloqueado = parts[1];
+				var info = parts[2];
+				var idPortafolio = parts[3];
+				var idTrabajoCampo = parts[4];
 				
-				alert(rowID);
+				
+				
+				var cellObj = gridAlumnos.cellById(rowID,celInd);
+				if(celInd=='3' && cellObj.getValue()=="Descargar") {
+					/*
+					var parts = rowID.split("-");
+					var accion = "descargarCasoClinico.do";
+					accion += "?idPortafolio="+parts[0];
+					accion += "&idCasoClinico="+parts[1];
+					location.href=accion;
+					*/
+				}
 				
 	    		var trabajoCampo = b.attachForm();
 		    	
@@ -323,6 +343,7 @@
 	    			trabajoCampo.setItemLabel('nombre','<bean:message key="label.nombre"/>');
 	    			trabajoCampo.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
 	    			trabajoCampo.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
+	    			trabajoCampo.setItemLabel('hora','<bean:message key="label.hora"/>');
 	    			trabajoCampo.setItemLabel('descargarCorreccion','<bean:message key="button.descargar.correccion"/>');
 	    			trabajoCampo.setItemLabel('descargarInformacion','<bean:message key="button.descargar.informacion"/>');
 	    			trabajoCampo.setItemLabel('subirPractica','<bean:message key="button.subir.trabajo.campo"/>');
@@ -334,23 +355,29 @@
 		    		trabajoCampo.setReadonly('nombre', true);
 		    		trabajoCampo.setReadonly('descripcion', true);
 		    		trabajoCampo.setReadonly('fechaFin', true);
+		    		trabajoCampo.setReadonly('hora', true);
+		    		trabajoCampo.setRequired('nombre', false);		    		
+		    		trabajoCampo.setRequired('fechaFin', false);
+		    		trabajoCampo.setRequired('hora', false);
 		    		trabajoCampo.hideItem('aceptar');
 		    		trabajoCampo.disableItem('descargarCorreccion');
 		    		trabajoCampo.disableItem('descargarInformacion');
 		    		trabajoCampo.disableItem('subirPractica');
+
 		    		
 		    		
-		    	/*	
-					
-		    		formAlumno.load('editarEstanciaUnidadClinica.do?idAlumno=' + idSessionUser + '&idAsignatura=' + idAsignatura);
-					
+		    		if(bloqueado=="F") trabajoCampo.enableItem('subirPractica');
+		    		if(corregido=="T") trabajoCampo.enableItem('descargarCorreccion');
+		    		if(info!="F") trabajoCampo.enableItem('descargarInformacion');
 		    		
 		    		
-		    		var cf = formAlumno.getCalendar("fechaFin");
+		    		trabajoCampo.load('verTrabajoCampo.do?idPortafolio=' + idPortafolio + '&idTrabajoCampo=' + idTrabajoCampo);
+		    		
+		    		var cf = trabajoCampo.getCalendar("fechaFin");
 		    		cf.attachEvent("onShow", function(){
 		    		    cf.hide();
 		    		});
-		    		*/
+		    		
 		    		
 	    	});
 				

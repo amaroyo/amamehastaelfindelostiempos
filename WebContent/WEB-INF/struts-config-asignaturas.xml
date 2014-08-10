@@ -133,6 +133,7 @@
 		
 		<action path="/asignaturas/crearTrabajoCampo" name="CrearTrabajoCampoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.CrearTrabajoCampoAction" />
 		
+		<action path="/asignaturas/verTrabajoCampo" name="CrearTrabajoCampoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.CrearTrabajoCampoAction" />		
 		
 		<action path="/asignaturas/subirArchivoTrabajoCampo" name="SubirArchivoTrabajoCampoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.SubirArchivoTrabajoCampoAction">
 			<exception type="java.lang.Exception" key="error.subir.archivo.caso.clinico" path="/asignaturas/subirCasoClinico.do"></exception>

@@ -1,5 +1,9 @@
 package es.oyssen.mrm.util;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -844,11 +848,18 @@ public class UtilXML {
 		sb.append("<rows>");
 		if(list != null){
 			for (TrabajoDeCampoVO tc : list) {
+				
 				boolean corregido = (tc.getCorreccionTrabajo() != null);
-				String c="";
+				String c="F";
 				if(corregido) c="T";
-				else c="F";
-				sb.append("<row id=\""+ c + "-" +tc.getIdPortafolio() + "-" + tc.getIdTrabajoDeCampo() + "\">");
+				String fechaLimite = parsearFechaLimite(tc.getFechaLimite(),false);
+				boolean bloqueado = chequearDeadLine(fechaLimite);
+				String b = "T";
+				if(!bloqueado) b="F";
+				boolean info = (tc.getEnunciado() != null);
+				String i = "F";
+				if(info) i = tc.getIdTrabajoInfo();
+				sb.append("<row id=\""+ c + "-" + b + "-" + i + "-" +tc.getIdPortafolio() + "-" + tc.getIdTrabajoDeCampo() + "\">");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(tc.getNombre()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(tc.getFechaLimite(),true)) + "]]></cell>");
 				
@@ -856,6 +867,9 @@ public class UtilXML {
 				if(corregido) sb.append("<cell><![CDATA[<img src=" + "../img/grid/corregida.png"+ "></img>]]></cell>");
 				else sb.append("<cell><![CDATA[<img src=" + "../img/grid/nocorregida.png"+ "></img>]]></cell>");
 				
+				String descarga = "";
+				if(tc.getTrabajoDeCampo() != null) descarga="Descargar";
+				sb.append("<cell><![CDATA[" +  descarga + "]]></cell>");
 				
 				sb.append("</row>");				
 			}
@@ -864,6 +878,7 @@ public class UtilXML {
 		return sb.toString();
 	}
 
+	
 	
 	public static String buildXmlGridCasosClinicosUsuarioAsignatura(List<CasoClinicoVO> list) {
 		StringBuffer sb = new StringBuffer();
@@ -928,6 +943,28 @@ public class UtilXML {
 	}
 
 	
+	private static boolean chequearDeadLine(String fechaLimite) {
+
+		Date tiempoActual = new Date();
+		
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
+		String dateInString = fechaLimite;
+		
+		Date fechaL = null;
+		try {
+			fechaL = sdf.parse(dateInString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		 		
+		return tiempoActual.after(fechaL);
+
+	}
+
 
 	
 	

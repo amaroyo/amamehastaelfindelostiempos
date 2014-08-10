@@ -26,6 +26,8 @@ public interface DAOTrabajosDeCampo {
 	public List<UsuarioTrabajoCampoVO> findAllByAsignaturaTrabajo(PortafolioVO p, TrabajoDeCampoVO t) throws DAOException;
 
 	public List<TrabajoDeCampoInfoVO> findAllNombresByAsignaturaTrabajo(PortafolioVO p) throws DAOException;
+
+	public TrabajoDeCampoVO findByIDs(TrabajoDeCampoVO t) throws DAOException;
 	
 	
 	

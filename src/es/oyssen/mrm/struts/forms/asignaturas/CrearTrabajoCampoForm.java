@@ -10,6 +10,8 @@ public class CrearTrabajoCampoForm extends DhtmlxGridForm {
 	private String descripcion;
 	private String fechaFin;
 	private String hora;
+	private String idPortafolio;
+	private String idTrabajoCampo;
 	
 	
 	public String getIdAsignatura() {
@@ -47,6 +49,18 @@ public class CrearTrabajoCampoForm extends DhtmlxGridForm {
 	}
 	public void setHora(String hora) {
 		this.hora = hora;
+	}
+	public String getIdPortafolio() {
+		return idPortafolio;
+	}
+	public void setIdPortafolio(String idPortafolio) {
+		this.idPortafolio = idPortafolio;
+	}
+	public String getIdTrabajoCampo() {
+		return idTrabajoCampo;
+	}
+	public void setIdTrabajoCampo(String idTrabajoCampo) {
+		this.idTrabajoCampo = idTrabajoCampo;
 	}
 	
 	

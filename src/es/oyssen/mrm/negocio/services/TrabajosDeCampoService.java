@@ -24,6 +24,8 @@ public interface TrabajosDeCampoService {
 
 	public List<UsuarioTrabajoCampoVO> findAllByAsignaturaTrabajo(PortafolioVO p, TrabajoDeCampoVO t) throws ServiceException;
 
-	public List<TrabajoDeCampoInfoVO> findAllNombresByAsignatura(PortafolioVO p)throws ServiceException;
+	public List<TrabajoDeCampoInfoVO> findAllNombresByAsignatura(PortafolioVO p) throws ServiceException;
+
+	public TrabajoDeCampoVO findByIDs(TrabajoDeCampoVO t) throws ServiceException;
 
 }

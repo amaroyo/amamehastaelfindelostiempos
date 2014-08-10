@@ -104,6 +104,17 @@ public class TrabajosDeCampoServiceImpl implements TrabajosDeCampoService{
 			throw new ServiceException(e.getMessage());
 		}
 	}
+
+	@Override
+	public TrabajoDeCampoVO findByIDs(TrabajoDeCampoVO t) throws ServiceException {
+		try {
+			return daoTrabajosDeCampo.findByIDs(t);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findByIDs trabajo de campo", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
 	
 	
 	

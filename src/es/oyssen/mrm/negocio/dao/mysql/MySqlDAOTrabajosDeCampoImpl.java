@@ -37,6 +37,7 @@ public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosD
 															" from trabajos_de_campo as t, portafolios as p, usuarios as u" + 
 															" where p.id_portafolio = t.id_portafolio and p.id_alumno=u.id_usuario and p.id_asignatura =? and p.anyo_academico =? and t.id_trabajo_info =?";
 
+	private static String SQL_FIND_BY_IDs = "select t.*,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i where t.id_trabajo_info = i.id_trabajo_info and id_portafolio = ? and id_trabajo_de_campo=?";
 	
 
 
@@ -138,6 +139,17 @@ public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosD
 			throw new DAOException(e);
 		}
 		
+	}
+
+	@Override
+	public TrabajoDeCampoVO findByIDs(TrabajoDeCampoVO t) throws DAOException {
+		try {
+			return (TrabajoDeCampoVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_IDs, new Object[]{t.getIdPortafolio(),t.getIdTrabajoDeCampo()}, new TrabajoDeCampoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
 	}
 
 	

@@ -20,30 +20,16 @@ public class CrearTrabajoCampoAction extends DHTMLXFormAction {
 	
 	@Override
 	public Object load(DhtmlxForm f) throws Exception {
-		/*
-		EditarUsuarioForm form = (EditarUsuarioForm) f;
-		UsuarioVO usuario = new UsuarioVO();
 		
-		if (!StringUtil.isNullOrBlank(form.getCorreo())){
-			
-			usuario.setCorreo(form.getCorreo());
-			return getUsuariosService().findByCorreo(usuario);
-			
-		}
+		CrearTrabajoCampoForm form = (CrearTrabajoCampoForm) f;
+		TrabajoDeCampoVO t = new TrabajoDeCampoVO();
 		
-		else  if (!StringUtil.isNullOrBlank(form.getIdUsuario())){
+		t.setIdPortafolio(form.getIdPortafolio());
+		t.setIdTrabajoDeCampo(form.getIdTrabajoCampo());
+
+		return getTrabajosDeCampoService().findByIDs(t);
 			
-			usuario.setIdUsuario(form.getIdUsuario());
-			return getUsuariosService().findById(usuario);
-			
-		}
-		else {//if (!StringUtil.isNullOrBlank(form.getDni()))
-			
-			usuario.setDni(form.getDni());
-			return getUsuariosService().findByDni(usuario);
-			
-		}*/
-	return null;
+		
 	}
 
 	@Override
@@ -85,9 +71,6 @@ public class CrearTrabajoCampoAction extends DHTMLXFormAction {
 	@Override
 	public String save(DhtmlxForm f) throws Exception {
 		
-		
-		
-		
 		CrearTrabajoCampoForm form = (CrearTrabajoCampoForm) f;
 		
 		PortafolioVO p = new PortafolioVO();
@@ -98,7 +81,7 @@ public class CrearTrabajoCampoAction extends DHTMLXFormAction {
 		p.setIdProfesor(form.getIdProfesor());
 		t.setNombre(form.getNombre());
 		t.setDescripcion(form.getDescripcion());
-		String fechaFinal = setFechaMySQL(form.getFechaFin()) + " " + form.getHora();
+		String fechaFinal = setFechaMySQL(form.getFechaFin()) + " " + form.getHora() + ":59";
 		
 		String idTrabajoInfo = getTrabajosDeCampoInfoService().insert(t);
 		
@@ -124,18 +107,20 @@ public class CrearTrabajoCampoAction extends DHTMLXFormAction {
 
 	@Override
 	public String parseXML(Object o) throws Exception {
-		UsuarioVO c = (UsuarioVO) o;
+		
+		TrabajoDeCampoVO t = (TrabajoDeCampoVO) o;
 		StringBuffer sb = new StringBuffer();
+		
+		String fl = parsearFechaLimite(t.getFechaLimite(),false);
+		String[] sp = fl.split(" ");
+		
 		sb.append("<data>");
-		sb.append("<grupo><![CDATA[" + nombreGrupo(c.getIdGrupo()) + "]]></grupo>");
-		sb.append("<correo><![CDATA[" + c.getCorreo() + "]]></correo>");
-		sb.append("<nombre><![CDATA[" + c.getNombre() + "]]></nombre>");
-		sb.append("<apellido1><![CDATA[" + c.getApellido1() + "]]></apellido1>");
-		sb.append("<apellido2><![CDATA[" + c.getApellido2() + "]]></apellido2>");
-		sb.append("<dni><![CDATA[" + c.getDni() + "]]></dni>");
-		sb.append("<telefono><![CDATA[" + c.getTelefono() + "]]></telefono>");
-		sb.append("<fotoImagen><![CDATA[" + c.getFotoImagen() + "]]></fotoImagen>");
-		//sb.append("<contrasenya></contrasenya>");
+		sb.append("<nombre><![CDATA[" + t.getNombre() + "]]></nombre>");
+		sb.append("<descripcion><![CDATA[" + t.getDescripcion() + "]]></descripcion>");
+		sb.append("<fechaFin><![CDATA[" + sp[0] + "]]></fechaFin>");
+		sb.append("<hora><![CDATA[" + sp[1]+ "]]></hora>");
+		
+		
 		sb.append("</data>");
 		
 		
@@ -165,6 +150,16 @@ public class CrearTrabajoCampoAction extends DHTMLXFormAction {
 		String out = sp[2] + "-" +  sp[1] + "-" + sp[0];
 		return out;
 		
+	}
+	
+	private static String parsearFechaLimite(String fechaLimite, boolean b) {
+		String[] fl = fechaLimite.split(" ");
+		String[] date = fl[0].split("-");
+		String[] hora = fl[1].split("\\.");
+		String out = "";
+		if (b) out = "Día: " + date[2] + "/" +  date[1] + "/" + date[0] + " Hora: " + hora[0];
+		else out = date[2] + "/" +  date[1] + "/" + date[0] + " " + hora[0];
+		return out;
 	}
 
 
