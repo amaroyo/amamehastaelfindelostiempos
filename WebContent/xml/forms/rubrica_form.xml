@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <items>
-	<item type="fieldset" name="competencias" label="Información general de la Asignatura" inputWidth="auto">
-		<item type="input" name="competencias" label="Resultados/Competencias" labelWidth="125" style="width:200" rows="10"/>
+	<item type="fieldset" name="resultados" label="RESULTADOS/COMPETENCIAS" inputWidth="auto">
+		<item type="input" name="competencias" label="" labelWidth="125" style="width:200" rows="10"/>
 	</item>
 	<item type="button" name="aceptar" value="Aceptar" />
 	<item type="newcolumn"/>
 	<item type="block" inputWidth="auto" id="grupos">
-	</item>
-	<item type="block" inputWidth="auto" id="total">
 	</item>
 </items>
 

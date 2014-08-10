@@ -46,7 +46,7 @@
 	    	
 	    	var main_layout, areaTrabajoCursos, listado, toolbarAsignaturas,
 	    	gridAsignaturas, formInfo, formRubrica, dhxWins, tabbar, tab_info, tab_rubrica, rubrica_layout,
-	    	competencias_layout, grupos_layout;
+	    	grupos_criterios_rubrica, competencias_layout, grupos_layout;
 	    	
 	    	var windowsNewAsignatura = new Array();
 	    	var formsNewAsignatura = new Array();
@@ -127,11 +127,11 @@
 
 		    	formRubrica = tab_rubrica.attachForm();
 		    	formRubrica.loadStruct('../xml/forms/rubrica_form.xml', function(){
-	    			formRubrica.setItemLabel('competencias','<bean:message key="title.resultados.competencias"/>');
+	    			formRubrica.setItemLabel('resultados','<bean:message key="title.resultados.competencias"/>');
 	    			
-	    			var itemData = dameGruposCriteriosAsignatura(idAsignatura);
-	    			for(var i=0;i++;i<itemData.lenght){
-	    				formRubrica.addItem("grupos", itemData[i]);
+	    			grupos_criterios_rubrica = dameGruposCriteriosAsignatura(idAsignatura);
+	    			for(var i=0;i<grupos_criterios_rubrica.length;i++){
+	    				formRubrica.addItem("grupos", grupos_criterios_rubrica[i]);
 	    			}
 	    			//myForm.addItem("query", {type: "newcolumn"}, lastItemIndex+1+q);
 	    			
@@ -430,36 +430,23 @@
 	    	}
 			
 			function createArrayGruposCriteriosFromXML(xml){
-				
-				/*var pos = 1;
-    			var itemData = [{type: "select", name: "video_codec", label: "Codec", validate: "NotEmpty", options:[
-						{text: "DivX", value: "DivX"},
-						{text: "XviD", value: "XviD", selected: true}
-				]},
-				{type: "select", name: "video_codec", label: "Codec2", validate: "NotEmpty", options:[
-							{text: "DivX", value: "DivX"},
-							{text: "XviD", value: "XviD", selected: true}
-					]},
-					{type: "select", name: "video_codec", label: "Codec3", validate: "NotEmpty", options:[
-							{text: "DivX", value: "DivX"},
-							{text: "XviD", value: "XviD", selected: true}
-					]}];
-				
-				
-				
-				
-				
-	    		var icon = 'libro.png';
-	    		var asignaturas = xml.getElementsByTagName("asignatura");
-	    		var id, nombre, asignatura;
-	    		var opts = new Array();
-	    		for(var i=0;i<asignaturas.length;i++) {
-	    	        id=asignaturas[i].getElementsByTagName("id")[0].firstChild.nodeValue;
-	    	        nombre=asignaturas[i].getElementsByTagName("nombre")[0].firstChild.nodeValue;
-					asignatura=[id,'obj',nombre,icon];
-	    	       	opts[i] = asignatura;
-	    	    }
-	    		return opts;*/
+				var items = new Array();
+				var grupos = xml.getElementsByTagName("grupo");
+				var id_grupo, nombre_grupo, id_criterio, nombre_criterio;
+				var id_grupo_anterior, criterio, grupo, id_grupo_id_criterio;
+				for(var i=0;i<grupos.length;i++) {
+	    	        id_grupo=grupos[i].getElementsByTagName("id_grupo")[0].firstChild.nodeValue;
+	    	        id_grupo_anterior=id_grupo;
+	    	        nombre_grupo=grupos[i].getElementsByTagName("nombre_grupo")[0].firstChild.nodeValue;
+	    	        id_criterio=grupos[i].getElementsByTagName("id_criterio")[0].firstChild.nodeValue;
+	    	        id_grupo_id_criterio=id_grupo+"_"+id_criterio;
+	    	        nombre_criterio=grupos[i].getElementsByTagName("nombre_criterio")[0].firstChild.nodeValue;
+	    	        grupo={type:"fieldset", name:id_grupo, label:nombre_grupo, inputWidth:"auto"};
+	    	        criterio={type:"input", name:id_grupo_id_criterio, label:nombre_criterio, labelWidth:"125", style:"width:200", rows:"2"};
+	    	        items[i*2]=grupo;
+	    	        items[i*2+1]=criterio;
+		    	}
+				return items;
 
 	    	}
 			
