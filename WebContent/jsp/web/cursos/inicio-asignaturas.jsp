@@ -431,23 +431,24 @@
 			
 			function createArrayGruposCriteriosFromXML(xml){
 				var items = new Array();
+				var criterios_grupo = new Array();
 				var grupos = xml.getElementsByTagName("grupo");
+				var criterios;
 				var id_grupo, nombre_grupo, id_criterio, nombre_criterio;
-				var id_grupo_anterior, criterio, grupo, id_grupo_id_criterio;
+				var id_grupo_id_criterio;
 				for(var i=0;i<grupos.length;i++) {
 	    	        id_grupo=grupos[i].getElementsByTagName("id_grupo")[0].firstChild.nodeValue;
-	    	        id_grupo_anterior=id_grupo;
 	    	        nombre_grupo=grupos[i].getElementsByTagName("nombre_grupo")[0].firstChild.nodeValue;
-	    	        id_criterio=grupos[i].getElementsByTagName("id_criterio")[0].firstChild.nodeValue;
-	    	        id_grupo_id_criterio=id_grupo+"_"+id_criterio;
-	    	        nombre_criterio=grupos[i].getElementsByTagName("nombre_criterio")[0].firstChild.nodeValue;
-	    	        grupo={type:"fieldset", name:id_grupo, label:nombre_grupo, inputWidth:"auto"};
-	    	        criterio={type:"input", name:id_grupo_id_criterio, label:nombre_criterio, labelWidth:"125", style:"width:200", rows:"2"};
-	    	        items[i*2]=grupo;
-	    	        items[i*2+1]=criterio;
+	    	        criterios = grupos[i].getElementsByTagName("criterios");
+	    	        for(var j=0;j<criterios.length;j++){
+	    	        	id_criterio=criterios[j].getElementsByTagName("id_criterio")[0].firstChild.nodeValue;
+		    	        id_grupo_id_criterio=id_grupo+"_"+id_criterio;
+		    	        nombre_criterio=criterios[j].getElementsByTagName("nombre_criterio")[0].firstChild.nodeValue;
+		    	        criterios_grupo[j]={type:"input", name:id_grupo_id_criterio, label:nombre_criterio, labelWidth:"125", style:"width:200", rows:"2"};
+	    	        }
+	    	        items[i]={type:"fieldset", name:id_grupo, label:nombre_grupo, inputWidth:"auto", list:criterios_grupo};
 		    	}
 				return items;
-
 	    	}
 			
         </script>
