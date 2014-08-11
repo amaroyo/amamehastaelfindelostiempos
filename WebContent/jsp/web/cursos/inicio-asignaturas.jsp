@@ -131,7 +131,7 @@
 	    			
 	    			grupos_criterios_rubrica = dameGruposCriteriosAsignatura(idAsignatura);
 	    			for(var i=0;i<grupos_criterios_rubrica.length;i++){
-	    				formRubrica.addItem("grupos", grupos_criterios_rubrica[i]);
+	    				formRubrica.addItem("grupos", grupos_criterios_rubrica[i], i);
 	    			}
 	    			//myForm.addItem("query", {type: "newcolumn"}, lastItemIndex+1+q);
 	    			
