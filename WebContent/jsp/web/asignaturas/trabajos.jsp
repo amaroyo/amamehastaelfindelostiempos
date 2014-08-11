@@ -201,8 +201,8 @@
 				    				window2.setModal(true);
 				    				window2.centerOnScreen();
 				    				window2.attachURL("eliminarTrabajo.do?idTrabajoInfo="+ idTrabajoInfo);
-				    				initProfesor();
-									
+				    				setTimeout(function(){initProfesor();},1000);
+				    				
 			    				}
 			    			}
 			    			if(correcto){
@@ -216,7 +216,7 @@
 						    				window2.setModal(true);
 						    				window2.centerOnScreen();
 						    				window2.attachURL("subirArchivo.do?tipoConsulta=TrabajoCampoInfo" + "&idTrabajoInfo=" + response);
-						    				initProfesor();
+						    				setTimeout(function(){initProfesor();},1000);
 											
 										});
 							    	}
@@ -227,7 +227,7 @@
 										window.close();
 										//var url = "trabajos.do";
 										//location.href=url;
-										initProfesor();
+										setTimeout(function(){initProfesor();},1000);
 									});
 									
 								}
@@ -317,7 +317,7 @@
 					    				window2.setModal(true);
 					    				window2.centerOnScreen();
 					    				window2.attachURL("subirArchivo.do?tipoConsulta=TrabajoCampoInfo" + "&idTrabajoInfo=" + response);
-					    				initProfesor();
+					    				setTimeout(function(){initProfesor();},1000);
 										
 									});
 						    	}
@@ -328,7 +328,7 @@
 									window.close();
 									//var url = "trabajos.do";
 									//location.href=url;
-									initProfesor();
+									setTimeout(function(){initProfesor();},1000);
 								});
 								
 							}

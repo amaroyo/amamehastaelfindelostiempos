@@ -26,6 +26,9 @@ public class TrabajosCampoAsignaturaAction extends MrmAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 			
+		
+		
+		
 		//String idUsuario = (String)request.getSession().getAttribute("idUsuario");
 		String anyoAcademico = (String)request.getSession().getAttribute("anyoAcademico");
 		
