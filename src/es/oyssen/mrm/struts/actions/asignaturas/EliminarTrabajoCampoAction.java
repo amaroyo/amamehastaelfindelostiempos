@@ -28,7 +28,7 @@ public class EliminarTrabajoCampoAction extends MrmAction {
 		
 		i.setIdTrabajoInfo(idTrabajoInfo);
 		
-		
+		/*
 		List<TrabajoDeCampoVO> list = getTrabajosDeCampoService().findAllByIdInfo(i);
 		
 		if(list != null){
@@ -37,7 +37,7 @@ public class EliminarTrabajoCampoAction extends MrmAction {
 
 			}
 		}
-		
+		*/
 		getTrabajosDeCampoInfoService().delete(i);
 
 		return mapping.findForward("success");
