@@ -15,6 +15,7 @@ public class GrupoCriteriosRubricasMapper implements RowMapper {
 	public static final String FIELD_ID_GRUPO_CRITERIO = "id_grupo_criterio";
 	public static final String FIELD_ID_ASIGNATURA = "id_asignatura";
 	public static final String FIELD_NOMBRE = "nombre";
+	public static final String FIELD_TIPO = "tipo";
     
 	
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -23,6 +24,7 @@ public class GrupoCriteriosRubricasMapper implements RowMapper {
     	o.setIdGrupoCriterio(StringUtil.nullToString(rs.getString(FIELD_ID_GRUPO_CRITERIO)));
     	o.setIdAsignatura(StringUtil.nullToString(rs.getString(FIELD_ID_ASIGNATURA)));
     	o.setNombre(StringUtil.nullToString(rs.getString(FIELD_NOMBRE)));
+    	o.setTipo(StringUtil.nullToString(rs.getString(FIELD_TIPO)));
 		return o;
 	}
 }

@@ -186,27 +186,27 @@ insert into rubricas (id_asignatura, competencias, numero_criterios) values (7, 
 
 
 -- Grupos Criterios Rúbricas
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (1, 'CONOCIMIENTOS (SABE-SABE CÓMO)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (1, 'HABILIDADES (MUESTRA CÓMO-HACE)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (1, 'ACTITUDES (MUESTRA CÓMO-HACE)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (2, 'CONOCIMIENTOS (SABE-SABE CÓMO)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (2, 'HABILIDADES (MUESTRA CÓMO-HACE)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (2, 'ACTITUDES (MUESTRA CÓMO-HACE)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (3, 'CONOCIMIENTOS (SABE-SABE CÓMO)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (3, 'HABILIDADES (MUESTRA CÓMO-HACE)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (3, 'ACTITUDES (MUESTRA CÓMO-HACE)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (4, 'CONOCIMIENTOS (SABE-SABE CÓMO)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (4, 'HABILIDADES (MUESTRA CÓMO-HACE)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (4, 'ACTITUDES (MUESTRA CÓMO-HACE)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (5, 'CONOCIMIENTOS (SABE-SABE CÓMO)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (5, 'HABILIDADES (MUESTRA CÓMO-HACE)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (5, 'ACTITUDES (MUESTRA CÓMO-HACE)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (6, 'CONOCIMIENTOS (SABE-SABE CÓMO)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (6, 'HABILIDADES (MUESTRA CÓMO-HACE)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (6, 'ACTITUDES (MUESTRA CÓMO-HACE)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (7, 'CONOCIMIENTOS (SABE-SABE CÓMO)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (7, 'HABILIDADES (MUESTRA CÓMO-HACE)');
-insert into grupos_criterios_rubricas (id_asignatura, nombre) values (7, 'ACTITUDES (MUESTRA CÓMO-HACE)');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (1, 'CONOCIMIENTOS (SABE-SABE CÓMO)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (1, 'HABILIDADES (MUESTRA CÓMO-HACE)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (1, 'ACTITUDES (MUESTRA CÓMO-HACE)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (2, 'CONOCIMIENTOS (SABE-SABE CÓMO)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (2, 'HABILIDADES (MUESTRA CÓMO-HACE)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (2, 'ACTITUDES (MUESTRA CÓMO-HACE)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (3, 'CONOCIMIENTOS (SABE-SABE CÓMO)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (3, 'HABILIDADES (MUESTRA CÓMO-HACE)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (3, 'ACTITUDES (MUESTRA CÓMO-HACE)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (4, 'CONOCIMIENTOS (SABE-SABE CÓMO)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (4, 'HABILIDADES (MUESTRA CÓMO-HACE)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (4, 'ACTITUDES (MUESTRA CÓMO-HACE)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (5, 'CONOCIMIENTOS (SABE-SABE CÓMO)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (5, 'HABILIDADES (MUESTRA CÓMO-HACE)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (5, 'ACTITUDES (MUESTRA CÓMO-HACE)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (6, 'CONOCIMIENTOS (SABE-SABE CÓMO)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (6, 'HABILIDADES (MUESTRA CÓMO-HACE)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (6, 'ACTITUDES (MUESTRA CÓMO-HACE)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (7, 'CONOCIMIENTOS (SABE-SABE CÓMO)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (7, 'HABILIDADES (MUESTRA CÓMO-HACE)', 'NOTA');
+insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (7, 'ACTITUDES (MUESTRA CÓMO-HACE)', 'NOTA');
 
 
 -- Criterios Rúbricas
@@ -526,48 +526,48 @@ insert into casos_clinicos (id_portafolio, nombre, caso_clinico, fecha_subida) v
 	
 
 -- Puntuacion Criterios 
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (1, 1, 2);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (1, 2, 1);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (1, 3, 0);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (1, 4, 0);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (1, 5, 0);
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (1, 1, '2');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (1, 2, '1');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (1, 3, '0');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (1, 4, '0');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (1, 5, '0');
 
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 20, 3);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 21, 4);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 22, 5);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 23, 5);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 25, 5);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 26, 4);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 27, 3);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 28, 4);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 29, 4);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 30, 5);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 31, 5);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 32, 4);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 33, 4);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 34, 5);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 35, 5);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 36, 4);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 37, 2);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 38, 1);
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 20, '3');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 21, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 22, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 23, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 25, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 26, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 27, '3');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 28, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 29, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 30, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 31, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 32, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 33, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 34, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 35, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 36, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 37, '2');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 38, '1');
 
 
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 1, 3);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 2, 4);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 3, 3);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 4, 5);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 5, 3);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 6, 4);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 7, 3);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 8, 4);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 9, 3);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 10, 5);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 11, 5);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 12, 4);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 13, 4);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 14, 5);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 15, 5);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 16, 4);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 17, 3);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 18, 1);
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 19, 1);
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 1, '3');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 2, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 3, '3');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 4, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 5, '3');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 6, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 7, '3');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 8, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 9, '3');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 10, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 11, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 12, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 13, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 14, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 15, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 16, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 17, '3');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 18, '1');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 19, '1');

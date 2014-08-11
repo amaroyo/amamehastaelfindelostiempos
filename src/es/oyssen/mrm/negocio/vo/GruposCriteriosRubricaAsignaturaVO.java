@@ -8,6 +8,7 @@ public class GruposCriteriosRubricaAsignaturaVO {
 	private String id_grupo_criterio;
 	private String nombre_criterio;
 	private String nombre_grupo_criterio;
+	private String tipo;
 
 
 	
@@ -114,6 +115,18 @@ public class GruposCriteriosRubricaAsignaturaVO {
 		} else if (!id_criterio.equals(other.id_criterio))
 			return false;
 		return true;
+	}
+
+
+
+	public String getTipo() {
+		return tipo;
+	}
+
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 

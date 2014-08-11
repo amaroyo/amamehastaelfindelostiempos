@@ -27,12 +27,12 @@ import es.oyssen.mrm.negocio.vo.GruposCriteriosRubricaAsignaturaVO;
 
 public class MySqlDAOGruposCriteriosRubricasImpl extends DAOBase implements DAOGruposCriteriosRubricas{
 
-	private static String SQL_INSERT = "insert into grupos_criterios_rubricas (id_asignatura, nombre) values (?,?)";
+	private static String SQL_INSERT = "insert into grupos_criterios_rubricas (id_asignatura, nombre, tipo) values (?,?,?)";
 	private static String SQL_UPDATE = "update grupos_criterios_rubricas set nombre=?";
 	private static String SQL_DELETE = "delete from grupos_criterios_rubricas where id_grupo_criterio = ? ";
 	private static String SQL_FIND_BY_ID = "select * from grupos_criterios_rubricas where id_grupo_criterio = ?";
 	private static String SQL_FIND_BY_ASIGNATURA = "select * from grupos_criterios_rubricas where id_asignatura = ?";
-	private static String SQL_FIND_GRUPOS_CRITERIOS_RUBRICA_ASIGNATURA = "select gcr.id_asignatura, gcr.id_grupo_criterio, gcr.nombre as nombre_grupo_criterio, cr.id_criterio, cr.nombre as nombre_criterio " +
+	private static String SQL_FIND_GRUPOS_CRITERIOS_RUBRICA_ASIGNATURA = "select gcr.id_asignatura, gcr.id_grupo_criterio, gcr.tipo as tipo_grupo_criterio, gcr.nombre as nombre_grupo_criterio, cr.id_criterio, cr.nombre as nombre_criterio " +
 																			"from grupos_criterios_rubricas as gcr, criterios_rubricas as cr " +
 																			"where gcr.id_asignatura = cr.id_asignatura and gcr.id_grupo_criterio = cr.id_grupo_criterio " +
 																			"and gcr.id_asignatura = ?";
@@ -50,6 +50,7 @@ public class MySqlDAOGruposCriteriosRubricasImpl extends DAOBase implements DAOG
 					PreparedStatement ps = conn.prepareStatement(SQL_INSERT, new String[]{"id_grupo_criterio"});
 					ps.setString(1, grupoCriterioRubrica.getIdAsignatura());
 					ps.setString(2, grupoCriterioRubrica.getNombre());
+					ps.setString(2, grupoCriterioRubrica.getTipo());
 					return ps;
 					
 				}

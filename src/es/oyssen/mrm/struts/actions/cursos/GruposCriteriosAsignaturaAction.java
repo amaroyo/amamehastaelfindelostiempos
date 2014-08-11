@@ -62,6 +62,7 @@ public class GruposCriteriosAsignaturaAction extends MrmAction {
 				sb.append("<grupo>");
 				sb.append("<id_grupo><![CDATA[" + gcra.getIdGrupoCriterio() + "]]></id_grupo>");
 				sb.append("<nombre_grupo><![CDATA[" + gcra.getNombreGrupoCriterio() + "]]></nombre_grupo>");
+				sb.append("<tipo_grupo><![CDATA[" + gcra.getTipo() + "]]></tipo_grupo>");
 				sb.append("<criterios>");
 				sb.append("<criterio>");
 				sb.append("<id_criterio><![CDATA[" + gcra.getIdCriterio() + "]]></id_criterio>");
@@ -77,6 +78,7 @@ public class GruposCriteriosAsignaturaAction extends MrmAction {
 						sb.append("<grupo>");
 						sb.append("<id_grupo><![CDATA[" + gcra.getIdGrupoCriterio() + "]]></id_grupo>");
 						sb.append("<nombre_grupo><![CDATA[" + gcra.getNombreGrupoCriterio() + "]]></nombre_grupo>");
+						sb.append("<tipo_grupo><![CDATA[" + gcra.getTipo() + "]]></tipo_grupo>");
 						sb.append("<criterios>");
 					}
 					sb.append("<criterio>");
