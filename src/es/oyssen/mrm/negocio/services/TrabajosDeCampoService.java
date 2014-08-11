@@ -34,4 +34,6 @@ public interface TrabajosDeCampoService {
 
 	public TrabajoDeCampoVO findByIDsTC(TrabajoDeCampoVO tc) throws ServiceException;
 
+	public List<TrabajoDeCampoVO> findAllByIdInfo(TrabajoDeCampoInfoVO i) throws ServiceException;
+
 }

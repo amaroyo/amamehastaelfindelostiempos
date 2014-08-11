@@ -152,6 +152,18 @@ public class TrabajosDeCampoServiceImpl implements TrabajosDeCampoService{
 			throw new ServiceException(e.getMessage());
 		}
 	}
+
+	@Override
+	public List<TrabajoDeCampoVO> findAllByIdInfo(TrabajoDeCampoInfoVO i)
+			throws ServiceException {
+		try {
+			return daoTrabajosDeCampo.findAllByIdInfo(i);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findAllByIdInfo trabajo de campo", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
 	
 	
 	

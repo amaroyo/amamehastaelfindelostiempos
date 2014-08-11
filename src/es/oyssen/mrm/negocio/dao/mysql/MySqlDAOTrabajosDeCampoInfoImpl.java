@@ -35,7 +35,7 @@ public class MySqlDAOTrabajosDeCampoInfoImpl extends DAOBase implements DAOTraba
 	private static String SQL_UPDATE = "update trabajos_de_campo_info set nombre=?, enunciado=?, nombre_archivo=?, descripcion=?";
 	private static String SQL_UPDATE_SIMPLE = "update trabajos_de_campo_info set nombre=?, descripcion=?";
 	private static String SQL_UPDATE_DATES = "update trabajos_de_campo set fecha_limite=?";
-	private static String SQL_DELETE = "delete from trabajos_de_campo_info where id_asignatura = ? ";
+	private static String SQL_DELETE = "delete from trabajos_de_campo_info where id_trabajo_info = ? ";
 	private static String SQL_FIND_BY_ID = "select distinct i.*, t.fecha_limite from trabajos_de_campo_info as i, trabajos_de_campo as t where t.id_trabajo_info=i.id_trabajo_info and i.id_trabajo_info = ?";
 	
 

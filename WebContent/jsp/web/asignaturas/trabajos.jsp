@@ -144,7 +144,7 @@
 	    	function modificarTrabajoCampo(){
 	    		var idTrabajoInfo = tabbar.getActiveTab();
 	    		var dhxWins= new dhtmlXWindows();
-				var window = dhxWins.createWindow("subir", 300,50, 500, 400);
+				var window = dhxWins.createWindow("subir", 300,50, 500, 420);
 				window.setText('<bean:message key="title.trabajo.de.campo" />');				
 				window.setModal(true);
 				window.centerOnScreen();
@@ -160,6 +160,7 @@
 					formNTC.setItemLabel('descargarInformacion','<bean:message key="button.subir.informacion.adicional"/>');
 					formNTC.setItemLabel('subirPractica','<bean:message key="button.subir.trabajo.campo"/>');
 					formNTC.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+					formNTC.setItemLabel('eliminar','<bean:message key="button.eliminar.trabajo.campo"/>');
 		    		formNTC.setRequired('nombre', true);		    		
 		    		formNTC.setRequired('fechaFin', true);
 		    		formNTC.setRequired('hora', true);
@@ -191,6 +192,19 @@
 		    		
 		    		formNTC.load('verTrabajoCampo.do?idTrabajoInfo='+ idTrabajoInfo, function () {	
 			    		formNTC.attachEvent("onButtonClick", function(id){
+			    			if(id == "eliminar"){
+			    				if (confirm("<bean:message key="message.eliminar.trabajo.campo"/>")) {
+			    					window.close();
+			    					var dhxWins2= new dhtmlXWindows();
+				    				var window2 = dhxWins2.createWindow("subir", 300,50, 500, 150);
+				    				window2.setText('<bean:message key="title.eliminar.trabajo.campo" />');				
+				    				window2.setModal(true);
+				    				window2.centerOnScreen();
+				    				window2.attachURL("eliminarTrabajo.do?idTrabajoInfo="+ idTrabajoInfo);
+				    				initProfesor();
+									
+			    				}
+			    			}
 			    			if(correcto){
 								if(id == "descargarInformacion"){
 						    		if (confirm("<bean:message key="message.subir.info.adicional2"/>")) {
@@ -261,6 +275,8 @@
 					formNTC.setItemLabel('descargarInformacion','<bean:message key="button.subir.informacion.adicional"/>');
 					formNTC.setItemLabel('subirPractica','<bean:message key="button.subir.trabajo.campo"/>');
 					formNTC.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+					formNTC.setItemLabel('eliminar','<bean:message key="button.eliminar.trabajo.campo"/>');
+					formNTC.hideItem('eliminar');
 		    		formNTC.setRequired('nombre', true);		    		
 		    		formNTC.setRequired('fechaFin', true);
 		    		formNTC.setRequired('hora', true);
@@ -432,7 +448,8 @@
 	    			trabajoCampo.setItemLabel('descargarInformacion','<bean:message key="button.descargar.informacion"/>');
 	    			trabajoCampo.setItemLabel('subirPractica','<bean:message key="button.subir.trabajo.campo"/>');
 	    			trabajoCampo.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
-		    		
+	    			trabajoCampo.setItemLabel('eliminar','<bean:message key="button.eliminar.trabajo.campo"/>');
+	    			trabajoCampo.hideItem('eliminar');
 	    			
 					//Ponemos por defecto que los items no se puedan modificar, y luego con los permisos necesarios 
 					//seran modificables.

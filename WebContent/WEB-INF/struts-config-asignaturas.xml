@@ -141,24 +141,27 @@
 		</action>
 		
 		<action path="/asignaturas/subirArchivoTrabajoCampo" name="SubirArchivoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.SubirArchivoAction">
-			<exception type="java.lang.Exception" key="error.subir.archivo.caso.clinico" path="/asignaturas/subirCasoClinico.do"></exception>
+			<exception type="java.lang.Exception" key="error.subir.archivo.caso.clinico" path="/asignaturas/subirArchivoTrabajoCampo.do"></exception>
 			<forward name="error" path="/asignaturas/subirArchivo.do" />
 			<forward name="success" path="/asignaturas/correcto.do" />
 		</action>
 		
 		<action path="/asignaturas/subirArchivoTrabajoCampoCorreccion" name="SubirArchivoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.SubirArchivoAction">
-			<exception type="java.lang.Exception" key="error.subir.archivo.caso.clinico" path="/asignaturas/subirCasoClinico.do"></exception>
+			<exception type="java.lang.Exception" key="error.subir.archivo.caso.clinico" path="/asignaturas/subirArchivoTrabajoCampoCorreccion.do"></exception>
 			<forward name="error" path="/asignaturas/subirArchivo.do" />
 			<forward name="success" path="/asignaturas/correcto.do" />
 		</action>
 		
 		<action path="/asignaturas/subirArchivoDiarioReflexivo" name="SubirArchivoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.SubirArchivoAction">
-			<exception type="java.lang.Exception" key="error.subir.archivo.caso.clinico" path="/asignaturas/subirCasoClinico.do"></exception>
+			<exception type="java.lang.Exception" key="error.subir.archivo.caso.clinico" path="/asignaturas/ArchivoDiarioReflexivo.do"></exception>
 			<forward name="error" path="/asignaturas/subirArchivo.do" />
 			<forward name="success" path="/asignaturas/correcto.do" />
 		</action>
 		
-		
+		<action path="/asignaturas/eliminarTrabajo" name="" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.EliminarTrabajoCampoAction" >
+			<exception type="java.lang.Exception" key="error.eliminar.trabajo.campo" path="/asignaturas/eliminarTrabajo.do"></exception>
+			<forward name="success" path="/asignaturas/correcto.do" />
+		</action>
 		
 	</action-mappings>
 

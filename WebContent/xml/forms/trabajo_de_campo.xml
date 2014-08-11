@@ -10,6 +10,7 @@
    </item>
    
    <item type="button" name="aceptar" value="Aceptar" />
+   <item type="button" name="eliminar" value="Eliminar Trabajo de Campo" />
    <item type="button" name="subirPractica" value="Subir Trabajo de Campo" />
    <item type="button" name="descargarCorreccion" value="Descargar Corrección" />
  

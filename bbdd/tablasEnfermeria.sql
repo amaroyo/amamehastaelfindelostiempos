@@ -275,6 +275,7 @@ CREATE TABLE IF NOT EXISTS trabajos_de_campo (
 		ON DELETE CASCADE,
 	FOREIGN KEY (id_trabajo_info)
 		REFERENCES trabajos_de_campo_info(id_trabajo_info)
+		ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8

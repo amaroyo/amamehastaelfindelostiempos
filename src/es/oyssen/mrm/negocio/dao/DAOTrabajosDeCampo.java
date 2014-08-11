@@ -34,6 +34,8 @@ public interface DAOTrabajosDeCampo {
 	public void updateTrabajoCampoCorreccion(TrabajoDeCampoVO tc) throws DAOException, DAOUpdateException;
 
 	public TrabajoDeCampoVO findByIDsTC(TrabajoDeCampoVO tc) throws DAOException;
+
+	public List<TrabajoDeCampoVO> findAllByIdInfo(TrabajoDeCampoInfoVO i) throws DAOException;
 	
 	
 	

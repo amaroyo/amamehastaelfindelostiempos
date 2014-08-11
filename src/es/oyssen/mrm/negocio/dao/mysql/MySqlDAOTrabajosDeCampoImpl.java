@@ -44,7 +44,7 @@ public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosD
 
 	private static String SQL_FIND_BY_IDs = "select t.fecha_limite,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i where t.id_trabajo_info = i.id_trabajo_info and id_portafolio = ? and id_trabajo_de_campo=?";
 	private static String SQL_FIND_BY_IDsTC = "select t.*,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i where t.id_trabajo_info = i.id_trabajo_info and id_portafolio = ? and id_trabajo_de_campo=?";
-	
+	private static String SQL_FIND_ALL_BY_ID_INFO = "select t.*,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i where t.id_trabajo_info = i.id_trabajo_info and i.id_trabajo_info=?";
 
 
 	public void insert(final TrabajoDeCampoVO trabajoDeCampo) throws DAOException,
@@ -95,7 +95,7 @@ public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosD
 	public void delete(TrabajoDeCampoVO trabajoDeCampo) throws DAOException,
 	DAODeleteException {
 		try {
-			getJdbcTemplate().update(SQL_DELETE, new Object[]{trabajoDeCampo.getIdTrabajoDeCampo(),trabajoDeCampo.getIdPortafolio()});
+			getJdbcTemplate().update(SQL_DELETE, new Object[]{trabajoDeCampo.getIdPortafolio(),trabajoDeCampo.getIdTrabajoDeCampo()});
 		} catch (Exception e) {
 			throw new DAODeleteException(e);
 		}
@@ -238,6 +238,18 @@ public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosD
 			throws DAOException {
 		try {
 			return (TrabajoDeCampoVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_IDsTC, new Object[]{tc.getIdPortafolio(),tc.getIdTrabajoDeCampo()}, new TrabajoDeCampoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+	@Override
+	public List<TrabajoDeCampoVO> findAllByIdInfo(TrabajoDeCampoInfoVO i)
+			throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_ALL_BY_ID_INFO, new Object[]{i.getIdTrabajoInfo()}, new TrabajoDeCampoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
