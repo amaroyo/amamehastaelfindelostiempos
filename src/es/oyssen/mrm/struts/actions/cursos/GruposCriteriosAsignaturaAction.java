@@ -71,6 +71,7 @@ public class GruposCriteriosAsignaturaAction extends MrmAction {
 				while(it.hasNext()) {
 					gcra = it.next();
 					if(!id_grupo_criterios_anterior.equals(gcra.getIdGrupoCriterio())){
+						id_grupo_criterios_anterior = gcra.getIdGrupoCriterio();
 						sb.append("</criterios>");
 						sb.append("</grupo>");
 						sb.append("<grupo>");

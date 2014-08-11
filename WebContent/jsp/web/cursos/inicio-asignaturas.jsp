@@ -439,7 +439,7 @@
 				for(var i=0;i<grupos.length;i++) {
 	    	        id_grupo=grupos[i].getElementsByTagName("id_grupo")[0].firstChild.nodeValue;
 	    	        nombre_grupo=grupos[i].getElementsByTagName("nombre_grupo")[0].firstChild.nodeValue;
-	    	        criterios = grupos[i].getElementsByTagName("criterios");
+	    	        criterios = grupos[i].getElementsByTagName("criterio");
 	    	        for(var j=0;j<criterios.length;j++){
 	    	        	id_criterio=criterios[j].getElementsByTagName("id_criterio")[0].firstChild.nodeValue;
 		    	        id_grupo_id_criterio=id_grupo+"_"+id_criterio;
