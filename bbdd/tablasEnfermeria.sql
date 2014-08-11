@@ -155,6 +155,7 @@ CREATE TABLE IF NOT EXISTS grupos_criterios_rubricas (
 	id_grupo_criterio INT(4) auto_increment,
 	id_asignatura INT(3) NOT NULL,
 	nombre VARCHAR(100) NOT NULL,
+	tipo ENUM('NOTA','TEXTO'),
 	PRIMARY KEY (id_grupo_criterio),
 	FOREIGN KEY (id_asignatura)
 		REFERENCES asignaturas(id_asignatura)
@@ -352,7 +353,7 @@ COLLATE = utf8_spanish_ci;
 CREATE TABLE IF NOT EXISTS puntuacion_criterios (
 	id_portafolio INT(50) NOT NULL,
 	id_criterio INT(5) NOT NULL,
-	nota INT(3),
+	nota TEXT,
 	PRIMARY KEY(id_portafolio,id_criterio),
 	FOREIGN KEY (id_portafolio) 
 		REFERENCES portafolios(id_portafolio)
