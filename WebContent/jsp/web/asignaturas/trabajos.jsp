@@ -23,12 +23,13 @@
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos, profesor,a,b, tabbar, idSession;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos, profesor,a,b, tabbar, idSession,miGrid,miGridActivado;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
 	    		//inicializo profesor a falso para tener un poco de seguridad
 	    		profesor=false;
+	    		miGridActivado=false;
 	    		
 	    		<% String idAsignatura = request.getParameter("idAsignatura");%>
 	    		idAsignatura="<%=idAsignatura%>";	
@@ -92,6 +93,10 @@
 	    			
 	    			initTabContent(idTrabajoInfo);
 	    		}
+	    		
+	    		tabbar.attachEvent("onTabClick", function(id, lastId){
+	    			goActualizarMiGrid();
+	    		});
 	    	}
 	    	
 		    	
@@ -548,7 +553,8 @@
 				var idTrabajoCampo = sp[3];
 				
 
-				var miGrid = b.attachGrid();
+				miGrid = b.attachGrid();
+				
 			    miGrid.setIconsPath('../skins/imgs/');		    	
 			    miGrid.setHeader(["<strong><bean:message key="label.mi.perfil" /></strong>"]);
 			    //set readonly (ro)
@@ -557,6 +563,7 @@
 			    miGrid.enableMultiselect(false);
 			    miGrid.init();
 			    miGrid.loadXML("../xml/forms/asignaturas_trabajos_opciones.xml");
+			    miGridActivado=true;
 			    miGrid.attachEvent("onRowSelect",function(rowId,cellIndex){
 			    	if (rowId == "a" && subido == "T") {
 			    		
@@ -589,6 +596,12 @@
 			    });
 		    }
 			
+			function goActualizarMiGrid(){
+				gridProfesores.clearSelection();
+				if(miGridActivado){
+					miGrid.clearAll();
+				}
+			}
 			
 			
 			
