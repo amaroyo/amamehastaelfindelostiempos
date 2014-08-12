@@ -126,9 +126,13 @@
 		
 		<action path="/asignaturas/descargarCasoClinico" name="Descargar" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarAction" />
 		
+		<action path="/asignaturas/descargarDiarioReflexivo" name="Descargar" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarAction" />
+		
 		<action path="/asignaturas/descargarTrabajoCampoAlumno" name="Descargar" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarAction" />
 		
 		<action path="/asignaturas/descargarTrabajoCampoCorreccion" name="Descargar" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarAction" />
+		
+		<action path="/asignaturas/descargarTrabajoCampoInformacion" name="Descargar" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarAction" />
 		
 		<action path="/asignaturas/descargarCasoClinicosAlumno" name="DescargarCasoClinicoAlumno" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarCasoClinicoAlumnoAction" />
 				

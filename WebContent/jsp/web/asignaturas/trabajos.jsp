@@ -425,13 +425,12 @@
 				
 				var cellObj = gridAlumnos.cellById(rowID,celInd);
 				if(celInd=='3' && cellObj.getValue()=="Descargar") {
-					/*
-					var parts = rowID.split("-");
-					var accion = "descargarCasoClinico.do";
-					accion += "?idPortafolio="+parts[0];
-					accion += "&idCasoClinico="+parts[1];
+					
+					var accion = "descargarTrabajoCampoAlumno.do";
+					accion += "?tipoConsulta="+"TrabajoCampoAlumno";
+					accion += "&idPortafolio="+idPortafolio;
+					accion += "&idTrabajoCampo="+idTrabajoCampo;
 					location.href=accion;
-					*/
 				}
 				
 	    		var trabajoCampo = b.attachForm();
@@ -487,6 +486,20 @@
 	    					windowAlumno.centerOnScreen();
 	    					windowAlumno.attachURL("subirArchivo.do?tipoConsulta=TrabajoCampoPractica" + "&idPortafolio=" + idPortafolio + "&idTrabajoCampo=" + idTrabajoCampo);
 	    					      
+	    				}
+	    				else if (id == "descargarInformacion"){
+	    					var accion = "descargarTrabajoCampoInformacion.do";
+							accion += "?tipoConsulta="+"TrabajoCampoInformacion";
+							accion += "&idPortafolio="+idPortafolio;
+							accion += "&idTrabajoCampo="+idTrabajoCampo;
+							location.href=accion;
+	    				}
+	    				else if (id == "descargarCorreccion"){
+	    					var accion = "descargarTrabajoCampoCorreccion.do";
+							accion += "?tipoConsulta="+"TrabajoCampoCorreccion";
+							accion += "&idPortafolio="+idPortafolio;
+							accion += "&idTrabajoCampo="+idTrabajoCampo;
+							location.href=accion;
 	    				}
 	    				
 	    				

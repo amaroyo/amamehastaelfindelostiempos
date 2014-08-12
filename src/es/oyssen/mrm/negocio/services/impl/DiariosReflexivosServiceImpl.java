@@ -103,6 +103,18 @@ public class DiariosReflexivosServiceImpl implements DiariosReflexivosService{
 		}
 		
 	}
+
+	@Override
+	public DiarioReflexivoVO findByIDs(DiarioReflexivoVO d)
+			throws ServiceException {
+		try {
+			return daoDiariosReflexivos.findByIDs(d);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findByIDs diario reflexivo", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
 	
 	
 	

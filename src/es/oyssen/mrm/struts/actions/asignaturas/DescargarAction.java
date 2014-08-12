@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
+import es.oyssen.mrm.negocio.vo.DiarioReflexivoVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
 import es.oyssen.mrm.struts.forms.asignaturas.DescargarForm;
@@ -44,6 +45,22 @@ public class DescargarAction extends MrmAction {
 			}
 			
 		}
+		else if (tipo.equals("DiarioReflexivo")){
+			
+			DiarioReflexivoVO d = new DiarioReflexivoVO();
+			
+			d.setIdPortafolio(f.getIdPortafolio());
+			d.setIdDiarioReflexivo(f.getIdDiarioReflexivo());
+		
+			d = getDiariosReflexivosService().findByIDs(d);
+			data = d.getDiarioReflexivo();
+			if(data!=null){
+				len = d.getDiarioReflexivo().length;
+				sp = d.getNombre().split("\\.");
+				fileName="DiarioReflexivo("+sp[0] + ")." + sp[1];
+			}
+			
+		}
 		else if (tipo.equals("TrabajoCampoAlumno")){
 			
 			TrabajoDeCampoVO t = new TrabajoDeCampoVO();
@@ -70,6 +87,20 @@ public class DescargarAction extends MrmAction {
 				len = t.getCorreccionTrabajo().length;
 				sp = t.getNombreCorreccion().split("\\.");
 				fileName="CorreccionTrabajoDeCampo("+sp[0] + ")." + sp[1];
+			}
+		}
+		else if (tipo.equals("TrabajoCampoInformacion")){
+			
+			TrabajoDeCampoVO t = new TrabajoDeCampoVO();
+			t.setIdPortafolio(f.getIdPortafolio());
+			t.setIdTrabajoDeCampo(f.getIdTrabajoCampo());
+			
+			t = getTrabajosDeCampoService().findByIDsTC(t);
+			data = t.getEnunciado();
+			if(data!=null){
+				len = t.getEnunciado().length;
+				sp = t.getNombreArchivo().split("\\.");
+				fileName="InformacionTrabajoDeCampo("+sp[0] + ")." + sp[1];
 			}
 		}
 		

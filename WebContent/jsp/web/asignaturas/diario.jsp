@@ -20,7 +20,7 @@
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b,idSession;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b,idSession,gridProfesoresAlumno;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -158,8 +158,23 @@
 		    		}
 		    	});
 		    	
+		    	gridAlumnos.attachEvent("onRowSelect",doOnRowDescargasOptions);
 		    	gridAlumnos.clearAndLoad("gridDiariosReflexivosUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);
 				
+			}
+			
+			function doOnRowDescargasOptions(rowID,celInd){
+				var cellObj = gridAlumnos.cellById(rowID,celInd);
+				if(celInd=='2' && cellObj.getValue()=="Descargar") {
+					var parts = rowID.split("-");
+					//alert("Descargar Archivo con idPortafolio=" + parts[0] + " y idCasoClinico=" + parts[1]);
+					var accion = "descargarDiarioReflexivo.do";
+					accion += "?tipoConsulta="+"DiarioReflexivo";
+					accion += "&idPortafolio="+parts[0];
+					accion += "&idDiarioReflexivo="+parts[1];
+					location.href=accion;
+				}
+	
 			}
 			
 			function goGridProfesores(){
@@ -193,7 +208,7 @@
 				
 				toolbarServicios.enableItem('descargarTodosAlumno');
 				
-				var gridProfesoresAlumno = b.attachGrid();
+				gridProfesoresAlumno = b.attachGrid();
 				
 		    	
 				gridProfesoresAlumno.setHeader(["<bean:message key="label.nombre" />", "<bean:message key="label.fecha" />", "<bean:message key="label.enlace" />"]);
@@ -220,9 +235,14 @@
 		    }
 			
 			function doOnRowSelectedOptions(rowID,celInd){
-				if(celInd=='2') {
+				var cellObj = gridProfesoresAlumno.cellById(rowID,celInd);
+				if(celInd=='2' && cellObj.getValue()=="Descargar") {
 					var parts = rowID.split("-");
-					alert("Descargar Archivo con idPortafolio=" + parts[0] + " y idDiarioReflexivo=" + parts[1]);
+					var accion = "descargarDiarioReflexivo.do";
+					accion += "?tipoConsulta="+"DiarioReflexivo";
+					accion += "&idPortafolio="+parts[0];
+					accion += "&idDiarioReflexivo="+parts[1];
+					location.href=accion;
 				}
 	
 			}

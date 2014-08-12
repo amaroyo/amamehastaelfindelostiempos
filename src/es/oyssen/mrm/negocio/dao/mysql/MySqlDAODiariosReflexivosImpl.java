@@ -19,7 +19,9 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
+import es.oyssen.mrm.negocio.dao.rowmappers.CasoClinicoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.DiarioReflexivoMapper;
+import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.DiarioReflexivoVO;
 
 
@@ -29,6 +31,7 @@ public class MySqlDAODiariosReflexivosImpl extends DAOBase implements DAODiarios
 	private static String SQL_UPDATE = "update diarios_reflexivos set diario_reflexivo=?, nombre=?, fecha_subida=?";
 	private static String SQL_DELETE = "delete from diarios_reflexivos where id_portafolio = ? and id_diario_reflexivo = ?";
 	private static String SQL_FIND_BY_PORTAFOLIO = "select * from diarios_reflexivos where id_portafolio = ?";
+	private static String SQL_FIND_BY_IDs = "select * from diarios_reflexivos where id_portafolio = ? and id_diario_reflexivo=?";
 
 
 
@@ -106,6 +109,16 @@ public class MySqlDAODiariosReflexivosImpl extends DAOBase implements DAODiarios
 		}
 	}
 
+	@Override
+	public DiarioReflexivoVO findByIDs(DiarioReflexivoVO d) throws DAOException {
+		try {
+			return (DiarioReflexivoVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_IDs, new Object[]{d.getIdPortafolio(), d.getIdDiarioReflexivo()}, new DiarioReflexivoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
 }
 
 

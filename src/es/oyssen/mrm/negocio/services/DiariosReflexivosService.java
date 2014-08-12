@@ -19,4 +19,6 @@ public interface DiariosReflexivosService {
 
 	public void process(SubirArchivoForm f) throws ServiceException;
 
+	public DiarioReflexivoVO findByIDs(DiarioReflexivoVO d) throws ServiceException;
+
 }

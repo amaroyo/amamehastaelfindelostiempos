@@ -17,6 +17,8 @@ public interface DAODiariosReflexivos {
 	public void delete(DiarioReflexivoVO diarioReflexivo) throws DAOException, DAODeleteException;
 		
 	public List<DiarioReflexivoVO> findAllByPortafolio(DiarioReflexivoVO diarioReflexivo) throws DAOException;
+
+	public DiarioReflexivoVO findByIDs(DiarioReflexivoVO d) throws DAOException;
 	
 	
 	

@@ -431,7 +431,7 @@
 			
 			function createArrayGruposCriteriosFromXML(xml){
 				var items = new Array();
-				var criterios_grupo = new Array();
+				var criterios_grupo;
 				var grupos = xml.getElementsByTagName("grupo");
 				var criterios;
 				var id_grupo, nombre_grupo, id_criterio, nombre_criterio;
@@ -440,11 +440,12 @@
 	    	        id_grupo=grupos[i].getElementsByTagName("id_grupo")[0].firstChild.nodeValue;
 	    	        nombre_grupo=grupos[i].getElementsByTagName("nombre_grupo")[0].firstChild.nodeValue;
 	    	        criterios = grupos[i].getElementsByTagName("criterio");
-	    	        for(var j=0;j<criterios.length;j++){
+	    	        criterios_grupo = new Array();
+	    	        for(var j=0;j<criterios.length;j++){   	        	
 	    	        	id_criterio=criterios[j].getElementsByTagName("id_criterio")[0].firstChild.nodeValue;
 		    	        id_grupo_id_criterio=id_grupo+"_"+id_criterio;
 		    	        nombre_criterio=criterios[j].getElementsByTagName("nombre_criterio")[0].firstChild.nodeValue;
-		    	        criterios_grupo[j]={type:"input", name:id_grupo_id_criterio, label:nombre_criterio, labelWidth:"125", style:"width:200", rows:"2"};
+		    	        criterios_grupo[j]={type:"input", name:id_grupo_id_criterio, label:nombre_criterio, labelWidth:"125", style:"width:200", rows:"2"};		   
 	    	        }
 	    	        items[i]={type:"fieldset", name:id_grupo, label:nombre_grupo, inputWidth:"auto", list:criterios_grupo};
 		    	}

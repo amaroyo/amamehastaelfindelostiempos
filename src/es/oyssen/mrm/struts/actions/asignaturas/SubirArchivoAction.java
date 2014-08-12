@@ -60,7 +60,7 @@ public class SubirArchivoAction extends MrmAction {
 						String[] split = n.split("\\.");
 						
 						if(f.getNombre().equals("")){	
-							tc.setNombreArchivo(split[0] + "." + split[1].toLowerCase());
+							tc.setNombreTrabajo(split[0] + "." + split[1].toLowerCase());
 						}
 						else tc.setNombreTrabajo(f.getNombre() + "." + split[1].toLowerCase());
 						
