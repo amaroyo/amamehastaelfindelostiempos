@@ -43,24 +43,26 @@ public class UsuarioTrabajoCampoMapper implements RowMapper {
     	
     	
     	try {
+
+    		
         	InputStream datosTrabajo = rs.getBinaryStream(FIELD_TRABAJO_DE_CAMPO);
         	InputStream datosCorreccion = rs.getBinaryStream(FIELD_CORRECCION_TRABAJO);
-        	String trabajo;
-        	String correccion;
+        	byte[] trabajo;
+        	byte[] correccion;
         	if(datosTrabajo != null) {
-        		trabajo = new String(new Base64().encode(IOUtils.toByteArray(datosTrabajo)));
+        		trabajo = IOUtils.toByteArray(datosTrabajo);
         	}
         	else{
-        		trabajo = "";
+        		trabajo = null;
         	}
         	if(datosCorreccion != null) {
-        		correccion = new String(new Base64().encode(IOUtils.toByteArray(datosCorreccion)));
+        		correccion = IOUtils.toByteArray(datosCorreccion);
         	}
         	else{
-        		correccion = "";
+        		correccion = null;
         	}
-        	o.setTrabajoDeCampoNombre(trabajo);
-        	o.setTrabajoDeCampoNombre(correccion);
+        	o.setTrabajoDeCampoFile(trabajo);
+        	o.setCorreccionTrabajoFile(correccion);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

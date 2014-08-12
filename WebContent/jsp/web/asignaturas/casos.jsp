@@ -183,7 +183,8 @@
 					var parts = rowID.split("-");
 					//alert("Descargar Archivo con idPortafolio=" + parts[0] + " y idCasoClinico=" + parts[1]);
 					var accion = "descargarCasoClinico.do";
-					accion += "?idPortafolio="+parts[0];
+					accion += "?tipoConsulta="+"CasoClinico";
+					accion += "&idPortafolio="+parts[0];
 					accion += "&idCasoClinico="+parts[1];
 					location.href=accion;
 				}
@@ -255,7 +256,8 @@
 					var parts = rowID.split("-");
 					//alert("Descargar Archivo con idPortafolio=" + parts[0] + " y idCasoClinico=" + parts[1]);
 					var accion = "descargarCasoClinico.do";
-					accion += "?idPortafolio="+parts[0];
+					accion += "?tipoConsulta="+"CasoClinico";
+					accion += "&idPortafolio="+parts[0];
 					accion += "&idCasoClinico="+parts[1];
 					location.href=accion;
 				}

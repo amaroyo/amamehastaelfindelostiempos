@@ -691,15 +691,30 @@ public class UtilXML {
 		sb.append("<rows>");
 		if(list != null){
 			for (UsuarioTrabajoCampoVO utc : list) {
-				sb.append("<row id=\"" +utc.getIdPortafolio() + "-" + utc.getIdTrabajoDeCampo() + "\">");
+				
+				
+				
+				boolean subido = (utc.getTrabajoDeCampoFile() != null);
+				String s="F";
+				if(subido) s="T";
+				
+				boolean corregido =(utc.getCorreccionTrabajoFile() != null);
+				String c = "F";
+				if(corregido) c="T";
+				
+				sb.append("<row id=\"" +s+"-"+c+"-"+utc.getIdPortafolio() + "-" + utc.getIdTrabajoDeCampo() + "\">");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(utc.getNombre()) + "]]></cell>");
 				String apellidos = utc.getApellido1();
 				if(utc.getApellido2() != "") apellidos = apellidos + ", " + utc.getApellido2();
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(apellidos) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(utc.getDni()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(utc.getFechaLimite(),true)) + "]]></cell>");				
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(utc.getTrabajoDeCampoNombre()) + "]]></cell>");
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(utc.getCorreccionTrabajoNombre()) + "]]></cell>");
+				String descarga = "";
+				if(utc.getTrabajoDeCampoFile() != null) descarga="Disponible";
+				sb.append("<cell><![CDATA[" + descarga + "]]></cell>");
+				String descarga2 = "";
+				if(utc.getCorreccionTrabajoFile() != null) descarga2="Disponible";
+				sb.append("<cell><![CDATA[" + descarga2 + "]]></cell>");
 				sb.append("</row>");				
 			}
 		}

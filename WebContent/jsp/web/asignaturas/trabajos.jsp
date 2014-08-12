@@ -249,9 +249,7 @@
 				alert("Descargar Todos");
 			}
 			
-			function subirCorrecciones(){
-				alert("Subir Correcciones");
-			}
+			
 			
 			function fechaLimite(){
 				alert("Fecha Limite");
@@ -529,9 +527,14 @@
 			}
 			
 			function doOnRowSelected(rowIDs,celInd){
+				
 				var sp = rowIDs.split("-");
-				var idPortafolio = sp[0];
-				var idTrabajoCampo = sp[1];
+				var subido = sp[0];
+				var corregido = sp[1];
+				var idPortafolio = sp[2];
+				var idTrabajoCampo = sp[3];
+				
+
 				var miGrid = b.attachGrid();
 			    miGrid.setIconsPath('../skins/imgs/');		    	
 			    miGrid.setHeader(["<strong><bean:message key="label.mi.perfil" /></strong>"]);
@@ -542,7 +545,15 @@
 			    miGrid.init();
 			    miGrid.loadXML("../xml/forms/asignaturas_trabajos_opciones.xml");
 			    miGrid.attachEvent("onRowSelect",function(rowId,cellIndex){
-			    	if (rowId == "a") alert("Descargar");
+			    	if (rowId == "a" && subido == "T") {
+			    		
+			    		var accion = "descargarTrabajoCampoAlumno.do";
+						accion += "?tipoConsulta="+"TrabajoCampoAlumno";
+						accion += "&idPortafolio="+idPortafolio;
+						accion += "&idTrabajoCampo="+idTrabajoCampo;
+						location.href=accion;
+			    		
+			    	}
 			    	else if (rowId == "b") {
 			    		var dhxWinsA= new dhtmlXWindows();
     					var windowAlumno = dhxWinsA.createWindow("subir", 300,50, 500, 150);
@@ -551,7 +562,16 @@
     					windowAlumno.centerOnScreen();
     					windowAlumno.attachURL("subirArchivo.do?tipoConsulta=TrabajoCampoCorreccion" + "&idPortafolio=" + idPortafolio + "&idTrabajoCampo=" + idTrabajoCampo);
 			    	}
-			    	else alert("Cambiar la fecha de entrega");
+			    	else  if (rowId == "c" && corregido == "T") {
+			    		var accion = "descargarTrabajoCampoCorreccion.do";
+						accion += "?tipoConsulta="+"TrabajoCampoCorreccion";
+						accion += "&idPortafolio="+idPortafolio;
+						accion += "&idTrabajoCampo="+idTrabajoCampo;
+						location.href=accion;
+			    	}
+			    	else if (rowId == "d") {
+			    		alert("cambiar fecha");
+			    	}
 			    	
 			    });
 		    }

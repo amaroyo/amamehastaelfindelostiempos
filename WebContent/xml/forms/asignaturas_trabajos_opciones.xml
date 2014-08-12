@@ -7,6 +7,9 @@
         <cell>Subir Corrección</cell>
     </row>
     <row id="c">
+        <cell>Descargar Corrección</cell>
+    </row>
+    <row id="d">
         <cell>Cambiar Fecha de Entrega</cell>
     </row>
 </rows>
