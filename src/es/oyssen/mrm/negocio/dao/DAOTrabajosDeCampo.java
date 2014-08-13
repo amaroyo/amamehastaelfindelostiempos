@@ -38,6 +38,8 @@ public interface DAOTrabajosDeCampo {
 	public List<TrabajoDeCampoVO> findAllByIdInfo(TrabajoDeCampoInfoVO i) throws DAOException;
 
 	public TrabajoDeCampoVO findByPortafolioInfo(TrabajoDeCampoVO trabajo) throws DAOException;
+
+	public void updateIndividualDate(TrabajoDeCampoVO t) throws DAOException, DAOUpdateException;
 	
 	
 	

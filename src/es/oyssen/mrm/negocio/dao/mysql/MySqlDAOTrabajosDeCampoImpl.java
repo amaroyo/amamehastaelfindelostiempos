@@ -32,6 +32,7 @@ public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosD
 
 	private static String SQL_INSERT = "insert into trabajos_de_campo (id_portafolio, id_trabajo_info, fecha_limite) values (?,?,?)";
 	private static String SQL_UPDATE = "update trabajos_de_campo set id_trabajo_info=?, trabajo_de_campo=?, correccion_trabajo=?, fecha_limite=?";
+	private static String SQL_UPDATE_DATE = "update trabajos_de_campo set fecha_limite=?";
 	private static String SQL_UPDATE_CORRECCION = "update trabajos_de_campo set nombre_correccion=?, correccion_trabajo=?";	
 	private static String SQL_UPDATE_TRABAJO = "update trabajos_de_campo set nombre_trabajo=?, trabajo_de_campo=?";
 	private static String SQL_DELETE = "delete from trabajos_de_campo where id_portafolio = ? and id_trabajo_de_campo = ?";
@@ -267,6 +268,26 @@ public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosD
 		} catch (Exception e) {
 			throw new DAOException(e);
 		}
+	}
+
+	@Override
+	public void updateIndividualDate(TrabajoDeCampoVO t) throws DAOException,
+			DAOUpdateException {
+		try {
+			 
+			String query = SQL_UPDATE_DATE;
+
+			query += " where id_trabajo_de_campo = ? and id_portafolio = ?";
+
+			getJdbcTemplate().update(query, new Object[]{
+					
+					t.getFechaLimite(),
+					t.getIdTrabajoDeCampo(),
+					t.getIdPortafolio()});
+		} catch(Exception e) {
+			throw new DAOUpdateException(e);
+		}
+		
 	}
 	
 	

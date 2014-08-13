@@ -38,4 +38,6 @@ public interface TrabajosDeCampoService {
 
 	public TrabajoDeCampoVO findByPortafolioInfo(TrabajoDeCampoVO trabajo) throws ServiceException;
 
+	public void updateIndividualDate(TrabajoDeCampoVO t) throws ServiceException, DAOException;
+
 }

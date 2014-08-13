@@ -176,6 +176,21 @@ public class TrabajosDeCampoServiceImpl implements TrabajosDeCampoService{
 			throw new ServiceException(e.getMessage());
 		}
 	}
+
+	@Override
+	public void updateIndividualDate(TrabajoDeCampoVO t)
+			throws ServiceException, DAOException {
+		try {
+			daoTrabajosDeCampo.updateIndividualDate(t);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error update date trabajo de campo", e);
+			throw new ServiceException(e);
+		}		
+		
+	}
+
+	
 	
 	
 	

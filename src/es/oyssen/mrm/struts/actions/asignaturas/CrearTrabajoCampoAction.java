@@ -83,17 +83,29 @@ public class CrearTrabajoCampoAction extends DHTMLXFormAction {
 	public String save(DhtmlxForm f) throws Exception {
 		
 		CrearTrabajoCampoForm form = (CrearTrabajoCampoForm) f;
-		TrabajoDeCampoInfoVO t= new TrabajoDeCampoInfoVO();
-		t.setIdTrabajoInfo(form.getIdTrabajoInfo());
-		t.setNombre(form.getNombre());
-		t.setDescripcion(form.getDescripcion());
-		getTrabajosDeCampoInfoService().updateSimple(t);
 		
-		String fechaFinal = setFechaMySQL(form.getFechaFin()) + " " + form.getHora() + ":59";
-		t.setFechaLimite(fechaFinal);
-		getTrabajosDeCampoInfoService().updateDates(t);
-		
-		return form.getIdTrabajoInfo();
+		if(!StringUtil.isNullOrBlank(form.getCambioFechaIndividual())){
+			TrabajoDeCampoVO t = new TrabajoDeCampoVO();
+			t.setIdPortafolio(form.getIdPortafolio());
+			t.setIdTrabajoDeCampo(form.getIdTrabajoCampo());
+			String fechaFinal = setFechaMySQL(form.getFechaFin()) + " " + form.getHora() + ":59";
+			t.setFechaLimite(fechaFinal);
+			getTrabajosDeCampoService().updateIndividualDate(t);
+		}		
+		else{
+			TrabajoDeCampoInfoVO t= new TrabajoDeCampoInfoVO();
+			t.setIdTrabajoInfo(form.getIdTrabajoInfo());
+			t.setNombre(form.getNombre());
+			t.setDescripcion(form.getDescripcion());
+			getTrabajosDeCampoInfoService().updateSimple(t);
+			
+			String fechaFinal = setFechaMySQL(form.getFechaFin()) + " " + form.getHora() + ":59";
+			t.setFechaLimite(fechaFinal);
+			getTrabajosDeCampoInfoService().updateDates(t);
+			
+			return form.getIdTrabajoInfo();
+		}
+		return "";
 	}
 
 	@Override
