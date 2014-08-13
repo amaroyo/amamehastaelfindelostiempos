@@ -20,12 +20,13 @@
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b,idSession,gridProfesoresAlumno;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b,idSession,idPortafolio,gridProfesoresAlumno;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
 	    		//inicializo profesor a falso para tener un poco de seguridad
 	    		profesor=false;
+	    		idPortafolio=-1;
 	    		
 	    		<% String idAsignatura = request.getParameter("idAsignatura");%>
 	    		idAsignatura="<%=idAsignatura%>";	
@@ -117,19 +118,20 @@
 			}
 			
 			function descargarTodos(){
-				alert("Descargar Todos");
+				var accion = "descargarTodosDiariosReflexivosAlumnos.do";
+				accion += "?idAsignatura=" + idAsignatura;
+				location.href=accion;
 			}
 			
-			function subirCorrecciones(){
-				alert("Subir Correcciones");
-			}
 			
-			function fechaLimite(){
-				alert("Fecha Limite");
-			}
 			
 			function descargarTodosAlumno(){
-				alert("Descargar Todos Alumno");
+				if (idPortafolio == -1) alert("<bean:message key="message.error.seleccionar.alumno" />");
+				else {
+					var accion = "descargarDiariosReflexivosAlumno.do";
+					accion += "?idPortafolio=" + idPortafolio;
+					location.href=accion;
+				}
 			}
 			
 			function goActualizar() {
@@ -205,6 +207,8 @@
 			}
 			
 			function doOnRowSelected(rowID,celInd){
+				
+				idPortafolio=rowID;
 				
 				toolbarServicios.enableItem('descargarTodosAlumno');
 				

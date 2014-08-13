@@ -133,13 +133,7 @@
 				location.href=accion;
 			}
 			
-			function subirCorrecciones(){
-				alert("Subir Correcciones");
-			}
 			
-			function fechaLimite(){
-				alert("Fecha Limite");
-			}
 			
 			function goActualizar() {
 				

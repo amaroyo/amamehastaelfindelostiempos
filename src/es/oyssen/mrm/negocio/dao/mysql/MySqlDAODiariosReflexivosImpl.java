@@ -111,7 +111,7 @@ public class MySqlDAODiariosReflexivosImpl extends DAOBase implements DAODiarios
 
 	@Override
 	public DiarioReflexivoVO findByIDs(DiarioReflexivoVO d) throws DAOException {
-		try {
+		try { 
 			return (DiarioReflexivoVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_IDs, new Object[]{d.getIdPortafolio(), d.getIdDiarioReflexivo()}, new DiarioReflexivoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
@@ -120,5 +120,5 @@ public class MySqlDAODiariosReflexivosImpl extends DAOBase implements DAODiarios
 		}
 	}
 }
-
+	
 

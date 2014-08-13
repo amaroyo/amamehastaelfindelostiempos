@@ -45,7 +45,7 @@ public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosD
 	private static String SQL_FIND_BY_IDs = "select t.fecha_limite,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i where t.id_trabajo_info = i.id_trabajo_info and id_portafolio = ? and id_trabajo_de_campo=?";
 	private static String SQL_FIND_BY_IDsTC = "select t.*,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i where t.id_trabajo_info = i.id_trabajo_info and id_portafolio = ? and id_trabajo_de_campo=?";
 	private static String SQL_FIND_ALL_BY_ID_INFO = "select t.*,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i where t.id_trabajo_info = i.id_trabajo_info and i.id_trabajo_info=?";
-
+	private static String SQL_FIND_BY_PORTAFOLIO_INFO = "select t.*,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i where t.id_trabajo_info = i.id_trabajo_info and t.id_portafolio = ? and t.id_trabajo_info=?";
 
 	public void insert(final TrabajoDeCampoVO trabajoDeCampo) throws DAOException,
 	DAOInsertException {
@@ -250,6 +250,18 @@ public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosD
 			throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_ALL_BY_ID_INFO, new Object[]{i.getIdTrabajoInfo()}, new TrabajoDeCampoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+	@Override
+	public TrabajoDeCampoVO findByPortafolioInfo(TrabajoDeCampoVO trabajo)
+			throws DAOException {
+		try {
+			return (TrabajoDeCampoVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_PORTAFOLIO_INFO, new Object[]{trabajo.getIdPortafolio(),trabajo.getIdTrabajoInfo()}, new TrabajoDeCampoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

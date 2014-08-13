@@ -164,6 +164,18 @@ public class TrabajosDeCampoServiceImpl implements TrabajosDeCampoService{
 			throw new ServiceException(e.getMessage());
 		}
 	}
+
+	@Override
+	public TrabajoDeCampoVO findByPortafolioInfo(TrabajoDeCampoVO trabajo)
+			throws ServiceException {
+		try {
+			return daoTrabajosDeCampo.findByPortafolioInfo(trabajo);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findByPortafolioInfo trabajo de campo", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
 	
 	
 	

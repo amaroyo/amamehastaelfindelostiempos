@@ -36,6 +36,8 @@ public interface DAOTrabajosDeCampo {
 	public TrabajoDeCampoVO findByIDsTC(TrabajoDeCampoVO tc) throws DAOException;
 
 	public List<TrabajoDeCampoVO> findAllByIdInfo(TrabajoDeCampoInfoVO i) throws DAOException;
+
+	public TrabajoDeCampoVO findByPortafolioInfo(TrabajoDeCampoVO trabajo) throws DAOException;
 	
 	
 	

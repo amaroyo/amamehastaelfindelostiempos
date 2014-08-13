@@ -251,7 +251,11 @@
 			
 			
 			function descargarTodos(){
-				alert("Descargar Todos");
+				var idTrabajoInfo = tabbar.getActiveTab();
+				var accion = "descargarTodosTrabajosCampoAlumnos.do";
+				accion += "?idAsignatura=" + idAsignatura;
+				accion += "&idTrabajoInfo=" + idTrabajoInfo;
+				location.href=accion;
 			}
 			
 			
