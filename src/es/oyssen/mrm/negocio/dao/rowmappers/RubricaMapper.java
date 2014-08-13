@@ -15,6 +15,7 @@ public class RubricaMapper implements RowMapper {
 	public static final String FIELD_ID_ASIGNATURA = "id_asignatura";
 	public static final String FIELD_COMPETENCIAS = "competencias";
 	public static final String FIELD_NUMERO_CRITERIOS = "numero_criterios";
+	public static final String FIELD_ANEXO = "anexo";
     
 	
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -23,6 +24,7 @@ public class RubricaMapper implements RowMapper {
     	o.setIdAsignatura(StringUtil.nullToString(rs.getString(FIELD_ID_ASIGNATURA)));
     	o.setCompetencias(StringUtil.nullToString(rs.getString(FIELD_COMPETENCIAS)));
     	o.setNumeroCriterios(StringUtil.nullToString(rs.getString(FIELD_NUMERO_CRITERIOS)));
+    	o.setAnexo(StringUtil.nullToString(rs.getString(FIELD_ANEXO)));
 		return o;
 	}
 }

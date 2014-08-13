@@ -22,8 +22,8 @@ import es.oyssen.mrm.negocio.vo.RubricaVO;
 
 public class MySqlDAORubricasImpl extends DAOBase implements DAORubricas{
 
-	private static String SQL_INSERT = "insert into rubricas (id_asignatura, competencias, numero_criterios) values (?,?,?)";
-	private static String SQL_UPDATE = "update rubricas set nombre=?, numero_criterios=?";
+	private static String SQL_INSERT = "insert into rubricas (id_asignatura, competencias, numero_criterios, anexo) values (?,?,?,?)";
+	private static String SQL_UPDATE = "update rubricas set nombre=?, numero_criterios=?, competencias=?, anexo=?";
 	private static String SQL_DELETE = "delete from rubricas where id_asignatura = ? ";
 	private static String SQL_FIND_BY_ID = "select * from rubricas where id_asignatura = ?";
 	
@@ -41,6 +41,7 @@ public class MySqlDAORubricasImpl extends DAOBase implements DAORubricas{
 					ps.setString(1, rubrica.getIdAsignatura());
 					ps.setString(2, rubrica.getCompetencias());
 					ps.setString(3, rubrica.getNumeroCriterios());
+					ps.setString(4, rubrica.getAnexo());
 					return ps;
 
 				}
@@ -64,7 +65,8 @@ public class MySqlDAORubricasImpl extends DAOBase implements DAORubricas{
 			getJdbcTemplate().update(query, new Object[]{
 					rubrica.getCompetencias(),
 					rubrica.getNumeroCriterios(),
-					rubrica.getIdAsignatura()});
+					rubrica.getIdAsignatura(),
+					rubrica.getAnexo()});
 		} catch(Exception e) {
 			throw new DAOUpdateException(e);
 		}

@@ -132,16 +132,16 @@
 		    	formRubrica = tab_rubrica.attachForm();
 		    	formRubrica.loadStruct('../xml/forms/rubrica_form.xml', function(){
 	    			formRubrica.setItemLabel('resultados','<bean:message key="title.resultados.competencias"/>');
-	    			
+	    			formRubrica.setItemValue('competencias',dameCompetenciasAsignatura(idAsignatura));
+
 	    			grupos_criterios_rubrica = dameGruposCriteriosAsignatura(idAsignatura);
 	    			for(var i=0;i<grupos_criterios_rubrica.length;i++){
 	    				formRubrica.addItem("grupos", grupos_criterios_rubrica[i], i);
 	    			}
 	    			
-	    			//load competencias
 	    			//permisosRubricasForm();	
-	    			/*formRubrica.load('editarasignatura.do?idAsignatura=' + idAsignatura, function () {			    			
-	    				formRubrica.attachEvent("onButtonClick", function(id){
+	    			/*formRubrica.load('competenciasasignatura.do?idAsignatura=' + idAsignatura, function () {			    			
+	    				/*formRubrica.attachEvent("onButtonClick", function(id){
 		    				if (id == "aceptar") {
 		    					formRubrica.send("actualizarasignatura.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura ,"post", function(xml) {
 									alert('<bean:message key="message.asignatura.cambiada.exito"/>');
@@ -162,16 +162,15 @@
 
 		    	formAnexo = tab_anexo.attachForm();
 		    	formAnexo.loadStruct('../xml/forms/anexo_form.xml', function(){
-	    			
+	    			formAnexo.setItemLabel('anexo',dameAnexoAsignatura(idAsignatura));
 	    			grupos_anexo_rubrica = dameGruposAnexoAsignatura(idAsignatura);
 	    			for(var i=0;i<grupos_anexo_rubrica.length;i++){
 	    				formAnexo.addItem("anexo", grupos_anexo_rubrica[i], i);
 	    			}
 	    			
-	    			//load titulo anexo
 	    			//permisosRubricasForm();	
-	    			/*formRubrica.load('editarasignatura.do?idAsignatura=' + idAsignatura, function () {			    			
-	    				formRubrica.attachEvent("onButtonClick", function(id){
+	    			/*formRubrica.load('anexoasignatura.do?idAsignatura=' + idAsignatura, function () {			    			
+	    				/*formRubrica.attachEvent("onButtonClick", function(id){
 		    				if (id == "aceptar") {
 		    					formRubrica.send("actualizarasignatura.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura ,"post", function(xml) {
 									alert('<bean:message key="message.asignatura.cambiada.exito"/>');
@@ -458,6 +457,36 @@
 	    			if (xmlhttp.readyState===4) {
 	        	        if(xmlhttp.status===200) { //GET returning a response
 	        	        	return createArrayGruposAnexoFromXML(xmlhttp.responseXML);
+	        	        }
+	        	    }
+	    		}
+	    	    xmlhttp.open("GET",url,false);
+	    	    xmlhttp.send(null);
+	    	    return xmlhttp.onreadystatechange();
+	    	}
+			
+			function dameAnexoAsignatura(idAsignatura){
+	    		var url = "anexoasignatura.do?idAsignatura="+idAsignatura;
+	    		var xmlhttp = initRequest();
+	    		xmlhttp.onreadystatechange=function(){
+	    			if (xmlhttp.readyState===4) {
+	        	        if(xmlhttp.status===200) { //GET returning a response
+	        	        	return xmlhttp.responseXML.getElementsByTagName("anexo")[0].firstChild.nodeValue;
+	        	        }
+	        	    }
+	    		}
+	    	    xmlhttp.open("GET",url,false);
+	    	    xmlhttp.send(null);
+	    	    return xmlhttp.onreadystatechange();
+	    	}
+			
+			function dameCompetenciasAsignatura(idAsignatura){
+	    		var url = "competenciasasignatura.do?idAsignatura="+idAsignatura;
+	    		var xmlhttp = initRequest();
+	    		xmlhttp.onreadystatechange=function(){
+	    			if (xmlhttp.readyState===4) {
+	        	        if(xmlhttp.status===200) { //GET returning a response
+	        	        	return xmlhttp.responseXML.getElementsByTagName("competencias")[0].firstChild.nodeValue;
 	        	        }
 	        	    }
 	    		}

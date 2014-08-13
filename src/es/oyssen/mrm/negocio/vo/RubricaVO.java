@@ -7,6 +7,7 @@ public class RubricaVO {
 	
 	private String id_asignatura;
 	private String competencias;
+	private String anexo;
 	private String numero_criterios;
 
 	
@@ -79,6 +80,16 @@ public class RubricaVO {
 		} else if (!id_asignatura.equals(other.id_asignatura))
 			return false;
 		return true;
+	}
+
+
+	public String getAnexo() {
+		return anexo;
+	}
+
+
+	public void setAnexo(String anexo) {
+		this.anexo = anexo;
 	}
 
 
