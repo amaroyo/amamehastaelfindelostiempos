@@ -19,7 +19,6 @@ public class TrabajoDeCampoInfoMapper implements RowMapper {
     public static final String FIELD_ENUNCIADO = "enunciado";
     public static final String FIELD_NOMBRE_ARCHIVO = "nombre_archivo";
     public static final String FIELD_DESCRIPCION = "descripcion";
-    public static final String FIELD_FECHA_LIMITE = "fecha_limite";
  
 	
     
@@ -30,7 +29,6 @@ public class TrabajoDeCampoInfoMapper implements RowMapper {
 		o.setNombre(StringUtil.nullToString(rs.getString(FIELD_NOMBRE)));
 		o.setNombreArchivo(StringUtil.nullToString(rs.getString(FIELD_NOMBRE_ARCHIVO)));
 		o.setDescripcion(StringUtil.nullToString(rs.getString(FIELD_DESCRIPCION)));
-		o.setFechaLimite(StringUtil.nullToString(rs.getString(FIELD_FECHA_LIMITE)));
 		
 		try {
         	InputStream datos = rs.getBinaryStream(FIELD_ENUNCIADO);

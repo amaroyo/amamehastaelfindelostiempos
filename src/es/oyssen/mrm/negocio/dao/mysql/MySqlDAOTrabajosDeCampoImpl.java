@@ -19,9 +19,11 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
+import es.oyssen.mrm.negocio.dao.rowmappers.InfoNombreTrabajoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.TrabajoDeCampoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.TrabajoDeCampoInfoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioTrabajoCampoMapper;
+import es.oyssen.mrm.negocio.vo.InfoNombreTrabajoVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoInfoVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
@@ -38,7 +40,7 @@ public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosD
 	private static String SQL_DELETE = "delete from trabajos_de_campo where id_portafolio = ? and id_trabajo_de_campo = ?";
 	private static String SQL_FIND_BY_PORTAFOLIO = "select t.*,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i where t.id_trabajo_info = i.id_trabajo_info and id_portafolio = ?";
 	private static String SQL_FIND_BY_ASIGNATURA = "select t.*,i.* from trabajos_de_campo as t, trabajos_de_campo_info as i, portafolios as p where t.id_trabajo_info = i.id_trabajo_info and p.id_portafolio = t.id_portafolio and p.id_asignatura =? and p.anyo_academico =?";
-	private static String SQL_FIND_NOMBRE_BY_ASIGNATURA = "select distinct i.*, t.fecha_limite from trabajos_de_campo as t, trabajos_de_campo_info as i, portafolios as p where p.id_portafolio = t.id_portafolio and t.id_trabajo_info = i.id_trabajo_info and p.id_asignatura =? and p.anyo_academico =?";
+	private static String SQL_FIND_NOMBRE_BY_ASIGNATURA = "select distinct i.id_trabajo_info, i.nombre from trabajos_de_campo as t, trabajos_de_campo_info as i, portafolios as p where p.id_portafolio = t.id_portafolio and t.id_trabajo_info = i.id_trabajo_info and p.id_asignatura =? and p.anyo_academico =?";
 	private static String SQL_FIND_BY_ASIGNATURA_TRABAJO = "select t.id_portafolio, t.id_trabajo_de_campo, t.trabajo_de_campo, t.correccion_trabajo, t.fecha_limite, u.id_usuario, u.nombre, u.apellido1, u.apellido2, u.dni" +  
 															" from trabajos_de_campo as t, portafolios as p, usuarios as u" + 
 															" where p.id_portafolio = t.id_portafolio and p.id_alumno=u.id_usuario and p.id_asignatura =? and p.anyo_academico =? and t.id_trabajo_info =?";
@@ -125,9 +127,9 @@ public class MySqlDAOTrabajosDeCampoImpl extends DAOBase implements DAOTrabajosD
 		}
 	}
 	
-	public List<TrabajoDeCampoInfoVO> findAllNombresByAsignaturaTrabajo(PortafolioVO p) throws DAOException {
+	public List<InfoNombreTrabajoVO> findAllNombresByAsignaturaTrabajo(PortafolioVO p) throws DAOException {
 		try {
-			return getJdbcTemplate().query(SQL_FIND_NOMBRE_BY_ASIGNATURA, new Object[]{p.getIdAsignatura(),p.getAnyoAcademico()}, new TrabajoDeCampoInfoMapper());
+			return getJdbcTemplate().query(SQL_FIND_NOMBRE_BY_ASIGNATURA, new Object[]{p.getIdAsignatura(),p.getAnyoAcademico()}, new InfoNombreTrabajoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

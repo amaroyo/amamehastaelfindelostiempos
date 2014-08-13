@@ -8,6 +8,7 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.vo.RubricaVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoInfoVO;
+import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 
 public interface DAOTrabajosDeCampoInfo {
 
@@ -21,7 +22,7 @@ public interface DAOTrabajosDeCampoInfo {
 
 	public void updateSimple(TrabajoDeCampoInfoVO t) throws DAOException, DAOUpdateException;
 
-	public void updateDates(TrabajoDeCampoInfoVO t) throws DAOException, DAOUpdateException;
+	public void updateDates(TrabajoDeCampoVO t) throws DAOException, DAOUpdateException;
 	
 
 

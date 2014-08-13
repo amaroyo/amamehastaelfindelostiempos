@@ -100,8 +100,11 @@ public class CrearTrabajoCampoAction extends DHTMLXFormAction {
 			getTrabajosDeCampoInfoService().updateSimple(t);
 			
 			String fechaFinal = setFechaMySQL(form.getFechaFin()) + " " + form.getHora() + ":59";
-			t.setFechaLimite(fechaFinal);
-			getTrabajosDeCampoInfoService().updateDates(t);
+			TrabajoDeCampoVO tr = new TrabajoDeCampoVO();
+			tr.setIdTrabajoInfo(form.getIdTrabajoInfo());
+			tr.setFechaLimite(fechaFinal);
+			
+			getTrabajosDeCampoInfoService().updateDates(tr);
 			
 			return form.getIdTrabajoInfo();
 		}
@@ -114,15 +117,13 @@ public class CrearTrabajoCampoAction extends DHTMLXFormAction {
 		TrabajoDeCampoInfoVO t = (TrabajoDeCampoInfoVO) o;
 		StringBuffer sb = new StringBuffer();
 		
-		String fl = parsearFechaLimite(t.getFechaLimite(),false);
-		String[] sp = fl.split(" ");
-		String[] m = sp[1].split(":");
+		
 		
 		sb.append("<data>");
 		sb.append("<nombre><![CDATA[" + t.getNombre() + "]]></nombre>");
 		sb.append("<descripcion><![CDATA[" + t.getDescripcion() + "]]></descripcion>");
-		sb.append("<fechaFin><![CDATA[" + sp[0] + "]]></fechaFin>");
-		sb.append("<hora><![CDATA[" + m[0] +":" + m[1]+ "]]></hora>");
+		sb.append("<fechaFin><![CDATA[" +  "]]></fechaFin>");
+		sb.append("<hora><![CDATA[" +  "]]></hora>");
 		
 		
 		sb.append("</data>");

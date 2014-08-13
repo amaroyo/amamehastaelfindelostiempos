@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import es.oyssen.mrm.negocio.vo.AsignaturaVO;
+import es.oyssen.mrm.negocio.vo.InfoNombreTrabajoVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.ProfesorAsociadoVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
@@ -39,7 +40,7 @@ public class TrabajosCampoAsignaturaAction extends MrmAction {
 		String id_asignatura = (String)request.getParameter("idAsignatura");
 		p.setIdAsignatura(id_asignatura);
 		p.setAnyoAcademico(anyoAcademico);
-		List<TrabajoDeCampoInfoVO> trabajos = null;
+		List<InfoNombreTrabajoVO> trabajos = null;
 		
 		//***CUIDADO, HABRA Q CONSULTAR Q PROFESOR ES Y VER LOS TRABAJOS DE CAMPO DE DICHO PROFE/ASIGNATURA
 		
@@ -82,11 +83,11 @@ public class TrabajosCampoAsignaturaAction extends MrmAction {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<trabajos>");
 		if (o != null){
-			List<TrabajoDeCampoInfoVO> trabajos = (List<TrabajoDeCampoInfoVO>) o;
-			Iterator<TrabajoDeCampoInfoVO> it = trabajos.iterator();
+			List<InfoNombreTrabajoVO> trabajos = (List<InfoNombreTrabajoVO>) o;
+			Iterator<InfoNombreTrabajoVO> it = trabajos.iterator();
 			while(it.hasNext()) {
 				sb.append("<trabajo>");
-				TrabajoDeCampoInfoVO trabajo = it.next();
+				InfoNombreTrabajoVO trabajo = it.next();
 				sb.append("<id><![CDATA[" + trabajo.getIdTrabajoInfo() + "]]></id>");
 				sb.append("<nombre><![CDATA[" + trabajo.getNombre()  + "]]></nombre>");
 				sb.append("</trabajo>");

@@ -27,6 +27,7 @@ import es.oyssen.mrm.negocio.dao.rowmappers.TrabajoDeCampoMapper;
 import es.oyssen.mrm.negocio.vo.AnexoVO;
 import es.oyssen.mrm.negocio.vo.RubricaVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoInfoVO;
+import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 
 
 public class MySqlDAOTrabajosDeCampoInfoImpl extends DAOBase implements DAOTrabajosDeCampoInfo{
@@ -36,7 +37,7 @@ public class MySqlDAOTrabajosDeCampoInfoImpl extends DAOBase implements DAOTraba
 	private static String SQL_UPDATE_SIMPLE = "update trabajos_de_campo_info set nombre=?, descripcion=?";
 	private static String SQL_UPDATE_DATES = "update trabajos_de_campo set fecha_limite=?";
 	private static String SQL_DELETE = "delete from trabajos_de_campo_info where id_trabajo_info = ? ";
-	private static String SQL_FIND_BY_ID = "select distinct i.*, t.fecha_limite from trabajos_de_campo_info as i, trabajos_de_campo as t where t.id_trabajo_info=i.id_trabajo_info and i.id_trabajo_info = ?";
+	private static String SQL_FIND_BY_ID = "select i.* from trabajos_de_campo_info as i where i.id_trabajo_info = ?";
 	
 
 
@@ -143,7 +144,7 @@ public class MySqlDAOTrabajosDeCampoInfoImpl extends DAOBase implements DAOTraba
 	}
 
 	@Override
-	public void updateDates(TrabajoDeCampoInfoVO t) throws DAOException,
+	public void updateDates(TrabajoDeCampoVO t) throws DAOException,
 			DAOUpdateException {
 		try {
 			 

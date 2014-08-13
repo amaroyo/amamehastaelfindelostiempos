@@ -7,7 +7,6 @@ public class TrabajoDeCampoInfoVO {
 	private byte[] enunciado;
 	private String nombre_archivo;
 	private String descripcion;
-	private String fecha_limite;
 	
 	public TrabajoDeCampoInfoVO() {
 		
@@ -58,15 +57,7 @@ public class TrabajoDeCampoInfoVO {
 	
 	
 
-	public String getFechaLimite() {
-		return fecha_limite;
-	}
-
-
-	public void setFechaLimite(String fecha_limite) {
-		this.fecha_limite = fecha_limite;
-	}
-
+	
 
 	public String getNombreArchivo() {
 		return nombre_archivo;

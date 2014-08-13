@@ -4,6 +4,7 @@ import java.util.List;
 
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
+import es.oyssen.mrm.negocio.vo.InfoNombreTrabajoVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoInfoVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
@@ -24,7 +25,7 @@ public interface TrabajosDeCampoService {
 
 	public List<UsuarioTrabajoCampoVO> findAllByAsignaturaTrabajo(PortafolioVO p, TrabajoDeCampoVO t) throws ServiceException;
 
-	public List<TrabajoDeCampoInfoVO> findAllNombresByAsignatura(PortafolioVO p) throws ServiceException;
+	public List<InfoNombreTrabajoVO> findAllNombresByAsignatura(PortafolioVO p) throws ServiceException;
 
 	public TrabajoDeCampoInfoVO findByIDs(TrabajoDeCampoVO t) throws ServiceException;
 
