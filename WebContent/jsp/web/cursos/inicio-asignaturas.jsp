@@ -45,8 +45,8 @@
 	    	dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	
 	    	var main_layout, areaTrabajoCursos, listado, toolbarAsignaturas,
-	    	gridAsignaturas, formInfo, formRubrica, dhxWins, tabbar, tab_info, tab_rubrica, rubrica_layout,
-	    	grupos_criterios_rubrica, competencias_layout, grupos_layout;
+	    	gridAsignaturas, formInfo, formRubrica, formAnexo, dhxWins, tabbar, tab_info, tab_rubrica, tab_anexo,
+	    	grupos_criterios_rubrica, grupos_anexo_rubrica;
 	    	
 	    	var windowsNewAsignatura = new Array();
 	    	var formsNewAsignatura = new Array();
@@ -118,6 +118,10 @@
 		    	tab_rubrica = tabbar.cells('rubricaAsignatura');
 		    	loadFormRubrica(rowID);
 		    	
+		    	tabbar.addTab('anexoAsignatura','<bean:message key="title.anexo"/>');
+		    	tab_anexo = tabbar.cells('anexoAsignatura');
+		    	loadFormAnexo(rowID);
+		    	
 				areaTrabajoCursos.setText(areaTrabajoCursos.getText());
 				areaTrabajoCursos.showHeader();
 		    }
@@ -133,9 +137,38 @@
 	    			for(var i=0;i<grupos_criterios_rubrica.length;i++){
 	    				formRubrica.addItem("grupos", grupos_criterios_rubrica[i], i);
 	    			}
-	    			//myForm.addItem("query", {type: "newcolumn"}, lastItemIndex+1+q);
 	    			
+	    			//load competencias
+	    			//permisosRubricasForm();	
+	    			/*formRubrica.load('editarasignatura.do?idAsignatura=' + idAsignatura, function () {			    			
+	    				formRubrica.attachEvent("onButtonClick", function(id){
+		    				if (id == "aceptar") {
+		    					formRubrica.send("actualizarasignatura.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura ,"post", function(xml) {
+									alert('<bean:message key="message.asignatura.cambiada.exito"/>');
+			    				});
+			    				buscar();
+		    				}
+		    			});
+	    				formRubrica.attachEvent("onEnter", function() {
+							formRubrica.send("actualizarasignatura.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura ,"post", function(xml) {
+								alert('<bean:message key="message.asignatura.cambiada.exito"/>');
+							}); 
+			    		});
+		    		});*/
+	    		});
+		    }
+		    
+		    function loadFormAnexo(idAsignatura){
+
+		    	formAnexo = tab_anexo.attachForm();
+		    	formAnexo.loadStruct('../xml/forms/anexo_form.xml', function(){
 	    			
+	    			grupos_anexo_rubrica = dameGruposAnexoAsignatura(idAsignatura);
+	    			for(var i=0;i<grupos_anexo_rubrica.length;i++){
+	    				formAnexo.addItem("anexo", grupos_anexo_rubrica[i], i);
+	    			}
+	    			
+	    			//load titulo anexo
 	    			//permisosRubricasForm();	
 	    			/*formRubrica.load('editarasignatura.do?idAsignatura=' + idAsignatura, function () {			    			
 	    				formRubrica.attachEvent("onButtonClick", function(id){
@@ -418,6 +451,20 @@
 	    	    return xmlhttp.onreadystatechange();
 	    	}
 			
+			function dameGruposAnexoAsignatura(idAsignatura){
+	    		var url = "gruposanexoasignatura.do?idAsignatura="+idAsignatura;
+	    		var xmlhttp = initRequest();
+	    		xmlhttp.onreadystatechange=function(){
+	    			if (xmlhttp.readyState===4) {
+	        	        if(xmlhttp.status===200) { //GET returning a response
+	        	        	return createArrayGruposAnexoFromXML(xmlhttp.responseXML);
+	        	        }
+	        	    }
+	    		}
+	    	    xmlhttp.open("GET",url,false);
+	    	    xmlhttp.send(null);
+	    	    return xmlhttp.onreadystatechange();
+	    	}
 			
 			function initRequest() {
 	    	    if (window.XMLHttpRequest) {
@@ -429,9 +476,21 @@
 	    	    return xmlhttp;
 	    	}
 			
+			function createArrayGruposAnexoFromXML(xml){
+				var items = new Array();
+				var grupos = xml.getElementsByTagName("grupo");
+				var id_grupo, nombre_grupo;
+				for(var i=0;i<grupos.length;i++) {
+	    	        id_grupo=grupos[i].getElementsByTagName("id_grupo")[0].firstChild.nodeValue;
+	    	        nombre_grupo=grupos[i].getElementsByTagName("nombre_grupo")[0].firstChild.nodeValue;
+	    	        items[i]={type:"input", name:id_grupo, label:nombre_grupo, labelWidth:"125", style:"width:200", rows:"2"};
+		    	}
+				return items;
+			}
+			
 			function createArrayGruposCriteriosFromXML(xml){
 				var items = new Array();
-				var criterios_grupo;
+				var criterios_grupo = new Array();
 				var grupos = xml.getElementsByTagName("grupo");
 				var criterios;
 				var id_grupo, nombre_grupo, id_criterio, nombre_criterio;
@@ -441,11 +500,11 @@
 	    	        nombre_grupo=grupos[i].getElementsByTagName("nombre_grupo")[0].firstChild.nodeValue;
 	    	        criterios = grupos[i].getElementsByTagName("criterio");
 	    	        criterios_grupo = new Array();
-	    	        for(var j=0;j<criterios.length;j++){   	        	
+	    	        for(var j=0;j<criterios.length;j++){
 	    	        	id_criterio=criterios[j].getElementsByTagName("id_criterio")[0].firstChild.nodeValue;
 		    	        id_grupo_id_criterio=id_grupo+"_"+id_criterio;
 		    	        nombre_criterio=criterios[j].getElementsByTagName("nombre_criterio")[0].firstChild.nodeValue;
-		    	        criterios_grupo[j]={type:"input", name:id_grupo_id_criterio, label:nombre_criterio, labelWidth:"125", style:"width:200", rows:"2"};		   
+		    	        criterios_grupo[j]={type:"input", name:id_grupo_id_criterio, label:nombre_criterio, labelWidth:"125", style:"width:200", rows:"2"};
 	    	        }
 	    	        items[i]={type:"fieldset", name:id_grupo, label:nombre_grupo, inputWidth:"auto", list:criterios_grupo};
 		    	}

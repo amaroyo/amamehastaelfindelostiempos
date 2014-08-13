@@ -32,10 +32,13 @@ public class MySqlDAOGruposCriteriosRubricasImpl extends DAOBase implements DAOG
 	private static String SQL_DELETE = "delete from grupos_criterios_rubricas where id_grupo_criterio = ? ";
 	private static String SQL_FIND_BY_ID = "select * from grupos_criterios_rubricas where id_grupo_criterio = ?";
 	private static String SQL_FIND_BY_ASIGNATURA = "select * from grupos_criterios_rubricas where id_asignatura = ?";
-	private static String SQL_FIND_GRUPOS_CRITERIOS_RUBRICA_ASIGNATURA = "select gcr.id_asignatura, gcr.id_grupo_criterio, gcr.tipo as tipo_grupo_criterio, gcr.nombre as nombre_grupo_criterio, cr.id_criterio, cr.nombre as nombre_criterio " +
+	private static String SQL_FIND_GRUPOS_CRITERIOS_RUBRICA_ASIGNATURA = "select gcr.id_asignatura, gcr.id_grupo_criterio, gcr.nombre as nombre_grupo_criterio, gcr.tipo, cr.id_criterio, cr.nombre as nombre_criterio " +
 																			"from grupos_criterios_rubricas as gcr, criterios_rubricas as cr " +
 																			"where gcr.id_asignatura = cr.id_asignatura and gcr.id_grupo_criterio = cr.id_grupo_criterio " +
-																			"and gcr.id_asignatura = ?";
+																			"and gcr.tipo = 'NOTA' and gcr.id_asignatura = ?";
+	private static String SQL_FIND_GRUPOS_ANEXO_RUBRICA_ASIGNATURA = "select gcr.id_grupo_criterio, gcr.id_asignatura, gcr.nombre, gcr.tipo " +
+																		"from grupos_criterios_rubricas as gcr " +
+																		"where gcr.tipo = 'TEXTO' and gcr.id_asignatura = ?";
 	
 
 
@@ -114,6 +117,17 @@ public class MySqlDAOGruposCriteriosRubricasImpl extends DAOBase implements DAOG
 	public List<GruposCriteriosRubricaAsignaturaVO> findGruposCriteriosRubricaAsignatura(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_GRUPOS_CRITERIOS_RUBRICA_ASIGNATURA, new Object[]{grupoCriterioRubrica.getIdAsignatura()}, new GruposCriteriosRubricaAsignaturaMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+	
+	public List<GrupoCriteriosRubricasVO> findGruposAnexoRubricaAsignatura(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws DAOException {
+		try {
+			List<GrupoCriteriosRubricasVO> o = getJdbcTemplate().query(SQL_FIND_GRUPOS_ANEXO_RUBRICA_ASIGNATURA, new Object[]{grupoCriterioRubrica.getIdAsignatura()}, new GrupoCriteriosRubricasMapper());
+			return o;
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+	
+	<item type="fieldset" name="anexo" label="Anexo" inputWidth="auto">
+		
+		<item type="block" id="grupos" inputWidth="auto" >
+			
+		</item>
+		<item type="button" name="aceptar" value="Aceptar"/>
+	</item>
+</items>
+

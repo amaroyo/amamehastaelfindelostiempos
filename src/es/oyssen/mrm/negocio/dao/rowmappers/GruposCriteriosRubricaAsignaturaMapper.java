@@ -19,7 +19,7 @@ public class GruposCriteriosRubricaAsignaturaMapper implements RowMapper {
 	public static final String FIELD_ID_GRUPO_CRITERIO = "id_grupo_criterio";
 	public static final String FIELD_NOMBRE_CRITERIO = "nombre_criterio";
 	public static final String FIELD_NOMBRE_GRUPO_CRITERIO = "nombre_grupo_criterio";
-	public static final String FIELD_TIPO_GRUPO_CRITERIO = "tipo_grupo_criterio";
+	public static final String FIELD_TIPO_GRUPO_CRITERIO = "tipo";
 
     
 	

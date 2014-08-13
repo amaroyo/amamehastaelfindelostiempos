@@ -20,5 +20,8 @@ public interface GruposCriteriosRubricasService {
 	public List<GrupoCriteriosRubricasVO> findAllByAsignatura(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws ServiceException;
 	
 	public List<GruposCriteriosRubricaAsignaturaVO> findGruposCriteriosRubricaAsignatura (GrupoCriteriosRubricasVO grupoCriterioRubrica) throws ServiceException;
+	
+	public List<GrupoCriteriosRubricasVO> findGruposAnexoAsignatura (GrupoCriteriosRubricasVO grupoCriterioRubrica) throws ServiceException;
+
 }
 

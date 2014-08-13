@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import es.oyssen.mrm.negocio.dao.DAOGruposCriteriosRubricas;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
+import es.oyssen.mrm.negocio.dao.rowmappers.GrupoCriteriosRubricasMapper;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.GruposCriteriosRubricasService;
 import es.oyssen.mrm.negocio.vo.CriterioRubricaVO;
@@ -91,6 +93,16 @@ public class GruposCriteriosRubricasServiceImpl implements GruposCriteriosRubric
 		}
 	}
 	
+	public List<GrupoCriteriosRubricasVO> findGruposAnexoAsignatura(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws ServiceException {
+		try {
+			return daoGruposCriteriosRubricas.findGruposAnexoRubricaAsignatura(grupoCriterioRubrica);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findAllByAsignatura criterio rubrica", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
 	
 	
 }
