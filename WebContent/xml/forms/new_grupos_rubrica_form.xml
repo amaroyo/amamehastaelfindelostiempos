@@ -1,24 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <items>
-   <item type="fieldset" name="data" label="Rúbrica de la asignatura: Grupos de criterios" inputWidth="auto">
-       <item type="input" name="numeroGruposCriterios" label="Número de grupos de criterios" labelWidth="140" style="width:160" required="true"/>
-	   <item type="input" name="parte" label="Parte" labelWidth="140" style="width:160" required="true"/>
-	   <item type="input" name="codigo" label="Código" labelWidth="140" style="width:160" required="true"/>
-	   <item type="input" name="curso" label="Curso" labelWidth="140" style="width:160" required="true"/>
-	   <item type="input" name="nombre" label="Nombre" labelWidth="140" style="width:160" required="true"/>
-	   <item type="input" name="competencias" label="Resultados/Competencias" labelWidth="160" style="width:310" rows="7"/> 
-	   <item type="block" id="grupos" inputWidth="auto" >
-		   <item type="label" name="grupo1" label="Grupo de criterios 1">
-		   		<item type="input" name="grupo1_nombre" label="Nombre" labelWidth="140" style="width:160" required="true"/>
+	
+<item type="fieldset" name="data" label="Rúbrica de la asignatura" inputWidth="1175" inputHeight="440">
+	<item type="block">
+		<item type="hidden" name="numeroGruposCriterios" label="Número de grupos de criterios" labelWidth="140" style="width:160" required="true"/>
+		<item type="input" name="parte" label="Parte" labelWidth="140" style="width:160" required="true"/>
+		<item type="input" name="codigo" label="Código" labelWidth="140" style="width:160" required="true"/>
+		<item type="input" name="curso" label="Curso" labelWidth="140" style="width:160" required="true"/>
+		<item type="input" name="nombre" label="Nombre" labelWidth="140" style="width:160" required="true"/>
+		<item type="label" name="labelCompetencias" label="Resultados/Competencias">
+			<item type="input" name="competencias" labelWidth="160" style="width:310" rows="14"/>
+		</item>
+	</item>
+	   
+	<item type="newcolumn"/>
+	   
+	<item type="block" >
+	   <item type="label" name="labelNota" label="Criterios con nota numérica asociada">
+		   <item type="block" id="gruposNota" inputWidth="auto" >
+			   		<item type="input" name="grupo1_nota" label="Nombre grupo 1" labelWidth="140" style="width:160" required="true"/>
+			   		<item type="input" name="grupo1_nota_criterio1" label="Criterio 1" labelWidth="140" style="width:160" required="true"/>
+			   		<item type="button" id="nuevoCriterioGrupoNota" name="Añadir nuevo criterio"/>
+			   		<item type="button" id="nuevoGrupoNota" name="Añadir nuevo grupo"/>
 		   </item>
 	   </item>
-	   <toolbar> 
-			<item type="button" id="nuevoGrupo" img="new.png" text="Añadir nuevo grupo"  action="nuevoGrupo" />
-	   </toolbar>
-   </item>
-   <item type="block">
-	   <item type="button" name="anterior" value="Anterior"/>
-	   <item type="newcolumn"/>
-	   <item type="button" name="siguiente" value="Siguiente"/>
-   </item>
+	</item>   
+	
+	<item type="newcolumn"/>
+	
+	<item type="block" >
+	   <item type="label" name="labelTexto" label="Criterios con anotaciones por parte del profesor">
+		   <item type="block" id="gruposTexto" inputWidth="auto" >
+			   		<item type="input" name="grupo1_texto" label="Nombre grupo 1" labelWidth="140" style="width:160" required="true"/>
+			   		<item type="input" name="grupo1_texto_criterio1" label="Criterio 1" labelWidth="140" style="width:160" required="true"/>
+		   			<item type="button" id="nuevoCriterioGrupoTexto" name="Añadir nuevo criterio"/>
+		   			<item type="button" name="nuevoGrupoTexto" value="Añadir nuevo grupo"/>
+		   </item>
+	   </item>
+	</item>
+	   
+</item>
+<item type="block">
+   <item type="button" name="anterior" value="Anterior"/>
+   <item type="newcolumn"/>
+   <item type="button" name="siguiente" value="Siguiente" offsetLeft="920"/>
+</item>
 </items>

@@ -225,7 +225,7 @@
 		    
 		    function newAsignatura() {
 		    	dhxWins= new dhtmlXWindows();
-		    	windowsNewAsignatura[0] = dhxWins.createWindow("nuevaAsignatura", 300, 50, 400, 215);
+		    	windowsNewAsignatura[0] = dhxWins.createWindow("nuevaAsignatura", 300, 50, 350, 205);
 		    	var windowNewAsignatura = windowsNewAsignatura[0];
 		    	windowNewAsignatura.setText('<bean:message key="title.crear.nueva.asignatura" />');
 		    	windowNewAsignatura.centerOnScreen();
@@ -245,6 +245,7 @@
 		    			}
 		    		});
 		    		
+		    		formNewAsignatura.setFocusOnFirstActive();
 					//permisosNuevaAsignaturaCommonForm();		  
 		    		
 		    		formNewAsignatura.attachEvent("onButtonClick", function(id){
@@ -258,7 +259,7 @@
 		    }
 		    
 		    function crearPartes(currentPart){
-		    	windowsNewAsignatura[currentPart] = dhxWins.createWindow("nuevaParte"+currentPart, 300, 50, 405, 440);
+		    	windowsNewAsignatura[currentPart] = dhxWins.createWindow("nuevaParte"+currentPart, 300, 50, 405, 415);
 		    	var windowNewAsignaturaPart = windowsNewAsignatura[currentPart];
 		    	windowNewAsignaturaPart.setText('<bean:message key="title.crear.nueva.asignatura" />'+': ' + '<bean:message key="title.parte.nueva.asignatura" /> ' +currentPart);				
 		    	windowNewAsignaturaPart.centerOnScreen();
@@ -297,6 +298,8 @@
 						}
 		    		});
 		    		
+					formNewAsignaturaPart.setFocusOnFirstActive();
+					
 					formNewAsignaturaPart.attachEvent("onButtonClick", function(id){
 	    				if (id == "siguiente") {
 	    					if(!existeEnNombresAnteriores(currentPart,numeroRubricas)){
@@ -389,9 +392,9 @@
 		    
 		    
 		    function crearRubricas(currentPart){
-		    	windowsGruposRubrica[currentPart] = dhxWins.createWindow("gruposRubrica"+currentPart, 300, 50, 405, 440);
+		    	windowsGruposRubrica[currentPart] = dhxWins.createWindow("gruposRubrica"+currentPart, 300, 50, 1200, 500);
 		    	var windowGruposRubrica = windowsGruposRubrica[currentPart];
-		    	windowGruposRubrica.setText('<bean:message key="title.crear.nueva.asignatura.grupos.rubrica" />'+': ' + '<bean:message key="title.parte.nueva.asignatura" /> ' +currentPart);				
+		    	windowGruposRubrica.setText('<bean:message key="title.crear.nueva.asignatura" />'+': '+'<bean:message key="title.parte.nueva.asignatura" /> ' +currentPart+' '+'<bean:message key="title.crear.nueva.asignatura.grupos.rubrica" />');				
 		    	windowGruposRubrica.centerOnScreen();
 		    	windowGruposRubrica.setModal(true);
 				formsGruposRubrica[currentPart] = windowsGruposRubrica[currentPart].attachForm();
@@ -399,23 +402,30 @@
 				var numeroRubricas = formsNewAsignatura[0].getItemValue("numeroRubricas");
 				formGruposRubrica.loadStruct('../xml/forms/new_grupos_rubrica_form.xml', function() {
 					formGruposRubrica.setItemLabel('data','<bean:message key="title.grupos.criterios.rubrica"/>');
-					formGruposRubrica.setItemLabel('numeroGruposCriterios','<bean:message key="label.numero.grupos.criterios"/>');
 					formGruposRubrica.setItemLabel('parte','<bean:message key="label.parte"/>');
 					formGruposRubrica.setItemLabel('codigo','<bean:message key="label.codigo.asignatura"/>');
 					formGruposRubrica.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
-					formGruposRubrica.setItemLabel('nombre','<bean:message key="label.nombre.asignatura"/>');
-					formGruposRubrica.setItemLabel('competencias','<bean:message key="label.competencias"/>');
-					formGruposRubrica.setItemLabel('grupo1','<bean:message key="label.grupo.criterios"/>'+': '+currentPart);
-					formGruposRubrica.setItemLabel('grupo1_nombre','<bean:message key="label.nombre.grupo.criterios"/>');
+					formGruposRubrica.setItemLabel('nombre','<bean:message key="label.nombre.asignatura.rubrica"/>');
+					formGruposRubrica.setItemLabel('labelCompetencias','<bean:message key="label.competencias"/>');
+					formGruposRubrica.setItemLabel('labelNota','<bean:message key="label.criterios.nota"/>');
+					formGruposRubrica.setItemLabel('grupo1_nota','<strong><bean:message key="label.nombre.grupo.criterios"/>'+' '+'1</strong>');
+					formGruposRubrica.setItemLabel('grupo1_nota_criterio1','<bean:message key="label.criterio"/>'+' '+'1');
+					formGruposRubrica.setItemLabel('nuevoCriterioGrupoNota','<bean:message key="button.add.nuevo.criterio"/>');	  
+					formGruposRubrica.setItemLabel('nuevoGrupoNota','<bean:message key="button.add.nuevo.grupo"/>');	  
+					formGruposRubrica.setItemLabel('labelTexto','<bean:message key="label.criterios.texto"/>');
+					formGruposRubrica.setItemLabel('grupo1_texto','<strong><bean:message key="label.nombre.grupo.criterios"/>'+' '+'1</strong>');
+					formGruposRubrica.setItemLabel('grupo1_texto_criterio1','<bean:message key="label.criterio"/>'+' '+'1');
+					formGruposRubrica.setItemLabel('nuevoCriterioGrupoTexto','<bean:message key="button.add.nuevo.criterio"/>');	  
+					formGruposRubrica.setItemLabel('nuevoGrupoTexto','<bean:message key="button.add.nuevo.grupo"/>');	  
 					formGruposRubrica.setItemLabel('anterior','<bean:message key="button.anterior"/>');	  
 					formGruposRubrica.setItemLabel('siguiente','<bean:message key="button.siguiente"/>');	
-		    		
+														
+					
 					formGruposRubrica.forEachItem(function(id){
 						if(formGruposRubrica.getItemType(id) == "input"){
-							alert(id);
 							formGruposRubrica.setRequired(id,true);
 						}
-						if(id == "numeroGruposCriterios" || id == "parte" || id == "codigo" || id == "curso" || id == "nombre") {
+						if(id == "parte" || id == "codigo" || id == "curso" || id == "nombre") {
 							switch(id) {
 								case "numeroGruposCriterios":
 									formGruposRubrica.setItemValue(id,"1");
@@ -436,6 +446,9 @@
 							formGruposRubrica.disableItem(id);
 						}
 		    		});
+					
+					formGruposRubrica.setFocusOnFirstActive();
+
 		    		
 					
 					/* LLAMAR AL FINAAAAAAAAAAAAAAAALLLLLLL

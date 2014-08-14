@@ -11,6 +11,6 @@
    <item type="block">
 	   <item type="button" name="anterior" value="Anterior"/>
 	   <item type="newcolumn"/>
-	   <item type="button" name="siguiente" value="Siguiente"/>
+	   <item type="button" name="siguiente" value="Siguiente" offsetLeft="145"/>
    </item>
 </items>
