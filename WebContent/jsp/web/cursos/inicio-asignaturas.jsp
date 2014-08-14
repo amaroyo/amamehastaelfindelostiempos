@@ -410,12 +410,12 @@
 					formGruposRubrica.setItemLabel('labelNota','<bean:message key="label.criterios.nota"/>');
 					formGruposRubrica.setItemLabel('grupo1_nota','<strong><bean:message key="label.nombre.grupo.criterios"/>'+' '+'1</strong>');
 					formGruposRubrica.setItemLabel('grupo1_nota_criterio1','<bean:message key="label.criterio"/>'+' '+'1');
-					formGruposRubrica.setItemLabel('nuevoCriterioGrupoNota','<bean:message key="button.add.nuevo.criterio"/>');	  
+					formGruposRubrica.setItemLabel('nuevoCriterioNota','<bean:message key="button.add.nuevo.criterio"/>');	  
 					formGruposRubrica.setItemLabel('nuevoGrupoNota','<bean:message key="button.add.nuevo.grupo"/>');	  
 					formGruposRubrica.setItemLabel('labelTexto','<bean:message key="label.criterios.texto"/>');
 					formGruposRubrica.setItemLabel('grupo1_texto','<strong><bean:message key="label.nombre.grupo.criterios"/>'+' '+'1</strong>');
 					formGruposRubrica.setItemLabel('grupo1_texto_criterio1','<bean:message key="label.criterio"/>'+' '+'1');
-					formGruposRubrica.setItemLabel('nuevoCriterioGrupoTexto','<bean:message key="button.add.nuevo.criterio"/>');	  
+					formGruposRubrica.setItemLabel('nuevoCriterioTexto','<bean:message key="button.add.nuevo.criterio"/>');	  
 					formGruposRubrica.setItemLabel('nuevoGrupoTexto','<bean:message key="button.add.nuevo.grupo"/>');	  
 					formGruposRubrica.setItemLabel('anterior','<bean:message key="button.anterior"/>');	  
 					formGruposRubrica.setItemLabel('siguiente','<bean:message key="button.siguiente"/>');	
@@ -449,17 +449,30 @@
 					
 					formGruposRubrica.setFocusOnFirstActive();
 
-		    		
-					
-					/* LLAMAR AL FINAAAAAAAAAAAAAAAALLLLLLL
-		    			crearAsignaturaCompleta(numeroRubricas);
-		    			cerrarVentanas();
-		    			*/
-					
-					
-					
-					/*formNewAsignaturaPart.attachEvent("onButtonClick", function(id){
-	    				if (id == "siguiente") {
+					var criterios_nota=2;
+					var criterios_texto=2;
+					var grupos_nota=2;
+					var grupos_texto=2;
+	    			formGruposRubrica.attachEvent("onButtonClick", function(id){
+						switch(id){
+							case "nuevoCriterioNota":
+								var nombre="grupo1_nota_criterio"+criterios_nota;
+								var etiqueta = "Criterio "+criterios_nota;
+				    	        criterio_nota={type:"input", nombre:nombre, label:etiqueta, labelWidth:"140", style:"width:160", required:"true"};
+								formGruposRubrica.addItem("gruposNota", criterio_nota, criterios_nota, true);
+								criterios_nota=criterios_nota+1;
+								break;
+							case "nuevoCriterioTexto":
+								alert("criterio texto");
+								break;
+							case "nuevoGrupoNota":
+								alert("grupo Nota");
+								break;
+							case "nuevoGrupoTexto":
+								alert("grupo Texto");
+								break;
+						}
+	    				/*if (id == "siguiente") {
 	    					if(!existeEnNombresAnteriores(currentPart,numeroRubricas)){
 		    					formNewAsignaturaPart.send("buscarasignatura.do","post", function(loader,response) {
 		    						resultadoBuscarParteAsignatura(response,currentPart,numeroRubricas);
@@ -471,8 +484,8 @@
 	    					windowsNewAsignatura[currentPart].hide();
 	    					windowsNewAsignatura[currentPart-1].setModal(true);
 	    					windowsNewAsignatura[currentPart-1].show();
-	    				}
-		    		});*/
+	    				}*/
+	    			});
 		    	});
 		    }
 		    

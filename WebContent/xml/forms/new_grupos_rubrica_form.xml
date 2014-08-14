@@ -20,8 +20,8 @@
 		   <item type="block" id="gruposNota" inputWidth="auto" >
 			   		<item type="input" name="grupo1_nota" label="Nombre grupo 1" labelWidth="140" style="width:160" required="true"/>
 			   		<item type="input" name="grupo1_nota_criterio1" label="Criterio 1" labelWidth="140" style="width:160" required="true"/>
-			   		<item type="button" id="nuevoCriterioGrupoNota" name="Añadir nuevo criterio"/>
-			   		<item type="button" id="nuevoGrupoNota" name="Añadir nuevo grupo"/>
+			   		<item type="button" name="nuevoCriterioNota" value="Añadir nuevo criterio"/>
+			   		<item type="button" name="nuevoGrupoNota" value="Añadir nuevo grupo"/>
 		   </item>
 	   </item>
 	</item>   
@@ -33,7 +33,7 @@
 		   <item type="block" id="gruposTexto" inputWidth="auto" >
 			   		<item type="input" name="grupo1_texto" label="Nombre grupo 1" labelWidth="140" style="width:160" required="true"/>
 			   		<item type="input" name="grupo1_texto_criterio1" label="Criterio 1" labelWidth="140" style="width:160" required="true"/>
-		   			<item type="button" id="nuevoCriterioGrupoTexto" name="Añadir nuevo criterio"/>
+		   			<item type="button" name="nuevoCriterioTexto" value="Añadir nuevo criterio"/>
 		   			<item type="button" name="nuevoGrupoTexto" value="Añadir nuevo grupo"/>
 		   </item>
 	   </item>
