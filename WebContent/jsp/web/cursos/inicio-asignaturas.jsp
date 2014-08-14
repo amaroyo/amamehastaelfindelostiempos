@@ -50,6 +50,10 @@
 	    	
 	    	var windowsNewAsignatura = new Array();
 	    	var formsNewAsignatura = new Array();
+	    	var windowsGruposRubrica = new Array();
+	    	var formsGruposRubrica = new Array();
+	    	var windowsCriteriosRubrica = new Array();
+	    	var formsCriteriosRubrica = new Array();
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -336,9 +340,7 @@
 		    function resultadoBuscarParteAsignatura(response,currentPart,numeroRubricas){
 		    	if(response == "No existe ninguna asignatura con ese nombre") {
 		    		if(numeroRubricas == 1 || currentPart == numeroRubricas) {
-		    			crearRubricas(numeroRubricas);
-		    			crearAsignaturaCompleta(numeroRubricas);
-		    			cerrarVentanas();
+		    			crearRubricas(1);
 		    		}
 		    		else{
 	    				windowsNewAsignatura[currentPart].hide();
@@ -382,6 +384,83 @@
 	    			successfulCrearAsignatura();
 	    			
 		    	}
+		    }
+		    
+		    
+		    
+		    function crearRubricas(currentPart){
+		    	windowsGruposRubrica[currentPart] = dhxWins.createWindow("gruposRubrica"+currentPart, 300, 50, 405, 440);
+		    	var windowGruposRubrica = windowsGruposRubrica[currentPart];
+		    	windowGruposRubrica.setText('<bean:message key="title.crear.nueva.asignatura.grupos.rubrica" />'+': ' + '<bean:message key="title.parte.nueva.asignatura" /> ' +currentPart);				
+		    	windowGruposRubrica.centerOnScreen();
+		    	windowGruposRubrica.setModal(true);
+				formsGruposRubrica[currentPart] = windowsGruposRubrica[currentPart].attachForm();
+				var formGruposRubrica = formsGruposRubrica[currentPart];
+				var numeroRubricas = formsNewAsignatura[0].getItemValue("numeroRubricas");
+				formGruposRubrica.loadStruct('../xml/forms/new_grupos_rubrica_form.xml', function() {
+					formGruposRubrica.setItemLabel('data','<bean:message key="title.grupos.criterios.rubrica"/>');
+					formGruposRubrica.setItemLabel('numeroGruposCriterios','<bean:message key="label.numero.grupos.criterios"/>');
+					formGruposRubrica.setItemLabel('parte','<bean:message key="label.parte"/>');
+					formGruposRubrica.setItemLabel('codigo','<bean:message key="label.codigo.asignatura"/>');
+					formGruposRubrica.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
+					formGruposRubrica.setItemLabel('nombre','<bean:message key="label.nombre.asignatura"/>');
+					formGruposRubrica.setItemLabel('competencias','<bean:message key="label.competencias"/>');
+					formGruposRubrica.setItemLabel('grupo1','<bean:message key="label.grupo.criterios"/>'+': '+currentPart);
+					formGruposRubrica.setItemLabel('grupo1_nombre','<bean:message key="label.nombre.grupo.criterios"/>');
+					formGruposRubrica.setItemLabel('anterior','<bean:message key="button.anterior"/>');	  
+					formGruposRubrica.setItemLabel('siguiente','<bean:message key="button.siguiente"/>');	
+		    		
+					formGruposRubrica.forEachItem(function(id){
+						if(formGruposRubrica.getItemType(id) == "input"){
+							alert(id);
+							formGruposRubrica.setRequired(id,true);
+						}
+						if(id == "numeroGruposCriterios" || id == "parte" || id == "codigo" || id == "curso" || id == "nombre") {
+							switch(id) {
+								case "numeroGruposCriterios":
+									formGruposRubrica.setItemValue(id,"1");
+									break;
+								case "codigo":
+				    			case "curso":
+				    				var valueCopied = formsNewAsignatura[0].getItemValue(id);
+				    				formGruposRubrica.setItemValue(id,valueCopied);
+				    				break;
+				    			case "parte":
+				    				formGruposRubrica.setItemValue(id,currentPart+" / "+numeroRubricas);
+				    				break;
+				    			case "nombre":
+				    				var valueCopied = formsNewAsignatura[currentPart].getItemValue(id);
+				    				formGruposRubrica.setItemValue(id,valueCopied);
+				    				break;
+							}
+							formGruposRubrica.disableItem(id);
+						}
+		    		});
+		    		
+					
+					/* LLAMAR AL FINAAAAAAAAAAAAAAAALLLLLLL
+		    			crearAsignaturaCompleta(numeroRubricas);
+		    			cerrarVentanas();
+		    			*/
+					
+					
+					
+					/*formNewAsignaturaPart.attachEvent("onButtonClick", function(id){
+	    				if (id == "siguiente") {
+	    					if(!existeEnNombresAnteriores(currentPart,numeroRubricas)){
+		    					formNewAsignaturaPart.send("buscarasignatura.do","post", function(loader,response) {
+		    						resultadoBuscarParteAsignatura(response,currentPart,numeroRubricas);
+			    				});
+	    					}
+	    				}
+	    				else if (id == "anterior") {
+	    					windowsNewAsignatura[currentPart].setModal(false);
+	    					windowsNewAsignatura[currentPart].hide();
+	    					windowsNewAsignatura[currentPart-1].setModal(true);
+	    					windowsNewAsignatura[currentPart-1].show();
+	    				}
+		    		});*/
+		    	});
 		    }
 		    
 		    function cerrarVentanas(){

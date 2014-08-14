@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+   <item type="fieldset" name="data" label="Rúbrica de la asignatura: Grupos de criterios" inputWidth="auto">
+       <item type="input" name="numeroGruposCriterios" label="Número de grupos de criterios" labelWidth="140" style="width:160" required="true"/>
+	   <item type="input" name="parte" label="Parte" labelWidth="140" style="width:160" required="true"/>
+	   <item type="input" name="codigo" label="Código" labelWidth="140" style="width:160" required="true"/>
+	   <item type="input" name="curso" label="Curso" labelWidth="140" style="width:160" required="true"/>
+	   <item type="input" name="nombre" label="Nombre" labelWidth="140" style="width:160" required="true"/>
+	   <item type="input" name="competencias" label="Resultados/Competencias" labelWidth="160" style="width:310" rows="7"/> 
+	   <item type="block" id="grupos" inputWidth="auto" >
+		   <item type="label" name="grupo1" label="Grupo de criterios 1">
+		   		<item type="input" name="grupo1_nombre" label="Nombre" labelWidth="140" style="width:160" required="true"/>
+		   </item>
+	   </item>
+	   <toolbar> 
+			<item type="button" id="nuevoGrupo" img="new.png" text="Añadir nuevo grupo"  action="nuevoGrupo" />
+	   </toolbar>
+   </item>
+   <item type="block">
+	   <item type="button" name="anterior" value="Anterior"/>
+	   <item type="newcolumn"/>
+	   <item type="button" name="siguiente" value="Siguiente"/>
+   </item>
+</items>
