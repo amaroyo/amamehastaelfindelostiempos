@@ -47,7 +47,7 @@
 	    	var main_layout, areaTrabajoCursos, listado, toolbarAsignaturas, numeroRubricas,
 	    	gridAsignaturas, formInfo, formRubrica, formAnexo, dhxWins, tabbar, tab_info, tab_rubrica, tab_anexo,
 	    	grupos_criterios_rubrica, grupos_anexo_rubrica;
-	    	var notas_num_criterios_grupo=new Array();
+	    	var num_criterios_grupo=new Array();
 	    	
 	    	var windowsNewAsignatura = new Array();
 	    	var formsNewAsignatura = new Array();
@@ -443,20 +443,21 @@
 					
 					formGruposRubrica.setFocusOnFirstActive();
 		
-					notas_num_criterios_grupo[1]=2;
+					num_criterios_grupo[1][1]=2;
+					num_criterios_grupo[2][1]=2;
 	    			formGruposRubrica.attachEvent("onButtonClick", function(id){
 	    				
 	    				if(id.indexOf("notas_boton_nuevo_criterio") != -1){
-	    					notasBotonNuevoCriterio(id);
+	    					botonNuevoCriterio(id,"notas",1);
 	    				}
 	    				else if(id.indexOf("notas_boton_borrar_criterio") != -1){
-	    					notasBotonBorrarCriterio(id);
+	    					botonBorrarCriterio(id,"notas",1);
 	    				}
 	    				else if(id.indexOf("notas_boton_nuevo_grupo") != -1){
-	    					notasBotonNuevoGrupo(id);
+	    					botonNuevoGrupo(id,"notas",1);
 						}
 						else if(id.indexOf("notas_boton_borrar_grupo") != -1){
-	    					notasBotonBorrarGrupo(id);
+	    					botonBorrarGrupo(id,"notas",1);
 						}
 							
 	    				/*if (id == "siguiente") {
@@ -478,92 +479,91 @@
 		    
 		    
 		    
-		    function notasBotonNuevoCriterio(id){
-		    	var notas_grupo_add_nuevo_criterio=id.charAt(id.length-1);
-				var notas_criterio_nuevo_nombre="notas_criterio_"+notas_grupo_add_nuevo_criterio+"_"+notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio];
-				var notas_criterio_nueva_etiqueta='<bean:message key="label.criterio"/>'+' '+notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio];
-				var notas_criterio_nuevo={type:"input", name:notas_criterio_nuevo_nombre, label:notas_criterio_nueva_etiqueta, labelWidth:"140", style:"width:160", required:"true"};
-				formGruposRubrica.addItem("notas_bloque_"+notas_grupo_add_nuevo_criterio, notas_criterio_nuevo, notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio], true);
-				formGruposRubrica.enableItem("notas_boton_borrar_criterio_"+notas_grupo_add_nuevo_criterio);
-				notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]=notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]+1;
+		    function botonNuevoCriterio(id,type,col){
+		    	var grupo_add_nuevo_criterio=id.charAt(id.length-1);
+				var criterio_nuevo_nombre=type+"_criterio_"+grupo_add_nuevo_criterio+"_"+num_criterios_grupo[col][grupo_add_nuevo_criterio];
+				var criterio_nueva_etiqueta='<bean:message key="label.criterio"/>'+' '+num_criterios_grupo[col][grupo_add_nuevo_criterio];
+				var criterio_nuevo={type:"input", name:criterio_nuevo_nombre, label:criterio_nueva_etiqueta, labelWidth:"140", style:"width:160", required:"true"};
+				formGruposRubrica.addItem(type+"_bloque_"+grupo_add_nuevo_criterio, criterio_nuevo, num_criterios_grupo[col][grupo_add_nuevo_criterio], true);
+				formGruposRubrica.enableItem(type+"_boton_borrar_criterio_"+grupo_add_nuevo_criterio);
+				num_criterios_grupo[col][grupo_add_nuevo_criterio]=num_criterios_grupo[col][grupo_add_nuevo_criterio]+1;
 		    }
 		    
-		    function notasBotonBorrarCriterio(id){
-		    	var notas_grupo_add_nuevo_criterio=id.charAt(id.length-1);
-				notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]=notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]-1;
-				var notas_criterio_nuevo_nombre="notas_criterio_"+notas_grupo_add_nuevo_criterio+"_"+notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio];
-				formGruposRubrica.removeItem(notas_criterio_nuevo_nombre);
-				if(notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]==2){
+		    function botonBorrarCriterio(id,type,col){
+		    	var grupo_add_nuevo_criterio=id.charAt(id.length-1);
+				num_criterios_grupo[col][grupo_add_nuevo_criterio]=num_criterios_grupo[col][notas_grupo_add_nuevo_criterio]-1;
+				var criterio_nuevo_nombre=type+"_criterio_"+grupo_add_nuevo_criterio+"_"+num_criterios_grupo[col][grupo_add_nuevo_criterio];
+				formGruposRubrica.removeItem(criterio_nuevo_nombre);
+				if(num_criterios_grupo[col][grupo_add_nuevo_criterio]==2){
 					formGruposRubrica.disableItem(id);
 				}
 		    }
 		    
-		    function notasBotonNuevoGrupo(id){
-		    	var notas_grupo_add_nuevo_criterio=parseInt(id.charAt(id.length-1))+1;
-				notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]=0;
-				var notas_bloque_grupo_nuevo_nombre="notas_bloque_"+notas_grupo_add_nuevo_criterio;
-				var notas_bloque_grupo_nuevo={type:"block", name:notas_bloque_grupo_nuevo_nombre};
-				formGruposRubrica.addItem("notas", notas_bloque_grupo_nuevo, id.charAt(id.length-1)*2, true);
+		    function botonNuevoGrupo(id,type,col){
+		    	var grupo_add_nuevo_criterio=parseInt(id.charAt(id.length-1))+1;
+				num_criterios_grupo[col][grupo_add_nuevo_criterio]=0;
+				var bloque_grupo_nuevo_nombre=type+"_bloque_"+grupo_add_nuevo_criterio;
+				var bloque_grupo_nuevo={type:"block", name:bloque_grupo_nuevo_nombre};
+				formGruposRubrica.addItem(type, bloque_grupo_nuevo, id.charAt(id.length-1)*2, true);
 				
-				var notas_criterio_nuevo_grupo_nombre="notas_grupo_"+notas_grupo_add_nuevo_criterio;
-				var notas_criterio_nuevo_grupo_etiqueta='<strong><bean:message key="label.nombre.grupo.criterios"/>'+' '+notas_grupo_add_nuevo_criterio+'</strong>';
-				var notas_criterio_nuevo={type:"input", name:notas_criterio_nuevo_grupo_nombre, label:notas_criterio_nuevo_grupo_etiqueta, labelWidth:"140", style:"width:160", required:"true"};
-				formGruposRubrica.addItem("notas_bloque_"+notas_grupo_add_nuevo_criterio, notas_criterio_nuevo, notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio], true);							
-				notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]=notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]+1;
+				var criterio_nuevo_grupo_nombre=type+"_grupo_"+grupo_add_nuevo_criterio;
+				var criterio_nuevo_grupo_etiqueta='<strong><bean:message key="label.nombre.grupo.criterios"/>'+' '+grupo_add_nuevo_criterio+'</strong>';
+				var criterio_nuevo={type:"input", name:criterio_nuevo_grupo_nombre, label:criterio_nuevo_grupo_etiqueta, labelWidth:"140", style:"width:160", required:"true"};
+				formGruposRubrica.addItem(type+"_bloque_"+grupo_add_nuevo_criterio, criterio_nuevo, num_criterios_grupo[col][grupo_add_nuevo_criterio], true);							
+				num_criterios_grupo[col][grupo_add_nuevo_criterio]=num_criterios_grupo[col][grupo_add_nuevo_criterio]+1;
 				
-				var notas_criterio_nuevo_nombre="notas_criterio_"+notas_grupo_add_nuevo_criterio+"_1";
-				var notas_criterio_nueva_etiqueta='<bean:message key="label.criterio"/>'+' 1';
-				var notas_criterio_nuevo={type:"input", name:notas_criterio_nuevo_nombre, label:notas_criterio_nueva_etiqueta, labelWidth:"140", style:"width:160", required:"true"};
-				formGruposRubrica.addItem("notas_bloque_"+notas_grupo_add_nuevo_criterio, notas_criterio_nuevo, notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio], true);
-				notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]=notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]+1;
+				var criterio_nuevo_nombre=type+"_criterio_"+grupo_add_nuevo_criterio+"_1";
+				var criterio_nueva_etiqueta='<bean:message key="label.criterio"/>'+' 1';
+				var criterio_nuevo={type:"input", name:criterio_nuevo_nombre, label:criterio_nueva_etiqueta, labelWidth:"140", style:"width:160", required:"true"};
+				formGruposRubrica.addItem(type+"_bloque_"+grupo_add_nuevo_criterio, criterio_nuevo, num_criterios_grupo[col][grupo_add_nuevo_criterio], true);
+				num_criterios_grupo[col][grupo_add_nuevo_criterio]=num_criterios_grupo[col][grupo_add_nuevo_criterio]+1;
 				
-				var notas_bloque_botones_nuevo_nombre="notas_bloque_botones_"+notas_grupo_add_nuevo_criterio;
-				var notas_bloque_botones_nuevo={type:"block", name:notas_bloque_botones_nuevo_nombre};
-				formGruposRubrica.addItem("notas", notas_bloque_botones_nuevo, id.charAt(id.length-1)*2+1, true);
+				var bloque_botones_nuevo_nombre=type+"_bloque_botones_"+grupo_add_nuevo_criterio;
+				var bloque_botones_nuevo={type:"block", name:bloque_botones_nuevo_nombre};
+				formGruposRubrica.addItem(type, bloque_botones_nuevo, id.charAt(id.length-1)*2+1, true);
 				
-				var notas_boton_nuevo_criterio_nombre="notas_boton_nuevo_criterio_"+notas_grupo_add_nuevo_criterio;
-				var notas_boton_nuevo_criterio_value='<bean:message key="button.add.nuevo.criterio"/>';
-				var notas_bloque_boton_nuevo_criterio={type:"button", name:notas_boton_nuevo_criterio_nombre, value:notas_boton_nuevo_criterio_value};
-				formGruposRubrica.addItem("notas_bloque_botones_"+notas_grupo_add_nuevo_criterio, notas_bloque_boton_nuevo_criterio, 0, true);
-				formGruposRubrica.addItem("notas_bloque_botones_"+notas_grupo_add_nuevo_criterio, {type:"newcolumn"}, 1, true);
-				var notas_boton_borrar_criterio_nombre="notas_boton_borrar_criterio_"+notas_grupo_add_nuevo_criterio;
-				var notas_boton_borrar_criterio_value='<bean:message key="button.delete.nuevo.criterio"/>';
-				var notas_bloque_boton_borrar_criterio={type:"button", name:notas_boton_borrar_criterio_nombre, value:notas_boton_borrar_criterio_value, disabled:"true"};
-				formGruposRubrica.addItem("notas_bloque_botones_"+notas_grupo_add_nuevo_criterio, notas_bloque_boton_borrar_criterio, 2, true);
+				var boton_nuevo_criterio_nombre=type+"boton_nuevo_criterio_"+grupo_add_nuevo_criterio;
+				var boton_nuevo_criterio_value='<bean:message key="button.add.nuevo.criterio"/>';
+				var bloque_boton_nuevo_criterio={type:"button", name:boton_nuevo_criterio_nombre, value:boton_nuevo_criterio_value};
+				formGruposRubrica.addItem(type+"_bloque_botones_"+grupo_add_nuevo_criterio, bloque_boton_nuevo_criterio, 0, true);
+				formGruposRubrica.addItem(type+"_bloque_botones_"+grupo_add_nuevo_criterio, {type:"newcolumn"}, 1, true);
+				var boton_borrar_criterio_nombre=type+"_boton_borrar_criterio_"+grupo_add_nuevo_criterio;
+				var boton_borrar_criterio_value='<bean:message key="button.delete.nuevo.criterio"/>';
+				var bloque_boton_borrar_criterio={type:"button", name:boton_borrar_criterio_nombre, value:boton_borrar_criterio_value, disabled:"true"};
+				formGruposRubrica.addItem(type+"_bloque_botones_"+grupo_add_nuevo_criterio, bloque_boton_borrar_criterio, 2, true);
 				
 				formGruposRubrica.removeItem(id);
-				var notas_boton_nuevo_grupo_nombre="notas_boton_nuevo_grupo_"+notas_grupo_add_nuevo_criterio;
-				var notas_boton_nuevo_grupo_value='<strong><bean:message key="button.add.nuevo.grupo"/></strong>';
-				var notas_boton_nuevo_grupo={type:"button", name:notas_boton_nuevo_grupo_nombre, value:notas_boton_nuevo_grupo_value};
-				formGruposRubrica.addItem("notas_bloque_boton", notas_boton_nuevo_grupo, 0, true);
-				formGruposRubrica.addItem("notas_bloque_boton", {type:"newcolumn"}, 1, true);
-				formGruposRubrica.removeItem("notas_boton_borrar_grupo_"+id.charAt(id.length-1));
-				var notas_boton_borrar_grupo_nombre="notas_boton_borrar_grupo_"+notas_grupo_add_nuevo_criterio;
-				var notas_boton_borrar_grupo_value='<strong><bean:message key="button.delete.nuevo.grupo"/></strong>';
-				var notas_boton_borrar_grupo={type:"button", name:notas_boton_borrar_grupo_nombre, value:notas_boton_borrar_grupo_value};
-				formGruposRubrica.addItem("notas_bloque_boton", notas_boton_borrar_grupo, 2, true);
+				var boton_nuevo_grupo_nombre=type+"_boton_nuevo_grupo_"+grupo_add_nuevo_criterio;
+				var boton_nuevo_grupo_value='<strong><bean:message key="button.add.nuevo.grupo"/></strong>';
+				var boton_nuevo_grupo={type:"button", name:boton_nuevo_grupo_nombre, value:boton_nuevo_grupo_value};
+				formGruposRubrica.addItem(type+"_bloque_boton", boton_nuevo_grupo, 0, true);
+				formGruposRubrica.addItem(type+"_bloque_boton", {type:"newcolumn"}, 1, true);
+				formGruposRubrica.removeItem(type+"_boton_borrar_grupo_"+id.charAt(id.length-1));
+				var boton_borrar_grupo_nombre=type+"_boton_borrar_grupo_"+grupo_add_nuevo_criterio;
+				var boton_borrar_grupo_value='<strong><bean:message key="button.delete.nuevo.grupo"/></strong>';
+				var boton_borrar_grupo={type:"button", name:boton_borrar_grupo_nombre, value:boton_borrar_grupo_value};
+				formGruposRubrica.addItem(type+"_bloque_boton", boton_borrar_grupo, 2, true);
 		    }
-		    function notasBotonBorrarGrupo(id){
-		    	var notas_grupo_add_nuevo_criterio=parseInt(id.charAt(id.length-1));
+		    function botonBorrarGrupo(id,type,col){
+		    	var grupo_add_nuevo_criterio=parseInt(id.charAt(id.length-1));
 				
-				formGruposRubrica.removeItem("notas_bloque_botones_"+notas_grupo_add_nuevo_criterio);
-				formGruposRubrica.removeItem("notas_bloque_"+notas_grupo_add_nuevo_criterio);
+				formGruposRubrica.removeItem(type+"_bloque_botones_"+grupo_add_nuevo_criterio);
+				formGruposRubrica.removeItem(type+"_bloque_"+grupo_add_nuevo_criterio);
 
 				formGruposRubrica.removeItem(id);
-				var notas_boton_nuevo_grupo_nombre="notas_boton_nuevo_grupo_"+(notas_grupo_add_nuevo_criterio-1);
-				alert(notas_boton_nuevo_grupo_nombre);
-				var notas_boton_nuevo_grupo_value='<strong><bean:message key="button.add.nuevo.grupo"/></strong>';
-				var notas_boton_nuevo_grupo={type:"button", name:notas_boton_nuevo_grupo_nombre, value:notas_boton_nuevo_grupo_value};
-				formGruposRubrica.addItem("notas_bloque_boton", notas_boton_nuevo_grupo, 0, true);
-				formGruposRubrica.addItem("notas_bloque_boton", {type:"newcolumn"}, 1, true);
-				formGruposRubrica.removeItem("notas_boton_nuevo_grupo_"+id.charAt(id.length-1));
-				var notas_boton_borrar_grupo_nombre="notas_boton_borrar_grupo_"+(notas_grupo_add_nuevo_criterio-1);
-				var notas_boton_borrar_grupo_value='<strong><bean:message key="button.delete.nuevo.grupo"/></strong>';
-				var notas_boton_borrar_grupo={type:"button", name:notas_boton_borrar_grupo_nombre, value:notas_boton_borrar_grupo_value};
-				formGruposRubrica.addItem("notas_bloque_boton", notas_boton_borrar_grupo, 2, true);
+				var boton_nuevo_grupo_nombre=type+"_boton_nuevo_grupo_"+(grupo_add_nuevo_criterio-1);
+				var boton_nuevo_grupo_value='<strong><bean:message key="button.add.nuevo.grupo"/></strong>';
+				var boton_nuevo_grupo={type:"button", name:boton_nuevo_grupo_nombre, value:boton_nuevo_grupo_value};
+				formGruposRubrica.addItem(type+"_bloque_boton", boton_nuevo_grupo, 0, true);
+				formGruposRubrica.addItem(type+"_bloque_boton", {type:"newcolumn"}, 1, true);
+				formGruposRubrica.removeItem(type+"_boton_nuevo_grupo_"+id.charAt(id.length-1));
+				var boton_borrar_grupo_nombre=type+"_boton_borrar_grupo_"+(grupo_add_nuevo_criterio-1);
+				var boton_borrar_grupo_value='<strong><bean:message key="button.delete.nuevo.grupo"/></strong>';
+				var boton_borrar_grupo={type:"button", name:boton_borrar_grupo_nombre, value:boton_borrar_grupo_value};
+				formGruposRubrica.addItem(type+"_bloque_boton", boton_borrar_grupo, 2, true);
 				
-				if(notas_grupo_add_nuevo_criterio-1 == 1){
-					formGruposRubrica.disableItem(notas_boton_borrar_grupo_nombre);
+				if(grupo_add_nuevo_criterio-1 == 1){
+					formGruposRubrica.disableItem(boton_borrar_grupo_nombre);
 				}
 		    }
 		    
