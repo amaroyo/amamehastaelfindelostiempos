@@ -52,6 +52,8 @@ public interface PortafoliosService {
 	public PortafolioVO findByAlumnoAsignatura(PortafolioVO p) throws ServiceException;
 
 	public UsuarioVO findAlumnoByPortafolio(PortafolioVO p) throws ServiceException;
+
+	
 	
 
 

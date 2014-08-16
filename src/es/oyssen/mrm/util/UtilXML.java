@@ -34,6 +34,7 @@ import es.oyssen.mrm.negocio.vo.ServicioUsuarioVO;
 import es.oyssen.mrm.negocio.vo.ServicioVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
+import es.oyssen.mrm.negocio.vo.UsuarioAsignaturaVO;
 import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioTrabajoCampoVO;
@@ -937,6 +938,30 @@ public class UtilXML {
 		return sb.toString();
 	}
 	
+	public static String buildXmlGridUsuariosProfesores(List<UsuarioAsignaturaVO> list, String idUsuario) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(XML_HEADER);
+		sb.append("<rows>");
+		if(list != null){
+			for (UsuarioAsignaturaVO ua : list) {
+				sb.append("<row id=\"" +ua.getIdUsuario() + "-" + ua.getIdAsignatura() + "-" + ua.getNombreAsignatura() + "-" + ua.getIdPortafolio() + "\">");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(ua.getNombre()) + "]]></cell>");
+				String apellidos = ua.getApellido1();
+				if(ua.getApellido2() != "") apellidos = apellidos + ", " + ua.getApellido2();			
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(apellidos) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(ua.getDni()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(ua.getCodigo()) + "]]></cell>");
+				String sel = "0";
+				if(ua.getIdProfesor().equals(idUsuario)) sel="1";
+				sb.append("<cell><![CDATA[" + sel + "]]></cell>");
+				sb.append("</row>");				
+			}
+		}
+		sb.append("</rows>");
+		return sb.toString();
+		
+	}
+	
 	
 	private static final String nombreGrupo(String id){
 		if (id.equals("1")) return "Super user";
@@ -979,6 +1004,8 @@ public class UtilXML {
 		return tiempoActual.after(fechaL);
 
 	}
+
+	
 
 
 	

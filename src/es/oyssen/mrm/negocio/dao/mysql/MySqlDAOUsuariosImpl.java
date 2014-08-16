@@ -19,8 +19,11 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
+import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioAsignaturaMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioMapper;
 import es.oyssen.mrm.negocio.vo.GrupoVO;
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
+import es.oyssen.mrm.negocio.vo.UsuarioAsignaturaVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
 
@@ -36,6 +39,13 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 	private static String SQL_FIND_BY_CORREO = "select * from usuarios where correo = ?";
 	private static String SQL_FIND_BY_DNI = "select * from usuarios where dni = ?";
 	private static String SQL_FIND_BY_NOMBRE_APELLIDOS = "select * from usuarios where nombre = ? and apellido1 = ? and apellido2 = ?";
+	private static String SQL_FIND_ALL_BY_ANYO = "select u.id_usuario, u.nombre, u.apellido1, u.apellido2, u.dni, a.id_asignatura, a.codigo, a.nombre, p.id_profesor, p.id_portafolio " +
+												"from asignaturas as a, usuarios as u, portafolios as p "+
+												"where u.id_usuario = p.id_alumno and a.id_asignatura = p.id_asignatura and p.anyo_academico =?";
+	
+	private static String SQL_FIND_ALL_BY_PROFESOR = "select u.id_usuario, u.nombre, u.apellido1, u.apellido2, u.dni, a.id_asignatura, a.codigo, a.nombre, p.id_profesor, p.id_portafolio " +
+														"from asignaturas as a, usuarios as u, portafolios as p "+
+														"where u.id_usuario = p.id_alumno and a.id_asignatura = p.id_asignatura and p.anyo_academico =? and p.id_profesor =?";
 	
 	
 	public void insert(final UsuarioVO usuario) throws DAOException,
@@ -195,6 +205,30 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 	public UsuarioVO findByNombreApellidos(UsuarioVO usuario) throws DAOException {
 		try {
 			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_NOMBRE_APELLIDOS, new Object[]{usuario.getNombre(), usuario.getApellido1(), usuario.getApellido2()}, new UsuarioMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+	@Override
+	public List<UsuarioAsignaturaVO> findAllbyAnyoAcademico(PortafolioVO p)
+			throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_ALL_BY_ANYO, new Object[]{p.getAnyoAcademico()}, new UsuarioAsignaturaMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+	@Override
+	public List<UsuarioAsignaturaVO> findAllbyProfesor(PortafolioVO p)
+			throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_ALL_BY_PROFESOR, new Object[]{p.getAnyoAcademico(), p.getIdProfesor()}, new UsuarioAsignaturaMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
