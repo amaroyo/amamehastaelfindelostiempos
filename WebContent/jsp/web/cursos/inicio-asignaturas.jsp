@@ -469,19 +469,19 @@
 	    					botonBorrarGrupo(id,"texto",2);
 						}
 							
-	    				/*if (id == "siguiente") {
-	    					if(!existeEnNombresAnteriores(currentPart,numeroRubricas)){
+	    				if (id == "siguiente") {
+	    					/*if(!existeEnNombresAnteriores(currentPart,numeroRubricas)){
 		    					formNewAsignaturaPart.send("buscarasignatura.do","post", function(loader,response) {
 		    						resultadoBuscarParteAsignatura(response,currentPart,numeroRubricas);
 			    				});
-	    					}
+	    					}*/
 	    				}
 	    				else if (id == "anterior") {
-	    					windowsNewAsignatura[currentPart].setModal(false);
+	    					/*windowsNewAsignatura[currentPart].setModal(false);
 	    					windowsNewAsignatura[currentPart].hide();
 	    					windowsNewAsignatura[currentPart-1].setModal(true);
-	    					windowsNewAsignatura[currentPart-1].show();
-	    				}*/
+	    					windowsNewAsignatura[currentPart-1].show();*/
+	    				}
 	    			});
 		    	});
 		    }
