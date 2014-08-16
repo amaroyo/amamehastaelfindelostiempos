@@ -5,6 +5,8 @@ import java.util.List;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.vo.GrupoVO;
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
+import es.oyssen.mrm.negocio.vo.UsuarioAsignaturaVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
 public interface UsuariosService {
@@ -28,6 +30,10 @@ public interface UsuariosService {
 	public UsuarioVO findByCorreoPass(UsuarioVO usuario) throws ServiceException;
 	
 	public UsuarioVO findByNombreApellidos(UsuarioVO usuario) throws ServiceException;
+
+	public List<UsuarioAsignaturaVO> findAllbyAnyoAcademico(PortafolioVO p) throws ServiceException;
+
+	public List<UsuarioAsignaturaVO> findAllbyProfesor(PortafolioVO p) throws ServiceException;
 
 
 }

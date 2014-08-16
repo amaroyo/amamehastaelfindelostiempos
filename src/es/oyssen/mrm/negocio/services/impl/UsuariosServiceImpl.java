@@ -10,6 +10,8 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.UsuariosService;
 import es.oyssen.mrm.negocio.vo.GrupoVO;
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
+import es.oyssen.mrm.negocio.vo.UsuarioAsignaturaVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
 public class UsuariosServiceImpl implements UsuariosService{
@@ -133,6 +135,30 @@ public class UsuariosServiceImpl implements UsuariosService{
 			e.printStackTrace();
 			log.error("Error findByNombreApellidos usuario", e);
 			throw new ServiceException(e);
+		}
+	}
+
+	@Override
+	public List<UsuarioAsignaturaVO> findAllbyAnyoAcademico(PortafolioVO p)
+			throws ServiceException {
+		try {
+			return daoUsuarios.findAllbyAnyoAcademico(p);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findAllbyAnyoAcademico usuario", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	@Override
+	public List<UsuarioAsignaturaVO> findAllbyProfesor(PortafolioVO p)
+			throws ServiceException {
+		try {
+			return daoUsuarios.findAllbyProfesor(p);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findAllbyProfesor usuario", e);
+			throw new ServiceException(e.getMessage());
 		}
 	}
 	

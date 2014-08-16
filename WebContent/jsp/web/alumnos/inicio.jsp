@@ -14,11 +14,31 @@
 	    <script type="text/javascript" src="../js/general.js"></script>
 	    
 		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlx.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxgrid.js">
 		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxform_dhx_skyblue.css">
 		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlx.js"></script>
 	    <script src="../js/dhtmlxSuite/patterns/dhtmlxlayout_pattern4l.js"></script>
 	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxform.js"></script>
-	    
+	   <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxgrid.js"></script>
+	   <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxgridcell.js"></script>
+	    <script type="text/javascript" src="../js/dhtmlxSuite/excells/dhtmlxgrid_excell_grid.js"></script>
+	    <script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
+ 		<script type="text/javascript" src="../js/dhtmlxSuite/excells/dhtmlxgrid_excell_acheck.js"></script>
+
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_deprecated.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_drag.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_export.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_filter.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_keymap_access.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_keymap_extra.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_keymap_excel.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_nxml.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_selection.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_srnd.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_start.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_validation.js"></script>
+
+
 
 	    <script type="text/javascript">
 	    
@@ -52,20 +72,21 @@
 			    
 			    // INSERTAR EL LABEL CORRECTO PARA ASIGNATURAS DESPUES DEL UPDATE!!!
 			    
-			    miGrid.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","CODIGO"]);
+			    miGrid.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","<bean:message key="label.codigo.asignatura" />"]);
 			    
 			    //anchura de las columnas, en porcentaje. La suma tiene que ser igual a 100
-			    miGrid.setInitWidthsP("22,50,13,15");
+			    miGrid.setInitWidthsP("22,45,18,15");
 			    //alineacion del contenido en la columna
 			    miGrid.setColAlign("left,left,left,left");
 			    
 			    miGrid.setColTypes("ro,ro,ro,ro");
-		    	
+			    
+			    
 			    miGrid.enableMultiselect(false);
 			    miGrid.setColSorting('str,str,str,ro');
 			    miGrid.init();
 		    	
-				var gridProcessor = new dataProcessor("gridusuarios.do");
+				var gridProcessor = new dataProcessor("gridUsuariosProfesor.do");
 				gridProcessor.enableUTFencoding('simple');
 				gridProcessor.init(miGrid);	  
 				gridProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -127,7 +148,7 @@
 		    
 		    
 		    function buscarMisAlumnos() {
-		    	miGrid.clearAndLoad("gridusuarios.do");		    	
+		    	miGrid.clearAndLoad("gridUsuariosProfesor.do");		    	
 		    }
 		    
 		    function buscarSeminarios() {
@@ -386,11 +407,77 @@
 		    }
 			
 			function seleccionarAlumnos(){
-				alert("seleccionarAlumnos");
+				
+	    		var dhxWins= new dhtmlXWindows();
+				var window = dhxWins.createWindow("subir", 300,50, 600, 420);
+				window.setText('<bean:message key="title.trabajo.de.campo" />');				
+				window.setModal(true);
+				window.centerOnScreen();
+				
+				var toolbarServicios = window.attachToolbar();
+		    	toolbarServicios.setIconsPath('../img/toolbar/');
+		    	toolbarServicios.addButton("botonAceptar", "1", "Aceptar", "aceptar.gif");
+				
+				var grid = window.attachGrid();
+				miGrid.setIconsPath('../skins/imgs/');		   
+			    
+			    
+			    
+				grid.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","<bean:message key="label.codigo.asignatura" />","<bean:message key="label.mio" />"]);
+			    
+			    //anchura de las columnas, en porcentaje. La suma tiene que ser igual a 100
+			    grid.setInitWidthsP("21,40,17,14,8");
+			    //alineacion del contenido en la columna
+			    grid.setColAlign("left,left,left,left,left");
+			    
+			    grid.setColTypes("ro,ro,ro,ro,ch");
+		    	
+			    grid.enableMultiselect(false);
+			    grid.setColSorting('str,str,str,ro,str');
+			    grid.init();
+		    	
+				var gridProcessor = new dataProcessor("gridUsuariosProfesor.do?busqueda=si");
+				gridProcessor.enableUTFencoding('simple');
+				gridProcessor.init(grid);	  
+				gridProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+					if(action == 'error'){
+		    			dhtmlx.message(tag.firstChild.data,action,4000);
+		    		}
+		    	});		    	
+
+				grid.clearAndLoad("gridUsuariosProfesor.do?busqueda=si");	
+				
+				toolbarServicios.attachEvent("onClick", function(id){
+	    			if(id == "botonAceptar"){
+	    				var aceptados="";
+	    				var noaceptados="";
+	    				grid.forEachRow(function(id){
+	    					var parts = id.split("-");
+	    					
+	    					var cellObj = grid.cellById(id,4);
+	    					if(cellObj.getValue()=="1") {
+	    						if (aceptados=="") aceptados = parts[3];
+	    						else aceptados += "," + parts[3];
+	    					}
+	    					else {
+	    						if (noaceptados=="") noaceptados = parts[3];
+	    						else noaceptados += "," +  parts[3];
+	    					}
+	    					
+	    				});
+	    				
+	    				var url = "actualizarAlumnos.do?aceptados=" + aceptados + "&noaceptados=" + noaceptados;
+						location.href=url;
+						window.close();
+						setTimeout(function(){buscarMisAlumnos();},1000);
+	    				
+	    			}
+				});
+				
 			}
 			
 			function goActualizarAlumnos(){
-				alert("actualizar alumnos");
+				 buscarMisAlumnos();
 			}
 			
 			function goCasos(dni,asignatura){

@@ -471,7 +471,8 @@
 				gridAlumnos.setHeader(["<bean:message key="label.trabajo.campo" />","<bean:message key="label.fecha.limite" />","<bean:message key="label.corregido" />","<bean:message key="label.enlace" />"]);
 				gridAlumnos.setInitWidthsP("45,30,10,15");
 				gridAlumnos.setColTypes("ro,ro,ro,ro");
-				gridAlumnos.setColSorting('str,str');
+				gridAlumnos.setColSorting('str,str,ro,ro');
+				gridAlumnos.setColAlign("left,left,left,center,center");
 				gridAlumnos.enableMultiselect(false);
 				gridAlumnos.init();
 				

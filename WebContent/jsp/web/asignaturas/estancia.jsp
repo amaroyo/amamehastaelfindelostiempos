@@ -129,6 +129,7 @@
 		    		gridProfesor.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","<bean:message key="label.centro.asociado" />","<bean:message key="label.turno" />","<bean:message key="label.mio" />"]);
 		    		gridProfesor.setInitWidthsP("15,21,13,26,18,7");
 		    		gridProfesor.setColTypes("ro,ro,ro,ro,ro,ro");
+		    		gridProfesor.setColAlign("left,left,left,left,left,center");
 			    	
 		    		gridProfesor.enableMultiselect(false);
 		    		gridProfesor.setColSorting('str,str,str,str,str');

@@ -231,6 +231,8 @@ public class PortafoliosServiceImpl implements PortafoliosService{
 			throw new ServiceException(e);
 		}
 	}
+
+	
 	
 	
 	
