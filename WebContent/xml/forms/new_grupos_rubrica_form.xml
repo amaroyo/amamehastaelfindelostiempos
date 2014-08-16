@@ -39,9 +39,9 @@
 	   		<item type="input" name="texto_criterio_1_1" label="Criterio 1" labelWidth="140" style="width:160" required="true"/>
 	   	</item>
 	   	<item type="block" name="texto_bloque_botones_1">
-	   		<item type="button" name="texto_boton_borrar_criterio_1" value="Borrar criterio" disabled="true"/>
+	   		<item type="button" name="texto_boton_nuevo_criterio_1" value="Añadir nuevo criterio"/>
 	   		<item type="newcolumn"/>
-	   		<item type="button" name="texto_boton_nuevo_criterio_1" value="Añadir nuevo criterio"/>	   		
+	   		<item type="button" name="texto_boton_borrar_criterio_1" value="Borrar criterio" disabled="true"/>
 	   	</item>
    	</item>
    	<item type="block" name="texto_bloque_boton" offsetLeft="50">
