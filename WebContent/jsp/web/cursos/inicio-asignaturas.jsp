@@ -459,6 +459,18 @@
 						else if(id.indexOf("notas_boton_borrar_grupo") != -1){
 	    					botonBorrarGrupo(id,"notas",1);
 						}
+						else if(id.indexOf("texto_boton_nuevo_criterio") != -1){
+	    					botonNuevoCriterio(id,"texto",2);
+	    				}
+	    				else if(id.indexOf("texto_boton_borrar_criterio") != -1){
+	    					botonBorrarCriterio(id,"texto",2);
+	    				}
+	    				else if(id.indexOf("texto_boton_nuevo_grupo") != -1){
+	    					botonNuevoGrupo(id,"texto",2);
+						}
+						else if(id.indexOf("texto_boton_borrar_grupo") != -1){
+	    					botonBorrarGrupo(id,"texto",2);
+						}
 							
 	    				/*if (id == "siguiente") {
 	    					if(!existeEnNombresAnteriores(currentPart,numeroRubricas)){
