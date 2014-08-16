@@ -44,7 +44,7 @@
 	    
 	    	dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	
-	    	var main_layout, areaTrabajoCursos, listado, toolbarAsignaturas,
+	    	var main_layout, areaTrabajoCursos, listado, toolbarAsignaturas, numeroRubricas,
 	    	gridAsignaturas, formInfo, formRubrica, formAnexo, dhxWins, tabbar, tab_info, tab_rubrica, tab_anexo,
 	    	grupos_criterios_rubrica, grupos_anexo_rubrica;
 	    	
@@ -239,10 +239,10 @@
 					formNewAsignatura.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
 					formNewAsignatura.setItemLabel('siguiente','<bean:message key="button.siguiente"/>');
 		    		
-		    		formNewAsignatura.forEachItem(function(id){
-		    			if(formNewAsignatura.getItemType(id) == "input"){
-		    				formNewAsignatura.setRequired(id,true);
-		    			}
+					formNewAsignatura.forEachItem(function(id){
+						if(formNewAsignatura.getItemType(id) == "input"){
+							formNewAsignatura.setRequired(id,true);
+						}
 		    		});
 		    		
 		    		formNewAsignatura.setFocusOnFirstActive();
@@ -266,7 +266,7 @@
 		    	windowNewAsignaturaPart.setModal(true);
 				formsNewAsignatura[currentPart] = windowsNewAsignatura[currentPart].attachForm();
 				var formNewAsignaturaPart = formsNewAsignatura[currentPart];
-				var numeroRubricas = formsNewAsignatura[0].getItemValue("numeroRubricas");
+				numeroRubricas = formsNewAsignatura[0].getItemValue("numeroRubricas");
 				formNewAsignaturaPart.loadStruct('../xml/forms/new_asignatura_part_form.xml', function() {
 					formNewAsignaturaPart.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
 					formNewAsignaturaPart.setItemLabel('numeroRubricas','<bean:message key="label.numero.rubricas"/>');
@@ -282,19 +282,16 @@
 						if(formNewAsignaturaPart.getItemType(id) == "input"){
 							formNewAsignaturaPart.setRequired(id,true);
 						}
-						if(id == "numeroRubricas" || id == "parte" || id == "codigo" || id == "curso") {
-							switch(id) {
-								case "numeroRubricas":
-								case "codigo":
-				    			case "curso":
-				    				var valueCopied = formsNewAsignatura[0].getItemValue(id);
-				    				formNewAsignaturaPart.setItemValue(id,valueCopied);
-				    				break;
-				    			case "parte":
-				    				formNewAsignaturaPart.setItemValue(id,currentPart+" / "+numeroRubricas);
-				    				break;
-							}
-							formNewAsignaturaPart.disableItem(id);
+						switch(id) {
+							case "numeroRubricas":
+							case "codigo":
+			    			case "curso":
+			    				var valueCopied = formsNewAsignatura[0].getItemValue(id);
+			    				formNewAsignaturaPart.setItemValue(id,valueCopied);
+			    				break;
+			    			case "parte":
+			    				formNewAsignaturaPart.setItemValue(id,currentPart+" / "+numeroRubricas);
+			    				break;
 						}
 		    		});
 		    		
@@ -302,9 +299,9 @@
 					
 					formNewAsignaturaPart.attachEvent("onButtonClick", function(id){
 	    				if (id == "siguiente") {
-	    					if(!existeEnNombresAnteriores(currentPart,numeroRubricas)){
+	    					if(!existeEnNombresAnteriores(currentPart)){
 		    					formNewAsignaturaPart.send("buscarasignatura.do","post", function(loader,response) {
-		    						resultadoBuscarParteAsignatura(response,currentPart,numeroRubricas);
+		    						resultadoBuscarParteAsignatura(response,currentPart);
 			    				});
 	    					}
 	    				}
@@ -318,7 +315,7 @@
 		    	});
 			}
 			
-		    function existeEnNombresAnteriores(currentPart,numeroRubricas){
+		    function existeEnNombresAnteriores(currentPart){
 		    	for(var i=currentPart-1;i>0;i--) {
 		    		if(formsNewAsignatura[currentPart].getItemValue('nombre').toLowerCase() == formsNewAsignatura[i].getItemValue('nombre').toLowerCase()){
 		    			if(numeroRubricas == 1) {
@@ -340,7 +337,7 @@
 		    	return false;
 		    }
 		    
-		    function resultadoBuscarParteAsignatura(response,currentPart,numeroRubricas){
+		    function resultadoBuscarParteAsignatura(response,currentPart){
 		    	if(response == "No existe ninguna asignatura con ese nombre") {
 		    		if(numeroRubricas == 1 || currentPart == numeroRubricas) {
 		    			crearRubricas(1);
@@ -399,7 +396,6 @@
 		    	windowGruposRubrica.setModal(true);
 				formsGruposRubrica[currentPart] = windowsGruposRubrica[currentPart].attachForm();
 				var formGruposRubrica = formsGruposRubrica[currentPart];
-				var numeroRubricas = formsNewAsignatura[0].getItemValue("numeroRubricas");
 				formGruposRubrica.loadStruct('../xml/forms/new_grupos_rubrica_form.xml', function() {
 					formGruposRubrica.setItemLabel('data','<bean:message key="title.grupos.criterios.rubrica"/>');
 					formGruposRubrica.setItemLabel('parte','<bean:message key="label.parte"/>');
@@ -408,15 +404,18 @@
 					formGruposRubrica.setItemLabel('nombre','<bean:message key="label.nombre.asignatura.rubrica"/>');
 					formGruposRubrica.setItemLabel('labelCompetencias','<bean:message key="label.competencias"/>');
 					formGruposRubrica.setItemLabel('labelNota','<bean:message key="label.criterios.nota"/>');
-					formGruposRubrica.setItemLabel('grupo1_nota','<strong><bean:message key="label.nombre.grupo.criterios"/>'+' '+'1</strong>');
-					formGruposRubrica.setItemLabel('grupo1_nota_criterio1','<bean:message key="label.criterio"/>'+' '+'1');
-					formGruposRubrica.setItemLabel('nuevoCriterioNota','<bean:message key="button.add.nuevo.criterio"/>');	  
-					formGruposRubrica.setItemLabel('nuevoGrupoNota','<bean:message key="button.add.nuevo.grupo"/>');	  
+					formGruposRubrica.setItemLabel('notas_grupo_1','<strong><bean:message key="label.nombre.grupo.criterios"/>'+' '+'1</strong>');
+					formGruposRubrica.setItemLabel('notas_criterio_1_1','<bean:message key="label.criterio"/>'+' '+'1');
+					formGruposRubrica.setItemLabel('notas_boton_nuevo_criterio_1','<bean:message key="button.add.nuevo.criterio"/>');
+					formGruposRubrica.setItemLabel('notas_boton_borrar_criterio_1','<bean:message key="button.delete.nuevo.criterio"/>');	  
+					formGruposRubrica.setItemLabel('notas_boton_nuevo_grupo_1','<strong><bean:message key="button.add.nuevo.grupo"/></strong>');	  
+					formGruposRubrica.setItemLabel('notas_boton_borrar_grupo_1','<strong><bean:message key="button.delete.nuevo.grupo"/></strong>');	  
 					formGruposRubrica.setItemLabel('labelTexto','<bean:message key="label.criterios.texto"/>');
-					formGruposRubrica.setItemLabel('grupo1_texto','<strong><bean:message key="label.nombre.grupo.criterios"/>'+' '+'1</strong>');
-					formGruposRubrica.setItemLabel('grupo1_texto_criterio1','<bean:message key="label.criterio"/>'+' '+'1');
-					formGruposRubrica.setItemLabel('nuevoCriterioTexto','<bean:message key="button.add.nuevo.criterio"/>');	  
-					formGruposRubrica.setItemLabel('nuevoGrupoTexto','<bean:message key="button.add.nuevo.grupo"/>');	  
+					formGruposRubrica.setItemLabel('texto_grupo_1','<strong><bean:message key="label.nombre.grupo.criterios"/>'+' '+'1</strong>');
+					formGruposRubrica.setItemLabel('texto_criterio_1_1','<bean:message key="label.criterio"/>'+' '+'1');
+					formGruposRubrica.setItemLabel('texto_boton_nuevo_criterio_1','<bean:message key="button.add.nuevo.criterio"/>');	  
+					formGruposRubrica.setItemLabel('texto_boton_nuevo_grupo_1','<strong><bean:message key="button.add.nuevo.grupo"/></strong>');	  
+					formGruposRubrica.setItemLabel('texto_boton_borrar_grupo_1','<strong><bean:message key="button.delete.nuevo.grupo"/></strong>');	  
 					formGruposRubrica.setItemLabel('anterior','<bean:message key="button.anterior"/>');	  
 					formGruposRubrica.setItemLabel('siguiente','<bean:message key="button.siguiente"/>');	
 														
@@ -425,53 +424,143 @@
 						if(formGruposRubrica.getItemType(id) == "input"){
 							formGruposRubrica.setRequired(id,true);
 						}
-						if(id == "parte" || id == "codigo" || id == "curso" || id == "nombre") {
-							switch(id) {
-								case "numeroGruposCriterios":
-									formGruposRubrica.setItemValue(id,"1");
-									break;
-								case "codigo":
-				    			case "curso":
-				    				var valueCopied = formsNewAsignatura[0].getItemValue(id);
-				    				formGruposRubrica.setItemValue(id,valueCopied);
-				    				break;
-				    			case "parte":
-				    				formGruposRubrica.setItemValue(id,currentPart+" / "+numeroRubricas);
-				    				break;
-				    			case "nombre":
-				    				var valueCopied = formsNewAsignatura[currentPart].getItemValue(id);
-				    				formGruposRubrica.setItemValue(id,valueCopied);
-				    				break;
-							}
-							formGruposRubrica.disableItem(id);
+						switch(id) {
+							case "codigo":
+			    			case "curso":
+			    				var valueCopied = formsNewAsignatura[0].getItemValue(id);
+			    				formGruposRubrica.setItemValue(id,valueCopied);
+			    				break;
+			    			case "parte":
+			    				formGruposRubrica.setItemValue(id,currentPart+" / "+numeroRubricas);
+			    				break;
+			    			case "nombre":
+			    				var valueCopied = formsNewAsignatura[currentPart].getItemValue(id);
+			    				formGruposRubrica.setItemValue(id,valueCopied);
+			    				break;
 						}
 		    		});
 					
 					formGruposRubrica.setFocusOnFirstActive();
-
-					var criterios_nota=2;
-					var criterios_texto=2;
-					var grupos_nota=2;
-					var grupos_texto=2;
+		
+					var notas_num_criterios_grupo=new Array();
+					notas_num_criterios_grupo[1]=2;
 	    			formGruposRubrica.attachEvent("onButtonClick", function(id){
-						switch(id){
-							case "nuevoCriterioNota":
-								var nombre="grupo1_nota_criterio"+criterios_nota;
-								var etiqueta = "Criterio "+criterios_nota;
-				    	        criterio_nota={type:"input", nombre:nombre, label:etiqueta, labelWidth:"140", style:"width:160", required:"true"};
-								formGruposRubrica.addItem("gruposNota", criterio_nota, criterios_nota, true);
-								criterios_nota=criterios_nota+1;
-								break;
-							case "nuevoCriterioTexto":
-								alert("criterio texto");
-								break;
-							case "nuevoGrupoNota":
-								alert("grupo Nota");
-								break;
-							case "nuevoGrupoTexto":
-								alert("grupo Texto");
-								break;
+	    				
+	    				if(id.indexOf("notas_boton_nuevo_criterio") != -1){
+	    					var notas_grupo_add_nuevo_criterio=id.charAt(id.length-1);
+							var notas_criterio_nuevo_nombre="notas_criterio_"+notas_grupo_add_nuevo_criterio+"_"+notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio];
+							var notas_criterio_nueva_etiqueta='<bean:message key="label.criterio"/>'+' '+notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio];
+							var notas_criterio_nuevo={type:"input", name:notas_criterio_nuevo_nombre, label:notas_criterio_nueva_etiqueta, labelWidth:"140", style:"width:160", required:"true"};
+							formGruposRubrica.addItem("notas_bloque_"+notas_grupo_add_nuevo_criterio, notas_criterio_nuevo, notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio], true);
+							formGruposRubrica.enableItem("notas_boton_borrar_criterio_"+notas_grupo_add_nuevo_criterio);
+							notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]=notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]+1;
+	    				}
+	    				else if(id.indexOf("notas_boton_borrar_criterio") != -1){
+	    					var notas_grupo_add_nuevo_criterio=id.charAt(id.length-1);
+							notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]=notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]-1;
+							var notas_criterio_nuevo_nombre="notas_criterio_"+notas_grupo_add_nuevo_criterio+"_"+notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio];
+	    					formGruposRubrica.removeItem(notas_criterio_nuevo_nombre);
+	    					if(notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]==2){
+    							formGruposRubrica.disableItem(id);
+	    					}
+	    				}
+	    				else if(id.indexOf("notas_boton_nuevo_grupo") != -1){
+	    					var notas_grupo_add_nuevo_criterio=parseInt(id.charAt(id.length-1))+1;
+							notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]=0;
+							var notas_bloque_grupo_nuevo_nombre="notas_bloque_"+notas_grupo_add_nuevo_criterio;
+							var notas_bloque_grupo_nuevo={type:"block", name:notas_bloque_grupo_nuevo_nombre};
+							formGruposRubrica.addItem("notas", notas_bloque_grupo_nuevo, id.charAt(id.length-1)*2, true);
+							
+							var notas_criterio_nuevo_grupo_nombre="notas_grupo_"+notas_grupo_add_nuevo_criterio;
+							var notas_criterio_nuevo_grupo_etiqueta='<strong><bean:message key="label.nombre.grupo.criterios"/>'+' '+notas_grupo_add_nuevo_criterio+'</strong>';
+							var notas_criterio_nuevo={type:"input", name:notas_criterio_nuevo_grupo_nombre, label:notas_criterio_nuevo_grupo_etiqueta, labelWidth:"140", style:"width:160", required:"true"};
+							formGruposRubrica.addItem("notas_bloque_"+notas_grupo_add_nuevo_criterio, notas_criterio_nuevo, notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio], true);							
+							notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]=notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]+1;
+							
+							var notas_criterio_nuevo_nombre="notas_criterio_"+notas_grupo_add_nuevo_criterio+"_1";
+							var notas_criterio_nueva_etiqueta='<bean:message key="label.criterio"/>'+' 1';
+							var notas_criterio_nuevo={type:"input", name:notas_criterio_nuevo_nombre, label:notas_criterio_nueva_etiqueta, labelWidth:"140", style:"width:160", required:"true"};
+							formGruposRubrica.addItem("notas_bloque_"+notas_grupo_add_nuevo_criterio, notas_criterio_nuevo, notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio], true);
+							notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]=notas_num_criterios_grupo[notas_grupo_add_nuevo_criterio]+1;
+							
+							var notas_bloque_botones_nuevo_nombre="notas_bloque_botones_"+notas_grupo_add_nuevo_criterio;
+							var notas_bloque_botones_nuevo={type:"block", name:notas_bloque_botones_nuevo_nombre};
+							formGruposRubrica.addItem("notas", notas_bloque_botones_nuevo, id.charAt(id.length-1)*2+1, true);
+							
+							var notas_boton_nuevo_criterio_nombre="notas_boton_nuevo_criterio_"+notas_grupo_add_nuevo_criterio;
+							var notas_boton_nuevo_criterio_value='<bean:message key="button.add.nuevo.criterio"/>';
+							var notas_bloque_boton_nuevo_criterio={type:"button", name:notas_boton_nuevo_criterio_nombre, value:notas_boton_nuevo_criterio_value};
+							formGruposRubrica.addItem("notas_bloque_botones_"+notas_grupo_add_nuevo_criterio, notas_bloque_boton_nuevo_criterio, 0, true);
+							formGruposRubrica.addItem("notas_bloque_botones_"+notas_grupo_add_nuevo_criterio, {type:"newcolumn"}, 1, true);
+							var notas_boton_borrar_criterio_nombre="notas_boton_borrar_criterio_"+notas_grupo_add_nuevo_criterio;
+							var notas_boton_borrar_criterio_value='<bean:message key="button.delete.nuevo.criterio"/>';
+							var notas_bloque_boton_borrar_criterio={type:"button", name:notas_boton_borrar_criterio_nombre, value:notas_boton_borrar_criterio_value, disabled:"true"};
+							formGruposRubrica.addItem("notas_bloque_botones_"+notas_grupo_add_nuevo_criterio, notas_bloque_boton_borrar_criterio, 2, true);
+							
+	    					formGruposRubrica.removeItem(id);
+	    					var notas_boton_nuevo_grupo_nombre="notas_boton_nuevo_grupo_"+notas_grupo_add_nuevo_criterio;
+	    					var notas_boton_nuevo_grupo_value='<strong><bean:message key="button.add.nuevo.grupo"/></strong>';
+							var notas_boton_nuevo_grupo={type:"button", name:notas_boton_nuevo_grupo_nombre, value:notas_boton_nuevo_grupo_value};
+							formGruposRubrica.addItem("notas_bloque_boton", notas_boton_nuevo_grupo, 0, true);
+	    					formGruposRubrica.addItem("notas_bloque_boton", {type:"newcolumn"}, 1, true);
+							formGruposRubrica.removeItem("notas_boton_borrar_grupo_"+id.charAt(id.length-1));
+	    					var notas_boton_borrar_grupo_nombre="notas_boton_borrar_grupo_"+notas_grupo_add_nuevo_criterio;
+	    					var notas_boton_borrar_grupo_value='<strong><bean:message key="button.delete.nuevo.grupo"/></strong>';
+							var notas_boton_borrar_grupo={type:"button", name:notas_boton_borrar_grupo_nombre, value:notas_boton_borrar_grupo_value};
+	    					formGruposRubrica.addItem("notas_bloque_boton", notas_boton_borrar_grupo, 2, true);
 						}
+						else if(id.indexOf("notas_boton_borrar_grupo") != -1){
+							var notas_grupo_add_nuevo_criterio=parseInt(id.charAt(id.length-1));
+							
+							formGruposRubrica.removeItem("notas_bloque_botones_"+notas_grupo_add_nuevo_criterio);
+							formGruposRubrica.removeItem("notas_bloque_"+notas_grupo_add_nuevo_criterio);
+
+							formGruposRubrica.removeItem(id);
+	    					var notas_boton_nuevo_grupo_nombre="notas_boton_nuevo_grupo_"+(notas_grupo_add_nuevo_criterio-1);
+	    					alert(notas_boton_nuevo_grupo_nombre);
+	    					var notas_boton_nuevo_grupo_value='<strong><bean:message key="button.add.nuevo.grupo"/></strong>';
+							var notas_boton_nuevo_grupo={type:"button", name:notas_boton_nuevo_grupo_nombre, value:notas_boton_nuevo_grupo_value};
+							formGruposRubrica.addItem("notas_bloque_boton", notas_boton_nuevo_grupo, 0, true);
+	    					formGruposRubrica.addItem("notas_bloque_boton", {type:"newcolumn"}, 1, true);
+							formGruposRubrica.removeItem("notas_boton_nuevo_grupo_"+id.charAt(id.length-1));
+	    					var notas_boton_borrar_grupo_nombre="notas_boton_borrar_grupo_"+(notas_grupo_add_nuevo_criterio-1);
+	    					var notas_boton_borrar_grupo_value='<strong><bean:message key="button.delete.nuevo.grupo"/></strong>';
+							var notas_boton_borrar_grupo={type:"button", name:notas_boton_borrar_grupo_nombre, value:notas_boton_borrar_grupo_value};
+	    					formGruposRubrica.addItem("notas_bloque_boton", notas_boton_borrar_grupo, 2, true);
+							
+	    					if(notas_grupo_add_nuevo_criterio-1 == 1){
+    							formGruposRubrica.disableItem(notas_boton_borrar_grupo_nombre);
+	    					}
+						}
+							/*
+		    		 		<item type="block" name="notas" offsetLeft="50">
+							  	<item type="block" name="notas_bloque_1">
+							 		<item type="input" name="notas_grupo_1" label="Nombre grupo 1" labelWidth="140" style="width:160" required="true"/>
+							 		<item type="input" name="notas_criterio_1_1" label="Criterio 1" labelWidth="140" style="width:160" required="true"/>
+								</item>
+								<item type="block" name="notas_bloque_botones_1">
+									<item type="button" name="notas_boton_nuevo_criterio_1" value="Añadir nuevo criterio"/>
+									<item type="newcolumn"/>
+									<item type="button" name="notas_boton_borrar_criterio_1" value="Borrar criterio" disabled="true"/>
+								</item>
+								<item type="block" name="notas_bloque_2">
+							 		<item type="input" name="notas_grupo_2" label="Nombre grupo 1" labelWidth="140" style="width:160" required="true"/>
+							 		<item type="input" name="notas_criterio_2_1" label="Criterio 1" labelWidth="140" style="width:160" required="true"/>
+								</item>
+								<item type="block" name="notas_bloque_botones_2">
+									<item type="button" name="notas_boton_nuevo_criterio_2" value="Añadir nuevo criterio"/>
+									<item type="newcolumn"/>
+									<item type="button" name="notas_boton_borrar_criterio_2" value="Borrar criterio" disabled="true"/>
+								</item>
+							</item>
+							
+							<item type="block" name="notas_bloque_boton" offsetLeft="50">
+								<item type="button" name="notas_boton_borrar_grupo_2" value="Borrar criterio" disabled="true"/>
+								<item type="newcolumn"/>
+								<item type="button" name="notas_boton_nuevo_grupo_2" value="Añadir nuevo grupo"/>
+							</item>
+		    	 			*/
+							
 	    				/*if (id == "siguiente") {
 	    					if(!existeEnNombresAnteriores(currentPart,numeroRubricas)){
 		    					formNewAsignaturaPart.send("buscarasignatura.do","post", function(loader,response) {

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <items>
    <item type="fieldset" name="data" label="Información general" inputWidth="auto">
-       <item type="input" name="numeroRubricas" label="Número de rúbricas/partes" labelWidth="140" style="width:160" required="true"/>
-	   <item type="input" name="parte" label="Parte" labelWidth="140" style="width:160" required="true"/>
-	   <item type="input" name="codigo" label="Código" labelWidth="140" style="width:160" required="true"/>
-	   <item type="input" name="curso" label="Curso" labelWidth="140" style="width:160" required="true"/>
+       <item type="input" name="numeroRubricas" label="Número de rúbricas/partes" labelWidth="140" disabled="true" style="width:160" required="true"/>
+	   <item type="input" name="parte" label="Parte" labelWidth="140" style="width:160" disabled="true" required="true"/>
+	   <item type="input" name="codigo" label="Código" labelWidth="140" style="width:160" disabled="true" required="true"/>
+	   <item type="input" name="curso" label="Curso" labelWidth="140" style="width:160" disabled="true" required="true"/>
 	   <item type="input" name="nombre" label="Nombre" labelWidth="140" style="width:160" required="true"/>
-	   <item type="input" name="descripcion" label="Descripción" labelWidth="140" style="width:310" rows="7"/> 
+	   <item type="input" name="descripcion" label="Descripción" labelWidth="140" style="width:310" rows="7" required="true"/> 
    </item>
    <item type="block">
 	   <item type="button" name="anterior" value="Anterior"/>
