@@ -458,34 +458,6 @@
 						else if(id.indexOf("notas_boton_borrar_grupo") != -1){
 	    					notasBotonBorrarGrupo(id);
 						}
-							/*
-		    		 		<item type="block" name="notas" offsetLeft="50">
-							  	<item type="block" name="notas_bloque_1">
-							 		<item type="input" name="notas_grupo_1" label="Nombre grupo 1" labelWidth="140" style="width:160" required="true"/>
-							 		<item type="input" name="notas_criterio_1_1" label="Criterio 1" labelWidth="140" style="width:160" required="true"/>
-								</item>
-								<item type="block" name="notas_bloque_botones_1">
-									<item type="button" name="notas_boton_nuevo_criterio_1" value="Añadir nuevo criterio"/>
-									<item type="newcolumn"/>
-									<item type="button" name="notas_boton_borrar_criterio_1" value="Borrar criterio" disabled="true"/>
-								</item>
-								<item type="block" name="notas_bloque_2">
-							 		<item type="input" name="notas_grupo_2" label="Nombre grupo 1" labelWidth="140" style="width:160" required="true"/>
-							 		<item type="input" name="notas_criterio_2_1" label="Criterio 1" labelWidth="140" style="width:160" required="true"/>
-								</item>
-								<item type="block" name="notas_bloque_botones_2">
-									<item type="button" name="notas_boton_nuevo_criterio_2" value="Añadir nuevo criterio"/>
-									<item type="newcolumn"/>
-									<item type="button" name="notas_boton_borrar_criterio_2" value="Borrar criterio" disabled="true"/>
-								</item>
-							</item>
-							
-							<item type="block" name="notas_bloque_boton" offsetLeft="50">
-								<item type="button" name="notas_boton_borrar_grupo_2" value="Borrar criterio" disabled="true"/>
-								<item type="newcolumn"/>
-								<item type="button" name="notas_boton_nuevo_grupo_2" value="Añadir nuevo grupo"/>
-							</item>
-		    	 			*/
 							
 	    				/*if (id == "siguiente") {
 	    					if(!existeEnNombresAnteriores(currentPart,numeroRubricas)){
