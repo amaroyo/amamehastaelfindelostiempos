@@ -357,7 +357,8 @@
 		    
 		    function crearAsignaturaCompleta(){
 		    	var error=false;
-		    	for(var i=1;i<numeroRubricas;i++) {
+		    	alert(numeroRubricas);
+		    	for(var i=1;i<=numeroRubricas;i++) {
 		    		formsNewAsignatura[i].send("crearasignatura.do","post", function(loader,response) {
 		    			if(response == "asignatura no creada: ya existe una asignatura con ese nombre"){
 		    				error=true;
@@ -379,7 +380,6 @@
 		    	}
 		    	if(!error){
 	    			successfulCrearAsignatura();
-	    			
 		    	}
 		    }
 		    
@@ -467,8 +467,6 @@
 	    					botonBorrarGrupo(id,"texto",2);
 						}
 							
-	    				
-	    				
 	    				if (id == "siguiente") {
 	    					if(currentPart == numeroRubricas){
 	    						crearAsignaturaCompleta();
@@ -557,6 +555,7 @@
 				var boton_borrar_grupo={type:"button", name:boton_borrar_grupo_nombre, value:boton_borrar_grupo_value};
 				formNewRubrica.addItem(type+"_bloque_boton", boton_borrar_grupo, 2, true);
 		    }
+		    
 		    function botonBorrarGrupo(id,type,col){
 		    	var grupo_add_nuevo_criterio=parseInt(id.charAt(id.length-1));
 				
