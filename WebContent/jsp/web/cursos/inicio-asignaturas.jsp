@@ -222,11 +222,13 @@
 		    
 		    function newAsignatura() {
 		    	dhxWins= new dhtmlXWindows();
+		    	windowsNewAsignatura = new Array();
 		    	windowsNewAsignatura[0] = dhxWins.createWindow("nuevaAsignatura", 300, 50, 350, 205);
 		    	var windowNewAsignatura = windowsNewAsignatura[0];
 		    	windowNewAsignatura.setText('<bean:message key="title.crear.nueva.asignatura" />');
 		    	windowNewAsignatura.centerOnScreen();
 				windowNewAsignatura.setModal(true);
+				formsNewAsignatura = new Array();
 				formsNewAsignatura[0] = windowNewAsignatura.attachForm();
 				var formNewAsignatura = formsNewAsignatura[0];
 				formNewAsignatura.loadStruct('../xml/forms/new_asignatura_common_form.xml', function() {
@@ -357,7 +359,6 @@
 		    
 		    function crearAsignaturaCompleta(){
 		    	var error=false;
-		    	alert(numeroRubricas);
 		    	for(var i=1;i<=numeroRubricas;i++) {
 		    		formsNewAsignatura[i].send("crearasignatura.do","post", function(loader,response) {
 		    			if(response == "asignatura no creada: ya existe una asignatura con ese nombre"){
@@ -385,8 +386,18 @@
 		    
 		    
 		    
+		    function crearRubricasAsignaturaCompleta(){
+		    	for(var i=numeroRubricas+1;i<=numeroRubricas*2;i++) {
+		    		formsNewAsignatura[i].send("crearrubricaasignatura.do","post", function(loader,response) {
+		    			
+					});
+		    	}
+		    }
+		    
+		    
+		    
 		    function crearRubricas(currentPart){
-		    	windowsNewAsignatura[numeroRubricas+currentPart] = dhxWins.createWindow("gruposRubrica"+currentPart, 300, 50, 1200, 500);
+		    	windowsNewAsignatura[numeroRubricas+currentPart] = dhxWins.createWindow("gruposRubrica"+currentPart, 300, 50, 1200, 490);
 		    	var windowNewRubrica = windowsNewAsignatura[numeroRubricas+currentPart];
 		    	windowNewRubrica.setText('<bean:message key="title.crear.nueva.asignatura" />'+': '+'<bean:message key="title.parte.nueva.asignatura" /> ' +currentPart+' '+'<bean:message key="title.crear.nueva.asignatura.grupos.rubrica" />');				
 		    	windowNewRubrica.centerOnScreen();
@@ -400,6 +411,7 @@
 					formNewRubrica.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
 					formNewRubrica.setItemLabel('nombre','<bean:message key="label.nombre.asignatura.rubrica"/>');
 					formNewRubrica.setItemLabel('labelCompetencias','<bean:message key="label.competencias"/>');
+					formNewRubrica.setItemLabel('labelAnexo1','<bean:message key="label.anexo"/>');
 					formNewRubrica.setItemLabel('labelNota','<bean:message key="label.criterios.nota"/>');
 					formNewRubrica.setItemLabel('notas_grupo_1','<strong><bean:message key="label.nombre.grupo.criterios"/>'+' '+'1</strong>');
 					formNewRubrica.setItemLabel('notas_criterio_1_1','<bean:message key="label.criterio"/>'+' '+'1');
@@ -439,8 +451,12 @@
 					
 					formNewRubrica.setFocusOnFirstActive();
 		
-					num_criterios_grupo[1,1]=2;
-					num_criterios_grupo[2,1]=2;
+					num_criterios_grupo = new Array(2);
+					num_criterios_grupo[1] = new Array();
+					num_criterios_grupo[2] = new Array();
+					num_criterios_grupo[1][1] = 2;
+					num_criterios_grupo[2][1] = 2;
+
 	    			formNewRubrica.attachEvent("onButtonClick", function(id){
 	    				if(id.indexOf("notas_boton_nuevo_criterio") != -1){
 	    					botonNuevoCriterio(id,"notas",1);
@@ -467,9 +483,10 @@
 	    					botonBorrarGrupo(id,"texto",2);
 						}
 							
-	    				if (id == "siguiente") {
+						else if (id == "siguiente") {
 	    					if(currentPart == numeroRubricas){
 	    						crearAsignaturaCompleta();
+	    						crearRubricasAsignaturaCompleta();
 		    					cerrarVentanas();
 	    		    		}
 	    		    		else{
@@ -492,42 +509,44 @@
 		    
 		    function botonNuevoCriterio(id,type,col){
 		    	var grupo_add_nuevo_criterio=id.charAt(id.length-1);
-				var criterio_nuevo_nombre=type+"_criterio_"+grupo_add_nuevo_criterio+"_"+num_criterios_grupo[col,grupo_add_nuevo_criterio];
-				var criterio_nueva_etiqueta='<bean:message key="label.criterio"/>'+' '+num_criterios_grupo[col,grupo_add_nuevo_criterio];
-				var criterio_nuevo={type:"input", name:criterio_nuevo_nombre, label:criterio_nueva_etiqueta, labelWidth:"140", style:"width:160", required:"true"};
-				formNewRubrica.addItem(type+"_bloque_"+grupo_add_nuevo_criterio, criterio_nuevo, num_criterios_grupo[col,grupo_add_nuevo_criterio], true);
+				var criterio_nuevo_nombre=type+"_criterio_"+grupo_add_nuevo_criterio+"_"+num_criterios_grupo[col][grupo_add_nuevo_criterio];
+				var criterio_nueva_etiqueta='<bean:message key="label.criterio"/>'+' '+num_criterios_grupo[col][grupo_add_nuevo_criterio];
+				var criterio_nuevo={type:"input", name:criterio_nuevo_nombre, label:criterio_nueva_etiqueta, labelWidth:"140", style:"width:180", required:"true"};
+				formNewRubrica.addItem(type+"_bloque_"+grupo_add_nuevo_criterio, criterio_nuevo, num_criterios_grupo[col][grupo_add_nuevo_criterio], true);
+				formNewRubrica.setRequired(criterio_nuevo_nombre,true);
 				formNewRubrica.enableItem(type+"_boton_borrar_criterio_"+grupo_add_nuevo_criterio);
-				num_criterios_grupo[col,grupo_add_nuevo_criterio]=num_criterios_grupo[col,grupo_add_nuevo_criterio]+1;
+				num_criterios_grupo[col][grupo_add_nuevo_criterio]=num_criterios_grupo[col][grupo_add_nuevo_criterio]+1;
 		    }
 		    
 		    function botonBorrarCriterio(id,type,col){
 		    	var grupo_add_nuevo_criterio=id.charAt(id.length-1);
-				num_criterios_grupo[col,grupo_add_nuevo_criterio]=num_criterios_grupo[col,grupo_add_nuevo_criterio]-1;
-				var criterio_nuevo_nombre=type+"_criterio_"+grupo_add_nuevo_criterio+"_"+num_criterios_grupo[col,grupo_add_nuevo_criterio];
+				num_criterios_grupo[col][grupo_add_nuevo_criterio]=num_criterios_grupo[col][grupo_add_nuevo_criterio]-1;
+				var criterio_nuevo_nombre=type+"_criterio_"+grupo_add_nuevo_criterio+"_"+num_criterios_grupo[col][grupo_add_nuevo_criterio];
 				formNewRubrica.removeItem(criterio_nuevo_nombre);
-				if(num_criterios_grupo[col,grupo_add_nuevo_criterio]==2){
+				if(num_criterios_grupo[col][grupo_add_nuevo_criterio]==2){
 					formNewRubrica.disableItem(id);
 				}
 		    }
 		    
 		    function botonNuevoGrupo(id,type,col){
 		    	var grupo_add_nuevo_criterio=parseInt(id.charAt(id.length-1))+1;
-				num_criterios_grupo[col,grupo_add_nuevo_criterio]=0;
+				num_criterios_grupo[col][grupo_add_nuevo_criterio]=0;
 				var bloque_grupo_nuevo_nombre=type+"_bloque_"+grupo_add_nuevo_criterio;
 				var bloque_grupo_nuevo={type:"block", name:bloque_grupo_nuevo_nombre};
 				formNewRubrica.addItem(type, bloque_grupo_nuevo, id.charAt(id.length-1)*2, true);
 				
 				var criterio_nuevo_grupo_nombre=type+"_grupo_"+grupo_add_nuevo_criterio;
 				var criterio_nuevo_grupo_etiqueta='<strong><bean:message key="label.nombre.grupo.criterios"/>'+' '+grupo_add_nuevo_criterio+'</strong>';
-				var criterio_nuevo={type:"input", name:criterio_nuevo_grupo_nombre, label:criterio_nuevo_grupo_etiqueta, labelWidth:"140", style:"width:160", required:"true"};
-				formNewRubrica.addItem(type+"_bloque_"+grupo_add_nuevo_criterio, criterio_nuevo, num_criterios_grupo[col,grupo_add_nuevo_criterio], true);							
-				num_criterios_grupo[col,grupo_add_nuevo_criterio]=num_criterios_grupo[col,grupo_add_nuevo_criterio]+1;
+				var criterio_nuevo={type:"input", name:criterio_nuevo_grupo_nombre, label:criterio_nuevo_grupo_etiqueta, labelWidth:"140", style:"width:180", required:"true"};
+				formNewRubrica.addItem(type+"_bloque_"+grupo_add_nuevo_criterio, criterio_nuevo, num_criterios_grupo[col][grupo_add_nuevo_criterio], true);							
+				formNewRubrica.setRequired(criterio_nuevo_grupo_nombre,true);
+				num_criterios_grupo[col][grupo_add_nuevo_criterio]=num_criterios_grupo[col][grupo_add_nuevo_criterio]+1;
 				
 				var criterio_nuevo_nombre=type+"_criterio_"+grupo_add_nuevo_criterio+"_1";
 				var criterio_nueva_etiqueta='<bean:message key="label.criterio"/>'+' 1';
-				var criterio_nuevo={type:"input", name:criterio_nuevo_nombre, label:criterio_nueva_etiqueta, labelWidth:"140", style:"width:160", required:"true"};
-				formNewRubrica.addItem(type+"_bloque_"+grupo_add_nuevo_criterio, criterio_nuevo, num_criterios_grupo[col,grupo_add_nuevo_criterio], true);
-				num_criterios_grupo[col,grupo_add_nuevo_criterio]=num_criterios_grupo[col,grupo_add_nuevo_criterio]+1;
+				var criterio_nuevo={type:"input", name:criterio_nuevo_nombre, label:criterio_nueva_etiqueta, labelWidth:"140", style:"width:180", required:"true"};
+				formNewRubrica.addItem(type+"_bloque_"+grupo_add_nuevo_criterio, criterio_nuevo, num_criterios_grupo[col][grupo_add_nuevo_criterio], true);
+				num_criterios_grupo[col][grupo_add_nuevo_criterio]=num_criterios_grupo[col][grupo_add_nuevo_criterio]+1;
 				
 				var bloque_botones_nuevo_nombre=type+"_bloque_botones_"+grupo_add_nuevo_criterio;
 				var bloque_botones_nuevo={type:"block", name:bloque_botones_nuevo_nombre};
