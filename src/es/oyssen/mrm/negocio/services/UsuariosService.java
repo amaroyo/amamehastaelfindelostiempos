@@ -35,5 +35,7 @@ public interface UsuariosService {
 
 	public List<UsuarioAsignaturaVO> findAllbyProfesor(PortafolioVO p) throws ServiceException;
 
+	public List<UsuarioAsignaturaVO> findAllbyProfesorDemas(PortafolioVO p)  throws ServiceException;
+
 
 }
