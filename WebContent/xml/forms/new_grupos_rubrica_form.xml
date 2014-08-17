@@ -2,20 +2,22 @@
 <items>
 	
 <item type="fieldset" name="data" label="Rúbrica de la asignatura" inputWidth="1175" inputHeight="440">
-	<item type="input" name="parte" label="Parte" labelWidth="140" style="width:160" disabled="true" required="true"/>
-	<item type="input" name="codigo" label="Código" labelWidth="140" style="width:160" disabled="true" required="true"/>
-	<item type="input" name="curso" label="Curso" labelWidth="140" style="width:160" disabled="true" required="true"/>
-	<item type="input" name="nombre" label="Nombre" labelWidth="140" style="width:160" disabled="true" required="true"/>
+	<item type="input" name="parte" label="Parte" labelWidth="140" style="width:150" disabled="true" required="true"/>
+	<item type="input" name="codigo" label="Código" labelWidth="140" style="width:150" disabled="true" required="true"/>
+	<item type="input" name="curso" label="Curso" labelWidth="140" style="width:150" disabled="true" required="true"/>
+	<item type="input" name="nombre" label="Nombre" labelWidth="140" style="width:150" disabled="true" required="true"/>
 	<item type="label" name="labelCompetencias" label="Resultados/Competencias"/>
-	<item type="input" name="competencias" labelWidth="160" style="width:310" rows="14"/>
+	<item type="input" name="competencias" labelWidth="140" style="width:310" rows="10" required="true"/>
+	<item type="label" name="labelAnexo1" label="Título Anexo I"/>
+	<item type="input" name="anexo1" labelWidth="140" style="width:310" required="true"/>   
 	   
 	<item type="newcolumn"/>
 	
-  	<item type="label" name="labelNota" label="Criterios con nota numérica asociada" offsetLeft="50"/>
-  	<item type="block" name="notas" offsetLeft="50">
+  	<item type="label" name="labelNota" label="Criterios con nota numérica asociada" offsetLeft="30"/>
+  	<item type="block" name="notas" offsetLeft="30">
 	  	<item type="block" name="notas_bloque_1">
-	 		<item type="input" name="notas_grupo_1" label="Nombre grupo 1" labelWidth="140" style="width:160" required="true"/>
-	 		<item type="input" name="notas_criterio_1_1" label="Criterio 1" labelWidth="140" style="width:160" required="true"/>
+	 		<item type="input" name="notas_grupo_1" label="Nombre grupo 1" labelWidth="140" style="width:180" required="true"/>
+	 		<item type="input" name="notas_criterio_1_1" label="Criterio 1" labelWidth="140" style="width:180" required="true"/>
 		</item>
 		<item type="block" name="notas_bloque_botones_1">
 			<item type="button" name="notas_boton_nuevo_criterio_1" value="Añadir nuevo criterio"/>
@@ -32,11 +34,11 @@
 	
 	<item type="newcolumn"/>
 	
-   	<item type="label" name="labelTexto" label="Criterios con anotaciones por parte del profesor" offsetLeft="50"/>
-   	<item type="block" name="texto" offsetLeft="50">
+   	<item type="label" name="labelTexto" label="Criterios con anotaciones por parte del profesor (Anexo I)" offsetLeft="30"/>
+   	<item type="block" name="texto" offsetLeft="30">
 	   	<item type="block" name="texto_bloque_1">
-	   		<item type="input" name="texto_grupo_1" label="Nombre grupo 1" labelWidth="140" style="width:160" required="true"/>
-	   		<item type="input" name="texto_criterio_1_1" label="Criterio 1" labelWidth="140" style="width:160" required="true"/>
+	   		<item type="input" name="texto_grupo_1" label="Nombre grupo 1" labelWidth="140" style="width:180" required="true"/>
+	   		<item type="input" name="texto_criterio_1_1" label="Criterio 1" labelWidth="140" style="width:180" required="true"/>
 	   	</item>
 	   	<item type="block" name="texto_bloque_botones_1">
 	   		<item type="button" name="texto_boton_nuevo_criterio_1" value="Añadir nuevo criterio"/>
@@ -44,6 +46,7 @@
 	   		<item type="button" name="texto_boton_borrar_criterio_1" value="Borrar criterio" disabled="true"/>
 	   	</item>
    	</item>
+   	
    	<item type="block" name="texto_bloque_boton" offsetLeft="50">
    		<item type="button" name="texto_boton_nuevo_grupo_1" value="Añadir nuevo grupo"/>
 		<item type="newcolumn"/>
