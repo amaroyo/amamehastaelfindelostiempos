@@ -20,12 +20,6 @@ public class GridSeminariosUsuarioAction extends DHTMLXGridAction {
 		
 		GridSeminariosUsuarioForm form = (GridSeminariosUsuarioForm) f;
 		
-		//Si el usuario es coordinador, vemos todos los alumnos de ese anyo y esa asignatura
-
-
-		//System.out.println(idUsuario);
-		
-		if (idGrupoUsuario.equals("4")){
 			
 			PortafolioVO p = new PortafolioVO();
 			p.setIdAlumno(form.getIdAlumno());
@@ -37,17 +31,9 @@ public class GridSeminariosUsuarioAction extends DHTMLXGridAction {
 			else if (form.getPeticion().equals("pendientes"))
 				return UtilXML.buildXmlGridSeminariosPendientesUsuario(getSeminariosRealizadosService().findSeminariosPendientes(p));
 			
-			else return null;
-		}
+			else return "";
 		
-		else return null;
-		/*if (form.getIdGrupo() == null) {
-			return UtilXML.buildXmlGridUsuarios(getUsuariosService().findAll());
-		} else { 
-			GrupoVO grupo = new GrupoVO();
-			grupo.setIdGrupo(form.getIdGrupo());
-			return UtilXML.buildXmlGridUsuariosGrupo(getUsuariosService().findByGrupo(grupo));
-		}*/
+		
 		
 		
 		
