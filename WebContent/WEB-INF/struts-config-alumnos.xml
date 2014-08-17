@@ -9,7 +9,7 @@
 		<form-bean name="GridUsuariosProfesor" type="es.oyssen.mrm.struts.forms.alumnos.GridUsuariosProfesorForm" />
 	   
 	   	<form-bean name="EditarUsuarioForm" type="es.oyssen.mrm.struts.forms.usuarios.EditarUsuarioForm" />
-		
+	   
 	</form-beans>
 	
 

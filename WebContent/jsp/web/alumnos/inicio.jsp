@@ -1,11 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" errorPage="error.jsp" %>
 <%@ include file="../../common/taglibs.jsp" %>
-<%@  page import="java.util.Enumeration"%>
+<%@ page import="java.util.Enumeration"%>
 <%@ page import="es.oyssen.mrm.Const"%>
 <%@page import="javax.servlet.http.HttpServletRequest"%>
 
 <html>
 	<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	    
+	  
+	    
 	    
 	    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
 	    <link rel="stylesheet" type="text/css" href="../css/templates.css">
@@ -13,18 +17,35 @@
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
 	    
+	    
 		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlx.css">
-		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxgrid.js">
 		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxform_dhx_skyblue.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxtabbar.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxlayout.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxwindows.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxcalendar.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxgrid.js">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxwindows_dhx_skyblue.css">
+		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxcalendar_dhx_skyblue.css">
 		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlx.js"></script>
-	    <script src="../js/dhtmlxSuite/patterns/dhtmlxlayout_pattern4l.js"></script>
-	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxform.js"></script>
-	   <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxgrid.js"></script>
-	   <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxgridcell.js"></script>
-	    <script type="text/javascript" src="../js/dhtmlxSuite/excells/dhtmlxgrid_excell_grid.js"></script>
-	    <script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxform.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_item_container.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_item_calendar.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxcalendar.js"></script>
+	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxcontainer.js"></script>
+	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxtabbar.js"></script>
+	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxwindows.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxtabbar_start.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
+		<script src="../js/dhtmlxSuite/patterns/dhtmlxlayout_pattern4l.js"></script>
+	    
+	    	
+		
+	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxgrid.js"></script>
+	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxgridcell.js"></script>
+	    <script type="text/javascript" src="../js/dhtmlxSuite/excells/dhtmlxgrid_excell_grid.js"></script>	    
  		<script type="text/javascript" src="../js/dhtmlxSuite/excells/dhtmlxgrid_excell_acheck.js"></script>
-
 		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_deprecated.js"></script>
 		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_drag.js"></script>
 		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_export.js"></script>
@@ -37,6 +58,13 @@
 		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_srnd.js"></script>
 		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_start.js"></script>
 		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxgrid_validation.js"></script>
+		
+		
+		
+	    
+		
+		
+		
 
 
 
@@ -104,42 +132,47 @@
 		   
 		    function doOnRowSelectedMiGrid(rowID,celInd){
 		    	
-		    	var dni = miGrid.cells(rowID,2).getValue();
-		    	var asignatura = miGrid.cells(rowID,3).getValue();
+		    	var sp = rowID.split("-");
+		    	var idAlumno = sp[0];
+		    	var idAsignatura = sp[1];
+		    	var nombreAsignatura = sp[2];
+		    	var idPortafolio = sp[3];
+		    	
+		    	var codigo = miGrid.cells(rowID,3).getValue();
 		    	
 		    	
-		    	b.setText(asignatura + " - " + "NOMBRE DE ASIGNATURA SELECCIONADA");
+		    	b.setText(codigo + " - " + nombreAsignatura);
 		    	tabbar = b.attachTabbar();
 		    	b.showHeader();
 		    	
 		    	tabbar.addTab('tab_1','<bean:message key="title.datos.personales"/>','');
 		    	tab_1 = tabbar.cells('tab_1');
 		    	tabbar.setTabActive('tab_1');
-		    	goInformacion(dni,asignatura);
+		    	goInformacion(idAlumno,idAsignatura,idPortafolio);
 		    	
 		    	tabbar.addTab('tab_2','<bean:message key="title.info.general.estancia"/>','');
 		    	tab_2 = tabbar.cells('tab_2');
-		    	goEstancia(dni,asignatura);
+		    	//goEstancia(idAlumno,idAsignatura,idPortafolio);
 		    	
 		    	tabbar.addTab('tab_3','<bean:message key="title.seminarios"/>','');
 		    	tab_3 = tabbar.cells('tab_3');
-		    	goSeminarios(dni,asignatura);
+		    	//goSeminarios(idAlumno,idAsignatura,idPortafolio);
 		    	
 		    	tabbar.addTab('tab_4','<bean:message key="title.trabajos.campo"/>','');
 		    	tab_4 = tabbar.cells('tab_4');
-		    	goTrabajos(dni,asignatura);
+		    	//goTrabajos(idAlumno,idAsignatura,idPortafolio);
 		    	
 		    	tabbar.addTab('tab_5','<bean:message key="title.casos.clinicos"/>','');
 		    	tab_5 = tabbar.cells('tab_5');
-		    	goCasos(dni,asignatura);
+		    	//goCasos(idAlumno,idAsignatura,idPortafolio);
 		    	
 		    	tabbar.addTab('tab_6','<bean:message key="title.diario.reflexivo"/>','');
 		    	tab_6 = tabbar.cells('tab_6');
-		    	goDiarios(dni,asignatura);
+		    	//goDiarios(idAlumno,idAsignatura,idPortafolio);
 		    	
 		    	tabbar.addTab('tab_7','<bean:message key="title.rubrica"/>','');
 		    	tab_7 = tabbar.cells('tab_7');
-		    	goRubricas(dni,asignatura);
+		    	//goRubricas(idAlumno,idAsignatura,idPortafolio);
 		    	
 		    	
 		    }
@@ -155,51 +188,145 @@
 		    	gridAlumnoRealizadoSem.clearAndLoad("gridusuarios.do");		    	
 		    }
 		    
-		    function goInformacion(dni,asignatura){
+		    function goInformacion(idAlumno,idAsignatura,idPortafolio){
 		    	
 		    	var form = tab_1.attachForm();
 		    	form.loadStruct('../xml/forms/usuario_form.xml', function(){
-		    		form.setItemLabel('data','<bean:message key="title.info.general"/>');
+		    		form.setItemLabel('data','<bean:message key="title.datos.personales"/>');
 		    		form.setItemLabel('grupo','<bean:message key="label.group"/>');
 		    		form.setItemLabel('nombre','<bean:message key="label.nombre"/>');
+		    		form.setItemLabel('apellido1','<bean:message key="label.apellido1"/>');
+		    		form.setItemLabel('apellido2','<bean:message key="label.apellido2"/>');
+		    		form.setItemLabel('dni','<bean:message key="label.dni"/>');
 		    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
-		    		form.setItemLabel('telefonoMovil','<bean:message key="label.telefono.movil"/>');
-		    		form.setItemLabel('direccion','<bean:message key="label.direccion"/>');
-		    		form.setItemLabel('codigoPostal','<bean:message key="label.postal.code"/>');
-		    		form.setItemLabel('ciudad','<bean:message key="label.ciudad"/>');
-		    		form.setItemLabel('pais','<bean:message key="label.pais"/>');
-		    		form.setItemLabel('email','<bean:message key="label.address.email"/>');
-		    		form.setItemLabel('comentarios','<bean:message key="label.comentarios"/>');
-		    		form.setItemLabel('user','<bean:message key="label.user"/>');
-		    		form.setItemLabel('pass','<bean:message key="label.pass"/>');			    		
-		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
-
-					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>36</permiso>" >		    	
-							form.hideItem('aceptar');
-						</logic:notMatch>
-					</logic:notMatch>			    		
+		    		form.setItemLabel('correo','<bean:message key="label.address.email"/>');	
+		    		form.setItemLabel('foto','<bean:message key="label.foto"/>');	
+		    		form.setItemLabel('fotoFile','<bean:message key="label.max.size"/>');
+		    		form.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 		    		
+		    		form.hideItem('aceptar');
+		    		form.removeItem('fotoFile');
 		    		
-				// HACER LAS MODIFICACIONES NECESARIAS PARA REALIZAR UNA BUSQUEDA SEGUN DNI CUANDO ESTE HECHA LA BBDD
-				//	form.load('editarusuario.do?email=' + selectedEmail, function () {			    			
-		    	//		form.attachEvent("onButtonClick", function(id){
-		    	//			if (id == "aceptar") {
-			    //				form.send("actualizarusuario.do?!nativeeditor_status=save&email=" + selectedEmail ,"post", function(xml) {
-			    //					
-			    //				});
-			    //				buscar();
-		    	//			}
-		    	//		});
-		    	//	});
+		    		form.forEachItem(function(id){
+		    			switch(id) {
+			    			case "grupo":{
+			    				form.setReadonly(id,true);
+			    				break;
+			    			}
+			    			case "nombre":{
+			    				form.setReadonly(id,true);
+			    				break;
+			    			}
+			    			case "apellido1":{
+			    				form.setReadonly(id,true);
+			    				break;
+			    			}
+			    			case "apellido2":{
+			    				form.setReadonly(id,true);
+			    				break;
+			    			}
+			    			case "dni":{
+			    				form.setReadonly(id,true);
+			    				break;
+			    			}
+			    			case "telefono":{
+			    				form.setReadonly(id,true);
+			    				break;
+			    			}
+			    			case "correo":{
+			    				form.setReadonly(id,true);
+			    				break;
+			    			}
+			    			default: break;
+		    			}
+		    		});
+		    		
+		    		//Aqui lo pondría con logic match para gente con permiso para modifiacar datos!
+		    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>3</permiso>" >	
+		    			form.forEachItem(function(id){
+			    			switch(id) {
+				    			case "grupo":{
+				    				form.setReadonly(id,false);
+				    				form.setRequired(id,true);
+				    				break;
+				    			}
+				    			case "nombre":{
+				    				form.setReadonly(id,false);
+				    				form.setRequired(id,true);
+				    				break;
+				    			}
+				    			case "apellido1":{
+				    				form.setReadonly(id,false);
+				    				form.setRequired(id,true);
+				    				break;
+				    			}
+				    			case "apellido2":{
+				    				form.setReadonly(id,false);
+				    				break;
+				    			}
+				    			case "dni":{
+				    				form.setReadonly(id,false);
+				    				form.setRequired(id,true);
+				    				break;
+				    			}
+				    			case "correo":{
+				    				form.setReadonly(id,false);
+				    				form.setRequired(id,true);
+				    				break;
+				    			}
+				    			case "telefono":{
+				    				form.setReadonly(id,false);
+				    				break;
+				    			}
+				    			default: break;
+			    			}
+			    		});
+		    			form.showItem('aceptar');
+						
+		    			form.enableLiveValidation(true);
+			    		//foto LONGBLOB, 
+			    		form.setFocusOnFirstActive();
+						
+					</logic:match>			    		
 					
+					form.load('editarusuario.do?idUsuario=' + idAlumno, function () {
+						if(form.getItemValue("fotoImagen") == "") {
+							var uriNoProfilePic = '../img/no-profile-pic.png';
+							form.getContainer("foto").innerHTML = "<img src="+ uriNoProfilePic +" />";
+						}
+						else{
+							var profilePic = form.getItemValue("fotoImagen");
+							form.getContainer("foto").innerHTML = "<img src=data:image/jpg;base64,"+ profilePic +" style='width:105px;height:140px'/>";
+						}
+						form.attachEvent("onButtonClick", function(id){
+							if (id == "aceptar") {
+								form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idAlumno ,"post", function(xml) {
+									buscarMisAlumnos();
+									alert('<bean:message key="message.perfil.cambiado.exito"/>');
+									
+								});
+
+							}
+						});
+						form.attachEvent("onEnter", function() {
+							form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idAlumno ,"post", function(xml) {
+								buscarMisAlumnos();
+								alert('<bean:message key="message.perfil.cambiado.exito"/>');
+								
+							}); 
+			    		});
+						
+						
+					});//load
+					
+		    		
 		    	});
 		    	
 		    	
 		    }
 		    
 		    
-		    function goEstancia(dni,asignatura){
+		    function goEstancia(idAlumno,idAsignatura,idPortafolio){
 		    	
 		    	var form2 = tab_2.attachForm();
 		    	form2.loadStruct('../xml/forms/estancia_form.xml', function(){
@@ -238,7 +365,7 @@
 				
 		    }
 		    
-		    function goSeminarios(dni,asignatura){	    	
+		    function goSeminarios(idAlumno,idAsignatura,idPortafolio){	    	
 		    	
 		    	var mini_layout = tabbar.cells('tab_3').attachLayout("2U","dhx_skyblue");
 		    	
@@ -313,7 +440,7 @@
 		    }
 		    
 		    
-			function goTrabajos(dni,asignatura){
+			function goTrabajos(idAlumno,idAsignatura,idPortafolio){
 				
 				var mini_layout = tabbar.cells('tab_4').attachLayout("2U","dhx_skyblue");
 		    	
@@ -531,7 +658,7 @@
 				 buscarMisAlumnos();
 			}
 			
-			function goCasos(dni,asignatura){
+			function goCasos(idAlumno,idAsignatura,idPortafolio){
 				
 				var mini_layout = tabbar.cells('tab_5').attachLayout("2U","dhx_skyblue");
 		    	
@@ -613,7 +740,7 @@
 			}
 		    
 			
-			function goDiarios(dni,asignatura){
+			function goDiarios(idAlumno,idAsignatura,idPortafolio){
 				
 				var mini_layout = tabbar.cells('tab_6').attachLayout("2U","dhx_skyblue");
 		    	
@@ -694,10 +821,26 @@
 			}
 			
 			
-			function goRubricas(dni,asignatura){
+			function goRubricas(idAlumno,idAsignatura,idPortafolio){
 				
 				
 			}
+			
+			function ucmEsEmail(correo) {
+	    		if (getDomain(correo) == "ucm.es") {
+	    			return true;
+	    		}
+	    		else {
+	    			formUsuario.setNote("correo", { text: '<bean:message key="message.email.institucional" />'} );
+	    			alert("false");
+	    			return false;
+	    		}
+	    	}
+	    	
+	    	function getDomain(correo) {
+			    var parts = correo.split('@');
+			    return parts[parts.length - 1];
+	    	}
 		    
 		    
         </script>
