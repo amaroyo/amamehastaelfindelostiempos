@@ -73,7 +73,7 @@
 	    	dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	
 	    	var miGrid, tabbar, tab_1,tab_2,tab_3,tab_4,tab_5,tab_6,tab_7, main_layout, form, b, a, gridAlumnoRealizadoSem, gridProfesoresTrab,
-	    				gridProfesoresCasos;
+	    				gridProfesoresCasos, idAsignatura, idAlumno, idPortafolio;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -133,10 +133,10 @@
 		    function doOnRowSelectedMiGrid(rowID,celInd){
 		    	
 		    	var sp = rowID.split("-");
-		    	var idAlumno = sp[0];
-		    	var idAsignatura = sp[1];
+		    	idAlumno = sp[0];
+		    	idAsignatura = sp[1];
 		    	var nombreAsignatura = sp[2];
-		    	var idPortafolio = sp[3];
+		    	idPortafolio = sp[3];
 		    	
 		    	var codigo = miGrid.cells(rowID,3).getValue();
 		    	
@@ -148,31 +148,31 @@
 		    	tabbar.addTab('tab_1','<bean:message key="title.datos.personales"/>','');
 		    	tab_1 = tabbar.cells('tab_1');
 		    	tabbar.setTabActive('tab_1');
-		    	goInformacion(idAlumno,idAsignatura,idPortafolio);
+		    	goInformacion();
 		    	
 		    	tabbar.addTab('tab_2','<bean:message key="title.info.general.estancia"/>','');
 		    	tab_2 = tabbar.cells('tab_2');
-		    	goEstancia(idAlumno,idAsignatura,idPortafolio);
+		    	goEstancia();
 		    	
 		    	tabbar.addTab('tab_3','<bean:message key="title.seminarios"/>','');
 		    	tab_3 = tabbar.cells('tab_3');
-		    	goSeminarios(idAlumno,idAsignatura,idPortafolio);
+		    	goSeminarios();
 		    	
 		    	tabbar.addTab('tab_4','<bean:message key="title.trabajos.campo"/>','');
 		    	tab_4 = tabbar.cells('tab_4');
-		    	goTrabajos(idAlumno,idAsignatura,idPortafolio);
+		    	goTrabajos();
 		    	
 		    	tabbar.addTab('tab_5','<bean:message key="title.casos.clinicos"/>','');
 		    	tab_5 = tabbar.cells('tab_5');
-		    	//goCasos(idAlumno,idAsignatura,idPortafolio);
+		    	//goCasos();
 		    	
 		    	tabbar.addTab('tab_6','<bean:message key="title.diario.reflexivo"/>','');
 		    	tab_6 = tabbar.cells('tab_6');
-		    	//goDiarios(idAlumno,idAsignatura,idPortafolio);
+		    	//goDiarios();
 		    	
 		    	tabbar.addTab('tab_7','<bean:message key="title.rubrica"/>','');
 		    	tab_7 = tabbar.cells('tab_7');
-		    	//goRubricas(idAlumno,idAsignatura,idPortafolio);
+		    	//goRubricas();
 		    	
 		    	
 		    }
@@ -186,7 +186,7 @@
 		    
 		    
 		    
-		    function goInformacion(idAlumno,idAsignatura,idPortafolio){
+		    function goInformacion(){
 		    	
 		    	var form = tab_1.attachForm();
 		    	form.loadStruct('../xml/forms/usuario_form.xml', function(){
@@ -324,7 +324,7 @@
 		    }
 		    
 		    
-		    function goEstancia(idAlumno,idAsignatura,idPortafolio){
+		    function goEstancia(){
 		    	
 		    	var form2 = tab_2.attachForm();
 		    	form2.loadStruct('../xml/forms/estancia_form.xml', function(){
@@ -438,7 +438,7 @@
 				
 		    }
 		    
-		    function goSeminarios(idAlumno,idAsignatura,idPortafolio){	    	
+		    function goSeminarios(){	    	
 		    	
 		    	var mini_layout = tabbar.cells('tab_3').attachLayout("2U","dhx_skyblue");
 		    	
@@ -451,7 +451,7 @@
 	    		mb.setWidth(500);
 			    
 			    
-				var gridAlumnoRealizadoSem = ma.attachGrid();
+				gridAlumnoRealizadoSem = ma.attachGrid();
 		    	
 				gridAlumnoRealizadoSem.setHeader(["<bean:message key="label.nombre.seminario" />","<bean:message key="label.codigo.seminario" />","<bean:message key="label.anyo.realizacion.seminario" />"]);
 				gridAlumnoRealizadoSem.setColTypes("ro,ro,ro");
@@ -538,7 +538,7 @@
 		    }
 		    
 		    
-			function goTrabajos(idAlumno,idAsignatura,idPortafolio){
+			function goTrabajos(){
 				
 				var mini_layout = tabbar.cells('tab_4').attachLayout("2U","dhx_skyblue");
 		    	
@@ -555,25 +555,38 @@
 		    	
 		    	toolbarServicios.loadXML('../xml/toolbars/dhxtoolbar-trabajos-campo.xml', function(){
 		    		toolbarServicios.setItemText('crearTrabajoCampo',"<bean:message key="button.crear.trabajo.campo"/>");
+		    		toolbarServicios.setItemText('modificarTrabajoCampo',"<bean:message key="button.cambiar.trabajo.campo"/>");
 		    		toolbarServicios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
-		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.casos"/>");
+		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.trabajos"/>");
 		    		toolbarServicios.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.casos.alumno"/>");
 		    		toolbarServicios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+		    		
+		    		toolbarServicios.hideItem('subirPractica');
+		    		toolbarServicios.hideItem('sep3');
+		    		toolbarServicios.hideItem('crearTrabajoCampo');
+		    		toolbarServicios.hideItem('sep1');
+		    		toolbarServicios.hideItem('modificarTrabajoCampo');
+		    		toolbarServicios.hideItem('sep2');
+		    		toolbarServicios.hideItem('descargarTodos');
+		    		toolbarServicios.hideItem('sep4');
+		    		toolbarServicios.hideItem('fechaLimite');
+		    		toolbarServicios.hideItem('sep6');
+		    		
 		    		
 		    	});
 		    	
 		    	
 				gridProfesoresTrab = ma.attachGrid();
 		    	
-				gridProfesoresTrab.setHeader(["<bean:message key="label.alumno" />","<bean:message key="label.dni" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
-				gridProfesoresTrab.setColTypes("ro,ro,ro,ro");
+				gridProfesoresTrab.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","<bean:message key="label.fecha.limite" />","<bean:message key="label.enlace.practica" />","<bean:message key="label.enlace.correccion" />"]);
+				gridProfesoresTrab.setColTypes("ro,ro,ro,ro,ro,ro");
 		    	
-				gridProfesoresTrab.setColSorting('str,str,str,str');
+				gridProfesoresTrab.setColSorting('str,str,str,str,str,str');
 				gridProfesoresTrab.enableMultiselect(false);
 				gridProfesoresTrab.init();
 		    	
-		    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+		    	var gridProcessorPro = new dataProcessor("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idAlumno);
 		    	gridProcessorPro.enableUTFencoding('simple');
 		    	gridProcessorPro.init(gridProfesoresTrab);	  
 		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -583,21 +596,9 @@
 		    	});
 
 		    	
-		    	gridProfesoresTrab.attachEvent("onRowSelect", function doOnRowSelected(rowID,celInd){
-		    		var miGrid = mb.attachGrid();
-				    miGrid.setIconsPath('../skins/imgs/');		    	
-				    miGrid.setHeader(["<strong><bean:message key="label.mi.perfil" /></strong>"]);
-				    //set readonly (ro)
-				    miGrid.setColTypes("ro");
-				    miGrid.setNoHeader(true);
-				    miGrid.enableMultiselect(false);
-				    miGrid.init();
-				    miGrid.loadXML("../xml/forms/asignaturas_trabajos_opciones.xml");
-				    miGrid.attachEvent("onRowSelect",doOnRowSelectedOptions); 
-		    		
-		    	});
+		    	gridProfesoresTrab.attachEvent("onRowSelect",doOnRowSelectedOptions);
 		    	
-		    	gridProfesoresTrab.clearAndLoad("gridusuarios.do");
+		    	gridProfesoresTrab.clearAndLoad("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idAlumno);
 		    	
 		    }
 			
@@ -605,31 +606,131 @@
 			
 			function doOnRowSelectedOptions(rowID,celInd){
 				
-				if (rowID == "a") alert("Descargar");
-		    	else if (rowID == "b") alert("Subir corrección");
-		    	else alert("Cambiar la fecha de entrega");
+				var sp = rowIDs.split("-");
+				var subido = sp[0];
+				var corregido = sp[1];
+				var idPortafolio = sp[2];
+				var idTrabajoCampo = sp[3];
+				
+
+				miGrid = b.attachGrid();
+				
+			    miGrid.setIconsPath('../skins/imgs/');		    	
+			    miGrid.setHeader(["<strong><bean:message key="label.mi.perfil" /></strong>"]);
+			    //set readonly (ro)
+			    miGrid.setColTypes("ro");
+			    miGrid.setNoHeader(true);
+			    miGrid.enableMultiselect(false);
+			    miGrid.init();
+			    miGrid.loadXML("../xml/forms/asignaturas_trabajos_opciones.xml");
+			    miGridActivado=true;
+			    miGrid.attachEvent("onRowSelect",function(rowId,cellIndex){
+			    	if (rowId == "a" && subido == "T") {
+			    		
+			    		var accion = "descargarTrabajoCampoAlumno.do";
+						accion += "?tipoConsulta="+"TrabajoCampoAlumno";
+						accion += "&idPortafolio="+idPortafolio;
+						accion += "&idTrabajoCampo="+idTrabajoCampo;
+						location.href=accion;
+			    		
+			    	}
+			    	else if (rowId == "b") {
+			    		var dhxWinsA= new dhtmlXWindows();
+    					var windowAlumno = dhxWinsA.createWindow("subir", 300,50, 500, 150);
+    					windowAlumno.setText('<bean:message key="title.subir.correccion" />');				
+    					windowAlumno.setModal(true);
+    					windowAlumno.centerOnScreen();
+    					windowAlumno.attachURL("subirArchivo.do?tipoConsulta=TrabajoCampoCorreccion" + "&idPortafolio=" + idPortafolio + "&idTrabajoCampo=" + idTrabajoCampo);
+			    	}
+			    	else  if (rowId == "c" && corregido == "T") {
+			    		var accion = "descargarTrabajoCampoCorreccion.do";
+						accion += "?tipoConsulta="+"TrabajoCampoCorreccion";
+						accion += "&idPortafolio="+idPortafolio;
+						accion += "&idTrabajoCampo="+idTrabajoCampo;
+						location.href=accion;
+			    	}
+			    	else if (rowId == "d") {
+			    		var idTrabajoInfo = tabbar.getActiveTab();
+			    		var dhxWins= new dhtmlXWindows();
+						var window = dhxWins.createWindow("subir", 300,50, 500, 190);
+						window.setText('<bean:message key="title.trabajo.de.campo" />');				
+						window.setModal(true);
+						window.centerOnScreen();
+						
+						var formNTC = window.attachForm();
+						formNTC.loadStruct('../xml/forms/trabajo_de_campo.xml', function(){
+							formNTC.setItemLabel('data','<bean:message key="title.cambiar.fecha.general.alumno"/>');
+							formNTC.setItemLabel('nombre','<bean:message key="label.nombre"/>');
+							formNTC.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
+							formNTC.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
+							formNTC.setItemLabel('hora','<bean:message key="label.hora"/>');
+							formNTC.setItemLabel('descargarCorreccion','<bean:message key="button.descargar.correccion"/>');
+							formNTC.setItemLabel('descargarInformacion','<bean:message key="button.subir.informacion.adicional"/>');
+							formNTC.setItemLabel('subirPractica','<bean:message key="button.subir.trabajo.campo"/>');
+							formNTC.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+							formNTC.setItemLabel('eliminar','<bean:message key="button.eliminar.trabajo.campo"/>');
+				    		formNTC.setRequired('nombre', false);
+				    		formNTC.hideItem('nombre');
+				    		formNTC.hideItem('descripcion');
+				    		formNTC.hideItem('descargarInformacion');
+				    		formNTC.hideItem('eliminar');
+				    		formNTC.setRequired('fechaFin', true);
+				    		formNTC.setRequired('hora', true);
+				    		formNTC.hideItem('descargarCorreccion');
+				    		formNTC.hideItem('subirPractica');
+				    		
+				    		var correcto=false;
+				    		var click = false;
+				    		
+				    		formNTC.attachEvent("onChange", function(name,value){
+				    		   if(name == "hora"){
+				    			   click=true;
+				    			   var hora = formNTC.getItemValue("hora");
+				    			   var sp = hora.split(":");
+				    			   if(sp.length==2){
+				    				   var isnum = /^\d+$/.test(sp[0]);
+				    				   isnum = isnum && /^\d+$/.test(sp[1]);
+				    				   if(isnum){
+				    					   if (sp[0] < 0 || sp[0] > 24 || sp[1] < 0 || sp[1] > 60) {
+					    					   formNTC.setNote("hora", { text: '<bean:message key="message.hora.correcta" />'} );
+					    					   correcto=false;
+				    				   		}
+				    					   else {correcto=true;}
+				    				   }
+				    				   else {formNTC.setNote("hora", { text: '<bean:message key="message.hora.correcta" />'} );correcto=false;}
+				    			   }
+				    			   else {formNTC.setNote("hora", { text: '<bean:message key="message.hora.correcta" />'} );correcto=false;}
+				    		   }
+				    		});
+				    		
+				    		formNTC.load('verTrabajoCampo.do?idTrabajoInfo='+ idTrabajoInfo, function () {	
+					    		formNTC.attachEvent("onButtonClick", function(id){
+					    			
+					    			if(!click || (click && correcto)){
+										if(id == "aceptar"){
+											formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idPortafolio=" + idPortafolio + "&idTrabajoCampo="+ idTrabajoCampo + "&cambioFechaIndividual=Si","post", function(xml) {
+												alert("<bean:message key="message.trabajo.de.campo.modificado.exito"/>");
+												window.close();
+												//var url = "trabajos.do";
+												//location.href=url;
+												setTimeout(function(){initProfesor();},1000);
+											});
+											
+										}
+					    			}
+					    			else {alert("<bean:message key="message.algo.incorrecto"/>");}
+					    			
+				
+						    	});
+				    			
+				    		});
+						});
+			    	}
+			    	
+			    });
 			}
 		    
 			
-			function subirPractica(){
-				alert("subir Practica");
-			}
-			
-			function descargarTodos(){
-				alert("Descargar Todos");
-			}
-			
-			function subirCorrecciones(){
-				alert("Subir Correcciones");
-			}
-			
-			function fechaLimite(){
-				alert("Fecha Limite");
-			}
-			
-			function goActualizar() {
-				gridProfesoresTrab.clearAndLoad("gridusuarios.do");	 	   		    	
-		    }
 			
 			function seleccionarAlumnos(){
 				
@@ -756,7 +857,7 @@
 				 buscarMisAlumnos();
 			}
 			
-			function goCasos(idAlumno,idAsignatura,idPortafolio){
+			function goCasos(){
 				
 				var mini_layout = tabbar.cells('tab_5').attachLayout("2U","dhx_skyblue");
 		    	
@@ -838,7 +939,7 @@
 			}
 		    
 			
-			function goDiarios(idAlumno,idAsignatura,idPortafolio){
+			function goDiarios(){
 				
 				var mini_layout = tabbar.cells('tab_6').attachLayout("2U","dhx_skyblue");
 		    	
@@ -919,7 +1020,7 @@
 			}
 			
 			
-			function goRubricas(idAlumno,idAsignatura,idPortafolio){
+			function goRubricas(){
 				
 				
 			}
@@ -958,6 +1059,14 @@
 	    		}
 	    		else return true;
 	    		
+	    	}
+	    	
+	    	function descargarTodosAlumno(){
+	    		alert("TODO");
+	    	}
+	    	
+	    	function goActualizar(){
+	    		gridProfesoresTrab.clearAndLoad("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idAlumno);
 	    	}
 	    	
 		    

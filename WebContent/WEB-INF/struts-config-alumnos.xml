@@ -16,6 +16,8 @@
 	   	
 	   	<form-bean name="EditarSeminarioForm" type="es.oyssen.mrm.struts.forms.cursos.EditarSeminarioForm" />
 	   	
+	   	 <form-bean name="GridTrabajosCampoUsuarioAsignatura" type="es.oyssen.mrm.struts.forms.asignaturas.GridTrabajosCampoUsuarioAsignaturaForm" />
+	   	
 	</form-beans>
 	
 
@@ -38,6 +40,8 @@
 		<action path="/alumnos/gridSeminariosRealizadosUsuario" name="GridSeminariosRealizadosUsuario" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridSeminariosUsuarioAction" />
 		
 		<action path="/alumnos/editarseminario" name="EditarSeminarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.EditarSeminarioAction" />
+		
+		<action path="/alumnos/gridTrabajosCampoUsuarioAsignatura" name="GridTrabajosCampoUsuarioAsignatura" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridTrabajosCampoUsuarioAsignaturaAction" />
 		
 	</action-mappings>
 
