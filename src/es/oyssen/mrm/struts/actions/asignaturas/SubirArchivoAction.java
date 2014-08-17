@@ -1,5 +1,6 @@
 package es.oyssen.mrm.struts.actions.asignaturas;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -59,10 +60,15 @@ public class SubirArchivoAction extends MrmAction {
 						String n = f.getFichero().getFileName();
 						String[] split = n.split("\\.");
 						
+						DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+						//get current date time with Date() dateFormat.format(date)
+						Date date = new Date();
+						
+						
 						if(f.getNombre().equals("")){	
-							tc.setNombreTrabajo(split[0] + "." + split[1].toLowerCase());
+							tc.setNombreTrabajo(split[0] + "_" + ((dateFormat.format(date)).replaceAll(" ", "_")).replaceAll("/", "_")+"." + split[1].toLowerCase());
 						}
-						else tc.setNombreTrabajo(f.getNombre() + "." + split[1].toLowerCase());
+						else tc.setNombreTrabajo(f.getNombre()+ "_" + ((dateFormat.format(date)).replaceAll(" ", "_")).replaceAll("/", "_")+"." + split[1].toLowerCase());
 						
 						tc.setTrabajoDeCampo(f.getFichero().getFileData());
 						
@@ -81,9 +87,9 @@ public class SubirArchivoAction extends MrmAction {
 					String[] split = n.split("\\.");
 					
 					if(f.getNombre().equals("")){	
-						tc.setNombreCorreccion(split[0] + "." + split[1].toLowerCase());
+						tc.setNombreCorreccion(split[0]+ "." + split[1].toLowerCase());
 					}
-					else tc.setNombreCorreccion(f.getNombre() + "." + split[1].toLowerCase());
+					else tc.setNombreCorreccion(f.getNombre()+ "." + split[1].toLowerCase());
 					
 					tc.setCorreccionTrabajo(f.getFichero().getFileData());
 					

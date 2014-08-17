@@ -65,7 +65,11 @@ public class DescargarTodosCasosClinicosAlumnosAction extends MrmAction {
 				if(casosPortafolio != null){
 					for (CasoClinicoVO c : casosPortafolio) {	
 						if(c.getCasoClinico()!=null){
-							ZipEntry subEntry = new ZipEntry(c.getNombre());
+							String[] nmbreArchivo = c.getNombre().split("\\.");
+							nmbreArchivo[0] = nmbreArchivo[0] + "_" + (c.getFechaSubida()).replaceAll(" ", "_");
+							nmbreArchivo[0] = nmbreArchivo[0].replaceAll("\\s","");
+							String[] s = nmbreArchivo[0].split("\\.");
+							ZipEntry subEntry = new ZipEntry(s[0]+"."+nmbreArchivo[1]);
 							subEntry.setSize(c.getCasoClinico().length);
 							subZos.putNextEntry(subEntry);
 							subZos.write(c.getCasoClinico());

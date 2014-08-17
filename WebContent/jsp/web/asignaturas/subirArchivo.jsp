@@ -40,6 +40,12 @@
 	    	String idTrabajoCampo = request.getParameter("idTrabajoCampo");
 	    	accion = "/asignaturas/subirArchivoTrabajoCampoCorreccion?tipoConsulta=" + tipoConsulta + "&idPortafolio=" + idPortafolio + "&idTrabajoCampo=" + idTrabajoCampo;
 	    }
+	    else if(tipoConsulta.equals("TrabajoCampoCorreccionProfesor")){
+	    	String idPortafolio = request.getParameter("idPortafolio");	    	
+	    	String idTrabajoCampo = request.getParameter("idTrabajoCampo");
+	    	tipoConsulta = "TrabajoCampoCorreccion";
+	    	accion = "/asignaturas/subirArchivoTrabajoCampoCorreccion?tipoConsulta=" + tipoConsulta + "&idPortafolio=" + idPortafolio + "&idTrabajoCampo=" + idTrabajoCampo;
+	    }
 	    else if(tipoConsulta.equals("DiarioReflexivo")){
 	    	String idAlumno = request.getParameter("idAlumno");
 	    	String idAsignatura = request.getParameter("idAsignatura");
