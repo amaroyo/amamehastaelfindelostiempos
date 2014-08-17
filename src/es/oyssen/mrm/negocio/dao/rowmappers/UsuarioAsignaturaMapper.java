@@ -18,11 +18,11 @@ public class UsuarioAsignaturaMapper implements RowMapper {
 
 	public static final String FIELD_ID = "id_usuario";
 	public static final String FIELD_ID_ASIGNATURA = "id_asignatura";
-    public static final String FIELD_NOMBRE = "nombre";
+    public static final String FIELD_NOMBRE = "u.nombre";
     public static final String FIELD_APELLIDO1 = "apellido1";
     public static final String FIELD_APELLIDO2 = "apellido2";
     public static final String FIELD_CODIGO = "codigo";
-    public static final String FIELD_NOMBRE_ASIGNATURA = "nombre";
+    public static final String FIELD_NOMBRE_ASIGNATURA = "a.nombre";
     public static final String FIELD_DNI = "dni";
     public static final String FIELD_ID_PROFESOR = "id_profesor";
     public static final String FIELD_ID_PORTAFOLIO = "id_portafolio";
