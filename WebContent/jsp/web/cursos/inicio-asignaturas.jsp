@@ -263,7 +263,7 @@
 		    	windowNewAsignaturaPart.setModal(true);
 				formsNewAsignatura[currentPart] = windowNewAsignaturaPart.attachForm();
 				var formNewAsignaturaPart = formsNewAsignatura[currentPart];
-				numeroRubricas = formsNewAsignatura[0].getItemValue("numeroRubricas");
+				numeroRubricas = parseInt(formsNewAsignatura[0].getItemValue("numeroRubricas"));
 				formNewAsignaturaPart.loadStruct('../xml/forms/new_asignatura_part_form.xml', function() {
 					formNewAsignaturaPart.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
 					formNewAsignaturaPart.setItemLabel('numeroRubricas','<bean:message key="label.numero.rubricas"/>');
@@ -336,7 +336,7 @@
 		    
 		    function resultadoBuscarParteAsignatura(response,currentPart){
 		    	if(response == "No existe ninguna asignatura con ese nombre") {
-		    		if(numeroRubricas == 1 || currentPart == numeroRubricas) {
+		    		if(currentPart == numeroRubricas) {
 		    			crearRubricas(1);
 		    		}
 		    		else{
@@ -467,14 +467,20 @@
 	    					botonBorrarGrupo(id,"texto",2);
 						}
 							
+	    				
+	    				
 	    				if (id == "siguiente") {
-	    					/*if(!existeEnNombresAnteriores(currentPart,numeroRubricas)){
-		    					formNewAsignaturaPart.send("buscarasignatura.do","post", function(loader,response) {
-		    						resultadoBuscarParteAsignatura(response,currentPart,numeroRubricas);
-			    				});
-	    					}*/
+	    					if(currentPart == numeroRubricas){
+	    						crearAsignaturaCompleta();
+		    					cerrarVentanas();
+	    		    		}
+	    		    		else{
+	    	    				windowsNewAsignatura[numeroRubricas+currentPart].hide();
+	    	    				windowsNewAsignatura[numeroRubricas+currentPart].setModal(false);
+	    			    		crearRubricas(currentPart+1);
+	    		    		}
 	    				}
-	    				else if (id == "anterior") {
+	    				else if (id == "anterior"){
 	    					windowsNewAsignatura[numeroRubricas+currentPart].setModal(false);
 	    					windowsNewAsignatura[numeroRubricas+currentPart].hide();
 	    					windowsNewAsignatura[numeroRubricas+currentPart-1].setModal(true);
