@@ -858,7 +858,7 @@ public class UtilXML {
 		return sb.toString();
 	}
 	
-	public static String buildXmlGridTrabajosCampoUsuarioAsignatura(List<TrabajoDeCampoVO> list) {
+	public static String buildXmlGridTrabajosCampoUsuarioAsignatura(List<TrabajoDeCampoVO> list, boolean profesor) {
 		StringBuffer sb = new StringBuffer();
 		sb.append(XML_HEADER);
 		sb.append("<rows>");
@@ -880,12 +880,24 @@ public class UtilXML {
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(tc.getFechaLimite(),true)) + "]]></cell>");
 				
 				
-				if(corregido) sb.append("<cell><![CDATA[<img src=" + "../img/grid/corregida.png"+ "></img>]]></cell>");
-				else sb.append("<cell><![CDATA[<img src=" + "../img/grid/nocorregida.png"+ "></img>]]></cell>");
+				if(corregido){
+					sb.append("<cell><![CDATA[<img src=" + "../img/grid/corregida.png"+ "></img>]]></cell>");
+					
+				}
+				else {
+					 sb.append("<cell><![CDATA[<img src=" + "../img/grid/nocorregida.png"+ "></img>]]></cell>");
+					
+				}
 				
-				String descarga = "";
-				if(tc.getTrabajoDeCampo() != null) descarga="Descargar";
-				sb.append("<cell><![CDATA[" +  descarga + "]]></cell>");
+				
+				if(tc.getTrabajoDeCampo() != null) {
+					if(!profesor) sb.append("<cell><![CDATA[" +  "Descargar" + "]]></cell>");
+					else sb.append("<cell><![CDATA[<img src=" + "../img/grid/corregida.png"+ "></img>]]></cell>");
+				}
+				else {
+					if(!profesor) sb.append("<cell><![CDATA[" +  "" + "]]></cell>");
+					else sb.append("<cell><![CDATA[<img src=" + "../img/grid/nocorregida.png"+ "></img>]]></cell>");
+				}
 				
 				sb.append("</row>");				
 			}
