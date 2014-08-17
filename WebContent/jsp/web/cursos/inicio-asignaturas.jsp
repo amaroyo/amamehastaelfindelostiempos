@@ -51,8 +51,6 @@
 	    	
 	    	var windowsNewAsignatura = new Array();
 	    	var formsNewAsignatura = new Array();
-	    	var windowsNewRubrica = new Array();
-	    	var formsNewRubrica = new Array();
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -229,7 +227,7 @@
 		    	windowNewAsignatura.setText('<bean:message key="title.crear.nueva.asignatura" />');
 		    	windowNewAsignatura.centerOnScreen();
 				windowNewAsignatura.setModal(true);
-				formsNewAsignatura[0] = windowsNewAsignatura[0].attachForm();
+				formsNewAsignatura[0] = windowNewAsignatura.attachForm();
 				var formNewAsignatura = formsNewAsignatura[0];
 				formNewAsignatura.loadStruct('../xml/forms/new_asignatura_common_form.xml', function() {
 					formNewAsignatura.setItemLabel('data','<bean:message key="title.info.general.asignatura"/>');
@@ -263,7 +261,7 @@
 		    	windowNewAsignaturaPart.setText('<bean:message key="title.crear.nueva.asignatura" />'+': ' + '<bean:message key="title.parte.nueva.asignatura" /> ' +currentPart);				
 		    	windowNewAsignaturaPart.centerOnScreen();
 		    	windowNewAsignaturaPart.setModal(true);
-				formsNewAsignatura[currentPart] = windowsNewAsignatura[currentPart].attachForm();
+				formsNewAsignatura[currentPart] = windowNewAsignaturaPart.attachForm();
 				var formNewAsignaturaPart = formsNewAsignatura[currentPart];
 				numeroRubricas = formsNewAsignatura[0].getItemValue("numeroRubricas");
 				formNewAsignaturaPart.loadStruct('../xml/forms/new_asignatura_part_form.xml', function() {
@@ -357,9 +355,9 @@
 		    	}
 		    }
 		    
-		    function crearAsignaturaCompleta(numeroRubricas){
+		    function crearAsignaturaCompleta(){
 		    	var error=false;
-		    	for(var i=1;i<formsNewAsignatura.length;i++) {
+		    	for(var i=1;i<numeroRubricas;i++) {
 		    		formsNewAsignatura[i].send("crearasignatura.do","post", function(loader,response) {
 		    			if(response == "asignatura no creada: ya existe una asignatura con ese nombre"){
 		    				error=true;
@@ -388,13 +386,13 @@
 		    
 		    
 		    function crearRubricas(currentPart){
-		    	windowsNewRubrica[currentPart] = dhxWins.createWindow("gruposRubrica"+currentPart, 300, 50, 1200, 500);
-		    	var windowNewRubrica = windowsNewRubrica[currentPart];
+		    	windowsNewAsignatura[numeroRubricas+currentPart] = dhxWins.createWindow("gruposRubrica"+currentPart, 300, 50, 1200, 500);
+		    	var windowNewRubrica = windowsNewAsignatura[numeroRubricas+currentPart];
 		    	windowNewRubrica.setText('<bean:message key="title.crear.nueva.asignatura" />'+': '+'<bean:message key="title.parte.nueva.asignatura" /> ' +currentPart+' '+'<bean:message key="title.crear.nueva.asignatura.grupos.rubrica" />');				
 		    	windowNewRubrica.centerOnScreen();
 		    	windowNewRubrica.setModal(true);
-				formsNewRubrica[currentPart] = windowsNewRubrica[currentPart].attachForm();
-				formNewRubrica = formsNewRubrica[currentPart];
+				formsNewAsignatura[numeroRubricas+currentPart] = windowsNewAsignatura[numeroRubricas+currentPart].attachForm();
+				formNewRubrica = formsNewAsignatura[numeroRubricas+currentPart];
 				formNewRubrica.loadStruct('../xml/forms/new_grupos_rubrica_form.xml', function() {
 					formNewRubrica.setItemLabel('data','<bean:message key="title.grupos.criterios.rubrica"/>');
 					formNewRubrica.setItemLabel('parte','<bean:message key="label.parte"/>');
@@ -477,10 +475,10 @@
 	    					}*/
 	    				}
 	    				else if (id == "anterior") {
-	    					/*windowsNewAsignatura[currentPart].setModal(false);
-	    					windowsNewAsignatura[currentPart].hide();
-	    					windowsNewAsignatura[currentPart-1].setModal(true);
-	    					windowsNewAsignatura[currentPart-1].show();*/
+	    					windowsNewAsignatura[numeroRubricas+currentPart].setModal(false);
+	    					windowsNewAsignatura[numeroRubricas+currentPart].hide();
+	    					windowsNewAsignatura[numeroRubricas+currentPart-1].setModal(true);
+	    					windowsNewAsignatura[numeroRubricas+currentPart-1].show();
 	    				}
 	    			});
 		    	});
