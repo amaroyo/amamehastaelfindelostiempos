@@ -53,8 +53,6 @@ public interface PortafoliosService {
 
 	public UsuarioVO findAlumnoByPortafolio(PortafolioVO p) throws ServiceException;
 
-	public List<UsuarioTrabajoCampoVO> findTrabajosByPortafolioProfesor(PortafolioVO p) throws ServiceException;
-
 	
 	
 

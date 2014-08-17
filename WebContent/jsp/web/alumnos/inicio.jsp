@@ -579,10 +579,11 @@
 		    	
 				gridProfesoresTrab = ma.attachGrid();
 		    	
-				gridProfesoresTrab.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","<bean:message key="label.fecha.limite" />","<bean:message key="label.enlace.practica" />","<bean:message key="label.enlace.correccion" />"]);
-				gridProfesoresTrab.setColTypes("ro,ro,ro,ro,ro,ro");
-		    	
-				gridProfesoresTrab.setColSorting('str,str,str,str,str,str');
+				gridProfesoresTrab.setHeader(["<bean:message key="label.trabajo.campo" />","<bean:message key="label.fecha.limite" />","<bean:message key="label.corregido" />","<bean:message key="label.subido" />"]);
+				gridProfesoresTrab.setInitWidthsP("45,30,10,15");
+				gridProfesoresTrab.setColTypes("ro,ro,ro,ro");
+				gridProfesoresTrab.setColSorting('str,str,ro,ro');
+				gridProfesoresTrab.setColAlign("left,left,left,center,center");
 				gridProfesoresTrab.enableMultiselect(false);
 				gridProfesoresTrab.init();
 		    	
@@ -596,7 +597,143 @@
 		    	});
 
 		    	
-		    	gridProfesoresTrab.attachEvent("onRowSelect",doOnRowSelectedOptions);
+		    	gridProfesoresTrab.attachEvent("onRowSelect", function doOnRowSelected(rowID,celInd){ 	
+					
+		    		var sp = rowID.split("-");
+				
+					var subido = "F";
+					
+					var cellObj = gridProfesoresTrab.cellById(rowID,celInd);
+					var s = cellObj.getValue();
+					
+					var ch = (s.indexOf("nocorregida.png") > -1);
+					
+					if(celInd=='3' && !ch){
+						subido = "T";
+					}
+						
+					var corregido = sp[0];
+					var idPortafolio = sp[3];
+					var idTrabajoCampo = sp[4];
+					
+	
+					var gridOpcionesAlumno = mb.attachGrid();
+					
+					gridOpcionesAlumno.setIconsPath('../skins/imgs/');		    	
+					gridOpcionesAlumno.setHeader(["<strong><bean:message key="label.mi.perfil" /></strong>"]);
+				    //set readonly (ro)
+				    gridOpcionesAlumno.setColTypes("ro");
+				    gridOpcionesAlumno.setNoHeader(true);
+				    gridOpcionesAlumno.enableMultiselect(false);
+				    gridOpcionesAlumno.init();
+				    gridOpcionesAlumno.loadXML("../xml/forms/asignaturas_trabajos_opciones.xml");
+				  
+				    gridOpcionesAlumno.attachEvent("onRowSelect",function(rowId,cellIndex){
+				    	if (rowId == "a" && subido == "T") {
+				    		
+				    		var accion = "descargarTrabajoCampoAlumno.do";
+							accion += "?tipoConsulta="+"TrabajoCampoAlumno";
+							accion += "&idPortafolio="+idPortafolio;
+							accion += "&idTrabajoCampo="+idTrabajoCampo;
+							location.href=accion;
+				    		
+				    	}
+				    	else if (rowId == "b") {
+				    		var dhxWinsA= new dhtmlXWindows();
+	    					var windowAlumno = dhxWinsA.createWindow("subir", 300,50, 500, 150);
+	    					windowAlumno.setText('<bean:message key="title.subir.correccion" />');				
+	    					windowAlumno.setModal(true);
+	    					windowAlumno.centerOnScreen();
+	    					windowAlumno.attachURL("subirArchivo.do?tipoConsulta=TrabajoCampoCorreccion" + "&idPortafolio=" + idPortafolio + "&idTrabajoCampo=" + idTrabajoCampo);
+				    	}
+				    	else  if (rowId == "c" && corregido == "T") {
+				    		var accion = "descargarTrabajoCampoCorreccion.do";
+							accion += "?tipoConsulta="+"TrabajoCampoCorreccion";
+							accion += "&idPortafolio="+idPortafolio;
+							accion += "&idTrabajoCampo="+idTrabajoCampo;
+							location.href=accion;
+				    	}
+				    	else if (rowId == "d") {
+				    		var idTrabajoInfo = tabbar.getActiveTab();
+				    		var dhxWins= new dhtmlXWindows();
+							var window = dhxWins.createWindow("subir", 300,50, 500, 190);
+							window.setText('<bean:message key="title.trabajo.de.campo" />');				
+							window.setModal(true);
+							window.centerOnScreen();
+							
+							var formNTC = window.attachForm();
+							formNTC.loadStruct('../xml/forms/trabajo_de_campo.xml', function(){
+								formNTC.setItemLabel('data','<bean:message key="title.cambiar.fecha.general.alumno"/>');
+								formNTC.setItemLabel('nombre','<bean:message key="label.nombre"/>');
+								formNTC.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
+								formNTC.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
+								formNTC.setItemLabel('hora','<bean:message key="label.hora"/>');
+								formNTC.setItemLabel('descargarCorreccion','<bean:message key="button.descargar.correccion"/>');
+								formNTC.setItemLabel('descargarInformacion','<bean:message key="button.subir.informacion.adicional"/>');
+								formNTC.setItemLabel('subirPractica','<bean:message key="button.subir.trabajo.campo"/>');
+								formNTC.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+								formNTC.setItemLabel('eliminar','<bean:message key="button.eliminar.trabajo.campo"/>');
+					    		formNTC.setRequired('nombre', false);
+					    		formNTC.hideItem('nombre');
+					    		formNTC.hideItem('descripcion');
+					    		formNTC.hideItem('descargarInformacion');
+					    		formNTC.hideItem('eliminar');
+					    		formNTC.setRequired('fechaFin', true);
+					    		formNTC.setRequired('hora', true);
+					    		formNTC.hideItem('descargarCorreccion');
+					    		formNTC.hideItem('subirPractica');
+					    		
+					    		var correcto=false;
+					    		var click = false;
+					    		
+					    		formNTC.attachEvent("onChange", function(name,value){
+					    		   if(name == "hora"){
+					    			   click=true;
+					    			   var hora = formNTC.getItemValue("hora");
+					    			   var sp = hora.split(":");
+					    			   if(sp.length==2){
+					    				   var isnum = /^\d+$/.test(sp[0]);
+					    				   isnum = isnum && /^\d+$/.test(sp[1]);
+					    				   if(isnum){
+					    					   if (sp[0] < 0 || sp[0] > 24 || sp[1] < 0 || sp[1] > 60) {
+						    					   formNTC.setNote("hora", { text: '<bean:message key="message.hora.correcta" />'} );
+						    					   correcto=false;
+					    				   		}
+					    					   else {correcto=true;}
+					    				   }
+					    				   else {formNTC.setNote("hora", { text: '<bean:message key="message.hora.correcta" />'} );correcto=false;}
+					    			   }
+					    			   else {formNTC.setNote("hora", { text: '<bean:message key="message.hora.correcta" />'} );correcto=false;}
+					    		   }
+					    		});
+					    		
+					    		formNTC.load('verTrabajoCampo.do?idTrabajoInfo='+ idTrabajoInfo, function () {	
+						    		formNTC.attachEvent("onButtonClick", function(id){
+						    			
+						    			if(!click || (click && correcto)){
+											if(id == "aceptar"){
+												formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idPortafolio=" + idPortafolio + "&idTrabajoCampo="+ idTrabajoCampo + "&cambioFechaIndividual=Si","post", function(xml) {
+													alert("<bean:message key="message.trabajo.de.campo.modificado.exito"/>");
+													window.close();
+													//var url = "trabajos.do";
+													//location.href=url;
+													setTimeout(function(){initProfesor();},1000);
+												});
+												
+											}
+						    			}
+						    			else {alert("<bean:message key="message.algo.incorrecto"/>");}
+						    			
+					
+							    	});
+					    			
+					    		});
+							});
+				    	}
+				    	
+				    });
+		    		
+		    	});
 		    	
 		    	gridProfesoresTrab.clearAndLoad("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idAlumno);
 		    	
@@ -604,131 +741,7 @@
 			
    
 			
-			function doOnRowSelectedOptions(rowID,celInd){
-				
-				var sp = rowIDs.split("-");
-				var subido = sp[0];
-				var corregido = sp[1];
-				var idPortafolio = sp[2];
-				var idTrabajoCampo = sp[3];
-				
-
-				miGrid = b.attachGrid();
-				
-			    miGrid.setIconsPath('../skins/imgs/');		    	
-			    miGrid.setHeader(["<strong><bean:message key="label.mi.perfil" /></strong>"]);
-			    //set readonly (ro)
-			    miGrid.setColTypes("ro");
-			    miGrid.setNoHeader(true);
-			    miGrid.enableMultiselect(false);
-			    miGrid.init();
-			    miGrid.loadXML("../xml/forms/asignaturas_trabajos_opciones.xml");
-			    miGridActivado=true;
-			    miGrid.attachEvent("onRowSelect",function(rowId,cellIndex){
-			    	if (rowId == "a" && subido == "T") {
-			    		
-			    		var accion = "descargarTrabajoCampoAlumno.do";
-						accion += "?tipoConsulta="+"TrabajoCampoAlumno";
-						accion += "&idPortafolio="+idPortafolio;
-						accion += "&idTrabajoCampo="+idTrabajoCampo;
-						location.href=accion;
-			    		
-			    	}
-			    	else if (rowId == "b") {
-			    		var dhxWinsA= new dhtmlXWindows();
-    					var windowAlumno = dhxWinsA.createWindow("subir", 300,50, 500, 150);
-    					windowAlumno.setText('<bean:message key="title.subir.correccion" />');				
-    					windowAlumno.setModal(true);
-    					windowAlumno.centerOnScreen();
-    					windowAlumno.attachURL("subirArchivo.do?tipoConsulta=TrabajoCampoCorreccion" + "&idPortafolio=" + idPortafolio + "&idTrabajoCampo=" + idTrabajoCampo);
-			    	}
-			    	else  if (rowId == "c" && corregido == "T") {
-			    		var accion = "descargarTrabajoCampoCorreccion.do";
-						accion += "?tipoConsulta="+"TrabajoCampoCorreccion";
-						accion += "&idPortafolio="+idPortafolio;
-						accion += "&idTrabajoCampo="+idTrabajoCampo;
-						location.href=accion;
-			    	}
-			    	else if (rowId == "d") {
-			    		var idTrabajoInfo = tabbar.getActiveTab();
-			    		var dhxWins= new dhtmlXWindows();
-						var window = dhxWins.createWindow("subir", 300,50, 500, 190);
-						window.setText('<bean:message key="title.trabajo.de.campo" />');				
-						window.setModal(true);
-						window.centerOnScreen();
-						
-						var formNTC = window.attachForm();
-						formNTC.loadStruct('../xml/forms/trabajo_de_campo.xml', function(){
-							formNTC.setItemLabel('data','<bean:message key="title.cambiar.fecha.general.alumno"/>');
-							formNTC.setItemLabel('nombre','<bean:message key="label.nombre"/>');
-							formNTC.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
-							formNTC.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
-							formNTC.setItemLabel('hora','<bean:message key="label.hora"/>');
-							formNTC.setItemLabel('descargarCorreccion','<bean:message key="button.descargar.correccion"/>');
-							formNTC.setItemLabel('descargarInformacion','<bean:message key="button.subir.informacion.adicional"/>');
-							formNTC.setItemLabel('subirPractica','<bean:message key="button.subir.trabajo.campo"/>');
-							formNTC.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
-							formNTC.setItemLabel('eliminar','<bean:message key="button.eliminar.trabajo.campo"/>');
-				    		formNTC.setRequired('nombre', false);
-				    		formNTC.hideItem('nombre');
-				    		formNTC.hideItem('descripcion');
-				    		formNTC.hideItem('descargarInformacion');
-				    		formNTC.hideItem('eliminar');
-				    		formNTC.setRequired('fechaFin', true);
-				    		formNTC.setRequired('hora', true);
-				    		formNTC.hideItem('descargarCorreccion');
-				    		formNTC.hideItem('subirPractica');
-				    		
-				    		var correcto=false;
-				    		var click = false;
-				    		
-				    		formNTC.attachEvent("onChange", function(name,value){
-				    		   if(name == "hora"){
-				    			   click=true;
-				    			   var hora = formNTC.getItemValue("hora");
-				    			   var sp = hora.split(":");
-				    			   if(sp.length==2){
-				    				   var isnum = /^\d+$/.test(sp[0]);
-				    				   isnum = isnum && /^\d+$/.test(sp[1]);
-				    				   if(isnum){
-				    					   if (sp[0] < 0 || sp[0] > 24 || sp[1] < 0 || sp[1] > 60) {
-					    					   formNTC.setNote("hora", { text: '<bean:message key="message.hora.correcta" />'} );
-					    					   correcto=false;
-				    				   		}
-				    					   else {correcto=true;}
-				    				   }
-				    				   else {formNTC.setNote("hora", { text: '<bean:message key="message.hora.correcta" />'} );correcto=false;}
-				    			   }
-				    			   else {formNTC.setNote("hora", { text: '<bean:message key="message.hora.correcta" />'} );correcto=false;}
-				    		   }
-				    		});
-				    		
-				    		formNTC.load('verTrabajoCampo.do?idTrabajoInfo='+ idTrabajoInfo, function () {	
-					    		formNTC.attachEvent("onButtonClick", function(id){
-					    			
-					    			if(!click || (click && correcto)){
-										if(id == "aceptar"){
-											formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idPortafolio=" + idPortafolio + "&idTrabajoCampo="+ idTrabajoCampo + "&cambioFechaIndividual=Si","post", function(xml) {
-												alert("<bean:message key="message.trabajo.de.campo.modificado.exito"/>");
-												window.close();
-												//var url = "trabajos.do";
-												//location.href=url;
-												setTimeout(function(){initProfesor();},1000);
-											});
-											
-										}
-					    			}
-					    			else {alert("<bean:message key="message.algo.incorrecto"/>");}
-					    			
-				
-						    	});
-				    			
-				    		});
-						});
-			    	}
-			    	
-			    });
-			}
+			
 		    
 			
 			

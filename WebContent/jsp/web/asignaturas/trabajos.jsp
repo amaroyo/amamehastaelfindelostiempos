@@ -472,7 +472,7 @@
 				gridAlumnos.setInitWidthsP("45,30,10,15");
 				gridAlumnos.setColTypes("ro,ro,ro,ro");
 				gridAlumnos.setColSorting('str,str,ro,ro');
-				gridAlumnos.setColAlign("left,left,left,center,center");
+				gridAlumnos.setColAlign("left,left,left,center,left");
 				gridAlumnos.enableMultiselect(false);
 				gridAlumnos.init();
 				
