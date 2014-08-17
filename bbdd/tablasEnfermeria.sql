@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS rubricas (
 	id_asignatura INT(3) NOT NULL,
 	competencias TEXT NOT NULL,
 	numero_criterios INT(3) NOT NULL,
-	anexo TEXT NOT NULL,
+	anexo VARCHAR(100) NOT NULL,
 	PRIMARY KEY (id_asignatura),
 	FOREIGN KEY (id_asignatura)
 		REFERENCES asignaturas(id_asignatura)
