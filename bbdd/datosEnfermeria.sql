@@ -1,4 +1,4 @@
-﻿use enfermeria;
+use enfermeria;
 
 
 -- Grupos
@@ -44,6 +44,7 @@ insert into permisos (nombre, descripcion) values ('Todas las acciones permitida
 insert into permisos (nombre, descripcion) values ('Permiso para modificar datos personales de los usuarios.', 'Este permiso lo tendrá el grupo Super Admin y se podrá otorgar a diferentes usuarios.');
 insert into permisos (nombre, descripcion) values ('Permiso para ver Mis Alumnos.', 'Este permiso se dará a gente que pueda visualizar el botón Mis Alumnos.');
 insert into permisos (nombre, descripcion) values ('Permiso para cambiar año academico.', 'Solo para Super Admin, Coordinador y Virtual Tour.');
+insert into permisos (nombre, descripcion) values ('Permiso para modificar seminario.', 'Solo para Super Admin y Coordinador.');
 
 
 /*insert into permisos (nombre, descripicion) values (2, 'View leads');
@@ -107,6 +108,8 @@ insert into grupos_permisos (id_grupo, id_permiso) values (1, 3);
 insert into grupos_permisos (id_grupo, id_permiso) values (1, 4);
 -- Permiso para visualizar Cambiar Año Academico
 insert into grupos_permisos (id_grupo, id_permiso) values (1, 5);
+-- Permiso para modificar seminarios
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 6);
 
 
 -- Grupo Coordinador : 
@@ -116,6 +119,8 @@ insert into grupos_permisos (id_grupo, id_permiso) values (2, 2);
 insert into grupos_permisos (id_grupo, id_permiso) values (2, 4);
 -- Permiso para visualizar Cambiar Año Academico
 insert into grupos_permisos (id_grupo, id_permiso) values (2, 5);
+-- Permiso para modificar seminarios
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 6);
 
 
 -- Grupo Profesores:

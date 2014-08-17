@@ -22,13 +22,7 @@ public class EditarSeminarioAction extends DHTMLXFormAction {
 			
 		} 
 		
-		/*else //if (!StringUtil.isNullOrBlank(form.getNombre())){
-			asignatura.setNombre(form.getNombre());
-			return getAsignaturasService().findByNombre(asignatura);
-			
-		//}
-		 * 
-		 */
+		
 		return null;
 	}
 
@@ -40,32 +34,13 @@ public class EditarSeminarioAction extends DHTMLXFormAction {
 	
 	@Override
 	public String save(DhtmlxForm f) throws Exception {
-		/*EditarAsignaturaForm form = (EditarAsignaturaForm) f;
-		AsignaturaVO asignatura = new AsignaturaVO();
-		asignatura.setNombre(form.getNombre());
-		asignatura.setCodigo(form.getCodigo());
-		asignatura.setCurso(form.getCurso());
-		asignatura.setDescripcion(form.getDescripcion());
+		EditarSeminarioForm form = (EditarSeminarioForm) f;
+		SeminarioAsignaturaVO seminario = new SeminarioAsignaturaVO();
+		seminario.setIdSeminario(form.getIdSeminario());
+		seminario.setDescripcion(form.getDescripcion());
+		getSeminariosAsignaturaService().update(seminario);
+		return "";
 		
-		if (!StringUtil.isNullOrBlank(form.getIdAsignatura())){
-			asignatura.setIdAsignatura(form.getIdAsignatura());
-			if (getAsignaturasService().findById(asignatura) != null) {
-				getAsignaturasService().update(asignatura);
-				return "asignatura changed";
-			}
-			else
-				return "asignatura not changed: asignatura does not exist";
-		}
-		else {//if (!StringUtil.isNullOrBlank(form.getNombre()))
-			asignatura.setNombre(form.getNombre());
-			if (getAsignaturasService().findByNombre(asignatura) != null) {
-				getAsignaturasService().update(asignatura);
-				return "asignatura changed";
-			}
-			else
-				return "asignatura not changed: asignatura does not exist";
-		}*/
-		return null;
 	}
 	
 	@Override

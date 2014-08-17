@@ -160,7 +160,7 @@
 		    	
 		    	tabbar.addTab('tab_4','<bean:message key="title.trabajos.campo"/>','');
 		    	tab_4 = tabbar.cells('tab_4');
-		    	//goTrabajos(idAlumno,idAsignatura,idPortafolio);
+		    	goTrabajos(idAlumno,idAsignatura,idPortafolio);
 		    	
 		    	tabbar.addTab('tab_5','<bean:message key="title.casos.clinicos"/>','');
 		    	tab_5 = tabbar.cells('tab_5');
@@ -487,13 +487,47 @@
 			    		
 		    			formSeminarioAlumno.hideItem('aceptar');
 		    			
+		    			
+		    			
 						//Ponemos por defecto que los items no se puedan modificar, y luego con los permisos necesarios 
 						//seran modificables.
 			    		formSeminarioAlumno.setReadonly('nombre', true);
 			    		formSeminarioAlumno.setReadonly('codigo', true);
 			    		formSeminarioAlumno.setReadonly('descripcion', true);
+			    		
+			    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>6</permiso>" >
+	    					formSeminarioAlumno.showItem('aceptar');
+	    					formSeminarioAlumno.setReadonly('descripcion', false);
+	    				</logic:match>
 		    		
-						formSeminarioAlumno.load('editarseminario.do?idSeminario=' + row);
+						
+						
+						
+		    		formSeminarioAlumno.load('editarseminario.do?idSeminario=' + row, function () {
+							
+							
+		    			formSeminarioAlumno.attachEvent("onButtonClick", function(id){
+							if (id == "aceptar") {
+									
+								formSeminarioAlumno.send("editarseminario.do?!nativeeditor_status=save&idSeminario=" + row,"post", function(xml) {
+									alert('<bean:message key="message.seminario.cambiado.exito"/>');
+								});
+								
+
+							}
+						});
+		    			formSeminarioAlumno.attachEvent("onEnter", function() {
+								
+		    				formSeminarioAlumno.send("editarseminario.do?!nativeeditor_status=save&idSeminario=" + row,"post", function(xml) {
+								alert('<bean:message key="message.seminario.cambiado.exito"/>');
+							}); 
+								
+				    	});
+							
+							
+						});//load
+						
+						
 			    			
 		    		});
 
