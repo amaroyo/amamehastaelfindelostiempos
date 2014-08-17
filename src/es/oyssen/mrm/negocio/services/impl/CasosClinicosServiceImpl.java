@@ -84,18 +84,20 @@ public class CasosClinicosServiceImpl implements CasosClinicosService{
 			
 			CasoClinicoVO caso = new CasoClinicoVO();
 			
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			//get current date time with Date()dateFormat.format(date)
+			Date date = new Date();
+			
 			String n = f.getFichero().getFileName();
 			String[] sp = n.split("\\.");
 			
 			if(f.getNombre().equals("")){	
-				caso.setNombre(sp[0] + "." + sp[1].toLowerCase());
+				caso.setNombre(sp[0]  + "." + sp[1].toLowerCase());
 			}
 			else caso.setNombre(f.getNombre() + "." + sp[1].toLowerCase());
 			caso.setCasoClinico(f.getFichero().getFileData());
 			
-			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-			//get current date time with Date()
-			Date date = new Date();
+			
 			caso.setFechaSubida(dateFormat.format(date));
 			caso.setIdPortafolio(f.getIdPortafolio());
 			daoCasosClinicos.insert(caso);

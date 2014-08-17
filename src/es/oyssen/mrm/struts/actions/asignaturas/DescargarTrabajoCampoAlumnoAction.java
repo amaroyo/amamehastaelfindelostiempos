@@ -11,15 +11,15 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
-import es.oyssen.mrm.negocio.vo.DiarioReflexivoVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
+import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 
-public class DescargarDiariosReflexivosAlumnoAction extends MrmAction {
+public class DescargarTrabajoCampoAlumnoAction extends MrmAction {
 
 	@Override
 	public ActionForward process(ActionMapping mapping, ActionForm form,
@@ -28,15 +28,15 @@ public class DescargarDiariosReflexivosAlumnoAction extends MrmAction {
 		
 		
 		
-		DiarioReflexivoVO diario = new DiarioReflexivoVO();
+		TrabajoDeCampoVO t = new TrabajoDeCampoVO();
 		String idPortafolio = (String)request.getParameter("idPortafolio");
-		diario.setIdPortafolio(idPortafolio);
+		t.setIdPortafolio(idPortafolio);
 		
 		PortafolioVO p = new PortafolioVO();
 		p.setIdPortafolio(idPortafolio);
 	
 		//Lista con todos los casos clinicos de un portafolio
-		List<DiarioReflexivoVO> diarios =  getDiariosReflexivosService().findAllByPortafolio(diario);
+		List<TrabajoDeCampoVO> trabajos =  getTrabajosDeCampoService().findAllByPortafolio(t);
 		
 		//Informacion de un alumno
 		UsuarioVO u = getPortafoliosService().findAlumnoByPortafolio(p);
@@ -45,17 +45,17 @@ public class DescargarDiariosReflexivosAlumnoAction extends MrmAction {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ZipOutputStream zos = new ZipOutputStream(baos);
 		
-		if(diarios != null){
-			for (DiarioReflexivoVO d : diarios) {				
-				if(d.getDiarioReflexivo()!=null){
-					String[] nmbreArchivo = d.getNombre().split("\\.");
-					nmbreArchivo[0] = nmbreArchivo[0] + "_" + (d.getFechaSubida()).replaceAll(" ", "_");
-					nmbreArchivo[0] = nmbreArchivo[0].replaceAll("\\s","");
-					String[] s = nmbreArchivo[0].split("\\.");
-					ZipEntry entry = new ZipEntry(s[0]+"."+nmbreArchivo[1]);
-					entry.setSize(d.getDiarioReflexivo().length);
+		if(trabajos != null){
+			for (TrabajoDeCampoVO tr : trabajos) {				
+				if(tr.getTrabajoDeCampo()!=null){
+					String nmbreArchivo = tr.getNombreTrabajo();
+					nmbreArchivo = nmbreArchivo.replaceAll("\\s","");
+					nmbreArchivo = nmbreArchivo.replaceAll("/","_");
+					nmbreArchivo = nmbreArchivo.replaceAll(":","_");
+					ZipEntry entry = new ZipEntry(nmbreArchivo);
+					entry.setSize(tr.getTrabajoDeCampo().length);
 					zos.putNextEntry(entry);
-					zos.write(d.getDiarioReflexivo());
+					zos.write(tr.getTrabajoDeCampo());
 					zos.closeEntry();
 				}
 
@@ -68,7 +68,7 @@ public class DescargarDiariosReflexivosAlumnoAction extends MrmAction {
 		
 		try{
 			
-			String nmbreArchivo = "Diarios_Reflexivos_de_" + u.getApellido1() + "_" + u.getApellido2()+"_" + u.getNombre()+"_"+u.getDni();
+			String nmbreArchivo = "Trabajos_Campo_de_" + u.getApellido1() + "_" + u.getApellido2()+"_" + u.getNombre()+"_"+u.getDni();
 			
 			//**********************************************
 			response.setHeader("Content-Disposition", "attachment; filename="+ nmbreArchivo +".zip");

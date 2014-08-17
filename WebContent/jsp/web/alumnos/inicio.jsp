@@ -603,18 +603,20 @@
 				
 					var subido = "F";
 					
-					var cellObj = gridProfesoresTrab.cellById(rowID,celInd);
+					var cellObj = gridProfesoresTrab.cellById(rowID,"3");
 					var s = cellObj.getValue();
 					
 					var ch = (s.indexOf("nocorregida.png") > -1);
 					
-					if(celInd=='3' && !ch){
+					if(!ch){
 						subido = "T";
 					}
-						
+						 
 					var corregido = sp[0];
 					var idPortafolio = sp[3];
 					var idTrabajoCampo = sp[4];
+					var idTrabajoInfo = sp[5];
+					
 					
 	
 					var gridOpcionesAlumno = mb.attachGrid();
@@ -654,7 +656,7 @@
 							location.href=accion;
 				    	}
 				    	else if (rowId == "d") {
-				    		var idTrabajoInfo = tabbar.getActiveTab();
+				    		
 				    		var dhxWins= new dhtmlXWindows();
 							var window = dhxWins.createWindow("subir", 300,50, 500, 190);
 							window.setText('<bean:message key="title.trabajo.de.campo" />');				
@@ -711,13 +713,13 @@
 						    		formNTC.attachEvent("onButtonClick", function(id){
 						    			
 						    			if(!click || (click && correcto)){
-											if(id == "aceptar"){
+											if(id == "aceptar"){ 
 												formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idPortafolio=" + idPortafolio + "&idTrabajoCampo="+ idTrabajoCampo + "&cambioFechaIndividual=Si","post", function(xml) {
 													alert("<bean:message key="message.trabajo.de.campo.modificado.exito"/>");
 													window.close();
 													//var url = "trabajos.do";
 													//location.href=url;
-													setTimeout(function(){initProfesor();},1000);
+													setTimeout(function(){goTrabajos();},1000);
 												});
 												
 											}
@@ -1075,7 +1077,9 @@
 	    	}
 	    	
 	    	function descargarTodosAlumno(){
-	    		alert("TODO");
+	    		var accion = "descargarTrabajosCampoAlumno.do";
+				accion += "?idPortafolio=" + idPortafolio;
+				location.href=accion;
 	    	}
 	    	
 	    	function goActualizar(){

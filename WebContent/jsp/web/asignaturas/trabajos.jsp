@@ -605,6 +605,7 @@
 				gridProfesores.setColTypes("ro,ro,ro,ro,ro,ro");
 		    	
 				gridProfesores.setColSorting('str,str,str,str,str,str');
+				gridProfesores.setColAlign("left,left,left,left,center,center");
 				gridProfesores.enableMultiselect(false);
 				gridProfesores.init();
 		    	

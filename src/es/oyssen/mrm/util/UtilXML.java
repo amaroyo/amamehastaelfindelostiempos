@@ -710,12 +710,17 @@ public class UtilXML {
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(apellidos) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(utc.getDni()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(utc.getFechaLimite(),true)) + "]]></cell>");				
-				String descarga = "";
-				if(utc.getTrabajoDeCampoFile() != null) descarga="Disponible";
-				sb.append("<cell><![CDATA[" + descarga + "]]></cell>");
-				String descarga2 = "";
-				if(utc.getCorreccionTrabajoFile() != null) descarga2="Disponible";
-				sb.append("<cell><![CDATA[" + descarga2 + "]]></cell>");
+				
+				
+				
+				if(utc.getTrabajoDeCampoFile() != null) sb.append("<cell><![CDATA[<img src=" + "../img/grid/corregida.png"+ "></img>]]></cell>");
+				else sb.append("<cell><![CDATA[<img src=" + "../img/grid/nocorregida.png"+ "></img>]]></cell>");
+						
+			
+				if(utc.getCorreccionTrabajoFile() != null) sb.append("<cell><![CDATA[<img src=" + "../img/grid/corregida.png"+ "></img>]]></cell>");
+				else sb.append("<cell><![CDATA[<img src=" + "../img/grid/nocorregida.png"+ "></img>]]></cell>");
+				
+				
 				sb.append("</row>");				
 			}
 		}
@@ -875,7 +880,7 @@ public class UtilXML {
 				boolean info = (tc.getEnunciado() != null);
 				String i = "F";
 				if(info) i = tc.getIdTrabajoInfo();
-				sb.append("<row id=\""+ c + "-" + b + "-" + i + "-" +tc.getIdPortafolio() + "-" + tc.getIdTrabajoDeCampo() + "\">");
+				sb.append("<row id=\""+ c + "-" + b + "-" + i + "-" +tc.getIdPortafolio() + "-" + tc.getIdTrabajoDeCampo() + "-" + tc.getIdTrabajoInfo() + "\">");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(tc.getNombre()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(tc.getFechaLimite(),true)) + "]]></cell>");
 				

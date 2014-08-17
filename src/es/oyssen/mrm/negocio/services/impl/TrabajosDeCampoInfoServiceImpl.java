@@ -82,6 +82,8 @@ public class TrabajosDeCampoInfoServiceImpl implements TrabajosDeCampoInfoServic
 		try {
 			log.debug("Procesamos fichero.........");
 
+			
+			
 			TrabajoDeCampoInfoVO t = new TrabajoDeCampoInfoVO();
 			t.setIdTrabajoInfo(f.getIdTrabajoInfo());
 			t = daoTrabajosDeCampoInfo.findById(t);
@@ -89,7 +91,7 @@ public class TrabajosDeCampoInfoServiceImpl implements TrabajosDeCampoInfoServic
 			String[] sp = n.split("\\.");
 			
 			if(f.getNombre().equals("")){	
-				t.setNombreArchivo(sp[0] + "." + sp[1].toLowerCase());
+				t.setNombreArchivo(sp[0]  + "." + sp[1].toLowerCase());
 			}
 			else t.setNombreArchivo(f.getNombre() + "." + sp[1].toLowerCase());
 			

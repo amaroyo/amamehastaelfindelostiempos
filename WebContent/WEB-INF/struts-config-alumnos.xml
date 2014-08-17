@@ -21,7 +21,9 @@
 	   	<form-bean name="Descargar" type="es.oyssen.mrm.struts.forms.asignaturas.DescargarForm" />
 	   	
 	   	<form-bean name="CrearTrabajoCampoForm" type="es.oyssen.mrm.struts.forms.asignaturas.CrearTrabajoCampoForm" />
-	   	 
+	   	
+	   	 <form-bean name="SubirArchivoForm" type="es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoForm" />
+	   	
 	</form-beans>
 	
 
@@ -56,6 +58,14 @@
 		<action path="/alumnos/verTrabajoCampo" name="CrearTrabajoCampoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.CrearTrabajoCampoAction" />
 		
 		<action path="/alumnos/crearTrabajoCampo" name="CrearTrabajoCampoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.CrearTrabajoCampoAction" />
+		
+		<action path="/alumnos/subirArchivoTrabajoCampoCorreccion" name="SubirArchivoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.SubirArchivoAction">
+			<exception type="java.lang.Exception" key="error.subir.archivo.caso.clinico" path="/alumnos/subirArchivoTrabajoCampoCorreccion.do"></exception>
+			<forward name="error" path="/alumnos/subirArchivo.do" />
+			<forward name="success" path="/asignaturas/correcto.do" />
+		</action>
+		
+		<action path="/alumnos/descargarTrabajosCampoAlumno" name="DescargarTrabajosCampoAlumno" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarTrabajoCampoAlumnoAction" />
 		
 	</action-mappings>
 
