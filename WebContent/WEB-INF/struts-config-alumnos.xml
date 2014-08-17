@@ -10,6 +10,8 @@
 	   
 	   	<form-bean name="EditarUsuarioForm" type="es.oyssen.mrm.struts.forms.usuarios.EditarUsuarioForm" />
 	   
+	   	 <form-bean name="EstanciaUnidadClinicaForm" type="es.oyssen.mrm.struts.forms.asignaturas.UsuariosEstanciasForm" />
+	   	
 	</form-beans>
 	
 
@@ -24,6 +26,10 @@
 		<action path="/alumnos/editarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />
 		
 		<action path="/alumnos/actualizarusuario" name="EditarUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.EditarUsuarioAction"  />
+		
+		<action path="/alumnos/editarEstanciaUnidadClinica" name="EstanciaUnidadClinicaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.UsuariosEstanciasAction" />
+		
+		<action path="/alumnos/actualizarEstanciaUnidadClinica" name="EstanciaUnidadClinicaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.UsuariosEstanciasAction" />
 		
 	</action-mappings>
 
