@@ -152,7 +152,7 @@
 		    	
 		    	tabbar.addTab('tab_2','<bean:message key="title.info.general.estancia"/>','');
 		    	tab_2 = tabbar.cells('tab_2');
-		    	//goEstancia(idAlumno,idAsignatura,idPortafolio);
+		    	goEstancia(idAlumno,idAsignatura,idPortafolio);
 		    	
 		    	tabbar.addTab('tab_3','<bean:message key="title.seminarios"/>','');
 		    	tab_3 = tabbar.cells('tab_3');
@@ -333,34 +333,109 @@
 		    		form2.setItemLabel('data','<bean:message key="title.info.general.estancia"/>');
 		    		form2.setItemLabel('hospital','<bean:message key="label.hospital.estancia"/>');
 		    		form2.setItemLabel('clinica','<bean:message key="label.clinica.estancia"/>');
+		    		form2.setItemLabel('turno','<bean:message key="label.turno"/>');
 		    		form2.setItemLabel('profesor','<bean:message key="label.profesor.asignatura"/>');
 		    		form2.setItemLabel('fechaIni','<bean:message key="label.fecha.ini.estancia"/>');
 		    		form2.setItemLabel('fechaFin','<bean:message key="label.fecha.fin.estancia"/>');
-		    	
+		    		form2.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 		    		
-		    		//Esto por ahora es provisional, cuando se haga una peticion de toda la informacion 
-		    		//de las asignaturas, se cogeran el codigo y el nombre de la asignatura
-		    		form2.setItemValue('hospital', "Lorem ipsum");
-		    		form2.setItemValue('clinica', "Lorem ipsum");
-		    		form2.setItemValue('profesor', "A113");
-		    		form2.setItemValue('fechaIni', "Lorem ipsum");
-		    		form2.setItemValue('fechaFin', "Lorem ipsum");
+		    		form2.hideItem('aceptar');
 	    			
+		    		
+		    		form2.forEachItem(function(id){
+		    			switch(id) {
+			    			case "hospital":{
+			    				form2.setReadonly(id,true);
+			    				break;
+			    			}
+			    			case "clinica":{
+			    				form2.setReadonly(id,true);
+			    				break;
+			    			}
+			    			case "profesor":{
+			    				form2.setReadonly(id,true);
+			    				break;
+			    			}
+			    			
+			    			default: break;
+		    			}
+		    		});
+		    		
+		    		
+		    		//Aqui lo pondría con logic match para gente con permiso para modifiacar datos!
+		    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>3</permiso>" >	
+		    			form2.forEachItem(function(id){
+		    				switch(id) {
+			    			case "hospital":{
+			    				form2.setReadonly(id,false);
+			    				form2.setRequired(id,true);
+			    				break;
+			    			}
+			    			case "clinica":{
+			    				form2.setReadonly(id,false);
+			    				form2.setRequired(id,true);
+			    				break;
+			    			}
+			    			
+			    			
+			    			default: break;
+		    			}
+			    		});
+		    			form2.showItem('aceptar');
+						
+		    			form2.enableLiveValidation(true);
+			    		form2.setFocusOnFirstActive();
+			    		
+			    		
+			    		form2.attachEvent("onButtonClick", function(id){
+			    			
+			    			var calendarIni, calendarFin, dateIni, dateFin;	
+			    			
+							calendarIni = form2.getCalendar("fechaIni");							
+							dateIni = form2.getItemValue("fechaIni");
+							fechaIni = calendarIni.getFormatedDate("%d/%m/%Y", dateIni);
+		    										
+							calendarFin = form2.getCalendar("fechaFin");							
+							dateFin = form2.getItemValue("fechaFin");
+							fechaFin = calendarFin.getFormatedDate("%d/%m/%Y", dateFin);	
+		    			
+			    		});	
+						
+					</logic:match>	
+
+					
+					form2.load('editarEstanciaUnidadClinica.do?idAlumno=' + idAlumno + '&idAsignatura=' + idAsignatura, function () {
+						
+						
+						form2.attachEvent("onButtonClick", function(id){
+							if (id == "aceptar") {
+								if(fechasMenores(fechaIni,fechaFin)){	
+									form2.send("actualizarEstanciaUnidadClinica.do?!nativeeditor_status=save&idAlumno=" + idAlumno + '&idAsignatura=' + idAsignatura,"post", function(xml) {
+										alert('<bean:message key="message.estancia.clinica.exito"/>');
+									});
+								}
+								else alert('<bean:message key="message.fechas.error"/>');
+
+							}
+						});
+						form2.attachEvent("onEnter", function() {
+							if(fechasMenores(fechaIni,fechaFin)){
+								form2.send("actualizarEstanciaUnidadClinica.do?!nativeeditor_status=save&idAlumno=" + idAlumno + '&idAsignatura=' + idAsignatura,"post", function(xml) {
+									alert('<bean:message key="message.estancia.clinica.exito"/>');
+								}); 
+							}
+							else alert('<bean:message key="message.fechas.error"/>');
+			    		});
+						
+						
+					});//load
+					
+					
+					
 		    	});
 		    	
 		    	
-		    	/*
-				form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
-					form.attachEvent("onButtonClick", function(id){
-						if (id == "aceptar") {
-							form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-
-							});
-
-						}
-					});
-				});
-				*/
+		    	
 				
 				
 		    }
@@ -842,6 +917,26 @@
 			    return parts[parts.length - 1];
 	    	}
 		    
+	    	function fechasMenores(f1,f2){
+	    		var partsIni = f1.split('/');
+	    		var partsFin = f2.split('/');
+	    		
+	    		if (partsIni[2]>partsFin[2]) return false;
+	    		else if (partsIni[2]==partsFin[2]) {
+	    			if (partsIni[1]>partsFin[1]) return false;
+	    			else if (partsIni[1]==partsFin[1]) {
+	    				if (partsIni[0]>partsFin[0]) return false;
+		    			else if (partsIni[0]==partsFin[0]) {
+		    				return false;
+		    			}
+		    			else return true;
+	    			}
+	    			else return true;
+	    		}
+	    		else return true;
+	    		
+	    	}
+	    	
 		    
         </script>
 	</head>
