@@ -10,7 +10,11 @@
 	   
 	   	<form-bean name="EditarUsuarioForm" type="es.oyssen.mrm.struts.forms.usuarios.EditarUsuarioForm" />
 	   
-	   	 <form-bean name="EstanciaUnidadClinicaForm" type="es.oyssen.mrm.struts.forms.asignaturas.UsuariosEstanciasForm" />
+	   	<form-bean name="EstanciaUnidadClinicaForm" type="es.oyssen.mrm.struts.forms.asignaturas.UsuariosEstanciasForm" />
+	   	
+	   	<form-bean name="GridSeminariosRealizadosUsuario" type="es.oyssen.mrm.struts.forms.asignaturas.GridSeminariosUsuarioForm" /> 
+	   	
+	   	<form-bean name="EditarSeminarioForm" type="es.oyssen.mrm.struts.forms.cursos.EditarSeminarioForm" />
 	   	
 	</form-beans>
 	
@@ -30,6 +34,10 @@
 		<action path="/alumnos/editarEstanciaUnidadClinica" name="EstanciaUnidadClinicaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.UsuariosEstanciasAction" />
 		
 		<action path="/alumnos/actualizarEstanciaUnidadClinica" name="EstanciaUnidadClinicaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.UsuariosEstanciasAction" />
+		
+		<action path="/alumnos/gridSeminariosRealizadosUsuario" name="GridSeminariosRealizadosUsuario" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridSeminariosUsuarioAction" />
+		
+		<action path="/alumnos/editarseminario" name="EditarSeminarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.EditarSeminarioAction" />
 		
 	</action-mappings>
 
