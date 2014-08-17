@@ -47,6 +47,10 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 														"from asignaturas as a, usuarios as u, portafolios as p "+
 														"where u.id_usuario = p.id_alumno and a.id_asignatura = p.id_asignatura and p.anyo_academico =? and p.id_profesor =?";
 	
+	private static String SQL_FIND_ALL_BY_PROFESOR_DEMAS = "select u.id_usuario, u.nombre, u.apellido1, u.apellido2, u.dni, a.id_asignatura, a.codigo, a.nombre, p.id_profesor, p.id_portafolio " + 
+															"from asignaturas as a, usuarios as u, portafolios as p " +
+															"where u.id_usuario = p.id_alumno and a.id_asignatura = p.id_asignatura and p.anyo_academico =? and p.id_profesor !=?";
+	
 	
 	public void insert(final UsuarioVO usuario) throws DAOException,
 			DAOInsertException {
@@ -229,6 +233,18 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 			throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_ALL_BY_PROFESOR, new Object[]{p.getAnyoAcademico(), p.getIdProfesor()}, new UsuarioAsignaturaMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+	@Override
+	public List<UsuarioAsignaturaVO> findAllbyProfesorDemas(PortafolioVO p)
+			throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_ALL_BY_PROFESOR_DEMAS, new Object[]{p.getAnyoAcademico(), p.getIdProfesor()}, new UsuarioAsignaturaMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

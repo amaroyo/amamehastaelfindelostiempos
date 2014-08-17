@@ -161,5 +161,17 @@ public class UsuariosServiceImpl implements UsuariosService{
 			throw new ServiceException(e.getMessage());
 		}
 	}
+
+	@Override
+	public List<UsuarioAsignaturaVO> findAllbyProfesorDemas(PortafolioVO p)
+			throws ServiceException {
+		try {
+			return daoUsuarios.findAllbyProfesorDemas(p);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findAllbyProfesorDemas usuario", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
 	
 }

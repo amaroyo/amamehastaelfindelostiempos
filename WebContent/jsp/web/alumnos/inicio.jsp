@@ -83,7 +83,7 @@
 			    
 			    
 			    miGrid.enableMultiselect(false);
-			    miGrid.setColSorting('str,str,str,ro');
+			    miGrid.setColSorting('str,str,str,str');
 			    miGrid.init();
 		    	
 				var gridProcessor = new dataProcessor("gridUsuariosProfesor.do");
@@ -409,68 +409,119 @@
 			function seleccionarAlumnos(){
 				
 	    		var dhxWins= new dhtmlXWindows();
-				var window = dhxWins.createWindow("subir", 300,50, 600, 420);
-				window.setText('<bean:message key="title.trabajo.de.campo" />');				
+				var window = dhxWins.createWindow("subir", 300,50, 950, 420);
+				window.setText('<bean:message key="title.seleccionar.alumnos" />');				
 				window.setModal(true);
 				window.centerOnScreen();
 				
 				var toolbarServicios = window.attachToolbar();
 		    	toolbarServicios.setIconsPath('../img/toolbar/');
 		    	toolbarServicios.addButton("botonAceptar", "1", "Aceptar", "aceptar.gif");
-				
-				var grid = window.attachGrid();
-				miGrid.setIconsPath('../skins/imgs/');		   
+		    	toolbarServicios.addSeparator("sp1","2");
+		    	toolbarServicios.addButton("refrescarAlumnos", "3", "Refrescar", "recargar.png");
+		    	
+		    	
+				var mini_layout = window.attachLayout("2U","dhx_skyblue");
+		    	
+		    	var ma = mini_layout.cells('a');
+			    var mb = mini_layout.cells('b');
+		    	
+			    ma.setText("<strong><bean:message key="label.mis.alumnos" /></strong>");
+			    mb.setText("<strong><bean:message key="label.demas.alumnos" /></strong>");
 			    
+				var gridMios = ma.attachGrid();
+				gridMios.setIconsPath('../skins/imgs/');		   
+  
 			    
-			    
-				grid.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","<bean:message key="label.codigo.asignatura" />","<bean:message key="label.mio" />"]);
+				gridMios.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","<bean:message key="label.codigo.asignatura" />","<bean:message key="label.mio" />"]);
 			    
 			    //anchura de las columnas, en porcentaje. La suma tiene que ser igual a 100
-			    grid.setInitWidthsP("21,40,17,14,8");
+			    gridMios.setInitWidthsP("21,38,17,14,10");
 			    //alineacion del contenido en la columna
-			    grid.setColAlign("left,left,left,left,left");
+			    gridMios.setColAlign("left,left,left,left,left");
 			    
-			    grid.setColTypes("ro,ro,ro,ro,ch");
+			    gridMios.setColTypes("ro,ro,ro,ro,ch");
 		    	
-			    grid.enableMultiselect(false);
-			    grid.setColSorting('str,str,str,ro,str');
-			    grid.init();
+			    gridMios.enableMultiselect(false);
+			    gridMios.setColSorting('str,str,str,str,str');
+			    gridMios.init();
 		    	
-				var gridProcessor = new dataProcessor("gridUsuariosProfesor.do?busqueda=si");
-				gridProcessor.enableUTFencoding('simple');
-				gridProcessor.init(grid);	  
-				gridProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+				var gridProcessorMios = new dataProcessor("gridUsuariosProfesor.do?");
+				gridProcessorMios.enableUTFencoding('simple');
+				gridProcessorMios.init(gridMios);	  
+				gridProcessorMios.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
 					if(action == 'error'){
 		    			dhtmlx.message(tag.firstChild.data,action,4000);
 		    		}
 		    	});		    	
 
-				grid.clearAndLoad("gridUsuariosProfesor.do?busqueda=si");	
+				gridMios.clearAndLoad("gridUsuariosProfesor.do?");	
+				
+				var gridDemas = mb.attachGrid();
+				gridDemas.setIconsPath('../skins/imgs/');		   
+  
+			    
+				gridDemas.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","<bean:message key="label.codigo.asignatura" />","<bean:message key="label.mio" />"]);
+			    
+			    //anchura de las columnas, en porcentaje. La suma tiene que ser igual a 100
+			    gridDemas.setInitWidthsP("21,38,17,14,10");
+			    //alineacion del contenido en la columna
+			    gridDemas.setColAlign("left,left,left,left,left");
+			    
+			    gridDemas.setColTypes("ro,ro,ro,ro,ch");
+		    	
+			    gridDemas.enableMultiselect(false);
+			    gridDemas.setColSorting('str,str,str,str,str');
+			    gridDemas.init();
+		    	
+				var gridProcessorDemas = new dataProcessor("gridUsuariosProfesor.do?busqueda=si");
+				gridProcessorDemas.enableUTFencoding('simple');
+				gridProcessorDemas.init(gridDemas);	  
+				gridProcessorDemas.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+					if(action == 'error'){
+		    			dhtmlx.message(tag.firstChild.data,action,4000);
+		    		}
+		    	});		    	
+
+				gridDemas.clearAndLoad("gridUsuariosProfesor.do?busqueda=si");	
+				
 				
 				toolbarServicios.attachEvent("onClick", function(id){
 	    			if(id == "botonAceptar"){
 	    				var aceptados="";
 	    				var noaceptados="";
-	    				grid.forEachRow(function(id){
+	    				gridMios.forEachRow(function(id){
+	    					var parts = id.split("-");	    					
+	    					var cellObj = gridMios.cellById(id,4);
+	    					if(cellObj.getValue()=="0") {
+	    						if (noaceptados=="") noaceptados = parts[3];
+	    						else noaceptados += "," +  parts[3];
+	    					}	
+	    					
+	    				});
+	    				gridDemas.forEachRow(function(id){
 	    					var parts = id.split("-");
 	    					
-	    					var cellObj = grid.cellById(id,4);
+	    					var cellObj = gridDemas.cellById(id,4);
 	    					if(cellObj.getValue()=="1") {
 	    						if (aceptados=="") aceptados = parts[3];
 	    						else aceptados += "," + parts[3];
 	    					}
-	    					else {
-	    						if (noaceptados=="") noaceptados = parts[3];
-	    						else noaceptados += "," +  parts[3];
-	    					}
+	    					
 	    					
 	    				});
+	    				var d= new dhtmlXWindows();
+	    				var w = d.createWindow("s", 300,50, 1, 1);	
+	    				w.hide();
+						w.attachURL("actualizarAlumnos.do?aceptados=" + aceptados + "&noaceptados=" + noaceptados);
+						
+						setTimeout(function(){gridMios.clearAndLoad("gridUsuariosProfesor.do?");gridDemas.clearAndLoad("gridUsuariosProfesor.do?busqueda=si");w.close();buscarMisAlumnos();},1000);
+						
 	    				
-	    				var url = "actualizarAlumnos.do?aceptados=" + aceptados + "&noaceptados=" + noaceptados;
-						location.href=url;
-						window.close();
-						setTimeout(function(){buscarMisAlumnos();},1000);
-	    				
+	    			}
+	    			else if (id == "refrescarAlumnos"){
+	    				gridMios.clearAndLoad("gridUsuariosProfesor.do?");
+	    				gridDemas.clearAndLoad("gridUsuariosProfesor.do?busqueda=si");
 	    			}
 				});
 				
