@@ -54,7 +54,7 @@ public class MySqlDAOGruposCriteriosRubricasImpl extends DAOBase implements DAOG
 					PreparedStatement ps = conn.prepareStatement(SQL_INSERT, new String[]{"id_grupo_criterio"});
 					ps.setString(1, grupoCriterioRubrica.getIdAsignatura());
 					ps.setString(2, grupoCriterioRubrica.getNombre());
-					ps.setString(2, grupoCriterioRubrica.getTipo());
+					ps.setString(3, grupoCriterioRubrica.getTipo());
 					return ps;
 					
 				}

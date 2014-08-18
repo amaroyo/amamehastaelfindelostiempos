@@ -79,6 +79,7 @@ public class CrearRubricaAsignaturaAction extends MrmAction {
 	        		criterio.setNombre(value);
 	        		String[] parts = key.split("_");
 	        		criterio.setIdGrupoCriterio(parts[parts.length - 2]);
+	        		getCriteriosRubricasService().insert(criterio);
 	        	}
 	        }
 	        	
