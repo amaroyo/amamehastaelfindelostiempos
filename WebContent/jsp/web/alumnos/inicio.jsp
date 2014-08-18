@@ -164,7 +164,7 @@
 		    	
 		    	tabbar.addTab('tab_5','<bean:message key="title.casos.clinicos"/>','');
 		    	tab_5 = tabbar.cells('tab_5');
-		    	//goCasos();
+		    	goCasos();
 		    	
 		    	tabbar.addTab('tab_6','<bean:message key="title.diario.reflexivo"/>','');
 		    	tab_6 = tabbar.cells('tab_6');
@@ -874,40 +874,49 @@
 			
 			function goCasos(){
 				
-				var mini_layout = tabbar.cells('tab_5').attachLayout("2U","dhx_skyblue");
+				var mini_layout = tabbar.cells('tab_5').attachLayout("1C","dhx_skyblue");
 		    	
 		    	var ma = mini_layout.cells('a');
-			    var mb = mini_layout.cells('b');
 			    
-			    mb.setWidth(250);
-	    		ma.hideHeader();
-				mb.setText('<bean:message key="label.casos.clinicos.alumno"/>');
+			    
+				ma.setText('<bean:message key="label.casos.clinicos.alumno"/>');
 				
 				var toolbarServiciosCasos = ma.attachToolbar();
 				toolbarServiciosCasos.setIconsPath('../img/toolbar/');
-
-		    	
+				
 				toolbarServiciosCasos.loadXML('../xml/toolbars/dhxtoolbar-trabajos-campo.xml', function(){
 					toolbarServiciosCasos.setItemText('crearTrabajoCampo',"<bean:message key="button.crear.trabajo.campo"/>");
+					toolbarServiciosCasos.setItemText('modificarTrabajoCampo',"<bean:message key="button.cambiar.trabajo.campo"/>");
 					toolbarServiciosCasos.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
 					toolbarServiciosCasos.setItemText('descargarTodos',"<bean:message key="button.descargar.casos"/>");
 					toolbarServiciosCasos.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.casos.alumno"/>");
 					toolbarServiciosCasos.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 					toolbarServiciosCasos.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 		    		
-		    	});
-				
+					toolbarServiciosCasos.hideItem('crearTrabajoCampo');
+					toolbarServiciosCasos.hideItem('sep1');
+					toolbarServiciosCasos.hideItem('fechaLimite');
+					toolbarServiciosCasos.hideItem('sep5');
+					toolbarServiciosCasos.hideItem('modificarTrabajoCampo');
+					toolbarServiciosCasos.hideItem('sep3');
+					toolbarServiciosCasos.hideItem('subirPractica');
+					toolbarServiciosCasos.hideItem('sep2');
+					toolbarServiciosCasos.hideItem('descargarTodos');
+					toolbarServiciosCasos.hideItem('sep3');
+				});
 				
 				gridProfesoresCasos = ma.attachGrid();
 		    	
-				gridProfesoresCasos.setHeader(["<bean:message key="label.alumno" />","<bean:message key="label.dni" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
-				gridProfesoresCasos.setColTypes("ro,ro,ro,ro");
+
 		    	
-				gridProfesoresCasos.setColSorting('str,str,str,str');
+				gridProfesoresCasos.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
+				gridProfesoresCasos.setColTypes("ro,ro,ro");
+		    	
+				gridProfesoresCasos.setColSorting('str,str,str');
 				gridProfesoresCasos.enableMultiselect(false);
 				gridProfesoresCasos.init();
 		    	
-		    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+		    	var gridProcessorPro = new dataProcessor("gridCasosClinicosUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idAlumno);
 		    	gridProcessorPro.enableUTFencoding('simple');
 		    	gridProcessorPro.init(gridProfesoresCasos);	  
 		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -915,43 +924,28 @@
 		    			dhtmlx.message(tag.firstChild.data,action,4000);
 		    		}
 		    	});
+		    	
+		    	
+		    	gridProfesoresCasos.clearAndLoad("gridCasosClinicosUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idAlumno);
 
 		    	
 		    	gridProfesoresCasos.attachEvent("onRowSelect",function doOnRowSelected(rowID,celInd){
 		    		
-		    		var gridProfesoresAlumno = mb.attachGrid();
-					
-			    	
-					gridProfesoresAlumno.setHeader(["<bean:message key="label.nombre" />", "<bean:message key="label.fecha" />"]);
-					gridProfesoresAlumno.setColTypes("ro,ro");
-			    	
-					gridProfesoresAlumno.setColSorting('str, str');
-					gridProfesoresAlumno.enableMultiselect(false);
-					gridProfesoresAlumno.init();
-			    	
-			    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
-			    	gridProcessorPro.enableUTFencoding('simple');
-			    	gridProcessorPro.init(gridProfesoresAlumno);	  
-			    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
-						if(action == 'error'){
-			    			dhtmlx.message(tag.firstChild.data,action,4000);
-			    		}
-			    	});
-
-			    	   	
-			    	gridProfesoresAlumno.attachEvent("onRowSelect",doOnRowSelectedOptionsCasos);
-			    	gridProfesoresAlumno.clearAndLoad("gridusuarios.do");
+		    		var cellObj = gridProfesoresCasos.cellById(rowID,celInd);
+					if(celInd=='2' && cellObj.getValue()=="Descargar") {
+						var parts = rowID.split("-");
+						//alert("Descargar Archivo con idPortafolio=" + parts[0] + " y idCasoClinico=" + parts[1]);
+						var accion = "descargarCasoClinico.do";
+						accion += "?tipoConsulta="+"CasoClinico";
+						accion += "&idPortafolio="+parts[0];
+						accion += "&idCasoClinico="+parts[1];
+						location.href=accion;
+					}
 		    	});
-		    	
-		    	gridProfesoresCasos.clearAndLoad("gridusuarios.do");
-				
 				
 			}
 			
-			function doOnRowSelectedOptionsCasos(rowID,celInd){
-				alert("Descargar Archivo");
-	
-			}
+			
 		    
 			
 			function goDiarios(){
@@ -1077,9 +1071,17 @@
 	    	}
 	    	
 	    	function descargarTodosAlumno(){
-	    		var accion = "descargarTrabajosCampoAlumno.do";
-				accion += "?idPortafolio=" + idPortafolio;
-				location.href=accion;
+	    		var tipo = tabbar.getActiveTab();
+	    		if (tipo == "tab_4"){
+		    		var accion = "descargarTrabajosCampoAlumno.do";
+					accion += "?idPortafolio=" + idPortafolio;
+					location.href=accion;
+	    		}
+	    		else if (tipo == "tab_5"){
+	    			var accion = "descargarCasoClinicosAlumno.do";
+					accion += "?idPortafolio=" + idPortafolio;
+					location.href=accion;
+	    		}
 	    	}
 	    	
 	    	function goActualizar(){

@@ -52,7 +52,7 @@ public class DescargarDiariosReflexivosAlumnoAction extends MrmAction {
 					nmbreArchivo[0] = nmbreArchivo[0] + "_" + (d.getFechaSubida()).replaceAll(" ", "_");
 					nmbreArchivo[0] = nmbreArchivo[0].replaceAll("\\s","");
 					String[] s = nmbreArchivo[0].split("\\.");
-					ZipEntry entry = new ZipEntry(s[0]+"."+nmbreArchivo[1]);
+					ZipEntry entry = new ZipEntry(s[0].replaceAll(":", "_")+"."+nmbreArchivo[1]);
 					entry.setSize(d.getDiarioReflexivo().length);
 					zos.putNextEntry(entry);
 					zos.write(d.getDiarioReflexivo());

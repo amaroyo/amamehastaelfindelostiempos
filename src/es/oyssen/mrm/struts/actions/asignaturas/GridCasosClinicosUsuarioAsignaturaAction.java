@@ -21,12 +21,8 @@ public class GridCasosClinicosUsuarioAsignaturaAction extends DHTMLXGridAction {
 		
 		GridCasosClinicosUsuarioAsignaturaForm form = (GridCasosClinicosUsuarioAsignaturaForm) f;
 		
-		//Si el usuario es coordinador, vemos todos los alumnos de ese anyo y esa asignatura
-
-
-		//System.out.println(idUsuario);
 		
-		if (idGrupoUsuario.equals("4")){
+	
 			
 			PortafolioVO p = new PortafolioVO();	
 			p.setAnyoAcademico(anyoAcademico);
@@ -34,16 +30,8 @@ public class GridCasosClinicosUsuarioAsignaturaAction extends DHTMLXGridAction {
 			p.setIdAlumno(form.getIdAlumno());
 			
 			return UtilXML.buildXmlGridCasosClinicosUsuarioAsignatura(getPortafoliosService().findCasosByPortafolio(p));
-		}
 		
-		else return null;
-		/*if (form.getIdGrupo() == null) {
-			return UtilXML.buildXmlGridUsuarios(getUsuariosService().findAll());
-		} else { 
-			GrupoVO grupo = new GrupoVO();
-			grupo.setIdGrupo(form.getIdGrupo());
-			return UtilXML.buildXmlGridUsuariosGrupo(getUsuariosService().findByGrupo(grupo));
-		}*/
+		
 		
 		
 		
