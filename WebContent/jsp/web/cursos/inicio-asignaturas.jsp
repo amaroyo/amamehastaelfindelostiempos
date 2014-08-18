@@ -484,7 +484,7 @@
 							
 						else if (id == "siguiente") {
 	    					if(currentPart == numeroRubricas){
-	    						//crearAsignaturaCompleta();
+	    						crearAsignaturaCompleta();
 	    						crearRubricasAsignaturaCompleta();
 		    					cerrarVentanas();
 	    		    		}
