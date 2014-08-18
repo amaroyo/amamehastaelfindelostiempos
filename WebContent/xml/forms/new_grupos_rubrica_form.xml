@@ -16,8 +16,8 @@
   	<item type="label" name="labelNota" label="Criterios con nota numérica asociada" offsetLeft="30"/>
   	<item type="block" name="notas" offsetLeft="30">
 	  	<item type="block" name="notas_bloque_1">
-	 		<item type="input" name="notas_grupo_1" label="Nombre grupo 1" labelWidth="140" style="width:180" required="true"/>
-	 		<item type="input" name="notas_criterio_1_1" label="Criterio 1" labelWidth="140" style="width:180" required="true"/>
+	 		<item type="input" name="value(notas_grupo_1)" label="Nombre grupo 1" labelWidth="140" style="width:180" required="true"/>
+	 		<item type="input" name="value(notas_criterio_1_1)" label="Criterio 1" labelWidth="140" style="width:180" required="true"/>
 		</item>
 		<item type="block" name="notas_bloque_botones_1">
 			<item type="button" name="notas_boton_nuevo_criterio_1" value="Añadir nuevo criterio"/>
@@ -37,8 +37,8 @@
    	<item type="label" name="labelTexto" label="Criterios con anotaciones por parte del profesor (Anexo I)" offsetLeft="30"/>
    	<item type="block" name="texto" offsetLeft="30">
 	   	<item type="block" name="texto_bloque_1">
-	   		<item type="input" name="texto_grupo_1" label="Nombre grupo 1" labelWidth="140" style="width:180" required="true"/>
-	   		<item type="input" name="texto_criterio_1_1" label="Criterio 1" labelWidth="140" style="width:180" required="true"/>
+	   		<item type="input" name="value(texto_grupo_1)" label="Nombre grupo 1" labelWidth="140" style="width:180" required="true"/>
+	   		<item type="input" name="value(texto_criterio_1_1)" label="Criterio 1" labelWidth="140" style="width:180" required="true"/>
 	   	</item>
 	   	<item type="block" name="texto_bloque_botones_1">
 	   		<item type="button" name="texto_boton_nuevo_criterio_1" value="Añadir nuevo criterio"/>

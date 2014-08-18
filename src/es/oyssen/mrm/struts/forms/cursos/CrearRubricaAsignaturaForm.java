@@ -10,11 +10,19 @@ public class CrearRubricaAsignaturaForm extends DhtmlxGridForm {
 	private String nombre;
 	private String competencias;
 	private String anexo1;
-	private Map values = new HashMap();
-	
-	
-	/*<item type="input" name="notas_grupo_1" label="Nombre grupo 1" labelWidth="140" style="width:180" required="true"/>
-		<item type="input" name="notas_criterio_1_1" label="Criterio 1" labelWidth="140" style="width:180" required="true"/>*/
+	private final Map values = new HashMap();
+ 
+    public Map getValues(){
+        return values;
+    }
+     
+    public void setValue(String key, Object value){
+        values.put(key, value);
+    }
+     
+    public Object getValue(String key){
+        return values.get(key);
+    }
 	
 	
 	public String getNombre() {
@@ -32,23 +40,7 @@ public class CrearRubricaAsignaturaForm extends DhtmlxGridForm {
 	public String getAnexo1() {
 		return anexo1;
 	}
-
-	public Map getValues() {
-		return values;
+	public void setAnexo1(String anexo1) {
+		this.anexo1 = anexo1;
 	}
-    
-    
-	public void setValues(Map values) {
-		this.values=values;
-	}
-    
-	public void setValue(String key, Object value) {
-        values.put(key, value);
-    }
-
-    public Object getValue(String key) {
-        return values.get(key);
-    }
-    
-    
 }

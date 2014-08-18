@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import es.oyssen.mrm.negocio.vo.AsignaturaVO;
+import es.oyssen.mrm.negocio.vo.RubricaVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
 import es.oyssen.mrm.struts.forms.cursos.CrearAsignaturaForm;
 import es.oyssen.mrm.struts.forms.cursos.CrearRubricaAsignaturaForm;
@@ -21,19 +22,33 @@ public class CrearRubricaAsignaturaAction extends MrmAction {
 			throws Exception {
 		
 		CrearRubricaAsignaturaForm f = (CrearRubricaAsignaturaForm) form;
-		AsignaturaVO asignaturaIN = new AsignaturaVO();
-		AsignaturaVO asignaturaOUT = new AsignaturaVO();
+		AsignaturaVO asignatura = new AsignaturaVO();
 		
 		//application/json or application/xml text/html
 		response.setContentType("text/xml;charset=utf-8");
 		PrintWriter out;
 	    out = response.getWriter();
 	    
-	    asignaturaIN.setNombre(f.getNombre());
-		asignaturaOUT = getAsignaturasService().findByNombre(asignaturaIN);
+	    asignatura.setNombre(f.getNombre());
+		asignatura = getAsignaturasService().findByNombre(asignatura);
 				
-		if (asignaturaOUT != null)
+		if (asignatura != null){
+			
+			//grupos_rubrica
+			
+			
+			
+			//criterios_rubrica
+			
+			//rubrica
+			RubricaVO rubrica = new RubricaVO();
+			rubrica.setIdAsignatura(asignatura.getIdAsignatura());
+			rubrica.setCompetencias(f.getCompetencias());
+			rubrica.setAnexo(f.getAnexo1());
+			rubrica.setNumeroCriterios(numero_criterios);
+			getRubricasService().insert(rubrica);
 			out.print("rúbrica no creada: no existe una asignatura con ese nombre");
+		}
 		else{
 			/*
 			getAsignaturasService().insert(asignatura);*/
