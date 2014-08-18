@@ -28,6 +28,7 @@ import es.oyssen.mrm.negocio.vo.LogUsuarioVO;
 import es.oyssen.mrm.negocio.vo.PermisoVO;
 import es.oyssen.mrm.negocio.vo.ResponsableVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaAnyoVO;
+import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaCodigoVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
 import es.oyssen.mrm.negocio.vo.SeminarioRealizadoVO;
 import es.oyssen.mrm.negocio.vo.ServicioUsuarioVO;
@@ -979,6 +980,26 @@ public class UtilXML {
 		
 	}
 	
+	public static String buildXmlGridSeminarios(List<SeminarioAsignaturaCodigoVO> list) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(XML_HEADER);
+		sb.append("<rows>");
+		if(list != null){
+			for (SeminarioAsignaturaCodigoVO sa : list) {
+				sb.append("<row id=\"" +sa.getIdSeminario() +"\">");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(sa.getNombre()) + "]]></cell>");
+						
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(sa.getCodigo()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(sa.getCurso()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(sa.getCodigoAsignatura()) + "]]></cell>");
+				
+				sb.append("</row>");				
+			}
+		}
+		sb.append("</rows>");
+		return sb.toString();
+	}
+	
 	
 	private static final String nombreGrupo(String id){
 		if (id.equals("1")) return "Super user";
@@ -1021,6 +1042,8 @@ public class UtilXML {
 		return tiempoActual.after(fechaL);
 
 	}
+
+	
 
 	
 

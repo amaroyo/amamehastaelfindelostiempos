@@ -16,7 +16,9 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
+import es.oyssen.mrm.negocio.dao.rowmappers.SeminarioAsignaturaCodigoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.SeminarioAsignaturaMapper;
+import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaCodigoVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
 
 
@@ -29,7 +31,12 @@ public class MySqlDAOSeminariosAsignaturaImpl extends DAOBase implements DAOSemi
 	private static String SQL_FIND_BY_NOMBRE = "select * from seminarios_asignaturas where nombre = ?";
 	private static String SQL_FIND_BY_CODIGO = "select * from seminarios_asignaturas where codigo = ?";
 	private static String SQL_FIND_BY_ASIGNATURA = "select * from seminarios_asignaturas where id_asignatura = ?";
-
+	private static String SQL_FIND_ALL = "select s.id_seminario, s.nombre, s.codigo, a.codigo, a.curso " +
+											"from seminarios_asignaturas as s, asignaturas as a "+
+											"where s.id_asignatura = a.id_asignatura and a.id_asignatura in "+
+											"(select id_asignatura "+
+													"from portafolios "+
+													"where anyo_academico=?)";
 
 
 	public void insert(final SeminarioAsignaturaVO seminarioAsignatura) throws DAOException,
@@ -119,6 +126,18 @@ public class MySqlDAOSeminariosAsignaturaImpl extends DAOBase implements DAOSemi
 	public List<SeminarioAsignaturaVO> findAllByAsignatura(SeminarioAsignaturaVO seminarioAsignatura) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_BY_ASIGNATURA, new Object[]{seminarioAsignatura.getIdAsignatura()}, new SeminarioAsignaturaMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+	@Override
+	public List<SeminarioAsignaturaCodigoVO> findAll(String anyoAcademico)
+			throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_ALL, new Object[]{anyoAcademico}, new SeminarioAsignaturaCodigoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

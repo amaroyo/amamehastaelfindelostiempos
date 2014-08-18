@@ -10,7 +10,8 @@
 		<form-bean name="EditarAsignaturaForm" type="es.oyssen.mrm.struts.forms.cursos.EditarAsignaturaForm" />
 		<form-bean name="CrearAsignaturaForm" type="es.oyssen.mrm.struts.forms.cursos.CrearAsignaturaForm" />
 		<form-bean name="CrearRubricaAsignaturaForm" type="es.oyssen.mrm.struts.forms.cursos.CrearRubricaAsignaturaForm" />
-		
+		<form-bean name="GridSeminarios" type="es.oyssen.mrm.struts.forms.cursos.GridSeminariosForm" />
+			<form-bean name="EditarSeminarioForm" type="es.oyssen.mrm.struts.forms.cursos.EditarSeminarioForm" />
 		
 	</form-beans>
 	
@@ -39,6 +40,9 @@
 
 		<action path="/cursos/crearrubricaasignatura" name="CrearRubricaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.CrearRubricaAsignaturaAction"  />
 
+		<action path="/cursos/gridSeminarios" name="GridSeminarios" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.GridSeminariosAction" />
+		<action path="/cursos/editarseminario" name="EditarSeminarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.EditarSeminarioAction" />
+		
 	</action-mappings>
 
 </struts-config>
