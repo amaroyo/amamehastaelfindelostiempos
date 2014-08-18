@@ -1,6 +1,8 @@
 package es.oyssen.mrm.struts.actions.cursos;
 
 import java.io.PrintWriter;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -34,8 +36,22 @@ public class CrearRubricaAsignaturaAction extends MrmAction {
 				
 		if (asignatura != null){
 			
-			//grupos_rubrica
+	        Map dynformValues = f.getValues();
+	        dynformValues
+	        for(int i =0; i<count ; i++){
+	            String name = (String)dynformValues.get("name"+i);
+	            String value = (String)dynformValues.get("value"+i);
+	            System.out.println("Name:" + name + " Value:" + value);
+	        }
+	        return mapping.findForward("success");
 			
+			
+			
+			
+			
+			//grupos_rubrica
+			value(notas_grupo_1)','<strong><bean:message key="label.nombre.grupo.criterios"/>'+' '+'1</strong>');
+			formNewRubrica.setItemLabel('value(notas_criterio_1_1)
 			
 			
 			//criterios_rubrica
