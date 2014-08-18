@@ -36,9 +36,10 @@ public class MySqlDAOGruposCriteriosRubricasImpl extends DAOBase implements DAOG
 																			"from grupos_criterios_rubricas as gcr, criterios_rubricas as cr " +
 																			"where gcr.id_asignatura = cr.id_asignatura and gcr.id_grupo_criterio = cr.id_grupo_criterio " +
 																			"and gcr.tipo = 'NOTA' and gcr.id_asignatura = ?";
-	private static String SQL_FIND_GRUPOS_ANEXO_RUBRICA_ASIGNATURA = "select gcr.id_grupo_criterio, gcr.id_asignatura, gcr.nombre, gcr.tipo " +
-																		"from grupos_criterios_rubricas as gcr " +
-																		"where gcr.tipo = 'TEXTO' and gcr.id_asignatura = ?";
+	private static String SQL_FIND_GRUPOS_ANEXO_RUBRICA_ASIGNATURA = "select gcr.id_asignatura, gcr.id_grupo_criterio, gcr.nombre as nombre_grupo_criterio, gcr.tipo, cr.id_criterio, cr.nombre as nombre_criterio " +
+																			"from grupos_criterios_rubricas as gcr, criterios_rubricas as cr " +
+																			"where gcr.id_asignatura = cr.id_asignatura and gcr.id_grupo_criterio = cr.id_grupo_criterio " +
+																			"and gcr.tipo = 'TEXTO' and gcr.id_asignatura = ?";
 	
 
 
@@ -124,10 +125,9 @@ public class MySqlDAOGruposCriteriosRubricasImpl extends DAOBase implements DAOG
 		}
 	}
 	
-	public List<GrupoCriteriosRubricasVO> findGruposAnexoRubricaAsignatura(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws DAOException {
+	public List<GruposCriteriosRubricaAsignaturaVO> findGruposAnexoRubricaAsignatura(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws DAOException {
 		try {
-			List<GrupoCriteriosRubricasVO> o = getJdbcTemplate().query(SQL_FIND_GRUPOS_ANEXO_RUBRICA_ASIGNATURA, new Object[]{grupoCriterioRubrica.getIdAsignatura()}, new GrupoCriteriosRubricasMapper());
-			return o;
+			return getJdbcTemplate().query(SQL_FIND_GRUPOS_ANEXO_RUBRICA_ASIGNATURA, new Object[]{grupoCriterioRubrica.getIdAsignatura()}, new GruposCriteriosRubricaAsignaturaMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
