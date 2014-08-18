@@ -22,8 +22,13 @@
 	   	
 	   	<form-bean name="CrearTrabajoCampoForm" type="es.oyssen.mrm.struts.forms.asignaturas.CrearTrabajoCampoForm" />
 	   	
-	   	 <form-bean name="SubirArchivoForm" type="es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoForm" />
+	   	<form-bean name="SubirArchivoForm" type="es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoForm" />
 	   	
+	   	<form-bean name="GridCasosClinicosUsuarioAsignatura" type="es.oyssen.mrm.struts.forms.asignaturas.GridCasosClinicosUsuarioAsignaturaForm" />
+	   	
+	   	
+	   	 
+	   	 
 	</form-beans>
 	
 
@@ -66,6 +71,12 @@
 		</action>
 		
 		<action path="/alumnos/descargarTrabajosCampoAlumno" name="DescargarTrabajosCampoAlumno" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarTrabajoCampoAlumnoAction" />
+		
+		<action path="/alumnos/gridCasosClinicosUsuarioAsignatura" name="GridCasosClinicosUsuarioAsignatura" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridCasosClinicosUsuarioAsignaturaAction" />
+		
+		<action path="/alumnos/descargarCasoClinico" name="Descargar" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarAction" />
+		
+		<action path="/alumnos/descargarCasoClinicosAlumno" name="DescargarCasoClinicoAlumno" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarCasoClinicoAlumnoAction" />
 		
 	</action-mappings>
 

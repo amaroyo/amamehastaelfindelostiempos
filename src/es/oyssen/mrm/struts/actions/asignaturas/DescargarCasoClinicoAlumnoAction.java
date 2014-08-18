@@ -51,7 +51,7 @@ public class DescargarCasoClinicoAlumnoAction extends MrmAction {
 					nmbreArchivo[0] = nmbreArchivo[0] + "_" + (c.getFechaSubida()).replaceAll(" ", "_");
 					nmbreArchivo[0] = nmbreArchivo[0].replaceAll("\\s","");
 					String[] s = nmbreArchivo[0].split("\\.");
-					ZipEntry entry = new ZipEntry(s[0]+"." + nmbreArchivo[1]);
+					ZipEntry entry = new ZipEntry(s[0].replaceAll(":", "_")+"." + nmbreArchivo[1]);
 					entry.setSize(c.getCasoClinico().length);
 					zos.putNextEntry(entry);
 					zos.write(c.getCasoClinico());
