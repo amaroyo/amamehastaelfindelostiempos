@@ -54,6 +54,8 @@ public interface DAOPortafolios {
 
 	public UsuarioVO findAlumnoByPortafolio(PortafolioVO p) throws DAOException;
 
+	public List<PortafolioVO> findAnyos() throws DAOException;
+
 
 	
 	

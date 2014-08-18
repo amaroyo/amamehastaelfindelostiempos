@@ -13,6 +13,8 @@
 
 		<action path="/curso_academico/cambiarCursoAcademico" name="CambiarCursoAcademico" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.CambiarCursoAcademicoAction"  />
 		
+		<action path="/curso_academico/dameAnyos" name="DameAnyos" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.usuarios.DameAnyosAction"  />
+		
 	</action-mappings>
 
 </struts-config>

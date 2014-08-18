@@ -233,6 +233,17 @@ public class PortafoliosServiceImpl implements PortafoliosService{
 		}
 	}
 
+	@Override
+	public List<PortafolioVO> findAnyos() throws ServiceException {
+		try {
+			return daoPortafolios.findAnyos();
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findAnyos portafolio", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
 	
 
 	
