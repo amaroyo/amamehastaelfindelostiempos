@@ -3,8 +3,6 @@ package es.oyssen.mrm.negocio.vo;
 
 public class GrupoCriteriosRubricasVO { 
 
-
-	
 	private String id_grupo_criterio;
 	private String id_asignatura;
 	private String nombre;

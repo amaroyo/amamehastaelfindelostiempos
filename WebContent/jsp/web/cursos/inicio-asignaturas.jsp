@@ -412,12 +412,12 @@
 					formNewRubrica.setItemLabel('labelCompetencias','<bean:message key="label.competencias"/>');
 					formNewRubrica.setItemLabel('labelAnexo1','<bean:message key="label.anexo"/>');
 					formNewRubrica.setItemLabel('labelNota','<bean:message key="label.criterios.nota"/>');
-					formNewRubrica.setItemLabel('value(notas_grupo_1)','<strong><bean:message key="label.nombre.grupo.criterios"/>'+' '+'1</strong>');
-					formNewRubrica.setItemLabel('value(notas_criterio_1_1)','<bean:message key="label.criterio"/>'+' '+'1');
-					formNewRubrica.setItemLabel('notas_boton_nuevo_criterio_1','<bean:message key="button.add.nuevo.criterio"/>');
-					formNewRubrica.setItemLabel('notas_boton_borrar_criterio_1','<bean:message key="button.delete.nuevo.criterio"/>');	  
-					formNewRubrica.setItemLabel('notas_boton_nuevo_grupo_1','<strong><bean:message key="button.add.nuevo.grupo"/></strong>');	  
-					formNewRubrica.setItemLabel('notas_boton_borrar_grupo_1','<strong><bean:message key="button.delete.nuevo.grupo"/></strong>');	  
+					formNewRubrica.setItemLabel('value(nota_grupo_1)','<strong><bean:message key="label.nombre.grupo.criterios"/>'+' '+'1</strong>');
+					formNewRubrica.setItemLabel('value(nota_criterio_1_1)','<bean:message key="label.criterio"/>'+' '+'1');
+					formNewRubrica.setItemLabel('nota_boton_nuevo_criterio_1','<bean:message key="button.add.nuevo.criterio"/>');
+					formNewRubrica.setItemLabel('nota_boton_borrar_criterio_1','<bean:message key="button.delete.nuevo.criterio"/>');	  
+					formNewRubrica.setItemLabel('nota_boton_nuevo_grupo_1','<strong><bean:message key="button.add.nuevo.grupo"/></strong>');	  
+					formNewRubrica.setItemLabel('nota_boton_borrar_grupo_1','<strong><bean:message key="button.delete.nuevo.grupo"/></strong>');	  
 					formNewRubrica.setItemLabel('labelTexto','<bean:message key="label.criterios.texto"/>');
 					formNewRubrica.setItemLabel('value(texto_grupo_1)','<strong><bean:message key="label.nombre.grupo.criterios"/>'+' '+'1</strong>');
 					formNewRubrica.setItemLabel('value(texto_criterio_1_1)','<bean:message key="label.criterio"/>'+' '+'1');
@@ -457,17 +457,17 @@
 					num_criterios_grupo[2][1] = 2;
 
 	    			formNewRubrica.attachEvent("onButtonClick", function(id){
-	    				if(id.indexOf("notas_boton_nuevo_criterio") != -1){
-	    					botonNuevoCriterio(id,"notas",1);
+	    				if(id.indexOf("nota_boton_nuevo_criterio") != -1){
+	    					botonNuevoCriterio(id,"nota",1);
 	    				}
-	    				else if(id.indexOf("notas_boton_borrar_criterio") != -1){
-	    					botonBorrarCriterio(id,"notas",1);
+	    				else if(id.indexOf("nota_boton_borrar_criterio") != -1){
+	    					botonBorrarCriterio(id,"nota",1);
 	    				}
-	    				else if(id.indexOf("notas_boton_nuevo_grupo") != -1){
-	    					botonNuevoGrupo(id,"notas",1);
+	    				else if(id.indexOf("nota_boton_nuevo_grupo") != -1){
+	    					botonNuevoGrupo(id,"nota",1);
 						}
-						else if(id.indexOf("notas_boton_borrar_grupo") != -1){
-	    					botonBorrarGrupo(id,"notas",1);
+						else if(id.indexOf("nota_boton_borrar_grupo") != -1){
+	    					botonBorrarGrupo(id,"nota",1);
 						}
 						else if(id.indexOf("texto_boton_nuevo_criterio") != -1){
 	    					botonNuevoCriterio(id,"texto",2);
