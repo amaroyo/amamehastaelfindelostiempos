@@ -28,7 +28,7 @@ public interface DAOGruposCriteriosRubricas {
 
 	public List<GruposCriteriosRubricaAsignaturaVO> findGruposCriteriosRubricaAsignatura(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws DAOException;
 
-	public List<GrupoCriteriosRubricasVO> findGruposAnexoRubricaAsignatura(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws DAOException;
+	public List<GruposCriteriosRubricaAsignaturaVO> findGruposAnexoRubricaAsignatura(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws DAOException;
 		
 
 		

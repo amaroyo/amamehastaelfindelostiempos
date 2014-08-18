@@ -671,7 +671,7 @@
 	    		xmlhttp.onreadystatechange=function(){
 	    			if (xmlhttp.readyState===4) {
 	        	        if(xmlhttp.status===200) { //GET returning a response
-	        	        	return createArrayGruposAnexoFromXML(xmlhttp.responseXML);
+	        	        	return createArrayGruposCriteriosFromXML(xmlhttp.responseXML);
 	        	        }
 	        	    }
 	    		}
@@ -720,17 +720,6 @@
 	    	    return xmlhttp;
 	    	}
 			
-			function createArrayGruposAnexoFromXML(xml){
-				var items = new Array();
-				var grupos = xml.getElementsByTagName("grupo");
-				var id_grupo, nombre_grupo;
-				for(var i=0;i<grupos.length;i++) {
-	    	        id_grupo=grupos[i].getElementsByTagName("id_grupo")[0].firstChild.nodeValue;
-	    	        nombre_grupo=grupos[i].getElementsByTagName("nombre_grupo")[0].firstChild.nodeValue;
-	    	        items[i]={type:"input", name:id_grupo, label:nombre_grupo, labelWidth:"125", style:"width:200", rows:"2"};
-		    	}
-				return items;
-			}
 			
 			function createArrayGruposCriteriosFromXML(xml){
 				var items = new Array();

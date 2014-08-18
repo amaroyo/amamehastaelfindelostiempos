@@ -93,7 +93,7 @@ public class GruposCriteriosRubricasServiceImpl implements GruposCriteriosRubric
 		}
 	}
 	
-	public List<GrupoCriteriosRubricasVO> findGruposAnexoAsignatura(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws ServiceException {
+	public List<GruposCriteriosRubricaAsignaturaVO> findGruposAnexoAsignatura(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws ServiceException {
 		try {
 			return daoGruposCriteriosRubricas.findGruposAnexoRubricaAsignatura(grupoCriterioRubrica);
 		} catch (DAOException e) {
