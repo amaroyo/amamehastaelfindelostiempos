@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS usuarios_permisos;
 DROP TABLE IF EXISTS asignaturas;
 DROP TABLE IF EXISTS seminarios_asignaturas;
 DROP TABLE IF EXISTS rubricas;
-DROP TABLE IF EXISTS grupo_criterios_rubricas;
+DROP TABLE IF EXISTS grupos_criterios_rubricas;
 DROP TABLE IF EXISTS criterios_rubricas;
 DROP TABLE IF EXISTS profesores_asociados;
 DROP TABLE IF EXISTS portafolios;
