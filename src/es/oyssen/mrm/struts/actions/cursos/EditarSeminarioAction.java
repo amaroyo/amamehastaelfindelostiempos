@@ -29,7 +29,14 @@ public class EditarSeminarioAction extends DHTMLXFormAction {
 	@Override
 	public String create(DhtmlxForm f) throws Exception {
 		
-		return null;
+		EditarSeminarioForm form = (EditarSeminarioForm) f;
+		SeminarioAsignaturaVO seminario = new SeminarioAsignaturaVO();
+		seminario.setNombre(form.getNombre());
+		seminario.setCodigo(form.getCodigo());
+		seminario.setDescripcion(form.getDescripcion());
+		seminario.setIdAsignatura(form.getAsignatura());
+		getSeminariosAsignaturaService().insert(seminario);
+		return "";
 	}
 	
 	@Override

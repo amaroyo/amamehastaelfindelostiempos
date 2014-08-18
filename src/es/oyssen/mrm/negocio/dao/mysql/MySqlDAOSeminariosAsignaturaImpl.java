@@ -112,9 +112,9 @@ public class MySqlDAOSeminariosAsignaturaImpl extends DAOBase implements DAOSemi
 		}
 	}
 	
-	public List<SeminarioAsignaturaVO> findByCodigo(SeminarioAsignaturaVO seminarioAsignatura) throws DAOException {
+	public SeminarioAsignaturaVO findByCodigo(SeminarioAsignaturaVO seminarioAsignatura) throws DAOException {
 		try {
-			return getJdbcTemplate().query(SQL_FIND_BY_CODIGO, new Object[]{seminarioAsignatura.getCodigo()}, new SeminarioAsignaturaMapper());
+			return (SeminarioAsignaturaVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_CODIGO, new Object[]{seminarioAsignatura.getCodigo()}, new SeminarioAsignaturaMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

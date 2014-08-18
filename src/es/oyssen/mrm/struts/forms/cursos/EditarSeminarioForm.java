@@ -8,7 +8,7 @@ public class EditarSeminarioForm extends DhtmlxGridForm {
 	private String nombre;
 	private String codigo;
 	private String descripcion;
-	
+	private String asignatura;
 	
 	public String getNombre() {
 		return nombre;
@@ -35,6 +35,13 @@ public class EditarSeminarioForm extends DhtmlxGridForm {
 	public void setIdSeminario(String idSeminario) {
 		this.idSeminario = idSeminario;
 	}
+	public String getAsignatura() {
+		return asignatura;
+	}
+	public void setAsignatura(String asignatura) {
+		this.asignatura = asignatura;
+	}
+	
 	
 	
 }

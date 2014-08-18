@@ -80,7 +80,7 @@ public class SeminariosAsignaturaServiceImpl implements SeminariosAsignaturaServ
 		}
 	}
 	
-	public List<SeminarioAsignaturaVO> findByCodigo(SeminarioAsignaturaVO seminarioAsignatura) throws ServiceException {
+	public SeminarioAsignaturaVO findByCodigo(SeminarioAsignaturaVO seminarioAsignatura) throws ServiceException {
 		try {
 			return daoSeminariosAsignatura.findByCodigo(seminarioAsignatura);
 		} catch (DAOException e) {

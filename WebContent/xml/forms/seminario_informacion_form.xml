@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <items>
    <item type="fieldset" name="data" label="Información general del Seminario" inputWidth="auto">
-       <item type="input" name="nombre" label="Nombre Seminario" labelWidth="110" style="width:400"/>
-       <item type="input" name="codigo" label="Código" labelWidth="110" style="width:400"/>
+       <item type="input" name="nombre" label="Nombre Seminario" labelWidth="110" style="width:400" required="true"/>
+       <item type="input" name="codigo" label="Código" labelWidth="110" style="width:400" required="true"/>
        <item type="input" name="descripcion" label="Descripción" labelWidth="110" style="width:400" rows="7"/>
+       <item type="select"	
+		  name="asignatura"
+		  label="Asignatura"
+		  labelWidth="110"
+		  labelAlign="center"
+		  inputHeight="20"
+		  inputWidth="400"
+		  required="true"
+		/>
    </item>
    <item type="button" name="aceptar" value="Aceptar" />
 </items>
