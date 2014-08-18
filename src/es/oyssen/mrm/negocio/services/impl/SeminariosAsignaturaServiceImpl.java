@@ -9,6 +9,7 @@ import es.oyssen.mrm.negocio.dao.DAOSeminariosAsignatura;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.SeminariosAsignaturaService;
+import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaCodigoVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
 
 public class SeminariosAsignaturaServiceImpl implements SeminariosAsignaturaService{
@@ -95,6 +96,18 @@ public class SeminariosAsignaturaServiceImpl implements SeminariosAsignaturaServ
 		} catch (DAOException e) {
 			e.printStackTrace();
 			log.error("Error findById findAllByAsignatura asignatura", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	@Override
+	public List<SeminarioAsignaturaCodigoVO> findAll(String anyoAcademico)
+			throws ServiceException {
+		try {
+			return daoSeminariosAsignatura.findAll(anyoAcademico);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findById findAll asignatura", e);
 			throw new ServiceException(e.getMessage());
 		}
 	}

@@ -6,6 +6,7 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
+import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaCodigoVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
 
 public interface DAOSeminariosAsignatura {
@@ -23,6 +24,8 @@ public interface DAOSeminariosAsignatura {
 	public List<SeminarioAsignaturaVO> findByCodigo(SeminarioAsignaturaVO seminarioAsignatura) throws DAOException;
 	
 	public List<SeminarioAsignaturaVO> findAllByAsignatura(SeminarioAsignaturaVO seminarioAsignatura) throws DAOException;
+
+	public List<SeminarioAsignaturaCodigoVO> findAll(String anyoAcademico) throws DAOException;
 
 	
 
