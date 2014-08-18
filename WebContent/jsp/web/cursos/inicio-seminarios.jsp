@@ -45,7 +45,7 @@
 	   		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	
 	    	var main_layout, areaTrabajoCursos, listado, toolbarSeminarios,
-	    	gridSeminarios, tabbarSeminarios, tabInfo, formInfo;
+	    	gridSeminarios, tabbarSeminarios, tabInfo, formInfo, idSeminario;
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -67,6 +67,7 @@
 		    		toolbarSeminarios.setItemText('delete',"<bean:message key="button.eliminar.seminario"/>");
 			    	toolbarSeminarios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 			    	toolbarSeminarios.hideItem("delete");
+			    	toolbarSeminarios.hideItem("sep1");
 	    		//permisosToolbarSeminarios();
 		    });
 			    
@@ -99,6 +100,8 @@
 		    
 		    function doOnRowSelected(row,celInd){
 
+		    	idSeminario = row;
+		    	
 		    	var formSeminarioAlumno = areaTrabajoCursos.attachForm();
 	    		
 	    		formSeminarioAlumno.loadStruct('../xml/forms/seminario_informacion_form.xml', function(){
@@ -107,8 +110,9 @@
 	    			formSeminarioAlumno.setItemLabel('codigo','<bean:message key="label.codigo.seminario"/>');
 	    			formSeminarioAlumno.setItemLabel('descripcion','<bean:message key="label.descripcion.seminario"/>');
 	    			formSeminarioAlumno.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
-		    		
+	    			formSeminarioAlumno.setItemLabel('asignatura','<bean:message key="label.asignatura.asociada"/>');
 	    			formSeminarioAlumno.hideItem('aceptar');
+	    			formSeminarioAlumno.hideItem('asignatura');
 	    			
 	    			
 	    			
@@ -123,7 +127,7 @@
     					formSeminarioAlumno.setReadonly('descripcion', false);
     				</logic:match>
 	    		
-					
+    				
 					
 					
 	    		formSeminarioAlumno.load('editarseminario.do?idSeminario=' + row, function () {
@@ -191,8 +195,156 @@
 		    	gridSeminarios.clearAndLoad("gridSeminarios.do");	
 		    }
 		    
+		    
+		    function nuevoSeminario(){
+		    	
+	    		var dhxWins= new dhtmlXWindows();
+				var window = dhxWins.createWindow("subir", 300,50, 500, 400);
+				window.setText('<bean:message key="title.trabajo.de.campo" />');				
+				window.setModal(true);
+				window.centerOnScreen();
+				
+				var formNTC = window.attachForm();
+				formNTC.loadStruct('../xml/forms/seminario_informacion_form.xml', function(){
+					formNTC.setItemLabel('data','<bean:message key="title.info.general.seminario"/>');
+					formNTC.setItemLabel('nombre','<bean:message key="label.nombre.seminario"/>');
+					formNTC.setItemLabel('codigo','<bean:message key="label.codigo.seminario"/>');
+					formNTC.setItemLabel('descripcion','<bean:message key="label.descripcion.seminario"/>');
+					formNTC.setItemLabel('asignatura','<bean:message key="label.asignatura.asociada"/>');
+					formNTC.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+					formNTC.setRequired('nombre', true);
+					formNTC.setRequired('codigo', true);
+					formNTC.setRequired('asignatura', true);
+					
+					var data = getData();
+					formNTC.reloadOptions('asignatura', data);
+		    		
+					var bloqueado = true;
+					formNTC.attachEvent("onChange", function(name,value){
+							
+			    		   if(name == "codigo"){
+			    			   bloqueado=true;
+			    			   formNTC.clearNote("codigo");
+			    			   var opts = chequeaSeminario(formNTC.getItemValue("codigo"))
+			    			   var ext = opts[0].toString();
+			    			   if (ext == "existe"){
+			    				   formNTC.setNote("codigo", { text: '<bean:message key="message.existe.codigo.seminario" />'} );
+			    			   }
+			    			   else if (formNTC.getItemValue("codigo") != ""){
+			    				   bloqueado = false;
+			    				   formNTC.setNote("codigo", { text: '<img src=../img/grid/corregida.png></img>'} );
+			    			   }
+			    		   }
+					});
+					
+					formNTC.attachEvent("onButtonClick", function(id){
+		    			if(id == "aceptar"){
+						
+							if (bloqueado){
+								alert('<bean:message key="message.incorrecto.codigo.seminario"/>');
+							}
+							else {
+								formNTC.send("editarseminario.do?!nativeeditor_status=create","post", function(xml) {
+									goActualizar();
+									alert('<bean:message key="message.seminario.cambiado.exito"/>');
+									window.close();
+									
+								});
+							}
+					
+		    			}
+					});
+					
+				});
+				
+				
+		    }
+		    
+		    
+		    function initRequest() {
+	    	    if (window.XMLHttpRequest) {
+	    	        xmlhttp = new XMLHttpRequest();
+	    	    } else if (window.ActiveXObject) {
+	    	        isIE = true;
+	    	        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	    	    }
+	    	    return xmlhttp;
+	    	}
+	    	
+	    	
+	    	function chequeaSeminario(codigo){
+	    		var url = "checkCodigoSeminario.do?codigo=" + codigo;
+	    		var xmlhttp = initRequest();
+	    		xmlhttp.onreadystatechange=function(){
+	    			if (xmlhttp.readyState===4) {
+	        	        if(xmlhttp.status===200) { //GET returning a response
+	        	        	return createArrayFromXML(xmlhttp.responseXML);
+	        	        }
+	        	    }
+	    		}
+	    	    xmlhttp.open("GET",url,false);
+	    	    xmlhttp.send(null);
+	    	    return xmlhttp.onreadystatechange();
+	    	}
+	    	
+	    	function createArrayFromXML(xml){
+	    		var seminarios = xml.getElementsByTagName("seminario");
+	    		var id, nombre, seminario;
+	    		var opts = new Array();
+	    		for(var i=0;i<seminarios.length;i++) {
+	    	        id=seminarios[i].getElementsByTagName("check")[0].firstChild.nodeValue;
+	    	        
+	    	        
+	    	       	opts[i] = id;
+	    	    }
+	    		return opts;
+
+	    	}
 		   
+	    	
+	    	function getData(){
+	    		
+	    		return retrieveData();
+	    		
+		    	var d = [ {text: "2014/2015", value: "2014/2015", selected: true},
+                          {text: "2013/2014", value: "2013/2014"},
+                          {text: "2012/2013", value: "2012/2013"}
+                		];
+		    	
+		    }
+	    	
 		  
+	    	function retrieveData(){
+	    		var url = "dameAsignaturas.do";
+	    		var xmlhttp = initRequest();
+	    		xmlhttp.onreadystatechange=function(){
+	    			if (xmlhttp.readyState===4) {
+	        	        if(xmlhttp.status===200) { //GET returning a response
+	        	        	return createArrayFromXMLAsignaturas(xmlhttp.responseXML);
+	        	        }
+	        	    }
+	    		}
+	    	    xmlhttp.open("GET",url,false);
+	    	    xmlhttp.send(null);
+	    	    return xmlhttp.onreadystatechange();
+	    	}
+	    	
+	    	function createArrayFromXMLAsignaturas(xml){
+	    		var seminarios = xml.getElementsByTagName("asignatura");
+	    		var id, nombre, seminario;
+	    		var opts = new Array();
+	    		for(var i=0;i<seminarios.length;i++) {
+	    	        id=seminarios[i].getElementsByTagName("id")[0].firstChild.nodeValue;
+	    	       
+	    	        nombre=seminarios[i].getElementsByTagName("nombre")[0].firstChild.nodeValue;
+	    	        if(i==0){seminario={text:nombre, value:id, selected:true};}
+	    	        else seminario={text:nombre, value:id};
+	    	       	opts[i] = seminario;
+	    	    }
+	    		return opts;
+
+	    	}
+	    	
         </script>
 	</head>
 	<body>

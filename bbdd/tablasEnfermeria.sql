@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS seminarios_asignaturas (
 	id_seminario INT(4) auto_increment,
 	id_asignatura INT(3) NOT NULL,
 	nombre VARCHAR(100) NOT NULL,
-	codigo VARCHAR(10) NOT NULL,
+	codigo VARCHAR(10) UNIQUE NOT NULL,
 	descripcion TEXT,
 	PRIMARY KEY (id_seminario),
 	FOREIGN KEY (id_asignatura)

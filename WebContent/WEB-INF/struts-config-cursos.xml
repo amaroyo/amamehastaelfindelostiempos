@@ -43,6 +43,11 @@
 		<action path="/cursos/gridSeminarios" name="GridSeminarios" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.GridSeminariosAction" />
 		<action path="/cursos/editarseminario" name="EditarSeminarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.EditarSeminarioAction" />
 		
+		<action path="/cursos/checkCodigoSeminario" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.CheckCodigoSeminarioAction"  />
+		
+		<action path="/cursos/dameAsignaturas" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.DameAsignaturasAction"  />
+		
+		
 	</action-mappings>
 
 </struts-config>

@@ -85,8 +85,12 @@
 			    			formSeminarioAlumno.setItemLabel('codigo','<bean:message key="label.codigo.seminario"/>');
 			    			formSeminarioAlumno.setItemLabel('descripcion','<bean:message key="label.descripcion.seminario"/>');
 			    			formSeminarioAlumno.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
-				    		
+			    			formSeminarioAlumno.setItemLabel('asignatura','<bean:message key="label.asignatura.asociada"/>');
+			    			
+			    			formSeminarioAlumno.setRequired('nombre', false);
+			    			formSeminarioAlumno.setRequired('codigo', false);
 			    			formSeminarioAlumno.hideItem('aceptar');
+			    			formSeminarioAlumno.hideItem('asignatura');
 			    			
 							//Ponemos por defecto que los items no se puedan modificar, y luego con los permisos necesarios 
 							//seran modificables.
@@ -139,8 +143,12 @@
 			    			formSeminarioAlumno.setItemLabel('codigo','<bean:message key="label.codigo.seminario"/>');
 			    			formSeminarioAlumno.setItemLabel('descripcion','<bean:message key="label.descripcion.seminario"/>');
 			    			formSeminarioAlumno.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
-				    		
+			    			formSeminarioAlumno.setItemLabel('asignatura','<bean:message key="label.asignatura.asociada"/>');
+			    			
+			    			formSeminarioAlumno.setRequired('nombre', false);
+			    			formSeminarioAlumno.setRequired('codigo', false);
 			    			formSeminarioAlumno.hideItem('aceptar');
+			    			formSeminarioAlumno.hideItem('asignatura');
 			    			
 							//Ponemos por defecto que los items no se puedan modificar, y luego con los permisos necesarios 
 							//seran modificables.
