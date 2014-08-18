@@ -168,11 +168,11 @@
 		    	
 		    	tabbar.addTab('tab_6','<bean:message key="title.diario.reflexivo"/>','');
 		    	tab_6 = tabbar.cells('tab_6');
-		    	//goDiarios();
+		    	goDiarios();
 		    	
 		    	tabbar.addTab('tab_7','<bean:message key="title.rubrica"/>','');
 		    	tab_7 = tabbar.cells('tab_7');
-		    	//goRubricas();
+		    	goRubricas();
 		    	
 		    	
 		    }
@@ -950,14 +950,11 @@
 			
 			function goDiarios(){
 				
-				var mini_layout = tabbar.cells('tab_6').attachLayout("2U","dhx_skyblue");
+				var mini_layout = tabbar.cells('tab_6').attachLayout("1C","dhx_skyblue");
 		    	
 		    	var ma = mini_layout.cells('a');
-			    var mb = mini_layout.cells('b');
 			    
-			    mb.setWidth(250);
-	    		ma.hideHeader();
-				mb.setText('<bean:message key="label.diario.reflexivo.alumno"/>');
+				ma.setText('<bean:message key="label.diario.reflexivo.alumno"/>');
 				
 				var toolbarServiciosDiarios = ma.attachToolbar();
 				toolbarServiciosDiarios.setIconsPath('../img/toolbar/');
@@ -965,25 +962,37 @@
 		    	
 				toolbarServiciosDiarios.loadXML('../xml/toolbars/dhxtoolbar-trabajos-campo.xml', function(){
 					toolbarServiciosDiarios.setItemText('crearTrabajoCampo',"<bean:message key="button.crear.trabajo.campo"/>");
+					toolbarServiciosDiarios.setItemText('modificarTrabajoCampo',"<bean:message key="button.cambiar.trabajo.campo"/>");
 					toolbarServiciosDiarios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
-					toolbarServiciosDiarios.setItemText('descargarTodos',"<bean:message key="button.descargar.casos"/>");
-					toolbarServiciosDiarios.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.casos.alumno"/>");
+					toolbarServiciosDiarios.setItemText('descargarTodos',"<bean:message key="button.descargar.diarios"/>");
+					toolbarServiciosDiarios.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.diarios.alumno"/>");
 					toolbarServiciosDiarios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 					toolbarServiciosDiarios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+		    		
+					toolbarServiciosDiarios.hideItem('crearTrabajoCampo');
+					toolbarServiciosDiarios.hideItem('sep1');
+					toolbarServiciosDiarios.hideItem('fechaLimite');
+					toolbarServiciosDiarios.hideItem('sep5');
+					toolbarServiciosDiarios.hideItem('modificarTrabajoCampo');
+					toolbarServiciosDiarios.hideItem('sep3');
+					toolbarServiciosDiarios.hideItem('subirPractica');
+					toolbarServiciosDiarios.hideItem('sep2');
+					toolbarServiciosDiarios.hideItem('descargarTodos');
+		    		toolbarServiciosDiarios.hideItem('sep3');
 		    		
 		    	});
 				
 				
 				gridProfesoresDiarios = ma.attachGrid();
 		    	
-				gridProfesoresDiarios.setHeader(["<bean:message key="label.alumno" />","<bean:message key="label.dni" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
-				gridProfesoresDiarios.setColTypes("ro,ro,ro,ro");
+				gridProfesoresDiarios.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
+				gridProfesoresDiarios.setColTypes("ro,ro,ro");
 		    	
-				gridProfesoresDiarios.setColSorting('str,str,str,str');
+				gridProfesoresDiarios.setColSorting('str,str,str');
 				gridProfesoresDiarios.enableMultiselect(false);
 				gridProfesoresDiarios.init();
 		    	
-		    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
+		    	var gridProcessorPro = new dataProcessor("gridDiariosReflexivosUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idAlumno);
 		    	gridProcessorPro.enableUTFencoding('simple');
 		    	gridProcessorPro.init(gridProfesoresDiarios);	  
 		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -991,35 +1000,24 @@
 		    			dhtmlx.message(tag.firstChild.data,action,4000);
 		    		}
 		    	});
-
 		    	
+		    	gridProfesoresDiarios.clearAndLoad("gridDiariosReflexivosUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idAlumno);
+						    	
 		    	gridProfesoresDiarios.attachEvent("onRowSelect",function doOnRowSelected(rowID,celInd){
 		    		
-		    		var gridProfesoresAlumno = mb.attachGrid();
-					
-			    	
-					gridProfesoresAlumno.setHeader(["<bean:message key="label.nombre" />", "<bean:message key="label.fecha" />"]);
-					gridProfesoresAlumno.setColTypes("ro,ro");
-			    	
-					gridProfesoresAlumno.setColSorting('str, str');
-					gridProfesoresAlumno.enableMultiselect(false);
-					gridProfesoresAlumno.init();
-			    	
-			    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
-			    	gridProcessorPro.enableUTFencoding('simple');
-			    	gridProcessorPro.init(gridProfesoresAlumno);	  
-			    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
-						if(action == 'error'){
-			    			dhtmlx.message(tag.firstChild.data,action,4000);
-			    		}
-			    	});
-
-			    	   	
-			    	gridProfesoresAlumno.attachEvent("onRowSelect",doOnRowSelectedOptionsDiarios);
-			    	gridProfesoresAlumno.clearAndLoad("gridusuarios.do");
+		    		var cellObj = gridProfesoresDiarios.cellById(rowID,celInd);
+					if(celInd=='2' && cellObj.getValue()=="Descargar") {
+						var parts = rowID.split("-");
+						//alert("Descargar Archivo con idPortafolio=" + parts[0] + " y idCasoClinico=" + parts[1]);
+						var accion = "descargarDiarioReflexivo.do";
+						accion += "?tipoConsulta="+"DiarioReflexivo";
+						accion += "&idPortafolio="+parts[0];
+						accion += "&idDiarioReflexivo="+parts[1];
+						location.href=accion;
+					}
 		    	});
 		    	
-		    	gridProfesoresDiarios.clearAndLoad("gridusuarios.do");
+		    	
 			}
 			
 			
@@ -1030,7 +1028,7 @@
 			
 			
 			function goRubricas(){
-				
+				alert("TODO RUBRICAS")
 				
 			}
 			
@@ -1079,6 +1077,11 @@
 	    		}
 	    		else if (tipo == "tab_5"){
 	    			var accion = "descargarCasoClinicosAlumno.do";
+					accion += "?idPortafolio=" + idPortafolio;
+					location.href=accion;
+	    		}
+	    		else if (tipo == "tab_6"){
+	    			var accion = "descargarDiariosReflexivosAlumno.do";
 					accion += "?idPortafolio=" + idPortafolio;
 					location.href=accion;
 	    		}

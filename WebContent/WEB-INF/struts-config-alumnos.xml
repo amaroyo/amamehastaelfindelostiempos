@@ -26,7 +26,7 @@
 	   	
 	   	<form-bean name="GridCasosClinicosUsuarioAsignatura" type="es.oyssen.mrm.struts.forms.asignaturas.GridCasosClinicosUsuarioAsignaturaForm" />
 	   	
-	   	
+	   	<form-bean name="GridDiariosReflexivosUsuarioAsignatura" type="es.oyssen.mrm.struts.forms.asignaturas.GridDiariosReflexivosUsuarioAsignaturaForm" />
 	   	 
 	   	 
 	</form-beans>
@@ -77,6 +77,12 @@
 		<action path="/alumnos/descargarCasoClinico" name="Descargar" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarAction" />
 		
 		<action path="/alumnos/descargarCasoClinicosAlumno" name="DescargarCasoClinicoAlumno" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarCasoClinicoAlumnoAction" />
+		
+		<action path="/alumnos/gridDiariosReflexivosUsuarioAsignatura" name="GridDiariosReflexivosUsuarioAsignatura" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridDiariosReflexivosUsuarioAsignaturaAction" />
+		
+		<action path="/alumnos/descargarDiarioReflexivo" name="Descargar" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarAction" />
+		
+		<action path="/alumnos/descargarDiariosReflexivosAlumno" name="DescargarDiariosReflexivosAlumno" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarDiariosReflexivosAlumnoAction" />
 		
 	</action-mappings>
 
