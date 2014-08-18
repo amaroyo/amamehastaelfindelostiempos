@@ -216,7 +216,7 @@
 					formNTC.setRequired('codigo', true);
 					formNTC.setRequired('asignatura', true);
 					
-					var data = getData();
+					var data = retrieveData();
 					formNTC.reloadOptions('asignatura', data);
 		    		
 					var bloqueado = true;
@@ -302,16 +302,7 @@
 	    	}
 		   
 	    	
-	    	function getData(){
-	    		
-	    		return retrieveData();
-	    		
-		    	var d = [ {text: "2014/2015", value: "2014/2015", selected: true},
-                          {text: "2013/2014", value: "2013/2014"},
-                          {text: "2012/2013", value: "2012/2013"}
-                		];
-		    	
-		    }
+	    	
 	    	
 		  
 	    	function retrieveData(){

@@ -53,6 +53,8 @@ public interface PortafoliosService {
 
 	public UsuarioVO findAlumnoByPortafolio(PortafolioVO p) throws ServiceException;
 
+	public List<PortafolioVO> findAnyos() throws ServiceException;
+
 	
 	
 

@@ -16,6 +16,7 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
+import es.oyssen.mrm.negocio.dao.rowmappers.AnyoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.CasoClinicoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.DatosUsuarioEstanciaUnidadClinicaMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.DiarioReflexivoMapper;
@@ -81,7 +82,7 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 															"p.id_alumno=? and p.id_asignatura=? and p.anyo_academico=?";
 
 	
-	
+	private static String SQL_FIND_ANYOS = "select distinct anyo_academico from portafolios";
 	
 	
 	
@@ -328,6 +329,18 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 	public UsuarioVO findAlumnoByPortafolio(PortafolioVO p) throws DAOException {
 		try {
 			return (UsuarioVO) getJdbcTemplate().queryForObject(SQL_FIND_ALUMNO_BY_PORTAFOLIO, new Object[]{p.getIdPortafolio()}, new UsuarioMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+
+	@Override
+	public List<PortafolioVO> findAnyos() throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_ANYOS, new Object[]{}, new AnyoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

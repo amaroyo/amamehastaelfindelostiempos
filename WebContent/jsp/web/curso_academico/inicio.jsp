@@ -74,13 +74,36 @@
 		    
 		    
 		    function getData(){
-		    	var d = [ {text: "2014/2015", value: "2014/2015", selected: true},
-                          {text: "2013/2014", value: "2013/2014"},
-                          {text: "2012/2013", value: "2012/2013"}
-                		];
-		    	return d;
+		    	var url = "dameAnyos.do";
+	    		var xmlhttp = initRequest();
+	    		xmlhttp.onreadystatechange=function(){
+	    			if (xmlhttp.readyState===4) {
+	        	        if(xmlhttp.status===200) { //GET returning a response
+	        	        	return createArrayFromXMLAnyos(xmlhttp.responseXML);
+	        	        }
+	        	    }
+	    		}
+	    	    xmlhttp.open("GET",url,false);
+	    	    xmlhttp.send(null);
+	    	    return xmlhttp.onreadystatechange();
 		    }
 
+		    
+		    function createArrayFromXMLAnyos(xml){
+	    		var seminarios = xml.getElementsByTagName("portafolio");
+	    		var id, nombre, seminario;
+	    		var opts = new Array();
+	    		for(var i=0;i<seminarios.length;i++) {
+	    	        
+	    	       
+	    	        nombre=seminarios[i].getElementsByTagName("nombre")[0].firstChild.nodeValue;
+	    	        if(i==0){seminario={text:nombre, value:nombre, selected:true};}
+	    	        else seminario={text:nombre, value:nombre};
+	    	       	opts[i] = seminario;
+	    	    }
+	    		return opts;
+
+	    	}
 		    
 		    function initRequest() {
 	    	    if (window.XMLHttpRequest) {
