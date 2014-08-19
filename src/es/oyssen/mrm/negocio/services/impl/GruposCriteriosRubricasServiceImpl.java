@@ -73,6 +73,16 @@ public class GruposCriteriosRubricasServiceImpl implements GruposCriteriosRubric
 		}
 	}
 	
+	public List<GrupoCriteriosRubricasVO> findByAsignaturaNombreTipo(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws ServiceException {
+		try {
+			return daoGruposCriteriosRubricas.findByAsignaturaNombreTipo(grupoCriterioRubrica);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findById grupo criterio rubrica", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
+	
 	public List<GrupoCriteriosRubricasVO> findAllByAsignatura(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws ServiceException {
 		try {
 			return daoGruposCriteriosRubricas.findAllByAsignatura(grupoCriterioRubrica);
@@ -102,6 +112,8 @@ public class GruposCriteriosRubricasServiceImpl implements GruposCriteriosRubric
 			throw new ServiceException(e.getMessage());
 		}
 	}
+
+	
 
 	
 	

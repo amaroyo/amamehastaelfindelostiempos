@@ -32,6 +32,7 @@ public class MySqlDAOGruposCriteriosRubricasImpl extends DAOBase implements DAOG
 	private static String SQL_DELETE = "delete from grupos_criterios_rubricas where id_grupo_criterio = ? ";
 	private static String SQL_FIND_BY_ID = "select * from grupos_criterios_rubricas where id_grupo_criterio = ?";
 	private static String SQL_FIND_BY_ASIGNATURA = "select * from grupos_criterios_rubricas where id_asignatura = ?";
+	private static String SQL_FIND_BY_ASIGNATURA_NOMBRE_TIPO = "select * from grupos_criterios_rubricas where id_asignatura = ? and nombre = ? and tipo = ?";
 	private static String SQL_FIND_GRUPOS_CRITERIOS_RUBRICA_ASIGNATURA = "select gcr.id_asignatura, gcr.id_grupo_criterio, gcr.nombre as nombre_grupo_criterio, gcr.tipo, cr.id_criterio, cr.nombre as nombre_criterio " +
 																			"from grupos_criterios_rubricas as gcr, criterios_rubricas as cr " +
 																			"where gcr.id_asignatura = cr.id_asignatura and gcr.id_grupo_criterio = cr.id_grupo_criterio " +
@@ -108,6 +109,18 @@ public class MySqlDAOGruposCriteriosRubricasImpl extends DAOBase implements DAOG
 	public List<GrupoCriteriosRubricasVO> findAllByAsignatura(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_BY_ASIGNATURA, new Object[]{grupoCriterioRubrica.getIdAsignatura()}, new GrupoCriteriosRubricasMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+	
+	public List<GrupoCriteriosRubricasVO> findByAsignaturaNombreTipo(GrupoCriteriosRubricasVO grupoCriterioRubrica) throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_BY_ASIGNATURA_NOMBRE_TIPO, new Object[]{
+					grupoCriterioRubrica.getIdAsignatura(),grupoCriterioRubrica.getNombre(),grupoCriterioRubrica.getTipo()
+					}, new GrupoCriteriosRubricasMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

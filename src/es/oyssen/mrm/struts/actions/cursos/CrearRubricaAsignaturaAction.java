@@ -2,6 +2,7 @@ package es.oyssen.mrm.struts.actions.cursos;
 
 import java.io.PrintWriter;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,14 +46,16 @@ public class CrearRubricaAsignaturaAction extends MrmAction {
 			String id_asignatura = asignaturaOUT.getIdAsignatura();
 			
 	        Map dynformValues = f.getValues();
+	        
+			// grupos_rubrica: "nota_grupo_1" / "texto_grupo_1" (tipo_grupo_#grupo)
 	        Iterator it = dynformValues.entrySet().iterator();
 	        while (it.hasNext()) {
 	        	Map.Entry e = (Map.Entry)it.next();
 	        	String key = (String) e.getKey();
 	        	String value = (String) e.getValue();
 	        	
-				// grupos_rubrica: "nota_grupo_1" / "texto_grupo_1" (tipo_grupo_#grupo)
 	        	if(key.contains("grupo")){
+	        		grupo = new GrupoCriteriosRubricasVO();
 	        		grupo.setIdAsignatura(id_asignatura);
 	        		grupo.setNombre(value);
 	        		if(key.contains("nota")){
@@ -67,18 +70,28 @@ public class CrearRubricaAsignaturaAction extends MrmAction {
 	        	}
 	        }
 	        
+	        // criterios_rubrica: "nota_criterio_1_1" / "texto_criterio_1_1" (tipo_criterio_#grupo_#criterio)
 	        it = dynformValues.entrySet().iterator();
 	        while (it.hasNext()) {
 	        	Map.Entry e = (Map.Entry)it.next();
 	        	String key = (String) e.getKey();
 	        	String value = (String) e.getValue();
 	        	
-	        	// criterios_rubrica: "nota_criterio_1_1" / "texto_criterio_1_1" (tipo_criterio_#grupo_#criterio)
 	        	if(key.contains("criterio")){
+	        		
+	        		grupo = new GrupoCriteriosRubricasVO();
+	        		grupo.setIdAsignatura(id_asignatura);
+	        		String[] parts = key.split("_");
+	        		tipo = parts[0];
+	        		String grupo_asociado = parts[parts.length - 2];
+	        		grupo.setNombre((String)dynformValues.get(tipo+"_grupo_"+grupo_asociado));
+	        		grupo.setTipo(tipo.toUpperCase());
+	        		grupo = getGruposCriteriosRubricasService().findByAsignaturaNombreTipo(grupo).get(0);
+	        		
 	        		criterio.setIdAsignatura(id_asignatura);
 	        		criterio.setNombre(value);
-	        		String[] parts = key.split("_");
-	        		criterio.setIdGrupoCriterio(parts[parts.length - 2]);
+	        		criterio.setIdGrupoCriterio(grupo.getIdGrupoCriterio());
+	        		
 	        		getCriteriosRubricasService().insert(criterio);
 	        	}
 	        }
