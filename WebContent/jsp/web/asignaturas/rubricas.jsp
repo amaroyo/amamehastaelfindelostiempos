@@ -20,7 +20,7 @@
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b,idSession, tabbar;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -30,7 +30,7 @@
 	    		<% String idAsignatura = request.getParameter("idAsignatura");%>
 	    		idAsignatura="<%=idAsignatura%>";	
 	    		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
-				var idSelectedUser = <%=sessionIdUser%>;
+				 idSession = <%=sessionIdUser%>;
 	    		
 
 				
@@ -41,7 +41,7 @@
 					main_layout = new dhtmlXLayoutObject(document.body, '2U');
 		    		a = main_layout.cells('a');
 		    		b = main_layout.cells('b');
-		    		b.setWidth(700);
+		    		b.setWidth(900);
 		    		a.hideHeader();
 					b.setText('<bean:message key="label.rubrica.alumno"/>');
 				</logic:match>
@@ -53,95 +53,111 @@
 		    		a.hideHeader();
 				</logic:notMatch>	
 	    		
-	    		
-	    		
-				
-				
-		    	toolbarServicios = a.attachToolbar();
-		    	toolbarServicios.setIconsPath('../img/toolbar/');
 
-		    	
-		    	toolbarServicios.loadXML('../xml/toolbars/dhxtoolbar-trabajos-campo.xml', function(){
-		    		toolbarServicios.setItemText('crearTrabajoCampo',"<bean:message key="button.crear.trabajo.campo"/>");
-		    		toolbarServicios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
-		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.casos"/>");
-		    		toolbarServicios.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.casos.alumno"/>");
-		    		toolbarServicios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
-		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
-		    	});
 		    	
 		    	if (profesor) goGridProfesores();
 		    	else goGridAlumnos();
-				
-				
-	    		
-				
+	
 				
 	    	});
 	    	
 
 			
-			function subirPractica(){
-				alert("subir Practica");
-			}
-			
-			function descargarTodos(){
-				alert("Descargar Todos");
-			}
-			
-			
-			
-			function fechaLimite(){
-				alert("Fecha Limite");
-			}
-			
-			function goActualizar() {
-				if (profesor) gridProfesor.clearAndLoad("gridusuarios.do");	 
-				else gridAlumno.clearAndLoad("gridusuarios.do");		    	
-		    	tabbar.clearAll();		    	
-		    }
 			
 			function goGridAlumnos(){
 				
-				alert("Falta rúbrica form");
+				initRubrica(idSession);
 				
 			}
+			
+			
 			
 			function goGridProfesores(){
 				
 				gridProfesores = a.attachGrid();
+		    	gridProfesores.setIconsPath('../skins/imgs/');		   
+			    gridProfesores.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />"]);
+			    
+			    //anchura de las columnas, en porcentaje. La suma tiene que ser igual a 100
+			    gridProfesores.setInitWidthsP("27,50,23");
+			    //alineacion del contenido en la columna
+			    gridProfesores.setColAlign("left,left,left");
+			    
+			    gridProfesores.setColTypes("ro,ro,ro");
+			    
+			    gridProfesores.enableMultiselect(false);
+			    gridProfesores.setColSorting('str,str,str');
+			    gridProfesores.init();
 		    	
-				gridProfesores.setHeader(["<bean:message key="label.alumno" />","<bean:message key="label.dni" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
-				gridProfesores.setColTypes("ro,ro,ro,ro");
-		    	
-				gridProfesores.setColSorting('str,str,str,str');
-				gridProfesores.enableMultiselect(false);
-				gridProfesores.init();
-		    	
-		    	var gridProcessorPro = new dataProcessor("gridusuarios.do");
-		    	gridProcessorPro.enableUTFencoding('simple');
-		    	gridProcessorPro.init(gridProfesores);	  
-		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+				var gridProcessor = new dataProcessor("gridUsuariosProfesor.do");
+				gridProcessor.enableUTFencoding('simple');
+				gridProcessor.init(gridProfesores);	  
+				gridProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
 					if(action == 'error'){
 		    			dhtmlx.message(tag.firstChild.data,action,4000);
 		    		}
-		    	});
+		    	});	
 
 		    	
-		    	gridProfesores.attachEvent("onRowSelect",doOnRowSelected);
+				gridProfesores.attachEvent("onRowSelect",doOnRowSelected);
 		    	
-		    	gridProfesores.clearAndLoad("gridusuarios.do");
+				gridProfesores.clearAndLoad("gridUsuariosProfesor.do");
 				
 			}
 			
 			function doOnRowSelected(rowID,celInd){
 				
-				alert("Falta rúbrica form");
+				var sp = rowID.split("-");
+				var idPortafolio = sp[3];
+				initRubrica(idPortafolio);
 		    	
 		    }
 			
 			
+			function initRubrica(identificador){
+				
+				if(profesor) tabbar = b.attachTabbar();
+				else tabbar = a.attachTabbar();
+				
+				tabbar.addTab('rubrica',"<bean:message key="title.rubrica"/>",'');
+				tabbar.addTab('anexo1',"<bean:message key="title.anexo.uno"/>",'');
+				tabbar.addTab('anexo2',"<bean:message key="title.anexo.dos"/>",'');
+				
+				tabbar.setTabActive('rubrica');
+				
+				tabbar.attachEvent("onTabClick", function(id, lastId){
+	    			if(id == 'rubrica') goRubrica(identificador);
+	    			else if (id == 'anexo1') goAnexo1(identificador);
+	    			else if (id == 'anexo2') goAnexo2(identificador);
+	    		});
+			}
 			
+			function goRubrica(identificador){
+				
+				
+				/*********************
+				 * Tanto aqui como en anexo1 y dos hay que distinguir de donde viene la llamada.
+				 * Si viene desde alumno, identificador sera el idUsuario del alumno, en cambio, si
+				 * la llamada viene desde un profesor, el identificador sera el portafolio. Me imagino
+				 * que eso te ahorrara un par de consultas :)
+				 * Tambien tienes acceso a la variable global idAsignatura.
+				 *
+				 * Ten cuidado al realizar la query para el alumno con el idAlumno, para coger el 
+				 * buen portafolio hay que meter el anyo academico!
+				 * 
+				 * Gracias por ocuparte de esta parte =)
+				 **********************
+				 */
+				
+				
+				alert("Rubrica");
+			}
+			function goAnexo1(identificador){
+				alert("Anexo1");
+			}
+			function goAnexo2(identificador){
+				alert("Anexo2");
+			}
 			
 			
 	    	
