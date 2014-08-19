@@ -2,7 +2,6 @@ package es.oyssen.mrm.struts.actions.cursos;
 
 import java.io.PrintWriter;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,10 +27,7 @@ public class CrearRubricaAsignaturaAction extends MrmAction {
 		
 		CrearRubricaAsignaturaForm f = (CrearRubricaAsignaturaForm) form;
 		AsignaturaVO asignaturaIN = new AsignaturaVO();
-		GrupoCriteriosRubricasVO grupo = new GrupoCriteriosRubricasVO();
-		CriterioRubricaVO criterio = new CriterioRubricaVO();
-		String tipo = "";
-		int numero_criterios = 0;
+		
 		
 		//application/json or application/xml text/html
 		response.setContentType("text/xml;charset=utf-8");
@@ -44,56 +40,84 @@ public class CrearRubricaAsignaturaAction extends MrmAction {
 		if (asignaturaOUT != null){
 			
 			String id_asignatura = asignaturaOUT.getIdAsignatura();
-			
+			GrupoCriteriosRubricasVO grupo = new GrupoCriteriosRubricasVO();
+			CriterioRubricaVO criterio = new CriterioRubricaVO();
+			int numero_criterios = 0;
+			int i = 1;
+			int j = 1;
+			String value = null;
 	        Map dynformValues = f.getValues();
 	        
-			// grupos_rubrica: "nota_grupo_1" / "texto_grupo_1" (tipo_grupo_#grupo)
-	        Iterator it = dynformValues.entrySet().iterator();
-	        while (it.hasNext()) {
-	        	Map.Entry e = (Map.Entry)it.next();
-	        	String key = (String) e.getKey();
-	        	String value = (String) e.getValue();
-	        	
-	        	if(key.contains("grupo")){
-	        		grupo = new GrupoCriteriosRubricasVO();
-	        		grupo.setIdAsignatura(id_asignatura);
-	        		grupo.setNombre(value);
-	        		if(key.contains("nota")){
-	        			tipo = "NOTA";
-	        			numero_criterios = numero_criterios+1;
-	        		}
-	        		else if(key.contains("texto")){
-	        			tipo = "TEXTO";
-	        		}
-	        		grupo.setTipo(tipo);
-	        		getGruposCriteriosRubricasService().insert(grupo);
-	        	}
+			// grupos_rubrica: "nota_grupo_1" (tipo_grupo_#grupo)
+	        while ((value = (String) dynformValues.get("nota_grupo_"+i)) != null){
+        		grupo = new GrupoCriteriosRubricasVO();
+        		grupo.setIdAsignatura(id_asignatura);
+        		grupo.setNombre(value);
+        		numero_criterios = numero_criterios+1;
+        		grupo.setTipo("NOTA");
+        		getGruposCriteriosRubricasService().insert(grupo);
+        		i = i + 1;
 	        }
 	        
+	        i = 1;
+			// grupos_rubrica: "texto_grupo_1" (tipo_grupo_#grupo)
+	        while ((value = (String) dynformValues.get("texto_grupo_"+i)) != null){
+        		grupo = new GrupoCriteriosRubricasVO();
+        		grupo.setIdAsignatura(id_asignatura);
+        		grupo.setNombre(value);
+        		grupo.setTipo("TEXTO");
+        		getGruposCriteriosRubricasService().insert(grupo);
+        		i = i + 1;
+	        }
+	        
+	        i = 1;
+	        j = 1;
 	        // criterios_rubrica: "nota_criterio_1_1" / "texto_criterio_1_1" (tipo_criterio_#grupo_#criterio)
-	        it = dynformValues.entrySet().iterator();
-	        while (it.hasNext()) {
-	        	Map.Entry e = (Map.Entry)it.next();
-	        	String key = (String) e.getKey();
-	        	String value = (String) e.getValue();
-	        	
-	        	if(key.contains("criterio")){
-	        		
-	        		grupo = new GrupoCriteriosRubricasVO();
-	        		grupo.setIdAsignatura(id_asignatura);
-	        		String[] parts = key.split("_");
-	        		tipo = parts[0];
-	        		String grupo_asociado = parts[parts.length - 2];
-	        		grupo.setNombre((String)dynformValues.get(tipo+"_grupo_"+grupo_asociado));
-	        		grupo.setTipo(tipo.toUpperCase());
-	        		grupo = getGruposCriteriosRubricasService().findByAsignaturaNombreTipo(grupo).get(0);
-	        		
-	        		criterio.setIdAsignatura(id_asignatura);
+	        while ((value = (String) dynformValues.get("nota_criterio_"+i+"_"+j)) != null){
+	        	grupo = new GrupoCriteriosRubricasVO();
+        		grupo.setIdAsignatura(id_asignatura);
+        		grupo.setNombre((String)dynformValues.get("nota_grupo_"+i));
+        		grupo.setTipo("NOTA");
+        		grupo = getGruposCriteriosRubricasService().findByAsignaturaNombreTipo(grupo).get(0);
+        		criterio.setIdAsignatura(id_asignatura);
+        		criterio.setNombre(value);
+        		criterio.setIdGrupoCriterio(grupo.getIdGrupoCriterio());
+        		getCriteriosRubricasService().insert(criterio);
+        		j = j + 1;
+        		
+		        while ((value = (String) dynformValues.get("nota_criterio_"+i+"_"+j)) != null){
 	        		criterio.setNombre(value);
 	        		criterio.setIdGrupoCriterio(grupo.getIdGrupoCriterio());
-	        		
 	        		getCriteriosRubricasService().insert(criterio);
-	        	}
+	        		j = j + 1;
+		        }
+		        i = i + 1;
+		        j = 1;
+	        }
+	        
+	        i = 1;
+	        j = 1;
+	        // criterios_rubrica: "nota_criterio_1_1" / "texto_criterio_1_1" (tipo_criterio_#grupo_#criterio)
+	        while ((value = (String) dynformValues.get("texto_criterio_"+i+"_"+j)) != null){
+	        	grupo = new GrupoCriteriosRubricasVO();
+        		grupo.setIdAsignatura(id_asignatura);
+        		grupo.setNombre((String)dynformValues.get("texto_grupo_"+i));
+        		grupo.setTipo("TEXTO");
+        		grupo = getGruposCriteriosRubricasService().findByAsignaturaNombreTipo(grupo).get(0);
+        		criterio.setIdAsignatura(id_asignatura);
+        		criterio.setNombre(value);
+        		criterio.setIdGrupoCriterio(grupo.getIdGrupoCriterio());
+        		getCriteriosRubricasService().insert(criterio);
+        		j = j + 1;
+        		
+		        while ((value = (String) dynformValues.get("texto_criterio_"+i+"_"+j)) != null){
+	        		criterio.setNombre(value);
+	        		criterio.setIdGrupoCriterio(grupo.getIdGrupoCriterio());
+	        		getCriteriosRubricasService().insert(criterio);
+	        		j = j + 1;
+		        }
+		        i = i + 1;
+	        	j = 1;
 	        }
 	        	
 	        
