@@ -27,7 +27,13 @@ public class MySqlDAOAsignaturasImpl extends DAOBase implements DAOAsignaturas{
 	private static String SQL_INSERT = "insert into asignaturas (nombre, codigo, curso, descripcion) values (?,?,?,?)";
 	private static String SQL_UPDATE = "update asignaturas set nombre=?, codigo=?, curso=?, descripcion=?";
 	private static String SQL_DELETE = "delete from asignaturas where id_asignatura = ?";
-	private static String SQL_FIND_ALL = "select distinct a.* from asignaturas as a, profesores_asociados as p where p.anyo_academico =? and a.id_asignatura = p.id_asignatura";
+	private static String SQL_FIND_ALL = "select * " + 
+										 "from asignaturas "+
+										 "where id_asignatura in "+
+										 "(select id_asignatura " +
+												"from portafolios " +
+												"where anyo_academico=?)";
+	
 	private static String SQL_FIND_ID = "select * from asignaturas where id_asignatura = ?";
 	private static String SQL_FIND_BY_CURSO = "select * from asignaturas where curso = ?";
 	private static String SQL_FIND_BY_CODIGO = "select * from asignaturas where codigo = ?";
