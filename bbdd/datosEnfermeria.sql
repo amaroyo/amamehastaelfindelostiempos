@@ -7,6 +7,7 @@ insert into grupos (nombre) values ('Coordinador');
 insert into grupos (nombre) values ('Profesor');
 insert into grupos (nombre) values ('Alumno');
 insert into grupos (nombre) values ('Virtual Tour');
+insert into grupos (nombre) values ('Indefinido');
 
 
 -- Usuarios 
