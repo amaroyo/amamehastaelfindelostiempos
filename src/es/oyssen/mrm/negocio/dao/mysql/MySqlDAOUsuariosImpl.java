@@ -29,7 +29,7 @@ import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
 public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 	
-	private static String SQL_INSERT = "insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni, telefono, foto) values (?,?,?,?,?,?,?,?,?)";
+	private static String SQL_INSERT = "insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni, telefono) values (?,?,?,?,?,?,?,?)";
 	private static String SQL_UPDATE = "update usuarios set nombre=?, apellido1=?, apellido2=?, dni=?, correo=?, telefono=?";
 	private static String SQL_DELETE = "delete from usuarios where id_usuario = ?";
 	private static String SQL_FIND_ALL = "select * from usuarios";
@@ -71,14 +71,14 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 					ps.setString(8, usuario.getTelefono());
 	
 
-					InputStream foto = new ByteArrayInputStream(usuario.getFotoFile());
+					/*InputStream foto = new ByteArrayInputStream(usuario.getFotoFile());
 					try {
 						ps.setBinaryStream(9, foto, foto.available());
 					}
 					catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
+					}*/
 				
 					return ps;
 					

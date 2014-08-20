@@ -1,12 +1,27 @@
 package es.oyssen.mrm.struts.actions.asignaturas;
 
 import java.io.InputStream;
+import java.nio.charset.Charset;
+
+import com.aeat.valida.Validador;
+
+import java.security.SecureRandom;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Properties;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,6 +42,7 @@ import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
 import es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoForm;
 import es.oyssen.mrm.struts.forms.ficheros.SubirFicheroForm;
+import es.oyssen.mrm.util.EncriptarUtil;
 import es.oyssen.mrm.util.ExcelUtil;
 import es.oyssen.mrm.util.StringUtil;
 
@@ -136,9 +152,37 @@ public class SubirArchivoAction extends MrmAction {
 			}
 			else if(((sp[sp.length-1].toLowerCase()).equals("xls") || (sp[sp.length-1].toLowerCase()).equals("xlsx")) && f.getFichero().getFileSize()<MAX_SIZE_MYSQL) {
 				if (tipo.equals("usuarios")){
-
-					if(parsearUsuarios(f.getFichero().getInputStream())) return mapping.findForward("success");
-					else return mapping.findForward("error");
+					String answ = parsearUsuarios(f.getFichero().getInputStream());
+					
+					if(answ.equals("")) return mapping.findForward("success");
+					else {
+						
+						try{
+							
+							byte[] b = answ.getBytes(Charset.forName("UTF-8"));
+							response.setHeader("Content-Disposition", "attachment; filename=\"" + "REGISTRO_ERRORES.txt" + "\"");
+					
+							ServletOutputStream outputStream = response.getOutputStream();
+							response.setContentType("text/plain");
+							
+							response.setContentLength(b.length);
+							outputStream.write(b); 
+							
+							
+							outputStream.flush();
+							outputStream.close();
+							
+						
+						} catch (Exception e2) {
+							System.out.println("Error in " + getClass().getName() + "\n" + e2);
+						}
+						
+						
+						
+						
+						return mapping.findForward("error");
+					}
+	
 				}
 				else if (tipo.equals("profesores")){
 					System.out.print("llegue profesores");
@@ -193,7 +237,7 @@ public class SubirArchivoAction extends MrmAction {
 	}
 	
 	
-	private boolean parsearUsuarios(InputStream inputStream) {
+	private String parsearUsuarios(InputStream inputStream) {
 		boolean error=false;
 		String errorlog="REGISTRO DE ERRORES\r\n\r\n";
 		
@@ -255,24 +299,25 @@ public class SubirArchivoAction extends MrmAction {
 					
 										
 					if(usuarioCorrecto) {
-						String contrasenya="";
-						contrasenya=generarPassword();
-						usuario.setContrasenya(contrasenya);						
+						String new_pass = generatePassword();
+						usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(new_pass, EncriptarUtil.MD5));					
+						usuario.setIdGrupo("6");
 						getUsuariosService().insert(usuario);
-						enviarCorreo(usuario);
+						//sendForgotPasswordMessage(usuario.getCorreo(),new_pass);
 					}
 				}
 			}
 			
-			if(!error) return true;
+			if(!error) return "";
 			else {
-				generarRegistroErrores(errorlog);
-				return false;
+				errorlog +="FIN REGISTRO ERRORES.";
+				return errorlog;
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("Error procesando fichero", e);
-			return false;
+			return errorlog;
 		}
 		
 	}
@@ -281,8 +326,18 @@ public class SubirArchivoAction extends MrmAction {
 
 
 
-	private boolean dniCorrecto(String correo) {
-		correo.matches([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1});
+
+
+
+
+	private boolean dniCorrecto(String dni) {
+		
+		Validador val = new Validador();
+		int r = val.checkNif(dni);
+		
+		if(r>0) return true;
+		else return false;
+		
 	}
 
 
@@ -298,5 +353,55 @@ public class SubirArchivoAction extends MrmAction {
 		else return false;
 	}
 	
+	private String generatePassword() {
+		int lenght = 10;
+		char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890".toCharArray();
+		SecureRandom random = new SecureRandom();
+		StringBuffer pass = new StringBuffer(lenght);
+        for (int i = 0; i < lenght; i++)
+        {
+            pass.append(alphabet[random.nextInt(alphabet.length)]);
+        }
 
+        return pass.toString();
+		
+	}
+
+	private void sendForgotPasswordMessage(String to,String new_pass){
+		
+		/*final String from = "facultad.de.enfermeria.ucm@gmail.com";
+		final String password = "proyecto1314";
+		String host = "smtp.gmail.com";
+		String subject = "Subject";
+		String body = "<h6> HTML body </h6>" + new_pass;
+		
+		Properties properties = new Properties();
+		properties.put("mail.smtp.host", host);
+		properties.put("mail.smtp.socketFactory.port", "465");
+		properties.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.port", "465");
+
+		Session session = Session.getDefaultInstance(properties,
+				new Authenticator() {
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(from,password);
+					}
+				}
+		);
+
+		try{
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(from));
+			message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
+			message.setSubject(subject);
+			message.setContent(body,"text/html" );
+		
+			Transport.send(message);
+			
+		}
+		catch (MessagingException mex) {
+			mex.printStackTrace();
+		}*/
+	}
 }
