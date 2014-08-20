@@ -22,9 +22,21 @@ import es.oyssen.mrm.negocio.vo.LeadVO;
 import es.oyssen.mrm.negocio.vo.MarketingActivityVO;
 import es.oyssen.mrm.negocio.vo.ResponsableVO;
 import es.oyssen.mrm.negocio.vo.ServicioVO;
+import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
 public class ExcelUtil {
 
+	public static UsuarioVO parseUsuario(HSSFRow row) {
+		UsuarioVO u = new UsuarioVO();
+		u.setApellido1((row.getCell(0) != null) ? row.getCell(0).getStringCellValue() : "");
+		u.setApellido2((row.getCell(1) != null) ? row.getCell(1).getStringCellValue() : "");
+		u.setNombre((row.getCell(2) != null) ? row.getCell(2).getStringCellValue() : "");
+		u.setDni((row.getCell(3) != null) ? row.getCell(3).getStringCellValue() : "");
+		u.setTelefono((row.getCell(4) != null) ? row.getCell(4).getStringCellValue() : "");
+		u.setCorreo((row.getCell(5) != null) ? row.getCell(5).getStringCellValue() : "");
+		return u;
+	}	
+	
 	public static LeadVO parseLead(HSSFRow row) {
 		LeadVO lead = new LeadVO();
 		lead.setResponsable(parseResponsable(row));
@@ -473,6 +485,8 @@ public class ExcelUtil {
 		autoSize(sheet, 18);
 
 		return book;
-	}		
+	}
+
+		
 	
 }

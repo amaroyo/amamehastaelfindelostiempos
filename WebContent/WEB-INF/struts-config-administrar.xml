@@ -6,7 +6,7 @@
 	
 	<form-beans>
 	    
-		<form-bean name="FileUploadForm" type="es.oyssen.mrm.struts.forms.ficheros.FileUploadForm" />
+		<form-bean name="SubirArchivoForm" type="es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoForm" />
 		
 	</form-beans>
 	
@@ -16,20 +16,31 @@
 		<action path="/administrar/listados" forward="/jsp/web/administrar/listados.jsp" />
 		<action path="/administrar/certificados" forward="/jsp/web/administrar/certificados.jsp" />
 		
-		<action path="/administrar/importarAlumnos" name="FileUploadForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.administrar.ImportarAlumnosAction">
-			<exception type="java.lang.Exception" key="error.importar.alumnos" path="/administrar/listados.do"></exception>
-			<forward name="success" path="/administrar/listados.do" />
-		</action>
-		<action path="/administrar/importarProfesores" name="FileUploadForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.administrar.ImportarProfesoresAction">
-			<exception type="java.lang.Exception" key="error.importar.profesores" path="/administrar/listados.do"></exception>
-			<forward name="success" path="/administrar/listados.do" />
-		</action>
-		<action path="/administrar/importarUsuarios" name="FileUploadForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.administrar.ImportarUsuariosAction">
-			<exception type="java.lang.Exception" key="error.importar.usuarios" path="/administrar/listados.do"></exception>
-			<forward name="success" path="/administrar/listados.do" />
-		</action>
 		
 		
+		
+		<action path="/administrar/subirArchivo" forward="/jsp/web/asignaturas/subirArchivo.jsp" />	
+		
+		<action path="/administrar/subirExcelUsuarios" name="SubirArchivoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.SubirArchivoAction">
+			<exception type="java.lang.Exception" key="error.subir.archivo.caso.clinico" path="/asignaturas/subirCasoClinico.do"></exception>
+			<forward name="cancel" path="/administrar/subirArchivo.do" />
+			<forward name="error" path="/administrar/algoSalioMal.do" />
+			<forward name="success" path="/asignaturas/correcto.do" />
+		</action>
+		
+		<action path="/administrar/subirExcelAlumnos" name="SubirArchivoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.SubirArchivoAction">
+			<exception type="java.lang.Exception" key="error.subir.archivo.caso.clinico" path="/asignaturas/subirCasoClinico.do"></exception>
+			<forward name="cancel" path="/administrar/subirArchivo.do" />
+			<forward name="error" path="/administrar/algoSalioMal.do" />
+			<forward name="success" path="/asignaturas/correcto.do" />
+		</action>
+		
+		<action path="/administrar/subirExcelProfesores" name="SubirArchivoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.SubirArchivoAction">
+			<exception type="java.lang.Exception" key="error.subir.archivo.caso.clinico" path="/asignaturas/subirCasoClinico.do"></exception>
+			<forward name="cancel" path="/administrar/subirArchivo.do" />
+			<forward name="error" path="/administrar/algoSalioMal.do" />
+			<forward name="success" path="/asignaturas/correcto.do" />
+		</action>
 	
 	</action-mappings>
 

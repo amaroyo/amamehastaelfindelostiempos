@@ -1,22 +1,34 @@
 package es.oyssen.mrm.struts.actions.asignaturas;
 
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import es.oyssen.mrm.negocio.exceptions.ServiceException;
+import es.oyssen.mrm.negocio.vo.CanalVO;
+import es.oyssen.mrm.negocio.vo.LeadVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
+import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
 import es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoForm;
 import es.oyssen.mrm.struts.forms.ficheros.SubirFicheroForm;
+import es.oyssen.mrm.util.ExcelUtil;
+import es.oyssen.mrm.util.StringUtil;
 
 public class SubirArchivoAction extends MrmAction {
 
@@ -29,11 +41,19 @@ public class SubirArchivoAction extends MrmAction {
 			throws Exception {
 		
 		SubirArchivoForm f = (SubirArchivoForm) form;	
-		String tipo = f.getTipoConsulta();
-		String nombre = f.getFichero().getFileName();
-		String[] sp = nombre.split("\\.");
-		if(!f.getFichero().getFileName().equals("") && f.getFichero().getFileSize()>0){
-			if(((sp[1].toLowerCase()).equals("pdf") || (sp[1].toLowerCase()).equals("doc") || (sp[1].toLowerCase()).equals("docx")) && f.getFichero().getFileSize()<MAX_SIZE_MYSQL) { 
+		String tipo="";
+		if (!StringUtil.isNullOrBlank(f.getTipoConsulta())) tipo = f.getTipoConsulta();
+		String nombre = "";
+		String[] sp = {};
+		if (!tipo.equals("") && !StringUtil.isNullOrBlank(f.getFichero().getFileName())){
+			nombre = f.getFichero().getFileName();
+			sp = nombre.split("\\.");
+		}
+		//lo he puesto ya que si no, archivos grandes como peliculas, y que tengan caracteres raros, todo lo q llega del form es null
+		//y se salta el isNullOrBlank y salta excepcion
+		if(!tipo.equals("") && !f.getFichero().getFileName().equals("") && f.getFichero().getFileSize()>0){
+			
+			if(((sp[sp.length-1].toLowerCase()).equals("pdf") || (sp[sp.length-1].toLowerCase()).equals("doc") || (sp[sp.length-1].toLowerCase()).equals("docx")) && f.getFichero().getFileSize()<MAX_SIZE_MYSQL) { 
 	
 				if (tipo.equals("CasoClinico")){
 					PortafolioVO p = new PortafolioVO();
@@ -43,9 +63,11 @@ public class SubirArchivoAction extends MrmAction {
 					p.setAnyoAcademico(anyoAcademico);
 					f.setIdPortafolio(getPortafoliosService().findByAlumnoAsignatura(p).getIdPortafolio());
 					getCasosClinicosService().process(f);
+					return mapping.findForward("success");
 				}
 				else if (tipo.equals("TrabajoCampoInfo")){
 					getTrabajosDeCampoInfoService().process(f);
+					return mapping.findForward("success");
 				}
 				else if (tipo.equals("TrabajoCampoPractica")){
 					TrabajoDeCampoVO tc = new TrabajoDeCampoVO();
@@ -73,6 +95,8 @@ public class SubirArchivoAction extends MrmAction {
 						tc.setTrabajoDeCampo(f.getFichero().getFileData());
 						
 						getTrabajosDeCampoService().updateTrabajoCampo(tc);
+						
+						return mapping.findForward("success");
 					}
 					else return mapping.findForward("error");
 				}				
@@ -94,6 +118,7 @@ public class SubirArchivoAction extends MrmAction {
 					tc.setCorreccionTrabajo(f.getFichero().getFileData());
 					
 					getTrabajosDeCampoService().updateTrabajoCampoCorreccion(tc);
+					return mapping.findForward("success");
 				
 				}
 				else if (tipo.equals("DiarioReflexivo")){
@@ -104,15 +129,37 @@ public class SubirArchivoAction extends MrmAction {
 					p.setAnyoAcademico(anyoAcademico);
 					f.setIdPortafolio(getPortafoliosService().findByAlumnoAsignatura(p).getIdPortafolio());
 					getDiariosReflexivosService().process(f);
+					return mapping.findForward("success");
 				}
 				
-				return mapping.findForward("success");
+				else return mapping.findForward("error");
 			}
+			else if(((sp[sp.length-1].toLowerCase()).equals("xls") || (sp[sp.length-1].toLowerCase()).equals("xlsx")) && f.getFichero().getFileSize()<MAX_SIZE_MYSQL) {
+				if (tipo.equals("usuarios")){
+
+					if(parsearUsuarios(f.getFichero().getInputStream())) return mapping.findForward("success");
+					else return mapping.findForward("error");
+				}
+				else if (tipo.equals("profesores")){
+					System.out.print("llegue profesores");
+					return mapping.findForward("success");
+				}
+				else if (tipo.equals("alumnos")){
+					System.out.print("llegue alumnos");
+					return mapping.findForward("success");
+				}
+				else return mapping.findForward("error");
+			}
+			else return mapping.findForward("cancel");
+			
 		}	
 		return mapping.findForward("error");
 	}
 	
 	
+	
+
+
 	private static String parsearFechaLimite(String fechaLimite, boolean b) {
 		String[] fl = fechaLimite.split(" ");
 		String[] date = fl[0].split("-");
@@ -143,6 +190,112 @@ public class SubirArchivoAction extends MrmAction {
 		 		
 		return tiempoActual.after(fechaL);
 
+	}
+	
+	
+	private boolean parsearUsuarios(InputStream inputStream) {
+		boolean error=false;
+		String errorlog="REGISTRO DE ERRORES\r\n\r\n";
+		
+		try {
+			log.debug("Procesamos fichero de carga.........");
+			HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
+			HSSFSheet sheet = workbook.getSheetAt(0);
+	
+			log.debug("Procesando archivo excel: " + workbook.getSheetName(0));
+			
+			Iterator<Row> rows = sheet.rowIterator();
+			if (rows.hasNext()) {
+				HSSFRow row = (HSSFRow) rows.next();
+				while (rows.hasNext()) {
+					boolean usuarioCorrecto=true;
+					row = (HSSFRow) rows.next();
+					
+					UsuarioVO usuario = ExcelUtil.parseUsuario(row);
+					if(usuario.getNombre().equals("")) {
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El nombre del usuario es vacio.\r\n";
+					}
+					if(usuario.getApellido1().equals("")) {
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El primer apellido del usuario es vacio.\r\n";
+					}
+					if(usuario.getCorreo().equals("")) {
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El correo del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " es vacio.\r\n";
+					}
+					if(!emailCorrecto(usuario.getCorreo())){
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El correo del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " es incorrecto.\r\n";
+					}
+					if(getUsuariosService().findByCorreo(usuario)!=null){
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El correo del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " ya existe en la base de datos.\r\n";
+					}
+					if(usuario.getDni().equals("")) {
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El dni del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " es vacio.\r\n";
+					}
+					if(!dniCorrecto(usuario.getDni())){
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El dni del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " es incorrecto.\r\n";
+					}
+					if(getUsuariosService().findByDni(usuario)!=null){
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El dni del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " ya existe en la base de datos.\r\n";
+					}
+					
+										
+					if(usuarioCorrecto) {
+						String contrasenya="";
+						contrasenya=generarPassword();
+						usuario.setContrasenya(contrasenya);						
+						getUsuariosService().insert(usuario);
+						enviarCorreo(usuario);
+					}
+				}
+			}
+			
+			if(!error) return true;
+			else {
+				generarRegistroErrores(errorlog);
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Error procesando fichero", e);
+			return false;
+		}
+		
+	}
+
+
+
+
+
+	private boolean dniCorrecto(String correo) {
+		correo.matches([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1});
+	}
+
+
+
+
+
+	private boolean emailCorrecto(String correo) {
+		if(correo.contains("@")){
+			String[] sp = correo.split("@");
+			if (sp[1].equals("ucm.es")) return true;
+			else return false;
+		}
+		else return false;
 	}
 	
 

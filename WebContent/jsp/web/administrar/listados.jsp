@@ -53,111 +53,40 @@
 		    });
 		    
 		    function doOnRowSelected(rowID,celInd){
-		    	importarForm = b.attachForm();
-		    	importarForm.loadStruct('../xml/forms/administrar_importar_form.xml', function() {
-		    		setFormLabels(rowID);
-		    		
-		    		importarForm.attachEvent("onBeforeFileAdd",function(realName, size){
-		    			
-		    			var myUploader = importarForm.getUploader("subir");
-						myUploader.clear();
-						return true;
-		    		});
-		    		
-		    		importarForm.attachEvent("onEnter", function() {
-		    			onSubmit(rowID);
-		    		});
-		    		
-		    		importarForm.attachEvent("onButtonClick", function(id){
-	    				if(id == "import") {
-	    					onSubmit(rowID);
-	    				}
-	    				
-		    		});
-		    	});
 		    	
-				goActualizar();
-		    }
-		    
-		    function onSubmit(rowID){
-				if(importarForm.getUploaderStatus("subir") == 1){
-					var fileData = importarForm.getItemValue("subir");
-				    /*(item's name)+“_count” - the count of uploaded files (item name “myFiles” is used for the code above)
-				    (item's name)+“_r_”+(0..count-1) - the real name of the file
-				    (item's name)+“_s_”+(0..count-1) - the file name that the server returns after uploading*/
-			    	var fileName = fileData.subir_r_0;
-			    	if(isExcelExtension(fileName)) {
-						goImportar(rowID);
-			    	}
-				}
-		    }
-		    
-		    function getExtension(fileName) {
-			    var parts = fileName.split('.');
-			    return parts[parts.length - 1];
-			}
-		    
-		    function isExcelExtension(fileName) {
-		        var ext = getExtension(fileName);
-		        switch (ext.toLowerCase()) {
-		        case 'xls':
-		        case 'xlsx':
-		            //etc
-		            return true;
-		        }
-		        return false;
-		    }
-		    
-		    function setFormLabels(rowID){
-		    	if(rowID == 'a'){
-	    			importarForm.setItemLabel('data','<bean:message key="title.importar.alumnos"/>');
-		    		importarForm.setItemLabel('seleccionar','<bean:message key="label.seleccionar.archivo"/>');
-		    		importarForm.setItemLabel('import','<bean:message key="label.importar.alumnos"/>');
-	    		}
-	    		else if(rowID == 'b'){
-	    			importarForm.setItemLabel('data','<bean:message key="title.importar.profesores"/>');
-		    		importarForm.setItemLabel('seleccionar','<bean:message key="label.seleccionar.archivo"/>');
-		    		importarForm.setItemLabel('import','<bean:message key="label.importar.profesores"/>');
-	    		}
-	    		else if(rowID == 'c'){
-	    			importarForm.setItemLabel('data','<bean:message key="title.importar.usuarios"/>');
-		    		importarForm.setItemLabel('seleccionar','<bean:message key="label.seleccionar.archivo"/>');
-		    		importarForm.setItemLabel('import','<bean:message key="label.importar.usuarios"/>');
-	    		}
-		    }
-		    
-		    function goImportar(rowID) {
+		    	var tipo = "";
+		    	var alubia = "";
 		    	
 		    	if(rowID == 'a'){
-		    		importarForm.send("importarAlumnos.do", function(loader, response) {
-		            });
+		    		tipo="alumnos";
+		    		alubia='<bean:message key="label.importar.alumnos" />';
 	    		}
 	    		else if(rowID == 'b'){
-	    			importarForm.send("importarProfesores.do", function(loader, response) {
-		            });
+	    			tipo="profesores";
+	    			alubia='<bean:message key="label.importar.profesores" />';
 	    		}
 	    		else if(rowID == 'c'){
-	    			importarForm.send("importarUsuarios.do", function(loader, response) {
-		            });
+	    			tipo="usuarios";
+	    			alubia='<bean:message key="label.importar.usuarios" />';
 	    		}
 		    	
 		    	
-		    	/*importarForm.send("actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(xml) {
-					goEntrada();
-				});*/
+		    	var dhxWins= new dhtmlXWindows();
+				var window = dhxWins.createWindow("subir", 300,50, 500, 150);
+				window.setText(alubia);				
+				window.setModal(true);
+				window.centerOnScreen();
+				window.attachURL("subirArchivo.do?tipoConsulta=" + tipo);
+			
 		    }
 		    
-		    function goActualizar() {
-		    	/*buscar();
-		    	toolbar_1.disableItem('delete');
-		    	tabbar.clearAll();*/		    	
-		    }
+		  
+		    
+		   
+		    
+		  
+		  
 		  
         </script>
-	</head>
-	<body>
-		<form name="myForm" method="post" enctype="multipart/form-data">
-			<div id="importarForm"></div>
-		</form>
-	</body>
+	
 </html>
