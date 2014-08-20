@@ -51,6 +51,15 @@
 	    	String idAsignatura = request.getParameter("idAsignatura");
 	    	accion = "/asignaturas/subirArchivoDiarioReflexivo?tipoConsulta=" + tipoConsulta + "&idAlumno=" + idAlumno + "&idAsignatura=" + idAsignatura;
 	    }
+	    else if(tipoConsulta.equals("alumnos")){
+	    	accion = "/administrar/subirExcelAlumnos?tipoConsulta=" + tipoConsulta;
+	    }
+	    else if(tipoConsulta.equals("profesores")){
+	    	accion = "/administrar/subirExcelProfesores?tipoConsulta=" + tipoConsulta;
+	    }
+	    else if(tipoConsulta.equals("usuarios")){
+	    	accion = "/administrar/subirExcelUsuarios?tipoConsulta=" + tipoConsulta;
+	    }
 	    %>
 		    function subir() {
 		    	document.forms[0].submit();
@@ -62,7 +71,7 @@
 		<html:form action="<%=accion%>" enctype="multipart/form-data">
 			<table>
 				<tr>
-					<td><label for="labelDescription"><bean:message key="label.fichero" /></label></td>
+					<td><label for="labelDescription"><bean:message key="label.nombre" /></label></td>
 					<td>					
 						<div id="div_descripcion" style="width:200px; height:30px;">
 							<input type="text" name="nombre"  size="55px">

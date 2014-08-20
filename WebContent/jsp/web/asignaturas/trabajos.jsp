@@ -42,6 +42,7 @@
 	    		
 	    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 					profesor=true;
+					
 					main_layout = new dhtmlXLayoutObject(document.body, '2U');
 		    		a = main_layout.cells('a');
 		    		b = main_layout.cells('b');
@@ -432,6 +433,7 @@
 				if (profesor) {
 					var idTrabajoInfo = tabbar.getActiveTab();
 					gridProfesores.clearAndLoad("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&idTrabajoInfo=" + idTrabajoInfo);	
+					initProfesor();
 				}
 				else gridAlumnos.clearAndLoad("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);		    	
 		    			    	

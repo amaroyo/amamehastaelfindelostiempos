@@ -19,7 +19,7 @@
 	 	
 	 </head>
 	<body>
-		<html:form action="/administrar/importarLeads" enctype="multipart/form-data">
+		<html:form action="/administrar/importarUsuarios" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td><bean:message key="label.fichero" /></td>
