@@ -15,12 +15,18 @@
 		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlx.css">
 		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlx.js"></script>
 	    <script src="../js/dhtmlxSuite/patterns/dhtmlxlayout_pattern4l.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
+	    
+	    
+	    
+	    
 	    
 
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b,idSession, tabbar;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b,idSession, tabbar,
+	    	formRubrica, tab_rubrica, tab_anexo1;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -120,16 +126,16 @@
 				else tabbar = a.attachTabbar();
 				
 				tabbar.addTab('rubrica',"<bean:message key="title.rubrica"/>",'');
+				tab_rubrica = tabbar.cells('rubrica');
+				goRubrica(identificador);
+				
 				tabbar.addTab('anexo1',"<bean:message key="title.anexo.uno"/>",'');
+		    	tab_anexo1 = tabbar.cells('anexo1');
+		    	goAnexo1(identificador);
+		    	
 				tabbar.addTab('anexo2',"<bean:message key="title.anexo.dos"/>",'');
 				
 				tabbar.setTabActive('rubrica');
-				
-				tabbar.attachEvent("onTabClick", function(id, lastId){
-	    			if(id == 'rubrica') goRubrica(identificador);
-	    			else if (id == 'anexo1') goAnexo1(identificador);
-	    			else if (id == 'anexo2') goAnexo2(identificador);
-	    		});
 			}
 			
 			function goRubrica(identificador){
@@ -148,19 +154,122 @@
 				 * Gracias por ocuparte de esta parte =)
 				 **********************
 				 */
-				
-				
-				alert("Rubrica");
+				formRubrica = tab_rubrica.attachForm();
+		    	formRubrica.loadStruct('../xml/forms/rubrica_form.xml', function(){
+	    			formRubrica.setItemLabel('resultados','<bean:message key="title.resultados.competencias"/>');
+	    			formRubrica.setItemValue('competencias',dameCompetenciasAsignatura(idAsignatura));
+
+	    			grupos_criterios_rubrica = dameGruposCriteriosAsignatura(idAsignatura);
+	    			for(var i=0;i<grupos_criterios_rubrica.length;i++){
+	    				formRubrica.addItem(null, grupos_criterios_rubrica[i], i+1);
+	    			}
+	    			
+	    			//permisosRubricasForm();	
+	    			/*formRubrica.load('competenciasasignatura.do?idAsignatura=' + idAsignatura, function () {			    			
+	    				/*formRubrica.attachEvent("onButtonClick", function(id){
+		    				if (id == "aceptar") {
+		    					formRubrica.send("actualizarasignatura.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura ,"post", function(xml) {
+									alert('<bean:message key="message.asignatura.cambiada.exito"/>');
+			    				});
+			    				buscar();
+		    				}
+		    			});
+	    				formRubrica.attachEvent("onEnter", function() {
+							formRubrica.send("actualizarasignatura.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura ,"post", function(xml) {
+								alert('<bean:message key="message.asignatura.cambiada.exito"/>');
+							}); 
+			    		});
+		    		});*/
+	    		});
 			}
 			function goAnexo1(identificador){
-				alert("Anexo1");
+				/*********************
+				 * Tanto aqui como en anexo1 y dos hay que distinguir de donde viene la llamada.
+				 * Si viene desde alumno, identificador sera el idUsuario del alumno, en cambio, si
+				 * la llamada viene desde un profesor, el identificador sera el portafolio. Me imagino
+				 * que eso te ahorrara un par de consultas :)
+				 * Tambien tienes acceso a la variable global idAsignatura.
+				 *
+				 * Ten cuidado al realizar la query para el alumno con el idAlumno, para coger el 
+				 * buen portafolio hay que meter el anyo academico!
+				 * 
+				 * Gracias por ocuparte de esta parte =)
+				 **********************
+				 */
 			}
 			function goAnexo2(identificador){
-				alert("Anexo2");
 			}
 			
 			
-	    	
+			
+			function initRequest() {
+	    	    if (window.XMLHttpRequest) {
+	    	        xmlhttp = new XMLHttpRequest();
+	    	    } else if (window.ActiveXObject) {
+	    	        isIE = true;
+	    	        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	    	    }
+	    	    return xmlhttp;
+	    	}
+			
+			
+			function dameCompetenciasAsignatura(idAsignatura){
+	    		var url = "competenciasasignatura.do?idAsignatura="+idAsignatura;
+	    		var xmlhttp = initRequest();
+	    		xmlhttp.onreadystatechange=function(){
+	    			if (xmlhttp.readyState===4) {
+	        	        if(xmlhttp.status===200) { //GET returning a response
+	        	        	return xmlhttp.responseXML.getElementsByTagName("competencias")[0].firstChild.nodeValue;
+	        	        }
+	        	    }
+	    		}
+	    	    xmlhttp.open("GET",url,false);
+	    	    xmlhttp.send(null);
+	    	    return xmlhttp.onreadystatechange();
+	    	}
+			
+			function dameGruposCriteriosAsignatura(idAsignatura){
+	    		var url = "gruposcriteriosasignatura.do?idAsignatura="+idAsignatura;
+	    		var xmlhttp = initRequest();
+	    		xmlhttp.onreadystatechange=function(){
+	    			if (xmlhttp.readyState===4) {
+	        	        if(xmlhttp.status===200) { //GET returning a response
+	        	        	return createArrayGruposCriteriosFromXML(xmlhttp.responseXML);
+	        	        }
+	        	    }
+	    		}
+	    	    xmlhttp.open("GET",url,false);
+	    	    xmlhttp.send(null);
+	    	    return xmlhttp.onreadystatechange();
+	    	}
+			
+			function createArrayGruposCriteriosFromXML(xml){
+				var items = new Array();
+				var criterios_grupo = new Array();
+				var grupos = xml.getElementsByTagName("grupo");
+				var criterios;
+				var id_grupo, nombre_grupo, id_criterio, nombre_criterio;
+				var id_grupo_id_criterio;
+				for(var i=0;i<grupos.length;i++) {
+	    	        id_grupo=grupos[i].getElementsByTagName("id_grupo")[0].firstChild.nodeValue;
+	    	        nombre_grupo=grupos[i].getElementsByTagName("nombre_grupo")[0].firstChild.nodeValue;
+	    	        criterios = grupos[i].getElementsByTagName("criterio");
+	    	        criterios_grupo = new Array();
+	    	        for(var j=0;j<criterios.length;j++){
+	    	        	id_criterio=criterios[j].getElementsByTagName("id_criterio")[0].firstChild.nodeValue;
+		    	        id_grupo_id_criterio=id_grupo+"_"+id_criterio;
+		    	        nombre_criterio=criterios[j].getElementsByTagName("nombre_criterio")[0].firstChild.nodeValue;
+		    	        var radios = new Array();
+		    	        for(var k=1;k<=10;k=k+2){
+		    	        	radios[k] = {type: "radio", name:id_grupo_id_criterio, label: (k+1)/2};
+		    	        	radios[k+1] = {type: "newcolumn"};
+		    	        }
+		    	        criterios_grupo[j]={type:"label", label:nombre_criterio, labelWidht:"100", list:radios};
+	    	        }
+	    	        items[i]={type:"fieldset", name:id_grupo, label:nombre_grupo, inputWidth:"auto", list:criterios_grupo};
+		    	}
+				return items;
+	    	}
 	   </script>
 	</head>
 	<body>

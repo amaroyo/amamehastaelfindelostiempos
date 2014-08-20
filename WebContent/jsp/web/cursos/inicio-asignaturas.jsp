@@ -56,7 +56,7 @@
 		    	dhtmlxError.catchError("ALL",errorHandler);
 			    main_layout = new dhtmlXLayoutObject(document.body, '2U');
 			    listado = main_layout.cells('a');
-			    listado.setWidth(600);
+			    listado.setWidth(500);
 			    areaTrabajoCursos = main_layout.cells('b');
 			    
 			    //autosize(horizontal,vertical)
@@ -136,7 +136,7 @@
 
 	    			grupos_criterios_rubrica = dameGruposCriteriosAsignatura(idAsignatura);
 	    			for(var i=0;i<grupos_criterios_rubrica.length;i++){
-	    				formRubrica.addItem("grupos", grupos_criterios_rubrica[i], i);
+	    				formRubrica.addItem(null, grupos_criterios_rubrica[i], i+1);
 	    			}
 	    			
 	    			//permisosRubricasForm();	
@@ -737,9 +737,9 @@
 	    	        	id_criterio=criterios[j].getElementsByTagName("id_criterio")[0].firstChild.nodeValue;
 		    	        id_grupo_id_criterio=id_grupo+"_"+id_criterio;
 		    	        nombre_criterio=criterios[j].getElementsByTagName("nombre_criterio")[0].firstChild.nodeValue;
-		    	        criterios_grupo[j]={type:"input", name:id_grupo_id_criterio, label:nombre_criterio, labelWidth:"125", style:"width:200", rows:"2"};
+		    	        criterios_grupo[j]={type:"input", name:id_grupo_id_criterio, value:nombre_criterio, rows:"1", disabled:"true", style:"width:800"};
 	    	        }
-	    	        items[i]={type:"fieldset", name:id_grupo, label:nombre_grupo, inputWidth:"auto", list:criterios_grupo};
+	    	        items[i]={type:"fieldset", name:id_grupo, label:nombre_grupo, width:"100%", list:criterios_grupo};
 		    	}
 				return items;
 	    	}

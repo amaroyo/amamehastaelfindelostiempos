@@ -1,9 +1,6 @@
 package es.oyssen.mrm.struts.actions.cursos;
 
 import java.io.PrintWriter;
-import java.util.Iterator;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,14 +8,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import es.oyssen.mrm.negocio.vo.AsignaturaVO;
-import es.oyssen.mrm.negocio.vo.CriterioRubricaVO;
-import es.oyssen.mrm.negocio.vo.GrupoCriteriosRubricasVO;
-import es.oyssen.mrm.negocio.vo.GruposCriteriosRubricaAsignaturaVO;
 import es.oyssen.mrm.negocio.vo.RubricaVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
-import es.oyssen.mrm.struts.forms.cursos.CrearAsignaturaForm;
-import es.oyssen.mrm.struts.forms.cursos.EditarAsignaturaForm;
 
 public class CompetenciasAsignaturaAction extends MrmAction {
 
@@ -27,12 +18,11 @@ public class CompetenciasAsignaturaAction extends MrmAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		EditarAsignaturaForm f = (EditarAsignaturaForm) form;
 		RubricaVO rubricaIn = new RubricaVO();
 		RubricaVO rubricaOut = new RubricaVO();
 	    
 	    //if(!StringUtil.isNullOrBlank(f.geIdAsignatura())){
-			rubricaIn.setIdAsignatura(f.getIdAsignatura());
+			rubricaIn.setIdAsignatura((String)request.getParameter("idAsignatura"));
 	    	rubricaOut = getRubricasService().findById(rubricaIn);
 	    			
 			//application/json or application/xml text/html
