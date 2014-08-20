@@ -165,7 +165,11 @@
 	    			}
 	    			
 	    			//permisosRubricasForm();	
-	    			/*formRubrica.load('competenciasasignatura.do?idAsignatura=' + idAsignatura, function () {			    			
+  					var formProcessor = new dataProcessor('notasrubrica.do?idPortafolio=' + identificador);
+  					formProcessor.init(formRubrica);
+ 
+  					/*myForm.load("php/user_details.php?id="+userID);
+	    			formRubrica.load('notasrubrica.do?idPortafolio=' + identificador, function () {			    			
 	    				/*formRubrica.attachEvent("onButtonClick", function(id){
 		    				if (id == "aceptar") {
 		    					formRubrica.send("actualizarasignatura.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura ,"post", function(xml) {
@@ -257,11 +261,11 @@
 	    	        criterios_grupo = new Array();
 	    	        for(var j=0;j<criterios.length;j++){
 	    	        	id_criterio=criterios[j].getElementsByTagName("id_criterio")[0].firstChild.nodeValue;
-		    	        id_grupo_id_criterio=id_grupo+"_"+id_criterio;
+		    	        //id_grupo_id_criterio=id_grupo+"_"+id_criterio;
 		    	        nombre_criterio=criterios[j].getElementsByTagName("nombre_criterio")[0].firstChild.nodeValue;
 		    	        var radios = new Array();
 		    	        for(var k=1;k<=10;k=k+2){
-		    	        	radios[k] = {type: "radio", name:id_grupo_id_criterio, label: (k+1)/2};
+		    	        	radios[k] = {type: "radio", name:"value("+id_criterio+")", label: (k+1)/2};
 		    	        	radios[k+1] = {type: "newcolumn"};
 		    	        }
 		    	        criterios_grupo[j]={type:"label", label:nombre_criterio, labelWidht:"100", list:radios};
