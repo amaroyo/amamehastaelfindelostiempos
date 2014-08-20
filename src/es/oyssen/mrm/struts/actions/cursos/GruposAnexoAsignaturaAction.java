@@ -23,12 +23,11 @@ public class GruposAnexoAsignaturaAction extends MrmAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		EditarAsignaturaForm f = (EditarAsignaturaForm) form;
 		GrupoCriteriosRubricasVO grupo_criterio = new GrupoCriteriosRubricasVO();
 		List<GruposCriteriosRubricaAsignaturaVO> grupos_criterios_rubrica_asignatura;
 	    
 	    //if(!StringUtil.isNullOrBlank(f.geIdAsignatura())){
-	    	grupo_criterio.setIdAsignatura(f.getIdAsignatura());
+	    	grupo_criterio.setIdAsignatura((String)request.getParameter("idAsignatura"));
 			grupos_criterios_rubrica_asignatura = getGruposCriteriosRubricasService().findGruposAnexoAsignatura(grupo_criterio);
 
 			//application/json or application/xml text/html

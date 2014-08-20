@@ -14,7 +14,6 @@ import org.apache.struts.action.ActionMapping;
 import es.oyssen.mrm.negocio.vo.GrupoCriteriosRubricasVO;
 import es.oyssen.mrm.negocio.vo.GruposCriteriosRubricaAsignaturaVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
-import es.oyssen.mrm.struts.forms.cursos.EditarAsignaturaForm;
 
 public class GruposCriteriosAsignaturaAction extends MrmAction {
 
@@ -23,12 +22,11 @@ public class GruposCriteriosAsignaturaAction extends MrmAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		EditarAsignaturaForm f = (EditarAsignaturaForm) form;
 		GrupoCriteriosRubricasVO grupo_criterio = new GrupoCriteriosRubricasVO();
 		List<GruposCriteriosRubricaAsignaturaVO> grupos_criterios_rubrica_asignatura;
 	    
 	    //if(!StringUtil.isNullOrBlank(f.geIdAsignatura())){
-	    	grupo_criterio.setIdAsignatura(f.getIdAsignatura());
+	    	grupo_criterio.setIdAsignatura((String)request.getParameter("idAsignatura"));
 			grupos_criterios_rubrica_asignatura = getGruposCriteriosRubricasService().findGruposCriteriosRubricaAsignatura(grupo_criterio);
 
 			//application/json or application/xml text/html
