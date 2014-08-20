@@ -49,6 +49,9 @@
 	   
 	  <form-bean name="GridUsuariosProfesor" type="es.oyssen.mrm.struts.forms.alumnos.GridUsuariosProfesorForm" />
 	   
+	  <form-bean name="NotasRubricaForm" type="es.oyssen.mrm.struts.forms.asignaturas.NotasRubricaForm" />
+	   
+	   
 	</form-beans>
 	
 
@@ -182,6 +185,11 @@
 		
 		<action path="/asignaturas/gruposcriteriosasignatura" name="" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.GruposCriteriosAsignaturaAction"  />
 		<action path="/asignaturas/competenciasasignatura" name="" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.CompetenciasAsignaturaAction"  />
+		
+		
+		<action path="/asignaturas/notasrubrica" name="NotasRubricaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.NotasRubricaAction"  />
+		
+		
 		
 	</action-mappings>
 
