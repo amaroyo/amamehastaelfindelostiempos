@@ -159,12 +159,14 @@
 	    			}
   					formRubrica.addItem(null,{type:"fieldset", name:"puntuacion", label:'<bean:message key="label.total.puntuacion"/>', inputWidth:"auto"},i+1);
   					formRubrica.addItem("puntuacion",{type:"block", name:"block_contadores", list:items},0);
-  					var rangos = "-   0-4,9: Suspenso (SS).\n-   5,0-6,9: Aprobado (AP).\n-   7,0-8,9: Notable (NT).\n-   9,0-10: Sobresaliente (SB)";
   					formRubrica.addItem("puntuacion",{type:"label", label:'<strong><bean:message key="label.nota.final"/></strong>'},1);
   					formRubrica.addItem("puntuacion",{type:"input", name:"nota", inputWidth:"50", readonly:"true"},2);
   					formRubrica.addItem("puntuacion",{type:"input", name:"aclaraciones", label:'<bean:message key="label.nota.final.aclaraciones"/>', labelWidth:"700", inputWidth:"0", position:"label-right", readonly:"true"},3);
-  					formRubrica.addItem("puntuacion",{type:"input", name:"rangos", label:rangos, labelWidth:"700", inputWidth:"0", position:"label-right", readonly:"true"},4);
-  					formRubrica.addItem("puntuacion",{type:"input", name:"observaciones", label:'<strong><bean:message key="label.observaciones"/></strong>'+': '+'<bean:message key="label.nota.final.observaciones"/>', labelWidth:"700", inputWidth:"0", position:"label-right", readonly:"true"},5);
+  					formRubrica.addItem("puntuacion",{type:"input", name:"rango1", label:'<bean:message key="label.nota.rango1"/>', labelWidth:"700", inputWidth:"0", position:"label-right", readonly:"true"},4);
+  					formRubrica.addItem("puntuacion",{type:"input", name:"rango2", label:'<bean:message key="label.nota.rango2"/>', labelWidth:"700", inputWidth:"0", position:"label-right", readonly:"true"},5);
+  					formRubrica.addItem("puntuacion",{type:"input", name:"rango3", label:'<bean:message key="label.nota.rango3"/>', labelWidth:"700", inputWidth:"0", position:"label-right", readonly:"true"},6);
+  					formRubrica.addItem("puntuacion",{type:"input", name:"rango4", label:'<bean:message key="label.nota.rango4"/>', labelWidth:"700", inputWidth:"0", position:"label-right", readonly:"true"},7);
+  					formRubrica.addItem("puntuacion",{type:"input", name:"observaciones", label:'<bean:message key="label.nota.final.observaciones"/>', labelWidth:"700", inputWidth:"0", position:"label-right", readonly:"true"},8);
   					
   					loadNotasRubrica(identificador);
   					contarValores();
