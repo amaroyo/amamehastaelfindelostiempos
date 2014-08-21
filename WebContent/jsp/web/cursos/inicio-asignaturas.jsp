@@ -751,7 +751,7 @@
 	    	        	id_criterio=criterios[j].getElementsByTagName("id_criterio")[0].firstChild.nodeValue;
 		    	        id_grupo_id_criterio=id_grupo+"_"+id_criterio;
 		    	        nombre_criterio=criterios[j].getElementsByTagName("nombre_criterio")[0].firstChild.nodeValue;
-		    	        criterios_grupo[j]={type:"input", name:id_grupo_id_criterio, value:nombre_criterio, rows:"1", disabled:"true", style:"width:800"};
+		    	        criterios_grupo[j]={type:"input", name:id_grupo_id_criterio, value:nombre_criterio, rows:"1", readonly:"true", style:"width:800"};
 	    	        }
 	    	        items[i]={type:"fieldset", name:id_grupo, label:nombre_grupo, width:"100%", list:criterios_grupo};
 		    	}
