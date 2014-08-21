@@ -66,7 +66,7 @@
 		
 		<action path="/alumnos/subirArchivoTrabajoCampoCorreccion" name="SubirArchivoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.SubirArchivoAction">
 			<exception type="java.lang.Exception" key="error.subir.archivo.caso.clinico" path="/alumnos/subirArchivoTrabajoCampoCorreccion.do"></exception>
-			<forward name="error" path="/alumnos/subirArchivo.do" />
+			<forward name="cancel" path="/alumnos/subirArchivo.do" />
 			<forward name="success" path="/asignaturas/correcto.do" />
 		</action>
 		
