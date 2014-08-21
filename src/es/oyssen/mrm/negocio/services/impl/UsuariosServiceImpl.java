@@ -173,5 +173,18 @@ public class UsuariosServiceImpl implements UsuariosService{
 			throw new ServiceException(e.getMessage());
 		}
 	}
+
+	@Override
+	public void updateGrupo(UsuarioVO usuario) throws ServiceException,
+			DAOException {
+		try {
+			daoUsuarios.updateGrupo(usuario);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error updateGrupo usuario", e);
+			throw new ServiceException(e);
+		}		
+		
+	}
 	
 }

@@ -14,6 +14,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
+
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +28,10 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import es.oyssen.mrm.negocio.vo.AsignaturaVO;
+import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
+import es.oyssen.mrm.negocio.vo.ProfesorAsociadoVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
@@ -174,7 +179,14 @@ public class SubirArchivoAction extends MrmAction {
 					
 					String answ = parsearProfesores(f.getFichero().getInputStream());					
 					if(answ.equals("")) return mapping.findForward("success");
-					else return mapping.findForward("error");
+					else {			
+						response.setHeader("Content-Disposition", "attachment; filename=\"" + "REGISTRO_ERRORES.txt" + "\"");
+						PrintWriter out = response.getWriter();
+						response.setContentType("text/plain");
+						out.print(answ); out.flush();
+						out.close();
+						return mapping.findForward("error");						
+					}
 					
 				}
 				else if (tipo.equals("alumnos")){
@@ -250,32 +262,9 @@ public class SubirArchivoAction extends MrmAction {
 					boolean usuarioCorrecto=true;
 					row = (HSSFRow) rows.next();
 					
-					UsuarioVO usuario = ExcelUtil.parseUsuario(row);
-					if(usuario.getNombre().equals("")) {
-						usuarioCorrecto=false;
-						error=true;
-						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El nombre del usuario es vacio.\r\n";
-					}
-					if(usuario.getApellido1().equals("")) {
-						usuarioCorrecto=false;
-						error=true;
-						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El primer apellido del usuario es vacio.\r\n";
-					}
-					if(usuario.getCorreo().equals("")) {
-						usuarioCorrecto=false;
-						error=true;
-						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El correo del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " es vacio.\r\n";
-					}
-					if(!emailCorrecto(usuario.getCorreo())){
-						usuarioCorrecto=false;
-						error=true;
-						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El correo del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " es incorrecto.\r\n";
-					}
-					if(getUsuariosService().findByCorreo(usuario)!=null){
-						usuarioCorrecto=false;
-						error=true;
-						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El correo del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " ya existe en la base de datos.\r\n";
-					}
+					UsuarioVO usuario = ExcelUtil.parsearProfesor(row);
+					
+					
 					if(usuario.getDni().equals("")) {
 						usuarioCorrecto=false;
 						error=true;
@@ -286,19 +275,45 @@ public class SubirArchivoAction extends MrmAction {
 						error=true;
 						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El dni del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " es incorrecto.\r\n";
 					}
-					if(getUsuariosService().findByDni(usuario)!=null){
+					String dni = usuario.getDni();
+					usuario = getUsuariosService().findByDni(usuario);
+					if (usuario == null){
 						usuarioCorrecto=false;
 						error=true;
-						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El dni del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " ya existe en la base de datos.\r\n";
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El dni: " + dni + " del profesor no existe en la base de datos.\r\n";
 					}
 					
-										
-					if(usuarioCorrecto) {
-						String new_pass = generatePassword();
-						usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(new_pass, EncriptarUtil.MD5));					
-						usuario.setIdGrupo("6");
-						getUsuariosService().insert(usuario);
-						//sendForgotPasswordMessage(usuario.getCorreo(),new_pass);
+					if(usuarioCorrecto){
+						ProfesorAsociadoVO profe = ExcelUtil.parsearProfesorAsociado(row);
+						profe.setIdProfesor(usuario.getIdUsuario());
+						
+						if(profe.getAnyoAcademico().equals("")){
+							usuarioCorrecto=false;
+							error=true;
+							errorlog += "Error en linea: " + row.getRowNum() +". Razon: El profesor con dni: " + dni + " no tiene un año academico valido asignado.\r\n";
+						}
+						
+						AsignaturaVO a = new AsignaturaVO();
+						a.setCodigo(profe.getIdAsignatura());
+						List<AsignaturaVO> asignaturas = getAsignaturasService().findByCodigo(a);
+						
+						if(asignaturas == null){
+							usuarioCorrecto=false;
+							error=true;
+							errorlog += "Error en linea: " + row.getRowNum() +". Razon: El profesor con dni: " + dni + " no tiene una asignatura valida asignada.\r\n";
+						
+						}
+											
+						if(usuarioCorrecto) {
+							//hacer set de grupo
+							usuario.setIdGrupo("3");
+							getUsuariosService().updateGrupo(usuario);
+							
+							for (AsignaturaVO as : asignaturas) {				
+								profe.setIdAsignatura(as.getIdAsignatura());
+								getProfesoresAsociadosService().insert(profe);
+							}
+						}
 					}
 				}
 			}

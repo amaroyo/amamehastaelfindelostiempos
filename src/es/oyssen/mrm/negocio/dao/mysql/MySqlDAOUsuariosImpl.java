@@ -31,6 +31,7 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 	
 	private static String SQL_INSERT = "insert into usuarios (id_grupo, correo, contrasenya, nombre, apellido1, apellido2, dni, telefono) values (?,?,?,?,?,?,?,?)";
 	private static String SQL_UPDATE = "update usuarios set nombre=?, apellido1=?, apellido2=?, dni=?, correo=?, telefono=?";
+	private static String SQL_UPDATE_GRUPO = "update usuarios set id_grupo=?";
 	private static String SQL_DELETE = "delete from usuarios where id_usuario = ?";
 	private static String SQL_FIND_ALL = "select * from usuarios";
 	private static String SQL_FIND_BY_ID = "select * from usuarios where id_usuario = ?";
@@ -250,6 +251,24 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 		} catch (Exception e) {
 			throw new DAOException(e);
 		}
+	}
+
+	@Override
+	public void updateGrupo(UsuarioVO usuario) throws DAOException,
+			DAOUpdateException {
+		try {
+			 
+			String query = SQL_UPDATE_GRUPO;
+
+			query += " where id_usuario=?";
+
+			getJdbcTemplate().update(query, new Object[]{
+					usuario.getIdGrupo(),
+					usuario.getIdUsuario()});
+		} catch(Exception e) {
+			throw new DAOUpdateException(e);
+		}
+		
 	}
 	
 }

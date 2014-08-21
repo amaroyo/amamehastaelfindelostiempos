@@ -20,12 +20,43 @@ import es.oyssen.mrm.negocio.vo.EmpresaVO;
 import es.oyssen.mrm.negocio.vo.EstadoVO;
 import es.oyssen.mrm.negocio.vo.LeadVO;
 import es.oyssen.mrm.negocio.vo.MarketingActivityVO;
+import es.oyssen.mrm.negocio.vo.ProfesorAsociadoVO;
 import es.oyssen.mrm.negocio.vo.ResponsableVO;
 import es.oyssen.mrm.negocio.vo.ServicioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
 public class ExcelUtil {
 
+	
+	public static ProfesorAsociadoVO parsearProfesorAsociado(HSSFRow row) {
+		ProfesorAsociadoVO p = new ProfesorAsociadoVO();
+		String cursoAcademico = (row.getCell(2) != null) ? row.getCell(2).getStringCellValue() : "";
+		if(!cursoAcademico.equals("")){
+			String[] sp = {};
+			sp = cursoAcademico.split("-");
+			if(Integer.parseInt(sp[sp.length-1])>0 && Integer.parseInt(sp[sp.length-1])>99){
+				String anyoAcademico = sp[0] + "/20" + sp[sp.length-1];
+				p.setAnyoAcademico(anyoAcademico);
+			}
+		}
+		p.setIdAsignatura((row.getCell(5) != null) ? row.getCell(5).getStringCellValue() : "");
+		String centroHospital = (row.getCell(5) != null) ? row.getCell(5).getStringCellValue() : "";
+		p.setCentroAsociado(centroHospital);
+		if (centroHospital.contains("Mañana")) p.setTurno("Mañana");
+		else if (centroHospital.contains("Tarde")) p.setTurno("Tarde");
+		else p.setTurno("");
+		
+		return p;
+		
+	}
+
+	
+	public static UsuarioVO parsearProfesor(HSSFRow row) {
+		UsuarioVO u = new UsuarioVO();
+		u.setDni((row.getCell(1) != null) ? row.getCell(1).getStringCellValue() : "");
+		return u;
+	}
+	
 	public static UsuarioVO parseUsuario(HSSFRow row) {
 		UsuarioVO u = new UsuarioVO();
 		u.setApellido1((row.getCell(0) != null) ? row.getCell(0).getStringCellValue() : "");
@@ -486,6 +517,9 @@ public class ExcelUtil {
 
 		return book;
 	}
+
+	
+	
 
 		
 	
