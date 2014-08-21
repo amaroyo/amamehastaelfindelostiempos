@@ -195,6 +195,7 @@
 	    			formInfo.setItemLabel('codigo','<bean:message key="label.codigo.asignatura"/>');
 	    			formInfo.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
 	    			formInfo.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
+	    			formInfo.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 	    			//permisosAsignaturasForm();			    		
 		    		
 	    			formInfo.load('editarasignatura.do?idAsignatura=' + idAsignatura, function () {			    			
@@ -253,6 +254,11 @@
 	    					crearPartes(1);	
 	    				}
 		    		});
+		    		formNewAsignatura.attachEvent("onEnter", function() {
+    					windowNewAsignatura.setModal(false);
+    					windowNewAsignatura.hide();
+    					crearPartes(1);	 
+		    		});
 		    	});
 		    }
 		    
@@ -309,6 +315,13 @@
 	    					windowsNewAsignatura[currentPart-1].setModal(true);
 	    					windowsNewAsignatura[currentPart-1].show();
 	    				}
+		    		});
+					formNewAsignatura.attachEvent("onEnter", function() {
+						if(!existeEnNombresAnteriores(currentPart)){
+	    					formNewAsignaturaPart.send("buscarasignatura.do","post", function(loader,response) {
+	    						resultadoBuscarParteAsignatura(response,currentPart);
+		    				});
+    					}	 
 		    		});
 		    	});
 			}
@@ -501,6 +514,19 @@
 	    					windowsNewAsignatura[numeroRubricas+currentPart-1].show();
 	    				}
 	    			});
+	    			
+	    			formNewAsignatura.attachEvent("onEnter", function() {
+	    				if(currentPart == numeroRubricas){
+    						crearAsignaturaCompleta();
+    						crearRubricasAsignaturaCompleta();
+	    					cerrarVentanas();
+    		    		}
+    		    		else{
+    	    				windowsNewAsignatura[numeroRubricas+currentPart].hide();
+    	    				windowsNewAsignatura[numeroRubricas+currentPart].setModal(false);
+    			    		crearRubricas(currentPart+1);
+    		    		}	 
+		    		});
 		    	});
 		    }
 		    
