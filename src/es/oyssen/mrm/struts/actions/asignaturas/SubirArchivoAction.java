@@ -23,7 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -250,17 +251,17 @@ public class SubirArchivoAction extends MrmAction {
 		
 		try {
 			log.debug("Procesamos fichero de carga.........");
-			HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
-			HSSFSheet sheet = workbook.getSheetAt(0);
-	
+			Workbook workbook = WorkbookFactory.create(inputStream);
+			Sheet sheet = workbook.getSheetAt(0);		
+			
 			log.debug("Procesando archivo excel: " + workbook.getSheetName(0));
 			
 			Iterator<Row> rows = sheet.rowIterator();
 			if (rows.hasNext()) {
-				HSSFRow row = (HSSFRow) rows.next();
+				Row row = (Row) rows.next();
 				while (rows.hasNext()) {
 					boolean usuarioCorrecto=true;
-					row = (HSSFRow) rows.next();
+					row = (Row) rows.next();
 					
 					UsuarioVO usuario = ExcelUtil.parsearProfesor(row);
 					
