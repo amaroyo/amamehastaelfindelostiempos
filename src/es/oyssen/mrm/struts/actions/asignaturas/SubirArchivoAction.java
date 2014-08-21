@@ -1,6 +1,9 @@
 package es.oyssen.mrm.struts.actions.asignaturas;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
 
 import com.aeat.valida.Validador;
@@ -11,16 +14,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.Properties;
-
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,15 +26,11 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import es.oyssen.mrm.negocio.exceptions.ServiceException;
-import es.oyssen.mrm.negocio.vo.CanalVO;
-import es.oyssen.mrm.negocio.vo.LeadVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
 import es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoForm;
-import es.oyssen.mrm.struts.forms.ficheros.SubirFicheroForm;
 import es.oyssen.mrm.util.EncriptarUtil;
 import es.oyssen.mrm.util.ExcelUtil;
 import es.oyssen.mrm.util.StringUtil;
@@ -114,7 +103,7 @@ public class SubirArchivoAction extends MrmAction {
 						
 						return mapping.findForward("success");
 					}
-					else return mapping.findForward("error");
+					else return mapping.findForward("cancel");
 				}				
 				else if (tipo.equals("TrabajoCampoCorreccion")){
 					TrabajoDeCampoVO tc = new TrabajoDeCampoVO();
@@ -148,60 +137,66 @@ public class SubirArchivoAction extends MrmAction {
 					return mapping.findForward("success");
 				}
 				
-				else return mapping.findForward("error");
+				else return mapping.findForward("cancel");
 			}
 			else if(((sp[sp.length-1].toLowerCase()).equals("xls") || (sp[sp.length-1].toLowerCase()).equals("xlsx")) && f.getFichero().getFileSize()<MAX_SIZE_MYSQL) {
 				if (tipo.equals("usuarios")){
-					String answ = parsearUsuarios(f.getFichero().getInputStream());
 					
+					String answ = parsearUsuarios(f.getFichero().getInputStream());					
 					if(answ.equals("")) return mapping.findForward("success");
+					//else return mapping.findForward("error");
+					
 					else {
 						
-						try{
-							
-							byte[] b = answ.getBytes(Charset.forName("UTF-8"));
+											
+							//byte[] b = answ.getBytes(Charset.forName("UTF-8"));
 							response.setHeader("Content-Disposition", "attachment; filename=\"" + "REGISTRO_ERRORES.txt" + "\"");
-					
-							ServletOutputStream outputStream = response.getOutputStream();
+							
+							PrintWriter out = response.getWriter();
+							
 							response.setContentType("text/plain");
 							
-							response.setContentLength(b.length);
-							outputStream.write(b); 
+							//response.setContentLength(b.length);
 							
 							
-							outputStream.flush();
-							outputStream.close();
+							out.print(answ); 
 							
-						
-						} catch (Exception e2) {
-							System.out.println("Error in " + getClass().getName() + "\n" + e2);
-						}
-						
-						
-						
-						
-						return mapping.findForward("error");
+							
+							out.flush();
+							out.close();
+														
+							
+							return mapping.findForward("error");						
 					}
 	
 				}
 				else if (tipo.equals("profesores")){
-					System.out.print("llegue profesores");
-					return mapping.findForward("success");
+					
+					String answ = parsearProfesores(f.getFichero().getInputStream());					
+					if(answ.equals("")) return mapping.findForward("success");
+					else return mapping.findForward("error");
+					
 				}
 				else if (tipo.equals("alumnos")){
 					System.out.print("llegue alumnos");
 					return mapping.findForward("success");
 				}
-				else return mapping.findForward("error");
+				else return mapping.findForward("cancel");
 			}
 			else return mapping.findForward("cancel");
 			
 		}	
-		return mapping.findForward("error");
+		return mapping.findForward("cancel");
 	}
 	
 	
 	
+
+
+	
+
+
+
 
 
 	private static String parsearFechaLimite(String fechaLimite, boolean b) {
@@ -234,6 +229,91 @@ public class SubirArchivoAction extends MrmAction {
 		 		
 		return tiempoActual.after(fechaL);
 
+	}
+	
+	
+	private String parsearProfesores(InputStream inputStream) {
+		boolean error=false;
+		String errorlog="REGISTRO DE ERRORES\r\n\r\n";
+		
+		try {
+			log.debug("Procesamos fichero de carga.........");
+			HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
+			HSSFSheet sheet = workbook.getSheetAt(0);
+	
+			log.debug("Procesando archivo excel: " + workbook.getSheetName(0));
+			
+			Iterator<Row> rows = sheet.rowIterator();
+			if (rows.hasNext()) {
+				HSSFRow row = (HSSFRow) rows.next();
+				while (rows.hasNext()) {
+					boolean usuarioCorrecto=true;
+					row = (HSSFRow) rows.next();
+					
+					UsuarioVO usuario = ExcelUtil.parseUsuario(row);
+					if(usuario.getNombre().equals("")) {
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El nombre del usuario es vacio.\r\n";
+					}
+					if(usuario.getApellido1().equals("")) {
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El primer apellido del usuario es vacio.\r\n";
+					}
+					if(usuario.getCorreo().equals("")) {
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El correo del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " es vacio.\r\n";
+					}
+					if(!emailCorrecto(usuario.getCorreo())){
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El correo del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " es incorrecto.\r\n";
+					}
+					if(getUsuariosService().findByCorreo(usuario)!=null){
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El correo del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " ya existe en la base de datos.\r\n";
+					}
+					if(usuario.getDni().equals("")) {
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El dni del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " es vacio.\r\n";
+					}
+					if(!dniCorrecto(usuario.getDni())){
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El dni del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " es incorrecto.\r\n";
+					}
+					if(getUsuariosService().findByDni(usuario)!=null){
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El dni del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " ya existe en la base de datos.\r\n";
+					}
+					
+										
+					if(usuarioCorrecto) {
+						String new_pass = generatePassword();
+						usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(new_pass, EncriptarUtil.MD5));					
+						usuario.setIdGrupo("6");
+						getUsuariosService().insert(usuario);
+						//sendForgotPasswordMessage(usuario.getCorreo(),new_pass);
+					}
+				}
+			}
+			
+			if(!error) return "";
+			else {
+				errorlog +="FIN REGISTRO ERRORES.";
+				return errorlog;
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Error procesando fichero", e);
+			return errorlog;
+		}
 	}
 	
 	
