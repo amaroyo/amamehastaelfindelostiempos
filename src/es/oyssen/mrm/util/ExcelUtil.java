@@ -12,6 +12,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Row;
 
 import es.oyssen.mrm.negocio.vo.CanalVO;
 import es.oyssen.mrm.negocio.vo.ComercialVO;
@@ -28,7 +29,7 @@ import es.oyssen.mrm.negocio.vo.UsuarioVO;
 public class ExcelUtil {
 
 	
-	public static ProfesorAsociadoVO parsearProfesorAsociado(HSSFRow row) {
+	public static ProfesorAsociadoVO parsearProfesorAsociado(Row row) {
 		ProfesorAsociadoVO p = new ProfesorAsociadoVO();
 		String cursoAcademico = (row.getCell(2) != null) ? row.getCell(2).getStringCellValue() : "";
 		if(!cursoAcademico.equals("")){
@@ -51,7 +52,7 @@ public class ExcelUtil {
 	}
 
 	
-	public static UsuarioVO parsearProfesor(HSSFRow row) {
+	public static UsuarioVO parsearProfesor(Row row) {
 		UsuarioVO u = new UsuarioVO();
 		u.setDni((row.getCell(1) != null) ? row.getCell(1).getStringCellValue() : "");
 		return u;
