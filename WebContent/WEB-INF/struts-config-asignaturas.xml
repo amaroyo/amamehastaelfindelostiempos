@@ -184,7 +184,7 @@
 		
 		
 		<action path="/asignaturas/gruposcriteriosasignatura" name="" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.GruposCriteriosAsignaturaAction"  />
-		<action path="/asignaturas/competenciasasignatura" name="" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.CompetenciasAsignaturaAction"  />
+		<action path="/asignaturas/rubricaasignatura" name="" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.RubricaAsignaturaAction"  />
 		
 		
 		<action path="/asignaturas/notasrubrica" name="NotasRubricaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.NotasRubricaAction"  />
