@@ -37,5 +37,7 @@ public interface UsuariosService {
 
 	public List<UsuarioAsignaturaVO> findAllbyProfesorDemas(PortafolioVO p)  throws ServiceException;
 
+	public void updateGrupo(UsuarioVO usuario) throws ServiceException, DAOException;
+
 
 }

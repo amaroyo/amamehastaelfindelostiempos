@@ -39,6 +39,8 @@ public interface DAOUsuarios {
 	public List<UsuarioAsignaturaVO> findAllbyProfesor(PortafolioVO p) throws DAOException;
 
 	public List<UsuarioAsignaturaVO> findAllbyProfesorDemas(PortafolioVO p) throws DAOException;
+
+	public void updateGrupo(UsuarioVO usuario) throws DAOException, DAOUpdateException;
 	
 
 }
