@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <items>
 	<item type="fieldset" name="resultados" label="RESULTADOS/COMPETENCIAS" inputWidth="auto">
-		<item type="input" name="competencias" rows="25" disabled="true" style="width:800"/>	
+		<item type="input" name="competencias" rows="25" readonly="true" style="width:800"/>	
 	</item>
 </items>
 

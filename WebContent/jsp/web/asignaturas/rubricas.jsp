@@ -154,13 +154,17 @@
 	    			
   					var items = new Array();
   					for(var j=1;j<=10;j=j+2){
-						items[j] = {type:"input", name:"contador_"+((j+1)/2), label:((j+1)/2), position:"label-top", labelWidth:"5", inputWidth:"30", disabled:"true"};
-		    			if(j!=10)
-		    				items[j+1] = {type:"newcolumn"};
+						items[j] = {type:"input", name:"contador_"+((j+1)/2), label:"<strong>"+((j+1)/2)+"</strong>", position:"label-top", labelWidth:"10", inputWidth:"30", readonly:"true"};
+		    			items[j+1] = {type:"newcolumn"};
 	    			}
-  					items[11]={type:"label", label:'<strong><bean:message key="label.nota.final"/></strong>'};
-  					items[12]={type:"input", name:"nota", inputWidth:"50", disabled:"true"};
-  					formRubrica.addItem(null,{type:"fieldset", name:"puntuacion", label:'<bean:message key="label.total.puntuacion"/>', inputWidth:"auto", list:items},i+1);
+  					formRubrica.addItem(null,{type:"fieldset", name:"puntuacion", label:'<bean:message key="label.total.puntuacion"/>', inputWidth:"auto"},i+1);
+  					formRubrica.addItem("puntuacion",{type:"block", name:"block_contadores", list:items},0);
+  					var rangos = "-   0-4,9: Suspenso (SS).\n-   5,0-6,9: Aprobado (AP).\n-   7,0-8,9: Notable (NT).\n-   9,0-10: Sobresaliente (SB)";
+  					formRubrica.addItem("puntuacion",{type:"label", label:'<strong><bean:message key="label.nota.final"/></strong>'},1);
+  					formRubrica.addItem("puntuacion",{type:"input", name:"nota", inputWidth:"50", readonly:"true"},2);
+  					formRubrica.addItem("puntuacion",{type:"input", name:"aclaraciones", label:'<bean:message key="label.nota.final.aclaraciones"/>', labelWidth:"700", inputWidth:"0", position:"label-right", readonly:"true"},3);
+  					formRubrica.addItem("puntuacion",{type:"input", name:"rangos", label:rangos, labelWidth:"700", inputWidth:"0", position:"label-right", readonly:"true"},4);
+  					formRubrica.addItem("puntuacion",{type:"input", name:"observaciones", label:'<strong><bean:message key="label.observaciones"/></strong>'+': '+'<bean:message key="label.nota.final.observaciones"/>', labelWidth:"700", inputWidth:"0", position:"label-right", readonly:"true"},5);
   					
   					loadNotasRubrica(identificador);
   					contarValores();
