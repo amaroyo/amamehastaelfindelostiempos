@@ -45,7 +45,7 @@
 	    	
 	    	var main_layout, areaTrabajoCursos, listado, toolbarAsignaturas, numeroRubricas,
 	    	gridAsignaturas, formInfo, formRubrica, formNewRubrica, formAnexo, dhxWins, tabbar, tab_info, tab_rubrica, tab_anexo,
-	    	grupos_criterios_rubrica, grupos_anexo_rubrica;
+	    	grupos_criterios_rubrica, grupos_anexo_rubrica, competencias, anexo, numeroCriterios;
 	    	var num_criterios_grupo=new Array();
 	    	
 	    	var windowsNewAsignatura = new Array();
@@ -108,6 +108,7 @@
 		    function doOnRowSelected(rowID,celInd){
 		    	//toolbarAsignaturas.enableItem('delete');
 		    	tabbar = areaTrabajoCursos.attachTabbar();
+		    	dameRubricaAsignatura(rowID);
 		    	
 		    	tabbar.addTab('formAsignatura','<bean:message key="title.info.general"/>');
 		    	tab_info = tabbar.cells('formAsignatura');
@@ -132,7 +133,7 @@
 		    	formRubrica = tab_rubrica.attachForm();
 		    	formRubrica.loadStruct('../xml/forms/rubrica_form.xml', function(){
 	    			formRubrica.setItemLabel('resultados','<bean:message key="title.resultados.competencias"/>');
-	    			formRubrica.setItemValue('competencias',dameCompetenciasAsignatura(idAsignatura));
+	    			formRubrica.setItemValue('competencias',competencias);
 
 	    			grupos_criterios_rubrica = dameGruposCriteriosAsignatura(idAsignatura);
 	    			for(var i=0;i<grupos_criterios_rubrica.length;i++){
@@ -162,7 +163,7 @@
 
 		    	formAnexo = tab_anexo.attachForm();
 		    	formAnexo.loadStruct('../xml/forms/anexo_form.xml', function(){
-	    			formAnexo.setItemLabel('anexo',dameAnexoAsignatura(idAsignatura));
+	    			formAnexo.setItemLabel('anexo',anexo);
 	    			grupos_anexo_rubrica = dameGruposAnexoAsignatura(idAsignatura);
 	    			for(var i=0;i<grupos_anexo_rubrica.length;i++){
 	    				formAnexo.addItem("anexo", grupos_anexo_rubrica[i], i);
@@ -706,28 +707,15 @@
 	    	    return xmlhttp.onreadystatechange();
 	    	}
 			
-			function dameAnexoAsignatura(idAsignatura){
-	    		var url = "anexoasignatura.do?idAsignatura="+idAsignatura;
+			function dameRubricaAsignatura(idAsignatura){
+	    		var url = "rubricaasignatura.do?idAsignatura="+idAsignatura;
 	    		var xmlhttp = initRequest();
 	    		xmlhttp.onreadystatechange=function(){
 	    			if (xmlhttp.readyState===4) {
 	        	        if(xmlhttp.status===200) { //GET returning a response
-	        	        	return xmlhttp.responseXML.getElementsByTagName("anexo")[0].firstChild.nodeValue;
-	        	        }
-	        	    }
-	    		}
-	    	    xmlhttp.open("GET",url,false);
-	    	    xmlhttp.send(null);
-	    	    return xmlhttp.onreadystatechange();
-	    	}
-			
-			function dameCompetenciasAsignatura(idAsignatura){
-	    		var url = "competenciasasignatura.do?idAsignatura="+idAsignatura;
-	    		var xmlhttp = initRequest();
-	    		xmlhttp.onreadystatechange=function(){
-	    			if (xmlhttp.readyState===4) {
-	        	        if(xmlhttp.status===200) { //GET returning a response
-	        	        	return xmlhttp.responseXML.getElementsByTagName("competencias")[0].firstChild.nodeValue;
+	        	        	competencias = xmlhttp.responseXML.getElementsByTagName("competencias")[0].firstChild.nodeValue;
+	        	        	anexo = xmlhttp.responseXML.getElementsByTagName("anexo")[0].firstChild.nodeValue;
+	        	        	numeroCriterios = xmlhttp.responseXML.getElementsByTagName("numero_criterios")[0].firstChild.nodeValue;
 	        	        }
 	        	    }
 	    		}

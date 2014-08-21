@@ -17,16 +17,12 @@
 	    <script src="../js/dhtmlxSuite/patterns/dhtmlxlayout_pattern4l.js"></script>
 		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
 	    
-	    
-	    
-	    
-	    
 
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b,idSession, tabbar,
-	    	formRubrica, tab_rubrica, tab_anexo1;
+	    	formRubrica, tab_rubrica, tab_anexo1, competencias, anexo, numeroCriterios;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -38,9 +34,6 @@
 	    		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
 				 idSession = <%=sessionIdUser%>;
 	    		
-
-				
-				
 	    		
 	    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 					profesor=true;
@@ -59,24 +52,17 @@
 		    		a.hideHeader();
 				</logic:notMatch>	
 	    		
-
 		    	
 		    	if (profesor) goGridProfesores();
 		    	else goGridAlumnos();
 	
 				
 	    	});
-	    	
-
-			
 			
 			function goGridAlumnos(){
-				
 				initRubrica(idSession);
 				
 			}
-			
-			
 			
 			function goGridProfesores(){
 				
@@ -104,19 +90,15 @@
 		    		}
 		    	});	
 
-		    	
 				gridProfesores.attachEvent("onRowSelect",doOnRowSelected);
-		    	
 				gridProfesores.clearAndLoad("gridUsuariosProfesor.do");
 				
 			}
 			
 			function doOnRowSelected(rowID,celInd){
-				
 				var sp = rowID.split("-");
 				var idPortafolio = sp[3];
 				initRubrica(idPortafolio);
-		    	
 		    }
 			
 			
@@ -124,6 +106,7 @@
 				
 				if(profesor) tabbar = b.attachTabbar();
 				else tabbar = a.attachTabbar();
+		    	dameRubricaAsignatura(idAsignatura);
 				
 				tabbar.addTab('rubrica',"<bean:message key="title.rubrica"/>",'');
 				tab_rubrica = tabbar.cells('rubrica');
@@ -157,26 +140,43 @@
 				formRubrica = tab_rubrica.attachForm();
 		    	formRubrica.loadStruct('../xml/forms/rubrica_form.xml', function(){
 	    			formRubrica.setItemLabel('resultados','<bean:message key="title.resultados.competencias"/>');
-	    			formRubrica.setItemValue('competencias',dameCompetenciasAsignatura(idAsignatura));
+	    			formRubrica.setItemValue('competencias',competencias);
 
+	    			var i;
 	    			grupos_criterios_rubrica = dameGruposCriteriosAsignatura(idAsignatura);
-	    			for(var i=0;i<grupos_criterios_rubrica.length;i++){
+	    			for(i=0;i<grupos_criterios_rubrica.length;i++){
 	    				formRubrica.addItem(null, grupos_criterios_rubrica[i], i+1);
 	    			}
 	    			formRubrica.addItem(null,{type:"button", name:"aceptar", value:"Modificar"},i+1);
 	    			formRubrica.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 
-	    			//permisosRubricasForm();	
+	    			//permisosRubricasForm();
+	    			
+  					var items = new Array();
+  					for(var j=1;j<=10;j=j+2){
+						items[j] = {type:"input", name:"contador_"+((j+1)/2), label:((j+1)/2), position:"label-top", labelWidth:"5", inputWidth:"30", disabled:"true"};
+		    			if(j!=10)
+		    				items[j+1] = {type:"newcolumn"};
+	    			}
+  					items[11]={type:"label", label:'<strong><bean:message key="label.nota.final"/></strong>'};
+  					items[12]={type:"input", name:"nota", inputWidth:"50", disabled:"true"};
+  					formRubrica.addItem(null,{type:"fieldset", name:"puntuacion", label:'<bean:message key="label.total.puntuacion"/>', inputWidth:"auto", list:items},i+1);
+  					
   					loadNotasRubrica(identificador);
+  					contarValores();
     				formRubrica.attachEvent("onButtonClick", function(id){
 	    				if (id == "aceptar") {
 	    					formRubrica.send("actualizarnotasrubrica.do?!nativeeditor_status=save&idPortafolio=" + identificador,"post", function(xml) {
-								//alert('<bean:message key="message.asignatura.cambiada.exito"/>');
+	    						contarValores();
+	    						alert('<bean:message key="message.notas.cambiadas.exito"/>');
 		    				});
 	    				}
 	    			});
     				formRubrica.attachEvent("onEnter", function() {
-						 
+    					formRubrica.send("actualizarnotasrubrica.do?!nativeeditor_status=save&idPortafolio=" + identificador,"post", function(xml) {
+							contarValores();
+    						alert('<bean:message key="message.notas.cambiadas.exito"/>');
+	    				});
 		    		});
 	    		});
 			}
@@ -235,13 +235,15 @@
 				}
 	    	}
 			
-			function dameCompetenciasAsignatura(idAsignatura){
-	    		var url = "competenciasasignatura.do?idAsignatura="+idAsignatura;
+			function dameRubricaAsignatura(idAsignatura){
+	    		var url = "rubricaasignatura.do?idAsignatura="+idAsignatura;
 	    		var xmlhttp = initRequest();
 	    		xmlhttp.onreadystatechange=function(){
 	    			if (xmlhttp.readyState===4) {
 	        	        if(xmlhttp.status===200) { //GET returning a response
-	        	        	return xmlhttp.responseXML.getElementsByTagName("competencias")[0].firstChild.nodeValue;
+	        	        	competencias = xmlhttp.responseXML.getElementsByTagName("competencias")[0].firstChild.nodeValue;
+	        	        	anexo = xmlhttp.responseXML.getElementsByTagName("anexo")[0].firstChild.nodeValue;
+	        	        	numeroCriterios = xmlhttp.responseXML.getElementsByTagName("numero_criterios")[0].firstChild.nodeValue;
 	        	        }
 	        	    }
 	    		}
@@ -284,7 +286,7 @@
 		    	        var radios = new Array();
 		    	        for(var k=1;k<=10;k=k+2){
 		    	        	radios[k] = {type:"radio", name:"value("+id_criterio+")", value:((k+1)/2), label:((k+1)/2)};
-		    	        	radios[k+1] = {type: "newcolumn"};
+		    	        	radios[k+1] = {type:"newcolumn"};
 		    	        }
 		    	        criterios_grupo[j]={type:"label", label:nombre_criterio, labelWidht:"100", list:radios};
 	    	        }
@@ -292,6 +294,24 @@
 		    	}
 				return items;
 	    	}
+			
+			function contarValores(){
+				contador = new Array();
+				contador = [0,0,0,0,0,0];
+				var sumatorio = 0;
+				formRubrica.forEachItem(function(name,value){
+					if(formRubrica.getItemType(name, value) == "radio"){
+						if(formRubrica.isItemChecked(name, value)){
+							contador[value]=contador[value]+1;
+							sumatorio = sumatorio + value;
+						}
+					}
+				});
+				for(var i=1;i<=5;i++){
+					formRubrica.setItemValue("contador_"+i, contador[i]);
+				}
+				formRubrica.setItemValue("nota", Math.round(((sumatorio/numeroCriterios)*2) * 100) / 100);
+			}
 	   </script>
 	</head>
 	<body>
