@@ -165,11 +165,8 @@
 	    			}
 	    			
 	    			//permisosRubricasForm();	
-  					var formProcessor = new dataProcessor('notasrubrica.do?idPortafolio=' + identificador);
-  					formProcessor.init(formRubrica);
  
-  					/*myForm.load("php/user_details.php?id="+userID);
-	    			formRubrica.load('notasrubrica.do?idPortafolio=' + identificador, function () {			    			
+  					loadNotasRubrica(identificador);
 	    				/*formRubrica.attachEvent("onButtonClick", function(id){
 		    				if (id == "aceptar") {
 		    					formRubrica.send("actualizarasignatura.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura ,"post", function(xml) {
@@ -182,8 +179,7 @@
 							formRubrica.send("actualizarasignatura.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura ,"post", function(xml) {
 								alert('<bean:message key="message.asignatura.cambiada.exito"/>');
 							}); 
-			    		});
-		    		});*/
+			    		});*/
 	    		});
 			}
 			function goAnexo1(identificador){
@@ -216,6 +212,31 @@
 	    	    return xmlhttp;
 	    	}
 			
+			
+			function loadNotasRubrica(idPortafolio){
+	    		var url = "notasrubrica.do?idPortafolio=" + idPortafolio;
+	    		var xmlhttp = initRequest();
+	    		xmlhttp.onreadystatechange=function(){
+	    			if (xmlhttp.readyState===4) {
+	        	        if(xmlhttp.status===200) { //GET returning a response
+	        	        	return checkRadioButtonsFromXML(xmlhttp.responseXML);
+	        	        }
+	        	    }
+	    		}
+	    	    xmlhttp.open("GET",url,false);
+	    	    xmlhttp.send(null);
+	    	    return xmlhttp.onreadystatechange();
+	    	}
+
+			function checkRadioButtonsFromXML(xml){
+				var criterios = xml.getElementsByTagName("criterio");
+				for(var i=0;i<criterios.length;i++) {
+	    	        var idCriterio = criterios[i].getElementsByTagName("idCriterio")[0].firstChild.nodeValue;
+	    	        var notaCriterio = criterios[i].getElementsByTagName("nota")[0].firstChild.nodeValue;
+	    	        formRubrica.checkItem(idCriterio,notaCriterio);
+		    	}
+				return items;
+	    	}
 			
 			function dameCompetenciasAsignatura(idAsignatura){
 	    		var url = "competenciasasignatura.do?idAsignatura="+idAsignatura;
@@ -265,7 +286,7 @@
 		    	        nombre_criterio=criterios[j].getElementsByTagName("nombre_criterio")[0].firstChild.nodeValue;
 		    	        var radios = new Array();
 		    	        for(var k=1;k<=10;k=k+2){
-		    	        	radios[k] = {type: "radio", name:"value("+id_criterio+")", label: (k+1)/2};
+		    	        	radios[k] = {type:"radio", name:id_criterio, value:((k+1)/2), label:((k+1)/2)};
 		    	        	radios[k+1] = {type: "newcolumn"};
 		    	        }
 		    	        criterios_grupo[j]={type:"label", label:nombre_criterio, labelWidht:"100", list:radios};
