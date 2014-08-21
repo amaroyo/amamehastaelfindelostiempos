@@ -163,23 +163,21 @@
 	    			for(var i=0;i<grupos_criterios_rubrica.length;i++){
 	    				formRubrica.addItem(null, grupos_criterios_rubrica[i], i+1);
 	    			}
-	    			
+	    			formRubrica.addItem(null,{type:"button", name:"aceptar", value:"Modificar"},i+1);
+	    			formRubrica.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
+
 	    			//permisosRubricasForm();	
- 
   					loadNotasRubrica(identificador);
-	    				/*formRubrica.attachEvent("onButtonClick", function(id){
-		    				if (id == "aceptar") {
-		    					formRubrica.send("actualizarasignatura.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura ,"post", function(xml) {
-									alert('<bean:message key="message.asignatura.cambiada.exito"/>');
-			    				});
-			    				buscar();
-		    				}
-		    			});
-	    				formRubrica.attachEvent("onEnter", function() {
-							formRubrica.send("actualizarasignatura.do?!nativeeditor_status=save&idAsignatura=" + idAsignatura ,"post", function(xml) {
-								alert('<bean:message key="message.asignatura.cambiada.exito"/>');
-							}); 
-			    		});*/
+    				formRubrica.attachEvent("onButtonClick", function(id){
+	    				if (id == "aceptar") {
+	    					formRubrica.send("actualizarnotasrubrica.do?!nativeeditor_status=save&idPortafolio=" + identificador,"post", function(xml) {
+								//alert('<bean:message key="message.asignatura.cambiada.exito"/>');
+		    				});
+	    				}
+	    			});
+    				formRubrica.attachEvent("onEnter", function() {
+						 
+		    		});
 	    		});
 			}
 			function goAnexo1(identificador){
@@ -233,9 +231,8 @@
 				for(var i=0;i<criterios.length;i++) {
 	    	        var idCriterio = criterios[i].getElementsByTagName("idCriterio")[0].firstChild.nodeValue;
 	    	        var notaCriterio = criterios[i].getElementsByTagName("nota")[0].firstChild.nodeValue;
-	    	        formRubrica.checkItem(idCriterio,notaCriterio);
-		    	}
-				return items;
+	    	        formRubrica.checkItem("value("+idCriterio+")",notaCriterio);
+				}
 	    	}
 			
 			function dameCompetenciasAsignatura(idAsignatura){
@@ -286,7 +283,7 @@
 		    	        nombre_criterio=criterios[j].getElementsByTagName("nombre_criterio")[0].firstChild.nodeValue;
 		    	        var radios = new Array();
 		    	        for(var k=1;k<=10;k=k+2){
-		    	        	radios[k] = {type:"radio", name:id_criterio, value:((k+1)/2), label:((k+1)/2)};
+		    	        	radios[k] = {type:"radio", name:"value("+id_criterio+")", value:((k+1)/2), label:((k+1)/2)};
 		    	        	radios[k+1] = {type: "newcolumn"};
 		    	        }
 		    	        criterios_grupo[j]={type:"label", label:nombre_criterio, labelWidht:"100", list:radios};

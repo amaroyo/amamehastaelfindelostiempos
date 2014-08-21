@@ -2,6 +2,7 @@ package es.oyssen.mrm.struts.actions.asignaturas;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import es.oyssen.mrm.negocio.vo.PuntuacionCriterioVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXFormAction;
@@ -31,32 +32,18 @@ public class NotasRubricaAction extends DHTMLXFormAction {
 	
 	@Override
 	public String save(DhtmlxForm f) throws Exception {
-		/*EditarAsignaturaForm form = (EditarAsignaturaForm) f;
-		AsignaturaVO asignatura = new AsignaturaVO();
-		asignatura.setNombre(form.getNombre());
-		asignatura.setCodigo(form.getCodigo());
-		asignatura.setCurso(form.getCurso());
-		asignatura.setDescripcion(form.getDescripcion());
+		NotasRubricaForm form = (NotasRubricaForm) f;
+		PuntuacionCriterioVO puntuacionCriterio = new PuntuacionCriterioVO();
+		puntuacionCriterio.setIdPortafolio(form.getIdPortafolio());
 		
-		if (!StringUtil.isNullOrBlank(form.getIdAsignatura())){
-			asignatura.setIdAsignatura(form.getIdAsignatura());
-			if (getAsignaturasService().findById(asignatura) != null) {
-				getAsignaturasService().update(asignatura);
-				return "asignatura changed";
-			}
-			else
-				return "asignatura not changed: asignatura does not exist";
+		Iterator it = form.getValues().entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry e = (Map.Entry)it.next();
+			puntuacionCriterio.setIdCriterio((String) e.getKey());
+			puntuacionCriterio.setNota((String) e.getValue());
+			getPuntuacionCriteriosService().update(puntuacionCriterio);
 		}
-		else {//if (!StringUtil.isNullOrBlank(form.getNombre()))
-			asignatura.setNombre(form.getNombre());
-			if (getAsignaturasService().findByNombre(asignatura) != null) {
-				getAsignaturasService().update(asignatura);
-				return "asignatura changed";
-			}
-			else
-				return "asignatura not changed: asignatura does not exist";
-		}*/
-		return null;
+		return "notas changed";
 	}
 	
 	@Override
