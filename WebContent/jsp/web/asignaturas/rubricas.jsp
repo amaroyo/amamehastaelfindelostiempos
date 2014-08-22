@@ -22,7 +22,7 @@
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b,idSession, tabbar,
-	    	formRubrica, tab_rubrica, tab_anexo1, competencias, anexo, numeroCriterios;
+	    	formRubrica, formAnexo, tab_rubrica, tab_anexo1, competencias, anexo, numeroCriterios;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -60,23 +60,6 @@
 	    	});
 			
 			function goGridAlumnos(){
-				
-
-				/*********************
-				 * Tanto aqui como en anexo1 y dos hay que distinguir de donde viene la llamada.
-				 * Si viene desde alumno, identificador sera el idUsuario del alumno, en cambio, si
-				 * la llamada viene desde un profesor, el identificador sera el portafolio. Me imagino
-				 * que eso te ahorrara un par de consultas :)
-				 * Tambien tienes acceso a la variable global idAsignatura.
-				 *
-				 * Ten cuidado al realizar la query para el alumno con el idAlumno, para coger el 
-				 * buen portafolio hay que meter el anyo academico!
-				 * 
-				 * Gracias por ocuparte de esta parte =)
-				 **********************
-				 */
-				
-				
 				initRubrica(idSession);
 				
 			}
@@ -146,7 +129,7 @@
 	    			formRubrica.setItemValue('competencias',competencias);
 
 	    			var i;
-	    			grupos_criterios_rubrica = dameGruposCriteriosAsignatura(idAsignatura);
+	    			var grupos_criterios_rubrica = dameGruposCriteriosAsignatura(idAsignatura);
 	    			for(i=0;i<grupos_criterios_rubrica.length;i++){
 	    				formRubrica.addItem(null, grupos_criterios_rubrica[i], i+1);
 	    			}
@@ -191,7 +174,36 @@
 			}
 			function goAnexo1(identificador){
 				
+				formAnexo = tab_anexo1.attachForm();
+		    	formAnexo.loadStruct('../xml/forms/anexo_form.xml', function(){
+	    			formAnexo.setItemLabel('anexo',anexo);
+	    			var grupos_anexo_rubrica = dameGruposAnexoAsignatura(idAsignatura);
+	    			for(var i=0;i<grupos_anexo_rubrica.length;i++){
+	    				formAnexo.addItem("anexo", grupos_anexo_rubrica[i], i);
+	    			}
+	    			formAnexo.addItem(null,{type:"button", name:"aceptar", value:"Modificar"},i+1);
+	    			formAnexo.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
+
+	    			
+	    			//permisosRubricasForm();
+	    			formAnexo.load("notasrubrica.do?idPortafolio=" + identificador+"&idAsignatura="+idAsignatura, function () {			    			
+	    				formAnexo.attachEvent("onButtonClick", function(id){
+		    				if (id == "aceptar") {
+		    					formAnexo.send("actualizarnotasrubrica.do?!nativeeditor_status=save&idPortafolio=" + identificador+"&idAsignatura="+idAsignatura,"post", function(xml) {
+		    						alert('<bean:message key="message.notas.cambiadas.exito"/>');
+			    				});
+		    				}
+		    			});
+	    				formAnexo.attachEvent("onEnter", function() {
+	    					formAnexo.send("actualizarnotasrubrica.do?!nativeeditor_status=save&idPortafolio="+identificador+"&idAsignatura="+idAsignatura,"post", function(xml) {
+	    						alert('<bean:message key="message.notas.cambiadas.exito"/>');
+		    				});
+			    		});
+	    			});
+	    		});	
 			}
+			
+			
 			function goAnexo2(identificador){
 			}
 			
@@ -224,10 +236,10 @@
 	    	}
 
 			function checkRadioButtonsFromXML(xml){
-				var criterios = xml.getElementsByTagName("criterio");
-				for(var i=0;i<criterios.length;i++) {
-	    	        var idCriterio = criterios[i].getElementsByTagName("idCriterio")[0].firstChild.nodeValue;
-	    	        var notaCriterio = criterios[i].getElementsByTagName("nota")[0].firstChild.nodeValue;
+				var length = xml.documentElement.childNodes.length;
+				for(var i=0;i<length;i++) {
+	    	        var idCriterio = xml.documentElement.childNodes.item(i).nodeName;
+	    	        var notaCriterio = xml.documentElement.childNodes.item(i).childNodes[0].nodeValue;
 	    	        formRubrica.checkItem("value("+idCriterio+")",notaCriterio);
 				}
 	    	}
@@ -264,13 +276,27 @@
 	    	    return xmlhttp.onreadystatechange();
 	    	}
 			
+			function dameGruposAnexoAsignatura(idAsignatura){
+	    		var url = "gruposanexoasignatura.do?idAsignatura="+idAsignatura;
+	    		var xmlhttp = initRequest();
+	    		xmlhttp.onreadystatechange=function(){
+	    			if (xmlhttp.readyState===4) {
+	        	        if(xmlhttp.status===200) { //GET returning a response
+	        	        	return createArrayGruposAnexoFromXML(xmlhttp.responseXML);
+	        	        }
+	        	    }
+	    		}
+	    	    xmlhttp.open("GET",url,false);
+	    	    xmlhttp.send(null);
+	    	    return xmlhttp.onreadystatechange();
+	    	}
+			
 			function createArrayGruposCriteriosFromXML(xml){
 				var items = new Array();
 				var criterios_grupo = new Array();
 				var grupos = xml.getElementsByTagName("grupo");
 				var criterios;
 				var id_grupo, nombre_grupo, id_criterio, nombre_criterio;
-				var id_grupo_id_criterio;
 				for(var i=0;i<grupos.length;i++) {
 	    	        id_grupo=grupos[i].getElementsByTagName("id_grupo")[0].firstChild.nodeValue;
 	    	        nombre_grupo=grupos[i].getElementsByTagName("nombre_grupo")[0].firstChild.nodeValue;
@@ -278,14 +304,35 @@
 	    	        criterios_grupo = new Array();
 	    	        for(var j=0;j<criterios.length;j++){
 	    	        	id_criterio=criterios[j].getElementsByTagName("id_criterio")[0].firstChild.nodeValue;
-		    	        //id_grupo_id_criterio=id_grupo+"_"+id_criterio;
 		    	        nombre_criterio=criterios[j].getElementsByTagName("nombre_criterio")[0].firstChild.nodeValue;
 		    	        var radios = new Array();
 		    	        for(var k=1;k<=10;k=k+2){
-		    	        	radios[k] = {type:"radio", name:"value("+id_criterio+")", value:((k+1)/2), label:((k+1)/2)};
+		    	        	radios[k] = {type:"radio", name:"value(idCriterio"+id_criterio+")", value:((k+1)/2), label:((k+1)/2)};
 		    	        	radios[k+1] = {type:"newcolumn"};
 		    	        }
 		    	        criterios_grupo[j]={type:"label", label:nombre_criterio, labelWidht:"100", list:radios};
+	    	        }
+	    	        items[i]={type:"fieldset", name:id_grupo, label:nombre_grupo, inputWidth:"auto", list:criterios_grupo};
+		    	}
+				return items;
+	    	}
+			
+			
+			function createArrayGruposAnexoFromXML(xml){
+				var items = new Array();
+				var criterios_grupo = new Array();
+				var grupos = xml.getElementsByTagName("grupo");
+				var criterios;
+				var id_grupo, nombre_grupo, id_criterio, nombre_criterio;
+				for(var i=0;i<grupos.length;i++) {
+	    	        id_grupo=grupos[i].getElementsByTagName("id_grupo")[0].firstChild.nodeValue;
+	    	        nombre_grupo=grupos[i].getElementsByTagName("nombre_grupo")[0].firstChild.nodeValue;
+	    	        criterios = grupos[i].getElementsByTagName("criterio");
+	    	        criterios_grupo = new Array();
+	    	        for(var j=0;j<criterios.length;j++){
+	    	        	id_criterio=criterios[j].getElementsByTagName("id_criterio")[0].firstChild.nodeValue;
+		    	        nombre_criterio=criterios[j].getElementsByTagName("nombre_criterio")[0].firstChild.nodeValue; 
+		    	        criterios_grupo[j] = {type:"input", name:"value(idCriterio"+id_criterio+")", label:"<strong>"+nombre_criterio+"</strong>", position:"label-top", labelWidth:"700", inputWidth:"700", rows:"3"};
 	    	        }
 	    	        items[i]={type:"fieldset", name:id_grupo, label:nombre_grupo, inputWidth:"auto", list:criterios_grupo};
 		    	}

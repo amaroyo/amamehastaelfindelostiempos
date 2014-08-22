@@ -54,7 +54,7 @@ public class NotasRubricaAction extends DHTMLXFormAction {
 		Iterator it = form.getValues().entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry e = (Map.Entry)it.next();
-			puntuacionCriterio.setIdCriterio((String) e.getKey());
+			puntuacionCriterio.setIdCriterio(((String) e.getKey()).substring(10));
 			puntuacionCriterio.setNota((String) e.getValue());
 			getPuntuacionCriteriosService().update(puntuacionCriterio);
 		}
@@ -71,10 +71,7 @@ public class NotasRubricaAction extends DHTMLXFormAction {
 			PuntuacionCriterioVO puntuacionCriterio = (PuntuacionCriterioVO) it.next();
 			String idCriterio = puntuacionCriterio.getIdCriterio();
 			String nota = puntuacionCriterio.getNota();
-			sb.append("<criterio>");
-			sb.append("<idCriterio><![CDATA[" + idCriterio + "]]></idCriterio>");
-			sb.append("<nota><![CDATA[" + nota + "]]></nota>");
-			sb.append("</criterio>");
+			sb.append("<idCriterio"+idCriterio+"><![CDATA[" + nota + "]]></idCriterio"+idCriterio+">");
 		}
 		sb.append("</data>");
 		return sb.toString();
