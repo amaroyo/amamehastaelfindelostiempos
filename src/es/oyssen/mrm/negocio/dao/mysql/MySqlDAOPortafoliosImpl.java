@@ -186,7 +186,7 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 	
 
 	@Override
-	public void insert(final PortafolioVO portafolio) throws DAOException, DAOInsertException {
+	public String insert(final PortafolioVO portafolio) throws DAOException, DAOInsertException {
 		try{
 			KeyHolder kh = new GeneratedKeyHolder();
 			getJdbcTemplate().update(new PreparedStatementCreator() {
@@ -204,6 +204,7 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 			}
 			,kh);
 			portafolio.setIdPortafolio(kh.getKey().toString());
+			return kh.getKey().toString();
 			
 		} catch (Exception e) {
 			throw new DAOInsertException(e);

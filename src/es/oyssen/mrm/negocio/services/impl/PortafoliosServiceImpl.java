@@ -29,11 +29,11 @@ public class PortafoliosServiceImpl implements PortafoliosService{
 		this.daoPortafolios = daoPortafolios;
 	}
 	
-	public void insert(PortafolioVO portafolio)
+	public String insert(PortafolioVO portafolio)
 			throws es.oyssen.mrm.negocio.exceptions.ServiceException,
 			es.oyssen.mrm.negocio.dao.exceptions.DAOException {
 		try {
-			daoPortafolios.insert(portafolio);	
+			return daoPortafolios.insert(portafolio);	
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("Error creando portafolio", e);
