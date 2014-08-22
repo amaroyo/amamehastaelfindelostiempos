@@ -146,7 +146,7 @@ public class SubirArchivoAction extends MrmAction {
 				
 				else return mapping.findForward("cancel");
 			}
-			else if(((sp[sp.length-1].toLowerCase()).equals("xls") || (sp[sp.length-1].toLowerCase()).equals("xlsx")) && f.getFichero().getFileSize()<MAX_SIZE_MYSQL) {
+			else if((sp[sp.length-1].toLowerCase()).equals("xls") && f.getFichero().getFileSize()<MAX_SIZE_MYSQL) {
 				if (tipo.equals("usuarios")){
 					
 					String answ = parsearUsuarios(f.getFichero().getInputStream());					
@@ -309,18 +309,20 @@ public class SubirArchivoAction extends MrmAction {
 						}
 											
 						if(usuarioCorrecto) {
-							//hacer set de grupo
-							usuario.setIdGrupo("3");
-							getUsuariosService().updateGrupo(usuario);
-							
+													
 							for (AsignaturaVO as : asignaturas) {				
 								profe.setIdAsignatura(as.getIdAsignatura());
 								//distinguir entre insert y update
 								ProfesorAsociadoVO existe = getProfesoresAsociadosService().findById(profe);
 								if (existe != null){
-									getProfesoresAsociadosService().update(profe);
+									getProfesoresAsociadosService().updateTODO(profe);
 								}
-								else getProfesoresAsociadosService().insert(profe);
+								else {
+									//hacer set de grupo
+									usuario.setIdGrupo("3");
+									getUsuariosService().updateGrupo(usuario);
+									getProfesoresAsociadosService().insert(profe);
+								}
 							}
 						}
 					}

@@ -28,4 +28,6 @@ public interface DAOProfesoresAsociados {
 	
 	public void delete(ProfesorAsociadoVO profesor) throws DAOException, DAODeleteException;
 
+	public void updateTODO(ProfesorAsociadoVO profe) throws DAOException, DAODeleteException;
+
 }
