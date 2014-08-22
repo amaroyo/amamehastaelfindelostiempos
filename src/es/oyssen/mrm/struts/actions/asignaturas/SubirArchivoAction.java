@@ -293,7 +293,7 @@ public class SubirArchivoAction extends MrmAction {
 						a.setCodigo(p.getIdAsignatura());
 						List<AsignaturaVO> asignaturas = getAsignaturasService().findByCodigo(a);
 						
-						if(asignaturas == null){
+						if(asignaturas.isEmpty()){
 							usuarioCorrecto=false;
 							error=true;
 							errorlog += "Error en linea: " + row.getRowNum() +". Razon: El alumno con dni: " + dni + " no tiene una asignatura valida asignada.\r\n";
@@ -409,7 +409,7 @@ public class SubirArchivoAction extends MrmAction {
 						a.setCodigo(profe.getIdAsignatura());
 						List<AsignaturaVO> asignaturas = getAsignaturasService().findByCodigo(a);
 						
-						if(asignaturas == null){
+						if(asignaturas.isEmpty()){
 							usuarioCorrecto=false;
 							error=true;
 							errorlog += "Error en linea: " + row.getRowNum() +". Razon: El profesor con dni: " + dni + " no tiene una asignatura valida asignada.\r\n";
