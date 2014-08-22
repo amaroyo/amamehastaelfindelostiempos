@@ -90,6 +90,8 @@
 	
 	<bean id="daoTrabajosDeCampoInfo" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOTrabajosDeCampoInfoImpl" parent="daoBase" />
 	
+	<bean id="daoErroresLog" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOErroresLogImpl" parent="daoBase" />
+	
 	
 </beans>
 
