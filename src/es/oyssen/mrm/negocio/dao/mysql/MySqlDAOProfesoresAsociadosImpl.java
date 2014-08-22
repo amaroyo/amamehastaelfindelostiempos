@@ -14,6 +14,7 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
+import es.oyssen.mrm.negocio.dao.rowmappers.ProfesorAsociadoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioMapper;
 import es.oyssen.mrm.negocio.vo.ProfesorAsociadoVO;
 
@@ -85,7 +86,7 @@ public class MySqlDAOProfesoresAsociadosImpl extends DAOBase implements DAOProfe
 
 	public List<ProfesorAsociadoVO> findAll(ProfesorAsociadoVO profesor) throws DAOException {
 		try {
-			return getJdbcTemplate().query(SQL_FIND_ALL, new Object[]{profesor.getAnyoAcademico()}, new UsuarioMapper());
+			return getJdbcTemplate().query(SQL_FIND_ALL, new Object[]{profesor.getAnyoAcademico()}, new ProfesorAsociadoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
@@ -100,7 +101,7 @@ public class MySqlDAOProfesoresAsociadosImpl extends DAOBase implements DAOProfe
 					(ProfesorAsociadoVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_ID, new Object[]{
 							profesor.getIdProfesor(),
 							profesor.getIdAsignatura(),
-							profesor.getAnyoAcademico()}, new UsuarioMapper());
+							profesor.getAnyoAcademico()}, new ProfesorAsociadoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
@@ -112,7 +113,7 @@ public class MySqlDAOProfesoresAsociadosImpl extends DAOBase implements DAOProfe
 	public List<ProfesorAsociadoVO> findByProfesor(ProfesorAsociadoVO profesor) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_BY_PROFESOR, new Object[]{
-					profesor.getIdProfesor(),profesor.getAnyoAcademico()}, new UsuarioMapper());
+					profesor.getIdProfesor(),profesor.getAnyoAcademico()}, new ProfesorAsociadoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
@@ -124,7 +125,7 @@ public class MySqlDAOProfesoresAsociadosImpl extends DAOBase implements DAOProfe
 	public List<ProfesorAsociadoVO> findByAsignatura(ProfesorAsociadoVO profesor) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_BY_ASIGNATURA, new Object[]{
-					profesor.getIdAsignatura(),profesor.getAnyoAcademico()}, new UsuarioMapper());
+					profesor.getIdAsignatura(),profesor.getAnyoAcademico()}, new ProfesorAsociadoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
@@ -136,7 +137,7 @@ public class MySqlDAOProfesoresAsociadosImpl extends DAOBase implements DAOProfe
 	public List<ProfesorAsociadoVO> findByAnyoAcademico(ProfesorAsociadoVO profesor) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_BY_ANYO_ACADEMICO, new Object[]{
-					profesor.getAnyoAcademico()}, new UsuarioMapper());
+					profesor.getAnyoAcademico()}, new ProfesorAsociadoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {
@@ -151,7 +152,7 @@ public class MySqlDAOProfesoresAsociadosImpl extends DAOBase implements DAOProfe
 					profesor.getCentroAsociado(),
 					profesor.getTurno(),
 					profesor.getIdAsignatura(),
-					profesor.getAnyoAcademico()}, new UsuarioMapper());
+					profesor.getAnyoAcademico()}, new ProfesorAsociadoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

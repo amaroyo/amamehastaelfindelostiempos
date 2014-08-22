@@ -30,14 +30,14 @@
 		</action>
 		
 		<action path="/administrar/subirExcelAlumnos" name="SubirArchivoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.SubirArchivoAction">
-			<exception type="java.lang.Exception" key="error.subir.archivo.excel.alumnos" path="/administrar/subirExcelAlumnos.do"></exception>
+			<exception type="java.lang.Exception" key="error.subir.archivo.excel.alumnos" path="/administrar/algoSalioMal.do"></exception>
 			<forward name="cancel" path="/administrar/subirArchivo.do" />
 			<forward name="error" path="/administrar/algoSalioMal.do" />
 			<forward name="success" path="/asignaturas/correcto.do" />
 		</action>
 		
 		<action path="/administrar/subirExcelProfesores" name="SubirArchivoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.SubirArchivoAction">
-			<exception type="java.lang.Exception" key="error.subir.archivo.excel.profesores" path="/administrar/subirExcelProfesores.do"></exception>
+			<exception type="java.lang.Exception" key="error.subir.archivo.excel.profesores" path="/administrar/algoSalioMal.do"></exception>
 			<forward name="cancel" path="/administrar/subirArchivo.do" />
 			<forward name="error" path="/administrar/algoSalioMal.do" />
 			<forward name="success" path="/asignaturas/correcto.do" />
