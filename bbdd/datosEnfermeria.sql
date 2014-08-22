@@ -1022,6 +1022,3 @@ insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 3
 insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 34, 'EXCELENTE');
 insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 35, 'NO');
 insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 36, 'ACEPTABLE');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 37, 'PROGRESA ADECUADAMENTE');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 38, 'DEBE CAMBIAR ACTITUD');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 39, 'BIEN');
