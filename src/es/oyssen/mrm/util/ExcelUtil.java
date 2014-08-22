@@ -1,5 +1,6 @@
 package es.oyssen.mrm.util;
 
+import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -29,30 +30,50 @@ import es.oyssen.mrm.negocio.vo.UsuarioVO;
 public class ExcelUtil {
 
 	
-	public static ProfesorAsociadoVO parsearProfesorAsociado(Row row) {
+	public static ProfesorAsociadoVO parsearProfesorAsociado(HSSFRow row) {
 		ProfesorAsociadoVO p = new ProfesorAsociadoVO();
 		String cursoAcademico = (row.getCell(2) != null) ? row.getCell(2).getStringCellValue() : "";
 		if(!cursoAcademico.equals("")){
 			String[] sp = {};
 			sp = cursoAcademico.split("-");
-			if(Integer.parseInt(sp[sp.length-1])>0 && Integer.parseInt(sp[sp.length-1])>99){
-				String anyoAcademico = sp[0] + "/20" + sp[sp.length-1];
-				p.setAnyoAcademico(anyoAcademico);
+			try{
+				if(Integer.parseInt(sp[sp.length-1])>0 && Integer.parseInt(sp[sp.length-1])<99){
+					if (Integer.parseInt(sp[0])>2000 && Integer.parseInt(sp[0])<2099){
+						String anyoAcademico = sp[0] + "/20" + sp[sp.length-1];
+						p.setAnyoAcademico(anyoAcademico);
+					}
+					else p.setAnyoAcademico("");
+				}
+			}
+			catch (Exception e){
+				p.setAnyoAcademico("");
 			}
 		}
-		p.setIdAsignatura((row.getCell(5) != null) ? row.getCell(5).getStringCellValue() : "");
-		String centroHospital = (row.getCell(5) != null) ? row.getCell(5).getStringCellValue() : "";
-		p.setCentroAsociado(centroHospital);
-		if (centroHospital.contains("Mañana")) p.setTurno("Mañana");
-		else if (centroHospital.contains("Tarde")) p.setTurno("Tarde");
-		else p.setTurno("");
+		else p.setAnyoAcademico("");
+		int cod = row.getCell(5).getCellType();
+		if (cod == 0 ) {
+			double c = (row.getCell(5) != null) ? row.getCell(5).getNumericCellValue() : 0;
+			int a = (int) c;
+			p.setIdAsignatura(Integer.toString(a));
+		}
+		else if (cod == 1){
+			p.setIdAsignatura((row.getCell(5) != null) ? row.getCell(5).getStringCellValue() : "");
+		}
+		else p.setIdAsignatura("-1");
+			
+			
 		
+		String centroHospital = (row.getCell(6) != null) ? row.getCell(6).getStringCellValue() : "";
+		p.setCentroAsociado(centroHospital);
+		if (centroHospital.contains("Mañana")) p.setTurno("M - Mañana");
+		else if (centroHospital.contains("Tarde")) p.setTurno("T - Tarde");
+		else p.setTurno("");
 		return p;
 		
 	}
 
 	
-	public static UsuarioVO parsearProfesor(Row row) {
+	public static UsuarioVO parsearProfesor(HSSFRow row) {
 		UsuarioVO u = new UsuarioVO();
 		u.setDni((row.getCell(1) != null) ? row.getCell(1).getStringCellValue() : "");
 		return u;

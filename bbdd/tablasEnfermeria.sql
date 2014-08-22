@@ -22,6 +22,7 @@ DROP TABLE IF EXISTS trabajos_de_campo;
 DROP TABLE IF EXISTS diarios_reflexivos;
 DROP TABLE IF EXISTS anexos;
 DROP TABLE IF EXISTS puntuacion_criterios;
+DROP TABLE IF EXISTS errores_log;
 
 
 
@@ -368,4 +369,16 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
 
+
+CREATE TABLE IF NOT EXISTS errores_log (
+	id_error INT(10) NOT NULL,
+	tipo ENUM('error_usuarios','error_profesores', 'error_alumnos') NOT NULL,
+	descripcion TEXT,
+	fecha DATETIME,
+	PRIMARY KEY(id_error)
+	
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
 

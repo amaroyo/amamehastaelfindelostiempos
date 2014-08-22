@@ -23,8 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -251,32 +252,34 @@ public class SubirArchivoAction extends MrmAction {
 		
 		try {
 			log.debug("Procesamos fichero de carga.........");
-			Workbook workbook = WorkbookFactory.create(inputStream);
-			Sheet sheet = workbook.getSheetAt(0);		
+			HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
+			HSSFSheet sheet = workbook.getSheetAt(0);
+	
+			
 			
 			log.debug("Procesando archivo excel: " + workbook.getSheetName(0));
 			
 			Iterator<Row> rows = sheet.rowIterator();
 			if (rows.hasNext()) {
-				Row row = (Row) rows.next();
+				HSSFRow row = (HSSFRow) rows.next();
 				while (rows.hasNext()) {
 					boolean usuarioCorrecto=true;
-					row = (Row) rows.next();
+					row = (HSSFRow) rows.next();
 					
 					UsuarioVO usuario = ExcelUtil.parsearProfesor(row);
 					
-					
+					String dni = usuario.getDni();
 					if(usuario.getDni().equals("")) {
 						usuarioCorrecto=false;
 						error=true;
-						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El dni del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " es vacio.\r\n";
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El dni del profesor es vacio.\r\n";
 					}
 					if(!dniCorrecto(usuario.getDni())){
 						usuarioCorrecto=false;
 						error=true;
-						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El dni del usuario " + usuario.getNombre() + ", " +usuario.getApellido1() +  " es incorrecto.\r\n";
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El dni: " + dni +   " es incorrecto.\r\n";
 					}
-					String dni = usuario.getDni();
+					
 					usuario = getUsuariosService().findByDni(usuario);
 					if (usuario == null){
 						usuarioCorrecto=false;
@@ -312,7 +315,12 @@ public class SubirArchivoAction extends MrmAction {
 							
 							for (AsignaturaVO as : asignaturas) {				
 								profe.setIdAsignatura(as.getIdAsignatura());
-								getProfesoresAsociadosService().insert(profe);
+								//distinguir entre insert y update
+								ProfesorAsociadoVO existe = getProfesoresAsociadosService().findById(profe);
+								if (existe != null){
+									getProfesoresAsociadosService().update(profe);
+								}
+								else getProfesoresAsociadosService().insert(profe);
 							}
 						}
 					}
