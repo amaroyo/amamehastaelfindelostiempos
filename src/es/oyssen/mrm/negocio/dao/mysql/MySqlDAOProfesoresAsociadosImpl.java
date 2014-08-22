@@ -23,6 +23,7 @@ public class MySqlDAOProfesoresAsociadosImpl extends DAOBase implements DAOProfe
 	
 	private static String SQL_INSERT = "insert into profesores_asociados (id_profesor, id_asignatura, centro_asociado, turno, anyo_academico) values (?,?,?,?,?)";
 	private static String SQL_UPDATE = "update profesores_asociados set id_asignatura=?, centro_asociado=?, turno=?, anyo_academico=?";
+	private static String SQL_UPDATE_TODO = "update profesores_asociados set centro_asociado=?, turno=?";
 	private static String SQL_DELETE = "delete from profesores_asociados where id_profesor = ? and id_asignatura = ? and anyo_academico = ?";
 	private static String SQL_FIND_ALL = "select * from profesores_asociados where anyo_academico =?";
 	private static String SQL_FIND_BY_ID = "select * from profesores_asociados where id_profesor = ? and id_asignatura = ? and anyo_academico =?";
@@ -62,6 +63,26 @@ public class MySqlDAOProfesoresAsociadosImpl extends DAOBase implements DAOProfe
 			
 			query += " where id_profesor = ?";
 			
+			getJdbcTemplate().update(query, new Object[]{					
+					profesor.getCentroAsociado(),
+					profesor.getTurno(),
+					profesor.getIdAsignatura(),
+					profesor.getAnyoAcademico(),
+					profesor.getIdProfesor()});
+		} catch(Exception e) {
+			throw new DAOUpdateException(e);
+		}
+		
+	}
+	public void updateTODO(ProfesorAsociadoVO profesor) throws DAOException,
+	DAOUpdateException {
+		try {
+
+			String query = SQL_UPDATE_TODO;
+
+			
+			query += " where id_asignatura =? and anyo_academico =? and id_profesor = ?";
+			
 			getJdbcTemplate().update(query, new Object[]{
 					profesor.getIdAsignatura(),
 					profesor.getCentroAsociado(),
@@ -71,7 +92,7 @@ public class MySqlDAOProfesoresAsociadosImpl extends DAOBase implements DAOProfe
 		} catch(Exception e) {
 			throw new DAOUpdateException(e);
 		}
-		
+
 	}
 	
 	public void delete(ProfesorAsociadoVO profesor) throws DAOException,

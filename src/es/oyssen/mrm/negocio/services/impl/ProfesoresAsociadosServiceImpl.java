@@ -108,6 +108,18 @@ public class ProfesoresAsociadosServiceImpl implements ProfesoresAsociadosServic
 			throw new ServiceException(e.getMessage());
 		}
 	}
+
+	@Override
+	public void updateTODO(ProfesorAsociadoVO profe) throws ServiceException,
+			DAOException {
+		try {
+			daoProfesoresAsociados.updateTODO(profe);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			throw new ServiceException(e);
+		}		
+		
+	}
 	
 	
 	
