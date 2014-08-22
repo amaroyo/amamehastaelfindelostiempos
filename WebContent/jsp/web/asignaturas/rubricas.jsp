@@ -189,6 +189,11 @@
 	    			formAnexo.load("notasrubrica.do?idPortafolio=" + identificador+"&idAsignatura="+idAsignatura, function () {			    			
 	    				formAnexo.attachEvent("onButtonClick", function(id){
 		    				if (id == "aceptar") {
+		    					formAnexo.forEachItem(function(name){
+		    						if(formAnexo.getItemType(name) == "input"){
+		    							formAnexo.setItemValue("value("+name+")", formAnexo.getItemValue(name));
+		    						}
+		    					});
 		    					formAnexo.send("actualizarnotasrubrica.do?!nativeeditor_status=save&idPortafolio=" + identificador+"&idAsignatura="+idAsignatura,"post", function(xml) {
 		    						alert('<bean:message key="message.notas.cambiadas.exito"/>');
 			    				});
@@ -329,10 +334,11 @@
 	    	        nombre_grupo=grupos[i].getElementsByTagName("nombre_grupo")[0].firstChild.nodeValue;
 	    	        criterios = grupos[i].getElementsByTagName("criterio");
 	    	        criterios_grupo = new Array();
-	    	        for(var j=0;j<criterios.length;j++){
-	    	        	id_criterio=criterios[j].getElementsByTagName("id_criterio")[0].firstChild.nodeValue;
-		    	        nombre_criterio=criterios[j].getElementsByTagName("nombre_criterio")[0].firstChild.nodeValue; 
-		    	        criterios_grupo[j] = {type:"input", name:"value(idCriterio"+id_criterio+")", label:"<strong>"+nombre_criterio+"</strong>", position:"label-top", labelWidth:"700", inputWidth:"700", rows:"3"};
+	    	        for(var j=0;j<(criterios.length)*2;j=j+2){
+	    	        	id_criterio=criterios[j/2].getElementsByTagName("id_criterio")[0].firstChild.nodeValue;
+		    	        nombre_criterio=criterios[j/2].getElementsByTagName("nombre_criterio")[0].firstChild.nodeValue; 
+		    	        criterios_grupo[j] = {type:"input", name:"idCriterio"+id_criterio, label:"<strong>"+nombre_criterio+"</strong>", position:"label-top", labelWidth:"700", inputWidth:"700", rows:"3"};
+		    	        criterios_grupo[j+1] = {type:"hidden", name:"value(idCriterio"+id_criterio+")"};
 	    	        }
 	    	        items[i]={type:"fieldset", name:id_grupo, label:nombre_grupo, inputWidth:"auto", list:criterios_grupo};
 		    	}
