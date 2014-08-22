@@ -108,15 +108,15 @@
 				else tabbar = a.attachTabbar();
 		    	dameRubricaAsignatura(idAsignatura);
 				
-				tabbar.addTab('rubrica',"<bean:message key="title.rubrica"/>",'');
+				tabbar.addTab('rubrica',"<bean:message key='title.rubrica'/>",'');
 				tab_rubrica = tabbar.cells('rubrica');
 				goRubrica(identificador);
 				
-				tabbar.addTab('anexo1',"<bean:message key="title.anexo.uno"/>",'');
+				tabbar.addTab('anexo1',"<bean:message key='title.anexo.uno'/>",'');
 		    	tab_anexo1 = tabbar.cells('anexo1');
 		    	goAnexo1(identificador);
 		    	
-				tabbar.addTab('anexo2',"<bean:message key="title.anexo.dos"/>",'');
+				tabbar.addTab('anexo2',"<bean:message key='title.anexo.dos'/>",'');
 				
 				tabbar.setTabActive('rubrica');
 			}
@@ -200,6 +200,11 @@
 		    				}
 		    			});
 	    				formAnexo.attachEvent("onEnter", function() {
+	    					formAnexo.forEachItem(function(name){
+	    						if(formAnexo.getItemType(name) == "input"){
+	    							formAnexo.setItemValue("value("+name+")", formAnexo.getItemValue(name));
+	    						}
+	    					});
 	    					formAnexo.send("actualizarnotasrubrica.do?!nativeeditor_status=save&idPortafolio="+identificador+"&idAsignatura="+idAsignatura,"post", function(xml) {
 	    						alert('<bean:message key="message.notas.cambiadas.exito"/>');
 		    				});

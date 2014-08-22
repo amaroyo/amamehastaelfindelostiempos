@@ -28,6 +28,8 @@
 	   	
 	   	<form-bean name="GridDiariosReflexivosUsuarioAsignatura" type="es.oyssen.mrm.struts.forms.asignaturas.GridDiariosReflexivosUsuarioAsignaturaForm" />
 	   	 
+	   	<form-bean name="NotasRubricaForm" type="es.oyssen.mrm.struts.forms.asignaturas.NotasRubricaForm" />
+	   	 
 	   	 
 	</form-beans>
 	
@@ -83,6 +85,17 @@
 		<action path="/alumnos/descargarDiarioReflexivo" name="Descargar" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarAction" />
 		
 		<action path="/alumnos/descargarDiariosReflexivosAlumno" name="DescargarDiariosReflexivosAlumno" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarDiariosReflexivosAlumnoAction" />
+		
+		
+		<action path="/alumnos/gruposcriteriosasignatura" name="" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.GruposCriteriosAsignaturaAction"  />
+		<action path="/alumnos/gruposanexoasignatura" name="" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.GruposAnexoAsignaturaAction"  />
+		<action path="/alumnos/rubricaasignatura" name="" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.cursos.RubricaAsignaturaAction"  />
+		
+		
+		<action path="/alumnos/notasrubrica" name="NotasRubricaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.NotasRubricaAction"  />
+		<action path="/alumnos/actualizarnotasrubrica" name="NotasRubricaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.NotasRubricaAction"  />
+		
+		
 		
 	</action-mappings>
 
