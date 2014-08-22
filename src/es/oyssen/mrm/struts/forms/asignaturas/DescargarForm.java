@@ -10,8 +10,15 @@ public class DescargarForm extends DhtmlxGridForm {
 	private String idCasoClinico;
 	private String idTrabajoCampo;
 	private String idDiarioReflexivo;
+	private String idError;
 	
 	
+	public String getIdError() {
+		return idError;
+	}
+	public void setIdError(String idError) {
+		this.idError = idError;
+	}
 	public String getIdPortafolio() {
 		return idPortafolio;
 	}

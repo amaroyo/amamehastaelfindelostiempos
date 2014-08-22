@@ -110,7 +110,7 @@
 			
 			function subirPractica(){
 				var dhxWins= new dhtmlXWindows();
-				var window = dhxWins.createWindow("subir", 300,50, 500, 150);
+				var window = dhxWins.createWindow("subir", 300,50, 500, 170);
 				window.setText('<bean:message key="title.subir.practica" />');				
 				window.setModal(true);
 				window.centerOnScreen();

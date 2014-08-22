@@ -32,6 +32,7 @@ import org.apache.struts.action.ActionMapping;
 
 import es.oyssen.mrm.negocio.vo.AsignaturaVO;
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
+import es.oyssen.mrm.negocio.vo.ErrorLogVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.ProfesorAsociadoVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
@@ -149,31 +150,18 @@ public class SubirArchivoAction extends MrmAction {
 			else if((sp[sp.length-1].toLowerCase()).equals("xls") && f.getFichero().getFileSize()<MAX_SIZE_MYSQL) {
 				if (tipo.equals("usuarios")){
 					
-					String answ = parsearUsuarios(f.getFichero().getInputStream());					
-					if(answ.equals("")) return mapping.findForward("success");
-					//else return mapping.findForward("error");
+					String answ = parsearUsuarios(f.getFichero().getInputStream());
 					
+					if(answ.equals("")) return mapping.findForward("success");
 					else {
-						
-											
-							//byte[] b = answ.getBytes(Charset.forName("UTF-8"));
-							response.setHeader("Content-Disposition", "attachment; filename=\"" + "REGISTRO_ERRORES.txt" + "\"");
-							
-							PrintWriter out = response.getWriter();
-							
-							response.setContentType("text/plain");
-							
-							//response.setContentLength(b.length);
-							
-							
-							out.print(answ); 
-							
-							
-							out.flush();
-							out.close();
-														
-							
-							return mapping.findForward("error");						
+						ErrorLogVO e = new ErrorLogVO();
+						e.setTipo("error_usuarios");
+						e.setDescripcion(answ);
+						DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+						Date date = new Date();
+						e.setFecha(dateFormat.format(date));
+						getErroresLogService().insert(e);
+						return mapping.findForward("error");						
 					}
 	
 				}
@@ -182,12 +170,14 @@ public class SubirArchivoAction extends MrmAction {
 					String answ = parsearProfesores(f.getFichero().getInputStream());					
 					if(answ.equals("")) return mapping.findForward("success");
 					else {			
-						response.setHeader("Content-Disposition", "attachment; filename=\"" + "REGISTRO_ERRORES.txt" + "\"");
-						PrintWriter out = response.getWriter();
-						response.setContentType("text/plain");
-						out.print(answ); out.flush();
-						out.close();
-						return mapping.findForward("error");						
+						ErrorLogVO e = new ErrorLogVO();
+						e.setTipo("error_profesores");
+						e.setDescripcion(answ);
+						DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+						Date date = new Date();
+						e.setFecha(dateFormat.format(date));
+						getErroresLogService().insert(e);
+						return mapping.findForward("error");							
 					}
 					
 				}

@@ -646,7 +646,7 @@
 				    	}
 				    	else if (rowId == "b") {
 				    		var dhxWinsA= new dhtmlXWindows();
-	    					var windowAlumno = dhxWinsA.createWindow("subir", 300,50, 500, 150);
+	    					var windowAlumno = dhxWinsA.createWindow("subir", 300,50, 500, 170);
 	    					windowAlumno.setText('<bean:message key="title.subir.correccion" />');				
 	    					windowAlumno.setModal(true);
 	    					windowAlumno.centerOnScreen();

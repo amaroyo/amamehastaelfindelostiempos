@@ -46,7 +46,7 @@ public class MySqlDAOErroresLogImpl extends DAOBase implements DAOErroresLog{
 					PreparedStatement ps = conn.prepareStatement(SQL_INSERT, new String[]{"id_error"});
 					ps.setString(1, error.getTipo());
 					ps.setString(2, error.getDescripcion());
-					ps.setString(2, error.getFecha());
+					ps.setString(3, error.getFecha());
 					return ps;
 
 				}
@@ -89,7 +89,7 @@ public class MySqlDAOErroresLogImpl extends DAOBase implements DAOErroresLog{
 	}
 
 
-	public List<ErrorLogVO> findAll(ErrorLogVO error) throws DAOException {
+	public List<ErrorLogVO> findAll() throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_ALL, new Object[]{}, new ErrorLogMapper());
 		} catch (EmptyResultDataAccessException e) {
