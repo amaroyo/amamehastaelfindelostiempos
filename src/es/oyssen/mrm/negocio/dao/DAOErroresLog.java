@@ -17,7 +17,7 @@ public interface DAOErroresLog {
 	
 	public void delete(ErrorLogVO error) throws DAOException, DAODeleteException;
 		
-	public List<ErrorLogVO> findAll(ErrorLogVO error) throws DAOException;
+	public List<ErrorLogVO> findAll() throws DAOException;
 	
 	public ErrorLogVO findById(ErrorLogVO error) throws DAOException;
 	

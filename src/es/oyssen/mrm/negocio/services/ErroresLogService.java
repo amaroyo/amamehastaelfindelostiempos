@@ -15,7 +15,7 @@ public interface ErroresLogService {
 	
 	public void delete(ErrorLogVO error) throws ServiceException, DAOException;
 	
-	public List<ErrorLogVO> findAll(ErrorLogVO error) throws ServiceException;
+	public List<ErrorLogVO> findAll() throws ServiceException;
 	
 	public ErrorLogVO findById(ErrorLogVO error) throws ServiceException;
 

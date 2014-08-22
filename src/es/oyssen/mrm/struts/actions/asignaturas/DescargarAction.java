@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionMapping;
 
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.DiarioReflexivoVO;
+import es.oyssen.mrm.negocio.vo.ErrorLogVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
 import es.oyssen.mrm.struts.forms.asignaturas.DescargarForm;
@@ -101,6 +102,20 @@ public class DescargarAction extends MrmAction {
 				len = t.getEnunciado().length;
 				sp = t.getNombreArchivo().split("\\.");
 				fileName="InformacionTrabajoDeCampo("+sp[0] + ")." + sp[1];
+			}
+		}
+		else if (tipo.equals("RegistroError")){
+			
+			ErrorLogVO e = new ErrorLogVO();
+			e.setIdError(f.getIdError());
+			e = getErroresLogService().findById(e);
+			
+			data = e.getDescripcion().getBytes();
+			if(data!=null){
+				len = e.getDescripcion().getBytes().length;
+				sp[0] = e.getTipo();
+				sp[1] = "txt";
+				fileName= sp[0] + "." + sp[1];
 			}
 		}
 		

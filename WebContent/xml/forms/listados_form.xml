@@ -9,4 +9,7 @@
     <row id="c">
         <cell>Dar de alta nuevos usuarios</cell>
     </row>
+    <row id="d">
+        <cell>Registro de Errores</cell>
+    </row>
 </rows>

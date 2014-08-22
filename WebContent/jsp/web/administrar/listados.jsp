@@ -24,7 +24,7 @@
 
 	    <script type="text/javascript">
 	    
-	    	dhtmlx.image_path='../skins/imgs/';
+	    	dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	
 	    	var miGrid, main_layout, a, b;
 	    	
@@ -70,18 +70,67 @@
 	    			alubia='<bean:message key="label.importar.usuarios" />';
 	    		}
 		    	
+	    		else if(rowID == 'd'){
+	    			goRegistroErrores();
+	    		}
 		    	
-		    	var dhxWins= new dhtmlXWindows();
-				var window = dhxWins.createWindow("subir", 300,50, 500, 150);
-				window.setText(alubia);				
-				window.setModal(true);
-				window.centerOnScreen();
-				window.attachURL("subirArchivo.do?tipoConsulta=" + tipo);
+		    	if(rowID != 'd'){
+			    	var dhxWins= new dhtmlXWindows();
+					var window = dhxWins.createWindow("subir", 300,50, 500, 170);
+					window.setText(alubia);				
+					window.setModal(true);
+					window.centerOnScreen();
+					window.attachURL("subirArchivo.do?tipoConsulta=" + tipo);
+		    	}
 			
 		    }
 		    
 		  
-		    
+		    function goRegistroErrores(){
+		    	var dhxWins= new dhtmlXWindows();
+				var window = dhxWins.createWindow("subir", 300,50, 350, 350);
+				window.setText('<bean:message key="label.registro.errores" />');				
+				window.setModal(true);
+				window.centerOnScreen();
+				var layout = window.attachLayout("1C","dhx_skyblue");
+				var a = layout.cells('a');
+				a.hideHeader();
+				var gridErrores = a.attachGrid();
+				gridErrores.setIconsPath('../skins/imgs/');		   
+  
+			    
+				gridErrores.setHeader(["<bean:message key="label.tipo" />","<bean:message key="label.fecha" />"]);
+			    
+			    
+			    //alineacion del contenido en la columna
+			    gridErrores.setColAlign("left,left");
+			    
+			    gridErrores.setColTypes("ro,ro");
+		    	
+			    gridErrores.enableMultiselect(false);
+			    gridErrores.setColSorting('str,str');
+			    gridErrores.init();
+		    	
+				var gridProcessorMios = new dataProcessor("gridRegistroErrores.do?");
+				gridProcessorMios.enableUTFencoding('simple');
+				gridProcessorMios.init(gridErrores);	  
+				gridProcessorMios.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+					if(action == 'error'){
+		    			dhtmlx.message(tag.firstChild.data,action,4000);
+		    		}
+		    	});		    	
+
+				gridErrores.clearAndLoad("gridRegistroErrores.do?");
+				
+				gridErrores.attachEvent("onRowSelect",function doOnRowSelected(rowID,celInd){
+		    		
+					var accion = "descargarRegistroError.do";
+					accion += "?tipoConsulta="+"RegistroError";
+					accion += "&idError=" + rowID;
+					location.href=accion;
+					
+		    	});
+		    }
 		   
 		    
 		  

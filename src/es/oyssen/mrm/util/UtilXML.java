@@ -20,6 +20,7 @@ import es.oyssen.mrm.negocio.vo.ContactoDistribuidorVO;
 import es.oyssen.mrm.negocio.vo.DiarioReflexivoVO;
 import es.oyssen.mrm.negocio.vo.DistribuidorVO;
 import es.oyssen.mrm.negocio.vo.EmpresaVO;
+import es.oyssen.mrm.negocio.vo.ErrorLogVO;
 import es.oyssen.mrm.negocio.vo.FicheroVO;
 import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.LeadHistoryVO;
@@ -1000,6 +1001,22 @@ public class UtilXML {
 		return sb.toString();
 	}
 	
+	public static String buildXmlRegistroErrores(List<ErrorLogVO> list) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(XML_HEADER);
+		sb.append("<rows>");
+		if(list != null){
+			for (ErrorLogVO e : list) {
+				sb.append("<row id=\"" +e.getIdError() +"\">");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(e.getTipo()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(e.getFecha(),false)) + "]]></cell>");
+				sb.append("</row>");				
+			}
+		}
+		sb.append("</rows>");
+		return sb.toString();
+	}
+	
 	
 	private static final String nombreGrupo(String id){
 		if (id.equals("1")) return "Super user";
@@ -1042,6 +1059,8 @@ public class UtilXML {
 		return tiempoActual.after(fechaL);
 
 	}
+
+	
 
 	
 

@@ -203,7 +203,7 @@
 			    				if (confirm("<bean:message key="message.eliminar.trabajo.campo"/>")) {
 			    					window.close();
 			    					var dhxWins2= new dhtmlXWindows();
-				    				var window2 = dhxWins2.createWindow("subir", 300,50, 500, 150);
+				    				var window2 = dhxWins2.createWindow("subir", 300,50, 500, 170);
 				    				window2.setText('<bean:message key="title.eliminar.trabajo.campo" />');				
 				    				window2.setModal(true);
 				    				window2.centerOnScreen();
@@ -218,7 +218,7 @@
 						    			formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=save&idTrabajoInfo="+ idTrabajoInfo,"post", function(loader, response) {
 						    				window.close();
 						    				var dhxWins2= new dhtmlXWindows();
-						    				var window2 = dhxWins2.createWindow("subir", 300,50, 500, 150);
+						    				var window2 = dhxWins2.createWindow("subir", 300,50, 500, 170);
 						    				window2.setText('<bean:message key="title.subir.practica" />');				
 						    				window2.setModal(true);
 						    				window2.centerOnScreen();
@@ -395,7 +395,7 @@
 					    			formNTC.send("crearTrabajoCampo.do?!nativeeditor_status=create&idAsignatura=" + idAsignatura + "&idProfesor=" + idSession,"post", function(loader, response) {
 					    				window.close();
 					    				var dhxWins2= new dhtmlXWindows();
-					    				var window2 = dhxWins2.createWindow("subir", 300,50, 500, 150);
+					    				var window2 = dhxWins2.createWindow("subir", 300,50, 500, 170);
 					    				window2.setText('<bean:message key="title.subir.practica" />');				
 					    				window2.setModal(true);
 					    				window2.centerOnScreen();
@@ -567,7 +567,7 @@
 		    		trabajoCampo.attachEvent("onButtonClick", function(id){
 	    				if (id == "subirPractica") {
 	    					var dhxWinsA= new dhtmlXWindows();
-	    					var windowAlumno = dhxWinsA.createWindow("subir", 300,50, 500, 150);
+	    					var windowAlumno = dhxWinsA.createWindow("subir", 300,50, 500, 170);
 	    					windowAlumno.setText('<bean:message key="button.subir.trabajo.campo" />');				
 	    					windowAlumno.setModal(true);
 	    					windowAlumno.centerOnScreen();
@@ -659,7 +659,7 @@
 			    	}
 			    	else if (rowId == "b") {
 			    		var dhxWinsA= new dhtmlXWindows();
-    					var windowAlumno = dhxWinsA.createWindow("subir", 300,50, 500, 150);
+    					var windowAlumno = dhxWinsA.createWindow("subir", 300,50, 500, 170);
     					windowAlumno.setText('<bean:message key="title.subir.correccion" />');				
     					windowAlumno.setModal(true);
     					windowAlumno.centerOnScreen();

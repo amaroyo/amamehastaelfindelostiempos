@@ -62,9 +62,9 @@ public class ErroresLogServiceImpl implements ErroresLogService{
 
 	
 	
-	 public List<ErrorLogVO> findAll(ErrorLogVO error) throws ServiceException {
+	 public List<ErrorLogVO> findAll() throws ServiceException {
 		try {
-			return daoErroresLog.findAll(error);
+			return daoErroresLog.findAll();
 		} catch (DAOException e) {
 			e.printStackTrace();
 			log.error("Error findAll error", e);

@@ -8,6 +8,10 @@
 	    
 		<form-bean name="SubirArchivoForm" type="es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoForm" />
 		
+		<form-bean name="GridRegistroErrores" type="es.oyssen.mrm.struts.forms.administrar.GridRegistroErroresForm" />
+		
+		<form-bean name="Descargar" type="es.oyssen.mrm.struts.forms.asignaturas.DescargarForm" />
+		
 	</form-beans>
 	
 
@@ -42,7 +46,11 @@
 			<forward name="error" path="/administrar/algoSalioMal.do" />
 			<forward name="success" path="/asignaturas/correcto.do" />
 		</action>
+		
+		<action path="/administrar/gridRegistroErrores" name="GridRegistroErrores" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.administrar.GridRegistroErroresAction" />
 	
+		<action path="/administrar/descargarRegistroError" name="Descargar" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarAction" />
+		
 	</action-mappings>
 
 </struts-config>
