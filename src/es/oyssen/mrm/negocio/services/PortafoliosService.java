@@ -17,7 +17,7 @@ import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
 public interface PortafoliosService {
 	
-	public void insert(PortafolioVO portafolio) throws ServiceException, DAOException;
+	public String insert(PortafolioVO portafolio) throws ServiceException, DAOException;
 	
 	public void update(PortafolioVO portafolio) throws ServiceException, DAOException;
 	

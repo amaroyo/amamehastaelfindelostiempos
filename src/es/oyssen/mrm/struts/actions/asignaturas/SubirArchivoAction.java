@@ -1,11 +1,6 @@
 package es.oyssen.mrm.struts.actions.asignaturas;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.PrintWriter;
-import java.nio.charset.Charset;
-
 import com.aeat.valida.Validador;
 
 import java.security.SecureRandom;
@@ -16,7 +11,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,15 +18,13 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import es.oyssen.mrm.negocio.vo.AsignaturaVO;
-import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.ErrorLogVO;
+import es.oyssen.mrm.negocio.vo.EstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.ProfesorAsociadoVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
@@ -182,8 +174,18 @@ public class SubirArchivoAction extends MrmAction {
 					
 				}
 				else if (tipo.equals("alumnos")){
-					System.out.print("llegue alumnos");
-					return mapping.findForward("success");
+					String answ = parsearAlumnos(f.getFichero().getInputStream());					
+					if(answ.equals("")) return mapping.findForward("success");
+					else {			
+						ErrorLogVO e = new ErrorLogVO();
+						e.setTipo("error_alumnos");
+						e.setDescripcion(answ);
+						DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+						Date date = new Date();
+						e.setFecha(dateFormat.format(date));
+						getErroresLogService().insert(e);
+						return mapping.findForward("error");							
+					}
 				}
 				else return mapping.findForward("cancel");
 			}
@@ -197,7 +199,7 @@ public class SubirArchivoAction extends MrmAction {
 	
 
 
-	
+
 
 
 
@@ -235,6 +237,122 @@ public class SubirArchivoAction extends MrmAction {
 
 	}
 	
+	private String parsearAlumnos(InputStream inputStream) {
+		boolean error=false;
+		String errorlog="REGISTRO DE ERRORES\r\n\r\n";
+		
+		try {
+			log.debug("Procesamos fichero de carga.........");
+			HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
+			HSSFSheet sheet = workbook.getSheetAt(0);
+	
+			
+			
+			log.debug("Procesando archivo excel: " + workbook.getSheetName(0));
+			
+			Iterator<Row> rows = sheet.rowIterator();
+			if (rows.hasNext()) {
+				HSSFRow row = (HSSFRow) rows.next();
+				while (rows.hasNext()) {
+					boolean usuarioCorrecto=true;
+					row = (HSSFRow) rows.next();
+					
+					UsuarioVO usuario = ExcelUtil.parsearCandidato(row);
+					
+					String dni = usuario.getDni();
+					if(usuario.getDni().equals("")) {
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El dni del alumno es vacio.\r\n";
+					}
+					if(!dniCorrecto(usuario.getDni())){
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El dni: " + dni +   " es incorrecto.\r\n";
+					}
+					
+					usuario = getUsuariosService().findByDni(usuario);
+					if (usuario == null){
+						usuarioCorrecto=false;
+						error=true;
+						errorlog += "Error en linea: " + row.getRowNum() +". Razon: El dni: " + dni + " del alumno no existe en la base de datos.\r\n";
+					}
+					
+					if(usuarioCorrecto){
+						PortafolioVO p = ExcelUtil.parsearPortafolio(row);
+						p.setIdAlumno(usuario.getIdUsuario());						
+						p.setIdProfesor("8"); //profesor No Asignado
+						
+						if(p.getAnyoAcademico().equals("")){
+							usuarioCorrecto=false;
+							error=true;
+							errorlog += "Error en linea: " + row.getRowNum() +". Razon: El alumno con dni: " + dni + " no tiene un año academico valido asignado.\r\n";
+						}
+						
+						AsignaturaVO a = new AsignaturaVO();
+						a.setCodigo(p.getIdAsignatura());
+						List<AsignaturaVO> asignaturas = getAsignaturasService().findByCodigo(a);
+						
+						if(asignaturas == null){
+							usuarioCorrecto=false;
+							error=true;
+							errorlog += "Error en linea: " + row.getRowNum() +". Razon: El alumno con dni: " + dni + " no tiene una asignatura valida asignada.\r\n";
+						
+						}
+						
+						EstanciaUnidadClinicaVO e = ExcelUtil.parsearEstancia(row);
+						
+						if (e.getFechaInicio().equals("")){
+							usuarioCorrecto=false;
+							error=true;
+							errorlog += "Error en linea: " + row.getRowNum() +". Razon: El alumno con dni: " + dni + " no tiene fecha de inicio valida asignada.\r\n";
+						
+						}
+						if (e.getFechaFin().equals("")){
+							usuarioCorrecto=false;
+							error=true;
+							errorlog += "Error en linea: " + row.getRowNum() +". Razon: El alumno con dni: " + dni + " no tiene fecha de fin valida asignada.\r\n";
+						
+						}
+						if (e.getFechaFin().equals("-1") || e.getFechaInicio().equals("-1")){
+							usuarioCorrecto=false;
+							error=true;
+							errorlog += "Error en linea: " + row.getRowNum() +". Razon: El alumno con dni: " + dni + " tiene una fecha inicial mayor que la final.\r\n";
+						
+						}
+											
+						if(usuarioCorrecto) {
+							usuario.setIdGrupo("4");
+							getUsuariosService().updateGrupo(usuario);
+							for (AsignaturaVO as : asignaturas) {	
+								
+								p.setIdAsignatura(as.getIdAsignatura());
+								String idPortafolio = getPortafoliosService().insert(p);
+								
+								e.setIdPortafolio(idPortafolio);
+								getEstanciasUnidadClinicaService().insert(e);
+								
+								
+								
+							}
+						}
+					}
+				}
+			}
+			
+			if(!error) return "";
+			else {
+				errorlog +="FIN REGISTRO ERRORES.";
+				return errorlog;
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Error procesando fichero", e);
+			return errorlog;
+		}
+	}
+	
 	
 	private String parsearProfesores(InputStream inputStream) {
 		boolean error=false;
@@ -256,7 +374,7 @@ public class SubirArchivoAction extends MrmAction {
 					boolean usuarioCorrecto=true;
 					row = (HSSFRow) rows.next();
 					
-					UsuarioVO usuario = ExcelUtil.parsearProfesor(row);
+					UsuarioVO usuario = ExcelUtil.parsearCandidato(row);
 					
 					String dni = usuario.getDni();
 					if(usuario.getDni().equals("")) {
@@ -299,7 +417,9 @@ public class SubirArchivoAction extends MrmAction {
 						}
 											
 						if(usuarioCorrecto) {
-													
+							//hacer set de grupo
+							usuario.setIdGrupo("3");
+							getUsuariosService().updateGrupo(usuario);					
 							for (AsignaturaVO as : asignaturas) {				
 								profe.setIdAsignatura(as.getIdAsignatura());
 								//distinguir entre insert y update
@@ -308,9 +428,7 @@ public class SubirArchivoAction extends MrmAction {
 									getProfesoresAsociadosService().updateTODO(profe);
 								}
 								else {
-									//hacer set de grupo
-									usuario.setIdGrupo("3");
-									getUsuariosService().updateGrupo(usuario);
+									
 									getProfesoresAsociadosService().insert(profe);
 								}
 							}

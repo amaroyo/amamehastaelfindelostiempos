@@ -34,7 +34,7 @@ public interface DAOPortafolios {
 
 	public List<PortafolioVO> findByAnyoAcademico(PortafolioVO portafolio) throws DAOException;	
 	
-	public void insert(PortafolioVO portafolio) throws DAOException, DAOInsertException;
+	public String insert(PortafolioVO portafolio) throws DAOException, DAOInsertException;
 	
 	public void update(PortafolioVO portafolio) throws DAOException, DAOUpdateException;
 	
