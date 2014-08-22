@@ -9,7 +9,7 @@ public class NotasRubricaForm extends DhtmlxGridForm {
 
 	private String idPortafolio;
 	private String idAsignatura;
-	private Map values = new HashMap();
+	private final Map values = new HashMap();
 	
 	
 	
@@ -23,10 +23,6 @@ public class NotasRubricaForm extends DhtmlxGridForm {
 
 	public Map getValues(){
 	    return values;
-	}
-	
-	public void setValues(Map values){
-		this.values = values;
 	}
 	 
 	public void setValue(String key, Object value){
