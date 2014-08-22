@@ -371,7 +371,7 @@ COLLATE = utf8_spanish_ci;
 
 
 CREATE TABLE IF NOT EXISTS errores_log (
-	id_error INT(10) NOT NULL,
+	id_error INT(10) NOT NULL auto_increment,
 	tipo ENUM('error_usuarios','error_profesores', 'error_alumnos') NOT NULL,
 	descripcion TEXT,
 	fecha DATETIME,
