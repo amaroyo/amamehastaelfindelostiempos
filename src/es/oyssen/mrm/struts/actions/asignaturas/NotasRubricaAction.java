@@ -4,10 +4,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.PuntuacionCriterioVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXFormAction;
 import es.oyssen.mrm.struts.forms.asignaturas.NotasRubricaForm;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxForm;
+import es.oyssen.mrm.util.StringUtil;
+
 
 public class NotasRubricaAction extends DHTMLXFormAction {
 
@@ -16,12 +19,16 @@ public class NotasRubricaAction extends DHTMLXFormAction {
 		
 		NotasRubricaForm form = (NotasRubricaForm) f;
 		PuntuacionCriterioVO puntuacionCriterio = new PuntuacionCriterioVO();
+		PortafolioVO portafolio = new PortafolioVO();
 		
-		//if (!StringUtil.isNullOrBlank(form.getIdAsignatura())){
-			puntuacionCriterio.setIdPortafolio(form.getIdPortafolio());
-			return getPuntuacionCriteriosService().findAllByPortafolio(puntuacionCriterio);
-			
-		//} 
+		if (idGrupoUsuario.equals("4")){
+			portafolio.setAnyoAcademico(anyoAcademico);
+			portafolio.setIdAlumno(idUsuario);
+			portafolio.setIdAsignatura(form.getIdAsignatura());
+			form.setIdPortafolio(getPortafoliosService().findByAlumnoAsignatura(portafolio).getIdPortafolio());
+		}
+		puntuacionCriterio.setIdPortafolio(form.getIdPortafolio());
+		return getPuntuacionCriteriosService().findAllByPortafolio(puntuacionCriterio);
 	}
 
 	@Override

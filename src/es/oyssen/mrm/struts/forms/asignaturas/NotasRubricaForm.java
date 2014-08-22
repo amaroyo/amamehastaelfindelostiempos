@@ -8,6 +8,7 @@ import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
 public class NotasRubricaForm extends DhtmlxGridForm {
 
 	private String idPortafolio;
+	private String idAsignatura;
 	private final Map values = new HashMap();
 	
 	
@@ -30,6 +31,14 @@ public class NotasRubricaForm extends DhtmlxGridForm {
 	 
 	public Object getValue(String key){
 	    return values.get(key);
+	}
+
+	public String getIdAsignatura() {
+		return idAsignatura;
+	}
+
+	public void setIdAsignatura(String idAsignatura) {
+		this.idAsignatura = idAsignatura;
 	}
 	
 }

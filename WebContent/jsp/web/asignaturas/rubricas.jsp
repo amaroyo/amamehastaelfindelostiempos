@@ -60,6 +60,23 @@
 	    	});
 			
 			function goGridAlumnos(){
+				
+
+				/*********************
+				 * Tanto aqui como en anexo1 y dos hay que distinguir de donde viene la llamada.
+				 * Si viene desde alumno, identificador sera el idUsuario del alumno, en cambio, si
+				 * la llamada viene desde un profesor, el identificador sera el portafolio. Me imagino
+				 * que eso te ahorrara un par de consultas :)
+				 * Tambien tienes acceso a la variable global idAsignatura.
+				 *
+				 * Ten cuidado al realizar la query para el alumno con el idAlumno, para coger el 
+				 * buen portafolio hay que meter el anyo academico!
+				 * 
+				 * Gracias por ocuparte de esta parte =)
+				 **********************
+				 */
+				
+				
 				initRubrica(idSession);
 				
 			}
@@ -123,20 +140,6 @@
 			
 			function goRubrica(identificador){
 				
-				
-				/*********************
-				 * Tanto aqui como en anexo1 y dos hay que distinguir de donde viene la llamada.
-				 * Si viene desde alumno, identificador sera el idUsuario del alumno, en cambio, si
-				 * la llamada viene desde un profesor, el identificador sera el portafolio. Me imagino
-				 * que eso te ahorrara un par de consultas :)
-				 * Tambien tienes acceso a la variable global idAsignatura.
-				 *
-				 * Ten cuidado al realizar la query para el alumno con el idAlumno, para coger el 
-				 * buen portafolio hay que meter el anyo academico!
-				 * 
-				 * Gracias por ocuparte de esta parte =)
-				 **********************
-				 */
 				formRubrica = tab_rubrica.attachForm();
 		    	formRubrica.loadStruct('../xml/forms/rubrica_form.xml', function(){
 	    			formRubrica.setItemLabel('resultados','<bean:message key="title.resultados.competencias"/>');
@@ -179,7 +182,7 @@
 	    				}
 	    			});
     				formRubrica.attachEvent("onEnter", function() {
-    					formRubrica.send("actualizarnotasrubrica.do?!nativeeditor_status=save&idPortafolio=" + identificador,"post", function(xml) {
+    					formRubrica.send("actualizarnotasrubrica.do?!nativeeditor_status=save&idPortafolio="+identificador,"post", function(xml) {
 							contarValores();
     						alert('<bean:message key="message.notas.cambiadas.exito"/>');
 	    				});
@@ -218,7 +221,7 @@
 			
 			
 			function loadNotasRubrica(idPortafolio){
-	    		var url = "notasrubrica.do?idPortafolio=" + idPortafolio;
+	    		var url = "notasrubrica.do?idPortafolio=" + idPortafolio+"&idAsignatura="+idAsignatura;
 	    		var xmlhttp = initRequest();
 	    		xmlhttp.onreadystatechange=function(){
 	    			if (xmlhttp.readyState===4) {
