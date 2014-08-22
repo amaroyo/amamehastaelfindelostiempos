@@ -41,6 +41,14 @@ public class NotasRubricaAction extends DHTMLXFormAction {
 	public String save(DhtmlxForm f) throws Exception {
 		NotasRubricaForm form = (NotasRubricaForm) f;
 		PuntuacionCriterioVO puntuacionCriterio = new PuntuacionCriterioVO();
+		PortafolioVO portafolio = new PortafolioVO();
+		
+		if (idGrupoUsuario.equals("4")){
+			portafolio.setAnyoAcademico(anyoAcademico);
+			portafolio.setIdAlumno(idUsuario);
+			portafolio.setIdAsignatura(form.getIdAsignatura());
+			form.setIdPortafolio(getPortafoliosService().findByAlumnoAsignatura(portafolio).getIdPortafolio());
+		}
 		puntuacionCriterio.setIdPortafolio(form.getIdPortafolio());
 		
 		Iterator it = form.getValues().entrySet().iterator();

@@ -175,14 +175,14 @@
   					contarValores();
     				formRubrica.attachEvent("onButtonClick", function(id){
 	    				if (id == "aceptar") {
-	    					formRubrica.send("actualizarnotasrubrica.do?!nativeeditor_status=save&idPortafolio=" + identificador,"post", function(xml) {
+	    					formRubrica.send("actualizarnotasrubrica.do?!nativeeditor_status=save&idPortafolio=" + identificador+"&idAsignatura="+idAsignatura,"post", function(xml) {
 	    						contarValores();
 	    						alert('<bean:message key="message.notas.cambiadas.exito"/>');
 		    				});
 	    				}
 	    			});
     				formRubrica.attachEvent("onEnter", function() {
-    					formRubrica.send("actualizarnotasrubrica.do?!nativeeditor_status=save&idPortafolio="+identificador,"post", function(xml) {
+    					formRubrica.send("actualizarnotasrubrica.do?!nativeeditor_status=save&idPortafolio="+identificador+"&idAsignatura="+idAsignatura,"post", function(xml) {
 							contarValores();
     						alert('<bean:message key="message.notas.cambiadas.exito"/>');
 	    				});
@@ -190,19 +190,7 @@
 	    		});
 			}
 			function goAnexo1(identificador){
-				/*********************
-				 * Tanto aqui como en anexo1 y dos hay que distinguir de donde viene la llamada.
-				 * Si viene desde alumno, identificador sera el idUsuario del alumno, en cambio, si
-				 * la llamada viene desde un profesor, el identificador sera el portafolio. Me imagino
-				 * que eso te ahorrara un par de consultas :)
-				 * Tambien tienes acceso a la variable global idAsignatura.
-				 *
-				 * Ten cuidado al realizar la query para el alumno con el idAlumno, para coger el 
-				 * buen portafolio hay que meter el anyo academico!
-				 * 
-				 * Gracias por ocuparte de esta parte =)
-				 **********************
-				 */
+				
 			}
 			function goAnexo2(identificador){
 			}
