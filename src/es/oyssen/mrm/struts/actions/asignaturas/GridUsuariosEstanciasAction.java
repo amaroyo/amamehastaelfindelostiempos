@@ -13,31 +13,12 @@ public class GridUsuariosEstanciasAction extends DHTMLXGridAction {
 	public String search(DhtmlxGridForm f) throws Exception {
 		GridUsuariosEstanciasForm form = (GridUsuariosEstanciasForm) f;
 		
-		//Si el usuario es coordinador, vemos todos los alumnos de ese anyo y esa asignatura
-
 		
-		
-		
-		//System.out.println(idUsuario);
-		
-		if (idGrupoUsuario.equals("1")){
 			PortafolioVO portafolio = new PortafolioVO();
 			portafolio.setIdAsignatura(form.getIdAsignatura());
 			portafolio.setAnyoAcademico(anyoAcademico);
 			return UtilXML.buildXmlGridUsuariosEstanciasUnidadClinica(getPortafoliosService().findUsuariosEstanciaUnidadClinica(portafolio),idUsuario);
-		}
-		
-		else return null;
-		/*if (form.getIdGrupo() == null) {
-			return UtilXML.buildXmlGridUsuarios(getUsuariosService().findAll());
-		} else { 
-			GrupoVO grupo = new GrupoVO();
-			grupo.setIdGrupo(form.getIdGrupo());
-			return UtilXML.buildXmlGridUsuariosGrupo(getUsuariosService().findByGrupo(grupo));
-		}*/
-		
-		
-		
+
 	}
 
 

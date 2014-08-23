@@ -44,6 +44,11 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 												"from asignaturas as a, usuarios as u, portafolios as p "+
 												"where u.id_usuario = p.id_alumno and a.id_asignatura = p.id_asignatura and p.anyo_academico =?";
 	
+	private static String SQL_FIND_ALL_BY_ASIGNATURA = "select u.id_usuario, u.nombre, u.apellido1, u.apellido2, u.dni, a.id_asignatura, a.codigo, a.nombre, p.id_profesor, p.id_portafolio " +
+														"from asignaturas as a, usuarios as u, portafolios as p "+
+														"where u.id_usuario = p.id_alumno and a.id_asignatura = p.id_asignatura and p.anyo_academico =? and p.id_asignatura=?";
+	
+	
 	private static String SQL_FIND_ALL_BY_PROFESOR = "select u.id_usuario, u.nombre, u.apellido1, u.apellido2, u.dni, a.id_asignatura, a.codigo, a.nombre, p.id_profesor, p.id_portafolio " +
 														"from asignaturas as a, usuarios as u, portafolios as p "+
 														"where u.id_usuario = p.id_alumno and a.id_asignatura = p.id_asignatura and p.anyo_academico =? and p.id_profesor =?";
@@ -269,6 +274,18 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 			throw new DAOUpdateException(e);
 		}
 		
+	}
+
+	@Override
+	public List<UsuarioAsignaturaVO> findAllByAsignatura(PortafolioVO p)
+			throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_ALL_BY_ASIGNATURA, new Object[]{p.getAnyoAcademico(),p.getIdAsignatura()}, new UsuarioAsignaturaMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
 	}
 	
 }

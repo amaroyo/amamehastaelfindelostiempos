@@ -24,11 +24,8 @@ public class SeminariosAsignaturaAction extends MrmAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 			
-		//String idUsuario = (String)request.getSession().getAttribute("idUsuario");
-		//String anyoAcademico = (String)request.getSession().getAttribute("anyoAcademico");
 		
-		// para saber si es profesor o alumno
-		String usuarioIdGrupo = (String)request.getSession().getAttribute("idGrupoUsuario");
+		
 		
 		SeminarioAsignaturaVO sa = new SeminarioAsignaturaVO();
 		String id_asignatura = (String)request.getParameter("idAsignatura");
@@ -36,28 +33,10 @@ public class SeminariosAsignaturaAction extends MrmAction {
 		List<SeminarioAsignaturaVO> seminarios = null;
 		
 		//"Super Admin" o "Coordinador" o "Virtual Tour"
-		if (usuarioIdGrupo.equals("1") || usuarioIdGrupo.equals("2") || usuarioIdGrupo.equals("5")) {
-				seminarios = getSeminariosAsignaturaService().findAllByAsignatura(sa);
-		}
-		/*else
-			// "Profesor"
-			if (usuarioIdGrupo.equals("3")) {
-				ProfesorAsociadoVO profesor = new ProfesorAsociadoVO();
-				profesor.setIdProfesor(idUsuario);
-				profesor.setAnyoAcademico(anyoAcademico);
-				asignaturas = getAsignaturasService().findByProfesorAnyoAcademico(profesor);
-			}
-		else
-			// "Alumno"
-			if (usuarioIdGrupo.equals("4")) {
-				PortafolioVO portafolio = new PortafolioVO();
-				portafolio.setIdAlumno(idUsuario);
-				portafolio.setAnyoAcademico(anyoAcademico);
-				asignaturas = getAsignaturasService().findByAlumnoAnyoAcademico(portafolio);
-			}*/
+		
+		seminarios = getSeminariosAsignaturaService().findAllByAsignatura(sa);
 		
 		
-		//application/json or application/xml text/html
 		response.setContentType("text/xml;charset=utf-8");
 		PrintWriter out;
 	    out = response.getWriter();

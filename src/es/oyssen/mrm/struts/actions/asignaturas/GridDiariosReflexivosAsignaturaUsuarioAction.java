@@ -22,26 +22,11 @@ public class GridDiariosReflexivosAsignaturaUsuarioAction extends DHTMLXGridActi
 		
 		GridDiariosReflexivosAsignaturaUsuarioForm form = (GridDiariosReflexivosAsignaturaUsuarioForm) f;
 		
-		//Si el usuario es coordinador, vemos todos los alumnos de ese anyo y esa asignatura
-
-
-		//System.out.println(idUsuario);
-		
-		if (idGrupoUsuario.equals("1")){
-			DiarioReflexivoVO d = new DiarioReflexivoVO();
-			d.setIdPortafolio(form.getIdPortafolio());
-		
-			return UtilXML.buildXmlGridDiariosReflexivosAsignaturaUsuario(getDiariosReflexivosService().findAllByPortafolio(d));
-		}
-		
-		else return null;
-		/*if (form.getIdGrupo() == null) {
-			return UtilXML.buildXmlGridUsuarios(getUsuariosService().findAll());
-		} else { 
-			GrupoVO grupo = new GrupoVO();
-			grupo.setIdGrupo(form.getIdGrupo());
-			return UtilXML.buildXmlGridUsuariosGrupo(getUsuariosService().findByGrupo(grupo));
-		}*/
+		DiarioReflexivoVO d = new DiarioReflexivoVO();
+		d.setIdPortafolio(form.getIdPortafolio());
+	
+		return UtilXML.buildXmlGridDiariosReflexivosAsignaturaUsuario(getDiariosReflexivosService().findAllByPortafolio(d));
+	
 		
 		
 		

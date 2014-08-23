@@ -23,6 +23,8 @@ public interface ProfesoresAsociadosService {
 	public List<ProfesorAsociadoVO> findByAnyoAcademico(ProfesorAsociadoVO profesor) throws ServiceException;
 	
 	public List<ProfesorAsociadoVO> findByAsignatura(ProfesorAsociadoVO profesor) throws ServiceException;
+	
+	public List<ProfesorAsociadoVO> findByProfesor(ProfesorAsociadoVO profesor) throws ServiceException;
 
 	public void updateTODO(ProfesorAsociadoVO profe) throws ServiceException, DAOException;
 	

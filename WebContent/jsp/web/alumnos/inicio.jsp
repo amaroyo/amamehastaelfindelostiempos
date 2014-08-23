@@ -108,7 +108,7 @@
 			    miGrid.setColSorting('str,str,str,str');
 			    miGrid.init();
 		    	
-				var gridProcessor = new dataProcessor("gridUsuariosProfesor.do");
+				var gridProcessor = new dataProcessor("gridUsuariosProfesor.do?busqueda=no");
 				gridProcessor.enableUTFencoding('simple');
 				gridProcessor.init(miGrid);	  
 				gridProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -184,7 +184,7 @@
 		    
 		    
 		    function buscarMisAlumnos() {
-		    	miGrid.clearAndLoad("gridUsuariosProfesor.do");		    	
+		    	miGrid.clearAndLoad("gridUsuariosProfesor.do?busqueda=no");		    	
 		    }
 		    
 		    

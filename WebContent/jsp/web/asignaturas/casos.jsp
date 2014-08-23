@@ -37,7 +37,7 @@
 				
 				
 	    		
-	    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 					profesor=true;
 					main_layout = new dhtmlXLayoutObject(document.body, '2U');
 		    		a = main_layout.cells('a');
@@ -45,14 +45,14 @@
 		    		b.setWidth(350);
 		    		a.hideHeader();
 					b.setText('<bean:message key="label.casos.clinicos.alumno"/>');
-				</logic:match>
+				</logic:notMatch>
 		
-				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+				<logic:match scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 					profesor=false;
 					main_layout = new dhtmlXLayoutObject(document.body, '1C');
 		    		a = main_layout.cells('a');
 		    		a.hideHeader();
-				</logic:notMatch>	
+				</logic:match>	
 	    		
 	    		
 	    		
@@ -78,13 +78,14 @@
 		    		toolbarServicios.hideItem('modificarTrabajoCampo');
 		    		toolbarServicios.hideItem('sep3');
 		    		
-		    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+		    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 			    		toolbarServicios.hideItem('subirPractica');
 			    		toolbarServicios.hideItem('sep2');
 			    		toolbarServicios.disableItem('descargarTodosAlumno');
 		    		
-		    		</logic:match>
-		    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+		    		</logic:notMatch>
+		    		
+		    		<logic:match scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 		    	
 			    		toolbarServicios.hideItem('descargarTodos');
 			    		toolbarServicios.hideItem('sep3');
@@ -93,7 +94,7 @@
 			    		
 			    		
 			    	
-		    		</logic:notMatch>
+		    		</logic:match>
 		    	
 		    	});
 		    	

@@ -11,7 +11,7 @@ public class GridUsuariosProfesorForm extends DhtmlxGridForm {
 	private String dni;
 	private String nombreAsignatura;
 	private String codigo;
-	private String id_asignatura;
+	private String idAsignatura;
 	private String busqueda;
 	
 	
@@ -70,13 +70,13 @@ public class GridUsuariosProfesorForm extends DhtmlxGridForm {
 	}
 
 
-	public String getId_asignatura() {
-		return id_asignatura;
+	public String getIdAsignatura() {
+		return idAsignatura;
 	}
 
 
-	public void setId_asignatura(String id_asignatura) {
-		this.id_asignatura = id_asignatura;
+	public void setIdAsignatura(String idAsignatura) {
+		this.idAsignatura = idAsignatura;
 	}
 
 

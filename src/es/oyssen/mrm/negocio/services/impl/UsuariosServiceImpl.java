@@ -186,5 +186,17 @@ public class UsuariosServiceImpl implements UsuariosService{
 		}		
 		
 	}
+
+	@Override
+	public List<UsuarioAsignaturaVO> findAllByAsignatura(PortafolioVO p)
+			throws ServiceException {
+		try {
+			return daoUsuarios.findAllByAsignatura(p);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findAllByAsignatura usuario", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
 	
 }

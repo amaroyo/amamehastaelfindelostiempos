@@ -108,6 +108,15 @@ public class ProfesoresAsociadosServiceImpl implements ProfesoresAsociadosServic
 			throw new ServiceException(e.getMessage());
 		}
 	}
+	
+	public List<ProfesorAsociadoVO> findByProfesor(ProfesorAsociadoVO profesor) throws ServiceException {
+		try {
+			return daoProfesoresAsociados.findByProfesor(profesor);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
+		}
+	}
 
 	@Override
 	public void updateTODO(ProfesorAsociadoVO profe) throws ServiceException,
