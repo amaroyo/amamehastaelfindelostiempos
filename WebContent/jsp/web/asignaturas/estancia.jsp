@@ -54,13 +54,13 @@
 				idSessionUser = <%=sessionIdUser%>;
 	    		
 	    		
-	    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 					goProfesor();
-				</logic:match>
+				</logic:notMatch>
 			
-				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+				<logic:match scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 					goAlumno();
-				</logic:notMatch>	
+				</logic:match>	
 	    		
 	    	});	
 	    	

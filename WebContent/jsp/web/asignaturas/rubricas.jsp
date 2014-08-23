@@ -35,7 +35,7 @@
 				 idSession = <%=sessionIdUser%>;
 	    		
 	    		
-	    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 					profesor=true;
 					main_layout = new dhtmlXLayoutObject(document.body, '2U');
 		    		a = main_layout.cells('a');
@@ -43,14 +43,14 @@
 		    		b.setWidth(900);
 		    		a.hideHeader();
 					b.setText('<bean:message key="label.rubrica.alumno"/>');
-				</logic:match>
+				</logic:notMatch>
 		
-				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+				<logic:match scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 					profesor=false;
 					main_layout = new dhtmlXLayoutObject(document.body, '1C');
 		    		a = main_layout.cells('a');
 		    		a.hideHeader();
-				</logic:notMatch>	
+				</logic:match>	
 	    		
 		    	
 		    	if (profesor) goGridProfesores();
@@ -81,7 +81,7 @@
 			    gridProfesores.setColSorting('str,str,str');
 			    gridProfesores.init();
 		    	
-				var gridProcessor = new dataProcessor("gridUsuariosProfesor.do");
+				var gridProcessor = new dataProcessor("gridUsuariosProfesor.do?busqueda=MisAsignaturas&idAsignatura=" + idAsignatura);
 				gridProcessor.enableUTFencoding('simple');
 				gridProcessor.init(gridProfesores);	  
 				gridProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -91,7 +91,7 @@
 		    	});	
 
 				gridProfesores.attachEvent("onRowSelect",doOnRowSelected);
-				gridProfesores.clearAndLoad("gridUsuariosProfesor.do");
+				gridProfesores.clearAndLoad("gridUsuariosProfesor.do?busqueda=MisAsignaturas&idAsignatura=" + idAsignatura);
 				
 			}
 			

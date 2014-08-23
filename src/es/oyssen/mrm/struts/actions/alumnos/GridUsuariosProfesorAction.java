@@ -28,19 +28,22 @@ public class GridUsuariosProfesorAction extends DHTMLXGridAction {
 			p.setIdProfesor(idUsuario);
 			return UtilXML.buildXmlGridUsuariosProfesores(getUsuariosService().findAllbyProfesorDemas(p),idUsuario);
 		}
-		else if (idGrupoUsuario.equals("1") || idGrupoUsuario.equals("2")){
+		else if ((idGrupoUsuario.equals("1") || idGrupoUsuario.equals("2")) && busqueda.equals("no")){
 			PortafolioVO p = new PortafolioVO();
 			p.setAnyoAcademico(anyoAcademico);
 			return UtilXML.buildXmlGridUsuariosProfesores(getUsuariosService().findAllbyAnyoAcademico(p),"");
 		}		
-		else if (idGrupoUsuario.equals("3")) {
+		else if (idGrupoUsuario.equals("3") && !busqueda.equals("MisAsignaturas")) {
 			PortafolioVO p = new PortafolioVO();
 			p.setAnyoAcademico(anyoAcademico);
 			p.setIdProfesor(idUsuario);
 			return UtilXML.buildXmlGridUsuariosProfesores(getUsuariosService().findAllbyProfesor(p),idUsuario);
 		} 
 		else{ 
-			return "";
+			PortafolioVO p = new PortafolioVO();
+			p.setAnyoAcademico(anyoAcademico);
+			p.setIdAsignatura(form.getIdAsignatura());
+			return UtilXML.buildXmlGridUsuariosProfesores(getUsuariosService().findAllByAsignatura(p),"");
 		}
 	}
 

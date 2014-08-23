@@ -16,30 +16,14 @@ public class GridUsuariosSeminariosAsignaturaAction extends DHTMLXGridAction {
 		
 		
 		GridUsuariosSeminariosAsignaturaForm form = (GridUsuariosSeminariosAsignaturaForm) f;
-		
-		//Si el usuario es coordinador, vemos todos los alumnos de ese anyo y esa asignatura
-
-
-		//System.out.println(idUsuario);
-		
-		if (idGrupoUsuario.equals("1")){
-			SeminarioRealizadoVO sr = new SeminarioRealizadoVO();
-			sr.setIdSeminario(form.getIdSeminario());
-			//vamos a crear un portafolio con el año academico actual para poder visualizar alumnos
-			//que se hayan matriculado de esa asignatura en el año academico "actual"
-			PortafolioVO p = new PortafolioVO();
-			p.setAnyoAcademico(anyoAcademico);
-			return UtilXML.buildXmlGridUsuariosSeminariosAsignatura(getSeminariosRealizadosService().findAllUsersByPortafolio(sr,p));
-		}
-		
-		else return null;
-		/*if (form.getIdGrupo() == null) {
-			return UtilXML.buildXmlGridUsuarios(getUsuariosService().findAll());
-		} else { 
-			GrupoVO grupo = new GrupoVO();
-			grupo.setIdGrupo(form.getIdGrupo());
-			return UtilXML.buildXmlGridUsuariosGrupo(getUsuariosService().findByGrupo(grupo));
-		}*/
+		SeminarioRealizadoVO sr = new SeminarioRealizadoVO();
+		sr.setIdSeminario(form.getIdSeminario());
+		//vamos a crear un portafolio con el año academico actual para poder visualizar alumnos
+		//que se hayan matriculado de esa asignatura en el año academico "actual"
+		PortafolioVO p = new PortafolioVO();
+		p.setAnyoAcademico(anyoAcademico);
+		return UtilXML.buildXmlGridUsuariosSeminariosAsignatura(getSeminariosRealizadosService().findAllUsersByPortafolio(sr,p));
+	
 		
 		
 		

@@ -40,7 +40,7 @@
 				
 				
 	    		
-	    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 					profesor=true;
 					
 					main_layout = new dhtmlXLayoutObject(document.body, '2U');
@@ -50,9 +50,9 @@
 		    		a.hideHeader();
 					b.setText('<bean:message key="label.opciones.alumno"/>');
 					initProfesor();
-				</logic:match>
+				</logic:notMatch>
 		
-				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+				<logic:match scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 					profesor=false;
 					main_layout = new dhtmlXLayoutObject(document.body, '2U');
 		    		a = main_layout.cells('a');
@@ -61,7 +61,7 @@
 		    		b.setText('<bean:message key="label.descripcion.practica"/>');
 				    b.setWidth(650);
 				    goGridAlumnos();
-				</logic:notMatch>	
+				</logic:match>	
 	    		
 	    		
 	    	});
@@ -118,14 +118,14 @@
 		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 		    		
 		    	
-			    	<logic:match scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+			    	<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 			    		toolbarServicios.hideItem('subirPractica');
 			    		toolbarServicios.hideItem('sep3');
 			    		toolbarServicios.hideItem('descargarTodosAlumno');
 			    		toolbarServicios.hideItem('sep5');
 			    		
-			    	</logic:match>
-			    	<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+			    	</logic:notMatch>
+			    	<logic:match scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 			    	
 			    		toolbarServicios.hideItem('crearTrabajoCampo');
 			    		toolbarServicios.hideItem('sep1');
@@ -138,7 +138,7 @@
 			    		toolbarServicios.hideItem('fechaLimite');
 			    		toolbarServicios.hideItem('sep6');
 			    	
-			    	</logic:notMatch>
+			    	</logic:match>
 		    	});
 		    	
 		    	

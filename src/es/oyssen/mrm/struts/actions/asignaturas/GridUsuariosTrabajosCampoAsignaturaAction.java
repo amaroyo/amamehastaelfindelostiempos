@@ -19,29 +19,16 @@ public class GridUsuariosTrabajosCampoAsignaturaAction extends DHTMLXGridAction 
 		
 		GridUsuariosTrabajosCampoAsignaturaForm form = (GridUsuariosTrabajosCampoAsignaturaForm) f;
 		
-		//Si el usuario es coordinador, vemos todos los alumnos de ese anyo y esa asignatura
-
-
-		//System.out.println(idUsuario);
 		
-		if (idGrupoUsuario.equals("1")){
-			TrabajoDeCampoVO t = new TrabajoDeCampoVO();
-			PortafolioVO p = new PortafolioVO();
-			t.setIdTrabajoInfo(form.getIdTrabajoInfo());
-			p.setAnyoAcademico(anyoAcademico);
-			p.setIdAsignatura(form.getIdAsignatura());
-			
-			return UtilXML.buildXmlGridUsuariosTrabajosCampoAsignatura(getTrabajosDeCampoService().findAllByAsignaturaTrabajo(p,t));
-		}
+		TrabajoDeCampoVO t = new TrabajoDeCampoVO();
+		PortafolioVO p = new PortafolioVO();
+		t.setIdTrabajoInfo(form.getIdTrabajoInfo());
+		p.setAnyoAcademico(anyoAcademico);
+		p.setIdAsignatura(form.getIdAsignatura());
 		
-		else return null;
-		/*if (form.getIdGrupo() == null) {
-			return UtilXML.buildXmlGridUsuarios(getUsuariosService().findAll());
-		} else { 
-			GrupoVO grupo = new GrupoVO();
-			grupo.setIdGrupo(form.getIdGrupo());
-			return UtilXML.buildXmlGridUsuariosGrupo(getUsuariosService().findByGrupo(grupo));
-		}*/
+		return UtilXML.buildXmlGridUsuariosTrabajosCampoAsignatura(getTrabajosDeCampoService().findAllByAsignaturaTrabajo(p,t));
+	
+		
 		
 		
 		
