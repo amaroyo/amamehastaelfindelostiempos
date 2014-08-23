@@ -56,7 +56,7 @@ public class NotasRubricaAction extends DHTMLXFormAction {
 			Map.Entry e = (Map.Entry)it.next();
 			puntuacionCriterio.setIdCriterio(((String) e.getKey()).substring(10));
 			puntuacionCriterio.setNota((String) e.getValue());
-			getPuntuacionCriteriosService().update(puntuacionCriterio);
+			getPuntuacionCriteriosService().insertOnDuplicateKeyUpdate(puntuacionCriterio);
 		}
 		return "notas changed";
 	}

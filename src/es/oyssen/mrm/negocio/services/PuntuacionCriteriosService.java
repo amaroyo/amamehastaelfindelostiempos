@@ -16,6 +16,9 @@ public interface PuntuacionCriteriosService {
 	
 	public List<PuntuacionCriterioVO> findAllByPortafolio(PuntuacionCriterioVO puntuacionCriterio) throws ServiceException;
 
+	public void insertOnDuplicateKeyUpdate(PuntuacionCriterioVO puntuacionCriterio) throws ServiceException, DAOException;
+
+
 }
 
 

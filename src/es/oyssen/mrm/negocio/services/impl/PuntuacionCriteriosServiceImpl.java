@@ -32,6 +32,18 @@ public class PuntuacionCriteriosServiceImpl implements PuntuacionCriteriosServic
 			throw new ServiceException(e);
 		}		
 	}
+	
+	public void insertOnDuplicateKeyUpdate(PuntuacionCriterioVO puntuacionCriterio)
+			throws es.oyssen.mrm.negocio.exceptions.ServiceException,
+			es.oyssen.mrm.negocio.dao.exceptions.DAOException {
+		try {
+			daoPuntuacionCriterios.insertOnDuplicateKeyUpdate(puntuacionCriterio);	
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Error creando puntuacion criterio", e);
+			throw new ServiceException(e);
+		}		
+	}
 
 	public void update(PuntuacionCriterioVO puntuacionCriterio) 
 			throws es.oyssen.mrm.negocio.exceptions.ServiceException,

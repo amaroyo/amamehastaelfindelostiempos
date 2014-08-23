@@ -24,6 +24,8 @@ public class MySqlDAOPuntuacionCriteriosImpl extends DAOBase implements DAOPuntu
 
 	private static String SQL_INSERT = "insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (?,?,?)";
 	private static String SQL_UPDATE = "update puntuacion_criterios set nota=?";
+	private static String SQL_INSERT_ON_DUPLICATE_KEY_UPDATE = "insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (?,?,?)" +
+																"on duplicate key update nota = ?";
 	private static String SQL_DELETE = "delete from puntuacion_criterios where id_portafolio = ? and id_criterio = ?";
 	private static String SQL_FIND_BY_PORTAFOLIO = "select * from puntuacion_criterios where id_portafolio = ?";
 
@@ -40,6 +42,29 @@ public class MySqlDAOPuntuacionCriteriosImpl extends DAOBase implements DAOPuntu
 					ps.setString(1, puntuacionCriterio.getIdPortafolio());
 					ps.setString(2, puntuacionCriterio.getIdCriterio());
 					ps.setString(3, puntuacionCriterio.getNota());
+					return ps;
+
+				}
+			}
+			);
+
+		} catch (Exception e) {
+			throw new DAOInsertException(e);
+		}			
+	}
+	
+	public void insertOnDuplicateKeyUpdate(final PuntuacionCriterioVO puntuacionCriterio) throws DAOException,
+	DAOInsertException {
+		try{
+			getJdbcTemplate().update(new PreparedStatementCreator() {
+
+				public PreparedStatement createPreparedStatement(Connection conn)
+						throws SQLException {
+					PreparedStatement ps = conn.prepareStatement(SQL_INSERT_ON_DUPLICATE_KEY_UPDATE, new String[]{});
+					ps.setString(1, puntuacionCriterio.getIdPortafolio());
+					ps.setString(2, puntuacionCriterio.getIdCriterio());
+					ps.setString(3, puntuacionCriterio.getNota());
+					ps.setString(4, puntuacionCriterio.getNota());
 					return ps;
 
 				}

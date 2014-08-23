@@ -17,8 +17,7 @@ public interface DAOPuntuacionCriterios {
 	public void delete(PuntuacionCriterioVO puntuacionCriterio) throws DAOException, DAODeleteException;
 		
 	public List<PuntuacionCriterioVO> findAllByPortafolio(PuntuacionCriterioVO puntuacionCriterio) throws DAOException;
-	
-	
-	
+
+	public void insertOnDuplicateKeyUpdate(PuntuacionCriterioVO puntuacionCriterio) throws DAOException, DAOInsertException;
 
 }
