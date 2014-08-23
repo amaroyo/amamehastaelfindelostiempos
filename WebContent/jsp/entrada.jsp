@@ -229,8 +229,12 @@
     			break;
     		case "copiaSeguridad":
     			if (confirm("<bean:message key="message.copia.seguridad"/>")) {
-    				var url = "./administrar/copiaSeguridad.do";
-					location.href=url;
+    				
+					var d= new dhtmlXWindows();
+    				var w = d.createWindow("s", 300,50, 1, 1);	
+    				w.hide();
+					w.attachURL("./administrar/copiaSeguridad.do");
+					setTimeout(function(){w.close();},1000);
     			}
     			break;
     		case "cerrarCurso":

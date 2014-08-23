@@ -23,7 +23,6 @@
 		<action path="/administrar/copiaSeguridad" name="CopiaSeguridad" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.administrar.CopiaSeguridadAction" />
 		
 		
-		
 		<action path="/administrar/subirArchivo" forward="/jsp/web/asignaturas/subirArchivo.jsp" />	
 		<action path="/administrar/algoSalioMal" forward="/jsp/web/administrar/algoSalioMal.jsp" />	
 		

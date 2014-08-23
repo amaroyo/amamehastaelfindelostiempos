@@ -28,44 +28,77 @@ public class CopiaSeguridadAction extends MrmAction {
 		
 		//deberiamos meter fecha
 		String fileName = "CopiaSeguridadEnfermeria.sql";
-
-
-		String executeCmd = "mysqldump -u " + "root" + " -p" + "" + " --add-drop-database -B " + "enfermeria" + " -r " + "/Users/Aleks/Desktop/enfermeriadump.sql";
+	
+		String[] exec = {};
+		
+		String so = System.getProperty("os.name");
+		
+		if (so.equals("Mac OS X")){			
+			String expr = new StringBuilder()
+		    .append("/usr/local/mysql/bin/mysqldump").append(' ')
+		    .append("-u").append("root").append(' ')
+		    //.append("-p").append("").append(' ') NO PASSWORD
+		    .append("--add-drop-database").append(' ')
+		    .append("-B").append(' ')
+		    .append("enfermeria").append(' ')
+		    //.append(">").append(' ')
+		    //.append("/Users/Aleks/Desktop/enfermeriadump.sql")
+		    .toString();
+			
+			
+			exec = new String[]{"/bin/bash", "-c", expr};
+			
+			
+			 
+		}
+		else {
+			
+			String expr = new StringBuilder()
+		    .append("C:\\Program Files\\MySQL\\MySQL Server 5.1\\bin").append(' ')
+		    .append("-u").append("root").append(' ')
+		    //.append("-p").append("").append(' ') NO PASSWORD
+		    .append("--add-drop-database").append(' ')
+		    .append("-B").append(' ')
+		    .append("enfermeria").append(' ')
+		    .toString();
+			
+			
+			exec = new String[]{"cmd", "/c", "start cmd.exe", expr};
+		}
+		
+		
 		Process runtimeProcess;
 		try {
 
-			runtimeProcess = Runtime.getRuntime().exec(executeCmd);
-			int processComplete = runtimeProcess.waitFor();
+			runtimeProcess = Runtime.getRuntime().exec(exec);
+			
+			try{
+				
+				response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
 
-			if (processComplete == 0) {
+				ServletOutputStream outputStream = response.getOutputStream();
+				response.setContentType("text/x-sql");
 
+				InputStream i = runtimeProcess.getInputStream();
+				
+				 byte[] buffer = new byte[1024]; // Adjust if you want
+				 int bytesRead;
+				 while ((bytesRead = i.read(buffer)) != -1){
+					 outputStream.write(buffer, 0, bytesRead);
+				 }
 				
 
-				try{
-					
-					response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
 
-					ServletOutputStream outputStream = response.getOutputStream();
-					response.setContentType("text/x-sql");
+				outputStream.flush();
+				outputStream.close();
+				
 
-					
-					response.setContentLength(executeCmd.getBytes().length);
-					outputStream.write(executeCmd.getBytes()); 
-
-
-					outputStream.flush();
-					outputStream.close();
-
-
-				} catch (Exception e2) {
-					System.out.println("Error in " + getClass().getName() + "\n" + e2);
-				}
-
-
-			} else {
-				System.out.println("Could not create the backup");
-				return mapping.findForward("error");
+			} catch (Exception e2) {
+				System.out.println("Error in " + getClass().getName() + "\n" + e2);
 			}
+
+
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
