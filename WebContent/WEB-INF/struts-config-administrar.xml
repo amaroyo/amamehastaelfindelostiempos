@@ -51,6 +51,10 @@
 	
 		<action path="/administrar/descargarRegistroError" name="Descargar" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarAction" />
 		
+		<action path="/administrar/generarcertificado" name="" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.administrar.GenerarCertificadoAction" />
+		
+		
+		
 	</action-mappings>
 
 </struts-config>
