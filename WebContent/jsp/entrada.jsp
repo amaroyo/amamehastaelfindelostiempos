@@ -228,8 +228,10 @@
     			document.getElementById("areatrabajo").src="administrar/certificados.do";
     			break;
     		case "copiaSeguridad":
-    			alert("copia");
-    			//document.getElementById("areatrabajo").src="administrar/inicio.do?opcion=" + opcion;
+    			if (confirm("<bean:message key="message.copia.seguridad"/>")) {
+    				var url = "./administrar/copiaSeguridad.do";
+					location.href=url;
+    			}
     			break;
     		case "cerrarCurso":
     			alert("cerrar");

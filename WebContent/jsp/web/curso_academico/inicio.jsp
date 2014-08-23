@@ -38,7 +38,7 @@
 
 
 				var dhxWins= new dhtmlXWindows(document.body);
-				mywindow = dhxWins.createWindow("CambiarAnyoAcademico", 300, 50, 465, 300);
+				mywindow = dhxWins.createWindow("CambiarAnyoAcademico", 300, 50, 425, 280);
 				mywindow.setText('<bean:message key="title.time.machine" />');				
 				mywindow.setModal(true);
 				mywindow.centerOnScreen();
