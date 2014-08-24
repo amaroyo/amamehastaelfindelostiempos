@@ -50,9 +50,12 @@ insert into permisos (nombre, descripcion) values ('Ver administrar.', 'En princ
 insert into permisos (nombre, descripcion) values ('Ver grupos.', 'En principio sólo puede el súper admin y el coordinador.');
 insert into permisos (nombre, descripcion) values ('Ver usuarios.', 'En principio sólo puede el súper admin y el coordinador.');
 insert into permisos (nombre, descripcion) values ('Ver años pasados.', 'En principio sólo puede el súper admin y el coordinador.');
+insert into permisos (nombre, descripcion) values ('Editar nombre, apellidos del perfil propio.', 'En principio sólo puede el súper admin, el coordinador y el profesor.');
+insert into permisos (nombre, descripcion) values ('Editar dni del perfil propio.', 'En principio sólo puede el súper admin, el coordinador y el profesor.');
 insert into permisos (nombre, descripcion) values ('Ver alumnos.', 'En principio sólo puede el súper admin, el coordinador y el profesor.');
+insert into permisos (nombre, descripcion) values ('Modificar información de la asignatura.', 'En principio sólo puede el súper admin y el coordinador.');
 
-
+						
 
 /*insert into permisos (nombre, descripcion) values ('Todas las acciones permitidas.', 'El Super Admin tendrá todos los privilegios.');
 insert into permisos (nombre, descripcion) values ('Todas las acciones permitidas menos editar cursos pasados.', 'El Coordinador podrá actuar como un super admin pero no modificar datos antiguos.');
