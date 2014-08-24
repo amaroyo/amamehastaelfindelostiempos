@@ -42,7 +42,7 @@
 				mywindow.setModal(true);
 				mywindow.centerOnScreen();
 				
-				var layout = window.attachLayout("1C","dhx_skyblue");
+				var layout = mywindow.attachLayout("1C","dhx_skyblue");
 				var a = layout.cells('a');
 				a.hideHeader();
 				var gridAlumnosCertificado = a.attachGrid();

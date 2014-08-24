@@ -42,6 +42,7 @@ import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioTrabajoCampoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.Constantes;
+import es.oyssen.mrm.struts.actions.administrar.GridAlumnosAptosCertificadoAction.Pares;
 
 
 public class UtilXML {
@@ -1017,6 +1018,29 @@ public class UtilXML {
 		return sb.toString();
 	}
 	
+	public static String buildXmlAlumnosCertificados(List<Pares> list) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(XML_HEADER);
+		sb.append("<rows>");
+		if(list != null){
+			for (Pares par : list) {
+				String port = par.getPortafolios().toString();
+				port = port.replaceAll(" ", "-");
+				UsuarioVO u = par.getUsuario();
+				sb.append("<row id=\"" +port +"\">");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(u.getNombre()) + "]]></cell>");				
+				String apellidos = u.getApellido1();
+				if(u.getApellido2() != "") apellidos = apellidos + ", " + u.getApellido2();			
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(apellidos) + "]]></cell>");
+				
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(u.getDni()) + "]]></cell>");
+				sb.append("</row>");				
+			}
+		}
+		sb.append("</rows>");
+		return sb.toString();
+	}
+	
 	
 	private static final String nombreGrupo(String id){
 		if (id.equals("1")) return "Super user";
@@ -1059,6 +1083,8 @@ public class UtilXML {
 		return tiempoActual.after(fechaL);
 
 	}
+
+	
 
 	
 

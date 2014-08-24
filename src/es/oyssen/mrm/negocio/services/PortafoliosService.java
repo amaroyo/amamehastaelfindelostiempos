@@ -55,6 +55,8 @@ public interface PortafoliosService {
 
 	public List<PortafolioVO> findAnyos() throws ServiceException;
 
+	public List<UsuarioPortafolioVO> findAlumnosPotencialesCertificado() throws ServiceException;
+
 	
 	
 

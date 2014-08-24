@@ -4,6 +4,7 @@ import java.util.List;
 
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.PuntuacionCriterioVO;
 
 public interface PuntuacionCriteriosService {
@@ -17,6 +18,8 @@ public interface PuntuacionCriteriosService {
 	public List<PuntuacionCriterioVO> findAllByPortafolio(PuntuacionCriterioVO puntuacionCriterio) throws ServiceException;
 
 	public void insertOnDuplicateKeyUpdate(PuntuacionCriterioVO puntuacionCriterio) throws ServiceException, DAOException;
+
+	public List<PuntuacionCriterioVO> findAllNotasByPortafolio(PortafolioVO p) throws ServiceException;
 
 
 }
