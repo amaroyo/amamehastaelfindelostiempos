@@ -191,37 +191,46 @@
 
 					loadFormPerfil();
 						
-						form.attachEvent("onChange", function (id, value){
-							if(id == "fotoFile"){
-								if(isImageExtension(value)) {
-									 //previewPicture(rowID);
-						    	}
-								else {
-									alert('<bean:message key="message.error.formato.imagen"/>');
-									document.forms[0].elements.namedItem("fotoFile").value=null;
-								}
+					form.attachEvent("onChange", function (id, value){
+						if(id == "fotoFile"){
+							if(isImageExtension(value)) {
+								 //previewPicture(rowID);
+					    	}
+							else {
+								alert('<bean:message key="message.error.formato.imagen"/>');
+								document.forms[0].elements.namedItem("fotoFile").value=null;
 							}
-						});
-						 
-						
-						form.attachEvent("onButtonClick", function(id){
-							if(id == "aceptar"){
-								document.forms[0].submit();
-								//document.getElementById("realForm").submit();
-								//form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser,"post", function(xml) {
-									alert('<bean:message key="message.perfil.cambiado.exito"/>');
-									loadFormPerfil();
-							}
-						});//onButtonClick
-					});//load
+						}
+					});
+					 
+					
+					form.attachEvent("onButtonClick", function(id){
+						if(id == "aceptar"){
+							document.forms[0].submit();
+							//document.getElementById("realForm").submit();
+							//form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser,"post", function(xml) {
+								alert('<bean:message key="message.perfil.cambiado.exito"/>');
+								loadFormPerfil();
+						}
+					});//onButtonClick
+					
+				permisosFormPerfilPropio();
+				});//load
 		    }
 		    
-		    function permisosFormPerfil(){
-		    	<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>36</permiso>" >		    	
-						form.hideItem('aceptar');
-					</logic:notMatch>
-				</logic:notMatch>
+		    function permisosFormPerfilPropio(){
+		    	<logic:notEmpty name="usuarioYPermisos">
+		    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+		    			<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >
+							<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>3</permiso>" >	    	
+							form.setReadonly("nombre", true);
+							form.setReadonly("apellido1", true);
+							form.setReadonly("apellido2", true);
+							form.setReadonly("dni", true);
+							</logic:notMatch>//permiso3
+						</logic:notMatch>//permiso2
+					</logic:notMatch>//permiso1
+				</logic:notEmpty>
 		    }
     
 		    function getExtension(fileName) {
