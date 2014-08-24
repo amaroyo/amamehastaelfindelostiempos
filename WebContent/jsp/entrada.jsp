@@ -25,19 +25,10 @@
 		        toolbar.setIconsPath("img/toolbar/");
 		        toolbar.loadXML('xml/toolbars/dhxtoolbar-mrm.xml', function() {
 		        	
-		        	
 		        	toolbar.setItemText('miPerfil', '<bean:message key="label.mi.perfil" />');
 		        	toolbar.setItemText('misAlumnos', '<bean:message key="label.mis.alumnos" />');
-					toolbar.setItemText('leads', '<bean:message key="title.leads" />');
-					toolbar.setItemText('comerciales', '<bean:message key="title.comerciales" />');
-					toolbar.setItemText('responsables', '<bean:message key="title.responsables" />');
-					toolbar.setItemText('empresas', '<bean:message key="title.empresas" />');
-					toolbar.setItemText('distribuidores', '<bean:message key="title.distribuidores" />');
-					toolbar.setItemText('servicios', '<bean:message key="title.servicios" />');
-					toolbar.setItemText('canales', '<bean:message key="title.channels" />');
 					toolbar.setItemText('grupos', '<bean:message key="title.groups" />');
 					toolbar.setItemText('usuarios', '<bean:message key="title.users" />');
-					toolbar.setItemText('logsUsuarios', '<bean:message key="title.logs.users" />');
 					
 					<% String anyo = (String) session.getAttribute("anyoAcademico");%>
 					var ann = ("<%=anyo%>");
@@ -58,9 +49,10 @@
 					var optsAdministrar = dameOpcionesAdministrar();
 					toolbar.addButtonSelect('administrar',8, '<bean:message key="button.select.administrar" />',
 							optsAdministrar, 'administrar.png', null, 'disabled', true, "10");
-	
 					
-					//permisosToolbarGeneral();
+					
+			        permisosToolbarGeneral();
+
 	        	});	 
 		        
 		        toolbar.attachEvent("onClick", function(id){
@@ -89,64 +81,25 @@
     	}
     	
     	function permisosToolbarGeneral(){
-    		
     		<logic:notEmpty name="usuarioYPermisos">
 	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>44</permiso>" >	    	
-						toolbar.hideItem('cursos');
-						toolbar.hideItem('sep4');
-						toolbar.hideItem('administrar');
-						toolbar.hideItem('sep5');
-					</logic:notMatch>
-					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >		    	
-						toolbar.hideItem('leads');
-						toolbar.hideItem('sep6');
-					</logic:notMatch>
-					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>8</permiso>" >		    	
-						toolbar.hideItem('comerciales');
-						toolbar.hideItem('sep7');
-					</logic:notMatch>    				
-					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>12</permiso>" >		    	
-						toolbar.hideItem('responsables');
-						toolbar.hideItem('sep8');
-					</logic:notMatch> 
-					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>16</permiso>" >		    	
-						toolbar.hideItem('distribuidores');
-						toolbar.hideItem('sep9');
-					</logic:notMatch> 
-					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>20</permiso>" >		    	
-						toolbar.hideItem('empresas');
-						toolbar.hideItem('sep10');
-					</logic:notMatch>
-					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>24</permiso>" >		    	
-						toolbar.hideItem('servicios');
-						toolbar.hideItem('sep11');
-					</logic:notMatch>
-					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>28</permiso>" >		    	
-						toolbar.hideItem('canales');
-						toolbar.hideItem('sep12');
-					</logic:notMatch>	
-					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>34</permiso>" >
-						toolbar.hideItem('usuarios');
-						toolbar.hideItem('sep14');
-					</logic:notMatch>
-					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>4</permiso>" >
-						toolbar.hideItem('misAlumnos');
-						toolbar.hideItem('sep2');
-					</logic:notMatch>
-					<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>4</permiso>" >
-						toolbar.hideItem('timeMachine');
-						toolbar.hideItem('sep13');
-					</logic:notMatch>
-				</logic:notMatch>
-				<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>1</grupo>" >
-					toolbar.hideItem('grupos');
-					toolbar.hideItem('sep13');
-					toolbar.hideItem('logsUsuarios');
-					toolbar.hideItem('sep15');
-					toolbar.hideItem('timeMachine');
-					toolbar.hideItem('sep16');
-				</logic:notMatch>
+	    			<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >
+	    				toolbar.hideItem("cursos");
+		    			toolbar.hideItem("sep4");
+		    			toolbar.hideItem("administrar");
+		    			toolbar.hideItem("sep5");
+		    			toolbar.hideItem("grupos");
+		    			toolbar.hideItem("sep6");
+		    			toolbar.hideItem("usuarios");
+		    			toolbar.hideItem("sep7");
+		    			toolbar.hideItem("timeMachine");
+		    			toolbar.hideItem("sep8");
+						<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>3</permiso>" >	    	
+							toolbar.hideItem("misAlumnos");
+			    			toolbar.hideItem("sep3");
+						</logic:notMatch>//permiso3
+					</logic:notMatch>//permiso2
+				</logic:notMatch>//permiso1
 			</logic:notEmpty>
     	}
     	
@@ -238,7 +191,8 @@
     			}
     			break;
     		case "cerrarCurso":
-    			document.getElementById("areatrabajo").src="administrar/cierreCurso.do";
+    			alert("cerrar");
+    			//document.getElementById("areatrabajo").src="administrar/inicio.do?opcion=" + opcion;
     			break;
     		}
 
