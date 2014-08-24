@@ -325,7 +325,7 @@ insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values
 insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (1, 3, 'Saber estar');
 
 
--- -Gruop PERCEPCIÓN/MANEJO DE LA SALUD
+-- -Grupo PERCEPCIÓN/MANEJO DE LA SALUD
 insert into criterios_rubricas (id_asignatura, id_grupo_criterio, nombre) values (1, 4, 'Identificación y control de riesgos');
 
 -- -Grupo NUTRICIONAL–METABÓLICO
@@ -962,28 +962,25 @@ insert into casos_clinicos (id_portafolio, nombre, caso_clinico, fecha_subida) v
 -- Puntuacion Criterios 
 insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (1, 1, '2');
 insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (1, 2, '1');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (1, 3, '0');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (1, 4, '0');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (1, 5, '0');
 
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 20, '3');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 21, '4');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 22, '5');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 23, '5');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 25, '5');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 26, '4');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 27, '3');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 28, '4');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 29, '4');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 30, '5');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 31, '5');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 32, '4');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 33, '4');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 34, '5');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 35, '5');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 36, '4');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 37, '2');
-insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 38, '1');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 37, '3');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 38, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 39, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 40, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 41, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 42, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 43, '3');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 44, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 45, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 46, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 47, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 48, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 49, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 50, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 51, '5');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 52, '4');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 53, '2');
+insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (2, 54, '1');
 
 
 insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 1, '3');
