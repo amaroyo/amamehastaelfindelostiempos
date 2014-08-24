@@ -4,7 +4,6 @@ import java.util.List;
 
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
-import es.oyssen.mrm.negocio.vo.AnexoVO;
 import es.oyssen.mrm.negocio.vo.ErrorLogVO;
 
 public interface ErroresLogService {
@@ -18,5 +17,9 @@ public interface ErroresLogService {
 	public List<ErrorLogVO> findAll() throws ServiceException;
 	
 	public ErrorLogVO findById(ErrorLogVO error) throws ServiceException;
+	
+	public ErrorLogVO findAnyoAcademico(ErrorLogVO error) throws ServiceException;
+	
+	public void updateAnyo(ErrorLogVO error) throws DAOException, ServiceException;
 
 }

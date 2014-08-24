@@ -21,6 +21,10 @@ public interface DAOErroresLog {
 	
 	public ErrorLogVO findById(ErrorLogVO error) throws DAOException;
 	
+	public ErrorLogVO findAnyoAcademico(ErrorLogVO error) throws DAOException;
+	
+	public void updateAnyo(ErrorLogVO error) throws DAOException, DAOUpdateException;
+	
 	
 	
 

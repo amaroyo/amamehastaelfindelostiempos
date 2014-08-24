@@ -81,6 +81,31 @@ public class ErroresLogServiceImpl implements ErroresLogService{
 				throw new ServiceException(e.getMessage());
 			}
 		}
+
+	@Override
+	public ErrorLogVO findAnyoAcademico(ErrorLogVO error)
+			throws ServiceException {
+		try {
+			return daoErroresLog.findAnyoAcademico(error);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findAnyoAcademico error", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	@Override
+	public void updateAnyo(ErrorLogVO error) throws DAOException,
+			ServiceException {
+		try {
+			daoErroresLog.updateAnyo(error);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error updateAnyo error", e);
+			throw new ServiceException(e);
+		}		
+		
+	}
 	
 	
 	

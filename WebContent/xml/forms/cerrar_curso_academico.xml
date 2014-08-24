@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+    <item type="fieldset" name="data1" label="Aviso" inputWidth="auto" width="400">
+        <item 	type="label" 	
+  				className="myCss"
+  				name="labelAviso1"
+  				label="Aviso importante..." 
+		 />
+   </item>
+   <item type="fieldset" name="data2" label="Aviso" inputWidth="auto" width="400">
+        <item 	type="label" 	
+  				className="myCss"
+  				name="labelAviso2"
+  				label="Aviso importante..." 
+		 />
+         <item type="button" name="bbdd" value="Crear Copia de Seguridad" />
+   </item>   
+   <item type="button" name="aceptar" value="Cerrar Curso"  position="absolute" inputLeft="70" inputTop="287"/>
+</items>

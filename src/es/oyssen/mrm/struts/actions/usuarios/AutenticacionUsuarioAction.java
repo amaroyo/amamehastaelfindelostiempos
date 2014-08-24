@@ -10,6 +10,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import es.oyssen.mrm.negocio.exceptions.ServiceException;
+import es.oyssen.mrm.negocio.vo.ErrorLogVO;
 import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.LogUsuarioVO;
 import es.oyssen.mrm.negocio.vo.PermisoVO;
@@ -81,9 +83,23 @@ public class AutenticacionUsuarioAction extends MrmAction {
 	}
 	
 	private String anyoAcademico(){
-		String actual = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-		String pasado = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)-1);
-		return pasado + "/" + actual;
+			
+		ErrorLogVO e = new ErrorLogVO();
+		e.setIdError("1");
+		
+		try {
+			e = getErroresLogService().findAnyoAcademico(e);
+			String fecha = e.getFecha();
+			String[] sp = fecha.split(" ");
+			String[] s = sp[0].split("-");
+			return s[0] + "/" + Integer.toString(Integer.parseInt(s[0])+1);
+		} catch (ServiceException e1) {
+			String actual = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+			String pasado = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)-1);
+			return pasado + "/" + actual;
+		}
+		
+		
 	}
 
 }
