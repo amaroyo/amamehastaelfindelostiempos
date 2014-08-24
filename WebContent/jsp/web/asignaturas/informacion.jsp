@@ -66,14 +66,16 @@
 	    });
 	    	
 	    function permisosFormInfoAsignaturas() {
-	    	<logic:match scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >	    	
+	    	<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+	    	<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >	    
 				formInfo.setReadonly('nombre', true);
 	    		formInfo.setReadonly('codigo', true);
 	    		formInfo.setReadonly('curso', true);
 	    		formInfo.setReadonly('profesor', true);
 	    		formInfo.setReadonly('descripcion', true);
 	    		formInfo.hideItem('aceptar');
-			</logic:match>
+	    	</logic:notMatch>
+	    	</logic:notMatch>
 	    }
 	    	
 	   </script>

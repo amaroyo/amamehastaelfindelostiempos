@@ -173,6 +173,8 @@
 		    		form.setItemLabel('fotoFile','<bean:message key="label.max.size"/>');
 		    		form.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 		    		
+					permisosFormPerfilPropio();
+		    		
 		    		form.forEachItem(function(id){
 		    			switch(id) {
 			    			case "grupo":
@@ -214,11 +216,12 @@
 						}
 					});//onButtonClick
 					
-				permisosFormPerfilPropio();
 				});//load
 		    }
 		    
 		    function permisosFormPerfilPropio(){
+		    	form.setReadonly("correo", true);
+				form.setReadonly("grupo", true);
 		    	<logic:notEmpty name="usuarioYPermisos">
 		    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
 		    			<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >
