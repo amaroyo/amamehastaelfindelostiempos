@@ -1019,3 +1019,6 @@ insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 3
 insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 34, 'EXCELENTE');
 insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 35, 'NO');
 insert into puntuacion_criterios (id_portafolio, id_criterio, nota) values (3, 36, 'ACEPTABLE');
+
+-- errores log
+insert into errores_log (tipo, fecha) values ('anyo_academico', '2013-01-01 00:00:01');

@@ -31,9 +31,9 @@ public class MySqlDAOErroresLogImpl extends DAOBase implements DAOErroresLog{
 	private static String SQL_UPDATE = "update errores_log set tipo=?, descripcion =?, fecha=?";
 	private static String SQL_DELETE = "delete from errores_log where id_error = ?";
 	private static String SQL_FIND_BY_ID = "select * from errores_log where id_error = ?";
-	private static String SQL_FIND_ALL = "select * from errores_log";
-
-
+	private static String SQL_FIND_ALL = "select * from errores_log where tipo !='anyo_academico'";
+	private static String SQL_FIND_ANYO = "select * from errores_log where id_error='1'";
+	private static String SQL_UPDATE_ANYO = "update errores_log set fecha=?";
 
 	public void insert(final ErrorLogVO error) throws DAOException,
 	DAOInsertException {
@@ -107,6 +107,34 @@ public class MySqlDAOErroresLogImpl extends DAOBase implements DAOErroresLog{
 		} catch (Exception e) {
 			throw new DAOException(e);
 		}
+	}
+	
+	public ErrorLogVO findAnyoAcademico(ErrorLogVO error) throws DAOException {
+		try {
+			return (ErrorLogVO) getJdbcTemplate().queryForObject(SQL_FIND_ANYO, new Object[]{}, new ErrorLogMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+	
+	public void updateAnyo(ErrorLogVO error) throws DAOException,
+	DAOUpdateException {
+		try {
+			 
+			String query = SQL_UPDATE_ANYO;
+
+			query += " where id_error = 1 ";
+
+			getJdbcTemplate().update(query, new Object[]{
+					
+					error.getFecha()
+					});
+		} catch(Exception e) {
+			throw new DAOUpdateException(e);
+		}
+
 	}
 }
 

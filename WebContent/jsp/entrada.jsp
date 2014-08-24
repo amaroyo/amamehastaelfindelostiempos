@@ -238,8 +238,7 @@
     			}
     			break;
     		case "cerrarCurso":
-    			alert("cerrar");
-    			//document.getElementById("areatrabajo").src="administrar/inicio.do?opcion=" + opcion;
+    			document.getElementById("areatrabajo").src="administrar/cierreCurso.do";
     			break;
     		}
 
