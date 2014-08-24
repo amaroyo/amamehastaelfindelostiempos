@@ -12,6 +12,8 @@
 		
 		<form-bean name="Descargar" type="es.oyssen.mrm.struts.forms.asignaturas.DescargarForm" />
 		
+		<form-bean name="GridAlumnosAptosCertificado" type="es.oyssen.mrm.struts.forms.administrar.GridAlumnosAptosCertificadoForm" />
+		
 	</form-beans>
 	
 
@@ -58,6 +60,8 @@
 		<action path="/administrar/cierreCurso" forward="/jsp/web/administrar/cierreCurso.jsp" />
 		
 		<action path="/administrar/cerrarCursoAcademico" name="CerrarCursoAcademico" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.administrar.CerrarCursoAcademicoAction"  />
+		
+		<action path="/administrar/gridAlumnosAptosCertificado" name="GridAlumnosAptosCertificado" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.administrar.GridAlumnosAptosCertificadoAction" />
 		
 		
 		
