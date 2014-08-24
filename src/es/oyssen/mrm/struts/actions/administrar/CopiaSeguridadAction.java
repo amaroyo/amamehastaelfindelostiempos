@@ -54,23 +54,27 @@ public class CopiaSeguridadAction extends MrmAction {
 		else {
 			
 			String expr = new StringBuilder()
-		    .append("C:\\Program Files\\MySQL\\MySQL Server 5.1\\bin").append(' ')
-		    .append("-u").append("root").append(' ')
+		    .append("C:\\Program Files\\MySQL\\MySQL Server 5.1\\bin\\mysqldump").append(' ')
+		    .append("-u ").append("root").append(' ')
 		    //.append("-p").append("").append(' ') NO PASSWORD
-		    .append("--add-drop-database").append(' ')
-		    .append("-B").append(' ')
-		    .append("enfermeria").append(' ')
+		    //.append("--add-drop-database").append(' ')
+		    //.append("-B").append(' ')
+		    .append("enfermeria")
 		    .toString();
 			
 			
-			exec = new String[]{"cmd", "/c", "start cmd.exe", expr};
+			String executeCmd = "mysqldump -u root enfermeria dumpfilename.sql";
+			
+			
+			exec = new String[]{"cmd", "/c", expr};
 		}
 		
 		
 		Process runtimeProcess;
 		try {
 
-			runtimeProcess = Runtime.getRuntime().exec(exec);
+			runtimeProcess = Runtime.getRuntime().exec("mysqldump -u root enfermeria ");
+	        //int processComplete = runtimeProcess.waitFor();
 			
 			try{
 				

@@ -39,7 +39,7 @@ public class GenerarCertificadoAction extends MrmAction {
 	            e.printStackTrace();
 	        }
 	        
-	        System.out.println("Complete");
+	        //System.out.println("Complete");
 	        return null;
 	    }
 	 
@@ -47,7 +47,7 @@ public class GenerarCertificadoAction extends MrmAction {
 	        pdfDocument = PDDocument.load(originalPdf);
 	        
 	        //System.out.println("Number of pages: "+pdfDocument.getNumberOfPages());
-	        printFields();
+	        //printFields();
 	        
 	        setField("alumno", "Raquel Álvarez Ramírez");
 	        setField("dni", "02286631V");
