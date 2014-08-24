@@ -96,7 +96,7 @@
 	    	}
 	    	
 	    	
-	    	function cambiarCursoAcademico(){
+	    	function cerrarCursoAcademico(){
 	    		var url = "cerrarCursoAcademico.do";
 	    		var xmlhttp = initRequest();
 	    		xmlhttp.onreadystatechange=function(){
@@ -120,10 +120,8 @@
 	    	        //seminario=[id,nombre];
 	    	    }
 	    		
-	    		if(nombre=="exito"){
-	    			return '<bean:message key="message.cambio.satisfactorio"/>';
-	    		}
-	    		else return '<bean:message key="message.algo.salio.mal"/>';
+	    		
+	    		return nombre;
 
 	    	}
 	    	
