@@ -9,6 +9,7 @@ import es.oyssen.mrm.negocio.dao.DAOPuntuacionCriterios;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.PuntuacionCriteriosService;
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.PuntuacionCriterioVO;
 
 public class PuntuacionCriteriosServiceImpl implements PuntuacionCriteriosService{
@@ -77,6 +78,18 @@ public class PuntuacionCriteriosServiceImpl implements PuntuacionCriteriosServic
 		} catch (DAOException e) {
 			e.printStackTrace();
 			log.error("Error delete findAllByPortafolio criterio", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	@Override
+	public List<PuntuacionCriterioVO> findAllNotasByPortafolio(PortafolioVO p)
+			throws ServiceException {
+		try {
+			return daoPuntuacionCriterios.findAllNotasByPortafolio(p);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error delete findAllNotasByPortafolio criterio", e);
 			throw new ServiceException(e.getMessage());
 		}
 	}

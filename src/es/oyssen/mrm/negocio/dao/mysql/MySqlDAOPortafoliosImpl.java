@@ -85,6 +85,12 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 	private static String SQL_FIND_ANYOS = "select distinct anyo_academico from portafolios";
 	
 	
+	private static String SQL_FIND_ALUMNOS_POTENCIALES = "select distinct p1.id_alumno, p1.id_portafolio, u.nombre, u.apellido1, u.apellido2, u.dni, u.correo, u.telefono, u.id_usuario "+
+															"from portafolios as p1, usuarios as u "+
+															"where p1.id_alumno = u.id_usuario and 7 = (select count(distinct p2.id_asignatura) "+
+															"from portafolios as p2 "+
+															"where p1.id_alumno = p2.id_alumno)";
+	
 	
 	@Override
 	public DatosUsuarioEstanciaUnidadClinicaVO findDatosUsuarioEstanciaUnidadClinica(
@@ -342,6 +348,19 @@ public class MySqlDAOPortafoliosImpl extends DAOBase implements DAOPortafolios{
 	public List<PortafolioVO> findAnyos() throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_ANYOS, new Object[]{}, new AnyoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+
+	@Override
+	public List<UsuarioPortafolioVO> findAlumnosPotencialesCertificado()
+			throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_ALUMNOS_POTENCIALES, new Object[]{}, new UsuarioPortafolioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

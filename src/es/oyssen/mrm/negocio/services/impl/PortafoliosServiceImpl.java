@@ -244,6 +244,18 @@ public class PortafoliosServiceImpl implements PortafoliosService{
 		}
 	}
 
+	@Override
+	public List<UsuarioPortafolioVO> findAlumnosPotencialesCertificado()
+			throws ServiceException {
+		try {
+			return daoPortafolios.findAlumnosPotencialesCertificado();
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findAlumnosPotencialesCertificado portafolio", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
 	
 
 	

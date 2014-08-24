@@ -17,6 +17,7 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.dao.rowmappers.PuntuacionCriterioMapper;
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.PuntuacionCriterioVO;
 
 
@@ -28,7 +29,10 @@ public class MySqlDAOPuntuacionCriteriosImpl extends DAOBase implements DAOPuntu
 																"on duplicate key update nota = ?";
 	private static String SQL_DELETE = "delete from puntuacion_criterios where id_portafolio = ? and id_criterio = ?";
 	private static String SQL_FIND_BY_PORTAFOLIO = "select * from puntuacion_criterios where id_portafolio = ?";
-
+	private static String SQL_ALL_NOTAS_BY_PORTAFOLIO = "select pc.* "+
+														"from puntuacion_criterios as pc, grupos_criterios_rubricas as gcr, criterios_rubricas as cr "+
+														"where gcr.tipo = 'NOTA' and gcr.id_grupo_criterio = cr.id_grupo_criterio "+
+														"and pc.id_criterio = cr.id_criterio and pc.id_portafolio = ?";
 
 
 	public void insert(final PuntuacionCriterioVO puntuacionCriterio) throws DAOException,
@@ -108,6 +112,18 @@ public class MySqlDAOPuntuacionCriteriosImpl extends DAOBase implements DAOPuntu
 	public List<PuntuacionCriterioVO> findAllByPortafolio(PuntuacionCriterioVO puntuacionCriterio) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_BY_PORTAFOLIO, new Object[]{puntuacionCriterio.getIdPortafolio()}, new PuntuacionCriterioMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+	@Override
+	public List<PuntuacionCriterioVO> findAllNotasByPortafolio(PortafolioVO p)
+			throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_ALL_NOTAS_BY_PORTAFOLIO, new Object[]{p.getIdPortafolio()}, new PuntuacionCriterioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

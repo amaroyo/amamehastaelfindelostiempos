@@ -873,6 +873,20 @@ insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) 
 insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 8, 3, '2013/2014'); -- id6
 insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 8, 1, '2012/2013'); -- id7
 
+-- Pruebas para elcerficicado
+insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (5, 8, 3, '2013/2014'); 
+insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (5, 8, 4, '2013/2014');
+insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (5, 8, 5, '2013/2014');
+insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (5, 8, 6, '2013/2014');
+insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (5, 8, 7, '2013/2014'); 
+
+insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 8, 1, '2013/2014'); 
+insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 8, 4, '2013/2014');
+insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 8, 5, '2013/2014');
+insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 8, 6, '2013/2014');
+insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 8, 7, '2013/2014'); 
+
+
 
 -- Estancias_unidad_clinica
 insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (1,'HUGM Hospital Gregorio Marañon', 'Urgencias', 'M - Mañana', '2012-09-01', '2013-01-31');
