@@ -20,9 +20,11 @@
 		<action path="/administrar/listados" forward="/jsp/web/administrar/listados.jsp" />
 		<action path="/administrar/certificados" forward="/jsp/web/administrar/certificados.jsp" />
 		
-		<action path="/administrar/copiaSeguridad" name="CopiaSeguridad" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.administrar.CopiaSeguridadAction" />
-		
-		
+		<action path="/administrar/copiaSeguridad" name="CopiaSeguridad" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.administrar.CopiaSeguridadAction" >
+			<exception type="java.lang.Exception" key="error.subir.copia.seguridad" path="/administrar/copiaSeguridad.do"></exception>
+			<forward name="error" path="/administrar/copiaSeguridad.do" />
+		</action>	
+	
 		<action path="/administrar/subirArchivo" forward="/jsp/web/asignaturas/subirArchivo.jsp" />	
 		<action path="/administrar/algoSalioMal" forward="/jsp/web/administrar/algoSalioMal.jsp" />	
 		

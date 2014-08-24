@@ -28,7 +28,7 @@ public class CopiaSeguridadAction extends MrmAction {
 		
 		//deberiamos meter fecha
 		String fileName = "CopiaSeguridadEnfermeria.sql";
-	
+		Process runtimeProcess;
 		String[] exec = {};
 		
 		String so = System.getProperty("os.name");
@@ -49,32 +49,23 @@ public class CopiaSeguridadAction extends MrmAction {
 			exec = new String[]{"/bin/bash", "-c", expr};
 			
 			
+			try {
+				runtimeProcess = Runtime.getRuntime().exec(exec);
+			} catch (Exception e) {
+				return mapping.findForward("error");
+			}
 			 
 		}
 		else {
 			
-			String expr = new StringBuilder()
-		    .append("mysqldump").append(' ')
-		    .append("-u ").append("root").append(' ')
-		    //.append("-p").append("").append(' ') NO PASSWORD
-		    //.append("--add-drop-database").append(' ')
-		    //.append("-B").append(' ')
-		    .append("enfermeria")
-		    .toString();
-			
-			
-			
-			
-			
-			exec = new String[]{expr};
+			try {
+				runtimeProcess = Runtime.getRuntime().exec("mysqldump -u root enfermeria");
+			} catch (Exception e) {
+				return mapping.findForward("error");
+			}
 		}
 		
-		
-		Process runtimeProcess;
-		try {
 
-			runtimeProcess = Runtime.getRuntime().exec(exec);
-	        
 			
 			try{
 				
@@ -99,13 +90,9 @@ public class CopiaSeguridadAction extends MrmAction {
 
 			} catch (Exception e2) {
 				System.out.println("Error in " + getClass().getName() + "\n" + e2);
+				return mapping.findForward("error");
 			}
-
-
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+	
 		return mapping.findForward("success");
 
 
