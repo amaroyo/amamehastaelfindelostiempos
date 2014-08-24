@@ -31,7 +31,7 @@ public class CambiarCursoAcademicoAction extends MrmAction {
 		
 		request.getSession().setAttribute("anyoAcademico", nuevoAnyoAcademico);
 		
-		String chequeo = (String)request.getSession().getAttribute("anyoAcademico");
+		
 		
 		response.setContentType("text/xml;charset=utf-8");
 		PrintWriter out;
