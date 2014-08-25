@@ -456,19 +456,12 @@
 			}
 			
 			function descargarTodosAlumno(){
-				if (idPortafolio == -1) alert("<bean:message key="message.error.seleccionar.alumno" />");
-				else {
-					var accion = "descargarCasoClinicosAlumno.do";
-					accion += "?idPortafolio=" + idPortafolio;
-					location.href=accion;
-				}
-			}
-			
-			function descargarTodos(){
-				var accion = "descargarTodosCasosClinicosAlumnos.do";
-				accion += "?idAsignatura=" + idAsignatura;
+				var accion = "descargarAnexosAlumno.do";
+				accion += "?idPortafolio=" + ID;
 				location.href=accion;
+				
 			}
+		
 			
 			
 			
