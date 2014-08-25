@@ -27,7 +27,7 @@ import es.oyssen.mrm.util.UtilXML;
 
 public class GridAlumnosAptosCertificadoAction extends DHTMLXGridAction {
 	
-	private HashMap<Integer, Pares> notasAlumnos =  new HashMap<Integer,Pares>();
+	private HashMap<Integer, Pares> notasAlumnos;
 	
 	public class Pares {
 		private UsuarioVO usuario;
@@ -57,7 +57,7 @@ public class GridAlumnosAptosCertificadoAction extends DHTMLXGridAction {
 	public String search(DhtmlxGridForm f) throws Exception {
 		
 		//GridAlumnosAptosCertificadoForm form = (GridAlumnosAptosCertificadoForm) f;
-		
+		notasAlumnos =  new HashMap<Integer,Pares>();
 		List<UsuarioPortafolioVO> idAlumnosPotenciales = getPortafoliosService().findAlumnosPotencialesCertificado();
 		
 		if(!idAlumnosPotenciales.isEmpty()){
