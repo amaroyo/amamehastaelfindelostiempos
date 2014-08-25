@@ -63,6 +63,7 @@
 		
 		<action path="/administrar/gridAlumnosAptosCertificado" name="GridAlumnosAptosCertificado" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.administrar.GridAlumnosAptosCertificadoAction" />
 		
+		<action path="/administrar/generarCertificado" name="GridAlumnosAptosCertificado" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.administrar.GenerarCertificadoAction" />
 		
 		
 	</action-mappings>
