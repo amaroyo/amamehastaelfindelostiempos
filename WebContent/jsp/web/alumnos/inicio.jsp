@@ -1124,7 +1124,7 @@
 			}
 				
 			function goAnexo2(){
-				var toolbarServiciosAnexo2= tab_9.attachForm();
+				var toolbarServiciosAnexo2= tab_9.attachToolbar();
 
 				toolbarServiciosAnexo2.setIconsPath('../img/toolbar/');
 
