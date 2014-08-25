@@ -174,7 +174,7 @@
 		</action>
 		
 		<action path="/asignaturas/subirArchivoDiarioReflexivo" name="SubirArchivoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.SubirArchivoAction">
-			<exception type="java.lang.Exception" key="error.subir.archivo.caso.clinico" path="/asignaturas/ArchivoDiarioReflexivo.do"></exception>
+			<exception type="java.lang.Exception" key="error.subir.archivo.caso.clinico" path="/asignaturas/subirArchivoDiarioReflexivo.do"></exception>
 			<forward name="cancel" path="/asignaturas/subirArchivo.do" />
 			<forward name="success" path="/asignaturas/correcto.do" />
 		</action>
@@ -195,6 +195,20 @@
 		
 		<action path="/asignaturas/gridAnexos2UsuarioAsignatura" name="GridAnexos2UsuarioAsignatura" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridAnexos2UsuarioAsignaturaAction" />
 		
+		
+		<action path="/asignaturas/subirAnexoProfesor" name="SubirArchivoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.SubirArchivoAction">
+			<exception type="java.lang.Exception" key="error.subir.archivo.anexo.profesor" path="/asignaturas/subirAnexoProfesor.do"></exception>
+			<forward name="cancel" path="/asignaturas/subirArchivo.do" />
+			<forward name="success" path="/asignaturas/correcto.do" />
+		</action>
+		
+		<action path="/asignaturas/subirAnexoAlumno" name="SubirArchivoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.SubirArchivoAction">
+			<exception type="java.lang.Exception" key="error.subir.archivo.anexo.profesor" path="/asignaturas/subirAnexoAlumno.do"></exception>
+			<forward name="cancel" path="/asignaturas/subirArchivo.do" />
+			<forward name="success" path="/asignaturas/correcto.do" />
+		</action>
+		
+		<action path="/asignaturas/descargarAnexo" name="Descargar" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarAction" />
 		
 	</action-mappings>
 

@@ -60,6 +60,15 @@
 	    else if(tipoConsulta.equals("usuarios")){
 	    	accion = "/administrar/subirExcelUsuarios?tipoConsulta=" + tipoConsulta;
 	    }
+	    else if(tipoConsulta.equals("AnexoProfesor")){
+	    	String idPortafolio = request.getParameter("idPortafolio");
+	    	accion = "/asignaturas/subirAnexoProfesor?tipoConsulta=" + tipoConsulta + "&idPortafolio="+idPortafolio;
+	    }
+	    else if(tipoConsulta.equals("AnexoAlumno")){
+	    	String idAlumno = request.getParameter("idAlumno");
+	    	String idAsignatura = request.getParameter("idAsignatura");
+	    	accion = "/asignaturas/subirAnexoAlumno?tipoConsulta=" + tipoConsulta + "&idAlumno="+idAlumno + "&idAsignatura="+idAsignatura;
+	    }
 	    %>
 		    function subir() {
 		    	document.forms[0].submit();

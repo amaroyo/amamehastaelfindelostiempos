@@ -20,7 +20,9 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.dao.rowmappers.AnexoMapper;
+import es.oyssen.mrm.negocio.dao.rowmappers.CasoClinicoMapper;
 import es.oyssen.mrm.negocio.vo.AnexoVO;
+import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 
 
 public class MySqlDAOAnexosImpl extends DAOBase implements DAOAnexos{
@@ -29,7 +31,7 @@ public class MySqlDAOAnexosImpl extends DAOBase implements DAOAnexos{
 	private static String SQL_UPDATE = "update anexos set anexo=?, nombre =?, fecha_subida=?";
 	private static String SQL_DELETE = "delete from anexos where id_portafolio = ? and id_anexo = ?";
 	private static String SQL_FIND_BY_PORTAFOLIO = "select * from anexos where id_portafolio = ?";
-
+	private static String SQL_FIND_BY_IDs = "select * from anexos where id_portafolio = ? and id_anexo=?";
 
 
 	public void insert(final AnexoVO anexo) throws DAOException,
@@ -97,6 +99,17 @@ public class MySqlDAOAnexosImpl extends DAOBase implements DAOAnexos{
 	public List<AnexoVO> findAllByPortafolio(AnexoVO anexo) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_BY_PORTAFOLIO, new Object[]{anexo.getIdPortafolio()}, new AnexoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+	@Override
+	public AnexoVO findById(AnexoVO a) throws DAOException {
+		try {
+			return (AnexoVO) getJdbcTemplate().queryForObject(SQL_FIND_BY_IDs, new Object[]{a.getIdPortafolio(), a.getIdAnexo()}, new AnexoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

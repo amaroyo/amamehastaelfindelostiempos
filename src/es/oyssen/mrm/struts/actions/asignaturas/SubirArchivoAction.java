@@ -136,6 +136,21 @@ public class SubirArchivoAction extends MrmAction {
 					getDiariosReflexivosService().process(f);
 					return mapping.findForward("success");
 				}
+				else if (tipo.equals("AnexoProfesor")){
+
+					getAnexosService().process(f);
+					return mapping.findForward("success");
+				}
+				else if (tipo.equals("AnexoAlumno")){
+					PortafolioVO p = new PortafolioVO();
+					p.setIdAlumno(f.getIdAlumno());
+					p.setIdAsignatura(f.getIdAsignatura());
+					String anyoAcademico = (String)request.getSession().getAttribute("anyoAcademico");
+					p.setAnyoAcademico(anyoAcademico);
+					f.setIdPortafolio(getPortafoliosService().findByAlumnoAsignatura(p).getIdPortafolio());
+					getAnexosService().process(f);
+					return mapping.findForward("success");
+				}
 				
 				else return mapping.findForward("cancel");
 			}

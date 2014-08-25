@@ -11,6 +11,7 @@ public class DescargarForm extends DhtmlxGridForm {
 	private String idTrabajoCampo;
 	private String idDiarioReflexivo;
 	private String idError;
+	private String idAnexo;
 	
 	
 	public String getIdError() {
@@ -48,6 +49,12 @@ public class DescargarForm extends DhtmlxGridForm {
 	}
 	public void setIdDiarioReflexivo(String idDiarioReflexivo) {
 		this.idDiarioReflexivo = idDiarioReflexivo;
+	}
+	public String getIdAnexo() {
+		return idAnexo;
+	}
+	public void setIdAnexo(String idAnexo) {
+		this.idAnexo = idAnexo;
 	}
 	
 	
