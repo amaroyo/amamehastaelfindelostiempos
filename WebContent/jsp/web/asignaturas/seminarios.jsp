@@ -15,6 +15,7 @@
 		<link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlx.css">
 		<script type="text/javascript" src="../js/dhtmlxSuite/dhtmlx.js"></script>
 	    <script src="../js/dhtmlxSuite/patterns/dhtmlxlayout_pattern4l.js"></script>
+	    <script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
 	    
 
 	    <script type="text/javascript">
@@ -50,10 +51,10 @@
 		    		b.setWidth(500);
 		    		
 		    		var tabbar = a.attachTabbar();
-			    	tabbar.addTab('tab_1','<bean:message key="title.seminarios.realizados"/>','');
-			    	var tab_1 = tabbar.cells('tab_1');
-			    	tabbar.setTabActive('tab_1');
-			    	gridAlumnoRealizado = tab_1.attachGrid();
+			    	tabbar.addTab('tab_realizados','<bean:message key="title.seminarios.realizados"/>','');
+			    	var tab_realizados = tabbar.cells('tab_realizados');
+			    	tabbar.setTabActive('tab_realizados');
+			    	gridAlumnoRealizado = tab_realizados.attachGrid();
 			    	
 			    	gridAlumnoRealizado.setHeader(["<bean:message key="label.nombre.seminario" />","<bean:message key="label.codigo.seminario" />","<bean:message key="label.anyo.realizacion.seminario" />"]);
 			    	gridAlumnoRealizado.setColTypes("ro,ro,ro");
@@ -74,8 +75,6 @@
 			    	gridAlumnoRealizado.clearAndLoad("gridSeminariosRealizadosUsuario.do?idAlumno=" + idSessionUser + "&idAsignatura=" + idAsignatura + "&peticion=realizados");
 			    	
 			    	gridAlumnoRealizado.attachEvent("onRowSelect", function(row,ind){
-
-
 			    		
 			    		var formSeminarioAlumno = b.attachForm();
 			    		
@@ -87,28 +86,24 @@
 			    			formSeminarioAlumno.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 			    			formSeminarioAlumno.setItemLabel('asignatura','<bean:message key="label.asignatura.asociada"/>');
 			    			
+			    			//ya se sabe que es un alumno por el filtro inicial
 			    			formSeminarioAlumno.setRequired('nombre', false);
 			    			formSeminarioAlumno.setRequired('codigo', false);
 			    			formSeminarioAlumno.hideItem('aceptar');
 			    			formSeminarioAlumno.hideItem('asignatura');
-			    			
-							//Ponemos por defecto que los items no se puedan modificar, y luego con los permisos necesarios 
-							//seran modificables.
 				    		formSeminarioAlumno.setReadonly('nombre', true);
 				    		formSeminarioAlumno.setReadonly('codigo', true);
 				    		formSeminarioAlumno.setReadonly('descripcion', true);
 			    		
 							formSeminarioAlumno.load('editarseminario.do?idSeminario=' + row);
 				    			
-			    		});
-	
-		    		
-			    	});
+			    		});//loadStrut
+			    	});//attachEvent
 			    	
-			    	tabbar.addTab('tab_2','<bean:message key="title.seminarios.pendientes"/>','');
-			    	var tab_2 = tabbar.cells('tab_2');
+			    	tabbar.addTab('tad_pendientes','<bean:message key="title.seminarios.pendientes"/>','');
+			    	var tad_pendientes = tabbar.cells('tad_pendientes');
 			    	
-			    	gridAlumnoPendiente = tab_2.attachGrid();
+			    	gridAlumnoPendiente = tad_pendientes.attachGrid();
 		    		
 			    	gridAlumnoPendiente.setHeader(["<bean:message key="label.nombre.seminario" />","<bean:message key="label.codigo.seminario" />"]);
 			    	gridAlumnoPendiente.setColTypes("ro,ro");
@@ -132,9 +127,6 @@
 			    	
 			    	gridAlumnoPendiente.attachEvent("onRowSelect", function(row,ind){
 
-			    		
-			    		
-			    		
 			    		var formSeminarioAlumno = b.attachForm();
 			    		
 			    		formSeminarioAlumno.loadStruct('../xml/forms/seminario_informacion_form.xml', function(){
@@ -145,23 +137,19 @@
 			    			formSeminarioAlumno.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 			    			formSeminarioAlumno.setItemLabel('asignatura','<bean:message key="label.asignatura.asociada"/>');
 			    			
+			    			//ya se sabe que es un alumno por el filtro inicial
 			    			formSeminarioAlumno.setRequired('nombre', false);
 			    			formSeminarioAlumno.setRequired('codigo', false);
 			    			formSeminarioAlumno.hideItem('aceptar');
 			    			formSeminarioAlumno.hideItem('asignatura');
-			    			
-							//Ponemos por defecto que los items no se puedan modificar, y luego con los permisos necesarios 
-							//seran modificables.
 				    		formSeminarioAlumno.setReadonly('nombre', true);
 				    		formSeminarioAlumno.setReadonly('codigo', true);
 				    		formSeminarioAlumno.setReadonly('descripcion', true);
 			    		
 							formSeminarioAlumno.load('editarseminario.do?idSeminario=' + row);
 				    			
-			    		});
-	
-		    		
-			    	});
+			    		});//loadStrut
+			    	});//attachEvent
 			    	
 		    	
 				 	//buscarAlumno();		
@@ -174,13 +162,9 @@
 					main_layout = new dhtmlXLayoutObject(document.body, '1C');
 		    		var a = main_layout.cells('a');
 		    		a.hideHeader();
-		    		
 		    		var tabbar = a.attachTabbar();
-		    		
 		    		var optsSeminarios = dameSeminariosAsignatura();
-		    		
 		    		var numSeminarios=optsSeminarios.length;
-		    		
 		    		
 					
 		    		//WHILEEEEEEEELELELELLELELELEEEEEE
@@ -219,22 +203,6 @@
 		    	
 		    		
 				}
-				
-				
-				
-				
-				
-				
-				function initRequest() {
-		    	    if (window.XMLHttpRequest) {
-		    	        xmlhttp = new XMLHttpRequest();
-		    	    } else if (window.ActiveXObject) {
-		    	        isIE = true;
-		    	        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		    	    }
-		    	    return xmlhttp;
-		    	}
-		    	
 		    	
 		    	function dameSeminariosAsignatura(){
 		    		var url = "seminariosAsignaturas.do?idAsignatura=" + idAsignatura;
@@ -264,12 +232,6 @@
 		    		return opts;
 
 		    	}
-				
-				
-				
-	    
-	    	
-	    
 	    	
 	   </script>
 	</head>
