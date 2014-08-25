@@ -22,7 +22,7 @@
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b,idSession, tabbar,
-	    	formRubrica, formAnexo, tab_rubrica, tab_anexo1, tab_anexo2, competencias, anexo, numeroCriterios;
+	    	formRubrica, formAnexo, tab_rubrica, tab_anexo1, tab_anexo2, competencias, anexo, numeroCriterios,gridAnexos2,toolbarServicios,ID;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -60,6 +60,7 @@
 	    	});
 			
 			function goGridAlumnos(){
+				ID=idSession;
 				initRubrica(idSession);
 				
 			}
@@ -98,6 +99,7 @@
 			function doOnRowSelected(rowID,celInd){
 				var sp = rowID.split("-");
 				var idPortafolio = sp[3];
+				ID=idPortafolio;
 				initRubrica(idPortafolio);
 		    }
 			
@@ -220,7 +222,39 @@
 		
 			function goAnexo2(identificador){
 				
-				var gridAnexos2 = tab_anexo2.attachGrid();
+				toolbarServicios = tab_anexo2.attachToolbar();
+		    	toolbarServicios.setIconsPath('../img/toolbar/');
+
+		    	
+		    	toolbarServicios.loadXML('../xml/toolbars/dhxtoolbar-trabajos-campo.xml', function(){
+		    		toolbarServicios.setItemText('crearTrabajoCampo',"<bean:message key="button.crear.trabajo.campo"/>");
+		    		toolbarServicios.setItemText('modificarTrabajoCampo',"<bean:message key="button.cambiar.trabajo.campo"/>");
+		    		toolbarServicios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
+		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.anexos"/>");
+		    		toolbarServicios.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.anexos.alumno"/>");
+		    		toolbarServicios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
+		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+		    		
+		    		toolbarServicios.hideItem('crearTrabajoCampo');
+		    		toolbarServicios.hideItem('sep1');
+		    		toolbarServicios.hideItem('fechaLimite');
+		    		toolbarServicios.hideItem('sep5');
+		    		toolbarServicios.hideItem('modificarTrabajoCampo');
+		    		toolbarServicios.hideItem('sep3');
+		    		toolbarServicios.hideItem('descargarTodos');
+		    		
+		    		<logic:match scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
+		    	
+			    		toolbarServicios.hideItem('descargarTodos');
+			    		toolbarServicios.hideItem('sep3');
+			    		toolbarServicios.hideItem('descargarTodosAlumno');
+			    		toolbarServicios.hideItem('sep4');		    		
+			    	
+		    		</logic:match>
+				
+		    	});
+				
+				gridAnexos2 = tab_anexo2.attachGrid();
 		    	
 				gridAnexos2.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
 				gridAnexos2.setColTypes("ro,ro,ro");
@@ -249,10 +283,10 @@
 					if(celInd=='2' && cellObj.getValue()=="Descargar") {
 						var parts = rowID.split("-");
 						//alert("Descargar Archivo con idPortafolio=" + parts[0] + " y idCasoClinico=" + parts[1]);
-						var accion = "descargarCasoClinico.do";
-						accion += "?tipoConsulta="+"CasoClinico";
+						var accion = "descargarAnexo.do";
+						accion += "?tipoConsulta="+"Anexo";
 						accion += "&idPortafolio="+parts[0];
-						accion += "&idCasoClinico="+parts[1];
+						accion += "&idAnexo="+parts[1];
 						location.href=accion;
 					}
 		
@@ -414,6 +448,50 @@
 				}
 				formRubrica.setItemValue("nota", Math.round(((sumatorio/numeroCriterios)*2) * 100) / 100);
 			}
+			
+			
+			function subirPractica(){
+				var dhxWins= new dhtmlXWindows();
+				var window = dhxWins.createWindow("subir", 300,50, 500, 170);
+				window.setText('<bean:message key="title.subir.practica" />');				
+				window.setModal(true);
+				window.centerOnScreen();
+				
+				if (profesor) accion = "subirArchivo.do?tipoConsulta=AnexoProfesor" + "&idPortafolio=" + ID;
+				else accion = "subirArchivo.do?tipoConsulta=AnexoAlumno" + "&idAsignatura=" + idAsignatura + "&idAlumno=" + ID;
+		
+				window.attachURL(accion);
+				//goActualizar();
+			}
+			
+			function descargarTodosAlumno(){
+				if (idPortafolio == -1) alert("<bean:message key="message.error.seleccionar.alumno" />");
+				else {
+					var accion = "descargarCasoClinicosAlumno.do";
+					accion += "?idPortafolio=" + idPortafolio;
+					location.href=accion;
+				}
+			}
+			
+			function descargarTodos(){
+				var accion = "descargarTodosCasosClinicosAlumnos.do";
+				accion += "?idAsignatura=" + idAsignatura;
+				location.href=accion;
+			}
+			
+			
+			
+			function goActualizar() {
+				
+				if (profesor) {
+					gridAnexos2.clearAndLoad("gridAnexos2UsuarioAsignatura.do?idPortafolio=" + ID);
+					
+				}
+				else gridAnexos2.clearAndLoad("gridAnexos2UsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + ID);		    	
+		    			    	
+		    }
+			
+			
 	   </script>
 	</head>
 	<body>

@@ -8,6 +8,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import es.oyssen.mrm.negocio.vo.AnexoVO;
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.DiarioReflexivoVO;
 import es.oyssen.mrm.negocio.vo.ErrorLogVO;
@@ -118,7 +119,22 @@ public class DescargarAction extends MrmAction {
 				fileName= sp[0] + "." + sp[1];
 			}
 		}
+		else if (tipo.equals("Anexo")){
+			
+			AnexoVO a = new AnexoVO();
+			
+			a.setIdPortafolio(f.getIdPortafolio());
+			a.setIdAnexo(f.getIdAnexo());
 		
+			a = getAnexosService().findById(a);
+			data = a.getAnexo();
+			if(data!=null){
+				len = a.getAnexo().length;
+				sp=a.getNombre().split("\\.");
+				fileName="Anexo("+sp[0] + ")." + sp[1];
+			}
+			
+		}
 		
 		
 		if(data!=null){ ///SE RALLA EL JSP!!!! CUANDO HAY UN CASO CLINICO IGUAL A NULL!!!!!! :@

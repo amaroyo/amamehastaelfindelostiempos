@@ -17,6 +17,8 @@ public interface DAOAnexos {
 	public void delete(AnexoVO anexo) throws DAOException, DAODeleteException;
 		
 	public List<AnexoVO> findAllByPortafolio(AnexoVO anexo) throws DAOException;
+
+	public AnexoVO findById(AnexoVO a) throws DAOException;
 	
 	
 	
