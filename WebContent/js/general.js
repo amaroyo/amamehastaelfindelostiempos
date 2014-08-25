@@ -1,4 +1,4 @@
-//**********************/* fin validacion inputs forms*/**********************//
+//**********************/* fin validacion inputs forms */**********************//
 
 function validateCIF(cif) {
 	var valueCif=cif.substr(1,cif.length-2);
@@ -91,7 +91,24 @@ function validateDNI(dni) {
  	return false;
  }
 
-//**********************/* fin validacion inputs forms*/**********************//
+//**********************/* fin validacion inputs forms */**********************//
+
+//**********************/* xml http requests */**********************//
+
+function initRequest() {
+    if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        isIE = true;
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    return xmlhttp;
+}
+
+//**********************/* fin xml http requests */**********************//
+
+
+
 
 // Funcion: go
 // Descripcion: Funcion que se redirecciona a la ruta (path) pasada como parametro.
