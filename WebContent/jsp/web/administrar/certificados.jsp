@@ -38,7 +38,7 @@
 
 				var dhxWins= new dhtmlXWindows(document.body);
 				mywindow = dhxWins.createWindow("CerrarCursoAcademico", 300, 50, 425, 360);
-				mywindow.setText('<bean:message key="title.cerrar.curso" />');				
+				mywindow.setText('<bean:message key="title.generar.certificados" />');				
 				mywindow.setModal(true);
 				mywindow.centerOnScreen();
 				
@@ -72,7 +72,8 @@
 				gridAlumnosCertificado.clearAndLoad("gridAlumnosAptosCertificado.do?");
 				
 				gridAlumnosCertificado.attachEvent("onRowSelect",function doOnRowSelected(rowID,celInd){
-		    		/*
+		    		alert(rowID);
+					/*
 					var accion = "descargarRegistroError.do";
 					accion += "?tipoConsulta="+"RegistroError";
 					accion += "&idError=" + rowID;

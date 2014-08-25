@@ -1026,6 +1026,9 @@ public class UtilXML {
 			for (Pares par : list) {
 				String port = par.getPortafolios().toString();
 				port = port.replaceAll(" ", "-");
+				port=port.replaceAll(",","");
+				port=port.replaceAll("\\[","");
+				port=port.replaceAll("\\]","");
 				UsuarioVO u = par.getUsuario();
 				sb.append("<row id=\"" +port +"\">");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(u.getNombre()) + "]]></cell>");				
