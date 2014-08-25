@@ -72,13 +72,23 @@
 				gridAlumnosCertificado.clearAndLoad("gridAlumnosAptosCertificado.do?");
 				
 				gridAlumnosCertificado.attachEvent("onRowSelect",function doOnRowSelected(rowID,celInd){
-		    		alert(rowID);
-					/*
-					var accion = "descargarRegistroError.do";
-					accion += "?tipoConsulta="+"RegistroError";
-					accion += "&idError=" + rowID;
+		
+					var cellObjdni = gridAlumnosCertificado.cellById(rowID,2);
+					var dni = cellObjdni.getValue();
+					
+					var cellObjnombre = gridAlumnosCertificado.cellById(rowID,0);
+					var nombre = cellObjnombre.getValue();
+					
+					var cellObjapp = gridAlumnosCertificado.cellById(rowID,1);
+					var app = cellObjapp.getValue();
+					
+					var accion = "generarCertificado.do";
+					accion += "?idPortafolios="+rowID;
+					accion += "&dni="+dni;
+					accion += "&nombre="+nombre;
+					accion += "&apellidos="+app;
 					location.href=accion;
-					*/
+					
 					
 		    	});
 				

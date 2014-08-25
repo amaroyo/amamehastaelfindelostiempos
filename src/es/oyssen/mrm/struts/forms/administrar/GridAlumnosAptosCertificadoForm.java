@@ -6,8 +6,10 @@ public class GridAlumnosAptosCertificadoForm extends DhtmlxGridForm {
 
 	private String idAlumno;
 	private String nombre;
-	private String apellidos;
+	private String apellido;
 	private String dni;
+	private String idPortafolios;
+	
 	public String getIdAlumno() {
 		return idAlumno;
 	}
@@ -20,17 +22,23 @@ public class GridAlumnosAptosCertificadoForm extends DhtmlxGridForm {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getApellidos() {
-		return apellidos;
+	public String getApellido() {
+		return apellido;
 	}
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 	public String getDni() {
 		return dni;
 	}
 	public void setDni(String dni) {
 		this.dni = dni;
+	}
+	public String getIdPortafolios() {
+		return idPortafolios;
+	}
+	public void setIdPortafolios(String idPortafolios) {
+		this.idPortafolios = idPortafolios;
 	}
 	
 	
