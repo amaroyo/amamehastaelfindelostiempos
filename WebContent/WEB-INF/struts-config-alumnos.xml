@@ -30,7 +30,8 @@
 	   	 
 	   	<form-bean name="NotasRubricaForm" type="es.oyssen.mrm.struts.forms.asignaturas.NotasRubricaForm" />
 	   	 
-	   	 
+	   	<form-bean name="GridAnexos2UsuarioAsignatura" type="es.oyssen.mrm.struts.forms.asignaturas.GridAnexos2UsuarioAsignaturaForm" />
+	  
 	</form-beans>
 	
 
@@ -95,7 +96,17 @@
 		<action path="/alumnos/notasrubrica" name="NotasRubricaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.NotasRubricaAction"  />
 		<action path="/alumnos/actualizarnotasrubrica" name="NotasRubricaForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.NotasRubricaAction"  />
 		
+		<action path="/alumnos/gridAnexos2UsuarioAsignatura" name="GridAnexos2UsuarioAsignatura" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.GridAnexos2UsuarioAsignaturaAction" />
 		
+		<action path="/alumnos/descargarAnexo" name="Descargar" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarAction" />
+		
+		<action path="/alumnos/descargarAnexosAlumno" name="DescargarAnexosAlumno" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarAnexosAlumnoAction" />
+		
+		<action path="/alumnos/subirAnexoAlumno" name="SubirArchivoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.SubirArchivoAction">
+			<exception type="java.lang.Exception" key="error.subir.archivo.anexo.profesor" path="/alumnos/subirAnexoAlumno.do"></exception>
+			<forward name="cancel" path="/asignaturas/subirArchivo.do" />
+			<forward name="success" path="/asignaturas/correcto.do" />
+		</action>
 		
 	</action-mappings>
 
