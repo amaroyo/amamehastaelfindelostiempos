@@ -24,6 +24,9 @@
 	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b,idSession, tabbar,
 	    	formRubrica, formAnexo, tab_rubrica, tab_anexo1, tab_anexo2, competencias, anexo, numeroCriterios,gridAnexos2,toolbarServicios,ID;
 	    	
+	    	
+	    	
+	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
 	    		//inicializo profesor a falso para tener un poco de seguridad
@@ -140,8 +143,6 @@
 	    			}
 	    			formRubrica.addItem(null,{type:"button", name:"aceptar", value:"Modificar"},i+1);
 	    			formRubrica.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
-
-	    			//permisosRubricasForm();
 	    			
   					var items = new Array();
   					for(var j=1;j<=10;j=j+2){
@@ -161,6 +162,9 @@
   					
   					loadNotasRubrica(identificador);
   					contarValores();
+  					
+	    			permisosRubricasForm();
+  					
     				formRubrica.attachEvent("onButtonClick", function(id){
 	    				if (id == "aceptar") {
 	    					formRubrica.send("actualizarnotasrubrica.do?!nativeeditor_status=save&idPortafolio=" + identificador+"&idAsignatura="+idAsignatura,"post", function(xml) {
@@ -190,7 +194,7 @@
 	    			formAnexo.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 
 	    			
-	    			//permisosRubricasForm();
+	    			permisosAnexoForm();
 	    			formAnexo.load("notasrubrica.do?idPortafolio=" + identificador+"&idAsignatura="+idAsignatura, function () {			    			
 	    				formAnexo.attachEvent("onButtonClick", function(id){
 		    				if (id == "aceptar") {
@@ -298,18 +302,6 @@
 			}
 			
 		
-			
-			
-			function initRequest() {
-	    	    if (window.XMLHttpRequest) {
-	    	        xmlhttp = new XMLHttpRequest();
-	    	    } else if (window.ActiveXObject) {
-	    	        isIE = true;
-	    	        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	    	    }
-	    	    return xmlhttp;
-	    	}
-			
 			
 			function loadNotasRubrica(idPortafolio){
 	    		var url = "notasrubrica.do?idPortafolio=" + idPortafolio+"&idAsignatura="+idAsignatura;
@@ -449,7 +441,6 @@
 				formRubrica.setItemValue("nota", Math.round(((sumatorio/numeroCriterios)*2) * 100) / 100);
 			}
 			
-			
 			function subirPractica(){
 				var dhxWins= new dhtmlXWindows();
 				var window = dhxWins.createWindow("subir", 300,50, 500, 170);
@@ -492,6 +483,40 @@
 		    }
 			
 			
+			function permisosRubricasForm(){
+    			formRubrica.setReadonly('competencias',true);
+    			formRubrica.setReadonly('nota',true);
+    			for(var i=1;i<=5;i++){
+        			formRubrica.setReadonly('contador_'+i,true);
+    			}
+				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >
+	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>3</permiso>" >	
+	    		formRubrica.forEachItem(function(id,value){
+	    			if(formRubrica.getItemType(id, value) == "radio"){
+	        			formRubrica.disableItem(id,value);
+	    			}
+	    		});
+    			formRubrica.hideItem('aceptar');
+    			</logic:notMatch>
+    			</logic:notMatch>	
+    			</logic:notMatch>	
+			}
+			
+			function permisosAnexoForm(){
+				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >
+	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>3</permiso>" >	
+	    		formAnexo.forEachItem(function(id){
+	    			if(formAnexo.getItemType(id) == "input"){
+	        			formAnexo.setReadonly(id,true);
+	    			}
+	    		});
+    			formAnexo.hideItem('aceptar');
+    			</logic:notMatch>
+    			</logic:notMatch>	
+    			</logic:notMatch>	
+			}
 	   </script>
 	</head>
 	<body>

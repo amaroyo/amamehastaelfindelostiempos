@@ -69,15 +69,10 @@
 	    	
 	    	function initProfesor(){
 
-				 
-	    		
 	    		tabbar = a.attachTabbar();
 	    		
 	    		var optsTrabajosCampo = dameTrabajosCampoAsignatura();
 	    		var numTrabajosCampo = optsTrabajosCampo.length;
-	    		
-	    		
-				
 	    		for (var i=0; i<numTrabajosCampo;i++) {
 	    			
 	    		
@@ -453,7 +448,9 @@
 					toolbarServiciosAlumnosRefrescar.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.casos.alumno"/>");
 					toolbarServiciosAlumnosRefrescar.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 					toolbarServiciosAlumnosRefrescar.setItemText('refresh',"<bean:message key="button.actualizar"/>");		    		
-			    	toolbarServiciosAlumnosRefrescar.hideItem('subirPractica');
+			    	
+					//ya se sabe que es un alumno
+					toolbarServiciosAlumnosRefrescar.hideItem('subirPractica');
 			    	toolbarServiciosAlumnosRefrescar.hideItem('sep2');			
 			    	toolbarServiciosAlumnosRefrescar.hideItem('modificarTrabajoCampo');
 			    	toolbarServiciosAlumnosRefrescar.hideItem('sep6');
@@ -509,7 +506,6 @@
 				var idTrabajoCampo = parts[4];
 				
 				
-				
 				var cellObj = gridAlumnos.cellById(rowID,celInd);
 				if(celInd=='3' && cellObj.getValue()=="Descargar") {
 					
@@ -533,10 +529,9 @@
 	    			trabajoCampo.setItemLabel('subirPractica','<bean:message key="button.subir.trabajo.campo"/>');
 	    			trabajoCampo.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 	    			trabajoCampo.setItemLabel('eliminar','<bean:message key="button.eliminar.trabajo.campo"/>');
-	    			trabajoCampo.hideItem('eliminar');
 	    			
-					//Ponemos por defecto que los items no se puedan modificar, y luego con los permisos necesarios 
-					//seran modificables.
+	    			
+					//ya sabemos que es un alumno
 		    		trabajoCampo.setReadonly('nombre', true);
 		    		trabajoCampo.setReadonly('descripcion', true);
 		    		trabajoCampo.setReadonly('fechaFin', true);
@@ -544,11 +539,11 @@
 		    		trabajoCampo.setRequired('nombre', false);		    		
 		    		trabajoCampo.setRequired('fechaFin', false);
 		    		trabajoCampo.setRequired('hora', false);
-		    		trabajoCampo.hideItem('aceptar');
 		    		trabajoCampo.disableItem('descargarCorreccion');
 		    		trabajoCampo.disableItem('descargarInformacion');
 		    		trabajoCampo.disableItem('subirPractica');
-
+		    		trabajoCampo.hideItem('eliminar');
+		    		trabajoCampo.hideItem('aceptar');
 		    		
 		    		
 		    		if(bloqueado=="F") trabajoCampo.enableItem('subirPractica');
@@ -759,19 +754,6 @@
 					miGrid.clearAll();
 				}
 			}
-			
-			
-			
-			function initRequest() {
-	    	    if (window.XMLHttpRequest) {
-	    	        xmlhttp = new XMLHttpRequest();
-	    	    } else if (window.ActiveXObject) {
-	    	        isIE = true;
-	    	        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	    	    }
-	    	    return xmlhttp;
-	    	}
-	    	
 	    	
 	    	function dameTrabajosCampoAsignatura(){
 	    		var url = "trabajosCampoAsignaturas.do?idAsignatura=" + idAsignatura;

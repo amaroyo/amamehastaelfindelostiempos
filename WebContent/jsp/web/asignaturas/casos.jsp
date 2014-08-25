@@ -33,9 +33,6 @@
 	    		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
 				idSession = <%=sessionIdUser%>;
 	    		
-
-				
-				
 	    		
 	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 					profesor=true;
@@ -100,10 +97,6 @@
 		    	
 		    	if (profesor) goGridProfesores();
 		    	else goGridAlumnos();
-				
-				
-	    		
-				
 				
 	    	});
 	    	
@@ -258,14 +251,6 @@
 				}
 	
 			}
-			
-			
-			
-	    	
-	    	
-			
-			
-	    	
 	   </script>
 	</head>
 	<body>
