@@ -56,6 +56,7 @@ insert into permisos (nombre, descripcion) values ('Ver alumnos.', 'En principio
 insert into permisos (nombre, descripcion) values ('Modificar información de la asignatura.', 'En principio sólo puede el súper admin y el coordinador.');
 insert into permisos (nombre, descripcion) values ('Editar nombre, apellidos del perfil alumno.', 'En principio sólo puede el súper admin, el coordinador y el profesor.');
 insert into permisos (nombre, descripcion) values ('Editar dni del perfil alumno.', 'En principio sólo puede el súper admin, el coordinador y el profesor.');
+insert into permisos (nombre, descripcion) values ('Editar estancia del alumno (salvo el profesor que se cambia a través de la interfaz de seleccionar alumnos.', 'En principio sólo puede el súper admin, el coordinador y el profesor.');
 
 						
 
