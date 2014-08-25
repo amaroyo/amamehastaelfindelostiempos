@@ -8,6 +8,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
 import es.oyssen.mrm.util.UtilXML;
 
@@ -19,7 +20,11 @@ public class ListarPermisosAction extends MrmAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {		
 		
-		String xml =  UtilXML.buildXmlComboPermisos(getPermisosService().findAll());
+		String idGrupo = (String) request.getParameter("idGrupo");
+		GrupoVO g = new GrupoVO();
+		g.setIdGrupo(idGrupo);
+		
+		String xml =  UtilXML.buildXmlComboPermisos(getPermisosService().findRestantes(g));
 		
 		response.setContentType("text/xml");
 		ServletOutputStream sos = response.getOutputStream();

@@ -568,20 +568,20 @@ public class UtilXML {
 		return sb.toString();
 	}
 	
-	public static final String buildXmlGridPermisosGrupo(List<PermisoVO> list) throws Exception {
-		/*StringBuffer sb = new StringBuffer();
+	public static final String buildXmlGridPermisosGrupo(List<PermisoVO> list, GrupoVO g) throws Exception {
+		StringBuffer sb = new StringBuffer();
 		sb.append(XML_HEADER);	
 		sb.append("<rows>");
 		if(list != null){
-			for (PermisoGrupoVO permisoGrupo : list) {
-				sb.append("<row id=\"" +permisoGrupo.getIdPermisoGrupo() + "\">");
+			for (PermisoVO permisoGrupo : list) {
+				sb.append("<row id=\"" +permisoGrupo.getIdPermiso() + "-" + g.getIdGrupo()+ "\">");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(permisoGrupo.getNombre()) + "]]></cell>");
 				sb.append("</row>");
 			}
 		}
 		sb.append("</rows>");
-		return sb.toString();**/
-		return null;
+		return sb.toString();
+
 	}
 
 	public static final String buildXmlGridUsuarios(List<UsuarioVO> list) throws Exception {
@@ -590,13 +590,15 @@ public class UtilXML {
 		sb.append("<rows>");
 		if(list != null){
 			for (UsuarioVO usuario : list) {
+			
 				sb.append("<row id=\"" +usuario.getIdUsuario() + "\">");
 				sb.append("<cell><![CDATA[" + nombreGrupo(StringUtil.nullToString(usuario.getIdGrupo())) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getNombre()) + "]]></cell>");
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getTelefono()) + "]]></cell>");
 				
 				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getCorreo()) + "]]></cell>");
-				sb.append("</row>");				
+				sb.append("</row>");	
+					
 			}
 		}
 		sb.append("</rows>");
@@ -741,23 +743,17 @@ public class UtilXML {
 		sb.append("<rows>");
 		if(list != null){
 			for (UsuarioVO usuario : list) {
-				sb.append("<row id=\"" +usuario.getIdUsuario() + "\">");
-				//sb.append("<cell><![CDATA[" + nombreGrupo(StringUtil.nullToString(usuario.getIdGrupo())) + "]]></cell>");
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getNombre()) + "]]></cell>");
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getTelefono()) + "]]></cell>");
-
-				// CUIDADO REVISAR
-				
-				
-				
-				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getTelefonoMovil()) + "]]></cell>");
-				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getDireccion()) + "]]></cell>");
-				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getCodigoPostal()) + "]]></cell>");
-				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getCiudad()) + "]]></cell>");
-				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getPais()) + "]]></cell>");
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getCorreo()) + "]]></cell>");
-				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getComentarios()) + "]]></cell>");
-				sb.append("</row>");				
+				if(!usuario.getIdUsuario().equals("8")){
+					sb.append("<row id=\"" +usuario.getIdUsuario() + "\">");			
+					sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getNombre()) + "]]></cell>");
+					
+					String apellidos = usuario.getApellido1();
+					if(usuario.getApellido2() != "") apellidos = apellidos + ", " + usuario.getApellido2();	
+					
+					sb.append("<cell><![CDATA[" + StringUtil.nullToString(apellidos) + "]]></cell>");
+					sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getCorreo()) + "]]></cell>");
+					sb.append("</row>");
+				}
 			}
 		}
 		sb.append("</rows>");
@@ -1068,11 +1064,12 @@ public class UtilXML {
 	
 	
 	private static final String nombreGrupo(String id){
-		if (id.equals("1")) return "Super user";
-		else if (id.equals("2")) return "Channel";
-		else if (id.equals("3")) return "Distributor";
-		else if (id.equals("4")) return "Sales rep.";
-		else if (id.equals("5")) return "Supplier";
+		if (id.equals("1")) return "Admin";
+		else if (id.equals("2")) return "Coordinador";
+		else if (id.equals("3")) return "Profesor";
+		else if (id.equals("4")) return "Alumno";
+		else if (id.equals("5")) return "Virtual Tour";
+
 		else return "";
 	}
 

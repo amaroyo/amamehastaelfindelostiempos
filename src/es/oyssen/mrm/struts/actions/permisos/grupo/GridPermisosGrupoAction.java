@@ -1,5 +1,6 @@
 package es.oyssen.mrm.struts.actions.permisos.grupo;
 
+import es.oyssen.mrm.negocio.vo.GrupoPermisoVO;
 import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXGridAction;
@@ -21,7 +22,7 @@ public class GridPermisosGrupoAction extends DHTMLXGridAction {
 			usuario = getUsuariosService().findById(usuario);			
 			grupo.setIdGrupo(usuario.getIdGrupo());			
 		}
-		return UtilXML.buildXmlGridPermisosGrupo(getGrupoPermisosService().findByGrupo(grupo));
+		return UtilXML.buildXmlGridPermisosGrupo(getGrupoPermisosService().findByGrupo(grupo),grupo);
 	}
 
 	@Override
@@ -38,10 +39,12 @@ public class GridPermisosGrupoAction extends DHTMLXGridAction {
 
 	@Override
 	public void delete(DhtmlxGridForm f) throws Exception {
-		// TODO
-		/*PermisoGrupoVO permisoGrupo = new PermisoGrupoVO();
-		permisoGrupo.setIdPermisoGrupo(f.getGr_id());
-		getPermisosGrupoService().delete(permisoGrupo);	*/
+		GrupoPermisoVO permisoGrupo = new GrupoPermisoVO();
+		
+		String[] sp = f.getGr_id().split("-");
+		permisoGrupo.setIdPermiso(sp[0]);
+		permisoGrupo.setIdGrupo(sp[1]);
+		getGrupoPermisosService().delete(permisoGrupo);
 	}
 
 }

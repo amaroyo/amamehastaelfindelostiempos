@@ -20,7 +20,7 @@ public class GrupoMapper implements RowMapper {
     	GrupoVO o = new GrupoVO();
     	o.setIdGrupo(StringUtil.nullToString(rs.getString(FIELD_ID)));
     	o.setNombre(StringUtil.nullToString(rs.getString(FIELD_NOMBRE)));
-    	o.setNombre(StringUtil.nullToString(rs.getString(FIELD_DESCRIPCION)));
+    	o.setDescripcion(StringUtil.nullToString(rs.getString(FIELD_DESCRIPCION)));
 
 		return o;
 	}

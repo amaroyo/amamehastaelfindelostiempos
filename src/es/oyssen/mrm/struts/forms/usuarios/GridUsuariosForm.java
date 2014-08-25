@@ -7,7 +7,7 @@ import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
 public class GridUsuariosForm extends DhtmlxGridForm {
 
 	private String idUsuario;
-	private String grupo;
+	private String idGrupo;
 	private String nombre;
 	private String apellido1;
 	private String apellido2;
@@ -27,12 +27,7 @@ public class GridUsuariosForm extends DhtmlxGridForm {
 	public void setIdUsuario(String idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-	public String getGrupo() {
-		return grupo;
-	}
-	public void setGrupo(String id_grupo) {
-		this.grupo = id_grupo;
-	}
+	
 	public String getCorreo() {
 		return correo;
 	}
@@ -95,5 +90,17 @@ public class GridUsuariosForm extends DhtmlxGridForm {
 	public void setFotoImagen(byte[] fotoImagen) {
 		this.fotoImagen = fotoImagen;
 	}
+
+
+	public String getIdGrupo() {
+		return idGrupo;
+	}
+
+
+	public void setIdGrupo(String idGrupo) {
+		this.idGrupo = idGrupo;
+	}
+	
+	
 	
 }
