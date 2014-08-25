@@ -210,6 +210,8 @@
 		
 		<action path="/asignaturas/descargarAnexo" name="Descargar" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarAction" />
 		
+		<action path="/asignaturas/descargarAnexosAlumno" name="DescargarAnexosAlumno" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarAnexosAlumnoAction" />
+		
 	</action-mappings>
 
 </struts-config>
