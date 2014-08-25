@@ -895,14 +895,17 @@ insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) 
 
 -- Estancias_unidad_clinica
 insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (1,'HUGM Hospital Gregorio Marañon', 'Urgencias', 'M - Mañana', '2012-09-01', '2013-01-31');
-insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (2,'12 de Octubre', 'UCI', 'T - Tarde', '2013-02-01', '2013-06-26');
+insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (2,'12 de Octubre', 'UCI', 'T - Tarde', '2013-02-01', '2013-07-26');
 
-insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (3,'HUGM Hospital Gregorio Marañon', 'Urgencias', 'M - Mañana', '2013-09-01', '2014-01-31');
-insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (4,'12 de Octubre', 'UCI', 'T - Tarde', '2013-09-01', '2014-01-31');
+insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (3,'HUGM Hospital Gregorio Marañon', 'Urgencias', 'M - Mañana', '2013-09-01', '2014-03-31');
+insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (4,'12 de Octubre', 'UCI', 'T - Tarde', '2013-09-01', '2014-05-31');
 
-insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (5,'12 de Octubre', 'Parto', 'T - Tarde', '2013-09-01', '2014-01-31');
-insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (6,'12 de Octubre', 'AA', 'T - Tarde', '2013-09-01', '2014-01-31');
+insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (5,'12 de Octubre', 'Parto', 'T - Tarde', '2013-09-01', '2014-02-15');
+insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (6,'12 de Octubre', 'AA', 'T - Tarde', '2013-09-01', '2014-06-26');
 
+
+insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (9,'12 de Octubre', 'Partamen', 'T - Tarde', '2013-10-01', '2014-02-15');
+insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (10,'12 de Octubre', 'Urgencias', 'T - Tarde', '2013-07-01', '2014-06-26');
 
 
 -- Trabajos de Campo info
