@@ -22,7 +22,7 @@
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b,idSession, tabbar,
-	    	formRubrica, formAnexo, tab_rubrica, tab_anexo1, competencias, anexo, numeroCriterios;
+	    	formRubrica, formAnexo, tab_rubrica, tab_anexo1, tab_anexo2, competencias, anexo, numeroCriterios;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -117,6 +117,9 @@
 		    	goAnexo1(identificador);
 		    	
 				tabbar.addTab('anexo2',"<bean:message key='title.anexo.dos'/>",'');
+				tab_anexo2 = tabbar.cells('anexo2');
+		    	goAnexo2(identificador);
+				
 				
 				tabbar.setTabActive('rubrica');
 			}
@@ -214,9 +217,53 @@
 			}
 			
 			
+		
 			function goAnexo2(identificador){
+				
+				var gridAnexos2 = tab_anexo2.attachGrid();
+		    	
+				gridAnexos2.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.fecha" />","<bean:message key="label.enlace" />"]);
+				gridAnexos2.setColTypes("ro,ro,ro");
+		    	
+				gridAnexos2.setColSorting('str,str,str');
+				gridAnexos2.enableMultiselect(false);
+				gridAnexos2.init();
+		    	
+				var accion= "";
+				
+				if (profesor) accion = "gridAnexos2UsuarioAsignatura.do?idPortafolio=" + identificador;
+				else accion = "gridAnexos2UsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + identificador;
+				
+		    	var gridProcessorPro = new dataProcessor(accion);
+		    	gridProcessorPro.enableUTFencoding('simple');
+		    	gridProcessorPro.init(gridAnexos2);	  
+		    	gridProcessorPro.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+					if(action == 'error'){
+		    			dhtmlx.message(tag.firstChild.data,action,4000);
+		    		}
+		    	});
+		    	
+		    	gridAnexos2.attachEvent("onRowSelect",function(rowID,celInd){
+		    		
+					var cellObj = gridAnexos2.cellById(rowID,celInd);
+					if(celInd=='2' && cellObj.getValue()=="Descargar") {
+						var parts = rowID.split("-");
+						//alert("Descargar Archivo con idPortafolio=" + parts[0] + " y idCasoClinico=" + parts[1]);
+						var accion = "descargarCasoClinico.do";
+						accion += "?tipoConsulta="+"CasoClinico";
+						accion += "&idPortafolio="+parts[0];
+						accion += "&idCasoClinico="+parts[1];
+						location.href=accion;
+					}
+		
+				});
+		    	
+		    	
+		    	gridAnexos2.clearAndLoad(accion);
+				
 			}
 			
+		
 			
 			
 			function initRequest() {

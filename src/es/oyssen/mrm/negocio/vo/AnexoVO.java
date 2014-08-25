@@ -7,7 +7,7 @@ public class AnexoVO {
 	private String id_portafolio;
 	private String nombre;
 	private String fecha_subida;
-	private String anexo;
+	private byte[] anexo;
 
 	
 	
@@ -40,11 +40,11 @@ public class AnexoVO {
 		this.id_portafolio = id_portafolio;
 	}
 
-	public String getAnexo() {
+	public byte[] getAnexo() {
 		return anexo;
 	}
 
-	public void setAnexo(String anexo) {
+	public void setAnexo(byte[] anexo) {
 		this.anexo = anexo;
 	}
 	

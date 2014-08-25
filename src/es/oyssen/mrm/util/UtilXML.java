@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts.util.MessageResources;
 
 import es.oyssen.mrm.negocio.vo.ActionHistoryVO;
+import es.oyssen.mrm.negocio.vo.AnexoVO;
 import es.oyssen.mrm.negocio.vo.AsignaturaVO;
 import es.oyssen.mrm.negocio.vo.CanalVO;
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
@@ -937,6 +938,27 @@ public class UtilXML {
 	}
 
 	
+	public static String buildXmlGridAnexos2UsuarioAsignatura(List<AnexoVO> list) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(XML_HEADER);
+		sb.append("<rows>");
+		if(list != null){
+			for (AnexoVO a : list) {
+				sb.append("<row id=\"" +a.getIdPortafolio() + "-" + a.getIdAnexo() + "\">");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(a.getNombre()) + "]]></cell>");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(parsearFechaLimite(a.getFechaSubida(),true)) + "]]></cell>");
+				//sb.append("<cell><![CDATA[" + StringUtil.nullToString(cc.getCasoClinico()) + "]]></cell>");
+				String descarga = "";
+				if(a.getAnexo() != null) descarga="Descargar";
+				sb.append("<cell><![CDATA[" +  descarga + "]]></cell>");
+				sb.append("</row>");				
+			}
+		}
+		sb.append("</rows>");
+		return sb.toString();
+	}
+
+	
 	public static String buildXmlGridDiariosReflexivosUsuarioAsignatura(List<DiarioReflexivoVO> list) {
 		StringBuffer sb = new StringBuffer();
 		sb.append(XML_HEADER);
@@ -1086,6 +1108,7 @@ public class UtilXML {
 		return tiempoActual.after(fechaL);
 
 	}
+
 
 	
 
