@@ -1,8 +1,11 @@
 package es.oyssen.mrm.negocio.dao.rowmappers;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.jdbc.core.RowMapper;
 
 import es.oyssen.mrm.negocio.vo.AnexoVO;
@@ -23,7 +26,28 @@ public class AnexoMapper implements RowMapper {
     	o.setIdPortafolio(StringUtil.nullToString(rs.getString(FIELD_ID_PORTAFOLIO)));
     	o.setNombre(StringUtil.nullToString(rs.getString(FIELD_NOMBRE)));
     	o.setFechaSubida(StringUtil.nullToString(rs.getString(FIELD_FECHA_SUBIDA)));
-    	o.setAnexo(StringUtil.nullToString(rs.getString(FIELD_ANEXO)));
+    	
+    	
+    	try {
+        	InputStream datos = rs.getBinaryStream(FIELD_ANEXO);
+
+        	byte[] archivo;
+        	if(datos != null) {
+        		archivo = IOUtils.toByteArray(datos);
+        	}
+        	else{
+        		archivo = null;
+        	}
+        	o.setAnexo(archivo);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+    	
+    	
 		return o;
 	}
 }
