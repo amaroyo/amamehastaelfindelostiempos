@@ -143,22 +143,6 @@
 	    		alert('<bean:message key="message.pass.cambiado.exito" />');
 	    	}
 	    	
-	    	function ucmEsEmail(email) {
-	    		if (getDomain(email) == "ucm.es") {
-	    			return true;
-	    		}
-	    		else {
-	    			form.setNote("correo", { text: '<bean:message key="message.email.institucional" />'} );
-	    			return false;
-	    		}
-	    	}
-	    	
-	    	function getDomain(email) {
-			    var parts = email.split('@');
-			    return parts[parts.length - 1];
-			}
-	    	
-		    
 		    function verPerfil(){
 		    	form.loadStruct('../xml/forms/usuario_form.xml', function(){
 		    		form.setItemLabel('data','<bean:message key="title.datos.personales"/>');
@@ -234,29 +218,6 @@
 						</logic:notMatch>//permiso2
 					</logic:notMatch>//permiso1
 				</logic:notEmpty>
-		    }
-    
-		    function getExtension(fileName) {
-			    var parts = fileName.split('.');
-			    return parts[parts.length - 1];
-			}
-		    
-		    function isImageExtension(fileName) {
-		        var ext = getExtension(fileName);
-		        switch (ext.toLowerCase()) {
-			        case 'jpg':
-			        case 'jpeg':
-			        case 'bmp':
-			        case 'gif':
-			        case 'png':
-		            //etc
-		            return true;
-		        }
-		        return false;
-		    }
-		    
-		    function previewPicture(input){
-		    	
 		    }
 		    
 		    function loadFormPerfil() {

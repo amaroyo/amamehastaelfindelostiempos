@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" errorPage="error.jsp" %>
 <%@ include file="../../common/taglibs.jsp" %>
-<%@  page import="java.util.Enumeration"%>
+<%@ page import="java.util.Enumeration"%>
 <%@ page import="es.oyssen.mrm.Const"%>
-<%@page import="javax.servlet.http.HttpServletRequest"%>
+<%@ page import="javax.servlet.http.HttpServletRequest"%>
 
 <html>
 	<head>
@@ -173,90 +173,26 @@
 				    		formUsuario.setItemLabel('fotoFile','<bean:message key="label.max.size"/>');
 				    		formUsuario.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 				    		
-				    		formUsuario.hideItem('aceptar');
 				    		formUsuario.removeItem('fotoFile');
 				    		
 				    		formUsuario.forEachItem(function(id){
 				    			switch(id) {
-					    			case "grupo":{
-					    				formUsuario.setReadonly(id,true);
+					    			case "grupo":
+					    			case "nombre":
+					    			case "apellido1":
+					    			case "apellido2":
+					    			case "dni":
+					    			case "telefono":
+					    			case "correo":
+					    				formUsuario.setRequired(id,true);
 					    				break;
-					    			}
-					    			case "nombre":{
-					    				formUsuario.setReadonly(id,true);
-					    				break;
-					    			}
-					    			case "apellido1":{
-					    				formUsuario.setReadonly(id,true);
-					    				break;
-					    			}
-					    			case "apellido2":{
-					    				formUsuario.setReadonly(id,true);
-					    				break;
-					    			}
-					    			case "dni":{
-					    				formUsuario.setReadonly(id,true);
-					    				break;
-					    			}
-					    			case "telefono":{
-					    				formUsuario.setReadonly(id,true);
-					    				break;
-					    			}
-					    			case "correo":{
-					    				formUsuario.setReadonly(id,true);
-					    				break;
-					    			}
-					    			default: break;
 				    			}
 				    		});
 				    		
-				    		//Aqui lo pondría con logic match para gente con permiso para modifiacar datos!
-				    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>3</permiso>" >	
-				    			formUsuario.forEachItem(function(id){
-					    			switch(id) {
-						    			case "grupo":{
-						    				formUsuario.setReadonly(id,false);
-						    				formUsuario.setRequired(id,true);
-						    				break;
-						    			}
-						    			case "nombre":{
-						    				formUsuario.setReadonly(id,false);
-						    				formUsuario.setRequired(id,true);
-						    				break;
-						    			}
-						    			case "apellido1":{
-						    				formUsuario.setReadonly(id,false);
-						    				formUsuario.setRequired(id,true);
-						    				break;
-						    			}
-						    			case "apellido2":{
-						    				formUsuario.setReadonly(id,false);
-						    				break;
-						    			}
-						    			case "dni":{
-						    				formUsuario.setReadonly(id,false);
-						    				formUsuario.setRequired(id,true);
-						    				break;
-						    			}
-						    			case "correo":{
-						    				formUsuario.setReadonly(id,false);
-						    				formUsuario.setRequired(id,true);
-						    				break;
-						    			}
-						    			case "telefono":{
-						    				formUsuario.setReadonly(id,false);
-						    				break;
-						    			}
-						    			default: break;
-					    			}
-					    		});
-				    			formUsuario.showItem('aceptar');
+				    		permisosFormPerfilDeAlumno();
 								
-				    			formUsuario.enableLiveValidation(true);
-					    		//foto LONGBLOB, 
-					    		formUsuario.setFocusOnFirstActive();
-								
-							</logic:match>			    		
+			    			formUsuario.enableLiveValidation(true);
+				    		formUsuario.setFocusOnFirstActive();
 							
 							formUsuario.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
 								if(formUsuario.getItemValue("fotoImagen") == "") {
@@ -409,23 +345,6 @@
 				function buscar() {
 					gridProfesor.clearAndLoad("gridUsuariosEstancias.do?idAsignatura=" + idAsignatura);		    	
 			    }
-	    		
-	    
-	    		function ucmEsEmail(correo) {
-		    		if (getDomain(correo) == "ucm.es") {
-		    			return true;
-		    		}
-		    		else {
-		    			formUsuario.setNote("correo", { text: '<bean:message key="message.email.institucional" />'} );
-		    			alert("false");
-		    			return false;
-		    		}
-		    	}
-		    	
-		    	function getDomain(correo) {
-				    var parts = correo.split('@');
-				    return parts[parts.length - 1];
-		    	}	    
 		    	
 		    	function fechasMenores(f1,f2){
 		    		var partsIni = f1.split('/');
@@ -445,6 +364,30 @@
 		    		}
 		    		else return true;
 		    		
+		    	}
+		    	
+		    	function permisosFormPerfilDeAlumno(){
+    				formUsuario.setReadonly("correo",true);
+    				formUsuario.setReadonly("grupo",true);
+    				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+    				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >
+		    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>3</permiso>" >	
+	    			formUsuario.forEachItem(function(id){
+		    			switch(id) {
+			    			case "nombre":
+			    			case "apellido1":
+			    			case "apellido2":
+			    			case "dni":
+			    			case "telefono":{
+			    				formUsuario.setReadonly(id,true);
+			    				break;
+			    			}
+		    			}
+		    		});
+		    		formAlumno.hideItem('aceptar');
+	    			</logic:notMatch>
+	    			</logic:notMatch>	
+	    			</logic:notMatch>	
 		    	}
 	    	
 	   </script>

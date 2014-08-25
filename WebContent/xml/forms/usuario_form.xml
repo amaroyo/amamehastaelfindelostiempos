@@ -6,7 +6,7 @@
        <item type="input" name="nombre" label="Nombre" labelWidth="110" required="true" />
        <item type="input" name="apellido1" label="Apellido1" labelWidth="110" required="true" />
        <item type="input" name="apellido2" label="Apellido2" labelWidth="110"/>
-       <item type="input" name="dni" label="DNI" labelWidth="110" required="true" />
+       <item type="input" name="dni" label="DNI" labelWidth="110" required="true" validate="validateCIF"/>
        <item type="input" name="correo" label="Email" labelWidth="110" required="true" validate="ucmEsEmail" readonly="true"/>
        <item type="input" name="telefono" label="Telefono" labelWidth="110" validate="ValidNumeric"/>
        <item type="hidden" name="fotoImagen"/>
