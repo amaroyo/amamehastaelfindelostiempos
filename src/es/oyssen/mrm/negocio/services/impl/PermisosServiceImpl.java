@@ -9,6 +9,7 @@ import es.oyssen.mrm.negocio.dao.DAOPermisos;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.PermisosService;
+import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.PermisoVO;
 
 
@@ -28,6 +29,18 @@ public class PermisosServiceImpl implements PermisosService{
 			throws ServiceException {
 		try {
 			return daoPermisos.findAll();
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findAll permisos", e);
+			throw new ServiceException(e);
+		}
+	}
+
+
+	@Override
+	public List<PermisoVO> findRestantes(GrupoVO g) throws ServiceException {
+		try {
+			return daoPermisos.findRestantes(g);
 		} catch (DAOException e) {
 			e.printStackTrace();
 			log.error("Error findAll permisos", e);

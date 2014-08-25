@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" errorPage="error.jsp" %>
 <%@ include file="../../common/taglibs.jsp" %>
 <html>
 	<head>
@@ -12,9 +13,10 @@
 
 	    <script type="text/javascript">
 	    
-	    	dhtmlx.image_path='../skins/imgs/';
+
+			dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	
-	    	var gridLeads, gridPermisos, idSelectedGroup, idSelectedPermisoGrupo, toolbarPermisos;
+	    	var gridLeads, gridPermisos, idSelectedGroup, idSelectedPermisoGrupo, toolbarPermisos,idSelectedUser;
   	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -26,7 +28,7 @@
 		    	a.hideHeader();
 		    	   	
 		    	gridLeads = a.attachGrid();
-		    	gridLeads.setIconsPath('../skins/imgs/');		    	
+		    	//gridLeads.setIconsPath('../skins/imgs/');		    	
 		    	gridLeads.setHeader(["<bean:message key="label.nombre" />"]);
 		    	gridLeads.setColTypes("ro");		    	
 		    	gridLeads.setColSorting('str');
@@ -40,14 +42,14 @@
 		    		b.setText("<bean:message key="title.responsable.propiedades"/>");
 			    					   					
 
-				   	//añadir tab con permisos
+				   	//aÃ±adir tab con permisos
 				   	tabbar = b.attachTabbar();
 				   	tabbar.addTab('tab_1','<bean:message key="layout.allowed.actions"/>','');
 				   	tab_1 = tabbar.cells('tab_1');
 				   	tabbar.setTabActive('tab_1');
 			    	
 				   	toolbarPermisos = tab_1.attachToolbar();
-				   	toolbarPermisos.setIconsPath('../skins/imgs/toolbar/');
+				   	toolbarPermisos.setIconsPath('../img/toolbar/');
 			    	
 				   	toolbarPermisos.loadXML('../xml/toolbars/dhxtoolbar-permisos.xml', function(){
 				   		toolbarPermisos.setItemText('new',"<bean:message key="button.add.permission"/>");
@@ -83,14 +85,14 @@
 			    	tab_2 = tabbar.cells('tab_2');
 			    	gridUsuarios = tab_2.attachGrid();
 			    	gridUsuarios.setIconsPath('../skins/imgs/');			    	
-			    	gridUsuarios.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.telefono" />","<bean:message key="label.telefono.movil" />","<bean:message key="label.address.email" />"]);
-			    	gridUsuarios.setColTypes("ro,ro,ro,ro");			    	
-			    	gridUsuarios.setColSorting('str,str,str,str');
+			    	gridUsuarios.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.address.email" />"]);
+			    	gridUsuarios.setColTypes("ro,ro,ro");			    	
+			    	gridUsuarios.setColSorting('str,str,str');
 			    	gridUsuarios.load("../usuarios/gridusuarios.do?idGrupo="+idGrupo);			    	
 			    	gridUsuarios.init();
 			    	
 			    	gridUsuarios.attachEvent("onRowSelect", function(idUsuario,ind){
-			    		
+			    		idSelectedUser=idUsuario;
 						var dhxWins= new dhtmlXWindows();
 						var window = dhxWins.createWindow("user", 300,50, 385, 510);
 						window.setText('<bean:message key="title.user"/>');				
@@ -98,33 +100,63 @@
 						window.centerOnScreen();
 					
 						var form = window.attachForm();		    	
-				    	form.loadStruct('../xml/forms/usuario_form.xml', function(){
-				    		form.setItemLabel('data','<bean:message key="title.info.general"/>');
+						form.loadStruct('../xml/forms/usuario_form.xml', function(){
+				    		form.setItemLabel('data','<bean:message key="title.datos.personales"/>');
 				    		form.setItemLabel('grupo','<bean:message key="label.group"/>');
 				    		form.setItemLabel('nombre','<bean:message key="label.nombre"/>');
+				    		form.setItemLabel('apellido1','<bean:message key="label.apellido1"/>');
+				    		form.setItemLabel('apellido2','<bean:message key="label.apellido2"/>');
+				    		form.setItemLabel('dni','<bean:message key="label.dni"/>');
 				    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
-				    		form.setItemLabel('telefonoMovil','<bean:message key="label.telefono.movil"/>');
-				    		form.setItemLabel('direccion','<bean:message key="label.direccion"/>');
-				    		form.setItemLabel('codigoPostal','<bean:message key="label.postal.code"/>');
-				    		form.setItemLabel('ciudad','<bean:message key="label.ciudad"/>');
-				    		form.setItemLabel('pais','<bean:message key="label.pais"/>');
-				    		form.setItemLabel('email','<bean:message key="label.address.email"/>');
-				    		form.setItemLabel('comentarios','<bean:message key="label.comentarios"/>');
-				    		form.setItemLabel('user','<bean:message key="label.user"/>');
-				    		form.setItemLabel('pass','<bean:message key="label.pass"/>');			    		
-				    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+				    		form.setItemLabel('correo','<bean:message key="label.correo"/>');	
+				    		form.setItemLabel('foto','<bean:message key="label.foto"/>');
+				    		form.setItemLabel('fotoFile','<bean:message key="label.max.size"/>');
+				    		form.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 				    		
-				    		form.load('../usuarios/editarusuario.do?idUsuario=' + idUsuario, function () {			    			
-				    			form.attachEvent("onButtonClick", function(id){
-				    				if (id == "aceptar") {
-					    				form.send("../usuarios/actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idUsuario ,"post", function(xml) {
-					    					
-					    				});
-					    				buscar();
-				    				}
-				    			});
+							
+				    		
+				    		form.forEachItem(function(id){
+				    			switch(id) {
+					    			case "grupo":
+					    			case "nombre":
+					    			case "apellido1":
+					    			case "dni":
+					    			case "correo":
+					    				form.setRequired(id,true);
+					    				break;
+				    			}
 				    		});
-				    	});				    	
+				    		
+				    		
+				    		form.enableLiveValidation(true);
+				    		form.setItemFocus("nombre");
+
+							loadFormPerfil();
+								
+							form.attachEvent("onChange", function (id, value){
+								if(id == "fotoFile"){
+									if(isImageExtension(value)) {
+										 //previewPicture(rowID);
+							    	}
+									else {
+										alert('<bean:message key="message.error.formato.imagen"/>');
+										document.forms[0].elements.namedItem("fotoFile").value=null;
+									}
+								}
+							});
+							 
+							
+							form.attachEvent("onButtonClick", function(id){
+								if(id == "aceptar"){
+									document.forms[0].submit();
+									//document.getElementById("realForm").submit();
+									//form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser,"post", function(xml) {
+										alert('<bean:message key="message.perfil.cambiado.exito"/>');
+										loadFormPerfil();
+								}
+							});//onButtonClick
+							
+						});//load			    	
 			    		
 			    	});
 			    	
@@ -168,7 +200,7 @@
 		    		form.setItemLabel('idPermiso','<bean:message key="label.permission"/>');
 		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
 		    		form.getCombo('idPermiso').readonly(1);
-		    		form.getCombo('idPermiso').loadXML("listarpermisos.do");
+		    		form.getCombo('idPermiso').loadXML("listarpermisos.do?idGrupo=" + idSelectedGroup);
 		    		
 		    		form.attachEvent("onButtonClick", function(id){
 	    				if (id == "aceptar") {
@@ -176,10 +208,22 @@
 		    					
 		    				});
 		    				window.close();
-		    				goActualizarDitributorContacts();
 	    				}
 		    		});
 		    		
+		    	});
+		    }
+		    
+		    function loadFormPerfil() {
+		    	form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
+					if(form.getItemValue("fotoImagen") == "") {
+						var uriNoProfilePic = '../img/no-profile-pic.png';
+						form.getContainer("foto").innerHTML = "<img src="+ uriNoProfilePic +" />";
+					}
+					else{
+						var profilePic = form.getItemValue("fotoImagen");
+						form.getContainer("foto").innerHTML = "<img src=data:image/jpg;base64,"+ profilePic +" style='width:105px;height:140px'/>";
+					}
 		    	});
 		    }
 		    

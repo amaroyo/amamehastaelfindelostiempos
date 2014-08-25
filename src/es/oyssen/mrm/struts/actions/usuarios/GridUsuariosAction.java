@@ -13,11 +13,11 @@ public class GridUsuariosAction extends DHTMLXGridAction {
 	@Override
 	public String search(DhtmlxGridForm f) throws Exception {
 		GridUsuariosForm form = (GridUsuariosForm) f;
-		if (form.getGrupo() == null) {
+		if (form.getIdGrupo() == null) {
 			return UtilXML.buildXmlGridUsuarios(getUsuariosService().findAll());
 		} else { 
 			GrupoVO grupo = new GrupoVO();
-			grupo.setIdGrupo(form.getGrupo());
+			grupo.setIdGrupo(form.getIdGrupo());
 			return UtilXML.buildXmlGridUsuariosGrupo(getUsuariosService().findByGrupo(grupo));
 		}
 	}
