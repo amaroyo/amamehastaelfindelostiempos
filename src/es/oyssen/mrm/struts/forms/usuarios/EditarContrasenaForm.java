@@ -5,7 +5,7 @@ import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
 public class EditarContrasenaForm extends DhtmlxGridForm {
 
 	private String oldPass;
-	private String newPass;
+	private String newPass1;
 	
 	
 	public String getOldPass() {
@@ -15,13 +15,14 @@ public class EditarContrasenaForm extends DhtmlxGridForm {
 	public void setOldPass(String oldPass) {
 		this.oldPass = oldPass;
 	}
-	
-	public String getNewPass() {
-		return newPass;
+
+	public String getNewPass1() {
+		return newPass1;
+	}
+
+	public void setNewPass1(String newPass1) {
+		this.newPass1 = newPass1;
 	}
 	
-	public void setNewPass(String newPass) {
-		this.newPass = newPass;
-	}
 	
 }
