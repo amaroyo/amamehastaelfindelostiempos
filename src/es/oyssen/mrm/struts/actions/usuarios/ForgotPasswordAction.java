@@ -39,26 +39,28 @@ public class ForgotPasswordAction extends MrmAction {
 			String new_pass = generatePassword();
 			usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(new_pass, EncriptarUtil.MD5));
 			getUsuariosService().update(usuario);
-			sendPasswordMessage(usuario.getCorreo(),new_pass,"forgot");
+			sendPasswordMessage(usuario,new_pass,"forgot");
 		}
 		
 		request.getSession().setAttribute("usuarioYPermisos", parseXML(usuarioYPermisos));
 		return mapping.findForward("success");
 	}
 	
-	public static void sendPasswordMessage(String to,String new_pass,String type){
+	public static void sendPasswordMessage(UsuarioVO u,String new_pass,String type){
 		
 		final String from = "facultad.de.enfermeria.ucm@gmail.com";
 		final String password = "proyecto1314";
 		String host = "smtp.gmail.com";
-		String subject = "Subject";
+		String subject = "";
 		String body = "";
 		
 		if(type.equals("forgot")){
-			body = "<h6> HTML body </h6>" + new_pass;
+			subject="Recuperación de contraseña de la Facultad de Enfermería";
+			body = crearCuerpo(type,new_pass,u);
 		}
 		else if(type.equals("new")){
-			body = "<h6> HTML body </h6>" + new_pass;
+			subject="Bienvenido a la Facultad de Enfermería";
+			body = crearCuerpo(type,new_pass,u);
 		}
 		
 		Properties properties = new Properties();
@@ -79,7 +81,7 @@ public class ForgotPasswordAction extends MrmAction {
 		try{
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(from));
-			message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
+			message.addRecipient(Message.RecipientType.TO,new InternetAddress(u.getCorreo()));
 			message.setSubject(subject);
 			message.setContent(body,"text/html" );
 		
@@ -91,6 +93,47 @@ public class ForgotPasswordAction extends MrmAction {
 		}
 	}
 	
+	private static String crearCuerpo(String type, String new_pass, UsuarioVO u) {
+		
+		String message = "";
+		if(type.equals("forgot")){
+			message = 	"Hola " + u.getNombre() + " " + u.getApellido1() + ",\r\r";
+			message += "Conforme a tu solicitud, tu contraseña se ha reestablecido.\n\r";
+			message += "Entra en la Facultad de Enfermería ahora y disfruta de tus prácticas: http://www.facultad.enfermeria.es\n\r\n\r";
+			message += "Tu nueva contraseña es la siguiente:  " + new_pass + "\n\r\n\r";
+			message += "Gracias por seguir confiando en nosotros, \n\r";
+			message += "                    - Universidad Complutense de Madrid. \n\r\n\r\n\r\n\r";
+			message += "\r";
+			message += "Comparte tus habilidades, comparte tu conocimiento\n\r\n\r";
+			message += "Si crees que has recibido este correo por error, por favor, envíanos un email a: facultad.de.enfermeria.ucm@gmail.com \n\r";
+			message += "Este correo ha sido enviado por un sistema automático de envíos y no permite respuesta. " +
+					"Si deseas contactar con la Facultad de Enfermería o tienes alguna duda o sugerencia, puedes escribirnos a: facultad.de.enfermeria.ucm@gmail.com \r";
+			return message;
+		}
+		
+		else if(type.equals("new")){
+			message =  "Hola " + u.getNombre() + " " + u.getApellido1() + ",\r\r";
+			message += "¡Bienvenido a la Facultad de Enfermería! \n\r";
+			message += "Ya puedes comenzar a realizar prácticas, consultar tus horarios, y hacer muchas más cosas.\r";
+			message += "Entra en la Facultad de Enfermería ahora y comienza a sacar partido a tus estudios: http://www.facultad.enfermeria.es\n\r\n\r";
+			message += "Tu usuario es:                           "+ u.getCorreo() + "\r";
+			message += "La contraseña de tu cuenta es:  " + new_pass + "\n\r\n\r";
+			message += "Gracias por registrarte, \n\r";
+			message += "                    - Universidad Complutense de Madrid. \n\r\n\r\n\r\n\r";
+			message += "<LOGO>\r";
+			message += "Comparte tus habilidades, comparte tu conocimiento\n\r\n\r";
+			message += "Este correo electrónico y su contenido está dirigido exclusivamente a su destinatario y puede contener información confidencial. " +
+					"Si crees que lo has recibido por error, por favor, envíanos un email a: facultad.de.enfermeria.ucm@gmail.com \n\r";
+			message += "Este correo ha sido enviado por un sistema automático de envíos y no permite respuesta. Si deseas contactar con la Facultad de Enfermería o " +
+					"tienes alguna duda o sugerencia, puedes escribirnos a: facultad.de.enfermeria.ucm@gmail.com \r";
+			return message;
+		}
+		else return message;
+		
+		
+		
+	}
+
 	public static String generatePassword() {
 		int lenght = 10;
 		char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890".toCharArray();
