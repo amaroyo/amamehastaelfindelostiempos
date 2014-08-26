@@ -69,11 +69,11 @@
 		    		
 		    		
 		    		b.showHeader();
-		    		b.setText("<bean:message key="title.comercial.propiedades" />");
+		    		b.setText("<bean:message key='title.datos.personales' />");
 
 		    		
 			    	tabbar = b.attachTabbar();
-			    	tabbar.addTab('tab_1','<bean:message key="label.propiedades"/>','');
+			    	tabbar.addTab('tab_1','<bean:message key="title.datos.personales"/>','');
 			    	tab_1 = tabbar.cells('tab_1');
 			    	tabbar.setTabActive('tab_1');
 			    	formUsuario = tab_1.attachForm();
@@ -215,20 +215,34 @@
 			    				break;
 		    			}
 		    		});
-				
-		    		
-					
-		    		
 		    		formNewUser.attachEvent("onButtonClick", function(id){
-	    				if (id == "aceptar") {	
-
+	    				if (id == "aceptar") {
 	    					formNewUser.send("actualizarusuario.do?!nativeeditor_status=create","post", function(loader, response) {
-		    					
+	    						if(response == "usuario created"){
+	    							window.close();
+				    				goActualizar();
+	    				    		alert('<bean:message key="message.usuario.creado.successful" />');
+	    				    	}
+	    				    	else{
+	    				    		alert('<bean:message key="message.usuario.creado.failed" />');
+	    					    }
 		    				});
-		    				window.close();
-		    				goActualizar();
+		    				
 	    				}
 		    		});
+		    		formNewUser.attachEvent("onEnter", function() {
+    					formNewUser.send("actualizarusuario.do?!nativeeditor_status=create","post", function(loader, response) {
+    						if(response == "usuario created"){
+    							window.close();
+			    				goActualizar();
+    				    		alert('<bean:message key="message.usuario.creado.successful" />');
+    				    	}
+    				    	else{
+    				    		alert('<bean:message key="message.usuario.creado.failed" />');
+    					    }
+	    				});
+		    		});
+		    		
 		    	});
 		    }		    
 		    
