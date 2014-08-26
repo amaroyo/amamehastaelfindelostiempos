@@ -210,10 +210,6 @@
 		    		
 		    		form.forEachItem(function(id){
 		    			switch(id) {
-			    			case "grupo":{
-			    				form.setReadonly(id,true);
-			    				break;
-			    			}
 			    			case "nombre":{
 			    				form.setReadonly(id,true);
 			    				break;
@@ -231,10 +227,6 @@
 			    				break;
 			    			}
 			    			case "telefono":{
-			    				form.setReadonly(id,true);
-			    				break;
-			    			}
-			    			case "correo":{
 			    				form.setReadonly(id,true);
 			    				break;
 			    			}

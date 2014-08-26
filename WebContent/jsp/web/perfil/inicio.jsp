@@ -161,11 +161,9 @@
 		    		
 		    		form.forEachItem(function(id){
 		    			switch(id) {
-			    			case "grupo":
 			    			case "nombre":
 			    			case "apellido1":
 			    			case "dni":
-			    			case "correo":
 			    				form.setRequired(id,true);
 			    				break;
 		    			}

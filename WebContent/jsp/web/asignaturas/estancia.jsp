@@ -160,13 +160,11 @@
 				    		
 				    		formUsuario.forEachItem(function(id){
 				    			switch(id) {
-					    			case "grupo":
 					    			case "nombre":
 					    			case "apellido1":
 					    			case "apellido2":
 					    			case "dni":
 					    			case "telefono":
-					    			case "correo":
 					    				formUsuario.setRequired(id,true);
 					    				break;
 				    			}
