@@ -293,20 +293,32 @@
 						}
 						form.attachEvent("onButtonClick", function(id){
 							if (id == "aceptar") {
+								if(validateCIF(form.getItemValue("dni")) == false){
+									alert('<bean:message key="message.dni.no.correcto"/>');
+								}
+								else{
+									form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idAlumno ,"post", function(xml) {
+										buscarMisAlumnos();
+										alert('<bean:message key="message.perfil.cambiado.exito"/>');
+										
+									});
+								}
+
+							}
+						});
+						
+						
+						form.attachEvent("onEnter", function() {
+							if(validateCIF(form.getItemValue("dni")) == false){
+								alert('<bean:message key="message.dni.no.correcto"/>');
+							}
+							else{
 								form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idAlumno ,"post", function(xml) {
 									buscarMisAlumnos();
 									alert('<bean:message key="message.perfil.cambiado.exito"/>');
 									
 								});
-
 							}
-						});
-						form.attachEvent("onEnter", function() {
-							form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idAlumno ,"post", function(xml) {
-								buscarMisAlumnos();
-								alert('<bean:message key="message.perfil.cambiado.exito"/>');
-								
-							}); 
 			    		});
 						
 						
@@ -705,7 +717,7 @@
 					    				   else {formNTC.setNote("hora", { text: '<bean:message key="message.hora.correcta" />'} );correcto=false;}
 					    			   }
 					    			   else {formNTC.setNote("hora", { text: '<bean:message key="message.hora.correcta" />'} );correcto=false;}
-					    		   }
+					    		   }//if
 					    		});
 					    		
 					    		formNTC.load('verTrabajoCampo.do?idTrabajoInfo='+ idTrabajoInfo, function () {	
@@ -721,18 +733,18 @@
 													setTimeout(function(){goTrabajos();},1000);
 												});
 												
-											}
-						    			}
+											}//if
+						    			}//if
 						    			else {alert("<bean:message key="message.algo.incorrecto"/>");}
 						    			
 					
-							    	});
+							    	});//attachEvent onbuttonclick
 					    			
-					    		});
-							});
-				    	}
+					    		});//load
+							});//loadStrut
+				    	}//else row d
 				    	
-				    });
+				    });//grid attachEvent
 		    		
 		    	});
 		    	

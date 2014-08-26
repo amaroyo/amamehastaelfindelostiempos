@@ -100,9 +100,7 @@
 		    function processPasswords(){
 				if (form.getItemValue("newPass1") == form.getItemValue("newPass2")){
 					if(form.getItemValue("newPass1") != form.getItemValue("oldPass")){
-   						var newPass = form.getItemValue("newPass1");
-   						var oldPass = form.getItemValue("oldPass");
-	    				form.send("actualizarcontrasena.do?oldPass=" + oldPass + "&newPass=" + newPass,"post", function(loader, response) {
+	    				form.send("actualizarcontrasena.do","post", function(loader, response) {
 	    					resultadoCambiarPassword(response);
 	    				});
 					}
@@ -190,11 +188,16 @@
 					
 					form.attachEvent("onButtonClick", function(id){
 						if(id == "aceptar"){
-							document.forms[0].submit();
-							//document.getElementById("realForm").submit();
-							//form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser,"post", function(xml) {
-								alert('<bean:message key="message.perfil.cambiado.exito"/>');
-								loadFormPerfil();
+							if(validateCIF(form.getItemValue("dni")) == false){
+								alert('<bean:message key="message.dni.no.correcto"/>');
+							}
+							else{
+								document.forms[0].submit();
+								//document.getElementById("realForm").submit();
+								//form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser,"post", function(xml) {
+									alert('<bean:message key="message.perfil.cambiado.exito"/>');
+									loadFormPerfil();
+							}
 						}
 					});//onButtonClick
 					
