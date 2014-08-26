@@ -297,7 +297,7 @@
 									alert('<bean:message key="message.dni.no.correcto"/>');
 								}
 								else{
-									form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idAlumno ,"post", function(xml) {
+									form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idAlumno ,"post", function(loader, response) {
 										if(response == "usuario changed"){
 											buscarMisAlumnos();
 											alert('<bean:message key="message.perfil.cambiado.exito"/>');
@@ -320,7 +320,7 @@
 								alert('<bean:message key="message.dni.no.correcto"/>');
 							}
 							else{
-								form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idAlumno ,"post", function(xml) {
+								form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idAlumno ,"post", function(loader, response) {
 									if(response == "usuario changed"){
 										buscarMisAlumnos();
 										alert('<bean:message key="message.perfil.cambiado.exito"/>');
