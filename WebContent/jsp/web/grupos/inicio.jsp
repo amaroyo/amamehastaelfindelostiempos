@@ -5,10 +5,12 @@
 	    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
 	    <link rel="stylesheet" type="text/css" href="../css/templates.css">
 	    <link rel="stylesheet" type="text/css" href="../css/estilosMenu.css">
-	    <link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlx.css">
-	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlx.js"></script>
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlx.css">
+	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlx.js"></script>
+	    
+	    <script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
 	    
 
 	    <script type="text/javascript">
@@ -16,8 +18,12 @@
 
 			dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	
-	    	var gridLeads, gridPermisos, idSelectedGroup, idSelectedPermisoGrupo, toolbarPermisos,idSelectedUser;
+		
+			
+	    	var gridLeads, gridPermisos, idSelectedGroup, idSelectedPermisoGrupo, toolbarPermisos,idSelectedUser,formUsuario;
   	
+	    	<% String accion = "/grupos/actualizarusuario?!nativeeditor_status=save"; %>
+	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
 			    dhtmlxError.catchError("ALL",errorHandler);
@@ -94,46 +100,46 @@
 			    	gridUsuarios.attachEvent("onRowSelect", function(idUsuario,ind){
 			    		idSelectedUser=idUsuario;
 						var dhxWins= new dhtmlXWindows();
-						var window = dhxWins.createWindow("user", 300,50, 385, 510);
-						window.setText('<bean:message key="title.user"/>');				
+						var window = dhxWins.createWindow("user", 300,50, 390, 450);
+						window.setText('<bean:message key="label.user"/>');				
 						window.setModal(true);
 						window.centerOnScreen();
 					
-						var form = window.attachForm();		    	
-						form.loadStruct('../xml/forms/usuario_form.xml', function(){
-				    		form.setItemLabel('data','<bean:message key="title.datos.personales"/>');
-				    		form.setItemLabel('grupo','<bean:message key="label.group"/>');
-				    		form.setItemLabel('nombre','<bean:message key="label.nombre"/>');
-				    		form.setItemLabel('apellido1','<bean:message key="label.apellido1"/>');
-				    		form.setItemLabel('apellido2','<bean:message key="label.apellido2"/>');
-				    		form.setItemLabel('dni','<bean:message key="label.dni"/>');
-				    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
-				    		form.setItemLabel('correo','<bean:message key="label.correo"/>');	
-				    		form.setItemLabel('foto','<bean:message key="label.foto"/>');
-				    		form.setItemLabel('fotoFile','<bean:message key="label.max.size"/>');
-				    		form.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
+						formUsuario = window.attachForm();		    	
+						formUsuario.loadStruct('../xml/forms/usuario_form.xml', function(){
+							formUsuario.setItemLabel('data','<bean:message key="title.datos.personales"/>');
+							formUsuario.setItemLabel('grupo','<bean:message key="label.group"/>');
+							formUsuario.setItemLabel('nombre','<bean:message key="label.nombre"/>');
+							formUsuario.setItemLabel('apellido1','<bean:message key="label.apellido1"/>');
+							formUsuario.setItemLabel('apellido2','<bean:message key="label.apellido2"/>');
+							formUsuario.setItemLabel('dni','<bean:message key="label.dni"/>');
+							formUsuario.setItemLabel('telefono','<bean:message key="label.telefono"/>');
+							formUsuario.setItemLabel('correo','<bean:message key="label.correo"/>');	
+							formUsuario.setItemLabel('foto','<bean:message key="label.foto"/>');
+							formUsuario.setItemLabel('fotoFile','<bean:message key="label.max.size"/>');
+							formUsuario.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 				    		
 							
 				    		
-				    		form.forEachItem(function(id){
+							formUsuario.forEachItem(function(id){
 				    			switch(id) {
 					    			case "grupo":
 					    			case "nombre":
 					    			case "apellido1":
 					    			case "dni":
 					    			case "correo":
-					    				form.setRequired(id,true);
+					    				formUsuario.setRequired(id,true);
 					    				break;
 				    			}
 				    		});
 				    		
 				    		
-				    		form.enableLiveValidation(true);
-				    		form.setItemFocus("nombre");
+							formUsuario.enableLiveValidation(true);
+							formUsuario.setItemFocus("nombre");
 
 							loadFormPerfil();
 								
-							form.attachEvent("onChange", function (id, value){
+							formUsuario.attachEvent("onChange", function (id, value){
 								if(id == "fotoFile"){
 									if(isImageExtension(value)) {
 										 //previewPicture(rowID);
@@ -146,7 +152,7 @@
 							});
 							 
 							
-							form.attachEvent("onButtonClick", function(id){
+							formUsuario.attachEvent("onButtonClick", function(id){
 								if(id == "aceptar"){
 									document.forms[0].submit();
 									//document.getElementById("realForm").submit();
@@ -215,14 +221,14 @@
 		    }
 		    
 		    function loadFormPerfil() {
-		    	form.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
-					if(form.getItemValue("fotoImagen") == "") {
+		    	formUsuario.load('editarusuario.do?idUsuario=' + idSelectedUser, function () {
+					if(formUsuario.getItemValue("fotoImagen") == "") {
 						var uriNoProfilePic = '../img/no-profile-pic.png';
-						form.getContainer("foto").innerHTML = "<img src="+ uriNoProfilePic +" />";
+						formUsuario.getContainer("foto").innerHTML = "<img src="+ uriNoProfilePic +" />";
 					}
 					else{
 						var profilePic = form.getItemValue("fotoImagen");
-						form.getContainer("foto").innerHTML = "<img src=data:image/jpg;base64,"+ profilePic +" style='width:105px;height:140px'/>";
+						formUsuario.getContainer("foto").innerHTML = "<img src=data:image/jpg;base64,"+ profilePic +" style='width:105px;height:140px'/>";
 					}
 		    	});
 		    }
@@ -230,5 +236,18 @@
         </script>
 	</head>
 	<body>
+	<div id="layout" style="width:100%; height:100%;">
+		<div id="menu" style="float:left; height:100%; width:150px;">
+		
+		</div>
+		<div id="content" style="float:left; height:100%; width:550px;">
+			<html:form action="<%=accion%>"  enctype="multipart/form-data" target="response_area_iframe">
+				<div id="myForm">
+	 
+				</div >
+			</html:form>
+		</div>
+		<iframe name="response_area_iframe" frameBorder="0" height="0"></iframe>
+	</div>
 	</body>
 </html>

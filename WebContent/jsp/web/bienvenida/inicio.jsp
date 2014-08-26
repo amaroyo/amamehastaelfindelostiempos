@@ -85,6 +85,20 @@
 				location.href=url;
 	    	}
 	    	
+	    	function ucmEsEmail(email) {
+	    		if (getDomain(email) == "ucm.es") {
+	    			return true;
+	    		}
+	    		else {
+	    			form.setNote("correo", { text: '<bean:message key="message.email.institucional" />'} );
+	    			return false;
+	    		}
+	    	}
+
+	    	function getDomain(email) {
+	    	    var parts = email.split('@');
+	    	    return parts[parts.length - 1];
+	    	}
 	    	
 	    	
         </script>
