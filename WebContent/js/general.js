@@ -47,6 +47,18 @@ function validateCIF(cif) {
 	return false;
  }
 
+
+
+function validateDNI(dni) {
+	var lockup = 'TRWAGMYFPDXBNJZSQVHLCKE';
+	var valueDni=dni.substr(0,dni.length-1);
+	var letra=dni.substr(dni.length-1,1).toUpperCase();
+ 	if(lockup.charAt(valueDni % 23)==letra){
+ 		return true;
+ 	}
+ 	return false;
+ }
+
 function getExtension(fileName) {
     var parts = fileName.split('.');
     return parts[parts.length - 1];
@@ -81,15 +93,6 @@ function getDomain(email) {
     var parts = email.split('@');
     return parts[parts.length - 1];
 }
-
-function validateDNI(dni) {
-	var lockup = 'TRWAGMYFPDXBNJZSQVHLCKE';
-	var valueDni=dni.substr(0,dni.length-1);
-	var letra=dni.substr(dni.length-1,1).toUpperCase();
- 	if(lockup.charAt(valueDni % 23)==letra)
- 		return true;
- 	return false;
- }
 
 //**********************/* fin validacion inputs forms */**********************//
 

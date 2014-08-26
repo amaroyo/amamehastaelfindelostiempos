@@ -160,11 +160,11 @@
 				    		
 				    		formUsuario.forEachItem(function(id){
 				    			switch(id) {
+				    				case "grupo":
 					    			case "nombre":
 					    			case "apellido1":
 					    			case "apellido2":
 					    			case "dni":
-					    			case "telefono":
 					    				formUsuario.setRequired(id,true);
 					    				break;
 				    			}
@@ -186,16 +186,25 @@
 								}
 								formUsuario.attachEvent("onButtonClick", function(id){
 									if (id == "aceptar") {
-										formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-											alert('<bean:message key="message.perfil.cambiado.exito"/>');
-										});
-
+										if(validateCIF(formUsuario.getItemValue("dni")) == false){
+											alert('<bean:message key="message.dni.no.correcto"/>');
+										}
+										else{
+											formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+												alert('<bean:message key="message.perfil.cambiado.exito"/>');
+											});
+										}
 									}
 								});
 								formUsuario.attachEvent("onEnter", function() {
-									formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-										alert('<bean:message key="message.perfil.cambiado.exito"/>');
-									}); 
+									if(validateCIF(formUsuario.getItemValue("dni")) == false){
+										alert('<bean:message key="message.dni.no.correcto"/>');
+									}
+									else{
+										formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+											alert('<bean:message key="message.perfil.cambiado.exito"/>');
+										});
+									} 
 					    		});
 								
 								
