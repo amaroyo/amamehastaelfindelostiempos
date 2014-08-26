@@ -590,15 +590,17 @@ public class UtilXML {
 		sb.append("<rows>");
 		if(list != null){
 			for (UsuarioVO usuario : list) {
-			
-				sb.append("<row id=\"" +usuario.getIdUsuario() + "\">");
-				sb.append("<cell><![CDATA[" + nombreGrupo(StringUtil.nullToString(usuario.getIdGrupo())) + "]]></cell>");
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getNombre()) + "]]></cell>");
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getTelefono()) + "]]></cell>");
-				
-				sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getCorreo()) + "]]></cell>");
-				sb.append("</row>");	
-					
+				if(!usuario.getIdUsuario().equals("8")){
+					sb.append("<row id=\"" +usuario.getIdUsuario() + "\">");
+					sb.append("<cell><![CDATA[" + nombreGrupo(StringUtil.nullToString(usuario.getIdGrupo())) + "]]></cell>");
+					sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getNombre()) + "]]></cell>");
+					String apellidos = usuario.getApellido1();
+					if(usuario.getApellido2() != "") apellidos = apellidos + ", " + usuario.getApellido2();
+					sb.append("<cell><![CDATA[" + StringUtil.nullToString(apellidos) + "]]></cell>");
+					sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getTelefono()) + "]]></cell>");	
+					sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getCorreo()) + "]]></cell>");
+					sb.append("</row>");	
+				}	
 			}
 		}
 		sb.append("</rows>");

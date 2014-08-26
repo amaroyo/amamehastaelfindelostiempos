@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <items>
    <item type="fieldset" name="data" label="Información general" inputWidth="auto">
-       <item type="combo" name="idGrupo" label="Grupo" labelWidth="110" width="138" >
-            <option text="Super user" value="1" />
-       		<option text="Channel" value="2" />
-       		<option text="Distributor" value="3" />
-       		<option text="Sales rep." value="4" />
-       		<option text="Supplier" value="5" />
+       <item type="combo" name="grupo" label="Grupo" labelWidth="110" width="138" >
+            <option text="Super Admin" value="1" />
+       		<option text="Coordinador" value="2" />
+       		<option text="Profesor" value="3" />
+       		<option text="Alumno" value="4" />
+       		<option text="Virtual Tour" value="5" />
        </item>
-       <item type="combo" name="idAsociado" label="Asociado a" labelWidth="110" width="138" />
-       <item type="input" name="nombre" label="Nombre" labelWidth="110" />
-       <item type="input" name="telefono" label="Telefono" labelWidth="110" />
-       <item type="input" name="telefonoMovil" label="Telefono movil" labelWidth="110" />
-       <item type="input" name="direccion" label="Direccion" labelWidth="110" />
-       <item type="input" name="codigoPostal" label="Codigo postal" labelWidth="110" />
-       <item type="input" name="ciudad" label="Ciudad" labelWidth="110" />
-       <item type="input" name="pais" label="Pais" labelWidth="110" />
-       <item type="input" name="email" label="Email" labelWidth="110" />
-       <item type="input" name="user" label="User" labelWidth="110" />
-       <item type="password" name="pass" label="Pass" labelWidth="110" />
-       <item type="input" name="comentarios" label="Comentarios" labelWidth="110" rows="3" />
+      
+       <item type="input" name="nombre" label="Nombre" labelWidth="110" required="true"/>
+       <item type="input" name="apellido1" label="Apellido1" labelWidth="110" required="true" />
+       <item type="input" name="apellido2" label="Apellido2" labelWidth="110"/>
+       <item type="input" name="dni" label="DNI" labelWidth="110" required="true" validate="validateCIF"/>
+       <item type="input" name="correo" label="Email" labelWidth="110" required="true" validate="ucmEsEmail"/>
+       <item type="input" name="telefono" label="Telefono" labelWidth="110" validate="ValidNumeric"/>
+ 
+      
    </item>
    <item type="button" name="aceptar" value="Aceptar" />
 </items>
