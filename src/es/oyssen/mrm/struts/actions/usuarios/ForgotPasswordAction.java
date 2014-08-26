@@ -39,20 +39,27 @@ public class ForgotPasswordAction extends MrmAction {
 			String new_pass = generatePassword();
 			usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(new_pass, EncriptarUtil.MD5));
 			getUsuariosService().update(usuario);
-			sendForgotPasswordMessage(usuario.getCorreo(),new_pass);
+			sendPasswordMessage(usuario.getCorreo(),new_pass,"forgot");
 		}
 		
 		request.getSession().setAttribute("usuarioYPermisos", parseXML(usuarioYPermisos));
 		return mapping.findForward("success");
 	}
 	
-	private void sendForgotPasswordMessage(String to,String new_pass){
+	public static void sendPasswordMessage(String to,String new_pass,String type){
 		
 		final String from = "facultad.de.enfermeria.ucm@gmail.com";
 		final String password = "proyecto1314";
 		String host = "smtp.gmail.com";
 		String subject = "Subject";
-		String body = "<h6> HTML body </h6>" + new_pass;
+		String body = "";
+		
+		if(type.equals("forgot")){
+			body = "<h6> HTML body </h6>" + new_pass;
+		}
+		else if(type.equals("new")){
+			body = "<h6> HTML body </h6>" + new_pass;
+		}
 		
 		Properties properties = new Properties();
 		properties.put("mail.smtp.host", host);
@@ -84,7 +91,7 @@ public class ForgotPasswordAction extends MrmAction {
 		}
 	}
 	
-	private String generatePassword() {
+	public static String generatePassword() {
 		int lenght = 10;
 		char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890".toCharArray();
 		SecureRandom random = new SecureRandom();
