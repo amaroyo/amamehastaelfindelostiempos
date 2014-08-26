@@ -191,8 +191,16 @@
 										}
 										else{
 											formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-												alert('<bean:message key="message.perfil.cambiado.exito"/>');
+												if(response == "usuario changed"){
+								    				alert('<bean:message key="message.perfil.cambiado.exito"/>');
+					    				    	}
+					    				    	else{
+					    				    		if(response == "usuario not changed: dni already exists"){
+					    				    			alert('<bean:message key="message.usuario.failed.dni" />');
+					    				    		}
+					    					    }
 											});
+											
 										}
 									}
 								});
@@ -202,7 +210,14 @@
 									}
 									else{
 										formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
-											alert('<bean:message key="message.perfil.cambiado.exito"/>');
+											if(response == "usuario changed"){
+							    				alert('<bean:message key="message.perfil.cambiado.exito"/>');
+				    				    	}
+				    				    	else{
+				    				    		if(response == "usuario not changed: dni already exists"){
+				    				    			alert('<bean:message key="message.usuario.failed.dni" />');
+				    				    		}
+				    					    }
 										});
 									} 
 					    		});

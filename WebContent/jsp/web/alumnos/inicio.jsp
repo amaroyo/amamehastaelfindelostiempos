@@ -298,8 +298,15 @@
 								}
 								else{
 									form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idAlumno ,"post", function(xml) {
-										buscarMisAlumnos();
-										alert('<bean:message key="message.perfil.cambiado.exito"/>');
+										if(response == "usuario changed"){
+											buscarMisAlumnos();
+											alert('<bean:message key="message.perfil.cambiado.exito"/>');
+			    				    	}
+			    				    	else{
+			    				    		if(response == "usuario not changed: dni already exists"){
+			    				    			alert('<bean:message key="message.usuario.failed.dni" />');
+			    				    		}
+			    					    }
 										
 									});
 								}
@@ -314,8 +321,15 @@
 							}
 							else{
 								form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idAlumno ,"post", function(xml) {
-									buscarMisAlumnos();
-									alert('<bean:message key="message.perfil.cambiado.exito"/>');
+									if(response == "usuario changed"){
+										buscarMisAlumnos();
+										alert('<bean:message key="message.perfil.cambiado.exito"/>');
+		    				    	}
+		    				    	else{
+		    				    		if(response == "usuario not changed: dni already exists"){
+		    				    			alert('<bean:message key="message.usuario.failed.dni" />');
+		    				    		}
+		    					    }
 									
 								});
 							}

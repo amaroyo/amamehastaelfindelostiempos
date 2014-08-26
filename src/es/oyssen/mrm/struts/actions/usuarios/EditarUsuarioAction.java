@@ -63,15 +63,19 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		//ESTO HAY QUE CAMBIARLO A BUSCAR SEGUN EMAIL O DNI, YA QUE SON UNIQUE
 		//EN ESTE CASO EL UNICO CAMPO UNIQUE A PARTE DEL ID ES EL USER (del form)
 		usuario.setCorreo(form.getCorreo());
-		if (getUsuariosService().findByCorreo(usuario) != null)
+		if (getUsuariosService().findByCorreo(usuario) != null){
 			return "usuario not created: correo already exists";
+		}
+		usuario.setDni(form.getDni());
+		if (getUsuariosService().findByDni(usuario) != null){
+			return "usuario not created: dni already exists";
+		}
 		else{
 			usuario.setIdGrupo(form.getGrupo());
 			usuario.setCorreo(form.getCorreo());
 			usuario.setNombre(form.getNombre());
 			usuario.setApellido1(form.getApellido1());
 			usuario.setApellido2(form.getApellido2());
-			usuario.setDni(form.getDni());
 			usuario.setTelefono(form.getTelefono());
 			//System.out.println(form.getFoto());
 			//usuario.setFoto(form.getFoto());
@@ -100,14 +104,29 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		
 		UsuarioVO usuario = new UsuarioVO();
 		
-		
 		if (StringUtil.isNullOrBlank(form.getIdUsuario())) {
 			if (!StringUtil.isNullOrBlank(form.getCorreo())) {
+				if (!StringUtil.isNullOrBlank(form.getDni())) {
+					usuario.setDni(form.getDni());
+					if (getUsuariosService().findByDni(usuario) != null){
+						if(!usuario.getCorreo().equals(form.getCorreo())){
+							return "usuario not changed: dni already exists";
+						}
+					}
+				}
 				usuario.setCorreo(form.getCorreo());
 				usuario.setIdUsuario(getUsuariosService().findByCorreo(usuario).getIdUsuario());
 			}
 		}
-		else  {
+		else {
+			if (!StringUtil.isNullOrBlank(form.getDni())) {
+				usuario.setDni(form.getDni());
+				if (getUsuariosService().findByDni(usuario) != null){
+					if(!usuario.getIdUsuario().equals(form.getIdUsuario())){
+						return "usuario not changed: dni already exists";
+					}
+				}
+			}
 			usuario.setIdUsuario(form.getIdUsuario());
 		}
 		usuario.setIdGrupo(idGrupo(form.getGrupo()));
