@@ -22,7 +22,7 @@
 			
 	    	var gridLeads, gridPermisos, idSelectedGroup, idSelectedPermisoGrupo, toolbarPermisos,idSelectedUser,formUsuario;
   	
-	    	<% String accion = "/grupos/actualizarusuario?!nativeeditor_status=save"; %>
+	    
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
