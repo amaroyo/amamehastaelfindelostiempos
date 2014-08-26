@@ -109,8 +109,9 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 			if (!StringUtil.isNullOrBlank(form.getCorreo())) {
 				if (!StringUtil.isNullOrBlank(form.getDni())) {
 					usuario.setDni(form.getDni());
-					if (getUsuariosService().findByDni(usuario) != null){
-						if(!usuario.getCorreo().equals(form.getCorreo())){
+					UsuarioVO correo;
+					if ((correo = getUsuariosService().findByDni(usuario)) != null){
+						if(!correo.getCorreo().equals(form.getCorreo())){
 							return "usuario not changed: dni already exists";
 						}
 					}
@@ -122,8 +123,9 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 		else {
 			if (!StringUtil.isNullOrBlank(form.getDni())) {
 				usuario.setDni(form.getDni());
-				if (getUsuariosService().findByDni(usuario) != null){
-					if(!usuario.getIdUsuario().equals(form.getIdUsuario())){
+				UsuarioVO id;
+				if ((id = getUsuariosService().findByDni(usuario)) != null){
+					if(!id.getIdUsuario().equals(form.getIdUsuario())){
 						return "usuario not changed: dni already exists";
 					}
 				}

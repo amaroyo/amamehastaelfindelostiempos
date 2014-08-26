@@ -190,7 +190,7 @@
 											alert('<bean:message key="message.dni.no.correcto"/>');
 										}
 										else{
-											formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+											formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(loader, response) {
 												if(response == "usuario changed"){
 								    				alert('<bean:message key="message.perfil.cambiado.exito"/>');
 					    				    	}
@@ -209,7 +209,7 @@
 										alert('<bean:message key="message.dni.no.correcto"/>');
 									}
 									else{
-										formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(xml) {
+										formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idSelectedUser ,"post", function(loader, response) {
 											if(response == "usuario changed"){
 							    				alert('<bean:message key="message.perfil.cambiado.exito"/>');
 				    				    	}
@@ -280,7 +280,7 @@
 								formEstancia.attachEvent("onButtonClick", function(id){
 									if (id == "aceptar") {
 										if(fechasMenores(fechaIni,fechaFin)){	
-											formEstancia.send("actualizarEstanciaUnidadClinica.do?!nativeeditor_status=save&idAlumno=" + idSelectedUser + '&idAsignatura=' + idAsignatura,"post", function(xml) {
+											formEstancia.send("actualizarEstanciaUnidadClinica.do?!nativeeditor_status=save&idAlumno=" + idSelectedUser + '&idAsignatura=' + idAsignatura,"post", function(loader, response) {
 												alert('<bean:message key="message.estancia.clinica.exito"/>');
 											});
 										}
@@ -289,7 +289,7 @@
 								});
 								formEstancia.attachEvent("onEnter", function() {
 									if(fechasMenores(fechaIni,fechaFin)){
-										formEstancia.send("actualizarEstanciaUnidadClinica.do?!nativeeditor_status=save&idAlumno=" + idSelectedUser + '&idAsignatura=' + idAsignatura,"post", function(xml) {
+										formEstancia.send("actualizarEstanciaUnidadClinica.do?!nativeeditor_status=save&idAlumno=" + idSelectedUser + '&idAsignatura=' + idAsignatura,"post", function(loader, response) {
 											alert('<bean:message key="message.estancia.clinica.exito"/>');
 										}); 
 									}
