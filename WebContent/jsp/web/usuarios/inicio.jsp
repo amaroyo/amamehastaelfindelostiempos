@@ -202,8 +202,7 @@
 					formNewUser.removeItem('fotoFile');
 					
 					formNewUser.getCombo('grupo').readonly(1);
-		    		formNewUser.getCombo('grupo').setComboValue("0");
-		    		formNewUser.getCombo('grupo').setComboText("");
+		    		formNewUser.getCombo('grupo').setChecked("4");
     				    		
 		    		formNewUser.forEachItem(function(id){
 		    			switch(id) {
@@ -224,21 +223,31 @@
 	    				    		alert('<bean:message key="message.usuario.creado.successful" />');
 	    				    	}
 	    				    	else{
-	    				    		alert('<bean:message key="message.usuario.creado.failed" />');
+	    				    		if(response == "usuario not created: dni already exists"){
+	    				    			alert('<bean:message key="message.usuario.failed.dni" />');
+	    				    		}
+	    				    		else{
+	    				    			alert('<bean:message key="message.usuario.failed.correo" />');
+	    				    		}
 	    					    }
 		    				});
 		    				
 	    				}
 		    		});
 		    		formNewUser.attachEvent("onEnter", function() {
-    					formNewUser.send("actualizarusuario.do?!nativeeditor_status=create","post", function(loader, response) {
+		    			formNewUser.send("actualizarusuario.do?!nativeeditor_status=create","post", function(loader, response) {
     						if(response == "usuario created"){
     							window.close();
 			    				goActualizar();
     				    		alert('<bean:message key="message.usuario.creado.successful" />');
     				    	}
     				    	else{
-    				    		alert('<bean:message key="message.usuario.creado.failed" />');
+    				    		if(response == "usuario not created: dni already exists"){
+    				    			alert('<bean:message key="message.usuario.failed.dni" />');
+    				    		}
+    				    		else{
+    				    			alert('<bean:message key="message.usuario.failed.correo" />');
+    				    		}
     					    }
 	    				});
 		    		});
