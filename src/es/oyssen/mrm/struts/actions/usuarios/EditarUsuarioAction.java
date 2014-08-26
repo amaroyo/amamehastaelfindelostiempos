@@ -76,6 +76,7 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 			usuario.setNombre(form.getNombre());
 			usuario.setApellido1(form.getApellido1());
 			usuario.setApellido2(form.getApellido2());
+			usuario.setDni(form.getDni());
 			usuario.setTelefono(form.getTelefono());
 			//System.out.println(form.getFoto());
 			//usuario.setFoto(form.getFoto());
