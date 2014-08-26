@@ -533,7 +533,7 @@ public class SubirArchivoAction extends MrmAction {
 						usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(new_pass, EncriptarUtil.MD5));					
 						usuario.setIdGrupo("6");
 						getUsuariosService().insert(usuario);
-						//ForgotPasswordAction.sendPasswordMessage(usuario,new_pass,"new");
+						//ForgotPasswordAction.sendPasswordMessage(usuario.getCorreo(),usuario.getNombre(),usuario.getApellido1(),new_pass,"new");
 					}
 				}
 			}

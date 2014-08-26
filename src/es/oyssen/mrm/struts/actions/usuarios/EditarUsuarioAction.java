@@ -87,7 +87,7 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 				String new_pass = ForgotPasswordAction.generatePassword();
 				usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(new_pass, EncriptarUtil.MD5));
 				getUsuariosService().insert(usuario);
-				ForgotPasswordAction.sendPasswordMessage(usuario,new_pass,"new");
+				ForgotPasswordAction.sendPasswordMessage(usuario.getCorreo(),usuario.getNombre(),usuario.getApellido1(),new_pass,"new");
 			}
 			return "usuario created";
 		}

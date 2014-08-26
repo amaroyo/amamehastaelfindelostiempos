@@ -39,14 +39,14 @@ public class ForgotPasswordAction extends MrmAction {
 			String new_pass = generatePassword();
 			usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(new_pass, EncriptarUtil.MD5));
 			getUsuariosService().update(usuario);
-			sendPasswordMessage(usuario,new_pass,"forgot");
+			sendPasswordMessage(usuario.getCorreo(),usuario.getNombre(),usuario.getApellido1(),new_pass,"forgot");
 		}
 		
 		request.getSession().setAttribute("usuarioYPermisos", parseXML(usuarioYPermisos));
 		return mapping.findForward("success");
 	}
 	
-	public static void sendPasswordMessage(UsuarioVO u,String new_pass,String type){
+	public static void sendPasswordMessage(String correo, String nombre, String apellido,String new_pass,String type){
 		
 		final String from = "facultad.de.enfermeria.ucm@gmail.com";
 		final String password = "proyecto1314";
@@ -56,11 +56,11 @@ public class ForgotPasswordAction extends MrmAction {
 		
 		if(type.equals("forgot")){
 			subject="Recuperación de contraseña de la Facultad de Enfermería";
-			body = crearCuerpo(type,new_pass,u);
+			body = crearCuerpo(type,new_pass,nombre,apellido,correo);
 		}
 		else if(type.equals("new")){
 			subject="Bienvenido a la Facultad de Enfermería";
-			body = crearCuerpo(type,new_pass,u);
+			body = crearCuerpo(type,new_pass,nombre,apellido,correo);
 		}
 		
 		Properties properties = new Properties();
@@ -81,7 +81,7 @@ public class ForgotPasswordAction extends MrmAction {
 		try{
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(from));
-			message.addRecipient(Message.RecipientType.TO,new InternetAddress(u.getCorreo()));
+			message.addRecipient(Message.RecipientType.TO,new InternetAddress(correo));
 			message.setSubject(subject);
 			message.setContent(body,"text/html" );
 		
@@ -93,11 +93,11 @@ public class ForgotPasswordAction extends MrmAction {
 		}
 	}
 	
-	private static String crearCuerpo(String type, String new_pass, UsuarioVO u) {
+	private static String crearCuerpo(String type, String new_pass, String nombre, String apellido,String correo) {
 		
 		String message = "";
 		if(type.equals("forgot")){
-			message = 	"Hola " + u.getNombre() + " " + u.getApellido1() + ",\r\r";
+			message = 	"Hola " + nombre + " " + apellido + ",\r\r";
 			message += "Conforme a tu solicitud, tu contraseña se ha reestablecido.\n\r";
 			message += "Entra en la Facultad de Enfermería ahora y disfruta de tus prácticas: http://www.facultad.enfermeria.es\n\r\n\r";
 			message += "Tu nueva contraseña es la siguiente:  " + new_pass + "\n\r\n\r";
@@ -112,11 +112,11 @@ public class ForgotPasswordAction extends MrmAction {
 		}
 		
 		else if(type.equals("new")){
-			message =  "Hola " + u.getNombre() + " " + u.getApellido1() + ",\r\r";
+			message =  "Hola " + nombre + " " + apellido + ",\r\r";
 			message += "¡Bienvenido a la Facultad de Enfermería! \n\r";
 			message += "Ya puedes comenzar a realizar prácticas, consultar tus horarios, y hacer muchas más cosas.\r";
 			message += "Entra en la Facultad de Enfermería ahora y comienza a sacar partido a tus estudios: http://www.facultad.enfermeria.es\n\r\n\r";
-			message += "Tu usuario es:                           "+ u.getCorreo() + "\r";
+			message += "Tu usuario es:                           "+ correo + "\r";
 			message += "La contraseña de tu cuenta es:  " + new_pass + "\n\r\n\r";
 			message += "Gracias por registrarte, \n\r";
 			message += "                    - Universidad Complutense de Madrid. \n\r\n\r\n\r\n\r";
