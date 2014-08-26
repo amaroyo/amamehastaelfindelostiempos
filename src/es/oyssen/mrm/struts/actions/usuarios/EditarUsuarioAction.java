@@ -28,8 +28,10 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 	@Override
 	public Object load(DhtmlxForm f) throws Exception {
 		
+		
 		EditarUsuarioForm form = (EditarUsuarioForm) f;
 		UsuarioVO usuario = new UsuarioVO();
+		
 		
 		if (!StringUtil.isNullOrBlank(form.getCorreo())){
 			
@@ -80,7 +82,7 @@ public class EditarUsuarioAction extends DHTMLXFormAction {
 				String new_pass = ForgotPasswordAction.generatePassword();
 				usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(new_pass, EncriptarUtil.MD5));
 				getUsuariosService().insert(usuario);
-				ForgotPasswordAction.sendPasswordMessage(usuario.getCorreo(),new_pass,"new");
+				ForgotPasswordAction.sendPasswordMessage(usuario,new_pass,"new");
 			}
 			return "usuario created";
 		}

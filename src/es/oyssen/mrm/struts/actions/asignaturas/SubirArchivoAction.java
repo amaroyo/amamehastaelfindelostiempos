@@ -30,6 +30,7 @@ import es.oyssen.mrm.negocio.vo.ProfesorAsociadoVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
+import es.oyssen.mrm.struts.actions.usuarios.ForgotPasswordAction;
 import es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoForm;
 import es.oyssen.mrm.util.EncriptarUtil;
 import es.oyssen.mrm.util.ExcelUtil;
@@ -532,7 +533,7 @@ public class SubirArchivoAction extends MrmAction {
 						usuario.setContrasenya(EncriptarUtil.getStringMessageDigest(new_pass, EncriptarUtil.MD5));					
 						usuario.setIdGrupo("6");
 						getUsuariosService().insert(usuario);
-						//sendForgotPasswordMessage(usuario.getCorreo(),new_pass);
+						//ForgotPasswordAction.sendPasswordMessage(usuario,new_pass,"new");
 					}
 				}
 			}
@@ -596,41 +597,5 @@ public class SubirArchivoAction extends MrmAction {
 		
 	}
 
-	private void sendForgotPasswordMessage(String to,String new_pass){
-		
-		/*final String from = "facultad.de.enfermeria.ucm@gmail.com";
-		final String password = "proyecto1314";
-		String host = "smtp.gmail.com";
-		String subject = "Subject";
-		String body = "<h6> HTML body </h6>" + new_pass;
-		
-		Properties properties = new Properties();
-		properties.put("mail.smtp.host", host);
-		properties.put("mail.smtp.socketFactory.port", "465");
-		properties.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
-		properties.put("mail.smtp.auth", "true");
-		properties.put("mail.smtp.port", "465");
-
-		Session session = Session.getDefaultInstance(properties,
-				new Authenticator() {
-					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication(from,password);
-					}
-				}
-		);
-
-		try{
-			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(from));
-			message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
-			message.setSubject(subject);
-			message.setContent(body,"text/html" );
-		
-			Transport.send(message);
-			
-		}
-		catch (MessagingException mex) {
-			mex.printStackTrace();
-		}*/
-	}
+	
 }
