@@ -24,7 +24,7 @@ public class ActualizarContrasenaAction extends MrmAction {
 		EditarContrasenaForm f = (EditarContrasenaForm) form;		
 		String correo = (String)request.getSession().getAttribute("correo");
 		String oldPass = f.getOldPass();
-		String newPass = f.getNewPass();
+		String newPass = f.getNewPass1();
 			
 		UsuarioVO usuario = new UsuarioVO();
 		UsuarioYPermisos usuarioYPermisos = new UsuarioYPermisos();
