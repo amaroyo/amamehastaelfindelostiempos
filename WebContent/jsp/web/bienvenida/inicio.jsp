@@ -4,19 +4,25 @@
 <html>
 	<head>
 	    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
+	    
 	    <script type="text/javascript" src="../js/utilsajax.js"></script>
 	    <script type="text/javascript" src="../js/general.js"></script>
 	    
 	    <link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxform_dhx_skyblue.css">
+	    <link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/dhtmlxwindows.css">
+	    <link rel="stylesheet" type="text/css" href="../js/dhtmlxSuite/skins/dhtmlxwindows_dhx_skyblue.css">
+	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlx.js"></script>
 	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxcommon.js"></script>
 	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxform.js"></script>
-	    <script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
+		<script type="text/javascript" src="../js/dhtmlxSuite/ext/dhtmlxform_dyn.js"></script>
+	    <script type="text/javascript" src="../js/dhtmlxSuite/dhtmlxwindows.js"></script>
+	 
 	    
 	    
 
 	    <script type="text/javascript">
 	    
-	    	var form;
+	    	var formLogin, formForgot, dhxWins;
 		    dhtmlxEvent(window,"load",function() {
 		    	
 		    	var refresh="false";
@@ -28,57 +34,75 @@
 			   	}
 		    	
 			    dhtmlxError.catchError("ALL",errorHandler);
-			    form = new dhtmlXForm("myForm");	
-		    	form.loadStruct('../xml/forms/bienvenida_form.xml', function() {
-		    		form.setItemLabel('data','<bean:message key="title.bienvenida"/>');
-		    		form.setItemLabel('correo','<bean:message key="label.user.email"/>');
-		    		form.setItemLabel('pass','<bean:message key="label.user.password"/>');
-		    		form.setItemLabel('aceptar','<bean:message key="button.entrar"/>');
-		    		form.setItemLabel('newPass','<bean:message key="button.olvide.pass"/>');
+			    formLogin = new dhtmlXForm("myForm");	
+		    	formLogin.loadStruct('../xml/forms/bienvenida_form.xml', function() {
+		    		formLogin.setItemLabel('data','<bean:message key="title.bienvenida"/>');
+		    		formLogin.setItemLabel('correo','<bean:message key="label.user.email"/>');
+		    		formLogin.setItemLabel('pass','<bean:message key="label.user.password"/>');
+		    		formLogin.setItemLabel('aceptar','<bean:message key="button.entrar"/>');
+		    		formLogin.setItemLabel('newPass','<bean:message key="button.olvide.pass"/>');
 		    		
-		    		form.forEachItem(function(id){
-		    			switch(id) {
-		    			case "correo":
-		    			case "pass":
-		    				form.setRequired(id,true);
-		    				break;
-		    			}
-		    		});
+		    		formLogin.setRequired("correo",true);
+		    		formLogin.setRequired("pass",true);
+
 		    		
-		    		form.enableLiveValidation(true);
-		    		form.setFocusOnFirstActive();
+		    		formLogin.enableLiveValidation(true);
+		    		formLogin.setFocusOnFirstActive();
 		    				    		
-		    		form.attachEvent("onEnter", function() {
-		    			 var correo = form.getItemValue("correo");
-	    					var pass = form.getItemValue("pass");
-		    				form.send("autenticacionusuario.do?correo=" + correo + "&pass=" + pass, "post", function(loader) {
+		    		formLogin.attachEvent("onEnter", function() {
+		    				formLogin.send("autenticacionusuario.do", "post", function(loader) {
 		    					goEntrada();
 		    				});
 		    		});
 		    		
-		    		form.attachEvent("onButtonClick", function(id){
+		    		formLogin.attachEvent("onButtonClick", function(id){
 	    				if (id == "aceptar") {
-	    					var user = form.getItemValue("user");
-	    					var pass = form.getItemValue("pass");
-		    				form.send("autenticacionusuario.do?user=" + user + "&pass=" + pass, "post", function(loader) {
+		    				formLogin.send("autenticacionusuario.do", "post", function(loader) {
 		    					goEntrada();
 		    				});
 	    				}
 	    				else if (id == "newPass") {
-	    					var email=prompt('<bean:message key="message.forgot.password"/>');
-	    		    		if (email!=null)
-	    		    		  {
-	    		    			form.send("forgotpassword.do?email=" + email, "post", function(loader) {
-	    	    					goEntrada();
-	    	    				});
-	    		    		  }
+	    					forgotPass();
 	    				}
 		    		});
 		    	});	
 		    	
 		    });
 		    
-		    
+		    function forgotPass(){
+		    	dhxWins= new dhtmlXWindows();
+		    	windowForgot = dhxWins.createWindow("forgot", 300, 50, 250, 150);
+		    	windowForgot.setText('<bean:message key="title.olvide.mi.pass" />');
+		    	windowForgot.centerOnScreen();
+		    	windowForgot.setModal(true);
+				formForgot = windowForgot.attachForm();
+				formForgot.loadStruct('../xml/forms/forgot_password_form.xml', function() {
+					formForgot.setItemLabel('data','<bean:message key="message.forgot.password"/>');
+					formForgot.setItemLabel('email','<bean:message key="label.user.email"/>');
+					formForgot.setItemLabel('newPass','<bean:message key="button.olvide.pass"/>');
+		    		
+					formForgot.setRequired("email",true);	
+		    		
+					formForgot.enableLiveValidation(true);
+					formForgot.setFocusOnFirstActive();
+		    				    		
+					formForgot.attachEvent("onEnter", function() {
+						formForgot.send("forgotpassword.do", "post", function(loader) {
+							windowForgot.close();	
+							goEntrada();
+		    			});
+		    		});
+		    		
+					formForgot.attachEvent("onButtonClick", function(id){
+	    				if (id == "newPass") {
+	    					formForgot.send("forgotpassword.do", "post", function(loader) {
+		    					windowForgot.close();
+	    						goEntrada();
+		    				});
+	    				}
+					});
+				});
+		    }
 		    
 	    	function goEntrada() {
 				var url = "../entrada.do";
@@ -90,7 +114,7 @@
 	    			return true;
 	    		}
 	    		else {
-	    			form.setNote("correo", { text: '<bean:message key="message.email.institucional" />'} );
+	    			formLogin.setNote("correo", { text: '<bean:message key="message.email.institucional" />'} );
 	    			return false;
 	    		}
 	    	}
