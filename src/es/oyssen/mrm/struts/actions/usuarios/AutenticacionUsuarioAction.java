@@ -54,6 +54,7 @@ public class AutenticacionUsuarioAction extends MrmAction {
 			request.getSession().setAttribute("idUsuario", usuario.getIdUsuario());
 			request.getSession().setAttribute("correo", usuario.getCorreo());
 			request.getSession().setAttribute("anyoAcademico", anyoAcademico());
+			request.getSession().setAttribute("anyoActual", "verdadero");
 		}
 
 		request.getSession().setAttribute("usuarioYPermisos", parseXML(usuarioYPermisos));

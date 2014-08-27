@@ -45,11 +45,14 @@
 	    	
 	    	var main_layout, areaTrabajoCursos, listado, toolbarAsignaturas, numeroRubricas,
 	    	gridAsignaturas, formInfo, formRubrica, formNewRubrica, formAnexo, dhxWins, tabbar, tab_info, tab_rubrica, tab_anexo,
-	    	grupos_criterios_rubrica, grupos_anexo_rubrica, competencias, anexo, numeroCriterios;
+	    	grupos_criterios_rubrica, grupos_anexo_rubrica, competencias, anexo, numeroCriterios,anyoActual;
 	    	var num_criterios_grupo=new Array();
 	    	
 	    	var windowsNewAsignatura = new Array();
 	    	var formsNewAsignatura = new Array();
+	    	
+	    	<% String anyoActual = (String) session.getAttribute("anyoActual"); %>
+	    	anyoActual = "<%=anyoActual%>";
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -72,7 +75,14 @@
 	    			toolbarAsignaturas.setItemText('new',"<bean:message key="button.create.asignatura"/>");
 	    			toolbarAsignaturas.setItemText('delete',"<bean:message key="button.eliminar.asignatura"/>");
 	    			toolbarAsignaturas.setItemText('refresh',"<bean:message key="button.actualizar"/>");
-		    		
+	    			toolbarAsignaturas.hideItem('delete');
+			   		toolbarAsignaturas.hideItem('sep2');
+			   		if(anyoActual=="falso"){
+			   			toolbarAsignaturas.hideItem('new');
+				   		toolbarAsignaturas.hideItem('sep1');
+				   		toolbarAsignaturas.hideItem('delete');
+				   		toolbarAsignaturas.hideItem('sep2');
+			   		}
 	    		//permisosToolbarAsignaturas();
 		    	});
 			    
@@ -198,7 +208,10 @@
 	    			formInfo.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
 	    			formInfo.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 	    			//permisosAsignaturasForm();			    		
-		    		
+		    		if (anyoActual=="falso"){
+		    			formInfo.hideItem('aceptar');
+		    		}
+	    			
 	    			formInfo.load('editarasignatura.do?idAsignatura=' + idAsignatura, function () {			    			
 	    				formInfo.attachEvent("onButtonClick", function(id){
 		    				if (id == "aceptar") {
@@ -643,6 +656,13 @@
 			   		toolbarAsignaturas.hideItem('delete');
 			   		toolbarAsignaturas.hideItem('sep2');
 				</logic:notMatch>
+				
+				if(anyoActual=="false"){
+					toolbarAsignaturas.hideItem('new');
+			   		toolbarAsignaturas.hideItem('sep1');    	
+			   		toolbarAsignaturas.hideItem('delete');
+			   		toolbarAsignaturas.hideItem('sep2');
+				}
 	    	}
 	    	
 	    	function permisosAsignaturasForm(){

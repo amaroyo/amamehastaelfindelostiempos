@@ -67,7 +67,11 @@
 	    	
 	    	var miGrid, tabbar, tab_1,tab_2,tab_3,tab_4,tab_5,tab_6,tab_7,tab_8,tab_9, main_layout, form, b, a, gridAlumnoRealizadoSem, gridProfesoresTrab,
 	    				gridProfesoresCasos, idAsignatura, idAlumno, idPortafolio,
-	    				formRubrica, formAnexo, competencias, anexo, numeroCriterios,gridAnexos2;
+	    				formRubrica, formAnexo, competencias, anexo, numeroCriterios,gridAnexos2,anyoActual,formUsuario;
+	    	
+	    	
+	    	<% String anyoActual = (String) session.getAttribute("anyoActual"); %>
+	    	anyoActual = "<%=anyoActual%>";
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -87,6 +91,11 @@
 			    toolbarSeleccionarAlumnos.loadXML('../xml/toolbars/dhxtoolbar-seleccionar-alumnos.xml', function(){
 			    	toolbarSeleccionarAlumnos.setItemText('seleccionarAlumnos',"<bean:message key="button.seleccionar.mis.alumnos"/>");		    	
 			    	toolbarSeleccionarAlumnos.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+			    	if(anyoActual=="falso"){
+			    		toolbarSeleccionarAlumnos.hideItem("sep1");
+			    		toolbarSeleccionarAlumnos.hideItem('seleccionarAlumnos');
+			    	}
+			    
 			    });
 			    
 			    miGrid = a.attachGrid();
@@ -191,43 +200,43 @@
 		    
 		    function goInformacion(){
 		    	
-		    	var form = tab_1.attachForm();
-		    	form.loadStruct('../xml/forms/usuario_form.xml', function(){
-		    		form.setItemLabel('data','<bean:message key="title.datos.personales"/>');
-		    		form.setItemLabel('grupo','<bean:message key="label.group"/>');
-		    		form.setItemLabel('nombre','<bean:message key="label.nombre"/>');
-		    		form.setItemLabel('apellido1','<bean:message key="label.apellido1"/>');
-		    		form.setItemLabel('apellido2','<bean:message key="label.apellido2"/>');
-		    		form.setItemLabel('dni','<bean:message key="label.dni"/>');
-		    		form.setItemLabel('telefono','<bean:message key="label.telefono"/>');
-		    		form.setItemLabel('correo','<bean:message key="label.address.email"/>');	
-		    		form.setItemLabel('foto','<bean:message key="label.foto"/>');	
-		    		form.setItemLabel('fotoFile','<bean:message key="label.max.size"/>');
-		    		form.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
+		    	formUsuario = tab_1.attachForm();
+		    	formUsuario.loadStruct('../xml/forms/usuario_form.xml', function(){
+		    		formUsuario.setItemLabel('data','<bean:message key="title.datos.personales"/>');
+		    		formUsuario.setItemLabel('grupo','<bean:message key="label.group"/>');
+		    		formUsuario.setItemLabel('nombre','<bean:message key="label.nombre"/>');
+		    		formUsuario.setItemLabel('apellido1','<bean:message key="label.apellido1"/>');
+		    		formUsuario.setItemLabel('apellido2','<bean:message key="label.apellido2"/>');
+		    		formUsuario.setItemLabel('dni','<bean:message key="label.dni"/>');
+		    		formUsuario.setItemLabel('telefono','<bean:message key="label.telefono"/>');
+		    		formUsuario.setItemLabel('correo','<bean:message key="label.address.email"/>');	
+		    		formUsuario.setItemLabel('foto','<bean:message key="label.foto"/>');	
+		    		formUsuario.setItemLabel('fotoFile','<bean:message key="label.max.size"/>');
+		    		formUsuario.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 		    		
-		    		form.hideItem('aceptar');
-		    		form.removeItem('fotoFile');
+		    		formUsuario.hideItem('aceptar');
+		    		formUsuario.removeItem('fotoFile');
 		    		
-		    		form.forEachItem(function(id){
+		    		formUsuario.forEachItem(function(id){
 		    			switch(id) {
 			    			case "nombre":{
-			    				form.setReadonly(id,true);
+			    				formUsuario.setReadonly(id,true);
 			    				break;
 			    			}
 			    			case "apellido1":{
-			    				form.setReadonly(id,true);
+			    				formUsuario.setReadonly(id,true);
 			    				break;
 			    			}
 			    			case "apellido2":{
-			    				form.setReadonly(id,true);
+			    				formUsuario.setReadonly(id,true);
 			    				break;
 			    			}
 			    			case "dni":{
-			    				form.setReadonly(id,true);
+			    				formUsuario.setReadonly(id,true);
 			    				break;
 			    			}
 			    			case "telefono":{
-			    				form.setReadonly(id,true);
+			    				formUsuario.setReadonly(id,true);
 			    				break;
 			    			}
 			    			default: break;
@@ -235,69 +244,108 @@
 		    		});
 		    		
 		    		//Aqui lo pondría con logic match para gente con permiso para modifiacar datos!
-		    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>3</permiso>" >	
-		    			form.forEachItem(function(id){
+		    		
+		    			formUsuario.forEachItem(function(id){
 			    			switch(id) {
 				    			case "grupo":{
-				    				form.setReadonly(id,false);
-				    				form.setRequired(id,true);
+				    				formUsuario.setReadonly(id,false);
+				    				formUsuario.setRequired(id,true);
 				    				break;
 				    			}
 				    			case "nombre":{
-				    				form.setReadonly(id,false);
-				    				form.setRequired(id,true);
+				    				formUsuario.setReadonly(id,false);
+				    				formUsuario.setRequired(id,true);
 				    				break;
 				    			}
 				    			case "apellido1":{
-				    				form.setReadonly(id,false);
-				    				form.setRequired(id,true);
+				    				formUsuario.setReadonly(id,false);
+				    				formUsuario.setRequired(id,true);
 				    				break;
 				    			}
 				    			case "apellido2":{
-				    				form.setReadonly(id,false);
+				    				formUsuario.setReadonly(id,false);
 				    				break;
 				    			}
 				    			case "dni":{
-				    				form.setReadonly(id,false);
-				    				form.setRequired(id,true);
+				    				formUsuario.setReadonly(id,false);
+				    				formUsuario.setRequired(id,true);
 				    				break;
 				    			}
 				    			case "correo":{
-				    				form.setReadonly(id,false);
-				    				form.setRequired(id,true);
+				    				formUsuario.setReadonly(id,false);
+				    				formUsuario.setRequired(id,true);
 				    				break;
 				    			}
 				    			case "telefono":{
-				    				form.setReadonly(id,false);
+				    				formUsuario.setReadonly(id,false);
 				    				break;
 				    			}
 				    			default: break;
 			    			}
 			    		});
-		    			form.showItem('aceptar');
+		    			formUsuario.showItem('aceptar');
 						
-		    			form.enableLiveValidation(true);
+		    			formUsuario.enableLiveValidation(true);
 			    		//foto LONGBLOB, 
-			    		form.setFocusOnFirstActive();
+			    		formUsuario.setFocusOnFirstActive();
 						
-					</logic:match>			    		
+			    		
+			    		if(anyoActual=="falso"){
+			    			formUsuario.hideItem('aceptar');
+			    			formUsuario.removeItem('fotoFile');
+				    		
+			    			formUsuario.forEachItem(function(id){
+				    			switch(id) {
+					    			case "grupo":{
+					    				formUsuario.setReadonly(id,true);
+					    				break;
+					    			}
+					    			case "nombre":{
+					    				formUsuario.setReadonly(id,true);
+					    				break;
+					    			}
+					    			case "apellido1":{
+					    				formUsuario.setReadonly(id,true);
+					    				break;
+					    			}
+					    			case "apellido2":{
+					    				formUsuario.setReadonly(id,true);
+					    				break;
+					    			}
+					    			case "dni":{
+					    				formUsuario.setReadonly(id,true);
+					    				break;
+					    			}
+					    			case "telefono":{
+					    				formUsuario.setReadonly(id,true);
+					    				break;
+					    			}
+					    			case "correo":{
+					    				formUsuario.setReadonly(id,true);
+					    				break;
+					    			}
+					    			default: break;
+				    			}
+				    		});
+				    	}
+							    		
 					
-					form.load('editarusuario.do?idUsuario=' + idAlumno, function () {
-						if(form.getItemValue("fotoImagen") == "") {
+			    	formUsuario.load('editarusuario.do?idUsuario=' + idAlumno, function () {
+						if(formUsuario.getItemValue("fotoImagen") == "") {
 							var uriNoProfilePic = '../img/no-profile-pic.png';
-							form.getContainer("foto").innerHTML = "<img src="+ uriNoProfilePic +" />";
+							formUsuario.getContainer("foto").innerHTML = "<img src="+ uriNoProfilePic +" />";
 						}
 						else{
-							var profilePic = form.getItemValue("fotoImagen");
-							form.getContainer("foto").innerHTML = "<img src=data:image/jpg;base64,"+ profilePic +" style='width:105px;height:140px'/>";
+							var profilePic = formUsuario.getItemValue("fotoImagen");
+							formUsuario.getContainer("foto").innerHTML = "<img src=data:image/jpg;base64,"+ profilePic +" style='width:105px;height:140px'/>";
 						}
-						form.attachEvent("onButtonClick", function(id){
+						formUsuario.attachEvent("onButtonClick", function(id){
 							if (id == "aceptar") {
-								if(validateCIF(form.getItemValue("dni")) == false){
+								if(validateCIF(formUsuario.getItemValue("dni")) == false){
 									alert('<bean:message key="message.dni.no.correcto"/>');
 								}
 								else{
-									form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idAlumno ,"post", function(loader, response) {
+									formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idAlumno ,"post", function(loader, response) {
 										if(response == "usuario changed"){
 											buscarMisAlumnos();
 											alert('<bean:message key="message.perfil.cambiado.exito"/>');
@@ -315,12 +363,12 @@
 						});
 						
 						
-						form.attachEvent("onEnter", function() {
-							if(validateCIF(form.getItemValue("dni")) == false){
+						formUsuario.attachEvent("onEnter", function() {
+							if(validateCIF(formUsuario.getItemValue("dni")) == false){
 								alert('<bean:message key="message.dni.no.correcto"/>');
 							}
 							else{
-								form.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idAlumno ,"post", function(loader, response) {
+								formUsuario.send("actualizarusuario.do?!nativeeditor_status=save&idUsuario=" + idAlumno ,"post", function(loader, response) {
 									if(response == "usuario changed"){
 										buscarMisAlumnos();
 										alert('<bean:message key="message.perfil.cambiado.exito"/>');
@@ -382,7 +430,7 @@
 		    		
 		    		
 		    		//Aqui lo pondría con logic match para gente con permiso para modifiacar datos!
-		    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>3</permiso>" >	
+		    		
 		    			form2.forEachItem(function(id){
 		    				switch(id) {
 			    			case "hospital":{
@@ -420,7 +468,44 @@
 		    			
 			    		});	
 						
-					</logic:match>	
+					if(anyoActual=="falso"){
+						form2.hideItem('aceptar');
+		    			
+			    		
+			    		form2.forEachItem(function(id){
+			    			switch(id) {
+				    			case "hospital":{
+				    				form2.setReadonly(id,true);
+				    				break;
+				    			}
+				    			case "clinica":{
+				    				form2.setReadonly(id,true);
+				    				break;
+				    			}
+				    			case "turno":{
+				    				form2.setReadonly(id,true);
+				    				break;
+				    			}
+				    			case "profesor":{
+				    				form2.setReadonly(id,true);
+				    				break;
+				    			}
+				    			
+				    			default: break;
+			    			}
+			    		});
+			    		
+						var ci = form2.getCalendar("fechaIni");
+			    		
+			    		ci.attachEvent("onShow", function(){
+			    		    ci.hide();
+			    		});
+			    		
+			    		var cf = form2.getCalendar("fechaFin");
+			    		cf.attachEvent("onShow", function(){
+			    		    cf.hide();
+			    		});
+			    	}
 
 					
 					form2.load('editarEstanciaUnidadClinica.do?idAlumno=' + idAlumno + '&idAsignatura=' + idAsignatura, function () {
@@ -520,11 +605,19 @@
 			    		formSeminarioAlumno.setReadonly('codigo', true);
 			    		formSeminarioAlumno.setReadonly('descripcion', true);
 			    		
-			    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>6</permiso>" >
-	    					formSeminarioAlumno.showItem('aceptar');
-	    					formSeminarioAlumno.setReadonly('descripcion', false);
-	    				</logic:match>
-		    		
+			    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>3</permiso>" >
+				    		formSeminarioAlumno.showItem('aceptar');
+		    				formSeminarioAlumno.setReadonly('descripcion', false);
+	    			
+		    			</logic:notMatch>
+		    			
+		    			if(anyoActual=="falso"){
+		    				formSeminarioAlumno.setReadonly('nombre', true);
+				    		formSeminarioAlumno.setReadonly('codigo', true);
+				    		formSeminarioAlumno.setReadonly('descripcion', true);
+				    		formSeminarioAlumno.hideItem('aceptar');
+			    			formSeminarioAlumno.hideItem('asignatura');
+		    			}
 						
 						
 						
@@ -654,7 +747,12 @@
 				    gridOpcionesAlumno.enableMultiselect(false);
 				    gridOpcionesAlumno.init();
 				    gridOpcionesAlumno.loadXML("../xml/forms/asignaturas_trabajos_opciones.xml");
-				  
+				   
+				    if(anyoActual=="falso"){	
+				    	setTimeout(function(){gridOpcionesAlumno.cellById("b",0).setValue(" ");
+				    	gridOpcionesAlumno.cellById("d",0).setValue(" ");},100);				    	
+				    }
+				    
 				    gridOpcionesAlumno.attachEvent("onRowSelect",function(rowId,cellIndex){
 				    	if (rowId == "a" && subido == "T") {
 				    		
@@ -665,7 +763,7 @@
 							location.href=accion;
 				    		
 				    	}
-				    	else if (rowId == "b") {
+				    	else if (rowId == "b" && anyoActual=="verdadero") {
 				    		var dhxWinsA= new dhtmlXWindows();
 	    					var windowAlumno = dhxWinsA.createWindow("subir", 300,50, 500, 170);
 	    					windowAlumno.setText('<bean:message key="title.subir.correccion" />');				
@@ -680,7 +778,7 @@
 							accion += "&idTrabajoCampo="+idTrabajoCampo;
 							location.href=accion;
 				    	}
-				    	else if (rowId == "d") {
+				    	else if (rowId == "d" && anyoActual=="verdadero") {
 				    		
 				    		var dhxWins= new dhtmlXWindows();
 							var window = dhxWins.createWindow("subir", 300,50, 500, 190);
@@ -1082,6 +1180,9 @@
   					
   					loadNotasRubrica();
   					contarValores();
+  					if(anyoActual=="falso"){
+  						formRubrica.hideItem("aceptar");
+  					}
     				formRubrica.attachEvent("onButtonClick", function(id){
 	    				if (id == "aceptar") {
 	    					formRubrica.send("actualizarnotasrubrica.do?!nativeeditor_status=save&idPortafolio=" +idPortafolio+"&idAsignatura="+idAsignatura,"post", function(xml) {
@@ -1111,7 +1212,9 @@
 	    			}
 	    			formAnexo.addItem(null,{type:"button", name:"aceptar", value:"Modificar"},i+1);
 	    			formAnexo.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
-
+	    			if(anyoActual=="falso"){
+	    				formAnexo.hideItem("aceptar");
+  					}
 	    			
 	    			//permisosRubricasForm();
 	    			formAnexo.load("notasrubrica.do?idPortafolio=" +idPortafolio+"&idAsignatura="+idAsignatura, function () {			    			
@@ -1172,6 +1275,18 @@
 		    			toolbarServiciosAnexo2.hideItem('sep4');		    		
 			    	
 		    		</logic:match>
+		    		
+		    		if(anyoActual=="falso"){
+		    			toolbarServiciosAnexo2.hideItem('sep1');
+		    			toolbarServiciosAnexo2.hideItem('subirPractica');
+		    			toolbarServiciosAnexo2.hideItem('sep2');
+		    			toolbarServiciosAnexo2.hideItem('descargarTodos');
+		    			toolbarServiciosAnexo2.hideItem('sep3');
+		    			toolbarServiciosAnexo2.hideItem('descargarTodosAlumno');
+		    			toolbarServiciosAnexo2.hideItem('sep4');
+		    			toolbarServiciosAnexo2.hideItem('sep5');
+		    			toolbarServiciosAnexo2.hideItem('sep6');
+		    		}
 				
 		    	});
 				
@@ -1233,7 +1348,7 @@
 	    		}
 	    		else {
 	    			formUsuario.setNote("correo", { text: '<bean:message key="message.email.institucional" />'} );
-	    			alert("false");
+	    			
 	    			return false;
 	    		}
 	    	}
