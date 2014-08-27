@@ -21,7 +21,7 @@
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 
-	    	var main_layout, formInfo, idAsignatura,nombreAsignatura;
+	    	var main_layout, formInfo, idAsignatura,nombreAsignatura,anyoActual;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -29,6 +29,9 @@
 	    		<% String idAsignatura = request.getParameter("idAsignatura");%>
 	    		idAsignatura="<%=idAsignatura%>";
 
+	    		<% String anyoActual = (String) session.getAttribute("anyoActual"); %>
+		    	anyoActual = "<%=anyoActual%>";
+	    		
 	    		main_layout = new dhtmlXLayoutObject(document.body, '1C');
 	    		var a = main_layout.cells('a');
 	    		a.hideHeader();
@@ -76,6 +79,15 @@
 	    		formInfo.hideItem('aceptar');
 	    	</logic:notMatch>
 	    	</logic:notMatch>
+	    	
+	    	if(anyoActual="falso"){
+	    		formInfo.setReadonly('nombre', true);
+	    		formInfo.setReadonly('codigo', true);
+	    		formInfo.setReadonly('curso', true);
+	    		formInfo.setReadonly('profesor', true);
+	    		formInfo.setReadonly('descripcion', true);
+	    		formInfo.hideItem('aceptar');
+	    	}
 	    }
 	    	
 	   </script>

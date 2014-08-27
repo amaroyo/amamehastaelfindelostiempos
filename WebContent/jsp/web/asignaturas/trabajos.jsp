@@ -23,7 +23,7 @@
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos, profesor,a,b, tabbar, idSession,miGrid,miGridActivado;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos, profesor,a,b, tabbar, idSession,miGrid,miGridActivado,anyoActual;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -35,7 +35,8 @@
 	    		idAsignatura="<%=idAsignatura%>";	
 	    		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
 				idSession = <%=sessionIdUser%>;
-	    		
+				<% String anyoActual = (String) session.getAttribute("anyoActual"); %>
+			    anyoActual = "<%=anyoActual%>";
 
 				
 				
@@ -134,6 +135,21 @@
 			    		toolbarServicios.hideItem('sep6');
 			    	
 			    	</logic:match>
+			    	
+			    	if(anyoActual=="falso"){
+			    		
+			    		toolbarServicios.hideItem('subirPractica');
+			    		toolbarServicios.hideItem('sep3');
+			    		toolbarServicios.hideItem('crearTrabajoCampo');
+			    		toolbarServicios.hideItem('sep1');
+			    		toolbarServicios.hideItem('modificarTrabajoCampo');
+			    		toolbarServicios.hideItem('sep2');
+			    		toolbarServicios.hideItem('descargarTodos');
+			    		toolbarServicios.hideItem('sep4');
+			    		toolbarServicios.hideItem('fechaLimite');
+			    		toolbarServicios.hideItem('sep6');
+			    	}
+			    	
 		    	});
 		    	
 		    	
@@ -642,6 +658,10 @@
 			    miGrid.init();
 			    miGrid.loadXML("../xml/forms/asignaturas_trabajos_opciones.xml");
 			    miGridActivado=true;
+			    if(anyoActual=="falso"){	
+			    	setTimeout(function(){miGrid.cellById("b",0).setValue(" ");
+			    	miGrid.cellById("d",0).setValue(" ");},100);				    	
+			    }
 			    miGrid.attachEvent("onRowSelect",function(rowId,cellIndex){
 			    	if (rowId == "a" && subido == "T") {
 			    		

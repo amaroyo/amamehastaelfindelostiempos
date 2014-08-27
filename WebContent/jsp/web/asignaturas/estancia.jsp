@@ -43,7 +43,7 @@
 	    <script type="text/javascript">
 	    
 	    	dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout,idAsignatura, nombreAsignatura, gridProfesor, formEstancia, formUsuario, fechaIni, fechaFin, idSessionUser;
+	    	var main_layout,idAsignatura, nombreAsignatura, gridProfesor, formEstancia, formUsuario, fechaIni, fechaFin, idSessionUser,anyoActual;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -52,7 +52,8 @@
 	    		idAsignatura="<%=idAsignatura%>";	
 	    		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
 				idSessionUser = <%=sessionIdUser%>;
-	    		
+				<% String anyoActual = (String) session.getAttribute("anyoActual"); %>
+		    	anyoActual = "<%=anyoActual%>";
 	    		
 	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 					goProfesor();
@@ -257,8 +258,21 @@
 				    			}
 				    		});
 								
+				    		var ci = formEstancia.getCalendar("fechaIni");
+				    		
+				    		ci.attachEvent("onShow", function(){
+				    		    ci.hide();
+				    		});
+				    		
+				    		var cf = formEstancia.getCalendar("fechaFin");
+				    		cf.attachEvent("onShow", function(){
+				    		    cf.hide();
+				    		});
+				    		
 			    			formEstancia.enableLiveValidation(true);
 				    		formEstancia.setFocusOnFirstActive();
+				    		
+				    		
 				    		
 				    		
 				    		formEstancia.attachEvent("onButtonClick", function(id){
@@ -350,6 +364,24 @@
 	    			</logic:notMatch>
 	    			</logic:notMatch>	
 	    			</logic:notMatch>	
+	    			
+	    			if(anyoActual=="falso"){
+	    				formEstancia.forEachItem(function(id){
+			    			switch(id) {
+				    			case "hospital":
+				    			case "clinica":
+				    			case "turno":
+				    			case "dni":
+				    			case "fechaIni":
+				    			case "fechaFin":{
+				    				formEstancia.setReadonly(id,true);
+				    				break;
+				    			}
+			    			}
+			    		});
+			    		formEstancia.hideItem('aceptar');
+	    				
+	    			}
 		    	}
 		    	
 		    	function permisosFormPerfilDeAlumno(){
@@ -374,6 +406,39 @@
 	    			</logic:notMatch>
 	    			</logic:notMatch>	
 	    			</logic:notMatch>	
+	    			
+	    			if(anyoActual=="falso"){
+	    				formUsuario.forEachItem(function(id){
+			    			switch(id) {
+				    			case "nombre":
+				    			case "apellido1":
+				    			case "apellido2":
+				    			case "dni":
+				    			case "telefono":{
+				    				formUsuario.setReadonly(id,true);
+				    				break;
+				    			}
+			    			}
+			    		});
+		    			formUsuario.hideItem('aceptar');
+	    			}
+	    			
+		    	}
+		    	
+		    	function ucmEsEmail(correo) {
+		    		if (getDomain(correo) == "ucm.es") {
+		    			return true;
+		    		}
+		    		else {
+		    			formUsuario.setNote("correo", { text: '<bean:message key="message.email.institucional" />'} );
+		    			
+		    			return false;
+		    		}
+		    	}
+		    	
+		    	function getDomain(correo) {
+				    var parts = correo.split('@');
+				    return parts[parts.length - 1];
 		    	}
 	    	
 	   </script>

@@ -247,11 +247,7 @@
 		    		
 		    			formUsuario.forEachItem(function(id){
 			    			switch(id) {
-				    			case "grupo":{
-				    				formUsuario.setReadonly(id,false);
-				    				formUsuario.setRequired(id,true);
-				    				break;
-				    			}
+				    			
 				    			case "nombre":{
 				    				formUsuario.setReadonly(id,false);
 				    				formUsuario.setRequired(id,true);
@@ -271,11 +267,7 @@
 				    				formUsuario.setRequired(id,true);
 				    				break;
 				    			}
-				    			case "correo":{
-				    				formUsuario.setReadonly(id,false);
-				    				formUsuario.setRequired(id,true);
-				    				break;
-				    			}
+				    			
 				    			case "telefono":{
 				    				formUsuario.setReadonly(id,false);
 				    				break;
@@ -690,6 +682,8 @@
 		    		toolbarServicios.hideItem('sep4');
 		    		toolbarServicios.hideItem('fechaLimite');
 		    		toolbarServicios.hideItem('sep6');
+		    		toolbarServicios.hideItem('descargarTodosAlumno');
+		    		toolbarServicios.hideItem('sep5');
 		    		
 		    		
 		    	});
@@ -1160,7 +1154,7 @@
 	    			formRubrica.addItem(null,{type:"button", name:"aceptar", value:"Modificar"},i+1);
 	    			formRubrica.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
 
-	    			//permisosRubricasForm();
+	    			permisosRubricasForm();
 	    			
   					var items = new Array();
   					for(var j=1;j<=10;j=j+2){
@@ -1216,7 +1210,7 @@
 	    				formAnexo.hideItem("aceptar");
   					}
 	    			
-	    			//permisosRubricasForm();
+	    			permisosRubricasForm();
 	    			formAnexo.load("notasrubrica.do?idPortafolio=" +idPortafolio+"&idAsignatura="+idAsignatura, function () {			    			
 	    				formAnexo.attachEvent("onButtonClick", function(id){
 		    				if (id == "aceptar") {
@@ -1560,6 +1554,65 @@
 	    	        formRubrica.checkItem("value("+idCriterio+")",notaCriterio);
 				}
 	    	}
+			
+
+			function permisosRubricasForm(){
+    			formRubrica.setReadonly('competencias',true);
+    			formRubrica.setReadonly('nota',true);
+    			for(var i=1;i<=5;i++){
+        			formRubrica.setReadonly('contador_'+i,true);
+    			}
+				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >
+	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>3</permiso>" >	
+	    		formRubrica.forEachItem(function(id,value){
+	    			if(formRubrica.getItemType(id, value) == "radio"){
+	        			formRubrica.disableItem(id,value);
+	    			}
+	    		});
+    			formRubrica.hideItem('aceptar');
+    			</logic:notMatch>
+    			</logic:notMatch>	
+    			</logic:notMatch>	
+    			
+    			if(anyoActual="falso"){
+    				formRubrica.setReadonly('competencias',true);
+        			formRubrica.setReadonly('nota',true);
+        			for(var i=1;i<=5;i++){
+            			formRubrica.setReadonly('contador_'+i,true);
+        			}
+        			formRubrica.forEachItem(function(id,value){
+    	    			if(formRubrica.getItemType(id, value) == "radio"){
+    	        			formRubrica.disableItem(id,value);
+    	    			}
+    	    		});
+        			formRubrica.hideItem('aceptar');
+    			}
+			}
+			
+			function permisosAnexoForm(){
+				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
+				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >
+	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>3</permiso>" >	
+	    		formAnexo.forEachItem(function(id){
+	    			if(formAnexo.getItemType(id) == "input"){
+	        			formAnexo.setReadonly(id,true);
+	    			}
+	    		});
+    			formAnexo.hideItem('aceptar');
+    			</logic:notMatch>
+    			</logic:notMatch>	
+    			</logic:notMatch>	
+    			
+    			if(anyoActual="falso"){
+    				formAnexo.forEachItem(function(id){
+    	    			if(formAnexo.getItemType(id) == "input"){
+    	        			formAnexo.setReadonly(id,true);
+    	    			}
+    	    		});
+        			formAnexo.hideItem('aceptar');
+    			}
+			}
         </script>
 	</head>
 	<body>
