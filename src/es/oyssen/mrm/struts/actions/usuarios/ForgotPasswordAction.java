@@ -55,11 +55,11 @@ public class ForgotPasswordAction extends MrmAction {
 		String body = "";
 		
 		if(type.equals("forgot")){
-			subject="Recuperación de contraseña de la Facultad de Enfermería";
+			subject="Solicitud de recuperación de contraseña";
 			body = crearCuerpo(type,new_pass,nombre,correo);
 		}
 		else if(type.equals("new")){
-			subject="Bienvenido a la Facultad de Enfermería";
+			subject="Bienvenido";
 			body = crearCuerpo(type,new_pass,nombre,correo);
 		}
 		
