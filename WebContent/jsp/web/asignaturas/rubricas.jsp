@@ -22,7 +22,7 @@
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos,tab, profesor,a,b,idSession, tabbar,
-	    	formRubrica, formAnexo, tab_rubrica, tab_anexo1, tab_anexo2, competencias, anexo, numeroCriterios,gridAnexos2,toolbarServicios,ID;
+	    	formRubrica, formAnexo, tab_rubrica, tab_anexo1, tab_anexo2, competencias, anexo, numeroCriterios,gridAnexos2,toolbarServicios,ID,anyoActual;
 	    	
 	    	
 	    	
@@ -36,7 +36,8 @@
 	    		idAsignatura="<%=idAsignatura%>";	
 	    		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
 				 idSession = <%=sessionIdUser%>;
-	    		
+				 <% String anyoActual = (String) session.getAttribute("anyoActual"); %>
+			    	anyoActual = "<%=anyoActual%>";
 	    		
 	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 					profesor=true;
@@ -255,6 +256,18 @@
 			    		toolbarServicios.hideItem('sep4');		    		
 			    	
 		    		</logic:match>
+		    		
+		    		if(anyoActual=="falso"){
+		    			toolbarServicios.hideItem('sep1');
+		    			toolbarServicios.hideItem('subirPractica');
+		    			toolbarServicios.hideItem('sep2');
+		    			toolbarServicios.hideItem('descargarTodos');
+		    			toolbarServicios.hideItem('sep3');
+		    			toolbarServicios.hideItem('descargarTodosAlumno');
+		    			toolbarServicios.hideItem('sep4');
+		    			toolbarServicios.hideItem('sep5');
+		    			toolbarServicios.hideItem('sep6');
+		    		}
 				
 		    	});
 				
@@ -494,6 +507,20 @@
     			</logic:notMatch>
     			</logic:notMatch>	
     			</logic:notMatch>	
+    			
+    			if(anyoActual="falso"){
+    				formRubrica.setReadonly('competencias',true);
+        			formRubrica.setReadonly('nota',true);
+        			for(var i=1;i<=5;i++){
+            			formRubrica.setReadonly('contador_'+i,true);
+        			}
+        			formRubrica.forEachItem(function(id,value){
+    	    			if(formRubrica.getItemType(id, value) == "radio"){
+    	        			formRubrica.disableItem(id,value);
+    	    			}
+    	    		});
+        			formRubrica.hideItem('aceptar');
+    			}
 			}
 			
 			function permisosAnexoForm(){
@@ -509,6 +536,15 @@
     			</logic:notMatch>
     			</logic:notMatch>	
     			</logic:notMatch>	
+    			
+    			if(anyoActual="falso"){
+    				formAnexo.forEachItem(function(id){
+    	    			if(formAnexo.getItemType(id) == "input"){
+    	        			formAnexo.setReadonly(id,true);
+    	    			}
+    	    		});
+        			formAnexo.hideItem('aceptar');
+    			}
 			}
 	   </script>
 	</head>
