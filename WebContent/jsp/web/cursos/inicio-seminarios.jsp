@@ -45,7 +45,11 @@
 	   		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	
 	    	var main_layout, areaTrabajoCursos, listado, toolbarSeminarios,
-	    	gridSeminarios, tabbarSeminarios, tabInfo, formInfo, idSeminario;
+	    	gridSeminarios, tabbarSeminarios, tabInfo, formInfo, idSeminario,anyoActual;
+	    	
+
+	    	<% String anyoActual = (String) session.getAttribute("anyoActual"); %>
+	    	anyoActual = "<%=anyoActual%>";
 	    	
 		    dhtmlxEvent(window,"load",function() {
 		    	
@@ -68,6 +72,10 @@
 			    	toolbarSeminarios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 			    	toolbarSeminarios.hideItem("delete");
 			    	toolbarSeminarios.hideItem("sep1");
+			    	if(anyoActual=="falso"){
+						toolbarSeminarios.hideItem('new');
+				   		toolbarSeminarios.hideItem('sep1');  
+					}
 	    		//permisosToolbarSeminarios();
 		    });
 			    
@@ -127,7 +135,13 @@
     					formSeminarioAlumno.setReadonly('descripcion', false);
     				</logic:match>
 	    		
-    				
+    				if(anyoActual=="falso"){
+    					formSeminarioAlumno.setReadonly('nombre', true);
+    		    		formSeminarioAlumno.setReadonly('codigo', true);
+    		    		formSeminarioAlumno.setReadonly('descripcion', true);
+    		    		formSeminarioAlumno.hideItem('aceptar');
+    	    			formSeminarioAlumno.hideItem('asignatura');
+    				}
 					
 					
 	    		formSeminarioAlumno.load('editarseminario.do?idSeminario=' + row, function () {
@@ -170,10 +184,15 @@
 		    	
 				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >	    	
 			   		toolbarSeminarios.hideItem('new');
-			   		toolbarSeminarios.hideItem('sep1');    	
+			   		toolbarSeminarios.hideItem('sep1');   
 			   		toolbarSeminarios.hideItem('delete');
 			   		toolbarSeminarios.hideItem('sep2');
 				</logic:notMatch>
+				
+				if(anyoActual=="falso"){
+					toolbarSeminarios.hideItem('new');
+			   		toolbarSeminarios.hideItem('sep1');  
+				}
 	    	}
 		    
 		    function permisosSeminariosForm(){

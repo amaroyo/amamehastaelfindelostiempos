@@ -15,7 +15,11 @@
 	    <script type="text/javascript" src="js/dhtmlxSuite/dhtmlxcommon.js"></script>
     
     <script>
-    	var dhxWins, toolbar, width, height, nota, optsAsignaturas;
+    	var dhxWins, toolbar, width, height, nota, optsAsignaturas, anyoActual;
+    	
+    	<% String anyoActual = (String) session.getAttribute("anyoActual"); %>
+    	anyoActual = "<%=anyoActual%>";
+    	
     	dhtmlx.image_path='js/dhtmlxSuite/imgs/';
     	
     	function init() {
@@ -101,6 +105,15 @@
 					</logic:notMatch>//permiso2
 				</logic:notMatch>//permiso1
 			</logic:notEmpty>
+				
+			if (anyoActual=="falso"){
+				toolbar.hideItem("administrar");
+    			toolbar.hideItem("sep5");
+    			toolbar.hideItem("grupos");
+    			toolbar.hideItem("sep6");
+    			toolbar.hideItem("usuarios");
+    			toolbar.hideItem("sep7");
+			}	
     	}
     	
     	function initWrong() {

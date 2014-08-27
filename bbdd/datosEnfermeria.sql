@@ -939,6 +939,8 @@ insert into trabajos_de_campo (id_portafolio, id_trabajo_info, trabajo_de_campo,
 
 insert into trabajos_de_campo (id_portafolio, id_trabajo_info, trabajo_de_campo, correccion_trabajo, fecha_limite) values (6, 7, null, null, '2013-10-13 23:59:59');
 
+insert into trabajos_de_campo (id_portafolio, id_trabajo_info, trabajo_de_campo, correccion_trabajo, fecha_limite) values (1, 7, null, null, '2013-10-13 23:59:59');
+
 
 
 
