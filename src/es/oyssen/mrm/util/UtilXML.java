@@ -1071,6 +1071,7 @@ public class UtilXML {
 		else if (id.equals("3")) return "Profesor";
 		else if (id.equals("4")) return "Alumno";
 		else if (id.equals("5")) return "Virtual Tour";
+		else if (id.equals("6")) return "Indefinido";
 
 		else return "";
 	}
