@@ -57,59 +57,12 @@ insert into permisos (nombre, descripcion) values ('Modificar información de la
 insert into permisos (nombre, descripcion) values ('Editar nombre, apellidos del perfil alumno.', 'En principio sólo puede el súper admin, el coordinador y el profesor.');
 insert into permisos (nombre, descripcion) values ('Editar dni del perfil alumno.', 'En principio sólo puede el súper admin, el coordinador y el profesor.');
 insert into permisos (nombre, descripcion) values ('Editar estancia del alumno (salvo el profesor que se cambia a través de la interfaz de seleccionar alumnos.', 'En principio sólo puede el súper admin, el coordinador y el profesor.');
-
-						
-
-/*insert into permisos (nombre, descripcion) values ('Todas las acciones permitidas.', 'El Super Admin tendrá todos los privilegios.');
-insert into permisos (nombre, descripcion) values ('Todas las acciones permitidas menos editar cursos pasados.', 'El Coordinador podrá actuar como un super admin pero no modificar datos antiguos.');
-insert into permisos (nombre, descripcion) values ('Permiso para modificar datos personales de los usuarios.', 'Este permiso lo tendrá el grupo Super Admin y se podrá otorgar a diferentes usuarios.');
-insert into permisos (nombre, descripcion) values ('Permiso para ver Mis Alumnos.', 'Este permiso se dará a gente que pueda visualizar el botón Mis Alumnos.');
-insert into permisos (nombre, descripcion) values ('Permiso para cambiar año academico.', 'Solo para Super Admin, Coordinador y Virtual Tour.');
-insert into permisos (nombre, descripcion) values ('Permiso para modificar seminario.', 'Solo para Super Admin y Coordinador.');*/
+insert into permisos (nombre, descripcion) values ('Editar seminarios', 'Permiso para poder editar la información de un seminario.');
+insert into permisos (nombre, descripcion) values ('Editar Estancia Unidad Clinica', 'Permiso para poder editar la Estancia en Unidad Clinica.');
+insert into permisos (nombre, descripcion) values ('Crear Trabajo de Campo', 'Permiso para crear Trabajos de Campo y modificar las fechas de entrega.');						
 
 
-/*insert into permisos (nombre, descripicion) values (2, 'View leads');
-insert into permisos (nombre, descripicion) values (3, 'Add lead');
-insert into permisos (nombre, descripicion) values (4, 'Delete lead');
-insert into permisos (nombre, descripicion) values (5, 'Modify lead');
-insert into permisos (nombre, descripicion) values (6, 'Import leads');
-insert into permisos (nombre, descripicion) values (7, 'Export leads');
-insert into permisos (nombre, descripicion) values (8, 'View sales reps.');
-insert into permisos (nombre, descripicion) values (9, 'Add sales rep.');
-insert into permisos (nombre, descripicion) values (10, 'Delete sales rep.');
-insert into permisos (nombre, descripicion) values (11, 'Modify sales rep.');
-insert into permisos (nombre, descripicion) values (38, 'Export sales reps.');
-insert into permisos (nombre, descripicion) values (12, 'View responsibles');
-insert into permisos (nombre, descripicion) values (13, 'Add responsible');
-insert into permisos (nombre, descripicion) values (14, 'Delete responsible');
-insert into permisos (nombre, descripicion) values (15, 'Modify responsible');
-insert into permisos (nombre, descripicion) values (39, 'Export responsibles');
-insert into permisos (nombre, descripicion) values (16, 'View distributors');
-insert into permisos (nombre, descripicion) values (17, 'Add distributor');
-insert into permisos (nombre, descripicion) values (18, 'Delete distributor');
-insert into permisos (nombre, descripicion) values (19, 'Modify distributor');
-insert into permisos (nombre, descripicion) values (40, 'Export distributors');
-insert into permisos (nombre, descripicion) values (20, 'View companies');
-insert into permisos (nombre, descripicion) values (21, 'Add company');
-insert into permisos (nombre, descripicion) values (22, 'Delete company');
-insert into permisos (nombre, descripicion) values (23, 'Modify company');
-insert into permisos (nombre, descripicion) values (41, 'Export companies');
-insert into permisos (nombre, descripicion) values (24, 'View services');
-insert into permisos (nombre, descripicion) values (25, 'Add service');
-insert into permisos (nombre, descripicion) values (26, 'Delete service');
-insert into permisos (nombre, descripicion) values (27, 'Modify service');
-insert into permisos (nombre, descripicion) values (42, 'Export services');
-insert into permisos (nombre, descripicion) values (28, 'View channels');
-insert into permisos (nombre, descripicion) values (29, 'Add channel');
-insert into permisos (nombre, descripicion) values (30, 'Delete channel');
-insert into permisos (nombre, descripicion) values (31, 'Modify channel');
-insert into permisos (nombre, descripicion) values (43, 'Export channels');
-insert into permisos (nombre, descripicion) values (32, 'Lock distributor');
-insert into permisos (nombre, descripicion) values (33, 'Unlock distributor');
-insert into permisos (nombre, descripicion) values (34, 'View users');
-insert into permisos (nombre, descripicion) values (35, 'Add user');
-insert into permisos (nombre, descripicion) values (36, 'Modify user');
-insert into permisos (nombre, descripicion) values (37, 'Delete user');*/
+
 
 
 -- Usuarios Permisos
@@ -122,21 +75,60 @@ insert into permisos (nombre, descripicion) values (37, 'Delete user');*/
 -- Grupo Super Admin 1:
 -- Todas las acciones permitidas
 insert into grupos_permisos (id_grupo, id_permiso) values (1, 1);
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 4);
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 5);
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 6);
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 7);
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 8);
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 9);
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 10);
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 11);
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 12);
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 13);
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 14);
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 15);
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 16);
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 17);
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 18);
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 19);
+insert into grupos_permisos (id_grupo, id_permiso) values (1, 20);
 
 -- Grupo Coordinador 2:
-insert into grupos_permisos (id_grupo, id_permiso) values (2, 2);
 
+
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 2);
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 5);
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 6);
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 7);
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 8);
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 9);
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 10);
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 11);
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 12);
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 13);
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 14);
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 15);
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 16);
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 17);
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 18);
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 19);
+insert into grupos_permisos (id_grupo, id_permiso) values (2, 20);
 
 -- Grupo Profesores 3:
 insert into grupos_permisos (id_grupo, id_permiso) values (3, 3);
+insert into grupos_permisos (id_grupo, id_permiso) values (3, 10);
+insert into grupos_permisos (id_grupo, id_permiso) values (3, 11);
+insert into grupos_permisos (id_grupo, id_permiso) values (3, 12);
+insert into grupos_permisos (id_grupo, id_permiso) values (3, 13);
+insert into grupos_permisos (id_grupo, id_permiso) values (3, 14);
+insert into grupos_permisos (id_grupo, id_permiso) values (3, 15);
+insert into grupos_permisos (id_grupo, id_permiso) values (3, 16);
+insert into grupos_permisos (id_grupo, id_permiso) values (3, 17);
+insert into grupos_permisos (id_grupo, id_permiso) values (3, 18);
+insert into grupos_permisos (id_grupo, id_permiso) values (3, 19);
+insert into grupos_permisos (id_grupo, id_permiso) values (3, 20);
 
 
--- Grupo Alumnos 4:
-
-
--- Grupo Virtual Tour 5:
-
--- Grupo Indefinido 6:
 
 
 

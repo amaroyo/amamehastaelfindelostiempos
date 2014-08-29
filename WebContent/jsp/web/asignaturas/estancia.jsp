@@ -260,14 +260,16 @@
 								
 				    		var ci = formEstancia.getCalendar("fechaIni");
 				    		
-				    		ci.attachEvent("onShow", function(){
-				    		    ci.hide();
-				    		});
-				    		
-				    		var cf = formEstancia.getCalendar("fechaFin");
-				    		cf.attachEvent("onShow", function(){
-				    		    cf.hide();
-				    		});
+				    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>19</permiso>" >	
+					    		ci.attachEvent("onShow", function(){
+					    		    ci.hide();
+					    		});
+					    		
+					    		var cf = formEstancia.getCalendar("fechaFin");
+					    		cf.attachEvent("onShow", function(){
+					    		    cf.hide();
+					    		});
+				    		</logic:notMatch>
 				    		
 			    			formEstancia.enableLiveValidation(true);
 				    		formEstancia.setFocusOnFirstActive();
@@ -344,26 +346,22 @@
 		    	
 		    	function permisosFormEstanciaDeAlumno(){
     				formEstancia.setReadonly("profesor",true);
-		    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >
-    				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>2</permiso>" >
-		    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>3</permiso>" >	
-		    		formEstancia.forEachItem(function(id){
-		    			switch(id) {
-			    			case "hospital":
-			    			case "clinica":
-			    			case "turno":
-			    			case "dni":
-			    			case "fechaIni":
-			    			case "fechaFin":{
-			    				formEstancia.setReadonly(id,true);
-			    				break;
+    				<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>19</permiso>" >	
+			    		formEstancia.forEachItem(function(id){
+			    			switch(id) {
+				    			case "hospital":
+				    			case "clinica":
+				    			case "turno":
+				    			case "dni":
+				    			case "fechaIni":
+				    			case "fechaFin":{
+				    				formEstancia.setReadonly(id,true);
+				    				break;
+				    			}
 			    			}
-		    			}
-		    		});
-		    		formEstancia.hideItem('aceptar');
+			    		});
+			    		formEstancia.hideItem('aceptar');
 	    			</logic:notMatch>
-	    			</logic:notMatch>	
-	    			</logic:notMatch>	
 	    			
 	    			if(anyoActual=="falso"){
 	    				formEstancia.forEachItem(function(id){
