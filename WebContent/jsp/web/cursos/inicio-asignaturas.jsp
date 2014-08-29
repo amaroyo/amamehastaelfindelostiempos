@@ -77,6 +77,7 @@
 	    			toolbarAsignaturas.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 	    			toolbarAsignaturas.hideItem('delete');
 			   		toolbarAsignaturas.hideItem('sep2');
+			   		
 			   		if(anyoActual=="falso"){
 			   			toolbarAsignaturas.hideItem('new');
 				   		toolbarAsignaturas.hideItem('sep1');
@@ -207,7 +208,7 @@
 	    			formInfo.setItemLabel('curso','<bean:message key="label.curso.asignatura"/>');
 	    			formInfo.setItemLabel('descripcion','<bean:message key="label.descripcion.asignatura"/>');
 	    			formInfo.setItemLabel('aceptar','<bean:message key="button.modificar"/>');
-	    			//permisosAsignaturasForm();			    		
+	    			permisosAsignaturasForm();			    		
 		    		if (anyoActual=="falso"){
 		    			formInfo.hideItem('aceptar');
 		    		}
@@ -666,6 +667,9 @@
 	    	}
 	    	
 	    	function permisosAsignaturasForm(){
+	    		myForm.setReadOnly('nombre', true);
+	    		myForm.setReadOnly('codigo', true);
+	    		myForm.setReadOnly('curso', true);
 	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >    	
 	    			formInfo.forEachItem(function(id){
 	    				if(getType(id) == "input"){

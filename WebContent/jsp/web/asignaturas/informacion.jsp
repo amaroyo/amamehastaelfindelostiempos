@@ -80,7 +80,7 @@
 	    	</logic:notMatch>
 	    	</logic:notMatch>
 	    	
-	    	if(anyoActual="falso"){
+	    	if(anyoActual=="falso"){
 	    		formInfo.setReadonly('nombre', true);
 	    		formInfo.setReadonly('codigo', true);
 	    		formInfo.setReadonly('curso', true);

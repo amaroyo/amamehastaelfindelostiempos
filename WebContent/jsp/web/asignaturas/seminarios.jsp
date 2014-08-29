@@ -21,7 +21,7 @@
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesor, gridAlumnoRealizado, gridAlumnoPendiente,idSessionUser;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesor, gridAlumnoRealizado, gridAlumnoPendiente,idSessionUser,toolbarSeminarios,tabbar,anyoActual;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -30,7 +30,9 @@
 	    		idAsignatura="<%=idAsignatura%>";	
 	    		<% String sessionIdUser = (String) session.getAttribute("idUsuario"); %>
 				 idSessionUser = <%=sessionIdUser%>;
-	    		
+
+			    	<% String anyoActual = (String) session.getAttribute("anyoActual"); %>
+			    	anyoActual = "<%=anyoActual%>";
 	    		
 	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 					goProfesor();
@@ -162,10 +164,30 @@
 					main_layout = new dhtmlXLayoutObject(document.body, '1C');
 		    		var a = main_layout.cells('a');
 		    		a.hideHeader();
-		    		var tabbar = a.attachTabbar();
+		    		
+		    		tabbar = a.attachTabbar();
 		    		var optsSeminarios = dameSeminariosAsignatura();
 		    		var numSeminarios=optsSeminarios.length;
 		    		
+		    		toolbarSeminarios = a.attachToolbar();
+		    		toolbarSeminarios.setIconsPath('../img/toolbar/');
+				    
+				    toolbarSeminarios.loadXML('../xml/toolbars/dhxtoolbar-seminarios.xml', function(){
+			    		toolbarSeminarios.setItemText('new',"<bean:message key="button.create.seminario"/>");
+			    		toolbarSeminarios.setItemText('delete',"<bean:message key="button.eliminar.seminario"/>");
+				    	toolbarSeminarios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+				    	toolbarSeminarios.setItemText('anyadirAlumnos',"<bean:message key="button.anyadir.alumnos.seminario"/>");
+				    	toolbarSeminarios.hideItem("delete");
+				    	toolbarSeminarios.hideItem("sep1");
+				    	toolbarSeminarios.hideItem("new");
+				    	toolbarSeminarios.hideItem("sep2");
+				    	
+				    	
+				    	if(anyoActual=="falso"){
+				    		a.detachToolbar();
+				    		toolbarSeminarios = null;
+						}
+				    });
 					
 		    		//WHILEEEEEEEELELELELLELELELEEEEEE
 		    		for (var i=0; i<numSeminarios;i++){
@@ -232,6 +254,63 @@
 		    		return opts;
 
 		    	}
+		    	
+		    	function anyadirAlumnos(){
+		    		var idSeminario = tabbar.getActiveTab();
+		    		var dhxWins= new dhtmlXWindows();
+					var window = dhxWins.createWindow("subir", 300,50, 430, 280);
+					window.setText('<bean:message key="title.anyadir.alumnos.seminario" />');				
+					window.setModal(true);
+					window.centerOnScreen();
+					
+					var formNTC = window.attachForm();
+					formNTC.loadStruct('../xml/forms/anyadir_alumno_seminario.xml', function(){
+						formNTC.setItemLabel('data','<bean:message key="title.info.seleccione.alumno"/>');
+						formNTC.setItemLabel('alumno','<bean:message key="label.alumno"/>');
+						formNTC.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+						
+						var data = getData(idSeminario);
+			    		form.reloadOptions('anyo', data);
+						
+						
+						
+						
+					});
+					
+					
+					
+		    	}
+		    	
+		    	
+		    	 function getData(idSeminario){
+				    	var url = "dameAlumnosFaltan.do?idAsignatura=" + idAsignatura + "&idSeminario=" + idSeminario;
+			    		var xmlhttp = initRequest();
+			    		xmlhttp.onreadystatechange=function(){
+			    			if (xmlhttp.readyState===4) {
+			        	        if(xmlhttp.status===200) { //GET returning a response
+			        	        	return createArrayFromXMLAlumnos(xmlhttp.responseXML);
+			        	        }
+			        	    }
+			    		}
+			    	    xmlhttp.open("GET",url,false);
+			    	    xmlhttp.send(null);
+			    	    return xmlhttp.onreadystatechange();
+				}
+		    	 
+		    	 function createArrayFromXMLAlumnos(xml){
+			    		var asignaturas = xml.getElementsByTagName("portafolio");
+			    		var id, nombre, seminario;
+			    		var opts = new Array();
+			    		for(var i=0;i<asignaturas.length;i++) {
+			    			nombre=asignaturas[i].getElementsByTagName("nombre")[0].firstChild.nodeValue;
+			    			id=asignaturas[i].getElementsByTagName("id")[0].firstChild.nodeValue;
+			    	        if(i==0){seminario={text:nombre, value:id, selected:true};}
+			    	        else seminario={text:nombre, value:nombre};
+			    	       	opts[i] = seminario;
+			    	    }
+			    		return opts;
+
+			    	}
 	    	
 	   </script>
 	</head>

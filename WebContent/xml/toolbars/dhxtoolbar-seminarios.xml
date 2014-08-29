@@ -2,7 +2,9 @@
 <toolbar> 
 	<item id="new" type="button" img="new.gif" imgdis="new_dis.gif" text="New User"  action="nuevoSeminario" />
 	<item id="sep1" type="separator"/>
-	<item id="delete" type="button" img="delete.png" imgdis="delete_dis.png" text="Eliminar" enabled="false" action="deleteUser" />
+	<item id="delete" type="button" img="delete.png" imgdis="delete_dis.png" text="Eliminar" enabled="false" action="deleteUser" />	
 	<item id="sep2" type="separator"/>
-	<item id="refresh" type="button" img="recargar.png" text="Actualizar" action="goActualizar"/>					
+	<item id="anyadirAlumnos" type="button" img="addStudent.png" text="Actualizar" action="anyadirAlumnos"/>	
+	<item id="sep3" type="separator"/>
+	<item id="refresh" type="button" img="recargar.png" text="Actualizar" action="goActualizar"/>				
 </toolbar>
