@@ -212,6 +212,9 @@
 		
 		<action path="/asignaturas/descargarAnexosAlumno" name="DescargarAnexosAlumno" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DescargarAnexosAlumnoAction" />
 		
+		<action path="/asignaturas/dameAlumnosFaltan" name="DameAlumnosFaltan" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.asignaturas.DameAlumnosFaltanSeminario"  />
+		
+		
 	</action-mappings>
 
 </struts-config>

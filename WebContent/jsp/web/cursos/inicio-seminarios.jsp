@@ -71,7 +71,9 @@
 		    		toolbarSeminarios.setItemText('delete',"<bean:message key="button.eliminar.seminario"/>");
 			    	toolbarSeminarios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 			    	toolbarSeminarios.hideItem("delete");
-			    	toolbarSeminarios.hideItem("sep1");
+			    	toolbarSeminarios.hideItem("sep2");
+			    	toolbarSeminarios.hideItem('anyadirAlumnos');
+			    	toolbarSeminarios.hideItem('sep3');
 			    	if(anyoActual=="falso"){
 						toolbarSeminarios.hideItem('new');
 				   		toolbarSeminarios.hideItem('sep1');  
@@ -130,7 +132,7 @@
 		    		formSeminarioAlumno.setReadonly('codigo', true);
 		    		formSeminarioAlumno.setReadonly('descripcion', true);
 		    		
-		    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>6</permiso>" >
+		    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>18</permiso>" >
     					formSeminarioAlumno.showItem('aceptar');
     					formSeminarioAlumno.setReadonly('descripcion', false);
     				</logic:match>

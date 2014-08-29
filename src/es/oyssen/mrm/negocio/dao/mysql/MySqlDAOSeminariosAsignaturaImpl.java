@@ -18,8 +18,10 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.dao.rowmappers.SeminarioAsignaturaCodigoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.SeminarioAsignaturaMapper;
+import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioPortafolioMapper;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaCodigoVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
+import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
 
 
 public class MySqlDAOSeminariosAsignaturaImpl extends DAOBase implements DAOSeminariosAsignatura{
@@ -38,6 +40,12 @@ public class MySqlDAOSeminariosAsignaturaImpl extends DAOBase implements DAOSemi
 													"from portafolios "+
 													"where anyo_academico=?)";
 
+	
+	private static String SQL_FIND_ALUMNOS_MISSING = "select u.id_usuario, u.correo, u.nombre, u.apellido1, u.apellido2, u.dni, u.telefono, p.id_portafolio "+
+														"from portafolios as p, usuarios as u "+
+														"where p.id_asignatura=? and p.id_portafolio not in(select s.id_portafolio "+
+														"from seminarios_realizados as s "+
+														"where s.id_seminario=?)";
 
 	public void insert(final SeminarioAsignaturaVO seminarioAsignatura) throws DAOException,
 	DAOInsertException {
@@ -138,6 +146,18 @@ public class MySqlDAOSeminariosAsignaturaImpl extends DAOBase implements DAOSemi
 			throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_ALL, new Object[]{anyoAcademico}, new SeminarioAsignaturaCodigoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+	@Override
+	public List<UsuarioPortafolioVO> findAlumnosMissing(SeminarioAsignaturaVO sa)
+			throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_ALUMNOS_MISSING, new Object[]{sa.getIdAsignatura(), sa.getIdSeminario()}, new UsuarioPortafolioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

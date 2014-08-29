@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+   <item type="fieldset" name="data" label="AnyadirAlumnoSeminario" inputWidth="auto">
+        <item type="select"	
+		  name="alumno"
+		  label="Alumnos"
+		  labelWidth="80"
+		  labelAlign="center"
+		  inputHeight="20"
+		  inputWidth="200"
+		/>
+       
+       <item type="input" name="anyo" label="Curo Academico" position="label-top"/>
+
+   </item>
+   <item type="button" name="aceptar" value="Añadir Alumno" align="right"/>
+</items>

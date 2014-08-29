@@ -100,7 +100,7 @@
 			    	gridUsuarios.attachEvent("onRowSelect", function(idUsuario,ind){
 			    		idSelectedUser=idUsuario;
 						var dhxWins= new dhtmlXWindows();
-						var window = dhxWins.createWindow("user", 300,50, 390, 450);
+						var window = dhxWins.createWindow("user", 300,50, 330, 400);
 						window.setText('<bean:message key="label.user"/>');				
 						window.setModal(true);
 						window.centerOnScreen();

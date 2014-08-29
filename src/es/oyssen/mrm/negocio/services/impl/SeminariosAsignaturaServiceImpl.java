@@ -11,6 +11,7 @@ import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.SeminariosAsignaturaService;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaCodigoVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
+import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
 
 public class SeminariosAsignaturaServiceImpl implements SeminariosAsignaturaService{
 	
@@ -29,7 +30,7 @@ public class SeminariosAsignaturaServiceImpl implements SeminariosAsignaturaServ
 			daoSeminariosAsignatura.insert(seminarioAsignatura);	
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.error("Error creando seminario asignatura", e);
+			log.error("Error creando seminario seminario asignatura", e);
 			throw new ServiceException(e);
 		}		
 	}
@@ -41,7 +42,7 @@ public class SeminariosAsignaturaServiceImpl implements SeminariosAsignaturaServ
 			daoSeminariosAsignatura.update(seminarioAsignatura);
 		} catch (DAOException e) {
 			e.printStackTrace();
-			log.error("Error update seminario asignatura", e);
+			log.error("Error update seminario seminario asignatura", e);
 			throw new ServiceException(e);
 		}		
 	}
@@ -53,7 +54,7 @@ public class SeminariosAsignaturaServiceImpl implements SeminariosAsignaturaServ
 			daoSeminariosAsignatura.delete(seminarioAsignatura);			
 		} catch (DAOException e) {
 			e.printStackTrace();
-			log.error("Error delete seminario asignatura", e);
+			log.error("Error delete seminario seminario asignatura", e);
 			throw new ServiceException(e);
 		}			
 	}
@@ -65,7 +66,7 @@ public class SeminariosAsignaturaServiceImpl implements SeminariosAsignaturaServ
 			return daoSeminariosAsignatura.findById(seminarioAsignatura);
 		} catch (DAOException e) {
 			e.printStackTrace();
-			log.error("Error findById seminario asignatura", e);
+			log.error("Error findById seminario seminario asignatura", e);
 			throw new ServiceException(e.getMessage());
 		}
 	}
@@ -75,7 +76,7 @@ public class SeminariosAsignaturaServiceImpl implements SeminariosAsignaturaServ
 			return daoSeminariosAsignatura.findByNombre(seminarioAsignatura);
 		} catch (DAOException e) {
 			e.printStackTrace();
-			log.error("Error findById findByNombre asignatura", e);
+			log.error("Error findById findByNombre seminario asignatura", e);
 			throw new ServiceException(e.getMessage());
 		}
 	}
@@ -85,7 +86,7 @@ public class SeminariosAsignaturaServiceImpl implements SeminariosAsignaturaServ
 			return daoSeminariosAsignatura.findByCodigo(seminarioAsignatura);
 		} catch (DAOException e) {
 			e.printStackTrace();
-			log.error("Error findById findByCodigo asignatura", e);
+			log.error("Error findById findByCodigo seminario asignatura", e);
 			throw new ServiceException(e.getMessage());
 		}
 	}
@@ -95,7 +96,7 @@ public class SeminariosAsignaturaServiceImpl implements SeminariosAsignaturaServ
 			return daoSeminariosAsignatura.findAllByAsignatura(seminarioAsignatura);
 		} catch (DAOException e) {
 			e.printStackTrace();
-			log.error("Error findById findAllByAsignatura asignatura", e);
+			log.error("Error findById findAllByAsignatura seminario asignatura", e);
 			throw new ServiceException(e.getMessage());
 		}
 	}
@@ -107,7 +108,19 @@ public class SeminariosAsignaturaServiceImpl implements SeminariosAsignaturaServ
 			return daoSeminariosAsignatura.findAll(anyoAcademico);
 		} catch (DAOException e) {
 			e.printStackTrace();
-			log.error("Error findById findAll asignatura", e);
+			log.error("Error findById findAll seminario asignatura", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	@Override
+	public List<UsuarioPortafolioVO> findAlumnosMissing(SeminarioAsignaturaVO sa)
+			throws ServiceException {
+		try {
+			return daoSeminariosAsignatura.findAlumnosMissing(sa);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findById findAlumnosMissing seminario asignatura", e);
 			throw new ServiceException(e.getMessage());
 		}
 	}

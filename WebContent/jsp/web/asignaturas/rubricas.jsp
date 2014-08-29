@@ -508,7 +508,7 @@
     			</logic:notMatch>	
     			</logic:notMatch>	
     			
-    			if(anyoActual="falso"){
+    			if(anyoActual=="falso"){
     				formRubrica.setReadonly('competencias',true);
         			formRubrica.setReadonly('nota',true);
         			for(var i=1;i<=5;i++){
@@ -537,7 +537,7 @@
     			</logic:notMatch>	
     			</logic:notMatch>	
     			
-    			if(anyoActual="falso"){
+    			if(anyoActual=="falso"){
     				formAnexo.forEachItem(function(id){
     	    			if(formAnexo.getItemType(id) == "input"){
     	        			formAnexo.setReadonly(id,true);
