@@ -411,6 +411,10 @@
 			    				form2.setReadonly(id,true);
 			    				break;
 			    			}
+			    			case "turno":{
+			    				form2.setReadonly(id,true);
+			    				break;
+			    			}
 			    			case "profesor":{
 			    				form2.setReadonly(id,true);
 			    				break;
@@ -422,26 +426,32 @@
 		    		
 		    		
 		    		//Aqui lo pondría con logic match para gente con permiso para modifiacar datos!
-		    		
-		    			form2.forEachItem(function(id){
-		    				switch(id) {
-			    			case "hospital":{
-			    				form2.setReadonly(id,false);
-			    				form2.setRequired(id,true);
-			    				break;
+		    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>19</permiso>" >
+							form2.forEachItem(function(id){
+			    				switch(id) {
+				    			case "hospital":{
+				    				form2.setReadonly(id,false);
+				    				form2.setRequired(id,true);
+				    				break;
+				    			}
+				    			case "clinica":{
+				    				form2.setReadonly(id,false);
+				    				form2.setRequired(id,true);
+				    				break;
+				    			}
+				    			case "turno":{
+				    				form2.setReadonly(id,false);
+				    				form2.setRequired(id,true);
+				    				break;
+				    			}
+				    			
+				    			
+				    			default: break;
 			    			}
-			    			case "clinica":{
-			    				form2.setReadonly(id,false);
-			    				form2.setRequired(id,true);
-			    				break;
-			    			}
-			    			
-			    			
-			    			default: break;
-		    			}
-			    		});
-		    			form2.showItem('aceptar');
-						
+				    		});
+			    			form2.showItem('aceptar');
+		    			</logic:match>
+				
 		    			form2.enableLiveValidation(true);
 			    		form2.setFocusOnFirstActive();
 			    		
@@ -589,7 +599,7 @@
 		    			formSeminarioAlumno.hideItem('aceptar');
 		    			formSeminarioAlumno.hideItem('asignatura');
 		    			
-		    			
+		    		
 		    			
 						//Ponemos por defecto que los items no se puedan modificar, y luego con los permisos necesarios 
 						//seran modificables.
@@ -597,11 +607,10 @@
 			    		formSeminarioAlumno.setReadonly('codigo', true);
 			    		formSeminarioAlumno.setReadonly('descripcion', true);
 			    		
-			    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>3</permiso>" >
+			    		<logic:match scope="session" name="usuarioYPermisos" value="<permiso>18</permiso>" >
 				    		formSeminarioAlumno.showItem('aceptar');
-		    				formSeminarioAlumno.setReadonly('descripcion', false);
-	    			
-		    			</logic:notMatch>
+		    				formSeminarioAlumno.setReadonly('descripcion', false);	
+		    			</logic:match>
 		    			
 		    			if(anyoActual=="falso"){
 		    				formSeminarioAlumno.setReadonly('nombre', true);
@@ -1575,7 +1584,7 @@
     			</logic:notMatch>	
     			</logic:notMatch>	
     			
-    			if(anyoActual="falso"){
+    			if(anyoActual=="falso"){
     				formRubrica.setReadonly('competencias',true);
         			formRubrica.setReadonly('nota',true);
         			for(var i=1;i<=5;i++){
@@ -1604,7 +1613,7 @@
     			</logic:notMatch>	
     			</logic:notMatch>	
     			
-    			if(anyoActual="falso"){
+    			if(anyoActual=="falso"){
     				formAnexo.forEachItem(function(id){
     	    			if(formAnexo.getItemType(id) == "input"){
     	        			formAnexo.setReadonly(id,true);

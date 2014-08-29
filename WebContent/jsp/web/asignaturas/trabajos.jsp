@@ -118,11 +118,10 @@
 			    		toolbarServicios.hideItem('subirPractica');
 			    		toolbarServicios.hideItem('sep3');
 			    		toolbarServicios.hideItem('descargarTodosAlumno');
-			    		toolbarServicios.hideItem('sep5');
-			    		
+			    		toolbarServicios.hideItem('sep5');			    		
 			    	</logic:notMatch>
-			    	<logic:match scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 			    	
+			    	<logic:match scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >			    	
 			    		toolbarServicios.hideItem('crearTrabajoCampo');
 			    		toolbarServicios.hideItem('sep1');
 			    		toolbarServicios.hideItem('modificarTrabajoCampo');
@@ -132,9 +131,21 @@
 			    		toolbarServicios.hideItem('descargarTodosAlumno');
 			    		toolbarServicios.hideItem('sep5');
 			    		toolbarServicios.hideItem('fechaLimite');
-			    		toolbarServicios.hideItem('sep6');
-			    	
+			    		toolbarServicios.hideItem('sep6');			    	
 			    	</logic:match>
+			    	
+			    	<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>20</permiso>" >			    	
+				    	toolbarServicios.hideItem('subirPractica');
+			    		toolbarServicios.hideItem('sep3');
+			    		toolbarServicios.hideItem('crearTrabajoCampo');
+			    		toolbarServicios.hideItem('sep1');
+			    		toolbarServicios.hideItem('modificarTrabajoCampo');
+			    		toolbarServicios.hideItem('sep2');
+			    		toolbarServicios.hideItem('descargarTodos');
+			    		toolbarServicios.hideItem('sep4');
+			    		toolbarServicios.hideItem('fechaLimite');
+			    		toolbarServicios.hideItem('sep6');			    	
+			    	</logic:notMatch>
 			    	
 			    	if(anyoActual=="falso"){
 			    		
@@ -662,6 +673,12 @@
 			    	setTimeout(function(){miGrid.cellById("b",0).setValue(" ");
 			    	miGrid.cellById("d",0).setValue(" ");},100);				    	
 			    }
+			    
+			    <logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>20</permiso>" >			    	
+				    setTimeout(function(){miGrid.cellById("b",0).setValue(" ");
+			    	miGrid.cellById("d",0).setValue(" ");},100);
+			    </logic:notMatch>
+			    
 			    miGrid.attachEvent("onRowSelect",function(rowId,cellIndex){
 			    	if (rowId == "a" && subido == "T") {
 			    		
