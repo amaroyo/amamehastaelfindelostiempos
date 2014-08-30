@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<items>
-   <item type="fieldset" name="data" label="Importar" inputWidth="500" inputHeight="100">
-       <item type="upload" name="subir" inputWidth="500" inputHeight="100"
-       		autoStart="true" url="../jsp/dhtmlxform_item_upload.jsp" />
-       <item type="button" name="importar" value="Importar"/>
-   </item>
-</items>

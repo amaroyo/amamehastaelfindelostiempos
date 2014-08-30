@@ -280,17 +280,6 @@
 				
 				
 		    }
-		    
-		    
-		    function initRequest() {
-	    	    if (window.XMLHttpRequest) {
-	    	        xmlhttp = new XMLHttpRequest();
-	    	    } else if (window.ActiveXObject) {
-	    	        isIE = true;
-	    	        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	    	    }
-	    	    return xmlhttp;
-	    	}
 	    	
 	    	
 	    	function chequeaSeminario(codigo){

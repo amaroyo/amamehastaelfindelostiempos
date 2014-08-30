@@ -11,9 +11,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import es.oyssen.mrm.negocio.vo.AsignaturaVO;
-import es.oyssen.mrm.negocio.vo.PortafolioVO;
-import es.oyssen.mrm.negocio.vo.ProfesorAsociadoVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
 

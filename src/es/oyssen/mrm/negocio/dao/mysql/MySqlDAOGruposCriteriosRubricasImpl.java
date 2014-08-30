@@ -16,11 +16,8 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
-import es.oyssen.mrm.negocio.dao.rowmappers.CriterioRubricaMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.GrupoCriteriosRubricasMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.GruposCriteriosRubricaAsignaturaMapper;
-import es.oyssen.mrm.negocio.exceptions.ServiceException;
-import es.oyssen.mrm.negocio.vo.CriterioRubricaVO;
 import es.oyssen.mrm.negocio.vo.GrupoCriteriosRubricasVO;
 import es.oyssen.mrm.negocio.vo.GruposCriteriosRubricaAsignaturaVO;
 

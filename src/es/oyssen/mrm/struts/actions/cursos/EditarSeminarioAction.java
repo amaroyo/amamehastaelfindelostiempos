@@ -1,9 +1,7 @@
 package es.oyssen.mrm.struts.actions.cursos;
 
-import es.oyssen.mrm.negocio.vo.AsignaturaVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXFormAction;
-import es.oyssen.mrm.struts.forms.cursos.EditarAsignaturaForm;
 import es.oyssen.mrm.struts.forms.cursos.EditarSeminarioForm;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxForm;
 import es.oyssen.mrm.util.StringUtil;

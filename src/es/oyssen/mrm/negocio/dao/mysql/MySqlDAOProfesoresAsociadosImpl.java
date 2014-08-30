@@ -15,7 +15,6 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.dao.rowmappers.ProfesorAsociadoMapper;
-import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioMapper;
 import es.oyssen.mrm.negocio.vo.ProfesorAsociadoVO;
 
 

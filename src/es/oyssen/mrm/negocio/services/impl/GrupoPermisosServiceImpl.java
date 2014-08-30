@@ -9,8 +9,8 @@ import es.oyssen.mrm.negocio.dao.DAOGrupoPermisos;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.GrupoPermisosService;
-import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.GrupoPermisoVO;
+import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.PermisoVO;
 
 

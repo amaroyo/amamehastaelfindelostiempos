@@ -1,8 +1,5 @@
 package es.oyssen.mrm.struts.actions.asignaturas;
 
-import java.util.List;
-import java.util.zip.ZipEntry;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,9 +7,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoInfoVO;
-import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
 
 public class EliminarTrabajoCampoAction extends MrmAction {

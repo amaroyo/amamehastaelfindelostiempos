@@ -14,36 +14,6 @@
 		<property name="credenciales" ref="credenciales" />
 	</bean>
 	
-	<bean id="daoComerciales" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOComercialesImpl" parent="daoBase" />
-	
-	<bean id="daoResponsables" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOResponsablesImpl" parent="daoBase" />
-	
-	<bean id="daoResponsablesComerciales" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOResponsablesComercialesImpl" parent="daoBase" />
-	
-	<bean id="daoEmpresas" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOEmpresasImpl" parent="daoBase" />
-	
-	<bean id="daoEstados" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOEstadosImpl" parent="daoBase" />
-	
-	<bean id="daoLeads" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOLeadsImpl" parent="daoBase" />
-	
-	<bean id="daoServicios" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOServiciosImpl" parent="daoBase" />
-	
-	<bean id="daoMarketingActivities" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOMarketingActivitiesImpl" parent="daoBase" />
-	
-	<bean id="daoDistribuidores" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAODistribuidoresImpl" parent="daoBase" />
-	
-	<bean id="daoLeadActionsHistory" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOLeadActionsHistoryImpl" parent="daoBase" />
-	
-	<bean id="daoContactosDistribuidor" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOContactosDistribuidorImpl" parent="daoBase" />
-	
-	<bean id="daoFicheros" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOFicherosImpl" parent="daoBase" />
-	
-	<bean id="daoCanales" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOCanalesImpl" parent="daoBase" />
-	
-	<bean id="daoContactosCanal" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOContactosCanalImpl" parent="daoBase" />
-	
-	<bean id="daoLeadsHistory" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOLeadsHistoryImpl" parent="daoBase" />
-	
 	<bean id="daoGrupos" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOGruposImpl" parent="daoBase" />
 	
 	<bean id="daoGrupoPermisos" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOGrupoPermisosImpl" parent="daoBase" />
@@ -65,13 +35,7 @@
 	<bean id="daoTrabajosDeCampo" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOTrabajosDeCampoImpl" parent="daoBase" />
 	
 	<bean id="daoSeminariosRealizados" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOSeminariosRealizadosImpl" parent="daoBase" />
-	
-	<bean id="daoServiciosUsuario" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOServiciosUsuarioImpl" parent="daoBase" />
-	
-	<bean id="daoLogsUsuario" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOLogsUsuarioImpl" parent="daoBase" />
-
-	<bean id="daoFicherosLead" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOFicherosLeadImpl" parent="daoBase" />
-	
+		
 	<bean id="daoDiariosReflexivos" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAODiariosReflexivosImpl" parent="daoBase" />
 	
 	<bean id="daoAnexos" class="es.oyssen.mrm.negocio.dao.mysql.MySqlDAOAnexosImpl" parent="daoBase" />

@@ -6,8 +6,8 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.vo.PermisoVO;
-import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioPermisosVO;
+import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
 public interface DAOUsuariosPermisos {
 	

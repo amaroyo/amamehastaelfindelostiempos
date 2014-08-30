@@ -25,77 +25,6 @@
         <aop:advisor pointcut="execution(* *..ComercialesService.*(..))" advice-ref="txAdvice"/>       
         <aop:advisor pointcut="execution(* *..LeadsService.*(..))" advice-ref="txAdvice"/>
     </aop:config>
-
-	 
-
-	<bean id="comercialesService" class="es.oyssen.mrm.negocio.services.impl.ComercialesServiceImpl">		
-		<property name="daoComerciales" ref="daoComerciales" />
-		<property name="daoLeads" ref="daoLeads" />
-		<property name="daoDistribuidores" ref="daoDistribuidores" />
-	</bean>
-
-
-	<bean id="responsablesService" class="es.oyssen.mrm.negocio.services.impl.ResponsablesServiceImpl">		
-		<property name="daoResponsables" ref="daoResponsables" />
-		<property name="daoResponsablesComerciales" ref="daoResponsablesComerciales" />
-		<property name="daoLeads" ref="daoLeads" />
-	</bean>
-	
-	
-	<bean id="distribuidoresService" class="es.oyssen.mrm.negocio.services.impl.DistribuidoresServiceImpl">		
-		<property name="daoDistribuidores" ref="daoDistribuidores" />
-		<property name="daoContactosDistribuidor" ref="daoContactosDistribuidor" />
-		<property name="daoLeads" ref="daoLeads" />
-	</bean>	
-	
-	
-	<bean id="contactosDistribuidorService" class="es.oyssen.mrm.negocio.services.impl.ContactosDistribuidorServiceImpl">		
-		<property name="daoContactosDistribuidor" ref="daoContactosDistribuidor" />
-	</bean>	
-
-	<bean id="canalesService" class="es.oyssen.mrm.negocio.services.impl.CanalesServiceImpl">		
-		<property name="daoCanales" ref="daoCanales" />
-		<property name="daoContactosCanal" ref="daoContactosCanal" />
-	</bean>	
-
-	<bean id="contactosCanalService" class="es.oyssen.mrm.negocio.services.impl.ContactosCanalServiceImpl">		
-		<property name="daoContactosCanal" ref="daoContactosCanal" />
-	</bean>	
-	
-	<bean id="ficherosService" class="es.oyssen.mrm.negocio.services.impl.FicherosServiceImpl">		
-		<property name="daoFicheros" ref="daoFicheros" />
-	</bean>		
-	
-	<bean id="serviciosService" class="es.oyssen.mrm.negocio.services.impl.ServiciosServiceImpl">		
-		<property name="daoServicios" ref="daoServicios" />
-		<property name="daoFicheros" ref="daoFicheros" />
-		<property name="daoLeads" ref="daoLeads" />		
-	</bean>		
-	
-
-	<bean id="leadsService" class="es.oyssen.mrm.negocio.services.impl.LeadsServiceImpl">		
-		<property name="daoComerciales" ref="daoComerciales" />
-		<property name="daoLeads" ref="daoLeads" />
-		<property name="daoResponsables" ref="daoResponsables" />
-		<property name="daoResponsablesComerciales" ref="daoResponsablesComerciales" />
-		<property name="daoEmpresas" ref="daoEmpresas" />
-		<property name="daoEstado" ref="daoEstados" />
-		<property name="daoServicios" ref="daoServicios" />
-		<property name="daoDistribuidores" ref="daoDistribuidores" />		
-		<property name="daoMarketingActivities" ref="daoMarketingActivities" />
-		<property name="daoLeadActionsHistory" ref="daoLeadActionsHistory" />
-		<property name="daoCanales" ref="daoCanales" />
-		<property name="daoLeadsHistory" ref="daoLeadsHistory" />		
-	</bean>
-
-	<bean id="empresasService" class="es.oyssen.mrm.negocio.services.impl.EmpresasServiceImpl">
-		<property name="daoEmpresas" ref="daoEmpresas" />
-		<property name="daoLeads" ref="daoLeads" />
-	</bean>
-	
-	<bean id="leadsHistoryService" class="es.oyssen.mrm.negocio.services.impl.LeadsHistoryServiceImpl">
-		<property name="daoLeadsHistory" ref="daoLeadsHistory" />
-	</bean>
 	
 	<bean id="gruposService" class="es.oyssen.mrm.negocio.services.impl.GruposServiceImpl">
 		<property name="daoGrupos" ref="daoGrupos" />
@@ -139,19 +68,7 @@
 	
 	<bean id="seminariosRealizadosService" class="es.oyssen.mrm.negocio.services.impl.SeminariosRealizadosServiceImpl">		
 		<property name="daoSeminariosRealizados" ref="daoSeminariosRealizados" />
-	</bean>	
-	
-	<bean id="serviciosUsuarioService" class="es.oyssen.mrm.negocio.services.impl.ServiciosUsuarioServiceImpl">
-		<property name="daoServiciosUsuario" ref="daoServiciosUsuario" />
 	</bean>
-	
-	<bean id="logsUsuarioService" class="es.oyssen.mrm.negocio.services.impl.LogsUsuarioServiceImpl">
-		<property name="daoLogsUsuario" ref="daoLogsUsuario" />
-	</bean>
-
-	<bean id="ficherosLeadService" class="es.oyssen.mrm.negocio.services.impl.FicherosLeadServiceImpl">		
-		<property name="daoFicherosLead" ref="daoFicherosLead" />
-	</bean>	
 	
 	<bean id="diariosReflexivosService" class="es.oyssen.mrm.negocio.services.impl.DiariosReflexivosServiceImpl">		
 		<property name="daoDiariosReflexivos" ref="daoDiariosReflexivos" />

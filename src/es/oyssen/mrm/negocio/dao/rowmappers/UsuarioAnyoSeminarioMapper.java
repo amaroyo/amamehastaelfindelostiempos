@@ -1,16 +1,11 @@
 package es.oyssen.mrm.negocio.dao.rowmappers;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.IOUtils;
 import org.springframework.jdbc.core.RowMapper;
 
 import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
-import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.util.StringUtil;
 
 

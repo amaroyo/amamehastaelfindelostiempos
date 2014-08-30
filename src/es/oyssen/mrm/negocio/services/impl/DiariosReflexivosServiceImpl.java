@@ -12,7 +12,6 @@ import es.oyssen.mrm.negocio.dao.DAODiariosReflexivos;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.DiariosReflexivosService;
-import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.DiarioReflexivoVO;
 import es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoForm;
 

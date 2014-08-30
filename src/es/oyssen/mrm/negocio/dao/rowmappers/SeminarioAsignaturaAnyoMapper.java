@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaAnyoVO;
-import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
 import es.oyssen.mrm.util.StringUtil;
 
 

@@ -4,14 +4,11 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.dao.EmptyResultDataAccessException;
 
 import es.oyssen.mrm.negocio.dao.DAOGruposCriteriosRubricas;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
-import es.oyssen.mrm.negocio.dao.rowmappers.GrupoCriteriosRubricasMapper;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.GruposCriteriosRubricasService;
-import es.oyssen.mrm.negocio.vo.CriterioRubricaVO;
 import es.oyssen.mrm.negocio.vo.GrupoCriteriosRubricasVO;
 import es.oyssen.mrm.negocio.vo.GruposCriteriosRubricaAsignaturaVO;
 

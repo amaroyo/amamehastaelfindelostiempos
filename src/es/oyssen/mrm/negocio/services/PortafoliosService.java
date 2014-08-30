@@ -9,10 +9,8 @@ import es.oyssen.mrm.negocio.vo.DatosUsuarioEstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.DiarioReflexivoVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
-import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioEstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
-import es.oyssen.mrm.negocio.vo.UsuarioTrabajoCampoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
 public interface PortafoliosService {

@@ -5,13 +5,10 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import es.oyssen.mrm.negocio.dao.DAOAnexos;
 import es.oyssen.mrm.negocio.dao.DAOErroresLog;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
-import es.oyssen.mrm.negocio.services.AnexosService;
 import es.oyssen.mrm.negocio.services.ErroresLogService;
-import es.oyssen.mrm.negocio.vo.AnexoVO;
 import es.oyssen.mrm.negocio.vo.ErrorLogVO;
 
 public class ErroresLogServiceImpl implements ErroresLogService{

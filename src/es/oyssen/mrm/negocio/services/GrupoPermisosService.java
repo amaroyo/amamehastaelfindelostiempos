@@ -3,8 +3,8 @@ package es.oyssen.mrm.negocio.services;
 import java.util.List;
 
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
-import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.GrupoPermisoVO;
+import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.PermisoVO;
 
 

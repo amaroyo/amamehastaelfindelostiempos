@@ -1,12 +1,9 @@
 package es.oyssen.mrm.struts.actions.permisos.usuario;
 
-import es.oyssen.mrm.negocio.vo.GrupoPermisoVO;
-import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioPermisosVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXGridAction;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
-import es.oyssen.mrm.struts.forms.permisos.grupo.GridPermisosGrupoForm;
 import es.oyssen.mrm.struts.forms.permisos.usuario.GridPermisosUsuarioForm;
 import es.oyssen.mrm.util.UtilXML;
 

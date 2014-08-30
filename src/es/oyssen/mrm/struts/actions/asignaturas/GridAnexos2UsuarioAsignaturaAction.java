@@ -2,15 +2,8 @@ package es.oyssen.mrm.struts.actions.asignaturas;
 
 import es.oyssen.mrm.negocio.vo.AnexoVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
-import es.oyssen.mrm.negocio.vo.SeminarioRealizadoVO;
-import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXGridAction;
 import es.oyssen.mrm.struts.forms.asignaturas.GridAnexos2UsuarioAsignaturaForm;
-import es.oyssen.mrm.struts.forms.asignaturas.GridCasosClinicosUsuarioAsignaturaForm;
-import es.oyssen.mrm.struts.forms.asignaturas.GridTrabajosCampoUsuarioAsignaturaForm;
-import es.oyssen.mrm.struts.forms.asignaturas.GridUsuariosEstanciasForm;
-import es.oyssen.mrm.struts.forms.asignaturas.GridUsuariosSeminariosAsignaturaForm;
-import es.oyssen.mrm.struts.forms.asignaturas.GridUsuariosTrabajosCampoAsignaturaForm;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
 import es.oyssen.mrm.util.StringUtil;
 import es.oyssen.mrm.util.UtilXML;

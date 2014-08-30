@@ -2,7 +2,6 @@ package es.oyssen.mrm.negocio.services;
 
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
-import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.RubricaVO;
 
 public interface RubricasService {
