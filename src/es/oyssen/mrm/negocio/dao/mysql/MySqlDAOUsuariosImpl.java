@@ -55,6 +55,9 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 															"where u.id_usuario = p.id_alumno and a.id_asignatura = p.id_asignatura and p.anyo_academico =? and p.id_profesor !=?";
 	
 	
+	
+	private static String SQL_FIND_ALL_INDEFINIDOS = "select * from usuarios where id_grupo = 6";
+	
 	public void insert(final UsuarioVO usuario) throws DAOException,
 			DAOInsertException {
 		try{
@@ -278,6 +281,17 @@ public class MySqlDAOUsuariosImpl extends DAOBase implements DAOUsuarios{
 			throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_ALL_BY_ASIGNATURA, new Object[]{p.getAnyoAcademico(),p.getIdAsignatura()}, new UsuarioAsignaturaMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+	@Override
+	public List<UsuarioVO> findIndefinidos() throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_ALL_INDEFINIDOS, new Object[]{}, new UsuarioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

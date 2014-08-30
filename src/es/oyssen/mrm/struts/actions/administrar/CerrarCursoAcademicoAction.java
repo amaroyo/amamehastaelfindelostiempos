@@ -2,6 +2,7 @@ package es.oyssen.mrm.struts.actions.administrar;
 
 import java.io.PrintWriter;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import org.apache.struts.action.ActionMapping;
 
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.vo.ErrorLogVO;
+import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
 
 public class CerrarCursoAcademicoAction extends MrmAction {
@@ -36,6 +38,7 @@ public class CerrarCursoAcademicoAction extends MrmAction {
 			String actual = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
 			String pasado = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)-1);
 			act = pasado + "/" + actual;
+			//Ha habido un error cerrando el curso academico.
 			mensaje="0";
 		}
 		
@@ -45,12 +48,23 @@ public class CerrarCursoAcademicoAction extends MrmAction {
 		int der = Integer.parseInt(spp[1]) + 1;
 		
 		if (izq - Calendar.getInstance().get(Calendar.YEAR) <= 1){
+			//Se ha cerrado satisfactoriamente el curso academico.
 			mensaje="1";
 			request.getSession().setAttribute("anyoAcademico", izq + "/" + der);
 			e.setFecha(izq + "-01-01 00:00:01");
 			getErroresLogService().updateAnyo(e);
+			
+			List<UsuarioVO> list = getUsuariosService().findIndefinidos();
+			
+			if(!list.isEmpty()){
+				for (UsuarioVO u : list){
+					getUsuariosService().delete(u);
+				}
+			}
+			
 		}
 		else {
+			//Ya ha cerrado el curso academico. El proximo cierre de curso se realizara al anyo que siguiente.
 			mensaje = "2";
 		}
 		
