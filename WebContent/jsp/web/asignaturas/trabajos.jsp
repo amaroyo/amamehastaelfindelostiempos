@@ -23,7 +23,7 @@
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos, profesor,a,b, tabbar, idSession,miGrid,miGridActivado,anyoActual,ultimaAbierta;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos, profesor,a,b, tabbar, idSession,miGrid,miGridActivado,anyoActual,ultimaAbierta,toolbarServicios;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -50,6 +50,9 @@
 		    		b.setWidth(250);
 		    		a.hideHeader();
 					b.setText('<bean:message key="label.opciones.alumno"/>');
+					toolbarServicios = a.attachToolbar();
+					initToolbarContent();
+					tabbar = a.attachTabbar();					
 					initProfesor();
 				</logic:notMatch>
 		
@@ -70,10 +73,22 @@
 	    	
 	    	function initProfesor(){
 
-	    		tabbar = a.attachTabbar();
+	    		
 	    		
 	    		var optsTrabajosCampo = dameTrabajosCampoAsignatura();
 	    		var numTrabajosCampo = optsTrabajosCampo.length;
+	    		
+	    		if(numTrabajosCampo==0){
+	    			toolbarServicios.disableItem('fechaLimite');
+	    			toolbarServicios.disableItem('modificarTrabajoCampo');
+	    			toolbarServicios.disableItem('descargarTodos');
+	    		}
+	    		else{
+	    			toolbarServicios.enableItem('fechaLimite');
+	    			toolbarServicios.enableItem('modificarTrabajoCampo');
+	    			toolbarServicios.enableItem('descargarTodos');
+	    		}
+	    		
 	    		for (var i=0; i<numTrabajosCampo;i++) {
 	    			
 	    		
@@ -89,8 +104,10 @@
 	    			
 	    			if(i==0 && ultimaAbierta == "-1") tabbar.setTabActive(idTrabajoInfo);
 	    			
-	    			initTabContent(idTrabajoInfo);
+	    			    			
+	    			goGridProfesores(idTrabajoInfo);
 	    		}
+	    		
 	    		
 	    		if(ultimaAbierta != "-1") tabbar.setTabActive(ultimaAbierta);
 	    		tabbar.attachEvent("onTabClick", function(id, lastId){
@@ -99,10 +116,10 @@
 	    	}
 	    	
 		    	
-	    	function initTabContent(idTrabajoInfo){
+	    	function initToolbarContent(){
 				
-				var tab = tabbar.cells(idTrabajoInfo);
-		    	var toolbarServicios = tab.attachToolbar();
+				
+		    	
 		    	toolbarServicios.setIconsPath('../img/toolbar/');
 
 		    	
@@ -166,7 +183,7 @@
 		    	});
 		    	
 		    	
-		    	goGridProfesores(tab,idTrabajoInfo);
+		    	
 		    	
 			}
 		    	
@@ -232,7 +249,7 @@
 				    				window2.setModal(true);
 				    				window2.centerOnScreen();
 				    				window2.attachURL("eliminarTrabajo.do?idTrabajoInfo="+ idTrabajoInfo);
-				    				setTimeout(function(){initProfesor();},1000);
+				    				setTimeout(function(){goActualizar("-1","true");},500);
 				    				
 			    				}
 			    			}
@@ -247,7 +264,7 @@
 						    				window2.setModal(true);
 						    				window2.centerOnScreen();
 						    				window2.attachURL("subirArchivo.do?tipoConsulta=TrabajoCampoInfo" + "&idTrabajoInfo=" + response);
-						    				setTimeout(function(){initProfesor();},1000);
+						    				setTimeout(function(){goActualizar("","false");},500);
 											
 										});
 							    	}
@@ -258,7 +275,7 @@
 										window.close();
 										//var url = "trabajos.do";
 										//location.href=url;
-										setTimeout(function(){initProfesor();},1000);
+										setTimeout(function(){goActualizar("","false");},500);
 									});
 									
 								}
@@ -350,7 +367,7 @@
 										window.close();
 										//var url = "trabajos.do";
 										//location.href=url;
-										setTimeout(function(){initProfesor();},1000);
+										setTimeout(function(){goActualizar("","false");},500);
 									});
 									
 								}
@@ -425,7 +442,7 @@
 					    				window2.centerOnScreen();
 					    				window2.attachURL("subirArchivo.do?tipoConsulta=TrabajoCampoInfo" + "&idTrabajoInfo=" + response);
 					    				ultimaAbierta = response;
-					    				setTimeout(function(){initProfesor();},1000);
+					    				setTimeout(function(){goActualizar(response,"true");},500);
 										
 									});
 						    	}
@@ -437,7 +454,7 @@
 									//var url = "trabajos.do";
 									//location.href=url;
 									ultimaAbierta = response;
-									setTimeout(function(){initProfesor();},1000);
+									setTimeout(function(){goActualizar(response,"true");},500);
 								});
 								
 							}
@@ -454,13 +471,19 @@
 				
 			}
 			
-			function goActualizar() {
+			function goActualizar(response,b) {
 				
 				if (profesor) {
 					var idTrabajoInfo = tabbar.getActiveTab();
-					ultimaAbierta=idTrabajoInfo;goActualizarMiGrid
-					gridProfesores.clearAndLoad("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&idTrabajoInfo=" + idTrabajoInfo);	
-					initProfesor();
+					if(b=="true"){
+						ultimaAbierta=response;
+					}
+					else ultimaAbierta=idTrabajoInfo;
+					//gridProfesores.clearAndLoad("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&idTrabajoInfo=" + idTrabajoInfo);						
+					tabbar.clearAll();
+					setTimeout(function(){
+						initProfesor();
+					},150);
 				}
 				else gridAlumnos.clearAndLoad("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);		    	
 		    			    	
@@ -625,9 +648,9 @@
 			}
 			
 			
-			function goGridProfesores(tab,idTrabajoInfo){
+			function goGridProfesores(idTrabajoInfo){
 				
-								
+				var tab = tabbar.cells(idTrabajoInfo);				
 				gridProfesores = tab.attachGrid();
 		    	
 				gridProfesores.setHeader(["<bean:message key="label.nombre" />","<bean:message key="label.apellido" />","<bean:message key="label.dni" />","<bean:message key="label.fecha.limite" />","<bean:message key="label.enlace.practica" />","<bean:message key="label.enlace.correccion" />"]);
@@ -773,7 +796,7 @@
 												window.close();
 												//var url = "trabajos.do";
 												//location.href=url;
-												setTimeout(function(){initProfesor();},1000);
+												setTimeout(function(){goActualizar("","false");},500);
 											});
 											
 										}
@@ -791,7 +814,7 @@
 		    }
 			
 			function goActualizarMiGrid(){
-				gridProfesores.clearSelection();
+				//gridProfesores.clearSelection();
 				if(miGridActivado){
 					miGrid.clearAll();
 				}
