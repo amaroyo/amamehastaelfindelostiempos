@@ -36,7 +36,7 @@ public class CerrarCursoAcademicoAction extends MrmAction {
 			String actual = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
 			String pasado = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)-1);
 			act = pasado + "/" + actual;
-			mensaje="Ha habido un error cerrando el curso académico.";
+			mensaje="0";
 		}
 		
 		
@@ -45,13 +45,13 @@ public class CerrarCursoAcademicoAction extends MrmAction {
 		int der = Integer.parseInt(spp[1]) + 1;
 		
 		if (izq - Calendar.getInstance().get(Calendar.YEAR) <= 1){
-			mensaje="Se ha cerrado satisfactoriamente el curso académico.";
+			mensaje="1";
 			request.getSession().setAttribute("anyoAcademico", izq + "/" + der);
 			e.setFecha(izq + "-01-01 00:00:01");
 			getErroresLogService().updateAnyo(e);
 		}
 		else {
-			mensaje = "Ya ha cerrado el curso académico. El proximo cierre de curso se realizará al año que siguiente.";
+			mensaje = "2";
 		}
 		
 		
