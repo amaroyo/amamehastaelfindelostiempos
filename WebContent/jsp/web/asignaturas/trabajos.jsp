@@ -23,7 +23,7 @@
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos, profesor,a,b, tabbar, idSession,miGrid,miGridActivado,anyoActual,ultimaAbierta,toolbarServicios;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos, profesor,a,b, tabbar, idSession,miGrid,miGridActivado,anyoActual,ultimaAbierta,toolbarServicios,trabajoCampo;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -472,7 +472,6 @@
 			}
 			
 			function goActualizar(response,b) {
-				
 				if (profesor) {
 					var idTrabajoInfo = tabbar.getActiveTab();
 					if(b=="true"){
@@ -485,7 +484,13 @@
 						initProfesor();
 					},150);
 				}
-				else gridAlumnos.clearAndLoad("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);		    	
+				else {
+					
+					
+					gridAlumnos.clearAndLoad("gridTrabajosCampoUsuarioAsignatura.do?idAsignatura=" + idAsignatura + "&idAlumno=" + idSession);
+					main_layout.cells("b").detachObject(true);
+					trabajoCampo = null;
+				}
 		    			    	
 		    }
 			
@@ -571,7 +576,7 @@
 					location.href=accion;
 				}
 				
-	    		var trabajoCampo = b.attachForm();
+	    		trabajoCampo = b.attachForm();
 		    	
 	    		trabajoCampo.loadStruct('../xml/forms/trabajo_de_campo.xml', function(){
 	    			trabajoCampo.setItemLabel('data','<bean:message key="title.info.general.trabajo.campo"/>');
