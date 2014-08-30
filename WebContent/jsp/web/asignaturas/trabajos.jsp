@@ -424,6 +424,7 @@
 					    				window2.setModal(true);
 					    				window2.centerOnScreen();
 					    				window2.attachURL("subirArchivo.do?tipoConsulta=TrabajoCampoInfo" + "&idTrabajoInfo=" + response);
+					    				ultimaAbierta = response;
 					    				setTimeout(function(){initProfesor();},1000);
 										
 									});
@@ -435,6 +436,7 @@
 									window.close();
 									//var url = "trabajos.do";
 									//location.href=url;
+									ultimaAbierta = response;
 									setTimeout(function(){initProfesor();},1000);
 								});
 								
