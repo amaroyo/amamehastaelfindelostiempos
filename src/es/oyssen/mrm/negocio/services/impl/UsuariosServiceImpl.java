@@ -198,5 +198,16 @@ public class UsuariosServiceImpl implements UsuariosService{
 			throw new ServiceException(e.getMessage());
 		}
 	}
+
+	@Override
+	public List<UsuarioVO> findIndefinidos() throws ServiceException {
+		try {
+			return daoUsuarios.findIndefinidos();
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findIndefinidos usuario", e);
+			throw new ServiceException(e.getMessage());
+		}
+	}
 	
 }

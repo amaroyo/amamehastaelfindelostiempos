@@ -43,6 +43,8 @@ public interface DAOUsuarios {
 	public void updateGrupo(UsuarioVO usuario) throws DAOException, DAOUpdateException;
 
 	public List<UsuarioAsignaturaVO> findAllByAsignatura(PortafolioVO p) throws DAOException;
+
+	public List<UsuarioVO> findIndefinidos() throws DAOException;
 	
 
 }

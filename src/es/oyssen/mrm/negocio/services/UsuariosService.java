@@ -41,5 +41,7 @@ public interface UsuariosService {
 
 	public List<UsuarioAsignaturaVO> findAllByAsignatura(PortafolioVO p) throws ServiceException;
 
+	public List<UsuarioVO> findIndefinidos() throws ServiceException;
+
 
 }
