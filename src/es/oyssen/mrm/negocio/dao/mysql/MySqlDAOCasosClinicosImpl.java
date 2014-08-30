@@ -20,9 +20,7 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.dao.rowmappers.CasoClinicoMapper;
-import es.oyssen.mrm.negocio.dao.rowmappers.PortafolioMapper;
 import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
-import es.oyssen.mrm.negocio.vo.PortafolioVO;
 
 
 public class MySqlDAOCasosClinicosImpl extends DAOBase implements DAOCasosClinicos{

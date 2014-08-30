@@ -7,7 +7,6 @@ import es.oyssen.mrm.negocio.dao.DAORubricas;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.RubricasService;
-import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.RubricaVO;
 
 public class RubricasServiceImpl implements RubricasService{

@@ -3,12 +3,9 @@ package es.oyssen.mrm.negocio.dao.mysql;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 
 import es.oyssen.mrm.negocio.dao.DAOBase;
 import es.oyssen.mrm.negocio.dao.DAORubricas;

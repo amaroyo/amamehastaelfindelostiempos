@@ -120,9 +120,6 @@
     		alert('<bean:message key="message.wrong.user.pass" />');
     	}
     	
-    	function initLock() {
-    		alert('<bean:message key="message.distributor.locked" />');
-    	}
     	
     	function failedForgotPassword() {
     		alert('<bean:message key="message.forgot.password.failed" />');
@@ -140,36 +137,11 @@
     		alert('<bean:message key="message.pass.cambiado.exito" />');
     	}
     	
-    	function goComerciales() {
-    		document.getElementById("areatrabajo").src="comerciales/inicio.do";
-    	}
-    	function goDistribuidores() {
-    		document.getElementById("areatrabajo").src="distribuidores/inicio.do";
-    	}
-    	function goServicios() {
-    		document.getElementById("areatrabajo").src="servicios/inicio.do";
-    	}
-    	function goLeads() {
-    		document.getElementById("areatrabajo").src="leads/inicio.do";
-    	}
-    	function goResponsables() {
-    		document.getElementById("areatrabajo").src="responsables/inicio.do";
-    	}
-    	function goEmpresas() {
-    		document.getElementById("areatrabajo").src="empresas/inicio.do";
-    	}
-    	function goCanales() {
-    		document.getElementById("areatrabajo").src="canales/inicio.do";
-    	}
     	function goGrupos() {
     		document.getElementById("areatrabajo").src="grupos/inicio.do";
     	}
     	function goUsuarios() {
     		document.getElementById("areatrabajo").src="usuarios/inicio.do";
-    	}
-    	
-    	function goLogsUsuarios() {
-    		document.getElementById("areatrabajo").src="logs/inicio.do";
     	}
     	function goMiPerfil() {
     		document.getElementById("areatrabajo").src="perfil/inicio.do";

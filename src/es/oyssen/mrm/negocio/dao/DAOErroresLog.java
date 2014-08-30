@@ -6,7 +6,6 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
-import es.oyssen.mrm.negocio.vo.AnexoVO;
 import es.oyssen.mrm.negocio.vo.ErrorLogVO;
 
 public interface DAOErroresLog {

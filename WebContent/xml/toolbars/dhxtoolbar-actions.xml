@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<toolbar> 
-		<item id="delete" type="button" img="delete.png" imgdis="delete_dis.png" text="Eliminar" enabled="false" action="deleteActionHistory" />
-		<item id="sep1" type="separator"/>
-		<item id="refresh" type="button" img="recargar.png" text="Actualizar" action="goActualizarActions"/>				
-</toolbar>

@@ -3,16 +3,16 @@ package es.oyssen.mrm.negocio.dao.mysql;
 import java.util.List;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+
 import es.oyssen.mrm.negocio.dao.DAOBase;
 import es.oyssen.mrm.negocio.dao.DAOUsuariosPermisos;
 import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.rowmappers.PermisoMapper;
-import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioPermisosMapper;
 import es.oyssen.mrm.negocio.vo.PermisoVO;
-import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioPermisosVO;
+import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
 
 public class MySqlDAOUsuariosPermisosImpl extends DAOBase implements DAOUsuariosPermisos{

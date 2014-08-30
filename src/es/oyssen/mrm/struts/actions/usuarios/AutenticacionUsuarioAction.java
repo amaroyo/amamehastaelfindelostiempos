@@ -13,7 +13,6 @@ import org.apache.struts.action.ActionMapping;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.vo.ErrorLogVO;
 import es.oyssen.mrm.negocio.vo.GrupoVO;
-import es.oyssen.mrm.negocio.vo.LogUsuarioVO;
 import es.oyssen.mrm.negocio.vo.PermisoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioYPermisos;
@@ -44,10 +43,6 @@ public class AutenticacionUsuarioAction extends MrmAction {
 			List<PermisoVO> permisosUsuario = getUsuariosPermisosService().findByUsuario(usuario);
 			permisosGrupo.addAll(permisosUsuario);
 			usuarioYPermisos.setPermisos(permisosGrupo);
-		 
-			LogUsuarioVO logUsuario = new LogUsuarioVO();
-			logUsuario.setIdUsuario(usuario.getIdUsuario());
-			getLogsUsuarioService().insert(logUsuario);
 
 
 			request.getSession().setAttribute("idGrupoUsuario", usuario.getIdGrupo());

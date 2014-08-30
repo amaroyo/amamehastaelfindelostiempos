@@ -5,8 +5,6 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import es.oyssen.mrm.negocio.vo.CriterioRubricaVO;
-import es.oyssen.mrm.negocio.vo.GrupoCriteriosRubricasVO;
 import es.oyssen.mrm.negocio.vo.GruposCriteriosRubricaAsignaturaVO;
 import es.oyssen.mrm.util.StringUtil;
 

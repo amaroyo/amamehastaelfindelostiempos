@@ -667,13 +667,13 @@
 	    	}
 	    	
 	    	function permisosAsignaturasForm(){
-	    		myForm.setReadOnly('nombre', true);
-	    		myForm.setReadOnly('codigo', true);
-	    		myForm.setReadOnly('curso', true);
+	    		formInfo.setReadonly('nombre', true);
+	    		formInfo.setReadonly('codigo', true);
+	    		formInfo.setReadonly('curso', true);
 	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<permiso>1</permiso>" >    	
 	    			formInfo.forEachItem(function(id){
 	    				if(getType(id) == "input"){
-	    			   		myForm.setReadOnly(id, true);
+	    					formInfo.setReadonly(id, true);
 	    				}
 	    				else if(getType(id) == "button"){
 	    					formInfo.hideItem(id);
@@ -746,16 +746,6 @@
 	    	    xmlhttp.open("GET",url,false);
 	    	    xmlhttp.send(null);
 	    	    return xmlhttp.onreadystatechange();
-	    	}
-			
-			function initRequest() {
-	    	    if (window.XMLHttpRequest) {
-	    	        xmlhttp = new XMLHttpRequest();
-	    	    } else if (window.ActiveXObject) {
-	    	        isIE = true;
-	    	        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	    	    }
-	    	    return xmlhttp;
 	    	}
 			
 			

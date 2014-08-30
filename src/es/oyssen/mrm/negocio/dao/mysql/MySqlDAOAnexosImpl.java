@@ -13,16 +13,14 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import es.oyssen.mrm.negocio.dao.DAOBase;
 import es.oyssen.mrm.negocio.dao.DAOAnexos;
+import es.oyssen.mrm.negocio.dao.DAOBase;
 import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.dao.rowmappers.AnexoMapper;
-import es.oyssen.mrm.negocio.dao.rowmappers.CasoClinicoMapper;
 import es.oyssen.mrm.negocio.vo.AnexoVO;
-import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 
 
 public class MySqlDAOAnexosImpl extends DAOBase implements DAOAnexos{

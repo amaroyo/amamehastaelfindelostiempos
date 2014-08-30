@@ -5,7 +5,6 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import es.oyssen.mrm.negocio.vo.AnexoVO;
 import es.oyssen.mrm.negocio.vo.InfoNombreTrabajoVO;
 import es.oyssen.mrm.util.StringUtil;
 

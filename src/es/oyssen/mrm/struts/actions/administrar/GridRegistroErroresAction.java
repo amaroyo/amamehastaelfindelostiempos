@@ -1,14 +1,8 @@
 package es.oyssen.mrm.struts.actions.administrar;
 
-import es.oyssen.mrm.negocio.vo.ErrorLogVO;
-import es.oyssen.mrm.negocio.vo.GrupoVO;
-import es.oyssen.mrm.negocio.vo.PortafolioVO;
-import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXGridAction;
 import es.oyssen.mrm.struts.forms.administrar.GridRegistroErroresForm;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
-import es.oyssen.mrm.struts.forms.usuarios.GridUsuariosForm;
-import es.oyssen.mrm.util.StringUtil;
 import es.oyssen.mrm.util.UtilXML;
 
 

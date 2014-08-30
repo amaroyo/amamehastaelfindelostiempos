@@ -10,7 +10,6 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.CriteriosRubricasService;
 import es.oyssen.mrm.negocio.vo.CriterioRubricaVO;
-import es.oyssen.mrm.negocio.vo.GruposCriteriosRubricaAsignaturaVO;
 
 public class CriteriosRubricasServiceImpl implements CriteriosRubricasService{
 	

@@ -1,6 +1,5 @@
 package es.oyssen.mrm.negocio.vo;
 
-import org.apache.struts.upload.FormFile;
 
 
 public class CasoClinicoVO { 

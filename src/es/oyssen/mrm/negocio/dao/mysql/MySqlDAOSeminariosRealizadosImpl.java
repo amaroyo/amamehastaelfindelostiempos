@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+
 import es.oyssen.mrm.negocio.dao.DAOBase;
 import es.oyssen.mrm.negocio.dao.DAOSeminariosRealizados;
 import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;

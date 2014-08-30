@@ -1,8 +1,5 @@
 package es.oyssen.mrm.negocio.dao.mysql;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

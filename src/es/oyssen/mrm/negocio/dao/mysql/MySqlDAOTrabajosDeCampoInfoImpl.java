@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -14,18 +13,12 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import es.oyssen.mrm.negocio.dao.DAOBase;
-import es.oyssen.mrm.negocio.dao.DAOAnexos;
 import es.oyssen.mrm.negocio.dao.DAOTrabajosDeCampoInfo;
 import es.oyssen.mrm.negocio.dao.exceptions.DAODeleteException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOInsertException;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
-import es.oyssen.mrm.negocio.dao.rowmappers.AnexoMapper;
-import es.oyssen.mrm.negocio.dao.rowmappers.RubricaMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.TrabajoDeCampoInfoMapper;
-import es.oyssen.mrm.negocio.dao.rowmappers.TrabajoDeCampoMapper;
-import es.oyssen.mrm.negocio.vo.AnexoVO;
-import es.oyssen.mrm.negocio.vo.RubricaVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoInfoVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 

@@ -4,24 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
-import es.oyssen.mrm.negocio.vo.AsignaturaVO;
-import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
-import es.oyssen.mrm.negocio.vo.ErrorLogVO;
-import es.oyssen.mrm.negocio.vo.GrupoVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.PuntuacionCriterioVO;
 import es.oyssen.mrm.negocio.vo.RubricaVO;
 import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXGridAction;
-import es.oyssen.mrm.struts.forms.administrar.GridAlumnosAptosCertificadoForm;
-import es.oyssen.mrm.struts.forms.administrar.GridRegistroErroresForm;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxGridForm;
-import es.oyssen.mrm.struts.forms.usuarios.GridUsuariosForm;
-import es.oyssen.mrm.util.StringUtil;
 import es.oyssen.mrm.util.UtilXML;
 
 

@@ -8,7 +8,6 @@ import es.oyssen.mrm.negocio.vo.InfoNombreTrabajoVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoInfoVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
-import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
 import es.oyssen.mrm.negocio.vo.UsuarioTrabajoCampoVO;
 
 public interface TrabajosDeCampoService {

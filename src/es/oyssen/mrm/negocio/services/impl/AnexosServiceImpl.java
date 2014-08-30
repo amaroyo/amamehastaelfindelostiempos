@@ -13,7 +13,6 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.AnexosService;
 import es.oyssen.mrm.negocio.vo.AnexoVO;
-import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoForm;
 
 public class AnexosServiceImpl implements AnexosService{

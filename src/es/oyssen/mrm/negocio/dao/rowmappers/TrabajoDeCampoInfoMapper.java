@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import org.apache.commons.io.IOUtils;
 import org.springframework.jdbc.core.RowMapper;
 
-import es.oyssen.mrm.negocio.vo.ServicioVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoInfoVO;
 import es.oyssen.mrm.util.StringUtil;
 

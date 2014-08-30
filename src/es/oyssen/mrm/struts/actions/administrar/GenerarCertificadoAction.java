@@ -26,9 +26,7 @@ import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.vo.AsignaturaVO;
 import es.oyssen.mrm.negocio.vo.EstanciaUnidadClinicaVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
-import es.oyssen.mrm.negocio.vo.PuntuacionCriterioVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
-import es.oyssen.mrm.struts.forms.administrar.GridAlumnosAptosCertificadoForm;
 
 public class GenerarCertificadoAction extends MrmAction {
 

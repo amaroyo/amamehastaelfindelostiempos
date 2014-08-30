@@ -1,7 +1,6 @@
 package es.oyssen.mrm.struts.actions.administrar;
 
 import java.io.InputStream;
-import java.io.OutputStream;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -11,12 +10,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
-import es.oyssen.mrm.negocio.vo.DiarioReflexivoVO;
-import es.oyssen.mrm.negocio.vo.ErrorLogVO;
-import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
-import es.oyssen.mrm.struts.forms.asignaturas.DescargarForm;
 
 public class CopiaSeguridadAction extends MrmAction {
 

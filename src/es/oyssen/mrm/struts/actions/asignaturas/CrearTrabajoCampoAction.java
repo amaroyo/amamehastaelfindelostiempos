@@ -2,13 +2,10 @@ package es.oyssen.mrm.struts.actions.asignaturas;
 
 
 import java.util.List;
-import java.util.zip.ZipEntry;
 
-import es.oyssen.mrm.negocio.vo.CasoClinicoVO;
 import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoInfoVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
-import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXFormAction;
 import es.oyssen.mrm.struts.forms.asignaturas.CrearTrabajoCampoForm;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxForm;

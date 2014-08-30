@@ -9,7 +9,6 @@ import es.oyssen.mrm.negocio.vo.PuntuacionCriterioVO;
 import es.oyssen.mrm.struts.actions.dhtmlx.DHTMLXFormAction;
 import es.oyssen.mrm.struts.forms.asignaturas.NotasRubricaForm;
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxForm;
-import es.oyssen.mrm.util.StringUtil;
 
 
 public class NotasRubricaAction extends DHTMLXFormAction {

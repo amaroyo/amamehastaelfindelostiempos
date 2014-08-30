@@ -1,8 +1,6 @@
 package es.oyssen.mrm.struts.actions.asignaturas;
 
 import java.io.InputStream;
-import com.aeat.valida.Validador;
-
 import java.security.SecureRandom;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -22,6 +20,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.aeat.valida.Validador;
+
 import es.oyssen.mrm.negocio.vo.AsignaturaVO;
 import es.oyssen.mrm.negocio.vo.ErrorLogVO;
 import es.oyssen.mrm.negocio.vo.EstanciaUnidadClinicaVO;
@@ -30,7 +30,6 @@ import es.oyssen.mrm.negocio.vo.ProfesorAsociadoVO;
 import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
-import es.oyssen.mrm.struts.actions.usuarios.ForgotPasswordAction;
 import es.oyssen.mrm.struts.forms.asignaturas.SubirArchivoForm;
 import es.oyssen.mrm.util.EncriptarUtil;
 import es.oyssen.mrm.util.ExcelUtil;

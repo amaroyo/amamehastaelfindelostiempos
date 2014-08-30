@@ -1,6 +1,7 @@
 package es.oyssen.mrm.struts.actions.cursos;
 
 import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

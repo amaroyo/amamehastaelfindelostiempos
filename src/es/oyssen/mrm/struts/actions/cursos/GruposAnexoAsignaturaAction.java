@@ -14,7 +14,6 @@ import org.apache.struts.action.ActionMapping;
 import es.oyssen.mrm.negocio.vo.GrupoCriteriosRubricasVO;
 import es.oyssen.mrm.negocio.vo.GruposCriteriosRubricaAsignaturaVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
-import es.oyssen.mrm.struts.forms.cursos.EditarAsignaturaForm;
 
 public class GruposAnexoAsignaturaAction extends MrmAction {
 

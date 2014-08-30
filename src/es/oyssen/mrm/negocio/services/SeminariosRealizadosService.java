@@ -9,8 +9,6 @@ import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaAnyoVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
 import es.oyssen.mrm.negocio.vo.SeminarioRealizadoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
-import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
-import es.oyssen.mrm.negocio.vo.UsuarioVO;
 
 public interface SeminariosRealizadosService {
 	

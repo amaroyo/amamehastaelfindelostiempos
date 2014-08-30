@@ -5,7 +5,6 @@ import java.util.List;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.vo.CriterioRubricaVO;
-import es.oyssen.mrm.negocio.vo.GruposCriteriosRubricaAsignaturaVO;
 
 public interface CriteriosRubricasService {
 	

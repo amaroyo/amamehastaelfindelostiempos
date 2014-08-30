@@ -1,7 +1,5 @@
 package es.oyssen.mrm.listeners;
 
-import java.util.List;
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -11,9 +9,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import es.oyssen.mrm.config.ExposablePropertyPaceholderConfigurer;
-import es.oyssen.mrm.negocio.dao.DAOMarketingActivities;
-import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
-import es.oyssen.mrm.negocio.vo.MarketingActivityVO;
 
 
 public class MrmContextListener implements ServletContextListener {
@@ -32,13 +27,7 @@ public class MrmContextListener implements ServletContextListener {
 		ExposablePropertyPaceholderConfigurer configurer = (ExposablePropertyPaceholderConfigurer) appContext.getBean("propertyConfigurer");
 		ctx.getServletContext().setAttribute("configProperties", configurer.getResolvedProps());
 		
-		DAOMarketingActivities daoMarketing = (DAOMarketingActivities) appContext.getBean("daoMarketingActivities");
-		try {
-			List<MarketingActivityVO> marketingActivities = daoMarketing.findAll();
-			ctx.getServletContext().setAttribute("marketing_activities", marketingActivities);
-		} catch (DAOException e) {
-			e.printStackTrace();
-		}		
+				
 		
 		log.debug("Contexto inicializado: mrm");		
 	}
