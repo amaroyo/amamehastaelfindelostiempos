@@ -296,7 +296,7 @@ public class SubirArchivoAction extends MrmAction {
 					if(usuarioCorrecto){
 						PortafolioVO p = ExcelUtil.parsearPortafolio(row);
 						p.setIdAlumno(usuario.getIdUsuario());						
-						p.setIdProfesor("8"); //profesor No Asignado
+						p.setIdProfesor("1"); //profesor No Asignado
 						
 						if(p.getAnyoAcademico().equals("")){
 							usuarioCorrecto=false;

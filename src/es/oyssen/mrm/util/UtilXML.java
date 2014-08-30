@@ -125,7 +125,7 @@ public class UtilXML {
 		sb.append("<rows>");
 		if(list != null){
 			for (UsuarioVO usuario : list) {
-				if(!usuario.getIdUsuario().equals("8")){
+				if(!usuario.getIdUsuario().equals("1")){
 					sb.append("<row id=\"" +usuario.getIdUsuario() + "\">");
 					sb.append("<cell><![CDATA[" + nombreGrupo(StringUtil.nullToString(usuario.getIdGrupo())) + "]]></cell>");
 					sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getNombre()) + "]]></cell>");
@@ -280,7 +280,7 @@ public class UtilXML {
 		sb.append("<rows>");
 		if(list != null){
 			for (UsuarioVO usuario : list) {
-				if(!usuario.getIdUsuario().equals("8")){
+				if(!usuario.getIdUsuario().equals("1")){
 					sb.append("<row id=\"" +usuario.getIdUsuario() + "\">");			
 					sb.append("<cell><![CDATA[" + StringUtil.nullToString(usuario.getNombre()) + "]]></cell>");
 					

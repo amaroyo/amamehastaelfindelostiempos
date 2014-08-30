@@ -160,8 +160,7 @@
 			    		toolbarServicios.hideItem('sep1');
 			    		toolbarServicios.hideItem('modificarTrabajoCampo');
 			    		toolbarServicios.hideItem('sep2');
-			    		toolbarServicios.hideItem('descargarTodos');
-			    		toolbarServicios.hideItem('sep4');
+			    		
 			    		toolbarServicios.hideItem('fechaLimite');
 			    		toolbarServicios.hideItem('sep6');			    	
 			    	</logic:notMatch>
