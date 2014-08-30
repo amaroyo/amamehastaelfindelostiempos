@@ -67,7 +67,10 @@
 	    					
     						var mensaje;
     						mensaje = cerrarCursoAcademico();  
-    						alert(mensaje);
+    						
+    						if (mensaje == "0"){alert('<bean:message key="message.error.cambio.anyo.academico"/>');}
+    						else if (mensaje == "1"){alert('<bean:message key="message.bien.cambio.anyo.academico"/>');}
+    						else alert('<bean:message key="message.bien.cerrado.anyo.academico"/>');
     						mywindow.close();
 	    					goEntrada();
 	    					
