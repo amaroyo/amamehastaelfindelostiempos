@@ -17,7 +17,7 @@
 		    
 	    	dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
 	    	
-	    	var gridLeads, toolbarUsuarios, tabbar,tab_1,tab_2, formUsuario, idSelectedUserService, toolbarServicios, gridServicios, idSelectedUser,formNewUser;
+	    	var gridLeads, toolbarUsuarios, tabbar,tab_1,tab_2, formUsuario, idSelectedUserService, toolbarServicios, gridServicios, idSelectedUser,formNewUser,idSelectedPermisoIndividuo,idUsuario;
 	    	
 	    	
 		    dhtmlxEvent(window,"load",function() {
@@ -149,17 +149,46 @@
 		    	
 			    	
 			    	
-			    	tabbar.addTab('tab_2','<bean:message key="layout.allowed.actions"/>','');
+			    	tabbar.addTab('tab_2','<bean:message key="layout.allowed.action.usuario"/>','');
 			    	tab_2 = tabbar.cells('tab_2');
+			    	
+			    	toolbarPermisos = tab_2.attachToolbar();
+				   	toolbarPermisos.setIconsPath('../img/toolbar/');
+			    	
+				   	toolbarPermisos.loadXML('../xml/toolbars/dhxtoolbar-permisos.xml', function(){
+				   		toolbarPermisos.setItemText('new',"<bean:message key="button.add.permission"/>");
+				   		toolbarPermisos.setItemText('delete',"<bean:message key="button.eliminar"/>");
+				   		toolbarPermisos.setItemText('refresh',"<bean:message key="button.actualizar"/>");
+			    	});
+			    	
+			    	
 			    	gridPermisos = tab_2.attachGrid();
 			    	gridPermisos.setIconsPath('../skins/imgs/');			    	
 			    	gridPermisos.setHeader(["<bean:message key="label.nombre" />"]);
 			    	gridPermisos.setColTypes("ro");			    	
 			    	gridPermisos.setColSorting('str');
-			    	idGrupo = 1;
-			    	gridPermisos.load("../grupos/gridpermisosgrupo.do?idUsuario="+idUsuario);			    	
+
+			    	gridPermisos.load();			    	
 			    	gridPermisos.init();
 			    	
+			    	
+
+			    	gridPermisosProcessor = new dataProcessor("gridpermisosusuario.do?idUsuario="+idUsuario);
+			    	gridPermisosProcessor.enableUTFencoding('simple');
+			    	gridPermisosProcessor.init(gridPermisos);	  
+			    	gridPermisosProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
+						if(action == 'error'){
+			    			dhtmlx.message(tag.firstChild.data,action,4000);
+			    		}
+			    	});		    	
+			    	
+			    	gridPermisos.clearAndLoad("gridpermisosusuario.do?idUsuario="+idUsuario);
+					
+			    	
+			    	gridPermisos.attachEvent("onRowSelect", function(idPermisoIndividuo,ind){
+			    		idSelectedPermisoIndividuo = idPermisoIndividuo;
+			    		toolbarPermisos.enableItem('delete');
+			    	});
 			    	
 			    	
 			    	
@@ -290,6 +319,49 @@
 	    	    return parts[parts.length - 1];
 	    	}
 	    	
+	    	
+	    	function goActualizarPermisosGrupo() {
+		    	toolbarPermisos.disableItem('delete');
+		    	gridPermisos.clearAndLoad("gridpermisosusuario.do?idUsuario="+idUsuario);
+		    }
+		    
+		    function deletePermisoGrupo() {
+		    	if (confirm("<bean:message key="message.confirm.delete.permission.group"/>")) {
+		    		gridPermisos.deleteSelectedRows();
+		    		goActualizarPermisosGrupo();
+		    	}
+		    }
+		    
+		    function newPermisoGrupo() {
+		    	var dhxWins= new dhtmlXWindows();
+				var window = dhxWins.createWindow("contact", 300,50, 400, 160);
+				window.setText('<bean:message key="layout.add.permission" />');				
+				window.setModal(true);
+				window.centerOnScreen();
+				var form = window.attachForm();			
+		    	form.loadStruct('../xml/forms/add_permiso_form.xml', function() {
+		    		form.setItemLabel('data','<bean:message key="title.info.general"/>');
+		    		form.setItemLabel('idPermiso','<bean:message key="label.permission"/>');
+		    		form.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
+		    		form.getCombo('idPermiso').readonly(1);
+		    		form.getCombo('idPermiso').loadXML("listarpermisos.do?idUsuario=" + idUsuario);
+		    		
+		    		
+		    		form.attachEvent("onButtonClick", function(id){
+		    			var permiso = form.getItemValue("idPermiso");
+		    			if(permiso != ""){
+		    				if (id == "aceptar") {
+			    				form.send("actualizarpermisogrupo.do?!nativeeditor_status=save&idUsuario=" + idUsuario,"post", function(xml) {
+			    					window.close();
+			    					goActualizarPermisosGrupo();
+			    				});
+			    				
+		    				}
+		    			}
+		    		});
+		    		
+		    	});
+		    }
 		    
 		    
 	 	</script>

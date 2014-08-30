@@ -55,6 +55,19 @@ public class UsuariosPermisosServiceImpl implements UsuariosPermisosService{
 			log.error("Error creando el permiso para el usuario", e);
 			throw new ServiceException(e);
 		}
+	}
+
+
+	@Override
+	public List<PermisoVO> findRestantes(UsuarioPermisosVO up)
+			throws ServiceException {
+		try {
+			return daoUsuariosPermisos.findRestantes(up);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			log.error("Error findRestantes usuario permiso", e);
+			throw new ServiceException(e);
+		}
 	}			
 	
 }

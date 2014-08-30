@@ -68,11 +68,11 @@
 			    	gridPermisos.setHeader(["<bean:message key="label.nombre" />"]);
 			    	gridPermisos.setColTypes("ro");			    	
 			    	gridPermisos.setColSorting('str');
-			    	gridPermisos.load("gridpermisosgrupo.do?idGrupo="+idGrupo);			    	
+			    		    	
 			    	gridPermisos.init();
 			    	
 
-			    	gridPermisosProcessor = new dataProcessor("gridpermisosgrupo.do");
+			    	gridPermisosProcessor = new dataProcessor("gridpermisosgrupo.do?idGrupo="+idGrupo);
 			    	gridPermisosProcessor.enableUTFencoding('simple');
 			    	gridPermisosProcessor.init(gridPermisos);	  
 			    	gridPermisosProcessor.attachEvent("onAfterUpdate", function(sid, action, tid, tag){
@@ -80,6 +80,9 @@
 			    			dhtmlx.message(tag.firstChild.data,action,4000);
 			    		}
 			    	});		    	
+			    	
+			    	gridPermisos.clearAndLoad("gridpermisosgrupo.do?idGrupo="+idGrupo);
+					
 			    	
 			    	gridPermisos.attachEvent("onRowSelect", function(idPermisoGrupo,ind){
 			    		idSelectedPermisoGrupo = idPermisoGrupo;
@@ -218,12 +221,16 @@
 		    		form.getCombo('idPermiso').loadXML("listarpermisos.do?idGrupo=" + idSelectedGroup);
 		    		
 		    		form.attachEvent("onButtonClick", function(id){
-	    				if (id == "aceptar") {
-		    				form.send("actualizarpermisogrupo.do?!nativeeditor_status=save&idGrupo=" + idSelectedGroup,"post", function(xml) {
-		    					
-		    				});
-		    				window.close();
-	    				}
+		    			var permiso = form.getItemValue("idPermiso");
+		    			if(permiso != ""){
+		    				if (id == "aceptar") {
+			    				form.send("actualizarpermisogrupo.do?!nativeeditor_status=save&idGrupo=" + idSelectedGroup,"post", function(xml) {
+			    					window.close();
+			    					goActualizarPermisosGrupo();
+			    				});
+			    				
+		    				}
+		    			}
 		    		});
 		    		
 		    	});

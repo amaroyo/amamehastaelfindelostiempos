@@ -583,6 +583,22 @@ public class UtilXML {
 		return sb.toString();
 
 	}
+	
+	public static String buildXmlGridPermisosUsuario(List<PermisoVO> list, UsuarioVO u) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(XML_HEADER);	
+		sb.append("<rows>");
+		if(list != null){
+			for (PermisoVO permisoUsuario : list) {
+				sb.append("<row id=\"" +permisoUsuario.getIdPermiso()+ "-" + u.getIdUsuario()+ "\">");
+				sb.append("<cell><![CDATA[" + StringUtil.nullToString(permisoUsuario.getNombre()) + "]]></cell>");
+				sb.append("</row>");
+			}
+		}
+		sb.append("</rows>");
+		return sb.toString();
+	}
+
 
 	public static final String buildXmlGridUsuarios(List<UsuarioVO> list) throws Exception {
 		StringBuffer sb = new StringBuffer();
@@ -1109,6 +1125,7 @@ public class UtilXML {
 
 	}
 
+	
 
 	
 
