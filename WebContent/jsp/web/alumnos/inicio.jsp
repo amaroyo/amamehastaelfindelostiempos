@@ -677,7 +677,7 @@
 		    		toolbarServicios.setItemText('modificarTrabajoCampo',"<bean:message key="button.cambiar.trabajo.campo"/>");
 		    		toolbarServicios.setItemText('subirPractica',"<bean:message key="button.subir.practica"/>");
 		    		toolbarServicios.setItemText('descargarTodos',"<bean:message key="button.descargar.trabajos"/>");
-		    		toolbarServicios.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.casos.alumno"/>");
+		    		toolbarServicios.setItemText('descargarTodosAlumno',"<bean:message key="button.descargar.trabajos.alumno"/>");
 		    		toolbarServicios.setItemText('fechaLimite',"<bean:message key="button.fecha.limite"/>");
 		    		toolbarServicios.setItemText('refresh',"<bean:message key="button.actualizar"/>");
 		    		
@@ -691,8 +691,7 @@
 		    		toolbarServicios.hideItem('sep4');
 		    		toolbarServicios.hideItem('fechaLimite');
 		    		toolbarServicios.hideItem('sep6');
-		    		toolbarServicios.hideItem('descargarTodosAlumno');
-		    		toolbarServicios.hideItem('sep5');
+		    		
 		    		
 		    		
 		    	});
