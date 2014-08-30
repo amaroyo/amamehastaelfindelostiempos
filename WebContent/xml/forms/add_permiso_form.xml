@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <items>
    <item type="fieldset" name="data" label="Información general" inputWidth="auto">
-       <item type="combo" name="idPermiso" label="Permiso" labelWidth="100" width="150" />     	    
+       <item type="combo" name="idPermiso" label="Permiso" labelWidth="100" width="190" />     	    
    </item>
    
    

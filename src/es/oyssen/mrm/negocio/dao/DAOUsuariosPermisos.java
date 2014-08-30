@@ -17,4 +17,6 @@ public interface DAOUsuariosPermisos {
 	
 	public void delete(UsuarioPermisosVO usuarioPermiso) throws DAOException, DAODeleteException;
 
+	public List<PermisoVO> findRestantes(UsuarioPermisosVO up)  throws DAOException;
+
 }

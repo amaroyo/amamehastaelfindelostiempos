@@ -9,6 +9,8 @@
 		
 		<form-bean name="GridServiciosUsuarioForm" type="es.oyssen.mrm.struts.forms.servicios.usuario.GridServiciosUsuarioForm" />
 		<form-bean name="EditarServicioUsuarioForm" type="es.oyssen.mrm.struts.forms.servicios.usuario.ServiciosUsuarioForm" />
+		<form-bean name="GridPermisosUsuarioForm" type="es.oyssen.mrm.struts.forms.permisos.usuario.GridPermisosUsuarioForm" />
+		<form-bean name="EditarPermisosGrupoForm" type="es.oyssen.mrm.struts.forms.permisos.grupo.PermisosGrupoForm" />
 	</form-beans>
 	
 
@@ -24,6 +26,13 @@
 		<action path="/usuarios/gridserviciosusuario" name="GridServiciosUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.servicios.usuario.GridServiciosUsuarioAction"  />
 		
 		<action path="/usuarios/actualizarserviciousuario" name="EditarServicioUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.servicios.usuario.EditarServicioUsuarioAction"  />
+		
+		<action path="/usuarios/gridpermisosusuario" name="GridPermisosUsuarioForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.permisos.usuario.GridPermisosUsuarioAction" />
+		
+		<action path="/usuarios/listarpermisos" name="" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.permisos.ListarPermisosAction"  />
+		
+		<action path="/usuarios/actualizarpermisogrupo" name="EditarPermisosGrupoForm" scope="request" validate="false" type="es.oyssen.mrm.struts.actions.permisos.grupo.EditarPermisoGrupoAction"  />
+		
 		
 	</action-mappings>
 

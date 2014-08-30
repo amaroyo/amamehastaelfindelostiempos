@@ -20,7 +20,12 @@ public class MySqlDAOUsuariosPermisosImpl extends DAOBase implements DAOUsuarios
 	private static String SQL_INSERT = "insert into usuarios_permisos (id_usuario, id_permiso) values (?,?)";
 	private static String SQL_DELETE = "delete from usuarios_permisos where (id_usuario, id_permiso) = (?,?)";
 	private static String SQL_FIND_BY_GRUPO = "select p.* from usuarios_permisos as up, permisos as p where p.id_permiso = up.id_permiso and up.id_usuario = ?";
-	
+	private static String SQL_FIND_DEMAS = "select * "+
+											"from permisos "+
+											"where id_permiso not in "+
+											"(select up.id_permiso "+
+											"from usuarios_permisos as up "+
+											"where up.id_usuario=?)";
 	
 	public void insert(final UsuarioPermisosVO usuarioPermiso) throws DAOException,
 			DAOInsertException {
@@ -46,6 +51,19 @@ public class MySqlDAOUsuariosPermisosImpl extends DAOBase implements DAOUsuarios
 	public List<PermisoVO> findByUsuario(UsuarioVO usuario) throws DAOException {
 		try {
 			return getJdbcTemplate().query(SQL_FIND_BY_GRUPO, new Object[]{usuario.getIdUsuario()}, new PermisoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+
+
+	@Override
+	public List<PermisoVO> findRestantes(UsuarioPermisosVO up)
+			throws DAOException {
+		try {
+			return getJdbcTemplate().query(SQL_FIND_DEMAS, new Object[]{up.getIdUsuario()}, new PermisoMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

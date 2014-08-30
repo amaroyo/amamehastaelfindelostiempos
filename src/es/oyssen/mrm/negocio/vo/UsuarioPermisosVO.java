@@ -14,7 +14,7 @@ public class UsuarioPermisosVO {
 
 
 	public UsuarioPermisosVO(String id_usuario, String id_permiso) {
-		super();
+		
 		this.id_usuario = id_usuario;
 		this.id_permiso = id_permiso;
 	}

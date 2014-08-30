@@ -14,6 +14,8 @@ public interface UsuariosPermisosService {
 	
 	public void insert(UsuarioPermisosVO usuarioPermiso) throws ServiceException;
 	
-	public void delete(UsuarioPermisosVO usuarioPermiso) throws ServiceException;	
+	public void delete(UsuarioPermisosVO usuarioPermiso) throws ServiceException;
+
+	public List<PermisoVO> findRestantes(UsuarioPermisosVO up) throws ServiceException;
 
 }

@@ -1,4 +1,4 @@
-package es.oyssen.mrm.struts.forms.permisos.grupo;
+package es.oyssen.mrm.struts.forms.permisos.usuario;
 
 import es.oyssen.mrm.struts.forms.dhtmlx.DhtmlxForm;
 
@@ -6,7 +6,6 @@ public class PermisosGrupoForm extends DhtmlxForm {
 
 	private String idPermiso;
 	private String idGrupo;
-	private String idUsuario;
 	
 	
 	public String getIdPermiso() {
@@ -23,16 +22,6 @@ public class PermisosGrupoForm extends DhtmlxForm {
 	
 	public void setIdGrupo(String idGrupo) {
 		this.idGrupo = idGrupo;
-	}
-
-	public String getIdUsuario() {
-		return idUsuario;
-	}
-
-	public void setIdUsuario(String idUsuario) {
-		this.idUsuario = idUsuario;
 	} 
-	
-	
 
 }
