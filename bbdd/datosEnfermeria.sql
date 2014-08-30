@@ -868,18 +868,7 @@ insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) 
 insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 8, 3, '2013/2014'); -- id6
 insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 8, 1, '2012/2013'); -- id7
 
--- Pruebas para elcerficicado
-insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (5, 8, 3, '2013/2014'); 
-insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (5, 8, 4, '2013/2014');
-insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (5, 8, 5, '2013/2014');
-insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (5, 8, 6, '2013/2014');
-insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (5, 8, 7, '2013/2014'); 
 
-insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 8, 1, '2013/2014'); 
-insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 8, 4, '2013/2014');
-insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 8, 5, '2013/2014');
-insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 8, 6, '2013/2014');
-insert into portafolios (id_alumno, id_profesor, id_asignatura, anyo_academico) values (6, 8, 7, '2013/2014'); 
 
 
 
@@ -894,8 +883,6 @@ insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_cli
 insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (6,'12 de Octubre', 'AA', 'T - Tarde', '2013-09-01', '2014-06-26');
 
 
-insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (9,'12 de Octubre', 'Partamen', 'T - Tarde', '2013-10-01', '2014-02-15');
-insert into estancias_unidad_clinica (id_portafolio, centro_asociado, unidad_clinica, turno, fecha_inicio, fecha_fin) values (10,'12 de Octubre', 'Urgencias', 'T - Tarde', '2013-07-01', '2014-06-26');
 
 
 -- Trabajos de Campo info
