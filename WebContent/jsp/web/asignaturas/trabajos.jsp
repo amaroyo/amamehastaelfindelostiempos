@@ -23,7 +23,7 @@
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos, profesor,a,b, tabbar, idSession,miGrid,miGridActivado,anyoActual;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesores,gridAlumnos, profesor,a,b, tabbar, idSession,miGrid,miGridActivado,anyoActual,ultimaAbierta;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -43,7 +43,7 @@
 	    		
 	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
 					profesor=true;
-					
+					ultimaAbierta="-1";
 					main_layout = new dhtmlXLayoutObject(document.body, '2U');
 		    		a = main_layout.cells('a');
 		    		b = main_layout.cells('b');
@@ -86,11 +86,13 @@
 	    			//no se como hacer que sea activa y que ademas este seleccionada para 
 	    			//disparar al metodo onSelect para que lo rellene con datos...
 			    	//alert("Cargando...." + (i+1) + "/" + numTrabajosCampo + " prácticas. Por favor, espere...");
-	    			if(i==0) tabbar.setTabActive(idTrabajoInfo);
+	    			
+	    			if(i==0 && ultimaAbierta == "-1") tabbar.setTabActive(idTrabajoInfo);
 	    			
 	    			initTabContent(idTrabajoInfo);
 	    		}
 	    		
+	    		if(ultimaAbierta != "-1") tabbar.setTabActive(ultimaAbierta);
 	    		tabbar.attachEvent("onTabClick", function(id, lastId){
 	    			goActualizarMiGrid();
 	    		});
@@ -454,6 +456,7 @@
 				
 				if (profesor) {
 					var idTrabajoInfo = tabbar.getActiveTab();
+					ultimaAbierta=idTrabajoInfo;goActualizarMiGrid
 					gridProfesores.clearAndLoad("gridUsuariosTrabajosCampoAsignatura.do?idAsignatura=" + idAsignatura + "&idTrabajoInfo=" + idTrabajoInfo);	
 					initProfesor();
 				}
