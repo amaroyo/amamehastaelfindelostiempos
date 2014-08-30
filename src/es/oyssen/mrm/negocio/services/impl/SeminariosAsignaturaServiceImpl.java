@@ -9,6 +9,7 @@ import es.oyssen.mrm.negocio.dao.DAOSeminariosAsignatura;
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
 import es.oyssen.mrm.negocio.services.SeminariosAsignaturaService;
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaCodigoVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
 import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
@@ -114,10 +115,10 @@ public class SeminariosAsignaturaServiceImpl implements SeminariosAsignaturaServ
 	}
 
 	@Override
-	public List<UsuarioPortafolioVO> findAlumnosMissing(SeminarioAsignaturaVO sa)
+	public List<UsuarioPortafolioVO> findAlumnosMissing(SeminarioAsignaturaVO sa, PortafolioVO p)
 			throws ServiceException {
 		try {
-			return daoSeminariosAsignatura.findAlumnosMissing(sa);
+			return daoSeminariosAsignatura.findAlumnosMissing(sa,p);
 		} catch (DAOException e) {
 			e.printStackTrace();
 			log.error("Error findById findAlumnosMissing seminario asignatura", e);

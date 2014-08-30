@@ -26,7 +26,7 @@ import es.oyssen.mrm.negocio.vo.UsuarioAnyoSeminarioVO;
 
 public class MySqlDAOSeminariosRealizadosImpl extends DAOBase implements DAOSeminariosRealizados{
 
-	private static String SQL_INSERT = "insert into seminarios_realizados (id_seminario,id_portafolio) values (?,?)";
+	private static String SQL_INSERT = "insert into seminarios_realizados (id_portafolio,id_seminario) values (?,?)";
 	private static String SQL_UPDATE = "";
 	private static String SQL_DELETE = "delete from seminarios_realizados where id_portafolio = ? and id_seminario = ?";
 	private static String SQL_FIND_BY_PORTAFOLIO = "select * from seminarios_realizados where id_portafolio = ?";

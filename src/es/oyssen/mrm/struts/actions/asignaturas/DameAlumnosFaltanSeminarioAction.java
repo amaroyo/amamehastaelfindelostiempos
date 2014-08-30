@@ -21,7 +21,7 @@ import es.oyssen.mrm.negocio.vo.TrabajoDeCampoVO;
 import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
 import es.oyssen.mrm.struts.actions.MrmAction;
 
-public class DameAlumnosFaltanSeminario extends MrmAction {
+public class DameAlumnosFaltanSeminarioAction extends MrmAction {
 
 	@Override
 	public ActionForward process(ActionMapping mapping, ActionForm form,
@@ -31,12 +31,16 @@ public class DameAlumnosFaltanSeminario extends MrmAction {
 
 		String idSeminario = (String) request.getParameter("idSeminario");
 		String idAsignatura = (String) request.getParameter("idAsignatura");
+		String anyoAcademico = (String) request.getSession().getAttribute("anyoAcademico");
+
+		PortafolioVO p = new PortafolioVO();
+		p.setAnyoAcademico(anyoAcademico);
 		
 		SeminarioAsignaturaVO sa = new SeminarioAsignaturaVO();
 		sa.setIdSeminario(idSeminario);
 		sa.setIdAsignatura(idAsignatura);
 		
-		List<UsuarioPortafolioVO> list = getSeminariosAsignaturaService().findAlumnosMissing(sa);
+		List<UsuarioPortafolioVO> list = getSeminariosAsignaturaService().findAlumnosMissing(sa,p);
 		
 		response.setContentType("text/xml;charset=utf-8");
 		PrintWriter out;

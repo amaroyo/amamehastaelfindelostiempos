@@ -7,10 +7,8 @@
 		  labelWidth="80"
 		  labelAlign="center"
 		  inputHeight="20"
-		  inputWidth="200"
-		/>
-       
-       <item type="input" name="anyo" label="Curo Academico" position="label-top"/>
+		  inputWidth="270"
+		/> 
 
    </item>
    <item type="button" name="aceptar" value="Añadir Alumno" align="right"/>
