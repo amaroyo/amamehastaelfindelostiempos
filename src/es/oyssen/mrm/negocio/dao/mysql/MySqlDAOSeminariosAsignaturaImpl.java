@@ -19,6 +19,7 @@ import es.oyssen.mrm.negocio.dao.exceptions.DAOUpdateException;
 import es.oyssen.mrm.negocio.dao.rowmappers.SeminarioAsignaturaCodigoMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.SeminarioAsignaturaMapper;
 import es.oyssen.mrm.negocio.dao.rowmappers.UsuarioPortafolioMapper;
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaCodigoVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
 import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
@@ -43,9 +44,12 @@ public class MySqlDAOSeminariosAsignaturaImpl extends DAOBase implements DAOSemi
 	
 	private static String SQL_FIND_ALUMNOS_MISSING = "select u.id_usuario, u.correo, u.nombre, u.apellido1, u.apellido2, u.dni, u.telefono, p.id_portafolio "+
 														"from portafolios as p, usuarios as u "+
-														"where p.id_asignatura=? and p.id_portafolio not in(select s.id_portafolio "+
-														"from seminarios_realizados as s "+
-														"where s.id_seminario=?)";
+														"where p.id_alumno = u.id_usuario and p.id_asignatura=? and p.anyo_academico=? "+
+														"and u.dni not in ( "+
+														"select uu.dni "+
+														"from seminarios_realizados as s, portafolios as pp, usuarios as uu "+
+														"where s.id_seminario=? and s.id_portafolio = pp.id_portafolio and "+
+														"pp.id_alumno=uu.id_usuario)";
 
 	public void insert(final SeminarioAsignaturaVO seminarioAsignatura) throws DAOException,
 	DAOInsertException {
@@ -154,10 +158,10 @@ public class MySqlDAOSeminariosAsignaturaImpl extends DAOBase implements DAOSemi
 	}
 
 	@Override
-	public List<UsuarioPortafolioVO> findAlumnosMissing(SeminarioAsignaturaVO sa)
+	public List<UsuarioPortafolioVO> findAlumnosMissing(SeminarioAsignaturaVO sa, PortafolioVO p)
 			throws DAOException {
 		try {
-			return getJdbcTemplate().query(SQL_FIND_ALUMNOS_MISSING, new Object[]{sa.getIdAsignatura(), sa.getIdSeminario()}, new UsuarioPortafolioMapper());
+			return getJdbcTemplate().query(SQL_FIND_ALUMNOS_MISSING, new Object[]{sa.getIdAsignatura(),p.getAnyoAcademico(), sa.getIdSeminario()}, new UsuarioPortafolioMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		} catch (Exception e) {

@@ -21,7 +21,7 @@
 	    <script type="text/javascript">
 	    
     		dhtmlx.image_path='../js/dhtmlxSuite/imgs/';
-	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesor, gridAlumnoRealizado, gridAlumnoPendiente,idSessionUser,toolbarSeminarios,tabbar,anyoActual;
+	    	var main_layout, idAsignatura, nombreAsignatura, gridProfesor, gridAlumnoRealizado, gridAlumnoPendiente,idSessionUser,toolbarSeminarios,tabbar,anyoActual,ultimaAbierta;
 	    	
 	    	dhtmlxEvent(window,"load",function() {
 	    		
@@ -35,7 +35,8 @@
 			    	anyoActual = "<%=anyoActual%>";
 	    		
 	    		<logic:notMatch scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
-					goProfesor();
+	    			ultimaAbierta = "-1";
+	    			goProfesor();
 				</logic:notMatch>
 			
 				<logic:match scope="session" name="usuarioYPermisos" value="<grupo>4</grupo>" >
@@ -198,7 +199,8 @@
 		    			var t = parts[0];
 		    			tabbar.addTab(t,parts[1],'');
 				    	var tab = tabbar.cells(t);
-				    	if(i==0) tabbar.setTabActive(t);
+				    	if(i==0 && ultimaAbierta == "-1") tabbar.setTabActive(t);
+				    	
 				    	
 				    	var grid = tab.attachGrid();
 				    	
@@ -222,7 +224,7 @@
 				    	
 		    			grid.clearAndLoad("gridUsuariosSeminariosAsignatura.do?idSeminario=" + t);
 		    		}//FOR
-		    	
+		    		if(ultimaAbierta != "-1") tabbar.setTabActive(ultimaAbierta);
 		    		
 				}
 		    	
@@ -258,7 +260,7 @@
 		    	function anyadirAlumnos(){
 		    		var idSeminario = tabbar.getActiveTab();
 		    		var dhxWins= new dhtmlXWindows();
-					var window = dhxWins.createWindow("subir", 300,50, 430, 280);
+					var window = dhxWins.createWindow("subir", 300,50, 450, 140);
 					window.setText('<bean:message key="title.anyadir.alumnos.seminario" />');				
 					window.setModal(true);
 					window.centerOnScreen();
@@ -270,10 +272,22 @@
 						formNTC.setItemLabel('aceptar','<bean:message key="button.aceptar"/>');
 						
 						var data = getData(idSeminario);
-			    		form.reloadOptions('anyo', data);
+						formNTC.reloadOptions('alumno', data);
 						
 						
-						
+						formNTC.attachEvent("onButtonClick", function(id){
+		    				if (id == "aceptar") {
+		    					var idPortafolio = formNTC.getItemValue("alumno");
+		    					formNTC.send("actualizarSeminarioAlumno.do?idSeminario=" + idSeminario + "&idPortafolio=" + idPortafolio,"post", function(loader, response) {
+		    							ultimaAbierta=idSeminario;
+			    						window.close();
+			    						goProfesor();
+			    						
+			    						
+			    				});
+		    				}
+		    				
+						});
 						
 					});
 					
@@ -298,19 +312,29 @@
 				}
 		    	 
 		    	 function createArrayFromXMLAlumnos(xml){
-			    		var asignaturas = xml.getElementsByTagName("portafolio");
-			    		var id, nombre, seminario;
+			    		var alumnos = xml.getElementsByTagName("portafolio");
+			    		var id, nombre, alum;
 			    		var opts = new Array();
-			    		for(var i=0;i<asignaturas.length;i++) {
-			    			nombre=asignaturas[i].getElementsByTagName("nombre")[0].firstChild.nodeValue;
-			    			id=asignaturas[i].getElementsByTagName("id")[0].firstChild.nodeValue;
-			    	        if(i==0){seminario={text:nombre, value:id, selected:true};}
-			    	        else seminario={text:nombre, value:nombre};
-			    	       	opts[i] = seminario;
+			
+			    		for(var i=0;i<alumnos.length;i++) {
+			    			nombre=alumnos[i].getElementsByTagName("nombre")[0].firstChild.nodeValue;
+			    			id=alumnos[i].getElementsByTagName("id")[0].firstChild.nodeValue;
+			    			
+			    	        if(i==0){alum={text:nombre, value:id, selected:true};}
+			    	        else alum={text:nombre, value:nombre};
+			    	 
+			    	       	opts[i] = alum;
 			    	    }
 			    		return opts;
 
 			    	}
+		    	 
+		    	 function goActualizar(){
+		    		ultimaAbierta = tabbar.getActiveTab();
+		    		goProfesor();
+		    	 }
+		    	 
+		    	
 	    	
 	   </script>
 	</head>

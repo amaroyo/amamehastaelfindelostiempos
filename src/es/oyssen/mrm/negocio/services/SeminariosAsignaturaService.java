@@ -4,6 +4,7 @@ import java.util.List;
 
 import es.oyssen.mrm.negocio.dao.exceptions.DAOException;
 import es.oyssen.mrm.negocio.exceptions.ServiceException;
+import es.oyssen.mrm.negocio.vo.PortafolioVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaCodigoVO;
 import es.oyssen.mrm.negocio.vo.SeminarioAsignaturaVO;
 import es.oyssen.mrm.negocio.vo.UsuarioPortafolioVO;
@@ -26,7 +27,7 @@ public interface SeminariosAsignaturaService {
 
 	public List<SeminarioAsignaturaCodigoVO> findAll(String anyoAcademico) throws ServiceException;
 
-	public List<UsuarioPortafolioVO> findAlumnosMissing(SeminarioAsignaturaVO sa) throws ServiceException;
+	public List<UsuarioPortafolioVO> findAlumnosMissing(SeminarioAsignaturaVO sa, PortafolioVO p) throws ServiceException;
 
 
 }
