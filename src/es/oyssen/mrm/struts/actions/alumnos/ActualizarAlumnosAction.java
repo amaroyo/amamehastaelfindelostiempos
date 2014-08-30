@@ -52,7 +52,7 @@ public class ActualizarAlumnosAction extends MrmAction {
 			for (int i = 0; i < nac.length; i++){
 				PortafolioVO p = new PortafolioVO();
 				p.setIdPortafolio(nac[i]);
-				p.setIdProfesor("8");
+				p.setIdProfesor("1");
 				getPortafoliosService().update(p);
 			}
 			
