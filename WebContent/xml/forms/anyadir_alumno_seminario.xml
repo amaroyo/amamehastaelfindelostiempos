@@ -6,7 +6,7 @@
 		  label="Alumnos"
 		  labelWidth="80"
 		  labelAlign="center"
-		  inputHeight="20"
+		  inputHeight="25"
 		  inputWidth="270"
 		/> 
 

@@ -191,7 +191,7 @@
 	    		var idTrabajoInfo = tabbar.getActiveTab();
 	    		var dhxWins= new dhtmlXWindows();
 				var window = dhxWins.createWindow("subir", 300,50, 500, 420);
-				window.setText('<bean:message key="title.trabajo.de.campo" />');				
+				window.setText("<bean:message key="button.cambiar.trabajo.campo"/>");				
 				window.setModal(true);
 				window.centerOnScreen();
 				
@@ -306,7 +306,7 @@
 				var idTrabajoInfo = tabbar.getActiveTab();
 	    		var dhxWins= new dhtmlXWindows();
 				var window = dhxWins.createWindow("subir", 300,50, 500, 190);
-				window.setText('<bean:message key="title.trabajo.de.campo" />');				
+				window.setText("<bean:message key="button.fecha.limite"/>");				
 				window.setModal(true);
 				window.centerOnScreen();
 				
@@ -383,7 +383,7 @@
 			function crearTrabajoCampo(){
 				var dhxWins= new dhtmlXWindows();
 				var window = dhxWins.createWindow("subir", 300,50, 500, 400);
-				window.setText('<bean:message key="title.trabajo.de.campo" />');				
+				window.setText("<bean:message key="button.crear.trabajo.campo"/>");				
 				window.setModal(true);
 				window.centerOnScreen();
 				
@@ -603,6 +603,8 @@
 		    		trabajoCampo.disableItem('subirPractica');
 		    		trabajoCampo.hideItem('eliminar');
 		    		trabajoCampo.hideItem('aceptar');
+		    		trabajoCampo.hideItem('fechaFin');
+		    		trabajoCampo.hideItem('hora');
 		    		
 		    		
 		    		if(bloqueado=="F") trabajoCampo.enableItem('subirPractica');
